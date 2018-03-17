@@ -8,9 +8,9 @@ const machineInstructions = {
   1: {
     instruction: 'set',
     action: (memory) => {
-      const a = getValueAtInPtr();
+      const a = getValueAtInPtr(memory);
       memory.inPtr++;
-      const b = getValueAtInPtr();
+      const b = getValueAtInPtr(memory);
       memory.inPtr++;
       memory.registers[a] = b;
     }
@@ -18,7 +18,7 @@ const machineInstructions = {
   6: {
     instruction: 'jmp',
     action: (memory) => {
-      const a = getValueAtInPtr();
+      const a = getValueAtInPtr(memory);
       memory.inPtr++;
       const actualA = a % 32768;
       stackPtr = a - 1;
@@ -27,7 +27,7 @@ const machineInstructions = {
   7: {
     instruction: 'jt',
     action: (memory) => {
-      const a = getValueAtInPtr();
+      const a = getValueAtInPtr(memory);
       memory.inPtr++;
       const actualA = a % 32768;
       const b = heap[++stackPtr];
@@ -39,10 +39,10 @@ const machineInstructions = {
   8: {
     instruction: 'jf',
     action: (memory) => {
-      const a = getValueAtInPtr();
+      const a = getValueAtInPtr(memory);
       memory.inPtr++;
       const actualA = a % 32768;
-      const b = getValueAtInPtr();
+      const b = getValueAtInPtr(memory);
       memory.inPtr++;
       if (actualA === 0) {
         stackPtr = b - 1;
@@ -52,7 +52,7 @@ const machineInstructions = {
   19: {
     instruction: 'out',
     action: (memory) => {
-      const a = getValueAtInPtr();
+      const a = getValueAtInPtr(memory);
       const char = String.fromCharCode(a);
       process.stdout.write(char);
     }
@@ -65,13 +65,18 @@ const machineInstructions = {
   }
 }
 
-module.exports = function() {
+module.exports = function(memory) {
   let { codepage, heap, registers } = memory;
   function step() {
     memory.inPtr++;
-    const instruction = machineInstructions[memory.codepage[inPtr]];
+    const instruction = 
+      machineInstructions[memory.codepage[memory.inPtr]];
     if (instruction) instruction.action(memory);
   }
+
+  return {
+    step
+  };
 };
 
 function getValueAtInPtr(memory) {
