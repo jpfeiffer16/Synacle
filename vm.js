@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Interpreter = require('./interprreter');
+const Interpreter = require('./interpreter');
 
 let buf = fs.readFileSync('./challenge.bin');
 
