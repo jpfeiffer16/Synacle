@@ -3,7 +3,6 @@ const machineInstructions = {
     paramaterCount: 0,
     instruction: 'halt',
     action: (memory) => {
-      trace(memory, 'halt');
       process.exit();
     }
   },
@@ -15,7 +14,6 @@ const machineInstructions = {
       // const a = getValueAtInPtr(memory);
       // memory.inPtr++;
       // const b = getValueAtInPtr(memory);
-      trace(memory, 'set', a, b);
       memory.registers[a] = b;
     }
   },
@@ -26,7 +24,6 @@ const machineInstructions = {
       // memory.inPtr++;
       // const a = getValueAtInPtr(memory);
       const actualA = a % 32768;
-      trace(memory, 'jmp', a, actualA);
       memory.inPtr = actualA - 1;
     }
   },
@@ -39,7 +36,6 @@ const machineInstructions = {
       const actualA = a % 32768;
       // memory.inPtr++;
       // const b = getValueAtInPtr(memory);
-      trace(memory, 'jt', a, actualA, b);
       if (actualA !== 0) {
         memory.inPtr = b - 1;
       }
@@ -54,7 +50,6 @@ const machineInstructions = {
       const actualA = a % 32768;
       // memory.inPtr++;      
       // const b = getValueAtInPtr(memory);
-      trace(memory, 'jf', a, actualA, b);
       if (actualA === 0) {
         memory.inPtr = b - 1;
       }
@@ -106,7 +101,6 @@ const machineInstructions = {
       // memory.inPtr++;
       // const a = getValueAtInPtr(memory);
       const char = String.fromCharCode(a);
-      trace(memory, 'out', a);
       process.stdout.write(char);
     }
   },
@@ -115,7 +109,6 @@ const machineInstructions = {
     instruction: 'noop',
     action: function(memory) {
       //NOOP
-      trace(memory, 'noop');
     }
   }
 }
@@ -130,6 +123,7 @@ module.exports = function(memory) {
       for (let i = 0; i < instruction.paramaterCount; i++) {
         params.push(memory.codepage[++memory.inPtr]);
       }
+      trace.apply([instruction.instruction].conca(params))
       instruction.action.apply(machineInstructions, params);
     }
     memory.inPtr++;
@@ -162,7 +156,7 @@ function setValue(memory, address, value) {
 
 const fs = require('fs');
 
-function trace(memory, instruction, ...rest) {
+function trace(instruction, memory, ...rest) {
   fs.appendFileSync('./log.txt', 
     `${ memory.inPtr }: ${ instruction } ${ rest.join(' ') }\n`
   );
