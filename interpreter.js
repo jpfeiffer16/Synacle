@@ -25,7 +25,7 @@ const machineInstructions = {
     action: (memory, a) => {
       // memory.inPtr++;
       // const a = getValueAtInPtr(memory);
-      // const actualA = a % 32768;
+      const actualA = a % 32768;
       trace(memory, 'jmp', a, actualA);
       memory.inPtr = actualA - 1;
     }
@@ -36,7 +36,7 @@ const machineInstructions = {
     action: (memory, a, b) => {
       // memory.inPtr++;
       // const a = getValueAtInPtr(memory);
-      // const actualA = a % 32768;
+      const actualA = a % 32768;
       // memory.inPtr++;
       // const b = getValueAtInPtr(memory);
       trace(memory, 'jt', a, actualA, b);
@@ -51,7 +51,7 @@ const machineInstructions = {
     action: (memory, a, b) => {
       // memory.inPtr++;
       // const a = getValueAtInPtr(memory);
-      // const actualA = a % 32768;
+      const actualA = a % 32768;
       // memory.inPtr++;      
       // const b = getValueAtInPtr(memory);
       trace(memory, 'jf', a, actualA, b);
@@ -100,9 +100,9 @@ const machineInstructions = {
     }
   },
   19: {
-    paramaterCount: 3,
+    paramaterCount: 1,
     instruction: 'out',
-    action: (memory, a, b, c) => {
+    action: (memory, a) => {
       // memory.inPtr++;
       // const a = getValueAtInPtr(memory);
       const char = String.fromCharCode(a);
@@ -128,7 +128,7 @@ module.exports = function(memory) {
     if (instruction) {
       const params = [ memory ];
       for (let i = 0; i < instruction.paramaterCount; i++) {
-        params.push(memory.codepage[memory.inPtr++]);
+        params.push(memory.codepage[++memory.inPtr]);
       }
       instruction.action.apply(machineInstructions, params);
     }
