@@ -11,10 +11,10 @@ const machineInstructions = {
     paramaterCount: 2,
     instruction: 'set',
     action: (memory, a, b) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const b = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const b = getValueAtInPtr(memory);
       trace(memory, 'set', a, b);
       memory.registers[a] = b;
     }
@@ -23,9 +23,9 @@ const machineInstructions = {
     paramaterCount: 1,
     instruction: 'jmp',
     action: (memory, a) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      const actualA = a % 32768;
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // const actualA = a % 32768;
       trace(memory, 'jmp', a, actualA);
       memory.inPtr = actualA - 1;
     }
@@ -34,11 +34,11 @@ const machineInstructions = {
     paramaterCount: 2,
     instruction: 'jt',
     action: (memory, a, b) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      const actualA = a % 32768;
-      memory.inPtr++;
-      const b = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // const actualA = a % 32768;
+      // memory.inPtr++;
+      // const b = getValueAtInPtr(memory);
       trace(memory, 'jt', a, actualA, b);
       if (actualA !== 0) {
         memory.inPtr = b - 1;
@@ -49,11 +49,11 @@ const machineInstructions = {
     paramaterCount: 2,
     instruction: 'jf',
     action: (memory, a, b) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      const actualA = a % 32768;
-      memory.inPtr++;      
-      const b = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // const actualA = a % 32768;
+      // memory.inPtr++;      
+      // const b = getValueAtInPtr(memory);
       trace(memory, 'jf', a, actualA, b);
       if (actualA === 0) {
         memory.inPtr = b - 1;
@@ -64,12 +64,12 @@ const machineInstructions = {
     paramaterCount: 3,
     instruction: 'add',
     action: (memory, a, b, c) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const b = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const c = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const b = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const c = getValueAtInPtr(memory);
       setValue(memory, a, (b + c) % 32768);
     }
   },
@@ -77,12 +77,12 @@ const machineInstructions = {
     paramaterCount: 3,
     instruction: 'mult',
     action: (memory, a, b, c) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const b = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const c = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const b = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const c = getValueAtInPtr(memory);
       setValue(memory, a, (b * c) % 32768);
     }
   },
@@ -90,12 +90,12 @@ const machineInstructions = {
     paramaterCount: 3,
     instruction: 'mod',
     action: (memory, a, b, c) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const b = getValueAtInPtr(memory);
-      memory.inPtr++;
-      const c = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const b = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const c = getValueAtInPtr(memory);
       setValue(memory, a, (b % c) % 32768);
     }
   },
@@ -103,8 +103,8 @@ const machineInstructions = {
     paramaterCount: 3,
     instruction: 'out',
     action: (memory, a, b, c) => {
-      memory.inPtr++;
-      const a = getValueAtInPtr(memory);
+      // memory.inPtr++;
+      // const a = getValueAtInPtr(memory);
       const char = String.fromCharCode(a);
       trace(memory, 'out', a);
       process.stdout.write(char);
