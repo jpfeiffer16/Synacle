@@ -17,16 +17,14 @@ module.exports = {
     paramaterCount: 1,
     instruction: 'jmp',
     action: (memory, a) => {
-      const actualA = a % 32768;
-      memory.inPtr = actualA - 1;
+      memory.inPtr = getValueAtInPtr(memory) - 1;
     }
   },
   7: {
     paramaterCount: 2,
     instruction: 'jt',
     action: (memory, a, b) => {
-      const actualA = a % 32768;
-      if (actualA !== 0) {
+      if (getValueAtInPtr(memory) !== 0) {
         memory.inPtr = b - 1;
       }
     }
@@ -35,8 +33,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'jf',
     action: (memory, a, b) => {
-      const actualA = a % 32768;
-      if (actualA === 0) {
+      if (getValueAtInPtr(memory) === 0) {
         memory.inPtr = b - 1;
       }
     }

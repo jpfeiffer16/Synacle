@@ -656,16 +656,16 @@ call 15
 add 1518 19 10
 set 32768 2
 halt 
-call 
+ret 
 set 19 32
 call 15
-call 
+ret 
 out 61
-call 
+ret 
 set 1 15
 call 32768
 out 2
-call 
+ret 
 rmem 32768 1
 jf 15 32768
 call 10
@@ -673,33 +673,33 @@ jt 32768 17
 set 2 32768
 jmp 1
 set 32769 1531
-call 
+ret 
 set 32768 32768
 set 15 32768
 call 1
-call 
+ret 
 set 19 101
 set 19 115
 call 19
-call 
+ret 
 halt 
 jf 10 3
 set 32768 32768
 set 1 32769
-call 
+ret 
 add 32768 18 2
 set 2 32770
 rmem 32768 2
 jt 15 32770
 set 3 15
 set 32770 1
-call 
+ret 
 set 3326 2
 call 32770
 jf 32770 1245
 set 32770 3
 set 32770 3
-call 
+ret 
 rmem 17 1458
 rmem 3 32768
 jf 32770 1
@@ -713,7 +713,7 @@ set 32768 2
 set 32769 15
 set 32768 32770
 halt 
-call 
+ret 
 halt 
 set 6 3481
 rmem 2 32770
@@ -727,7 +727,7 @@ set 2732 16
 halt 
 jf 1 32768
 halt 
-call 
+ret 
 halt 
 add 17 1458 3
 set 3 32769
@@ -746,7 +746,7 @@ mult 3 32770 3
 in 3
 jmp 32768
 halt 
-call 
+ret 
 set 32768 18
 set 2 32769
 rmem 9 32770
@@ -790,7 +790,7 @@ halt
 set 32769 3
 call 2
 halt 
-call 
+ret 
 halt 
 set 18 2
 set 32769 1
@@ -825,18 +825,18 @@ out 32769
 add 3 32769 3
 jmp 32769
 halt 
-call 
+ret 
 and 17 1518 1
 not 46 19
 or 32770 3 32769
 and 2 32769 2
-call 
+ret 
 add 15 32768 3951
-call 
+ret 
 mult 15 32768 3952
 add 32770 3948 15
 set 32769 4391
-call 
+ret 
 jf 8 32770
 jf 32768 26235
 jt 19 10
@@ -855,12 +855,12 @@ halt
 jmp 3955
 set 2 1
 set 17 4515
-call 
+ret 
 set 32772 17
 halt 
 set 1 32769
 halt 
-call 
+ret 
 jf 32772 3
 add 32769 3 32768
 and 32768 17 2248
@@ -868,7 +868,7 @@ mult 3 32769 16
 jf 9 32768
 or 32768 7 32768
 set 26321 17
-call 
+ret 
 not 4608 1
 set 3954 9
 set 32768 4596
@@ -877,7 +877,7 @@ add 17 1518 9
 mult 32767 3 32768
 jmp 2716
 set 32768 7
-call 
+ret 
 jmp 4
 halt 
 halt 
@@ -994,7 +994,7 @@ halt
 call 32771
 jt 32771 8
 halt 
-call 
+ret 
 halt 
 rmem 32769 5956
 jf 9 32769
@@ -1099,7 +1099,7 @@ set 7329 20795
 call 19897
 halt 
 halt 
-call 
+ret 
 halt 
 set 1621 15217
 rmem 14674 27234
@@ -1123,7 +1123,7 @@ add 18403 31633 12119
 call 25688
 halt 
 halt 
-call 
+ret 
 halt 
 halt 
 set 16377 29228
@@ -1132,7 +1132,7 @@ add 12481 26493 7080
 call 21889
 halt 
 halt 
-call 
+ret 
 halt 
 halt 
 set 29636 9860
@@ -1144,7 +1144,7 @@ set 24701 5937
 halt 
 call 7729
 halt 
-call 
+ret 
 halt 
 call 1341
 jf 22640 4002
@@ -1168,7 +1168,7 @@ add 30125 10806 24690
 call 10228
 halt 
 halt 
-call 
+ret 
 halt 
 call 15269
 jf 5139 19127
@@ -1191,7 +1191,7 @@ add 6582 20795 1723
 call 21957
 halt 
 halt 
-call 
+ret 
 halt 
 call 15153
 jf 6217 20607
@@ -1217,7 +1217,7 @@ add 14608 28710 10459
 call 32356
 halt 
 halt 
-call 
+ret 
 halt 
 set 31037 12466
 call 20208
@@ -1230,7 +1230,7 @@ add 21738 3653 18911
 wmem 9172 23856
 wmem 32229 14199
 halt 
-call 
+ret 
 halt 
 set 14194 29041
 set 4924 19748
@@ -1243,40 +1243,40 @@ halt
 rmem 13308 27703
 or 4581 19420 1032
 wmem 25109 7423
-call 
+ret 
 wmem 8638 23089
 not 20785 2983
-call 
+ret 
 halt 
 set 24449 6229
 set 18441 667
 halt 
-call 
+ret 
 halt 
 set 29416 12272
 call 21870
 halt 
-call 
+ret 
 halt 
 set 2777 18417
 call 27750
 halt 
-call 
+ret 
 halt 
 set 9837 25362
 jf 4713 20293
 halt 
-call 
+ret 
 halt 
 set 17419 464
 wmem 13173 27829
 halt 
-call 
+ret 
 halt 
 set 26574 9008
 call 18965
 halt 
-call 
+ret 
 halt 
 set 22308 4351
 call 15064
@@ -1299,7 +1299,7 @@ call 1203
 halt 
 wmem 20437 2788
 halt 
-call 
+ret 
 halt 
 rmem 26254 9637
 rmem 21508 4867
@@ -1314,7 +1314,7 @@ halt
 wmem 5817 21553
 wmem 2492 18231
 halt 
-call 
+ret 
 jf 2544 18241
 halt 
 halt 
@@ -1332,97 +1332,97 @@ set 2925 18728
 halt 
 call 32629
 halt 
-call 
+ret 
 halt 
 set 21800 4987
 jf 19872 2594
 set 17265 496
 halt 
-call 
+ret 
 halt 
 set 7044 22548
 set 5551 21080
 call 2494
 halt 
-call 
+ret 
 halt 
 set 27437 10278
 set 25718 9535
 call 23045
 call 22477
 halt 
-call 
+ret 
 halt 
 set 15989 32561
 set 14336 31034
 call 13021
 halt 
-call 
+ret 
 halt 
 set 8430 24619
 set 7397 24025
 call 6279
 halt 
-call 
+ret 
 halt 
 set 3238 19477
 mod 2725 19031 3039
 jmp 2069
 call 2434
 halt 
-call 
+ret 
 halt 
 set 854 17248
 set 78 16483
 jt 464 16867
 halt 
-call 
+ret 
 halt 
 set 369 16711
 halt 
 set 405 16440
 jf 73 16552
 halt 
-call 
+ret 
 halt 
 set 1537 18093
 set 2069 18685
 add 3016 18960 2791
 halt 
-call 
+ret 
 halt 
 set 5673 22264
 set 6288 23344
 mult 7397 24440 8132
 halt 
-call 
+ret 
 halt 
 set 12659 28728
-call 
+ret 
 set 13407 30517
 mod 14359 31492 14885
 halt 
-call 
+ret 
 call 18528
-call 
+ret 
 halt 
 set 22582 7029
 set 23806 7795
 and 25716 10146 26360
 halt 
-call 
+ret 
 halt 
 set 1161 17945
 add 2737 19509 4085
 or 5550 22309 5802
 halt 
-call 
+ret 
 halt 
 set 14974 31787
 set 17634 1717
 not 19842 4004
 halt 
-call 
+ret 
 halt 
 add 820 17776 1840
 rmem 4963 21776
@@ -1445,7 +1445,7 @@ out 20869
 mult 22317 6185 23292
 mult 24688 9588 26618
 halt 
-call 
+ret 
 halt 
 add 12332 29992 13873
 rmem 18473 3389
@@ -1489,7 +1489,7 @@ call 21844
 set 26580 10922
 call 978
 halt 
-call 
+ret 
 halt 
 rmem 20055 5392
 jt 5908 23159
@@ -1519,14 +1519,14 @@ or 3381 21365 6486
 add 15545 1396 19316
 call 32169
 halt 
-call 
+ret 
 halt 
 rmem 22216 8119
 call 32469
 set 6989 25049
 call 17248
 wmem 31081 15923
-call 
+ret 
 halt 
 add 19216 4212 22213
 rmem 96 18791
@@ -1556,7 +1556,7 @@ call 30805
 add 6556 25060 10585
 wmem 22893 8489
 halt 
-call 
+ret 
 halt 
 add 22877 8613 27022
 rmem 6161 24804
@@ -1575,7 +1575,7 @@ set 17741 3472
 call 31080
 call 6709
 halt 
-call 
+ret 
 halt 
 wmem 5973 24181
 wmem 19081 5608
@@ -1591,7 +1591,7 @@ rmem 32688 18130
 add 23322 8807 27988
 wmem 8768 28062
 halt 
-call 
+ret 
 halt 
 add 14001 414 19305
 rmem 848 19185
@@ -1602,7 +1602,7 @@ call 31172
 wmem 7701 26672
 wmem 22605 9182
 halt 
-call 
+ret 
 halt 
 halt 
 set 25348 11583
@@ -1622,7 +1622,7 @@ add 28428 14807 672
 call 17085
 halt 
 halt 
-call 
+ret 
 halt 
 add 24632 11574 30248
 rmem 14429 1445
@@ -1648,7 +1648,7 @@ add 7580 27106 13778
 call 31875
 halt 
 halt 
-call 
+ret 
 halt 
 add 15745 2109 21595
 wmem 7921 28028
@@ -1664,7 +1664,7 @@ halt
 wmem 32313 19812
 mult 26421 12852 304
 halt 
-call 
+ret 
 halt 
 add 20044 7606 26768
 wmem 14621 1184
@@ -1680,7 +1680,7 @@ halt
 wmem 18917 6011
 mult 12496 32364 19556
 halt 
-call 
+ret 
 rmem 23245 10407
 jt 7959 27925
 halt 
@@ -1782,42 +1782,42 @@ set 11037 31915
 add 7239 29077 17128
 call 13948
 halt 
-call 
+ret 
 add 32165 20795 8865
 set 28852 17488
 add 3868 24804 13377
 wmem 10760 32710
-call 
+ret 
 halt 
 set 14118 2257
 set 11280 38
 call 9548
 halt 
-call 
+ret 
 halt 
 set 23876 12714
 set 21532 10339
 call 20264
 halt 
-call 
+ret 
 halt 
 set 2776 24930
 set 1816 23524
 call 398
 halt 
-call 
+ret 
 halt 
 set 17753 6203
 set 16645 5589
 jt 5060 26268
 halt 
-call 
+ret 
 halt 
 set 1222 23472
 set 608 22906
 add 22051 11568 50
 halt 
-call 
+ret 
 halt 
 jf 9251 31613
 halt 
@@ -1898,7 +1898,7 @@ wmem 20357 9941
 wmem 25832 15914
 mult 28924 19381 9511
 halt 
-call 
+ret 
 halt 
 halt 
 set 3678 26663
@@ -1922,7 +1922,7 @@ add 24238 15153 5539
 call 13012
 halt 
 halt 
-call 
+ret 
 out 16728
 out 10901
 call 5721
@@ -1934,20 +1934,20 @@ set 17240 7329
 halt 
 call 25681
 set 21370 11504
-call 
+ret 
 rmem 24792 15376
 add 2029 25405 15538
 rmem 25528 16183
 jf 26004 16755
 add 2988 26471 16517
 set 12796 3568
-call 
+ret 
 halt 
 set 24026 14822
 set 1317 24935
 call 11561
 halt 
-call 
+ret 
 add 9724 32 23637
 rmem 1836 25466
 jf 4200 27793
@@ -1955,7 +1955,7 @@ add 14925 5808 29394
 halt 
 rmem 8029 31671
 call 18889
-call 
+ret 
 set 18632 10212
 set 29850 21296
 set 8421 32634
@@ -1968,7 +1968,7 @@ halt
 jmp 20520
 set 17408 9054
 halt 
-call 
+ret 
 set 3389 26801
 add 15097 6205 30509
 halt 
@@ -1977,7 +1977,7 @@ call 22358
 jf 16534 7711
 set 29607 20795
 set 8865 80
-call 
+ret 
 add 31821 23490 14756
 rmem 27571 18928
 jf 7268 31275
@@ -1988,7 +1988,7 @@ halt
 jmp 23352
 set 21267 12657
 set 19269 10669
-call 
+ret 
 jt 13610 4987
 add 26744 18080 9397
 set 8190 31784
@@ -1996,7 +1996,7 @@ jt 5831 30522
 add 19672 11568 2967
 set 16840 7752
 call 30398
-call 
+ret 
 halt 
 add 10668 1539 25745
 call 7261
@@ -2004,7 +2004,7 @@ set 5767 30581
 halt 
 add 19304 10340 1787
 call 16760
-call 
+ret 
 call 23029
 add 24057 23443 22947
 in 17787
