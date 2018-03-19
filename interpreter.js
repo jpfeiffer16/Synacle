@@ -123,7 +123,9 @@ module.exports = function(memory) {
       for (let i = 0; i < instruction.paramaterCount; i++) {
         params.push(memory.codepage[++memory.inPtr]);
       }
-      trace.apply([instruction.instruction].conca(params))
+      let traceParams = [instruction.instruction];
+      traceParams = traceParams.concat(params);
+      trace.apply({}, traceParams)
       instruction.action.apply(machineInstructions, params);
     }
     memory.inPtr++;
