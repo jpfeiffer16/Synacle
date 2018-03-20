@@ -4,12 +4,9 @@ let buf = fs.readFileSync('./challenge.bin');
 // buf.byteLength = 16;
 
 for (let i = 0; i < buf.length; i += 2) {
-    const byte = buf[i];
-    const nByte = buf[i + 1];
-    console.log('--------------------------');
-    console.log(`${byte}     ${byte|nByte}`);
-    console.log(`${nByte}    `);
-    console.log('--------------------------');
+    const highByte = buf[i];
+    const lowByte = buf[i + 1];
+    console.log(highByte, lowByte);
 }
 
 // for (let i = 0; i < buf.length; i += 2) {

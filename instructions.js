@@ -10,21 +10,50 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'set',
     action: (memory, a, b) => {
-      memory.registers[a] = b;
+      memory.registers[a - 32768] = b;
+    }
+  },
+  2: {
+    paramaterCount: 1,
+    instruction: 'push',
+    action: (memory, a) => {
+      memory.stack.push(getValue(memory, a));
+    }
+  },
+  3: {
+    paramaterCount: 1,
+    instruction: 'pop',
+    action: (memory, a) => {
+      if (memory.stack.length === 0) throw 'Empty stack error';
+      setValue(memory, a, memory.stack.pop());
+    }
+  },
+  4: {
+    paramaterCount: 3,
+    instruction: 'eq',
+    action: (memory, a, b, c) => {
+      setValue(memory, a, getValue(memory, b) == getValue(memory, c) ? 1 : 0);
+    }
+  },
+  5: {
+    paramaterCount: 3,
+    instruction: 'gt',
+    action: (memory, a, b, c) => {
+      setValue(memory, a, b > c ? 1 : 0);
     }
   },
   6: {
     paramaterCount: 1,
     instruction: 'jmp',
     action: (memory, a) => {
-      memory.inPtr = getValueAtInPtr(memory) - 1;
+      memory.inPtr = getValue(memory, a) - 1;
     }
   },
   7: {
     paramaterCount: 2,
     instruction: 'jt',
     action: (memory, a, b) => {
-      if (getValueAtInPtr(memory) !== 0) {
+      if (getValue(memory, a) !== 0) {
         memory.inPtr = b - 1;
       }
     }
@@ -33,7 +62,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'jf',
     action: (memory, a, b) => {
-      if (getValueAtInPtr(memory) === 0) {
+      if (getValue(memory,a ) === 0) {
         memory.inPtr = b - 1;
       }
     }
@@ -77,7 +106,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'not',
     action: (memory, a, b) => {
-      setValue(memory, a, ~ b);
+      setValue(memory, a, ~ getValue(memory, b));
     }
   },
   15: {
@@ -134,13 +163,12 @@ module.exports = {
   }
 };
 
-function getValueAtInPtr(memory) {
-  const addressInt = memory.codepage[memory.inPtr];
-  if (addressInt >= 0 && addressInt <= 32767) {
-    return addressInt
+function getValue(memory, address) {
+  if (address >= 0 && address <= 32767) {
+    return address
   }
-  if (addressInt >= 32768 && addressInt <= 32775) {
-    return memory.registers[addressInt - 32768];
+  if (address >= 32768 && address <= 32775) {
+    return memory.registers[address - 32768];
   }
   return 0;
 }
