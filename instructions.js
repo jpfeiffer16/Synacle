@@ -106,7 +106,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'not',
     action: (memory, a, b) => {
-      setValue(memory, a, ~ getValue(memory, b));
+      setValue(memory, a, (~getValue(memory, b) >>> 0) % 32768);
     }
   },
   15: {
