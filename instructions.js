@@ -127,7 +127,7 @@ module.exports = {
     paramaterCount: 1,
     instruction: 'call',
     action: (memory, a) => {
-      memory.stack.push(memory.codepage[memory.inPtr + 1]);
+      memory.stack.push(memory.inPtr + 1);
       memory.inPtr = a;
     }
   },
