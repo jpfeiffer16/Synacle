@@ -176,9 +176,9 @@ function getValue(memory, address) {
 function setValue(memory, address, value) {
   //TODO: This first part maybe shouldn't be a thing
   if (address >= 0 && address <= 32767) {
-    memory.heap[address] = value;
+    memory.heap[address] = getValue(memory, value);
   }
   if (address >= 32768 && address <= 32775) {
-    memory.registers[address - 32768] = value
+    memory.registers[address - 32768] = getValue(memory, value);
   }
 }
