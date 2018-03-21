@@ -128,7 +128,7 @@ module.exports = {
     instruction: 'call',
     action: (memory, a) => {
       memory.stack.push(memory.inPtr + 1);
-      memory.inPtr = a;
+      memory.inPtr = getValue(memory, a) - 1;
     }
   },
   18: {
