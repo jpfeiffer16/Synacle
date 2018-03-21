@@ -113,7 +113,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'rmem',
     action: (memory, a, b) => {
-      setValue(memory, a, memory.heap[b]);
+      setValue(memory, a, memory.heap[getValue(memory, b)]);
     }
   },
   16: {
@@ -174,6 +174,7 @@ function getValue(memory, address) {
 }
 
 function setValue(memory, address, value) {
+  //TODO: This first part maybe shouldn't be a thing
   if (address >= 0 && address <= 32767) {
     memory.heap[address] = value;
   }

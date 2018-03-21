@@ -1,21 +1,22 @@
 const fs = require('fs');
 let buf = fs.readFileSync('./challenge.bin');
 
-// buf.byteLength = 16;
+const heap = new Uint16Array(71680);
 
 for (let i = 0; i < buf.length; i += 2) {
     const highByte = buf[i];
     const lowByte = buf[i + 1];
-    console.log(highByte, lowByte);
+    // console.log(highByte, lowByte);
+    heap[i ? i / 2 : i] = buf.readUInt16LE(i);
+    // heap[i] = buf[i];
+}
+
+// console.log(heap[32770]);
+
+for (let i = 0; i < heap.length; i++) {
+    console.log(i, + ' ' + heap[i]);
 }
 
 // for (let i = 0; i < buf.length; i += 2) {
-//     console.log(buf[i] | buf[i + 1]);
+// memory.codepage[i ? i / 2 : i] = buf.readUInt16LE(i);
 // }
-
-// for (let i = 0; i < buf.length / 2; i += 2) {
-//     // console.log(buf[i]);
-//     console.log(buf.readInt16LE(i));
-// }
-
-// Buffer.byteLength
