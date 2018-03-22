@@ -120,7 +120,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'wmem',
     action: (memory, a, b) => {
-      setValue(memory, getValue(memory, a), b);
+      setValue(memory, a, getValue(memory, b));
     }
   },
   17: {

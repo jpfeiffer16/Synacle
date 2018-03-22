@@ -4,8 +4,8 @@ let buf = fs.readFileSync('./challenge.bin');
 const heap = new Uint16Array(71680);
 
 for (let i = 0; i < buf.length; i += 2) {
-    const highByte = buf[i];
-    const lowByte = buf[i + 1];
+    const lowByte = buf[i];
+    const highByte = buf[i + 1];
     // console.log(highByte, lowByte);
     heap[i ? i / 2 : i] = buf.readUInt16LE(i);
     // heap[i] = buf[i];
