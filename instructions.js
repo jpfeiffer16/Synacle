@@ -62,7 +62,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'jf',
     action: (memory, a, b) => {
-      if (getValue(memory,a ) === 0) {
+      if (getValue(memory, a) === 0) {
         memory.inPtr = b - 1;
       }
     }
@@ -120,7 +120,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'wmem',
     action: (memory, a, b) => {
-      setValue(memory, a, getValue(memory, b));
+      setValue(memory, getValue(memory, a), b);
     }
   },
   17: {
@@ -136,7 +136,7 @@ module.exports = {
     instruction: 'ret',
     action: (memory) => {
       if (memory.stack.length === 0) process.exit(0);
-      memory.inPtr = memory.stack.pop();
+      memory.inPtr = memory.stack.pop() - 1;
     }
   },
   19: {

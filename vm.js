@@ -17,10 +17,10 @@ const memory = {
 }
 
 for (let i = 0; i < buf.length; i += 2) {
-  const lowByte = buf[i];
-  const highByte = buf[i + 1];
-  memory.codepage[i ? i / 2 : i] = (highByte << 16) | lowByte;
-  // memory.codepage[i ? i / 2 : i] = buf.readUInt16LE(i);
+  // const lowByte = buf[i];
+  // const highByte = buf[i + 1];
+  // memory.codepage[i ? i / 2 : i] = (highByte << 16) | lowByte;
+  memory.codepage[i ? i / 2 : i] = buf.readUInt16LE(i);
 }
 
 const interpreter = Interpreter(memory);
