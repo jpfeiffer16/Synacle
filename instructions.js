@@ -185,6 +185,9 @@ module.exports = {
     instruction: 'in',
     action: (memory, a) => {
       //Implement
+      const readLineSync = require('readline-sync');
+      const value = readLineSync.question('');
+      console.log(value);
     }
   },
   21: {
@@ -215,3 +218,57 @@ function setValue(memory, address, value) {
     memory.registers[address - 32768] = getValue(memory, value);
   }
 }
+
+// process.stdin.resume();
+// // const value = process.stdin.read();
+// // if (value)
+// //   process.stdout.write(value);
+
+// process.stdin.on('data', function (chunk) {
+//   // process.stdout.write('data: ' + chunk);
+//   console.log(chunk);
+// });
+
+// var stdin = process.openStdin(); 
+// require('tty').setRawMode(true);
+
+// stdin.on('keypress', function (chunk, key) {
+//   process.stdout.write('Get Chunk: ' + chunk + '\n');
+//   if (key && key.ctrl && key.name == 'c') process.exit();
+// });
+
+// var stdin = process.stdin;
+
+// // without this, we would only get streams once enter is pressed
+// stdin.setRawMode( true );
+
+// // resume stdin in the parent process (node app won't quit all by itself
+// // unless an error or process.exit() happens)
+// stdin.resume();
+
+// // i don't want binary, do you?
+// stdin.setEncoding( 'utf8' );
+
+// // on any data into stdin
+// stdin.on( 'keypress', function( key ){
+//   // ctrl-c ( end of text )
+//   if ( key === '\u0003' ) {
+//     process.exit();
+//   }
+//   // write the key to stdout all normal like
+//   process.stdout.write( key );
+// });
+
+// const readline = require('readline');
+// readline.emitKeypressEvents(process.stdin);
+// process.stdin.setRawMode(true);
+// process.stdin.on('keypress', (str, key) => {
+//   if (key.ctrl && key.name === 'c') {
+//     process.exit();
+//   } else {
+//     console.log(`You pressed the "${str}" key`);
+//     console.log();
+//     console.log(key);
+//     console.log();
+//   }
+// });

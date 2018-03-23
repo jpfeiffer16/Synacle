@@ -4,8 +4,13 @@
   "description": "",
   "main": "vm.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "bash -c \"node test.js\""
   },
   "author": "Joe Pfeiffer",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "readline": "^1.3.0",
+    "readline-sync": "^1.4.9"
+  }
 }
