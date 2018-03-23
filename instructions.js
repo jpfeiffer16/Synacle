@@ -10,7 +10,7 @@ module.exports = {
     paramaterCount: 2,
     instruction: 'set',
     action: (memory, a, b) => {
-      memory.registers[a - 32768] = b;
+      memory.registers[a - 32768] = getValue(memory, b);
     }
   },
   2: {
@@ -24,22 +24,35 @@ module.exports = {
     paramaterCount: 1,
     instruction: 'pop',
     action: (memory, a) => {
-      if (memory.stack.length === 0) throw 'Empty stack error';
-      setValue(memory, a, memory.stack.pop());
+      if (memory.stack.length === 0)
+        throw 'Empty stack error';
+      setValue(
+        memory,
+        a,
+        getValue(memory, memory.stack.pop())
+      );
     }
   },
   4: {
     paramaterCount: 3,
     instruction: 'eq',
     action: (memory, a, b, c) => {
-      setValue(memory, a, getValue(memory, b) == getValue(memory, c) ? 1 : 0);
+      setValue(
+        memory,
+        a,
+        getValue(memory, b) == getValue(memory, c) ? 1 : 0
+      );
     }
   },
   5: {
     paramaterCount: 3,
     instruction: 'gt',
     action: (memory, a, b, c) => {
-      setValue(memory, a, b > c ? 1 : 0);
+      setValue(
+        memory,
+        a,
+        getValue(memory, b) > getValue(memory, c) ? 1 : 0
+      );
     }
   },
   6: {
@@ -54,7 +67,7 @@ module.exports = {
     instruction: 'jt',
     action: (memory, a, b) => {
       if (getValue(memory, a) !== 0) {
-        memory.inPtr = b - 1;
+        memory.inPtr = getValue(memory, b) - 1;
       }
     }
   },
@@ -63,7 +76,7 @@ module.exports = {
     instruction: 'jf',
     action: (memory, a, b) => {
       if (getValue(memory, a) === 0) {
-        memory.inPtr = b - 1;
+        memory.inPtr = getValue(memory, b) - 1;
       }
     }
   },
@@ -71,42 +84,62 @@ module.exports = {
     paramaterCount: 3,
     instruction: 'add',
     action: (memory, a, b, c) => {
-      setValue(memory, a, (b + c) % 32768);
+      setValue(
+        memory,
+        a,
+        (getValue(memory, b) + getValue(memory, c)) % 32768
+      );
     }
   },
   10: {
     paramaterCount: 3,
     instruction: 'mult',
     action: (memory, a, b, c) => {
-      setValue(memory, a, (b * c) % 32768);
+      setValue(
+        memory,
+        a,
+        (getValue(memory, b) * getValue(memory, c)) % 32768
+      );
     }
   },
   11: {
     paramaterCount: 3,
     instruction: 'mod',
     action: (memory, a, b, c) => {
-      setValue(memory, a, (b % c) % 32768);
+      setValue(
+        memory,
+        a,
+        (getValue(memory, b) % getValue(memory, c)) % 32768
+      );
     }
   },
   12: {
     paramaterCount: 3,
     instruction: 'and',
     action: (memory, a, b, c) => {
-      setValue(memory, a, b & c);
+      setValue(
+        memory,
+        a,
+        getValue(memory, b) & getValue(memory, c)
+      );
     }
   },
   13: {
     paramaterCount: 3,
     instruction: 'or',
     action: (memory, a, b, c) => {
-      setValue(memory, a, b | c);
+      setValue(
+        memory,
+        a,
+        getValue(memory, b) | getValue(memory, c)
+      );
     }
   },
   14: {
     paramaterCount: 2,
     instruction: 'not',
     action: (memory, a, b) => {
-      setValue(memory, a, (~getValue(memory, b) >>> 0) % 32768);
+      setValue(memory, a, ((~getValue(memory, b) >>> 0) & 0xFFFF) % 32768);
     }
   },
   15: {
@@ -136,14 +169,14 @@ module.exports = {
     instruction: 'ret',
     action: (memory) => {
       if (memory.stack.length === 0) process.exit(0);
-      memory.inPtr = memory.stack.pop() - 1;
+      memory.inPtr = getValue(memory, memory.stack.pop()) - 1;
     }
   },
   19: {
     paramaterCount: 1,
     instruction: 'out',
     action: (memory, a) => {
-      const char = String.fromCharCode(a);
+      const char = String.fromCharCode(getValue(memory, a));
       process.stdout.write(char);
     }
   },
