@@ -1,14 +1,14 @@
 const machineInstructions = require('./instructions');
 
 module.exports = function(memory) {
-  let { codepage, heap, registers } = memory;
+  // let { heap, registers } = memory;
   function step() {
     const instruction = 
-      machineInstructions[memory.codepage[memory.inPtr]];
+      machineInstructions[memory.heap[memory.inPtr]];
     if (instruction) {
       const params = [ memory ];
       for (let i = 0; i < instruction.paramaterCount; i++) {
-        params.push(memory.codepage[++memory.inPtr]);
+        params.push(memory.heap[++memory.inPtr]);
       }
       let traceParams = [instruction.instruction];
       traceParams = traceParams.concat(params);

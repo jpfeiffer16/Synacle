@@ -3,16 +3,13 @@ const Interpreter = require('./interpreter');
 
 let buf = fs.readFileSync('./challenge.bin');
 
-const testSame = new Uint16Array(71680);
+
 
 const memory = {
   //TODO: This length is not currently correct
-  // codepage: new Uint16Array(buf.length),
-  codepage: testSame,
   stack: [],
   registers: new Uint16Array(8),
-  // heap: new Uint16Array(4084),
-  heap: testSame,
+  heap: new Uint16Array(71680),
   inPtr: 0
 }
 
