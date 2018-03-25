@@ -188,6 +188,9 @@ module.exports = {
       if (!typedLetters.length) {
         const readLineSync = require('readline-sync');
         const value = readLineSync.question('');
+        if (value === 'save') {
+          require('fs').writeFileSync('./.state', JSON.stringify(memory));
+        }
         typedLetters = [];
         for(let i = 0; i < value.length; i++) {
           typedLetters.push(value[i]);
