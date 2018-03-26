@@ -22,13 +22,7 @@ if (!stateExists) {
   }
 }
 
-
 const interpreter = Interpreter(memory);
-
-// process.nextTick(() =>
-//   interpreter.step()
-// );
-
 
 function step() {
   interpreter.step();
