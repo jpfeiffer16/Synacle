@@ -13,10 +13,15 @@ for (let i = 0; i < codepage.length; i++) {
   if (instruction) {
     const params = [];
     for (let paramIndex = 0; paramIndex < instruction.paramaterCount; paramIndex++) {
-      params.push(codepage[++i]);
+      let instructionOp = codepage[++i];
+      console.log(instructionOp);
+      params.push(instructionOp);
     }
-    if (instruction.instruction === 'out')
-      params.push(String.fromCharCode(params[0]));
+    if (instruction.instruction === 'out') {
+      const char = String.fromCharCode(params[0]);
+      if (char != '\n')
+        params.push(char);
+    }
     console.log(`${ instruction.instruction } ${ params.join(' ') }`);
   }
 }

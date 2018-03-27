@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #4c4b4b;
+  color: white;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+}
+
+.scroll {
+  overflow-y: scroll;
+  height: 100%;
+}

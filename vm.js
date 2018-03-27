@@ -1,8 +1,10 @@
 const fs = require('fs');
+const program = require('commander');
 const Interpreter = require('./interpreter');
-let buf = fs.readFileSync('./challenge.bin');
 
-// process.on('message', (message) => console.log(message));
+program
+  .option('-d, --debug', 'Launch interactive debugger')
+  .parse(process.argv);
 
 const stateExists = fs.existsSync('./.state');
 
@@ -17,6 +19,7 @@ const memory = stateExists
   };
 
 if (!stateExists) {
+  let buf = fs.readFileSync('./challenge.bin');  
   for (let i = 0; i < buf.length; i += 2) {
     memory.heap[i ? i / 2 : i] = buf.readUInt16LE(i);
   }
@@ -26,8 +29,12 @@ const interpreter = Interpreter(memory);
 
 function step() {
   interpreter.step();
-  // process.nextTick(() => step());
   setImmediate(step);
 }
 
-step();
+// step();
+
+if (program.debug) {
+  const SynacorDebugger = require('./debugger/debugger');  
+  SynacorDebugger(memory);
+}
