@@ -16,13 +16,25 @@ function updateUI() {
       heap.push(memory.heap[key])
     );
   loadArray('heap', heap);
+
+  let registers = [];
+  Object.keys(memory.registers)
+    .forEach((key) => {
+      registers.push(memory.registers[key]);
+    });
+  loadArray('registers', registers);
+
+  loadArray('stack', memory.stack);
 }
 
 function loadArray(id, array) {
-  const area = document.getElementById('heap');
+  const area = document.getElementById(id);
+  const list = document.createElement('ol');
+  list.start = '0';
   array.forEach((arrayItem) => {
-    let item = document.createElement('p');
+    let item = document.createElement('li');
     item.innerText = arrayItem;    
-    area.appendChild(item);
+    list.appendChild(item);
   });
+  area.appendChild(list);
 }

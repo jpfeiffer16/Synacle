@@ -5,15 +5,24 @@
     <title>Joe Pfeiffer's JS Synacor challenge debugger</title>
   </head>
   <body>
-    <h1>Hi! I'm the debugger.</h1>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/client.js"></script>
-    <div id="left-pane" class="scroll">
-        <div id="heap"></div>
-    </div>
-    <div id="right-pane" class="scroll">
-        <div id="registers"></div>
-        <div id="stack"></div>
+    
+    <div class="container-h">
+      <div id="left-pane" class="cell container-v">
+        <h3>Heap</h3>
+        <div id="heap" class="scroll cell"></div>
+      </div>
+      <div id="right-pane" class="container-v cell">
+        <div class="cell container-v">
+            <h3>Registers</h3>
+            <div id="registers" class="scroll cell"></div>  
+        </div>
+        <div class="cell container-v">
+            <h3>Stack</h3>
+            <div id="stack" class="scroll cell"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
