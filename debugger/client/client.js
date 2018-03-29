@@ -17,6 +17,8 @@ function updateUI() {
     );
   loadArray('heap', heap);
 
+  // document.querySelector(`#heap ol li:nth-child(${ memory.inPtr + 1 })`).className += ' highlighted';
+
   let registers = [];
   Object.keys(memory.registers)
     .forEach((key) => {
@@ -28,13 +30,25 @@ function updateUI() {
 }
 
 function loadArray(id, array) {
-  const area = document.getElementById(id);
-  const list = document.createElement('ol');
-  list.start = '0';
-  array.forEach((arrayItem) => {
-    let item = document.createElement('li');
-    item.innerText = arrayItem;    
-    list.appendChild(item);
-  });
-  area.appendChild(list);
+  // const area = document.getElementById(id);
+  // while (area.firstChild) {
+  //   area.removeChild(area.firstChild);
+  // }
+  // const list = document.createElement('ol');
+  // list.start = '0';
+  // array.forEach((arrayItem) => {
+  //   let item = document.createElement('li');
+  //   item.innerText = arrayItem;    
+  //   list.appendChild(item);
+  // });
+  // area.appendChild(list);
 }
+
+document.addEventListener('keypress', (e) => {
+  if (e.key === 'o') {
+    //Step
+    socket.emit('step');
+  } else if (e.key === 'p') {
+    //Continue
+  }
+});

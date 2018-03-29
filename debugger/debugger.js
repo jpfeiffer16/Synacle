@@ -13,10 +13,16 @@ http.listen(3000, function(){
   console.log('debugger listening on *:3000');
 });
 
-module.exports = function(memory) {
+module.exports = function(memory, interpreter) {
+  memory.breakpoints = [];
   io.on('connection', function(socket){
     socket.emit('state', memory);
+
+    socket.on('step', () => {
+      interpreter.step();
+      io.sockets.emit('state', memory);
+    });
   });
   
-  io.sockets.emit('state', memory);
+  
 }

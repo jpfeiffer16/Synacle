@@ -1,4 +1,4 @@
-const instructions = require('./instructions');
+const instructions = require('./instructions')(require('./virtualMemoryLayer'));
 
 const fs = require('fs');
 let buf = fs.readFileSync('./challenge.bin');

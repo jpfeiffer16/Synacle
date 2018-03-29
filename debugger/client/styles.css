@@ -39,3 +39,7 @@ body {
 
 #right-pane {
 }
+
+.highlighted {
+  background-color: yellow;
+}

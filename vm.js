@@ -36,5 +36,7 @@ function step() {
 
 if (program.debug) {
   const SynacorDebugger = require('./debugger/debugger');  
-  SynacorDebugger(memory);
+  SynacorDebugger(memory, interpreter);
+} else {
+  step();
 }
