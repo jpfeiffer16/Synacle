@@ -14,7 +14,7 @@ for (let i = 0; i < codepage.length; i++) {
     const params = [];
     for (let paramIndex = 0; paramIndex < instruction.paramaterCount; paramIndex++) {
       let instructionOp = codepage[++i];
-      console.log(instructionOp);
+      // console.log(`${ i - 1 }: ${ instructionOp }`);
       params.push(instructionOp);
     }
     if (instruction.instruction === 'out') {
@@ -22,6 +22,6 @@ for (let i = 0; i < codepage.length; i++) {
       if (char != '\n')
         params.push(char);
     }
-    console.log(`${ instruction.instruction } ${ params.join(' ') }`);
+    console.log(`${ i - params.length }: ${ instruction.instruction } ${ params.join(' ') }`);
   }
 }

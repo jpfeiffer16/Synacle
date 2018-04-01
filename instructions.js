@@ -1,5 +1,5 @@
 let typedLetters = [];
-module.exports = function(VirtualMemoryLayer) {
+module.exports = function(VMem) {
   return {
     0: {
       paramaterCount: 0,
@@ -12,14 +12,14 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 2,
       instruction: 'set',
       action: (memory, a, b) => {
-        memory.registers[a - 32768] = VirtualMemoryLayer.getValue(memory, b);
+        memory.registers[a - 32768] = VMem.getValue(memory, b);
       }
     },
     2: {
       paramaterCount: 1,
       instruction: 'push',
       action: (memory, a) => {
-        memory.stack.push(VirtualMemoryLayer.getValue(memory, a));
+        memory.stack.push(VMem.getValue(memory, a));
       }
     },
     3: {
@@ -28,10 +28,10 @@ module.exports = function(VirtualMemoryLayer) {
       action: (memory, a) => {
         if (memory.stack.length === 0)
           throw 'Empty stack error';
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          VirtualMemoryLayer.getValue(memory, memory.stack.pop())
+          VMem.getValue(memory, memory.stack.pop())
         );
       }
     },
@@ -39,10 +39,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'eq',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          VirtualMemoryLayer.getValue(memory, b) == VirtualMemoryLayer.getValue(memory, c) ? 1 : 0
+          VMem.getValue(memory, b) == VMem.getValue(memory, c) ? 1 : 0
         );
       }
     },
@@ -50,10 +50,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'gt',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          VirtualMemoryLayer.getValue(memory, b) > VirtualMemoryLayer.getValue(memory, c) ? 1 : 0
+          VMem.getValue(memory, b) > VMem.getValue(memory, c) ? 1 : 0
         );
       }
     },
@@ -61,15 +61,15 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 1,
       instruction: 'jmp',
       action: (memory, a) => {
-        memory.inPtr = VirtualMemoryLayer.getValue(memory, a) - 1;
+        memory.inPtr = VMem.getValue(memory, a) - 1;
       }
     },
     7: {
       paramaterCount: 2,
       instruction: 'jt',
       action: (memory, a, b) => {
-        if (VirtualMemoryLayer.getValue(memory, a) !== 0) {
-          memory.inPtr = VirtualMemoryLayer.getValue(memory, b) - 1;
+        if (VMem.getValue(memory, a) !== 0) {
+          memory.inPtr = VMem.getValue(memory, b) - 1;
         }
       }
     },
@@ -77,8 +77,8 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 2,
       instruction: 'jf',
       action: (memory, a, b) => {
-        if (VirtualMemoryLayer.getValue(memory, a) === 0) {
-          memory.inPtr = VirtualMemoryLayer.getValue(memory, b) - 1;
+        if (VMem.getValue(memory, a) === 0) {
+          memory.inPtr = VMem.getValue(memory, b) - 1;
         }
       }
     },
@@ -86,10 +86,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'add',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          (VirtualMemoryLayer.getValue(memory, b) + VirtualMemoryLayer.getValue(memory, c)) % 32768
+          (VMem.getValue(memory, b) + VMem.getValue(memory, c)) % 32768
         );
       }
     },
@@ -97,10 +97,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'mult',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          (VirtualMemoryLayer.getValue(memory, b) * VirtualMemoryLayer.getValue(memory, c)) % 32768
+          (VMem.getValue(memory, b) * VMem.getValue(memory, c)) % 32768
         );
       }
     },
@@ -108,10 +108,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'mod',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          (VirtualMemoryLayer.getValue(memory, b) % VirtualMemoryLayer.getValue(memory, c)) % 32768
+          (VMem.getValue(memory, b) % VMem.getValue(memory, c)) % 32768
         );
       }
     },
@@ -119,10 +119,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'and',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          VirtualMemoryLayer.getValue(memory, b) & VirtualMemoryLayer.getValue(memory, c)
+          VMem.getValue(memory, b) & VMem.getValue(memory, c)
         );
       }
     },
@@ -130,10 +130,10 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 3,
       instruction: 'or',
       action: (memory, a, b, c) => {
-        VirtualMemoryLayer.setValue(
+        VMem.setValue(
           memory,
           a,
-          VirtualMemoryLayer.getValue(memory, b) | VirtualMemoryLayer.getValue(memory, c)
+          VMem.getValue(memory, b) | VMem.getValue(memory, c)
         );
       }
     },
@@ -141,21 +141,21 @@ module.exports = function(VirtualMemoryLayer) {
       paramaterCount: 2,
       instruction: 'not',
       action: (memory, a, b) => {
-        VirtualMemoryLayer.setValue(memory, a, ((~VirtualMemoryLayer.getValue(memory, b) >>> 0) & 0xFFFF) % 32768);
+        VMem.setValue(memory, a, ((~VMem.getValue(memory, b) >>> 0) & 0xFFFF) % 32768);
       }
     },
     15: {
       paramaterCount: 2,
       instruction: 'rmem',
       action: (memory, a, b) => {
-        VirtualMemoryLayer.setValue(memory, a, memory.heap[VirtualMemoryLayer.getValue(memory, b)]);
+        VMem.setValue(memory, a, memory.heap[VMem.getValue(memory, b)]);
       }
     },
     16: {
       paramaterCount: 2,
       instruction: 'wmem',
       action: (memory, a, b) => {
-        VirtualMemoryLayer.setValue(memory, VirtualMemoryLayer.getValue(memory, a), b);
+        VMem.setValue(memory, VMem.getValue(memory, a), b);
       }
     },
     17: {
@@ -163,7 +163,7 @@ module.exports = function(VirtualMemoryLayer) {
       instruction: 'call',
       action: (memory, a) => {
         memory.stack.push(memory.inPtr + 1);
-        memory.inPtr = VirtualMemoryLayer.getValue(memory, a) - 1;
+        memory.inPtr = VMem.getValue(memory, a) - 1;
       }
     },
     18: {
@@ -171,14 +171,14 @@ module.exports = function(VirtualMemoryLayer) {
       instruction: 'ret',
       action: (memory) => {
         if (memory.stack.length === 0) process.exit(0);
-        memory.inPtr = VirtualMemoryLayer.getValue(memory, memory.stack.pop()) - 1;
+        memory.inPtr = VMem.getValue(memory, memory.stack.pop()) - 1;
       }
     },
     19: {
       paramaterCount: 1,
       instruction: 'out',
       action: (memory, a) => {
-        const char = String.fromCharCode(VirtualMemoryLayer.getValue(memory, a));
+        const char = String.fromCharCode(VMem.getValue(memory, a));
         process.stdout.write(char);
       }
     },
@@ -199,7 +199,7 @@ module.exports = function(VirtualMemoryLayer) {
           typedLetters.push('\n');
         }
         const char = typedLetters.shift();
-        VirtualMemoryLayer.setValue(memory, a, char ? char.charCodeAt(0) : 0);      
+        VMem.setValue(memory, a, char ? char.charCodeAt(0) : 0);      
       }
     },
     21: {

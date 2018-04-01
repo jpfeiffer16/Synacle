@@ -13,7 +13,7 @@ module.exports = function(memory) {
       }
       let traceParams = [instruction.instruction];
       traceParams = traceParams.concat(params);
-      trace.apply({}, traceParams);
+      // trace.apply({}, traceParams);
       instruction.action.apply(machineInstructions, params);
     }
     memory.inPtr++;
