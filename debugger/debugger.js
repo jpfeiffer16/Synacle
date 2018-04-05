@@ -1,28 +1,47 @@
-const express = require('express');
-const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const path = require('path');
+const fs = require('fs');
+const breakpoints  = JSON.parse(
+    fs.readFileSync('./.breakpoints', 'utf8')
+  ).breakpoints;
+const VMemLayer = require('../virtualMemoryLayer');
+const instructions = require('../instructions')(VMemLayer);
+const readlineSync = require('readline-sync');
 
-// app.get('/', function(req, res){
-//   res.sendFile(path.resolve(__dirname, './client/index.html'));
-// });
-app.use(express.static(path.resolve(__dirname, './client/')));
+function Debugger(memory, interpreter) {
+  while (true) {
+    
+    if (~breakpoints.indexOf(memory.inPtr)) {
+      //break
+      console.log(`Hit breakpoint on ${ memory.inPtr }`);
+      debugPrompt();
+    }
+    interpreter.step();
+  }
 
-http.listen(3000, function(){
-  console.log('debugger listening on *:3000');
-});
+  function debugPrompt() {
+    const instruction = instructions[memory.heap[memory.inPtr]];
+    
+    console.log(instruction);
+    const input = readlineSync.question('Command:');
+    const inputParts = input.split(' ');
+    switch(inputParts[0]) {
+      case 'reg':
+        console.log(memory.registers);
+        break;
+      case 'ins':
+        console.log(memory.heap[memory.inPtr]);
+        break;
+      case 'next':
+        memory.inPtr += (instruction.paramaterCount) + 1;
+        break;
+      case 'rset':
+        memory.registers[parseInt(inputParts[1])] = parseInt(inputParts[2]);
+        break;
+      default: 
+        return;
+    }
+    debugPrompt();
+  }  
+};
 
-module.exports = function(memory, interpreter) {
-  memory.breakpoints = [];
-  io.on('connection', function(socket){
-    socket.emit('state', memory);
 
-    socket.on('step', () => {
-      interpreter.step();
-      io.sockets.emit('state', memory);
-    });
-  });
-  
-  
-}
+module.exports = Debugger;

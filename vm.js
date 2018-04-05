@@ -4,6 +4,7 @@ const Interpreter = require('./interpreter');
 
 program
   .option('-d, --debug', 'Launch interactive debugger')
+  .option('-wd, --web-debug', 'Launch interactive web debugger')
   .parse(process.argv);
 
 const stateExists = fs.existsSync('./.state');
@@ -32,10 +33,11 @@ function step() {
   setImmediate(step);
 }
 
-// step();
-
 if (program.debug) {
-  const SynacorDebugger = require('./debugger/debugger');  
+  const Debugger = require('./debugger/debugger');
+  Debugger(memory, interpreter);
+} else if (program.webDebug) {
+  const SynacorDebugger = require('./webDebugger/debugger');  
   SynacorDebugger(memory, interpreter);
 } else {
   step();
