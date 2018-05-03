@@ -5,6 +5,7 @@ const Interpreter = require('./interpreter');
 program
   .option('-d, --debug', 'Launch interactive debugger')
   .option('-wd, --web-debug', 'Launch interactive web debugger')
+  .option('-b, --binary [string]', 'Binary to run. Defaults to challenge.bin')
   .parse(process.argv);
 
 const stateExists = fs.existsSync('./.state');
@@ -20,7 +21,7 @@ const memory = stateExists
   };
 
 if (!stateExists) {
-  let buf = fs.readFileSync('./challenge.bin');  
+  let buf = fs.readFileSync(program.binary || './challenge.bin');  
   for (let i = 0; i < buf.length; i += 2) {
     memory.heap[i ? i / 2 : i] = buf.readUInt16LE(i);
   }
