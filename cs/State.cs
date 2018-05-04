@@ -6,4 +6,5 @@ public class State {
   public Stack<UInt16> Stack { get; set; }
   public UInt16[] Registers { get; set; }
   public UInt16 IntPtr { get; set; }
+  public string TypedChars { get; set; }
 }

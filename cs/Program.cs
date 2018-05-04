@@ -21,7 +21,8 @@ namespace cs
                     0,
                     0
                 },
-                IntPtr = 0
+                IntPtr = 0,
+                TypedChars = String.Empty
             };
             var fileBytes = File.ReadAllBytes("../assembler/programs/basic.bin");
 
