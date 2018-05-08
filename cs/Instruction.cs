@@ -28,14 +28,14 @@ public class Instruction {
         OpCode = "push",
         ArgCount = 1,
         Action = (State state, UInt16[] args) => {
-          state.Stack.Push(args[0]);
+          state.Stack.Push(Instruction.GetValue(state, args[0]));
         }
       },
       new Instruction() {
         OpCode = "pop",
         ArgCount = 1,
         Action = (State state, UInt16[] args) => {
-          Instruction.SetValue(state, args[0], args[1]);
+          Instruction.SetValue(state, args[0], state.Stack.Pop());
         }
       },
       new Instruction() {
@@ -45,7 +45,7 @@ public class Instruction {
           Instruction.SetValue(
             state,
             args[0],
-            (UInt16)(args[1] == args[2] ? 1 : 0)
+            (UInt16)(Instruction.GetValue(state, args[1]) == Instruction.GetValue(state, args[2]) ? 1 : 0)
           );
         }
       },
@@ -56,7 +56,7 @@ public class Instruction {
         Action = (State state, UInt16[] args) => {
           Instruction.SetValue(
             state,
-            Instruction.GetValue(state, args[0]),
+            args[0],
             (UInt16)(Instruction.GetValue(state, args[1]) > Instruction.GetValue(state, args[2]) ? 1 : 0)
           );
         }
@@ -72,7 +72,7 @@ public class Instruction {
         OpCode = "jt",
         ArgCount = 2,
         Action = (State state, UInt16[] args) => {
-          if (Instruction.GetValue(state, args[0]) == 1) {
+          if (Instruction.GetValue(state, args[0]) != 0) {
             state.IntPtr = (UInt16)(Instruction.GetValue(state, args[1]) - 1);
           }
         }
@@ -81,7 +81,7 @@ public class Instruction {
         OpCode = "jf",
         ArgCount = 2,
         Action = (State state, UInt16[] args) => {
-          if (Instruction.GetValue(state, args[0]) != 1) {
+          if (Instruction.GetValue(state, args[0]) == 0) {
             state.IntPtr = (UInt16)(Instruction.GetValue(state, args[1]) - 1);
           }
         }
@@ -90,7 +90,11 @@ public class Instruction {
         OpCode = "add",
         ArgCount = 3,
         Action = (State state, UInt16[] args) => {
-          Instruction.SetValue(state, args[0], (UInt16)((args[1] + args[2]) % 32768));
+          Instruction.SetValue(
+            state,
+            args[0],
+            (UInt16)((Instruction.GetValue(state, args[1]) + Instruction.GetValue(state, args[2])) % 32768)
+          );
         }
       },
       new Instruction() {
@@ -125,14 +129,14 @@ public class Instruction {
         OpCode = "not",
         ArgCount = 2,
         Action = (State state, UInt16[] args) => {
-          Instruction.SetValue(state, args[0], (UInt16)(~args[1]));
+          Instruction.SetValue(state, args[0], (UInt16)(((UInt16)(~args[1])  % 32768)));
         }
       },
       new Instruction() {
         OpCode = "rmem",
         ArgCount = 2,
         Action = (State state, UInt16[] args) => {
-          Instruction.SetValue(state, args[0], args[1]);
+          Instruction.SetValue(state, args[0], state.Heap[Instruction.GetValue(state, args[1])]);
         }
       },
       new Instruction() {
@@ -185,7 +189,7 @@ public class Instruction {
   }
 
   private static UInt16 GetValue(State state, UInt16 address) {
-    if (address > 32767) {
+    if (address < 32768) {
       return address;
     } else {
       return state.Registers[address - 32768];
@@ -193,8 +197,8 @@ public class Instruction {
   }
 
   private static void SetValue(State state, UInt16 address, UInt16 value) {
-    if (value > 32767) {
-      state.Registers[32768 - address] = Instruction.GetValue(state, value);
+    if (address > 32767) {
+      state.Registers[address - 32768] = Instruction.GetValue(state, value);
     } else {
       state.Heap[address] = Instruction.GetValue(state, value);
     }

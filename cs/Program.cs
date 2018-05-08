@@ -24,14 +24,19 @@ namespace cs
                 IntPtr = 0,
                 TypedChars = String.Empty
             };
-            var fileBytes = File.ReadAllBytes("../assembler/programs/basic.bin");
+            // var fileBytes = File.ReadAllBytes("../assembler/programs/basic.bin");
+            var fileBytes = File.ReadAllBytes("../challenge.bin");
 
             for (var i = 0; i < fileBytes.Length; i += 2) {
                 var truByte = BitConverter.ToUInt16(new byte[2] { fileBytes[i], fileBytes[i + 1] }, 0);
                 machineState.Heap[i == 0 ? 0 : i / 2] = truByte;
             }
 
-            Console.WriteLine("Done with init");
+            var vm = new Interpreter(machineState);
+
+            while(true) {
+                vm.Step();
+            }
         }
     }
 }
