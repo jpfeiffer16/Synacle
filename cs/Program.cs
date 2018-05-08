@@ -9,9 +9,9 @@ namespace cs
         static void Main(string[] args)
         {
             var machineState = new State() {
-                Heap = new UInt16[32768],
-                Stack = new Stack<UInt16>(),
-                Registers = new UInt16[8] {
+                Heap = new ushort[32768],
+                Stack = new Stack<ushort>(),
+                Registers = new ushort[8] {
                     0,
                     0,
                     0,

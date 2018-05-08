@@ -14,7 +14,7 @@ public class Interpreter {
   public void Step() {
     var instruction = Instructions[state.Heap[state.IntPtr]];
     // Console.WriteLine(instruction.OpCode);
-    var args = new UInt16[instruction.ArgCount];
+    var args = new ushort[instruction.ArgCount];
     if (instruction != null) {
       for (var i = 0; i < instruction.ArgCount; i++) {
         args[i] = state.Heap[++state.IntPtr];

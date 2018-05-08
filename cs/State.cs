@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 
 public class State {
-  public UInt16[] Heap { get; set; }
-  public Stack<UInt16> Stack { get; set; }
-  public UInt16[] Registers { get; set; }
-  public UInt16 IntPtr { get; set; }
+  public ushort[] Heap { get; set; }
+  public Stack<ushort> Stack { get; set; }
+  public ushort[] Registers { get; set; }
+  public ushort IntPtr { get; set; }
   public string TypedChars { get; set; }
 }
