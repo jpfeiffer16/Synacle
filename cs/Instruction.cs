@@ -21,7 +21,7 @@ public class Instruction {
         OpCode = "set",
         ArgCount = 2,
         Action = (State state, ushort[] args) => {
-          state.Registers[32768 - args[0]] = Instruction.GetValue(state, args[1]);
+          state.Registers[args[0] - 32768] = Instruction.GetValue(state, args[1]);
         }
       },
       new Instruction() {
@@ -143,7 +143,7 @@ public class Instruction {
         OpCode = "wmem",
         ArgCount = 2,
         Action = (State state, ushort[] args) => {
-          Instruction.SetValue(state, args[1], args[0]);
+          Instruction.SetValue(state, Instruction.GetValue(state, args[0]), args[1]);
         }
       },
       new Instruction() {

@@ -21,9 +21,8 @@
             // "program": "${workspaceFolder}/toInt.js".
             "program": "${workspaceFolder}/vm.js",
             "args": [
-                // "-d",
-                "-b",
-                "assembler/programs/count.bin"
+                // "-b",
+                // "assembler/programs/count.bin"
             ]
             // "program": "${workspaceFolder}/test.js"
         }
