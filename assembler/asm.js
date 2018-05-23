@@ -12,6 +12,9 @@ fs.readFile(programName, 'utf8', (err, text) => {
 
   const lines = text.split('\n');
   lines.forEach((line, lineNumber) => {
+    // If the line is a comment, discard it
+    if (line[0] === '#') return;
+
     const tokens = line.split(' ');
     let opcode;
     const instruction = Object.keys(instructions).find(i => {

@@ -49,7 +49,6 @@ public class Instruction {
           );
         }
       },
-      //TODO: Need to add GetValue calls from here down
       new Instruction() {
         OpCode = "gt",
         ArgCount = 3,
@@ -101,35 +100,78 @@ public class Instruction {
         OpCode = "mult",
         ArgCount = 3,
         Action = (State state, ushort[] args) => {
-          Instruction.SetValue(state, args[0], (ushort)((args[1] * args[2]) % 32768));
+          Instruction.SetValue(
+            state,
+            args[0],
+            (ushort)(
+              (
+                Instruction.GetValue(state, args[1])
+                *
+                Instruction.GetValue(state, args[2])
+              ) % 32768
+            )
+          );
         }
       },
       new Instruction() {
         OpCode = "mod",
         ArgCount = 3,
         Action = (State state, ushort[] args) => {
-          Instruction.SetValue(state, args[0], (ushort)(args[1] % args[2]));
+          Instruction.SetValue(
+            state,
+            args[0],
+            (ushort)(
+              Instruction.GetValue(state, args[1])
+              %
+              Instruction.GetValue(state, args[2])
+            )
+          );
         }
       },
       new Instruction() {
         OpCode = "and",
         ArgCount = 3,
         Action = (State state, ushort[] args) => {
-          Instruction.SetValue(state, args[0], (ushort)(args[1] & args[2]));
+          Instruction.SetValue(
+            state,
+            args[0],
+            (ushort)(
+              Instruction.GetValue(state, args[1])
+              &
+              Instruction.GetValue(state, args[2])
+            )
+          );
+          // (ushort)(args[1] & args[2]);
         }
       },
       new Instruction() {
         OpCode = "or",
         ArgCount = 3,
         Action = (State state, ushort[] args) => {
-          Instruction.SetValue(state, args[0], (ushort)(args[1] | args[2]));
+          Instruction.SetValue(
+            state,
+            args[0],
+            (ushort)(
+              Instruction.GetValue(state, args[1])
+              |
+              Instruction.GetValue(state, args[2])
+            )
+          );
+          // (ushort)(args[1] | args[2])
         }
       },
       new Instruction() {
         OpCode = "not",
         ArgCount = 2,
         Action = (State state, ushort[] args) => {
-          Instruction.SetValue(state, args[0], (ushort)(((ushort)(~args[1])  % 32768)));
+          Instruction.SetValue(
+            state,
+            args[0],
+            (ushort)(
+              (ushort)(~Instruction.GetValue(state, args[1])) % 32768
+            )
+          );
+          // (ushort)(((ushort)(~args[1])  % 32768))
         }
       },
       new Instruction() {
@@ -158,7 +200,7 @@ public class Instruction {
         OpCode = "ret",
         ArgCount = 0,
         Action = (State state, ushort[] args) => {
-          state.IntPtr = Instruction.GetValue(state, state.Stack.Pop());
+          state.IntPtr = (ushort)(Instruction.GetValue(state, state.Stack.Pop()) - 1);
         }
       },
       new Instruction() {
@@ -175,7 +217,9 @@ public class Instruction {
           if (string.IsNullOrEmpty(state.TypedChars)) {
             state.TypedChars = Console.ReadLine() + "\n";
           }
-          Instruction.SetValue(state, args[0], Convert.ToUInt16(state.TypedChars[0]));
+          var character = state.TypedChars[0];
+          state.TypedChars = state.TypedChars.Substring(1);
+          Instruction.SetValue(state, args[0], Convert.ToUInt16(character));
         }
       },
       new Instruction() {

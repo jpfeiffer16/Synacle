@@ -42,3 +42,9 @@ function trace(instruction, memory, ...rest) {
     }\n`
   );
 }
+
+function trace(instruction, memory, ...rest) {
+  fs.appendFileSync('./log.txt', 
+    `${ memory.inPtr }: ${ instruction } ${ rest.join(' ') }\n`
+  );
+}
