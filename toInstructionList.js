@@ -1,7 +1,7 @@
 const instructions = require('./instructions')(require('./virtualMemoryLayer'));
 
 const fs = require('fs');
-let buf = fs.readFileSync('./challenge.bin');
+let buf = fs.readFileSync(process.argv[2]);
 let codepage = [];
 
 for (let i = 0; i < buf.length; i += 2) {

@@ -1,11 +1,15 @@
 const fs = require('fs');
 const program = require('commander');
+const moment = require('moment');
 const Interpreter = require('./interpreter');
+
+let startTime;
 
 program
   .option('-d, --debug', 'Launch interactive debugger')
   .option('-wd, --web-debug', 'Launch interactive web debugger')
   .option('-b, --binary [string]', 'Binary to run. Defaults to challenge.bin')
+  .option('-i, --information [bool]', 'Display information about the program once it exits')
   .parse(process.argv);
 
 const stateExists = fs.existsSync('./.state');
@@ -17,7 +21,8 @@ const memory = stateExists
     stack: [],
     registers: new Uint16Array(8),
     heap: new Uint16Array(71680),
-    inPtr: 0
+    inPtr: 0,
+    stopped: false
   };
 
 if (!stateExists) {
@@ -31,7 +36,13 @@ const interpreter = Interpreter(memory);
 
 function step() {
   interpreter.step();
-  setImmediate(step);
+  if (!memory.stopped) {
+    setImmediate(step);
+  } else {
+    if (program.information) {
+      console.log(moment.duration(moment().diff(startTime)).as('milliseconds'));
+    }
+  }
 }
 
 if (program.debug) {
@@ -41,5 +52,6 @@ if (program.debug) {
   const SynacorDebugger = require('./webDebugger/debugger');  
   SynacorDebugger(memory, interpreter);
 } else {
+  startTime = moment();
   step();
 }

@@ -13,7 +13,7 @@ public class Instruction {
         OpCode = "halt",
         ArgCount = 0,
         Action = (State state, ushort[] args) => {
-          Environment.Exit(0);
+          state.Stopped = true;
         }
       },
       //TODO: Use SetValue here
@@ -64,7 +64,7 @@ public class Instruction {
         OpCode = "jmp",
         ArgCount = 1,
         Action = (State state, ushort[] args) => {
-          state.IntPtr = (ushort)(Instruction.GetValue(state, args[0]) - 1);
+          state.InPtr = (ushort)(Instruction.GetValue(state, args[0]) - 1);
         }
       },
       new Instruction() {
@@ -72,7 +72,7 @@ public class Instruction {
         ArgCount = 2,
         Action = (State state, ushort[] args) => {
           if (Instruction.GetValue(state, args[0]) != 0) {
-            state.IntPtr = (ushort)(Instruction.GetValue(state, args[1]) - 1);
+            state.InPtr = (ushort)(Instruction.GetValue(state, args[1]) - 1);
           }
         }
       },
@@ -81,7 +81,7 @@ public class Instruction {
         ArgCount = 2,
         Action = (State state, ushort[] args) => {
           if (Instruction.GetValue(state, args[0]) == 0) {
-            state.IntPtr = (ushort)(Instruction.GetValue(state, args[1]) - 1);
+            state.InPtr = (ushort)(Instruction.GetValue(state, args[1]) - 1);
           }
         }
       },
@@ -192,15 +192,15 @@ public class Instruction {
         OpCode = "call",
         ArgCount = 1,
         Action = (State state, ushort[] args) => {
-          state.Stack.Push((ushort)(state.IntPtr + args.Length));
-          state.IntPtr = (ushort)(Instruction.GetValue(state, args[0]) - 1);
+          state.Stack.Push((ushort)(state.InPtr + args.Length));
+          state.InPtr = (ushort)(Instruction.GetValue(state, args[0]) - 1);
         }
       },
       new Instruction() {
         OpCode = "ret",
         ArgCount = 0,
         Action = (State state, ushort[] args) => {
-          state.IntPtr = (ushort)(Instruction.GetValue(state, state.Stack.Pop()) - 1);
+          state.InPtr = (ushort)(Instruction.GetValue(state, state.Stack.Pop()) - 1);
         }
       },
       new Instruction() {

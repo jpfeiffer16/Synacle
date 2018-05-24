@@ -12,21 +12,21 @@ public class Interpreter {
   }
 
   public void Step() {
-    var instruction = Instructions[state.Heap[state.IntPtr]];
+    var instruction = Instructions[state.Heap[state.InPtr]];
     var args = new ushort[instruction.ArgCount];
     if (instruction != null) {
       for (var i = 0; i < instruction.ArgCount; i++) {
-        args[i] = state.Heap[++state.IntPtr];
+        args[i] = state.Heap[++state.InPtr];
       }
       // this.Log(state, instruction, args);
       instruction.Action(state, args);
     }
-    state.IntPtr++;
+    state.InPtr++;
   }
 
   private void Log(State state, Instruction instruction, ushort[] args) {
     using (var stream = System.IO.File.AppendText("./log.txt")) {
-      stream.Write(String.Format("{0}: {1} {2}\n", state.IntPtr, instruction.OpCode, String.Join(" ", args)));
+      stream.Write(String.Format("{0}: {1} {2}\n", state.InPtr, instruction.OpCode, String.Join(" ", args)));
     }
   }
 }

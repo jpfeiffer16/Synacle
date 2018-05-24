@@ -5,7 +5,8 @@ module.exports = function(VMem) {
       paramaterCount: 0,
       instruction: 'halt',
       action: (memory) => {
-        process.exit();
+        // process.exit();
+        memory.stopped = true;
       }
     },
     1: {

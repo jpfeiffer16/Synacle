@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using CommandLine;
 
 namespace cs
 {
@@ -21,22 +22,33 @@ namespace cs
                     0,
                     0
                 },
-                IntPtr = 0,
-                TypedChars = String.Empty
+                InPtr = 0,
+                TypedChars = String.Empty,
+                Stopped = false
             };
 
-            var fileBytes = File.ReadAllBytes(args.Length > 0 ? args[0] : "../challenge.bin");
+            // var commandLineOptions = new CommandLineOptions();
 
-            for (var i = 0; i < fileBytes.Length; i += 2) {
-                var truByte = BitConverter.ToUInt16(new byte[2] { fileBytes[i], fileBytes[i + 1] }, 0);
-                machineState.Heap[i == 0 ? 0 : i / 2] = truByte;
-            }
+            CommandLine.Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed((opts) => {
+                var fileBytes = File.ReadAllBytes(opts.Binary);
 
-            var vm = new Interpreter(machineState);
+                for (var i = 0; i < fileBytes.Length; i += 2) {
+                    var truByte = BitConverter.ToUInt16(new byte[2] { fileBytes[i], fileBytes[i + 1] }, 0);
+                    machineState.Heap[i == 0 ? 0 : i / 2] = truByte;
+                }
 
-            while(true) {
-                vm.Step();
-            }
+                var vm = new Interpreter(machineState);
+
+                var startTime = DateTime.UtcNow;
+                while(!machineState.Stopped) {
+                    vm.Step();
+                }
+                if (opts.Information) {
+                    Console.WriteLine((DateTime.UtcNow - startTime).Milliseconds);
+                }
+            });
+
+            
         }
     }
 }
