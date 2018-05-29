@@ -68,6 +68,15 @@ fs.readFile(programName, 'utf8', (err, text) => {
     }
   });
 
+  //   Register substitution pass
+  symbols.forEach((symbol, index) => {
+    if (symbol && symbol.length) {
+      if (~symbol.indexOf('reg')) {
+        symbols[index] = parseInt(symbol.replace('reg', '')) + 32768;
+      }
+    }
+  });
+
   symbols.forEach((symbol, index) => {
     const tryInstruction = Object.keys(instructions).find(i => {
       return instructions[i].instruction === symbol;

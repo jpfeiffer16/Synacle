@@ -1,18 +1,24 @@
-
+set reg6 100
 call >read
-rmem 32768 100
-out 32768
+set reg6 100
+call >write
 halt
 
+
+#Read input into memory starting at the offset in register 6
 :read
-in 32768
-out 32768
-wmem 100 32768
-#add 32771 32771 1
-eq 32769 32768 10
-jf 32769 >read
+in reg0
+#out reg0
+wmem reg6 reg0
+add reg6 reg6 1
+eq reg1 reg0 10
+jf reg1 >read
 ret
 
-#:write
-#32768
-#ret
+#Read memory at offset in register 6 ending with a null byte (0)
+:write
+rmem reg1 reg6
+out reg1
+add reg6 reg6 1
+jt reg1 >write
+ret
