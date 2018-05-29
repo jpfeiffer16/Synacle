@@ -10,7 +10,7 @@
             "name": "Launch Assembler",
             "program": "${workspaceFolder}/assembler/asm.js",
             "args": [
-                "./programs/basic.asm"
+                "./programs/count.asm"
             ]
         },
         {
@@ -21,8 +21,8 @@
             // "program": "${workspaceFolder}/toInt.js".
             "program": "${workspaceFolder}/vm.js",
             "args": [
-                // "-b",
-                // "assembler/programs/count.bin"
+                "-b",
+                "assembler/programs/echo.bin"
             ]
             // "program": "${workspaceFolder}/test.js"
         }

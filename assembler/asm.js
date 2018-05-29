@@ -1,3 +1,16 @@
+/*
+  Rules
+    Every contiguous set of chars separated by some whitespace can be assumed
+    to be a byte.
+
+    There will be three phases:
+      1.) Parse file into an array of string symbols
+      2.) A macro engine that will run and replace, and rearrange symbols as
+          needed
+      3.) The actuall assembler wich will then iterate over that list and convert
+          the symbols to the output binary.
+*/
+
 const fs = require('fs');
 const path = require('path');
 const VMem = require('../virtualMemoryLayer');
@@ -5,54 +18,74 @@ const instructions = require('../instructions')(VMem);
 
 const programName = path.normalize(path.join(__dirname, process.argv[2]));
 
+const programPath = path.parse(programName);
+const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`)
+
 fs.readFile(programName, 'utf8', (err, text) => {
   if (err) throw err;
 
-  const outputBytes = [];
-
+  // Get rid of comments
   const lines = text.split('\n');
-  lines.forEach((line, lineNumber) => {
-    // If the line is a comment, discard it
-    if (line[0] === '#') return;
 
-    const tokens = line.split(' ');
-    let opcode;
-    const instruction = Object.keys(instructions).find(i => {
-      opcode = i;
-      return instructions[i].instruction === tokens[0];
-    });
-
-    if (!tokens.length || !instruction) {
-      console.log(`malformed line: ${ lineNumber }`);
-      return;
+  for (var i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.length || line[0] === '#') {
+      lines.splice(i, 1);
+      i--;
     }
-
-    // const opcode = Object
-    //   .keys(instructions).find(i => instructions[i] === instruction);
-
-    
-
-    outputBytes.push(opcode);
-    for (let i = 1; i < tokens.length; i++) {
-      outputBytes.push(tokens[i]);
-    } 
-  });
-
-  const outputBuffer = new Buffer(outputBytes.length * 2);
-
-  for (let i = 0; i < outputBytes.length; i++) {
-    outputBuffer.writeUInt16LE(outputBytes[i], i * 2);
   }
 
-  const programPath = path.parse(programName);
-  const filePath = path.join(programPath.dir, `${ programPath.name }.bin`)
-  fs.writeFile(
-    filePath,
-    outputBuffer,
-    (err) => {
-      if (err) throw err;
+  text = lines.join('\n');
 
-      console.log(`Assembly done. File: ${ filePath }`);
+  let symbols = text
+    .split(/\n| /g)
+    .map(symbol => symbol.trim())
+    .filter(symbol => symbol.length);
+
+  // Preprocessor
+  //   Label pass
+  const labels = {};
+  symbols.forEach((symbol, index) => {
+    if (symbol && symbol.length) {
+      if (symbol[0] === ':') {
+        labels[symbol.substr(1)] = index;
+        symbols[index] = 'noop';
+      }
     }
-  );
+  });
+
+  //   Label resolution pass
+  symbols.forEach((symbol, index) => {
+    if (symbol && symbol.length) {
+      if (symbol[0] === '>') {
+        const label = symbol.substr(1);
+        const resolution = labels[label];
+        if (!resolution) {
+          throw `Undefined label: ${ label }`;
+        }
+        symbols[index] = resolution;
+      }
+    }
+  });
+
+  symbols.forEach((symbol, index) => {
+    const tryInstruction = Object.keys(instructions).find(i => {
+      return instructions[i].instruction === symbol;
+    });
+    if (tryInstruction) {
+      symbols[index] = tryInstruction;
+    }
+  });
+
+
+  // Write to output file
+  let bytes = [];
+  symbols.forEach(symbol => bytes.push(parseInt(symbol)));
+  let outputBuffer = new Buffer(bytes.length * 2);
+  bytes.forEach((byte, index) => outputBuffer.writeUInt16LE(byte, index * 2));
+  fs.writeFile(outputPath, outputBuffer, (err) => {
+    if (err) throw err;
+
+    console.log(`Assembly done. File: ${ outputPath }`);
+  });
 });

@@ -1,4 +1,4 @@
-const instructions = require('./instructions')(require('./virtualMemoryLayer'));
+const instructions = require('../instructions')(require('../virtualMemoryLayer'));
 
 const fs = require('fs');
 let buf = fs.readFileSync(process.argv[2]);
@@ -14,7 +14,6 @@ for (let i = 0; i < codepage.length; i++) {
     const params = [];
     for (let paramIndex = 0; paramIndex < instruction.paramaterCount; paramIndex++) {
       let instructionOp = codepage[++i];
-      // console.log(`${ i - 1 }: ${ instructionOp }`);
       params.push(instructionOp);
     }
     if (instruction.instruction === 'out') {
