@@ -7,6 +7,7 @@ halt
 
 :setreadlocation
 set reg6 100
+ret
 
 $lib/readinput.asm
 
