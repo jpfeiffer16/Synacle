@@ -10,7 +10,7 @@
             "name": "Launch Assembler",
             "program": "${workspaceFolder}/assembler/asm.js",
             "args": [
-                "./programs/count.asm"
+                "./programs/echo.asm"
             ]
         },
         {

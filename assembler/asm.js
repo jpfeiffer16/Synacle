@@ -24,25 +24,28 @@ const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`)
 fs.readFile(programName, 'utf8', (err, text) => {
   if (err) throw err;
 
-  // Get rid of comments
-  const lines = text.split('\n');
-
-  for (var i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    if (!line.length || line[0] === '#') {
-      lines.splice(i, 1);
-      i--;
-    }
-  }
-
-  text = lines.join('\n');
-
-  let symbols = text
-    .split(/\n| /g)
-    .map(symbol => symbol.trim())
-    .filter(symbol => symbol.length);
+  let symbols = parseText(text);
 
   // Preprocessor
+
+  //   Import pass
+  symbols.forEach((symbol, index) => {
+    if (symbol && symbol.length) {
+      if (symbol[0] === '$') {
+        const libCode = fs.readFileSync(
+          path.join(
+            programPath.dir,
+            symbol.replace('$', '')
+          ),
+          'utf8'
+        );
+        const libSymbols = parseText(libCode);
+        const currentSymbols = symbols;
+        symbols = currentSymbols.slice(0, index).concat(libSymbols).concat(currentSymbols.slice(index + 1), currentSymbols.length);
+      }
+    }
+  });
+
   //   Label pass
   const labels = {};
   symbols.forEach((symbol, index) => {
@@ -98,3 +101,25 @@ fs.readFile(programName, 'utf8', (err, text) => {
     console.log(`Assembly done. File: ${ outputPath }`);
   });
 });
+
+function parseText(text) {
+  // Get rid of comments
+  const lines = text.split('\n');
+
+  for (var i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.length || line[0] === '#') {
+      lines.splice(i, 1);
+      i--;
+    }
+  }
+
+  text = lines.join('\n');
+
+  let symbols = text
+    .split(/\n| /g)
+    .map(symbol => symbol.trim())
+    .filter(symbol => symbol.length);
+  
+  return symbols;
+}
