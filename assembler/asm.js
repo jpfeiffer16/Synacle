@@ -29,7 +29,9 @@ fs.readFile(programName, 'utf8', (err, text) => {
   // Preprocessor
 
   //   Import pass
-  symbols.forEach((symbol, index) => {
+  // symbols.forEach((symbol, index) => {
+  for (let index = 0; index < symbols.length; index++) {
+    symbol = symbols[index];
     if (symbol && symbol.length) {
       if (symbol[0] === '$') {
         const libCode = fs.readFileSync(
@@ -41,10 +43,11 @@ fs.readFile(programName, 'utf8', (err, text) => {
         );
         const libSymbols = parseText(libCode);
         const currentSymbols = symbols;
-        symbols = currentSymbols.slice(0, index).concat(libSymbols).concat(currentSymbols.slice(index + 1), currentSymbols.length);
+        symbols = currentSymbols.slice(0, index).concat(libSymbols).concat(currentSymbols.slice(index + 1));
+        index += libSymbols.length - 1;
       }
     }
-  });
+  }
 
   //   Label pass
   const labels = {};
