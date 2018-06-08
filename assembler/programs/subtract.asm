@@ -1,17 +1,13 @@
 #Here we want to subtract 2 from 3 resulting in 1 and print that out
 
-set 32768 9
-set 32769 2
-add 32770 32768 32769
-add 32771 32770 32764
+set reg6 9
+set reg7 6
+call >subtract
 
-add 32772 32771 47
-add 32773 32772 1
+add reg6 reg6 48
 
-out 32773
+out reg6
 out 10
 halt
 
-#add 32770 32768 32767
-#add 32771 32770 47
-#out 32771
+$lib/subtract.asm
