@@ -66,7 +66,7 @@ fs.readFile(programName, 'utf8', (err, text) => {
       if (symbol[0] === '>') {
         const label = symbol.substr(1);
         const resolution = labels[label];
-        if (!resolution) {
+        if (resolution === undefined) {
           throw `Undefined label: ${ label }`;
         }
         symbols[index] = resolution;
