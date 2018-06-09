@@ -49,6 +49,15 @@ fs.readFile(programName, 'utf8', (err, text) => {
     }
   }
 
+  //   Character substitution pass
+  symbols.forEach((symbol, index) => {
+    if (symbol && symbol.length) {
+      if (symbol[0] === '&') {
+        symbols[index] = symbol.charCodeAt(1);
+      }
+    }
+  });
+
   //   Label pass
   const labels = {};
   symbols.forEach((symbol, index) => {
