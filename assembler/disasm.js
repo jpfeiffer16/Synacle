@@ -22,5 +22,7 @@ for (let i = 0; i < codepage.length; i++) {
         params.push(char);
     }
     console.log(`${ i - params.length }: ${ instruction.instruction } ${ params.join(' ') }`);
+  } else {
+    console.log(`${ i }: ${ codepage[i] }`);
   }
 }
