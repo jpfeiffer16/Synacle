@@ -22,20 +22,4 @@ $lib/writebytes.asm
 
 #Data
 :label
-&E
-&n
-&t
-&e
-&r
-32
-&s
-&o
-&m
-&e
-32
-&t
-&e
-&x
-&t
-&:
-32
+&E &n &t &e &r 32 &s &o &m &e 32 &t &e &x &t &: 32
