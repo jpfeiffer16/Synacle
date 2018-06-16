@@ -7,10 +7,17 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Launch Compiler",
+            "cwd": "${workspaceFolder}/compiler",
+            "program": "${workspaceFolder}/compiler/compiler.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Assembler",
             "program": "${workspaceFolder}/assembler/asm.js",
             "args": [
-                "./programs/echo.asm"
+                "./programs/pig-latin.asm"
             ]
         },
         {
@@ -22,7 +29,8 @@
             "program": "${workspaceFolder}/vm.js",
             "args": [
                 "-b",
-                "assembler/programs/echo.bin"
+                // "assembler/programs/echo.bin"
+                "assembler/programs/pig-latin.bin"
             ]
             // "program": "${workspaceFolder}/test.js"
         }
