@@ -23,12 +23,12 @@ module.exports = {
 }
 
 function SyntaxToken(tknString) {
-  var matchedTokens = Object.keys(syntaxTokensTypes).filter(tknType => tknType.name === tknString);
+  var matchedTokens = Object.keys(syntaxTokenTypes).filter(tknType => syntaxTokenTypes[tknType].name === tknString);
   if (matchedTokens.length) this.type = matchedTokens[0];
-  else this.type = syntaxTokenTypes.IDENTIFIER;
+  else this.type = 'IDENTIFIER';
   this.token = tknString;
 }
 
 SyntaxToken.prototype.isNumeric = function() {
-  return parseInt(this.syntaxToken) ? true : false;
+  return !isNaN(parseInt(this.token));
 }

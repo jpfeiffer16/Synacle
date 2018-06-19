@@ -1,61 +1,38 @@
 const grammar = require('./grammar');
 
 module.exports = function(code) {
-  let currentToken = '';
   const tokens = [];
+  let currentToken = '';
+  let currentTokenType;
 
   for (let i = 0; i < code.length; i++) {
     const char = code[i].trim();
-    const match = matchToken(char);
-    if (match) {
+    let charType;
+    //First see if it's a number
+    if (isNumber(char))  charType = 'number';
+    //See if it's a word char
+    else if (isWordChar(char)) charType = 'word';
+    //Then it's a symbol
+    else charType = 'symbol';
+
+    if (currentTokenType !== charType || i === code.length - 1) {
       if (currentToken.length) {
-        const matchedTokens = grammar
-          .tokens
-          .filter(tkn => tkn.token === currentToken);
-        if (matchedTokens.length) {
-          tokens.push(matchedTokens[0]);
-        } else {
-          tokens.push({
-            token: currentToken,
-            name: 'identifier'
-          });
-        }
+        tokens.push(new grammar.SyntaxToken(currentToken));
         currentToken = '';
       }
-      tokens.push(match);
-    } else {
-      if (char === '') {
-        if (currentToken.length) {
-          const matchedTokens = grammar
-            .tokens
-            .filter(tkn => tkn.token === currentToken);
-          if (matchedTokens.length) {
-            tokens.push(matchedTokens[0]);
-          } else {
-            tokens.push({
-              token: currentToken,
-              name: 'identifier'
-            });
-          }
-          currentToken = '';
-        }
-      } else {
-        currentToken += char;
-      }
     }
+    currentTokenType = charType;
+    currentToken += char;
   }
+  if (currentToken.length) tokens.push(new grammar.SyntaxToken(currentToken));
 
   return tokens;
 }
 
-function matchToken(char) {
-  if (!grammar.singleCharTokens) {
-    grammar.singleCharTokens = grammar.tokens.filter(tkn => tkn.width === 1)
-  }
-  let tokens = grammar.tokens.filter(tkn => tkn.token === char);
-  return tokens.length ? tokens[0] : undefined;
+function isNumber(char) {
+  return !isNaN(parseInt(char));
 }
 
-function parse(tokens) {
-
+function isWordChar(char) {
+  return char.match(/\w/) ? true : false;
 }

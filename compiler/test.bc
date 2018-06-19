@@ -1,2 +1,4 @@
-var i = 0;
-print_ascii(i);
+var i: 100 = 0;
+{
+  print_ascii(i);
+}
