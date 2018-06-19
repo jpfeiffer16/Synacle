@@ -1,3 +1,24 @@
+/*
+    Rules:
+        Generally c-style syntax
+        All variables are byte types.
+        All lines end in semicolons except expression bodies like function
+            declarations and scope blocks.
+
+    Examples:
+
+    Variable declaration: var <name>: <memory_address>;
+    Variable assignment: <name> = <value;
+    Function definition:
+        write(arg) {
+            out(arg);
+        }
+    Function calls:
+        write(2 + 2);
+    Nested scope blocks:
+        
+*/
+
 
 module.exports = function(tokens) {
   let current = 0;
