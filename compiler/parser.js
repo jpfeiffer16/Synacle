@@ -20,20 +20,48 @@
 */
 
 
-module.exports = function(tokens) {
+module.exports = function parse(tokens) {
   const ast = [];
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
-    
-    if (token.token === 'var') {
+
+    if (token.type === 'VARIABLE_DECLARATION') {
       token.identifier = tokens[++i];
       expect('identifier', false, token.identifier.isNumeric());
-      token.dimSeparator = tokens[++i];
-      expect('dimSeparator', ':', token.dimSeparator.token);      
-      token.memoryAddress = tokens[++i];  
+      const dimSeparator = tokens[++i];
+      if (dimSeparator.token === ':') {
+        token.dimSeparator = dimSeparator;
+        token.memoryAddress = tokens[++i];  
+      }
+      // expect('dimSeparator', ':', token.dimSeparator.token);      
+      
       ast.push(token);
     }
+
+    if (token.type === 'IDENTIFIER') {
+      //Do stuff with identifiers here
+      if (!token.isNumeric()) {
+          // see if it's a function call
+          if (tokens[i + 1] && tokens[i + 1].type === 'LEFT_PAREN') {
+              i += 2;
+              const orignialI = i;
+              let nestingLevel = 1;
+              while (nestingLevel !== 0) {
+                  if (tokens[i].type === 'LEFT_PAREN') ++nestingLevel;
+                  if (tokens[i].type === 'RIGHT_PAREN') --nestingLevel;
+                  ++i;
+              }
+              --i;
+              //TODO recurse here
+              token.parameters = parse(tokens.slice(orignialI, i));
+              token.isFunctionCall = true;
+              ast.push(token);
+          } else {
+              ast.push(token);
+          }
+      }
+  }
   }
 
   return ast;
