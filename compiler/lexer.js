@@ -1,6 +1,10 @@
 const grammar = require('./grammar');
 
 module.exports = function(code) {
+  code = code
+    .split('\n')
+    .filter(line => line.length && !line.trim().startsWith('//'))
+    .join('\n');
   const tokens = [];
   let currentToken = '';
   let currentTokenType;
@@ -15,7 +19,7 @@ module.exports = function(code) {
     //Then it's a symbol
     else charType = 'symbol';
 
-    if (currentTokenType !== charType || i === code.length - 1) {
+    if (currentTokenType !== charType || charType === 'symbol' || i === code.length - 1) {
       if (currentToken.length) {
         tokens.push(new grammar.SyntaxToken(currentToken));
         currentToken = '';

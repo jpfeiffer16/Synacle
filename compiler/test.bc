@@ -1,2 +1,21 @@
-var i: 100 = 65;
+var i: 200;
+i = 65;
 out(i);
+
+var j: 201;
+j = 66;
+out(j);
+//print_ascii(&i);
+
+
+//function print_ascii(charPtr) {
+//    var dref;
+//    dref = *charPtr;
+//    while (dref != 0) {
+//        out(dref);
+//        charPtr = charPtr + 1;
+//        dref = &charPtr;
+//    }
+//
+//    return;
+//}

@@ -14,6 +14,27 @@ const syntaxTokenTypes = {
   RIGHT_PAREN: {
     name: ')'
   },
+  LEFT_CURLY: {
+    name: '{'
+  },
+  RIGHT_CURLY: {
+    name: '}'
+  },
+  FUNCTION_DECLARATION: {
+    name: 'function'
+  },
+  WHILE: {
+    name: 'while'
+  },
+  RETURN: {
+    name: 'return'
+  },
+  ADDRESSOF: {
+    name: '$'
+  },
+  DEREF: {
+    name: '*'
+  },
   IDENTIFIER: {}
 }
 
