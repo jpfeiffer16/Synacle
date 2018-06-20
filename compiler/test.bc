@@ -2,9 +2,18 @@ var i: 200;
 i = 65;
 out(i);
 
-var j: 201;
-j = 66;
-out(j);
+main();
+
+return;
+
+function main() {
+  var j: 201;
+  j = 66;
+  out(j);
+  out(i);
+}
+
+
 //print_ascii(&i);
 
 

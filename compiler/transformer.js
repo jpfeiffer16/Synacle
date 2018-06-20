@@ -1,7 +1,8 @@
-const memory = [];
-const variables = [];
 
-module.exports = function(ast) {
+
+module.exports = function transform(ast, variables = []) {
+  // const variables = [];
+  let memory = [];
   for (let i = 0; i < ast.length; i++) {
     const astNode = ast[i];
 
@@ -22,6 +23,18 @@ module.exports = function(ast) {
         memory.push(`rmem reg0 ${variable.memoryAddress.token}`);
         memory.push(`out reg0`);
       }
+    } else if (astNode.type === 'FUNCTION_CALL') {
+      memory.push(`call >${astNode.name}`);
+    }
+
+    if (astNode.type === 'FUNCTION_DECLARATION') {
+      memory.push(`:${astNode.identifier.token}`);
+      memory = memory.concat(transform(astNode.body, variables));
+      memory.push('ret');
+    }
+
+    if (astNode.type === 'RETURN') {
+      memory.push('ret');
     }
   }
 
