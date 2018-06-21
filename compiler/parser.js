@@ -61,7 +61,29 @@ module.exports = function parse(tokens) {
               node.name = token.token;
               ast.push(node);
           }
+      } else if (token.isNumeric()) {
+        const astNode = new AstNode('INTEGER_LITTERAL');
+        astNode.value = token.token;
+        ast.push(astNode);
       }
+    }
+
+    if (token.type === 'ADD') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('ADD');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
+    if (token.type === 'SUBTRACT') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('SUBTRACT');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
     }
 
     if (token.type === 'VARIABLE_ASSIGNMENT') {
@@ -71,16 +93,21 @@ module.exports = function parse(tokens) {
             identifierNode.type
         );
 
-        const valueToken = tokens[++i];
-        expect(
-            'VARIABLE_ASSIGNMENT: typeof valueToken',
-            'IDENTIFIER',
-            valueToken.type
-        );
+        const orignialI = ++i;
+        i = getNext(tokens, i, 'SEMI_COLON');
+
+        const valueAst = parse(tokens.slice(orignialI, i));
+
+        // const valueToken = tokens[++i];
+        // expect(
+        //     'VARIABLE_ASSIGNMENT: typeof valueToken',
+        //     'IDENTIFIER',
+        //     valueToken.type
+        // );
 
         const node = new AstNode('VARIABLE_ASSIGNMENT');
         node.name = identifierNode.name;
-        node.value = valueToken.token;
+        node.value = valueAst;
         ast.push(node);
     }
 
@@ -89,7 +116,6 @@ module.exports = function parse(tokens) {
         expect('function identifier', false, identifier.isNumeric());
         const leftParen = tokens[++i];
         expect('function parameter list start', '(', leftParen.token);
-        console.log('function definition');
         ++i;
         let orignialI = i;
         i = getMatching(tokens, i, 'PAREN');
@@ -171,6 +197,13 @@ function getMatching(tokens, index, charTypeToMatch) {
     while (nestingLevel !== 0) {
         if (tokens[index].type === `LEFT_${charTypeToMatch}`) ++nestingLevel;
         if (tokens[index].type === `RIGHT_${charTypeToMatch}`) --nestingLevel;
+        ++index;
+    }
+    return index;
+}
+
+function getNext(tokens, index, charTypeToMatch) {
+    while (tokens[index].type !== charTypeToMatch) {
         ++index;
     }
     return index;

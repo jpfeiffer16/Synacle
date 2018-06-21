@@ -5,6 +5,12 @@ const syntaxTokenTypes = {
   VARIABLE_ASSIGNMENT: {
     name: '='
   },
+  ADD: {
+    name: '+'
+  },
+  SUBTRACT: {
+    name: '-'
+  },
   SEMI_COLON: {
     name: ';'
   },
