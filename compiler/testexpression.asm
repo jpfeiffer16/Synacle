@@ -15,4 +15,9 @@ wmem 100 reg0
 rmem reg0 100
 out reg0
 out 10
+call >test
+ret
+:test
+out 65
+ret
 ret

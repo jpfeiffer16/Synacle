@@ -11,6 +11,11 @@ function add() {
 
   out(i);
   out(10);
+  test();
+  return;
+  function test() {
+    out(65);
+  }
 }
 
 //i = 5+6;
