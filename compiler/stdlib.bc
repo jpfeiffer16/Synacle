@@ -1,0 +1,16 @@
+function alloc() {
+  //Start memory space at 16384
+  //We'll use the last memory slot to
+  //store the pointer
+  var i: 32768;
+  i = 16384;
+  while(*i) {
+    i = i + 1;
+  }
+
+  return i;
+}
+
+function print_ascii(a) {
+
+}

@@ -64,6 +64,8 @@ module.exports = function transform(ast, ctx = { variables: [] }) {
       memory.push(`add reg0 ${operandValue} ${operatorValue}`);
     }
 
+    
+
     if (astNode.type === 'RETURN') {
       memory.push('ret');
     }
