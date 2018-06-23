@@ -1,9 +1,12 @@
-set reg0 65
+set reg0 62
 wmem 100 reg0
-set reg0 100
-wmem 200 reg0
-rmem reg0 200
-rmem reg0 reg0
-wmem 300 reg0
-rmem reg0 300
-wmem 400 reg0
+rmem reg0 100
+set reg1 3
+add reg0 reg0 reg1
+set reg1 1
+add reg0 reg0 reg1
+set reg1 3
+add reg0 reg0 reg1
+set reg1 5
+add reg0 reg0 reg1
+out reg0

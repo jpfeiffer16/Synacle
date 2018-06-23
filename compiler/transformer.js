@@ -1,6 +1,11 @@
 const expect = require('./expect');
 
-module.exports = function transform(ast, ctx = { variables: [] }) {
+const ctxDefaults = {
+  variables: [],
+  registerLevel: 0
+};
+
+module.exports = function transform(ast, ctx = ctxDefaults) {
   let memory = [];
   for (let i = 0; i < ast.length; i++) {
     const astNode = ast[i];
@@ -8,11 +13,11 @@ module.exports = function transform(ast, ctx = { variables: [] }) {
     if (astNode.type === 'IDENTIFIER') {
       const variable = ctx.variables.find(variable => variable.identifier.token === astNode.name);
       
-      memory.push(`rmem reg0 ${variable.memoryAddress.token}`);
+      memory.push(`rmem reg${ctx.registerLevel} ${variable.memoryAddress.token}`);
     }
 
-    if (astNode.type === 'INTEGER_LITERAL') {
-      memory.push(`set reg0 ${astNode.value}`);
+    if (astNode.type === 'INTEGER_LITTERAL') {
+      memory.push(`set reg${ctx.registerLevel} ${astNode.value}`);
     }
 
     if (astNode.type === 'VARIABLE_DECLARATION') {
@@ -30,7 +35,9 @@ module.exports = function transform(ast, ctx = { variables: [] }) {
     }
 
     if (astNode.type === 'FUNCTION_CALL' && astNode.name === 'out') {
-      // const parameter = astNode.parameters[0];
+      const parameter = astNode.parameters[0];
+      memory = memory.concat(transform([parameter], ctx));
+      memory.push(`out reg0`);
       // if (parameter.type === 'IDENTIFIER') {
       //   const variable = ctx.variables.find(variable => variable.identifier.token === parameter.name);
       //   memory.push(`rmem reg0 ${variable.memoryAddress.token}`);
@@ -50,29 +57,12 @@ module.exports = function transform(ast, ctx = { variables: [] }) {
     }
 
     if (astNode.type === 'ADD') {
-      // let operandValue;
-      // if (astNode.operand.type === 'IDENTIFIER') {
-      //   const variable = ctx.variables.find(variable => variable.identifier.token === astNode.operand.name);
-      //   memory.push(`rmem reg0 ${variable.memoryAddress.token}`);
-      //   operandValue = 'reg0'
-      // } else if (astNode.operand.type === 'INTEGER_LITTERAL') {
-      //   operandValue = astNode.operand.value;
-      // } else {
-      //   //TODO: Transform the next node in the tree. Assume it is another expression
-      // }
-
-      // let operatorValue;
-      // if (astNode.operator.type === 'IDENTIFIER') {
-      //   const variable = ctx.variables.find(variable => variable.identifier.token === astNode.operator.name);
-      //   memory.push(`rmem reg1 ${variable.memoryAddress.token}`);
-      //   operatorValue = 'reg1'
-      // } else if (astNode.operator.type === 'INTEGER_LITTERAL') {
-      //   operatorValue = astNode.operator.value;
-      // } else {
-      //   //TODO: Transform the next node in the tree. Assume it is another expression
-      // }
-
-      // memory.push(`add reg0 ${operandValue} ${operatorValue}`);
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push(`add reg0 reg0 reg1`);
     }
 
     if (astNode.type === 'DEREF') {
