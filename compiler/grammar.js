@@ -36,7 +36,7 @@ const syntaxTokenTypes = {
     name: 'return'
   },
   ADDRESSOF: {
-    name: '$'
+    name: '&'
   },
   DEREF: {
     name: '*'

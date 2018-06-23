@@ -19,6 +19,7 @@
         
 */
 
+const expect = require('./expect');
 
 module.exports = function parse(tokens) {
   const ast = [];
@@ -177,19 +178,12 @@ module.exports = function parse(tokens) {
         const nextToken = tokens[++i];
         expect('DEREF: typeof nextToken', 'IDENTIFIER', nextToken.type);
         const node = new AstNode('DEREF');
-        node.operand = nextToken;
+        node.operand = parse([nextToken])[0];
         ast.push(node);
     }
   }
 
   return ast;
-}
-
-function expect(description, value, condition) {
-  if (value !== condition) {
-    console.error(`Expected value for ${ description } to be ${ value }, but it was ${ condition }`);
-    process.exit(1);
-  }
 }
 
 function getMatching(tokens, index, charTypeToMatch) {
