@@ -47,17 +47,10 @@ function transform(ast, ctx) {
       const parameter = astNode.parameters[0];
       memory = memory.concat(transform([parameter], ctx));
       memory.push(`out reg0`);
-      // if (parameter.type === 'IDENTIFIER') {
-      //   const variable = ctx.variables.find(variable => variable.identifier.token === parameter.name);
-      //   memory.push(`rmem reg0 ${variable.memoryAddress.token}`);
-      //   memory.push(`out reg0`);
-      // } else if(parameter.type === 'INTEGER_LITTERAL') {
-      //   memory.push(`out ${parameter.value}`);
-      // }
     }
-    // else if (astNode.type === 'FUNCTION_CALL') {
-    //   memory.push(`call >${astNode.name}`);
-    // }
+    else if (astNode.type === 'FUNCTION_CALL' && astNode.name === 'in') {
+      memory.push(`in reg0`);
+    }
 
     if (astNode.type === 'FUNCTION_DECLARATION') {
       memory.push(`:${astNode.identifier.token}`);

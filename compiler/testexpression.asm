@@ -1,20 +1,7 @@
-set reg0 10
+in reg0
 wmem 100 reg0
-:begin_while_43
 rmem reg0 100
-set reg1 0
-gt reg0 reg0 reg1
-jf reg0 >end_while_43
-rmem reg0 100
-set reg1 48
-add reg0 reg0 reg1
 out reg0
-rmem reg0 100
-set reg1 1
-call >subtract
-wmem 100 reg0
-jmp >begin_while_43
-:end_while_43
 :not
 jf reg0 >isfalse
 :istrue
