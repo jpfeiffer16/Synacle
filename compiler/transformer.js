@@ -3,12 +3,14 @@ const expect = require('./expect');
 const ctxDefaults = {
   variables: [],
   registerLevel: 0,
-  // hasNotSupport: 0
+  hasNotSupport: false,
+  hasSubtractSupport: false
 };
 
 module.exports = function(ast, ctx = ctxDefaults) {
   let mem = transform(ast, ctx);
   mem = ensureNotSupport(mem, ctx);
+  mem = ensureSubtractSupport(mem, ctx);
   return mem;
 }
 
@@ -72,6 +74,15 @@ function transform(ast, ctx) {
       memory.push(`add reg0 reg0 reg1`);
     }
 
+    if (astNode.type === 'SUBTRACT') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push(`call >subtract`);
+    }
+
     if (astNode.type === 'LESS_THAN') {
       const originalRegisterLevel = ctx.registerLevel;
       memory = memory.concat(transform([astNode.operand], ctx));
@@ -82,6 +93,15 @@ function transform(ast, ctx) {
       memory.push(`gt reg3 reg0 reg1`);
       memory.push(`or reg0 reg2 reg3`);
       memory.push(`call >not`);
+    }
+
+    if (astNode.type === 'GREATER_THAN') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push(`gt reg0 reg0 reg1`);
     }
 
     if (astNode.type === 'WHILE') {
@@ -125,6 +145,19 @@ function ensureNotSupport(memory, ctx) {
     ret
     :isfalse
     set reg0 1
+    ret`
+    .split('\n')
+    .map(ln => ln.trim())
+  );
+}
+
+function ensureSubtractSupport(memory, ctx) {
+  ctx.hasSubtractSupport = true;
+  return memory.concat(
+    `:subtract
+    add reg0 reg0 32767
+    add reg1 reg1 32767
+    jt reg1 >subtract
     ret`
     .split('\n')
     .map(ln => ln.trim())

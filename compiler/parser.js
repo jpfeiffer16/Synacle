@@ -87,6 +87,15 @@ module.exports = function parse(tokens) {
         ast.push(node);
     }
 
+    if (token.type === 'GREATER_THAN') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('GREATER_THAN');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
     if (token.type === 'SUBTRACT') {
         const previousAstNode = ast.pop();
         const nextToken = tokens[++i];
