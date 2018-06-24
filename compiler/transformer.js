@@ -2,10 +2,17 @@ const expect = require('./expect');
 
 const ctxDefaults = {
   variables: [],
-  registerLevel: 0
+  registerLevel: 0,
+  // hasNotSupport: 0
 };
 
-module.exports = function transform(ast, ctx = ctxDefaults) {
+module.exports = function(ast, ctx = ctxDefaults) {
+  let mem = transform(ast, ctx);
+  mem = ensureNotSupport(mem, ctx);
+  return mem;
+}
+
+function transform(ast, ctx) {
   let memory = [];
   for (let i = 0; i < ast.length; i++) {
     const astNode = ast[i];
@@ -65,6 +72,28 @@ module.exports = function transform(ast, ctx = ctxDefaults) {
       memory.push(`add reg0 reg0 reg1`);
     }
 
+    if (astNode.type === 'LESS_THAN') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push(`eq reg2 reg0 reg1`);
+      memory.push(`gt reg3 reg0 reg1`);
+      memory.push(`or reg0 reg2 reg3`);
+      memory.push(`call >not`);
+    }
+
+    if (astNode.type === 'WHILE') {
+      const rand = Math.round(Math.random() * 100);
+      memory.push(`:begin_while_${rand}`);
+      memory = memory.concat(transform([astNode.condition][0], ctx));
+      memory.push(`jf reg0 >end_while_${rand}`);
+      memory = memory.concat(transform([astNode.body][0], ctx));
+      memory.push(`jmp >begin_while_${rand}`);
+      memory.push(`:end_while_${rand}`);
+    }
+
     if (astNode.type === 'DEREF') {
       const operand = astNode.operand;
       memory = memory.concat(transform([operand], ctx));
@@ -84,4 +113,20 @@ module.exports = function transform(ast, ctx = ctxDefaults) {
   }
 
   return memory;
+}
+
+function ensureNotSupport(memory, ctx) {
+  ctx.hasNotSupport = true;
+  return memory.concat(
+    `:not
+    jf reg0 >isfalse
+    :istrue
+    set reg0 0
+    ret
+    :isfalse
+    set reg0 1
+    ret`
+    .split('\n')
+    .map(ln => ln.trim())
+  );
 }

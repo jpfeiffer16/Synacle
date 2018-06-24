@@ -11,6 +11,12 @@ const syntaxTokenTypes = {
   SUBTRACT: {
     name: '-'
   },
+  LESS_THAN: {
+    name: '<'
+  },
+  GREATER_THAN: {
+    name: '>'
+  },
   SEMI_COLON: {
     name: ';'
   },
