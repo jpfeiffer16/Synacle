@@ -1,7 +1,7 @@
-:begin_while_84
+:begin_while_32
 in reg0
 wmem 100 reg0
-jf reg0 >end_while_84
+jf reg0 >end_while_32
 rmem reg0 100
 set reg1 1
 call >subtract
@@ -9,12 +9,12 @@ out reg0
 rmem reg0 100
 set reg1 10
 eq reg0 reg0 reg1
-jf reg0 >end_if_1
+jf reg0 >end_if_50
 set reg0 65
 out reg0
-:end_if_1
-jmp >begin_while_84
-:end_while_84
+:end_if_50
+jmp >begin_while_32
+:end_while_32
 :not
 jf reg0 >isfalse
 :istrue

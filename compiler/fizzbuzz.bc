@@ -1,0 +1,9 @@
+//Fizzbuzz... Yay!
+
+var index: 100;
+index = 0;
+
+while(index < 10) {
+  out(index + 48);
+  index = index + 1;
+}

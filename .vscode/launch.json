@@ -9,7 +9,11 @@
             "request": "launch",
             "name": "Launch Compiler",
             "cwd": "${workspaceFolder}/compiler",
-            "program": "${workspaceFolder}/compiler/compiler.js"
+            "program": "${workspaceFolder}/compiler/compiler.js",
+            "args": [
+                "-p",
+                "testexpression.bc"
+            ]
         },
         {
             "type": "node",
