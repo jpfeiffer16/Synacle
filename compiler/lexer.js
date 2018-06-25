@@ -30,7 +30,7 @@ module.exports = function(code) {
   }
   if (currentToken.length) tokens.push(new grammar.SyntaxToken(currentToken));
 
-  return tokens;
+  return agregateLikeTokens(tokens);
 }
 
 function isNumber(char) {
@@ -39,4 +39,17 @@ function isNumber(char) {
 
 function isWordChar(char) {
   return char.match(/\w/) ? true : false;
+}
+
+function agregateLikeTokens(tokens) {
+  for(let i = 0; i < tokens.length; i++) {
+    const currentToken = tokens[i];
+    const nextToken = tokens[i + 1];
+
+    if (currentToken.token === '=' && nextToken && nextToken.token === '=') {
+      tokens.splice(i, 2, new grammar.SyntaxToken('=='));
+    }
+  }
+
+  return tokens;
 }

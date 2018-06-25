@@ -78,6 +78,15 @@ module.exports = function parse(tokens) {
         ast.push(node);
     }
 
+    if (token.type === 'EQUALS') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('EQUALS');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
     if (token.type === 'LESS_THAN') {
         const previousAstNode = ast.pop();
         const nextToken = tokens[++i];
@@ -153,16 +162,37 @@ module.exports = function parse(tokens) {
         ast.push(node);
     }
 
-    if (token.type === 'WHILE') {
+    if (token.type === 'IF') {
         const leftParen = tokens[++i];
-        expect('leftParen start', '(', leftParen.token);
+        expect('IF: leftParen start', '(', leftParen.token);
         i++;
         let orignialI = i;
         i = getMatching(tokens, i, 'PAREN');
         const condition = parse(tokens.slice(orignialI, i - 1));
         
         const leftCurly = tokens[i];
-        expect('leftCurly start', '{', leftCurly.token);
+        expect('IF: leftCurly start', '{', leftCurly.token);
+        i++;
+        orignialI = i;
+        i = getMatching(tokens, i, 'CURLY');
+        const body = parse(tokens.slice(orignialI, i - 1));
+
+        const node = new AstNode('IF');
+        node.condition = condition;
+        node.body = body;
+        ast.push(node);
+    }
+
+    if (token.type === 'WHILE') {
+        const leftParen = tokens[++i];
+        expect('WHILE: leftParen start', '(', leftParen.token);
+        i++;
+        let orignialI = i;
+        i = getMatching(tokens, i, 'PAREN');
+        const condition = parse(tokens.slice(orignialI, i - 1));
+        
+        const leftCurly = tokens[i];
+        expect('WHILE: leftCurly start', '{', leftCurly.token);
         i++;
         orignialI = i;
         i = getMatching(tokens, i, 'CURLY');
@@ -215,7 +245,7 @@ function getMatching(tokens, index, charTypeToMatch) {
 }
 
 function getNext(tokens, index, charTypeToMatch) {
-    while (tokens[index].type !== charTypeToMatch) {
+    while (index < tokens.length && tokens[index].type !== charTypeToMatch) {
         ++index;
     }
     return index;

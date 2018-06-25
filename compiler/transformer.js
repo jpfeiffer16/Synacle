@@ -76,6 +76,15 @@ function transform(ast, ctx) {
       memory.push(`call >subtract`);
     }
 
+    if (astNode.type === 'EQUALS') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push('eq reg0 reg0 reg1');
+    }
+
     if (astNode.type === 'LESS_THAN') {
       const originalRegisterLevel = ctx.registerLevel;
       memory = memory.concat(transform([astNode.operand], ctx));
@@ -95,6 +104,14 @@ function transform(ast, ctx) {
       memory = memory.concat(transform([astNode.operator], ctx));
       ctx.registerLevel = originalRegisterLevel;
       memory.push(`gt reg0 reg0 reg1`);
+    }
+
+    if (astNode.type === 'IF') {
+      const rand = Math.round(Math.random() * 100);
+      memory = memory.concat(transform([astNode.condition][0], ctx));
+      memory.push(`jf reg0 >end_if_${rand}`);
+      memory = memory.concat(transform([astNode.body][0], ctx));
+      memory.push(`:end_if_${rand}`);
     }
 
     if (astNode.type === 'WHILE') {

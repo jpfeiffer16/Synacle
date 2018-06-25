@@ -1,5 +1,8 @@
 var i: 100;
 
 while(i = in()) {
-  out(i);
+  out(i - 1);
+  if(i == 10) {
+    out(65);
+  }
 }

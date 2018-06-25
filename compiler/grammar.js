@@ -11,6 +11,9 @@ const syntaxTokenTypes = {
   SUBTRACT: {
     name: '-'
   },
+  EQUALS: {
+    name: '=='
+  },
   LESS_THAN: {
     name: '<'
   },
@@ -34,6 +37,9 @@ const syntaxTokenTypes = {
   },
   FUNCTION_DECLARATION: {
     name: 'function'
+  },
+  IF: {
+    name: 'if'
   },
   WHILE: {
     name: 'while'
