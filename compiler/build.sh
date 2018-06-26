@@ -1,4 +1,3 @@
-node compiler.js
-node ../assembler/asm.js ../compiler/testexpression.asm
+node compiler.js -p testexpression.bc
 node ../vm.js -b ../compiler/testexpression.bin
 

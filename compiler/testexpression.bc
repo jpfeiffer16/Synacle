@@ -1,8 +1,29 @@
-var i: 100;
+var i: 600;
+i = 0;
 
-while(i = in()) {
-  out(i - 1);
-  if(i == 10) {
-    out(65);
+while (i < 20) {
+  var fizz: 601;
+  fizz = i % 3;
+  var buzz: 602;
+  buzz = i % 5;
+
+  if (!fizz) {
+    out(102);
+    out(105);
+    out(122);
+    out(122);
   }
+
+  if (!buzz) {
+    out(98);
+    out(117);
+    out(122);
+    out(122);
+  }
+
+  out(10);
+
+
+
+  i = i + 1;
 }

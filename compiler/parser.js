@@ -69,12 +69,41 @@ module.exports = function parse(tokens) {
       }
     }
 
+    // if (token.type === 'LEFT_PAREN') {
+         
+    // }
+
     if (token.type === 'ADD') {
         const previousAstNode = ast.pop();
         const nextToken = tokens[++i];
         const node = new AstNode('ADD');
         node.operand = previousAstNode;
         node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
+    if (token.type === 'SUBTRACT') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('SUBTRACT');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
+    if (token.type === 'MOD') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('MOD');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
+    if (token.type === 'NOT') {
+        const nextToken = tokens[++i];
+        const node = new AstNode('NOT');
+        node.operand = parse([nextToken])[0];
         ast.push(node);
     }
 
@@ -105,15 +134,6 @@ module.exports = function parse(tokens) {
         ast.push(node);
     }
 
-    if (token.type === 'SUBTRACT') {
-        const previousAstNode = ast.pop();
-        const nextToken = tokens[++i];
-        const node = new AstNode('SUBTRACT');
-        node.operand = previousAstNode;
-        node.operator = parse([nextToken])[0];
-        ast.push(node);
-    }
-
     if (token.type === 'VARIABLE_ASSIGNMENT') {
         const identifierNode = ast.pop();
         expect(
@@ -125,13 +145,6 @@ module.exports = function parse(tokens) {
         i = getNext(tokens, i, 'SEMI_COLON');
 
         const valueAst = parse(tokens.slice(orignialI, i));
-
-        // const valueToken = tokens[++i];
-        // expect(
-        //     'VARIABLE_ASSIGNMENT: typeof valueToken',
-        //     'IDENTIFIER',
-        //     valueToken.type
-        // );
 
         const node = new AstNode('VARIABLE_ASSIGNMENT');
         node.name = identifierNode.name;
@@ -175,6 +188,7 @@ module.exports = function parse(tokens) {
         i++;
         orignialI = i;
         i = getMatching(tokens, i, 'CURLY');
+        i--;
         const body = parse(tokens.slice(orignialI, i - 1));
 
         const node = new AstNode('IF');

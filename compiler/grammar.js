@@ -11,6 +11,12 @@ const syntaxTokenTypes = {
   SUBTRACT: {
     name: '-'
   },
+  MOD: {
+    name: '%'
+  },
+  NOT: {
+    name: '!'
+  },
   EQUALS: {
     name: '=='
   },

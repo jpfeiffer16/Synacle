@@ -76,6 +76,22 @@ function transform(ast, ctx) {
       memory.push(`call >subtract`);
     }
 
+    if (astNode.type === 'MOD') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push(`mod reg0 reg0 reg1`);
+    }
+
+    if (astNode.type === 'NOT') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push(`call >not`);
+    }
+
     if (astNode.type === 'EQUALS') {
       const originalRegisterLevel = ctx.registerLevel;
       memory = memory.concat(transform([astNode.operand], ctx));

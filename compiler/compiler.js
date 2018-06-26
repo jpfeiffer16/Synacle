@@ -35,4 +35,15 @@ fs.writeFileSync(
   'utf8'
 );
 
-childProcess.exec(`node path.join(__dirname, '../assembler/asm.js') ${asmPath}`, { cwd: __dirname });
+childProcess.fork(
+  `../assembler/asm`,
+  [ asmPath ],
+  { cwd: __dirname },
+  (err, stdout, stderr) => {
+    if (err) {
+      console.error(stderr);
+    } else {
+      console.log(stdout);
+    }
+  }
+);
