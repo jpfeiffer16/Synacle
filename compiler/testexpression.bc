@@ -7,7 +7,12 @@ while (i < 20) {
   var buzz: 602;
   buzz = i % 5;
 
+  if (fizz == buzz) {
+    out(i + 48);
+  }
+
   if (!fizz) {
+    //fizz
     out(102);
     out(105);
     out(122);
@@ -15,6 +20,7 @@ while (i < 20) {
   }
 
   if (!buzz) {
+    //buzz
     out(98);
     out(117);
     out(122);

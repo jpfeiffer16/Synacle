@@ -101,6 +101,15 @@ function transform(ast, ctx) {
       memory.push('eq reg0 reg0 reg1');
     }
 
+    if (astNode.type === 'AND') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push('and reg0 reg0 reg1');
+    }
+
     if (astNode.type === 'LESS_THAN') {
       const originalRegisterLevel = ctx.registerLevel;
       memory = memory.concat(transform([astNode.operand], ctx));

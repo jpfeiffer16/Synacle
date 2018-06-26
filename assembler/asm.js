@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
   Rules
     Every contiguous set of chars separated by some whitespace can be assumed
@@ -18,7 +16,7 @@ const path = require('path');
 const VMem = require('../virtualMemoryLayer');
 const instructions = require('../instructions')(VMem);
 
-const programName = path.normalize(path.join(__dirname, process.argv[2]));
+const programName = path.normalize(process.argv[2]);
 
 const programPath = path.parse(programName);
 const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`)

@@ -42,13 +42,22 @@ function isWordChar(char) {
 }
 
 function agregateLikeTokens(tokens) {
+  const nonOneCharTokens = Object.keys(grammar.syntaxTokenTypes)
+    .map(type => grammar.syntaxTokenTypes[type])
+    .filter(token => token.name ? token.name.length > 1 : false);
   for(let i = 0; i < tokens.length; i++) {
     const currentToken = tokens[i];
     const nextToken = tokens[i + 1];
 
-    if (currentToken.token === '=' && nextToken && nextToken.token === '=') {
-      tokens.splice(i, 2, new grammar.SyntaxToken('=='));
-    }
+    nonOneCharTokens.forEach(grammarToken => {
+      const to = i + grammarToken.name.length;
+      if (i < tokens.length) {
+        const agrTokens = tokens.slice(i, to).map(tkn => tkn.token).join('');
+        if (agrTokens === grammarToken.name) {
+          tokens.splice(i, to - i, new grammar.SyntaxToken(agrTokens));
+        }
+      }
+    });
   }
 
   return tokens;

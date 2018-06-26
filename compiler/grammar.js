@@ -20,6 +20,9 @@ const syntaxTokenTypes = {
   EQUALS: {
     name: '=='
   },
+  AND: {
+    name: '&&'
+  },
   LESS_THAN: {
     name: '<'
   },
