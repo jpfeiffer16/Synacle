@@ -1,13 +1,13 @@
 set reg0 0
 wmem 100 reg0
-:begin_while_14
+:begin_while_34
 rmem reg0 100
 set reg1 10
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >end_while_14
+jf reg0 >end_while_34
 rmem reg0 100
 set reg1 48
 add reg0 reg0 reg1
@@ -16,8 +16,8 @@ rmem reg0 100
 set reg1 1
 add reg0 reg0 reg1
 wmem 100 reg0
-jmp >begin_while_14
-:end_while_14
+jmp >begin_while_34
+:end_while_34
 :not
 jf reg0 >isfalse
 :istrue

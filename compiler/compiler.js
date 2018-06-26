@@ -35,4 +35,4 @@ fs.writeFileSync(
   'utf8'
 );
 
-childProcess.spawn(path.join(__dirname, '../assembler/asm.js'), [ asmPath ], { cwd: __dirname });
+childProcess.exec(`node path.join(__dirname, '../assembler/asm.js') ${asmPath}`, { cwd: __dirname });
