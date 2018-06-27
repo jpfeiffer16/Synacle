@@ -1,19 +1,18 @@
-var a: 200;
-a = 2;
 
-main(a);
+var inputPtr: 600;
+inputPtr = 65;
+
+var input: 600;
+
+while(input < 9 || input > 11) {
+  input = in();
+}
+
+print_ascii(inputPtr);
+
 exit();
 
 
-function main(a) {
-  var i: 600;
-  i = 1;
-
-  var j: 601;
-  j = 0;
-
-  var z: 602;
-  z = i == 1;
-
-  out(z + 48);
+function print_ascii(var a: 700) {
+  out(a);
 }

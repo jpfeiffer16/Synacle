@@ -64,18 +64,22 @@ function transform(ast, ctx) {
       memory.push(`halt`);
     } else if (astNode.type === 'FUNCTION_CALL') {
       // const originalRegisterLevel = ctx.registerLevel;
-
+      const originalRegisterLevel = ctx.registerLevel;
       astNode.parameters.forEach((parameterAstNode, index) => {
+        memory = memory.concat(transform([astNode.parameters[index]], ctx));
+        ctx.registerLevel += 1;
         // const variable = ctx.variables.find(variable => variable.identifier.token === parameterAstNode.name);
-        const variable = ctx.variables.getVariable(parameterAstNode.name);
-        if (variable) {
-          memory.push(`set reg${index} ${variable.memoryAddress.token}`);
-        } else {
-          throw 'Must pass params';
-        }
+        // const variable = ctx.variables.getVariable(parameterAstNode.name);
+        // if (variable) {
+        //   memory.push(`rmem reg${index} ${variable.memoryAddress.token}`);
+        //   // memory.push(`set reg${index} ${variable.memoryAddress.token}`);
+        // } else {
+        //   throw 'Must pass params';
+        // }
         
         // ctx.registerLevel += 1;
       });
+      ctx.registerLevel = originalRegisterLevel;
 
       // ctx.registerLevel = originalRegisterLevel;
 
@@ -85,11 +89,13 @@ function transform(ast, ctx) {
     if (astNode.type === 'FUNCTION_DECLARATION') {
       memory.push(`:${astNode.identifier.token}`);
       ctx.variables.push();
-      astNode.parameters.forEach((parameterNode, index) => {
-
+      memory = memory.concat(transform(astNode.params, ctx));
+      astNode.params.forEach((parameterNode, index) => {
+        memory.push(`wmem ${parameterNode.memoryAddress.token} reg${index}`);
+        ctx.variables.setRef(parameterNode, );
       });
-      ctx.variables.pop();
       memory = memory.concat(transform(astNode.body, ctx));
+      ctx.variables.pop();
       memory.push('ret');
     }
 

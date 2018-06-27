@@ -31,7 +31,7 @@ module.exports = function VariableStack() {
             .scopeStack
             .reverse();
 
-        for(const i = 0; i < stacksReversed; i++) {
+        for(let i = 0; i < stacksReversed.length; i++) {
             const stack = stacksReversed[i];
 
             const varStackInstance = stack[name];
