@@ -23,6 +23,9 @@ const syntaxTokenTypes = {
   AND: {
     name: '&&'
   },
+  OR: {
+    name: '||'
+  },
   LESS_THAN: {
     name: '<'
   },
@@ -61,6 +64,11 @@ const syntaxTokenTypes = {
   },
   DEREF: {
     name: '*'
+  },
+  //Were letting this one fall through the parser
+  //on purpose for now.
+  COMMA: {
+    name: ','
   },
   IDENTIFIER: {}
 }

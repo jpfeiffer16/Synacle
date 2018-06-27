@@ -125,6 +125,15 @@ module.exports = function parse(tokens) {
         ast.push(node);
     }
 
+    if (token.type === 'OR') {
+        const previousAstNode = ast.pop();
+        const nextToken = tokens[++i];
+        const node = new AstNode('OR');
+        node.operand = previousAstNode;
+        node.operator = parse([nextToken])[0];
+        ast.push(node);
+    }
+
     if (token.type === 'LESS_THAN') {
         const previousAstNode = ast.pop();
         const nextToken = tokens[++i];

@@ -1,15 +1,22 @@
 const expect = require('./expect');
+const VariableStack = require('./variableStack');
 
 const ctxDefaults = {
-  variables: [],
+  variables: new VariableStack(),
+  // variables: [],
+  // refs: [],
   registerLevel: 0,
   hasNotSupport: false,
+  hasAndSupport: false,
+  hasOrSupport: false,
   hasSubtractSupport: false
 };
 
 module.exports = function(ast, ctx = ctxDefaults) {
   let mem = transform(ast, ctx);
   mem = ensureNotSupport(mem, ctx);
+  mem = ensureAndSupport(mem, ctx);
+  mem = ensureOrSupport(mem, ctx);
   mem = ensureSubtractSupport(mem, ctx);
   return mem;
 }
@@ -20,7 +27,8 @@ function transform(ast, ctx) {
     const astNode = ast[i];
 
     if (astNode.type === 'IDENTIFIER') {
-      const variable = ctx.variables.find(variable => variable.identifier.token === astNode.name);
+      // const variable = ctx.variables.find(variable => variable.identifier.token === astNode.name);
+      const variable = ctx.variables.getVariable(astNode.name);
       
       memory.push(`rmem reg${ctx.registerLevel} ${variable.memoryAddress.token}`);
     }
@@ -30,11 +38,14 @@ function transform(ast, ctx) {
     }
 
     if (astNode.type === 'VARIABLE_DECLARATION') {
-      ctx.variables.push(astNode);
+      // ctx.variables.push(astNode);
+      ctx.variables.add(astNode);
     }
 
     if (astNode.type === 'VARIABLE_ASSIGNMENT') {
-      const variable = ctx.variables.find(variable => variable.identifier.token === astNode.name);
+      //TODO: Need to make this a method
+      // const variable = ctx.variables.find(variable => variable.identifier.token === astNode.name);
+      const variable = ctx.variables.getVariable(astNode.name);
       if (astNode.value[0].type !== 'INTEGER_LITTERAL') {
         memory = memory.concat(transform(astNode.value, ctx));
       } else {
@@ -47,13 +58,37 @@ function transform(ast, ctx) {
       const parameter = astNode.parameters[0];
       memory = memory.concat(transform([parameter], ctx));
       memory.push(`out reg0`);
-    }
-    else if (astNode.type === 'FUNCTION_CALL' && astNode.name === 'in') {
+    } else if (astNode.type === 'FUNCTION_CALL' && astNode.name === 'in') {
       memory.push(`in reg0`);
+    } else if (astNode.type === 'FUNCTION_CALL' && astNode.name === 'exit') {
+      memory.push(`halt`);
+    } else if (astNode.type === 'FUNCTION_CALL') {
+      // const originalRegisterLevel = ctx.registerLevel;
+
+      astNode.parameters.forEach((parameterAstNode, index) => {
+        // const variable = ctx.variables.find(variable => variable.identifier.token === parameterAstNode.name);
+        const variable = ctx.variables.getVariable(parameterAstNode.name);
+        if (variable) {
+          memory.push(`set reg${index} ${variable.memoryAddress.token}`);
+        } else {
+          throw 'Must pass params';
+        }
+        
+        // ctx.registerLevel += 1;
+      });
+
+      // ctx.registerLevel = originalRegisterLevel;
+
+      memory.push(`call >${astNode.name}`);
     }
 
     if (astNode.type === 'FUNCTION_DECLARATION') {
       memory.push(`:${astNode.identifier.token}`);
+      ctx.variables.push();
+      astNode.parameters.forEach((parameterNode, index) => {
+
+      });
+      ctx.variables.pop();
       memory = memory.concat(transform(astNode.body, ctx));
       memory.push('ret');
     }
@@ -107,7 +142,16 @@ function transform(ast, ctx) {
       ctx.registerLevel += 1;
       memory = memory.concat(transform([astNode.operator], ctx));
       ctx.registerLevel = originalRegisterLevel;
-      memory.push('and reg0 reg0 reg1');
+      memory.push('call >and');
+    }
+
+    if (astNode.type === 'OR') {
+      const originalRegisterLevel = ctx.registerLevel;
+      memory = memory.concat(transform([astNode.operand], ctx));
+      ctx.registerLevel += 1;
+      memory = memory.concat(transform([astNode.operator], ctx));
+      ctx.registerLevel = originalRegisterLevel;
+      memory.push('call >or');
     }
 
     if (astNode.type === 'LESS_THAN') {
@@ -157,7 +201,8 @@ function transform(ast, ctx) {
 
     if (astNode.type === 'ADDRESSOF') {
       const operand = astNode.operand;
-      const variable = ctx.variables.find(variable => variable.identifier.token === operand.token);
+      // const variable = ctx.variables.find(variable => variable.identifier.token === operand.token);
+      const variable = ctx.variables.getVariable(operand.token);
 
       memory.push(`rmem reg0 ${variable.memoryAddress.token}`);
     }
@@ -170,31 +215,81 @@ function transform(ast, ctx) {
   return memory;
 }
 
+// function getVariable(ctx) {
+//   if (memory)
+// }
+
+// function addVariable(variable, ctx) {
+  
+// }
+
 function ensureNotSupport(memory, ctx) {
-  ctx.hasNotSupport = true;
-  return memory.concat(
-    `:not
-    jf reg0 >isfalse
-    :istrue
-    set reg0 0
-    ret
-    :isfalse
-    set reg0 1
-    ret`
-    .split('\n')
-    .map(ln => ln.trim())
-  );
+  if (!ctx.hasNotSupport) {
+    ctx.hasNotSupport = true;
+    return memory.concat(
+      `:not
+      jf reg0 >not_isfalse
+      :not_istrue
+      set reg0 0
+      ret
+      :not_isfalse
+      set reg0 1
+      ret`
+      .split('\n')
+      .map(ln => ln.trim())
+    );
+  }
+}
+
+function ensureAndSupport(memory, ctx) {
+  if (!ctx.hasAndSupport) {
+    ctx.hasAndSupport = true;
+    return memory.concat(
+      `:and
+      jf reg0 >and_isfalse
+      jf reg1 >and_isfalse
+      :and_istrue
+      set reg0 1
+      ret
+      :and_isfalse
+      set reg0 0
+      ret`
+      .split('\n')
+      .map(ln => ln.trim())
+    );
+  }
+}
+
+function ensureOrSupport(memory, ctx) {
+  if (!ctx.hasOrSupport) {
+    ctx.hasOrSupport = true;
+    return memory.concat(
+      `:or
+      jt reg0 >or_istrue
+      jt reg1 >or_istrue
+      :or_isfalse
+      set reg0 0
+      ret
+      :or_istrue
+      set reg0 1
+      ret`
+      .split('\n')
+      .map(ln => ln.trim())
+    );
+  }
 }
 
 function ensureSubtractSupport(memory, ctx) {
-  ctx.hasSubtractSupport = true;
-  return memory.concat(
-    `:subtract
-    add reg0 reg0 32767
-    add reg1 reg1 32767
-    jt reg1 >subtract
-    ret`
-    .split('\n')
-    .map(ln => ln.trim())
-  );
+  if (!ctx.hasSubtractSupport) {
+    ctx.hasSubtractSupport = true;
+    return memory.concat(
+      `:subtract
+      add reg0 reg0 32767
+      add reg1 reg1 32767
+      jt reg1 >subtract
+      ret`
+      .split('\n')
+      .map(ln => ln.trim())
+    );
+  }
 }

@@ -1,68 +1,46 @@
-set reg0 0
+set reg0 2
+wmem 200 reg0
+set reg0 200
+call >main
+halt
+:main
+set reg0 1
 wmem 600 reg0
-:begin_while_53
-rmem reg0 600
-set reg1 20
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >end_while_53
-rmem reg0 600
-set reg1 3
-mod reg0 reg0 reg1
+set reg0 0
 wmem 601 reg0
 rmem reg0 600
-set reg1 5
-mod reg0 reg0 reg1
-wmem 602 reg0
-rmem reg0 601
-rmem reg1 602
+set reg1 1
 eq reg0 reg0 reg1
-jf reg0 >end_if_56
-rmem reg0 600
+wmem 602 reg0
+rmem reg0 602
 set reg1 48
 add reg0 reg0 reg1
 out reg0
-:end_if_56
-rmem reg0 601
-call >not
-jf reg0 >end_if_4
-set reg0 102
-out reg0
-set reg0 105
-out reg0
-set reg0 122
-out reg0
-set reg0 122
-out reg0
-:end_if_4
-rmem reg0 602
-call >not
-jf reg0 >end_if_76
-set reg0 98
-out reg0
-set reg0 117
-out reg0
-set reg0 122
-out reg0
-set reg0 122
-out reg0
-:end_if_76
-set reg0 10
-out reg0
-rmem reg0 600
-set reg1 1
-add reg0 reg0 reg1
-wmem 600 reg0
-jmp >begin_while_53
-:end_while_53
+ret
 :not
-jf reg0 >isfalse
-:istrue
+jf reg0 >not_isfalse
+:not_istrue
 set reg0 0
 ret
-:isfalse
+:not_isfalse
+set reg0 1
+ret
+:and
+jf reg0 >and_isfalse
+jf reg1 >and_isfalse
+:and_istrue
+set reg0 1
+ret
+:and_isfalse
+set reg0 0
+ret
+:or
+jt reg0 >or_istrue
+jt reg1 >or_istrue
+:or_isfalse
+set reg0 0
+ret
+:or_istrue
 set reg0 1
 ret
 :subtract
