@@ -11,6 +11,6 @@ function alloc() {
   return i;
 }
 
-function print_ascii(a) {
-
+function print_ascii(var ptr: 18000) {
+  
 }

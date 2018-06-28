@@ -1,26 +1,30 @@
 set reg0 65
-wmem 600 reg0
-:begin_while_69
-rmem reg0 600
-set reg1 9
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-rmem reg1 600
-call >or
-set reg1 11
-gt reg0 reg0 reg1
-jf reg0 >end_while_69
-in reg0
-wmem 600 reg0
-jmp >begin_while_69
-:end_while_69
-rmem reg0 600
+wmem 16000 reg0
+set reg0 66
+wmem 16001 reg0
+set reg0 67
+wmem 16002 reg0
+rmem reg0 16000
+rmem reg1 16001
+rmem reg2 16002
+call >print
 halt
-:print_ascii
-wmem 700 reg0
-rmem reg0 700
+:print
+wmem 16003 reg0
+wmem 16004 reg1
+wmem 16005 reg2
+rmem reg0 16003
+out reg0
+call >new_line
+rmem reg0 16001
+out reg0
+call >new_line
+rmem reg0 16005
+out reg0
+call >new_line
+ret
+:new_line
+set reg0 10
 out reg0
 ret
 :not

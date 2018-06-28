@@ -1,18 +1,34 @@
 
-var inputPtr: 600;
-inputPtr = 65;
-
-var input: 600;
-
-while(input < 9 || input > 11) {
-  input = in();
-}
-
-print_ascii(inputPtr);
+print_number(14);
 
 exit();
 
+function print_number(var num: 16006) {
 
-function print_ascii(var a: 700) {
-  out(a);
 }
+
+//var a: 16000;
+//var b: 16001;
+//var c: 16002;
+//
+//a = 65;
+//b = 66;
+//c = 67;
+//
+//print(a, b, c);
+//
+//
+//exit();
+//
+//function print(var a: 16003, var b: 16004, var c: 16005) {
+//  out(a);
+//  new_line();
+//  out(b);
+//  new_line();
+//  out(c);
+//  new_line();
+//};
+//
+//function new_line() {
+//  out(10);
+//}

@@ -221,14 +221,6 @@ function transform(ast, ctx) {
   return memory;
 }
 
-// function getVariable(ctx) {
-//   if (memory)
-// }
-
-// function addVariable(variable, ctx) {
-  
-// }
-
 function ensureNotSupport(memory, ctx) {
   if (!ctx.hasNotSupport) {
     ctx.hasNotSupport = true;
