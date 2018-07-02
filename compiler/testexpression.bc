@@ -4,7 +4,7 @@ print_number(14);
 exit();
 
 function print_number(var num: 16006) {
-
+	out(num + 48);
 }
 
 //var a: 16000;

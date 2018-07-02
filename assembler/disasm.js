@@ -1,7 +1,11 @@
 const instructions = require('../instructions')(require('../virtualMemoryLayer'));
 
 const fs = require('fs');
-let buf = fs.readFileSync(process.argv[2]);
+const path = require('path');
+
+const programName = path.normalize(process.argv[2]);
+
+let buf = fs.readFileSync(programName);
 let codepage = [];
 
 for (let i = 0; i < buf.length; i += 2) {

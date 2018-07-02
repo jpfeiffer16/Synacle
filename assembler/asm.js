@@ -19,7 +19,7 @@ const instructions = require('../instructions')(VMem);
 const programName = path.normalize(process.argv[2]);
 
 const programPath = path.parse(programName);
-const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`)
+const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`);
 
 fs.readFile(programName, 'utf8', (err, text) => {
   if (err) throw err;

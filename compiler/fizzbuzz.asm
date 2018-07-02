@@ -1,13 +1,13 @@
 set reg0 1
 wmem 600 reg0
-:begin_while_18
+:begin_while_76
 rmem reg0 600
 set reg1 10
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >end_while_18
+jf reg0 >end_while_76
 rmem reg0 600
 set reg1 3
 mod reg0 reg0 reg1
@@ -19,15 +19,15 @@ wmem 602 reg0
 rmem reg0 601
 rmem reg1 602
 call >and
-jf reg0 >end_if_86
+jf reg0 >end_if_16
 rmem reg0 600
 set reg1 48
 add reg0 reg0 reg1
 out reg0
-:end_if_86
+:end_if_16
 rmem reg0 601
 call >not
-jf reg0 >end_if_66
+jf reg0 >end_if_79
 set reg0 102
 out reg0
 set reg0 105
@@ -36,10 +36,10 @@ set reg0 122
 out reg0
 set reg0 122
 out reg0
-:end_if_66
+:end_if_79
 rmem reg0 602
 call >not
-jf reg0 >end_if_89
+jf reg0 >end_if_17
 set reg0 98
 out reg0
 set reg0 117
@@ -48,15 +48,15 @@ set reg0 122
 out reg0
 set reg0 122
 out reg0
-:end_if_89
+:end_if_17
 set reg0 10
 out reg0
 rmem reg0 600
 set reg1 1
 add reg0 reg0 reg1
 wmem 600 reg0
-jmp >begin_while_18
-:end_while_18
+jmp >begin_while_76
+:end_while_76
 halt
 :not
 jf reg0 >not_isfalse

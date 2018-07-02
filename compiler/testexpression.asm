@@ -1,30 +1,11 @@
-set reg0 65
-wmem 16000 reg0
-set reg0 66
-wmem 16001 reg0
-set reg0 67
-wmem 16002 reg0
-rmem reg0 16000
-rmem reg1 16001
-rmem reg2 16002
-call >print
+set reg0 14
+call >print_number
 halt
-:print
-wmem 16003 reg0
-wmem 16004 reg1
-wmem 16005 reg2
-rmem reg0 16003
-out reg0
-call >new_line
-rmem reg0 16001
-out reg0
-call >new_line
-rmem reg0 16005
-out reg0
-call >new_line
-ret
-:new_line
-set reg0 10
+:print_number
+wmem 16006 reg0
+rmem reg0 16006
+set reg1 48
+add reg0 reg0 reg1
 out reg0
 ret
 :not
