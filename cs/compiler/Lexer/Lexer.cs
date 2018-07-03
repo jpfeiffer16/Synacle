@@ -62,5 +62,9 @@ namespace compiler {
     private bool isWordChar(string ch) {
       return new Regex(@"\w").Match(ch).Success;
     }
+
+    private List<SyntaxToken> AggriegateLikeTokens(List<SyntaxToken> tokens) {
+      var multiCharTokens = 
+    }
   }
 }

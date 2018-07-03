@@ -1,15 +1,4 @@
 namespace compiler {
-  public enum SyntaxTokenTypes {
-    VariableDeclaration,
-    VariableAssignment,
-
-    Identifier,
-    SemiColon,
-    LeftParen,
-    RightParen,
-    Addition,
-        Subtraction
-    }
   public class SyntaxToken {
     public string Token { get; private set; }
     public SyntaxTokenTypes Type { get; private set; }
