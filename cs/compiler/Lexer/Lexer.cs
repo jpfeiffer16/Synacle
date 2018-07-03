@@ -19,7 +19,6 @@ namespace compiler {
       this.code = code;
     }
 
-    //TODO: Once we have a token type return a list of those here.
     public List<SyntaxToken> Lex() {
       var tokens = new List<SyntaxToken>();
       var currentToken = String.Empty;

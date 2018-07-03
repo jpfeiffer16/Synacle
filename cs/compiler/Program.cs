@@ -10,11 +10,20 @@ namespace compiler
         // out
         static void Main(string[] args)
         {
+            //Get code
             var code = File.ReadAllText("./example.bc");
+            //Lex
             var lexer = new Lexer(code);
             var tokens = lexer.Lex();
+            //Parse
             var parser = new Parser(tokens);
             var ast = parser.Parse();
+            //Transform
+            var transformer = new Transformer(ast);
+            var asmLines = transformer.Transform();
+
+            //Write file
+            File.WriteAllLines("./example.asm", asmLines);
         }
     }
 }
