@@ -1,5 +1,8 @@
 var i;
-i = 4;
+i = 0;
 
-out(i + 48);
-out(10);
+while (i < 20) {
+  out(i + 48);
+  out(10);
+  i = i + 1;
+}

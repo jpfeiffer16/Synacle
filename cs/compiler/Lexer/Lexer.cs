@@ -52,6 +52,7 @@ namespace compiler {
         tokens.Add(new SyntaxToken(currentToken));
       }
 
+      tokens = AggriegateLikeTokens(tokens);
       return tokens;
     }
 
@@ -64,7 +65,33 @@ namespace compiler {
     }
 
     private List<SyntaxToken> AggriegateLikeTokens(List<SyntaxToken> tokens) {
-      var multiCharTokens = 
+      var multiCharTokens = Grammar.Tokens.Where(tkn => tkn.Token.Length > 1);
+
+      for (var i = 0; i < tokens.Count; i++) {
+        var token = tokens[i];
+
+        foreach (var mToken in multiCharTokens) {
+          // var to = i = mToken.Token.Length;
+          if (i < tokens.Count && i + mToken.Token.Length < tokens.Count) {
+            var aggrTokens = string.Join(
+              string.Empty,
+              tokens
+                .GetRange(i, mToken.Token.Length)
+                .Select(tkn => tkn.Token)
+            );
+
+            if (aggrTokens == mToken.Token) {
+              tokens.Splice(
+                i,
+                mToken.Token.Length,
+                new List<SyntaxToken>() { new SyntaxToken(aggrTokens) }
+              );
+            }
+          }
+        }
+      }
+
+      return tokens;
     }
   }
 }

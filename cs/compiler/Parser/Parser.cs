@@ -52,22 +52,82 @@ namespace compiler {
 
         if (token.Type == SyntaxTokenTypes.VariableAssignment) {
           var previousAstNode = nodes.Pop();
-          var parsedParameter = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          var nextTerminator = GetNextTerminator(i, tokens);
+          var tokensToParse = tokens.GetRange(i + 1, nextTerminator - i);
+          i = nextTerminator;
+          var parsedParameter = ParseTokens(tokensToParse)[0];
           node = new VariableAssignment(previousAstNode, parsedParameter);
         }
 
-        //TODO
+        if (token.Type == SyntaxTokenTypes.Equal) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i]})[0];
+          node = new Equal(left, right);
+        }
+
+        if (token.Type == SyntaxTokenTypes.GreaterThan) {
+          var previousAstNode = nodes.Pop();
+          node = new GreaterThan(
+            previousAstNode,
+            ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+          );
+        }
+
+        if (token.Type == SyntaxTokenTypes.LessThan) {
+          var previousAstNode = nodes.Pop();
+          node = new LessThan(
+            previousAstNode,
+            ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+          );
+        }
+
         if (token.Type == SyntaxTokenTypes.Addition) {
-          // var addNode = node as Addition;
           var left = nodes.Pop();
           var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
           node = new Addition(left, right[0]);
           
         }
 
+        if (token.Type == SyntaxTokenTypes.Subtraction) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+          node = new Subtraction(left, right[0]);
+        }
+
+        if (token.Type == SyntaxTokenTypes.While) {
+          i++;
+          var conditionEnd = GetExpression(
+            SyntaxTokenTypes.LeftParen,
+            SyntaxTokenTypes.RightParen,
+            i,
+            tokens
+          );
+          var condition = tokens.GetRange(i, conditionEnd - i);
+          i = conditionEnd;
+          // i++;
+          var expressionEnd = GetExpression(
+            SyntaxTokenTypes.LeftCurly,
+            SyntaxTokenTypes.RightCurly,
+            i,
+            tokens
+          );
+
+          var expression = tokens.GetRange(i, expressionEnd - i);
+          i = expressionEnd;
+          node = new While(ParseTokens(condition), ParseTokens(expression));
+        }
+
         nodes.Add(node);
       }
       return nodes.Where(nd => nd != null).ToList();
+    }
+    
+    private int GetNextTerminator(int index, List<SyntaxToken> tokens) {
+      while (index < tokens.Count && tokens[index].Type != SyntaxTokenTypes.SemiColon) {
+        index++;
+      }
+
+      return index;
     }
 
     private int GetExpression(

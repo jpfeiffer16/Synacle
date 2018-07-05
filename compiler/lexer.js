@@ -46,8 +46,6 @@ function agregateLikeTokens(tokens) {
     .map(type => grammar.syntaxTokenTypes[type])
     .filter(token => token.name ? token.name.length > 1 : false);
   for(let i = 0; i < tokens.length; i++) {
-    const currentToken = tokens[i];
-    const nextToken = tokens[i + 1];
 
     nonOneCharTokens.forEach(grammarToken => {
       const to = i + grammarToken.name.length;
