@@ -16,8 +16,10 @@ namespace compiler
       Equal,
       LeftCurly,
       RightCurly,
-    GreaterThan,
-    LessThan
+      GreaterThan,
+      LessThan,
+      FunctionDeclaration,
+      Return
   }
 
     public static class Grammar {
@@ -26,6 +28,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "var",
             Type = SyntaxTokenTypes.VariableDeclaration
+          },
+          new SyntaxToken() {
+            Token = "function",
+            Type = SyntaxTokenTypes.FunctionDeclaration
           },
           new SyntaxToken() {
             Token = "=",
@@ -78,6 +84,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "}",
             Type = SyntaxTokenTypes.RightCurly
+          },
+          new SyntaxToken() {
+            Token = "return",
+            Type = SyntaxTokenTypes.Return
           }
         };
     } 

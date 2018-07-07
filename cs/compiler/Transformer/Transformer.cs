@@ -47,6 +47,14 @@ namespace compiler
           });
         }
 
+        if (nodeType == typeof(FunctionDeclaration)) {
+          var fcNode = node as FunctionDeclaration;
+
+          lines.Add($":{fcNode.Name}");
+          lines.AddRange(TransformAst(fcNode.Expression, ctx));
+          lines.Add("ret");
+        }
+
         if (nodeType == typeof(VariableAssignment))
         {
           var vaNode = node as VariableAssignment;
@@ -142,7 +150,11 @@ namespace compiler
           //Handle special cases
           if (fcNode.Name == "out")
           {
-            lines.Add($"out reg0");
+            lines.Add("out reg0");
+          } else if (fcNode.Name == "exit") {
+            lines.Add("halt");
+          } else {
+            lines.Add($"call >{fcNode.Name}");
           }
         }
 
@@ -160,6 +172,11 @@ namespace compiler
           var inNode = node as IntegerLiteral;
 
           lines.Add($"set reg{ctx.RegisterLevel} {inNode.Value}");
+        }
+
+        //TODO: Add params here when needed
+        if (nodeType == typeof(Return)) {
+          lines.Add("ret");
         }
       }
       return lines;

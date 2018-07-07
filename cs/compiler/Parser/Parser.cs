@@ -22,10 +22,6 @@ namespace compiler {
 
           SyntaxToken nextToken;
           if (i + 1 < tokens.Count && (nextToken = tokens[i + 1]).Type == SyntaxTokenTypes.LeftParen) {
-            
-            // if (nextToken.Type != SyntaxTokenTypes.LeftParen) {
-            //   throw new Exception("Next token must be (");
-            // }
 
             i++;
             var nextClose = GetExpression(SyntaxTokenTypes.LeftParen, SyntaxTokenTypes.RightParen, i, tokens);
@@ -48,6 +44,39 @@ namespace compiler {
           var nextToken = tokens[++i];
 
           node = new VariableDeclaration(nextToken.Token);
+        }
+
+        if (token.Type == SyntaxTokenTypes.FunctionDeclaration) {
+          var name = tokens[++i];
+          i++;
+          var nextClosingParen = GetExpression(
+            SyntaxTokenTypes.LeftParen,
+            SyntaxTokenTypes.RightParen,
+            i,
+            tokens
+          );
+          var parameters = ParseTokens(
+            tokens.GetRange(i, nextClosingParen - i)
+          );
+
+          i = nextClosingParen + 1;
+
+          var nextClosingCurly = GetExpression(
+            SyntaxTokenTypes.LeftCurly,
+            SyntaxTokenTypes.RightCurly,
+            i,
+            tokens
+          );
+
+          var expression = ParseTokens(
+            tokens.GetRange(i, nextClosingCurly - i)
+          );
+
+          i = nextClosingCurly;
+
+
+
+          node = new FunctionDeclaration(parameters, expression, name.Token);
         }
 
         if (token.Type == SyntaxTokenTypes.VariableAssignment) {
@@ -104,7 +133,7 @@ namespace compiler {
           );
           var condition = tokens.GetRange(i, conditionEnd - i);
           i = conditionEnd;
-          // i++;
+          i++;
           var expressionEnd = GetExpression(
             SyntaxTokenTypes.LeftCurly,
             SyntaxTokenTypes.RightCurly,
@@ -115,6 +144,10 @@ namespace compiler {
           var expression = tokens.GetRange(i, expressionEnd - i);
           i = expressionEnd;
           node = new While(ParseTokens(condition), ParseTokens(expression));
+        }
+
+        if (token.Type == SyntaxTokenTypes.Return) {
+          node = new Return();
         }
 
         nodes.Add(node);
@@ -145,7 +178,8 @@ namespace compiler {
         index++;
       } while ((indentLevel > 0));
 
-      return index;
+      //Return one less as we will over-step by one
+      return index - 1;
     }
   }
 }

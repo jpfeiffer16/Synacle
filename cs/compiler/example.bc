@@ -3,6 +3,12 @@ i = 0;
 
 while (i < 20) {
   out(i + 48);
-  out(10);
+  print();
   i = i + 1;
+}
+
+exit();
+
+function print() {
+  out(10);
 }

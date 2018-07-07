@@ -1,28 +1,32 @@
-jmp >var_b1f30667-f89c-41a9-80f3-a17e40872863_end
-:var_b1f30667-f89c-41a9-80f3-a17e40872863
-:var_b1f30667-f89c-41a9-80f3-a17e40872863_end
+jmp >var_b06c336a-6892-4f86-a30b-0e7579fb3e44_end
+:var_b06c336a-6892-4f86-a30b-0e7579fb3e44
+:var_b06c336a-6892-4f86-a30b-0e7579fb3e44_end
 set reg0 0
-wmem >var_b1f30667-f89c-41a9-80f3-a17e40872863 reg0
-:while_fbc88f36-1a79-4856-ace3-8c0139014751_begin
-rmem reg0 >var_b1f30667-f89c-41a9-80f3-a17e40872863
+wmem >var_b06c336a-6892-4f86-a30b-0e7579fb3e44 reg0
+:while_84cb4c7b-702b-4b00-aad2-207caee3abad_begin
+rmem reg0 >var_b06c336a-6892-4f86-a30b-0e7579fb3e44
 set reg1 20
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while_fbc88f36-1a79-4856-ace3-8c0139014751_end
-rmem reg0 >var_b1f30667-f89c-41a9-80f3-a17e40872863
+jf reg0 >while_84cb4c7b-702b-4b00-aad2-207caee3abad_end
+rmem reg0 >var_b06c336a-6892-4f86-a30b-0e7579fb3e44
 set reg1 48
 add reg0 reg0 reg1
 out reg0
-set reg0 10
-out reg0
-rmem reg0 >var_b1f30667-f89c-41a9-80f3-a17e40872863
+call >print
+rmem reg0 >var_b06c336a-6892-4f86-a30b-0e7579fb3e44
 set reg1 1
 add reg0 reg0 reg1
-wmem >var_b1f30667-f89c-41a9-80f3-a17e40872863 reg0
-jmp >while_fbc88f36-1a79-4856-ace3-8c0139014751_begin
-:while_fbc88f36-1a79-4856-ace3-8c0139014751_end
+wmem >var_b06c336a-6892-4f86-a30b-0e7579fb3e44 reg0
+jmp >while_84cb4c7b-702b-4b00-aad2-207caee3abad_begin
+:while_84cb4c7b-702b-4b00-aad2-207caee3abad_end
+halt
+:print
+set reg0 10
+out reg0
+ret
 
 :subtract
 add reg0 reg0 32767
