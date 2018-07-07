@@ -51,15 +51,24 @@ namespace compiler
           var fcNode = node as FunctionDeclaration;
 
           lines.Add($":{fcNode.Name}");
+          ctx.Variables.Push();
+          lines.AddRange(TransformAst(fcNode.Parameters, ctx));
+          for (var index = 0; index < fcNode.Parameters.Count; index++) {
+            var parameter = fcNode.Parameters[index];
+            var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
+            lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
+          }
           lines.AddRange(TransformAst(fcNode.Expression, ctx));
           lines.Add("ret");
+          ctx.Variables.Pop();
         }
 
         if (nodeType == typeof(VariableAssignment))
         {
           var vaNode = node as VariableAssignment;
 
-          var variable = ctx.Variables.Find(vr => vr.Name == (vaNode.Identifier as Identifier).Name);
+          // var variable = ctx.Variables.Find(vr => vr.Name == (vaNode.Identifier as Identifier).Name);
+          var variable = ctx.Variables.Get((vaNode.Identifier as Identifier).Name);
 
           lines.AddRange(TransformAst(new List<AstNode> { vaNode.Parameter }, ctx));
           lines.Add($"wmem >{variable.MemoryAddress} reg0");
@@ -154,6 +163,12 @@ namespace compiler
           } else if (fcNode.Name == "exit") {
             lines.Add("halt");
           } else {
+            var originalRegisterLevel = ctx.RegisterLevel;
+            foreach (var parameter in fcNode.Parameters) {
+              lines.AddRange(TransformAst(new List<AstNode> { parameter }, ctx));
+              ctx.RegisterLevel++;
+            }
+            ctx.RegisterLevel = originalRegisterLevel;
             lines.Add($"call >{fcNode.Name}");
           }
         }
@@ -162,7 +177,8 @@ namespace compiler
         {
           var idNode = node as Identifier;
 
-          var variable = ctx.Variables.Find(vr => vr.Name == idNode.Name);
+          // var variable = ctx.Variables.Find(vr => vr.Name == idNode.Name);
+          var variable = ctx.Variables.Get(idNode.Name);
 
           lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
         }

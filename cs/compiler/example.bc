@@ -2,13 +2,19 @@ var i;
 i = 0;
 
 while (i < 20) {
-  out(i + 48);
-  print();
+  one();
   i = i + 1;
 }
 
+out(10);
+
 exit();
 
-function print() {
-  out(10);
+function one() {
+  out(65);
+  two();
+}
+
+function two() {
+  out(66);
 }

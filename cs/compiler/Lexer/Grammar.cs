@@ -19,7 +19,8 @@ namespace compiler
       GreaterThan,
       LessThan,
       FunctionDeclaration,
-      Return
+      Return,
+      Comma
   }
 
     public static class Grammar {
@@ -88,6 +89,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "return",
             Type = SyntaxTokenTypes.Return
+          },
+          new SyntaxToken() {
+            Token = ",",
+            Type = SyntaxTokenTypes.Comma
           }
         };
     } 
