@@ -33,8 +33,8 @@ namespace compiler {
       );
         
 
-      for (var i = 0; i < this.code.Length; i++) {
-        var ch = this.code[i];
+      for (var i = 0; i < strippedCode.Length; i++) {
+        var ch = strippedCode[i];
         var chr = ch.ToString().Trim();
         var charType = CharType.Unknown;
 
