@@ -24,6 +24,15 @@ namespace compiler {
       var currentToken = String.Empty;
       var currentCharType = CharType.Unknown;
 
+      var strippedCode = string.Join(
+        "\n",
+        this
+          .code
+          .Split("\n")
+          .Where(line => !line.Trim().StartsWith("//"))
+      );
+        
+
       for (var i = 0; i < this.code.Length; i++) {
         var ch = this.code[i];
         var chr = ch.ToString().Trim();
