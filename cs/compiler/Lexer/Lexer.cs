@@ -46,7 +46,7 @@ namespace compiler {
           charType = CharType.Symbol;
         }
 
-        if (currentCharType != charType || charType == CharType.Symbol || i == code.Length - 1) {
+        if (currentCharType != charType || charType == CharType.Symbol || i == strippedCode.Length - 1) {
           if (currentToken.Length > 0) {
           tokens.Add(new SyntaxToken(currentToken));
           currentToken = String.Empty;
