@@ -9,5 +9,6 @@ namespace compiler
         public bool HasSubtractSupport = false;
         public bool HasNotSupport = false;
         public bool HasOrSupport = false;
+        public bool HasDivisionSupport = false;
     }
 }

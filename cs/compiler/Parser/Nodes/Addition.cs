@@ -1,7 +1,7 @@
 namespace compiler
 {
     public class Addition : AstNode {
-        public Addition(AstNode left, AstNode right) : base("SUBTRACTION") {
+        public Addition(AstNode left, AstNode right) : base("ADDITION") {
             this.Left = left;
             this.Right = right;
         }

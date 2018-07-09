@@ -19,6 +19,7 @@ namespace compiler
       var lines = TransformAst(this.nodes, ctx);
       lines = EnsureSubtractSupport(ctx, lines);
       lines = EnsureNotSupport(ctx, lines);
+      lines = EnsureDivisionSupport(ctx, lines);
       return lines;
     }
     private List<string> TransformAst(List<AstNode> ast, Context ctx)
@@ -134,6 +135,42 @@ namespace compiler
           lines.Add($"call >subtract");
         }
 
+        if (nodeType == typeof(Multiplication))
+        {
+          var sbNode = node as Multiplication;
+
+          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
+          ctx.RegisterLevel--;
+
+          lines.Add($"mult reg0 reg0 reg1");
+        }
+
+
+        if (nodeType == typeof(Division))
+        {
+          var sbNode = node as Division;
+
+          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
+          ctx.RegisterLevel--;
+
+          lines.Add($"call >divide");
+        }
+
+        if (nodeType == typeof(Mod)) {
+          var modNode = node as Mod;
+
+          lines.AddRange(TransformAst(new List<AstNode> { modNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { modNode.Right }, ctx));
+          ctx.RegisterLevel--;
+
+          lines.Add($"mod reg0 reg0 reg1");
+        }
+
         if (nodeType == typeof(While))
         {
           var whNode = node as While;
@@ -162,6 +199,11 @@ namespace compiler
             lines.Add("out reg0");
           } else if (fcNode.Name == "exit") {
             lines.Add("halt");
+          } else if (fcNode.Name == "push") {
+            lines.AddRange(TransformAst(fcNode.Parameters, ctx));
+            lines.Add("push reg0");
+          } else if (fcNode.Name == "pop") {
+            lines.Add("pop reg0");
           } else {
             var originalRegisterLevel = ctx.RegisterLevel;
             foreach (var parameter in fcNode.Parameters) {
@@ -194,6 +236,38 @@ namespace compiler
         if (nodeType == typeof(Return)) {
           lines.Add("ret");
         }
+      }
+      return lines;
+    }
+
+    private List<string> EnsureDivisionSupport(Context ctx, List<string> lines)
+    {
+      lines = EnsureSubtractSupport(ctx, lines);
+      if (!ctx.HasDivisionSupport)
+      {
+        ctx.HasDivisionSupport = true;
+        lines.AddRange(
+            @"
+              :divide
+              set reg3 0
+              set reg2 reg1
+              :divide_loop
+              set reg1 reg2
+              gt reg4 reg0 reg1
+              eq reg5 reg0 reg1
+              or reg4 reg4 reg5
+              jf reg4 >divide_loop_end
+              call >subtract
+              add reg3 reg3 1
+              call >divide_loop
+              :divide_loop_end
+              set reg0 reg3
+              ret
+            "
+            .Split('\n')
+            .Select(ln => ln.Trim())
+            .ToList()
+        );
       }
       return lines;
     }

@@ -12,6 +12,9 @@ namespace compiler
       RightParen,
       Addition,
       Subtraction,
+      Multiplication,
+      Division,
+      Mod,
       While,
       Equal,
       LeftCurly,
@@ -73,6 +76,18 @@ namespace compiler
           new SyntaxToken() {
             Token = "-",
             Type = SyntaxTokenTypes.Subtraction
+          },
+          new SyntaxToken() {
+            Token = "*",
+            Type = SyntaxTokenTypes.Multiplication
+          },
+          new SyntaxToken() {
+            Token = "/",
+            Type = SyntaxTokenTypes.Division
+          },
+          new SyntaxToken() {
+            Token = "%",
+            Type = SyntaxTokenTypes.Mod
           },
           new SyntaxToken() {
             Token = "while",

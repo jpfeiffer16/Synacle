@@ -123,6 +123,24 @@ namespace compiler {
           node = new Subtraction(left, right[0]);
         }
 
+        if (token.Type == SyntaxTokenTypes.Multiplication) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+          node = new Subtraction(left, right[0]);
+        }
+
+        if (token.Type == SyntaxTokenTypes.Division) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+          node = new Division(left, right[0]);
+        }
+
+        if (token.Type == SyntaxTokenTypes.Mod) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+          node = new Mod(left, right[0]);
+        }
+
         if (token.Type == SyntaxTokenTypes.While) {
           i++;
           var conditionEnd = GetExpression(

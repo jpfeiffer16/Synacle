@@ -1,20 +1,30 @@
 var i;
-i = 0;
-//This get's stripped
-while (i < 20) {
-  one();
-  i = i + 1;
-}
+i = 12345;
 
-out(10);
+print_number(i);
 
 exit();
 
-function one() {
-  out(65);
-  two();
-}
+function print_number(var num) {
+  var charNum;
+  var length;
+  length = 0;
+  while (num > 10) {
+    charNum = num % 10;
+    push(charNum);
+    length = length + 1;
+    num = num / 10;
+  }
+  charNum = num % 10;
+  push(charNum);
+  length = length + 1;
 
-function two() {
-  out(66);
+  //Clean up the stack and output number
+  var stackIndex;
+  stackIndex = 0;
+
+  while(stackIndex < length) {
+    stackIndex = stackIndex + 1;
+    out(pop() + 48);
+  }
 }
