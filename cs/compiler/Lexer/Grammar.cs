@@ -5,7 +5,6 @@ namespace compiler
     public enum SyntaxTokenTypes {
       VariableDeclaration,
       VariableAssignment,
-
       Identifier,
       SemiColon,
       LeftParen,
@@ -15,8 +14,11 @@ namespace compiler
       Multiplication,
       Division,
       Mod,
+      If,
       While,
       Equal,
+      Not,
+      And,
       LeftCurly,
       RightCurly,
       GreaterThan,
@@ -62,6 +64,14 @@ namespace compiler
             Type = SyntaxTokenTypes.Equal
           },
           new SyntaxToken() {
+            Token = "!",
+            Type = SyntaxTokenTypes.Not
+          },
+          new SyntaxToken() {
+            Token = "&&",
+            Type = SyntaxTokenTypes.And
+          },
+          new SyntaxToken() {
             Token = ">",
             Type = SyntaxTokenTypes.GreaterThan
           },
@@ -88,6 +98,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "%",
             Type = SyntaxTokenTypes.Mod
+          },
+          new SyntaxToken() {
+            Token = "if",
+            Type = SyntaxTokenTypes.If
           },
           new SyntaxToken() {
             Token = "while",

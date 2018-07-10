@@ -20,6 +20,7 @@ namespace compiler
       lines = EnsureSubtractSupport(ctx, lines);
       lines = EnsureNotSupport(ctx, lines);
       lines = EnsureDivisionSupport(ctx, lines);
+      lines = EnsureAndSupport(ctx, lines);
       return lines;
     }
     private List<string> TransformAst(List<AstNode> ast, Context ctx)
@@ -87,6 +88,21 @@ namespace compiler
           lines.AddRange(TransformAst(new List<AstNode> { eqNode.Right }, ctx));
           ctx.RegisterLevel--;
           lines.Add("eq reg0 reg0 reg1");
+        }
+
+        if (nodeType == typeof(Not)) {
+          var notNode = node as Not;
+          lines.AddRange(TransformAst(new List<AstNode> { notNode.Parameter }, ctx));
+          lines.Add("call >not");
+        }
+
+        if (nodeType == typeof(And)) {
+          var andNode = node as And;
+          lines.AddRange(TransformAst(new List<AstNode> { andNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
+          ctx.RegisterLevel--;
+          lines.Add("call >and");
         }
 
         if (nodeType == typeof(GreaterThan))
@@ -171,6 +187,17 @@ namespace compiler
           ctx.RegisterLevel--;
 
           lines.Add($"mod reg0 reg0 reg1");
+        }
+
+        if (nodeType == typeof(If)) {
+          var ifNode = node as If;
+
+          var uuid = Guid.NewGuid();
+
+          lines.AddRange(TransformAst(ifNode.Condition, ctx));
+          lines.Add($"jf reg0 >end_{uuid}");
+          lines.AddRange(TransformAst(ifNode.Expression, ctx));
+          lines.Add($":end_{uuid}");
         }
 
         if (nodeType == typeof(While))
@@ -309,6 +336,31 @@ namespace compiler
               ret
               :not_isfalse
               set reg0 1
+              ret
+            "
+            .Split("\n")
+            .Select(ln => ln.Trim())
+            .ToList()
+        );
+      }
+      return lines;
+    }
+
+    private List<string> EnsureAndSupport(Context ctx, List<string> lines)
+    {
+      if (!ctx.HasAndSupport)
+      {
+        ctx.HasAndSupport = true;
+        lines.AddRange(
+            @"
+              :and
+              jf reg0 >and_isfalse
+              jf reg1 >and_isfalse
+              :and_istrue
+              set reg0 1
+              ret
+              :and_isfalse
+              set reg0 0
               ret
             "
             .Split("\n")

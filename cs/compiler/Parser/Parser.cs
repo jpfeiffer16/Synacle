@@ -94,6 +94,17 @@ namespace compiler {
           node = new Equal(left, right);
         }
 
+        if (token.Type == SyntaxTokenTypes.Not) {
+          var next = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          node = new Not(next);
+        }
+
+        if (token.Type == SyntaxTokenTypes.And) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          node = new And(left, right);
+        }
+
         if (token.Type == SyntaxTokenTypes.GreaterThan) {
           var previousAstNode = nodes.Pop();
           node = new GreaterThan(
@@ -139,6 +150,29 @@ namespace compiler {
           var left = nodes.Pop();
           var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
           node = new Mod(left, right[0]);
+        }
+
+        if (token.Type == SyntaxTokenTypes.If) {
+          i++;
+          var conditionEnd = GetExpression(
+            SyntaxTokenTypes.LeftParen,
+            SyntaxTokenTypes.RightParen,
+            i,
+            tokens
+          );
+          var condition = tokens.GetRange(i, conditionEnd - i);
+          i = conditionEnd;
+          i++;
+          var expressionEnd = GetExpression(
+            SyntaxTokenTypes.LeftCurly,
+            SyntaxTokenTypes.RightCurly,
+            i,
+            tokens
+          );
+
+          var expression = tokens.GetRange(i + 1, expressionEnd - i);
+          i = expressionEnd;
+          node = new If(ParseTokens(condition), ParseTokens(expression));
         }
 
         if (token.Type == SyntaxTokenTypes.While) {

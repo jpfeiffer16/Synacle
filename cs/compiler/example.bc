@@ -1,6 +1,33 @@
 #include "stdlib.bc"
 
 var i;
-i = 904;
+i = 1;
 
-print_number(i);
+while (i < 10) {
+  var fizz;
+  var buzz;
+  fizz = i % 3;
+  buzz = i % 5;
+
+  if (fizz && buzz) {
+    print_number(i);
+  }
+
+  if (!fizz) {
+    out(102);
+    out(105);
+    out(122);
+    out(122);
+  }
+
+  if (!buzz) {
+    out(98);
+    out(117);
+    out(122);
+    out(122);
+  }
+
+  i = i + 1;
+
+  out(10);
+}
