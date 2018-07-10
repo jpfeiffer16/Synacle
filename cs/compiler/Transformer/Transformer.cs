@@ -51,6 +51,7 @@ namespace compiler
         if (nodeType == typeof(FunctionDeclaration)) {
           var fcNode = node as FunctionDeclaration;
 
+          lines.Add($"jmp >{fcNode.Name}_end");
           lines.Add($":{fcNode.Name}");
           ctx.Variables.Push();
           lines.AddRange(TransformAst(fcNode.Parameters, ctx));
@@ -61,6 +62,7 @@ namespace compiler
           }
           lines.AddRange(TransformAst(fcNode.Expression, ctx));
           lines.Add("ret");
+          lines.Add($":{fcNode.Name}_end");
           ctx.Variables.Pop();
         }
 

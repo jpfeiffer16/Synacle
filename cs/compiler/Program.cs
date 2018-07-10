@@ -12,6 +12,9 @@ namespace compiler
         {
             //Get code
             var code = File.ReadAllText("./example.bc");
+            //Preprocess
+            var preprocessor = new Preprocessor(code);
+            code = preprocessor.Preprocess();
             //Lex
             var lexer = new Lexer(code);
             var tokens = lexer.Lex();
