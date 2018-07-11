@@ -105,6 +105,12 @@ namespace compiler {
           node = new And(left, right);
         }
 
+        if (token.Type == SyntaxTokenTypes.Or) {
+          var left = nodes.Pop();
+          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          node = new Or(left, right);
+        }
+
         if (token.Type == SyntaxTokenTypes.GreaterThan) {
           var previousAstNode = nodes.Pop();
           node = new GreaterThan(
@@ -200,6 +206,29 @@ namespace compiler {
 
         if (token.Type == SyntaxTokenTypes.Return) {
           node = new Return();
+        }
+
+        if (token.Type == SyntaxTokenTypes.AddressOf) {
+          var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          node = new AddressOf(nextNode);
+        }
+
+        if (token.Type == SyntaxTokenTypes.Deref) {
+          var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          node = new Deref(nextNode);
+        }
+
+        if (token.Type == SyntaxTokenTypes.Quote) {
+          ++i;
+          var originalI = i;
+          while (tokens[i].Type != SyntaxTokenTypes.Quote) {
+            i++;
+          }
+          // i++;
+          // i--;
+          node = new StringLitteral(
+            string.Join(string.Empty, tokens.GetRange(originalI, i - originalI).Select(tkn => tkn.Token))
+          );
         }
 
         nodes.Add(node);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace compiler
 {
@@ -21,6 +22,7 @@ namespace compiler
       lines = EnsureNotSupport(ctx, lines);
       lines = EnsureDivisionSupport(ctx, lines);
       lines = EnsureAndSupport(ctx, lines);
+      lines = EnsureOrSupport(ctx, lines);
       return lines;
     }
     private List<string> TransformAst(List<AstNode> ast, Context ctx)
@@ -103,6 +105,15 @@ namespace compiler
           lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
           ctx.RegisterLevel--;
           lines.Add("call >and");
+        }
+
+        if (nodeType == typeof(Or)) {
+          var andNode = node as Or;
+          lines.AddRange(TransformAst(new List<AstNode> { andNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
+          ctx.RegisterLevel--;
+          lines.Add("call >or");
         }
 
         if (nodeType == typeof(GreaterThan))
@@ -265,6 +276,46 @@ namespace compiler
         if (nodeType == typeof(Return)) {
           lines.Add("ret");
         }
+
+        if (nodeType == typeof(AddressOf)) {
+          var adofNode = node as AddressOf;
+          var variable = ctx.Variables.Get((adofNode.Parameter as Identifier).Name);
+          lines.Add($"set reg0 >{variable.MemoryAddress}");
+        }
+
+        if (nodeType == typeof(Deref)) {
+          var adofNode = node as Deref;
+          lines.AddRange(TransformAst(new List<AstNode> { adofNode.Parameter }, ctx));
+          lines.Add($"rmem reg0 reg0");
+        }
+
+        if (nodeType == typeof(StringLitteral)) {
+          var strNode = node as StringLitteral;
+          if (!string.IsNullOrEmpty(strNode.Value)) {
+            var firstLetter = strNode.Value.Substring(0, 1);
+            var value = strNode.Value.Substring(1);
+            var uuid = Guid.NewGuid();
+            lines.Add($"jmp >var_{uuid}_end");
+            lines.Add($":var_{uuid}");
+            foreach (var ch in value) {
+              var str = ch.ToString();
+              if (str.Trim().Count() == 0) {
+                lines.Add(Encoding.ASCII.GetBytes(str).FirstOrDefault().ToString());
+              } else {
+                lines.Add($"&{str}");
+              }
+            }
+            lines.Add($":var_{uuid}_end");
+            if (firstLetter.Trim().Count() == 0) {
+              lines.Add(
+                $"wmem >var_{uuid} {Encoding.ASCII.GetBytes(firstLetter).FirstOrDefault().ToString()}"
+              );
+            } else {
+              lines.Add($"wmem >var_{uuid} &{firstLetter}");
+            }
+            lines.Add($"set reg0 >var_{uuid}");
+          }
+        }
       }
       return lines;
     }
@@ -361,6 +412,31 @@ namespace compiler
               ret
               :and_isfalse
               set reg0 0
+              ret
+            "
+            .Split("\n")
+            .Select(ln => ln.Trim())
+            .ToList()
+        );
+      }
+      return lines;
+    }
+
+     private List<string> EnsureOrSupport(Context ctx, List<string> lines)
+    {
+      if (!ctx.HasOrSupport)
+      {
+        ctx.HasOrSupport = true;
+        lines.AddRange(
+            @"
+              :or
+              jt reg0 >or_istrue
+              jt reg1 >or_istrue
+              :or_isfalse
+              set reg0 0
+              ret
+              :or_istrue
+              set reg0 1
               ret
             "
             .Split("\n")

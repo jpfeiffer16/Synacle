@@ -1,4 +1,18 @@
+function print(var strPtr) {
+  while (~strPtr) {
+    print_number(~strPtr);
+    out(~strPtr);
+    out(10);
+    strPtr = strPtr + 1;
+  }
+}
+
 function print_number(var num) {
+  if (num == 10) {
+    out(49);
+    out(48);
+    return;
+  }
   var charNum;
   var length;
   length = 0;
@@ -19,5 +33,16 @@ function print_number(var num) {
   while(stackIndex < length) {
     stackIndex = stackIndex + 1;
     out(pop() + 48);
+  }
+}
+
+function dump_mem() {
+  var i;
+  i = 0;
+
+  while (~i) {
+    i = i + 1;
+    print_number(~i);
+    out(10);
   }
 }

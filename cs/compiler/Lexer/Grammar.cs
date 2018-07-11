@@ -19,13 +19,17 @@ namespace compiler
       Equal,
       Not,
       And,
+      Or,
       LeftCurly,
       RightCurly,
       GreaterThan,
       LessThan,
       FunctionDeclaration,
       Return,
-      Comma
+      Comma,
+      AddressOf,
+      Deref,
+      Quote
   }
 
     public static class Grammar {
@@ -70,6 +74,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "&&",
             Type = SyntaxTokenTypes.And
+          },
+          new SyntaxToken() {
+            Token = "||",
+            Type = SyntaxTokenTypes.Or
           },
           new SyntaxToken() {
             Token = ">",
@@ -122,6 +130,18 @@ namespace compiler
           new SyntaxToken() {
             Token = ",",
             Type = SyntaxTokenTypes.Comma
+          },
+          new SyntaxToken() {
+            Token = "&",
+            Type = SyntaxTokenTypes.AddressOf
+          },
+          new SyntaxToken() {
+            Token = "~",
+            Type = SyntaxTokenTypes.Deref
+          },
+          new SyntaxToken() {
+            Token = "\"",
+            Type = SyntaxTokenTypes.Quote
           }
         };
     } 
