@@ -3,7 +3,7 @@
 println("Getting here");
 var length;
 length = str_len("Hello World!");
-println(print_number(length));
+print_number(length);
 
 //var i;
 //i = 1;
