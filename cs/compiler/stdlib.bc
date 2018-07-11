@@ -1,8 +1,11 @@
+function println(var strPtr) {
+  print(strPtr);
+  out(10);
+}
+
 function print(var strPtr) {
   while (~strPtr) {
-    print_number(~strPtr);
     out(~strPtr);
-    out(10);
     strPtr = strPtr + 1;
   }
 }

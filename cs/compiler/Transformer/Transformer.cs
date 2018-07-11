@@ -305,6 +305,7 @@ namespace compiler
                 lines.Add($"&{str}");
               }
             }
+            lines.Add("0");
             lines.Add($":var_{uuid}_end");
             if (firstLetter.Trim().Count() == 0) {
               lines.Add(
