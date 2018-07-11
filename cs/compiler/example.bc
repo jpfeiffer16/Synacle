@@ -1,29 +1,32 @@
 #include "stdlib.bc"
 
-//print("Hello World!");
+println("Getting here");
+var length;
+length = str_len("Hello World!");
+println(print_number(length));
 
-var i;
-i = 1;
-
-while (i < 40) {
-  var fizz;
-  var buzz;
-  fizz = i % 3;
-  buzz = i % 5;
-
-  if (fizz && buzz) {
-    print_number(i);
-  }
-
-  if (!fizz) {
-    print("fizz");
-  }
-
-  if (!buzz) {
-    print("buzz");
-  }
-
-  i = i + 1;
-
-  out(10);
-}
+//var i;
+//i = 1;
+//
+//while (i < 40) {
+//  var fizz;
+//  var buzz;
+//  fizz = i % 3;
+//  buzz = i % 5;
+//
+//  if (fizz && buzz) {
+//    print_number(i);
+//  }
+//
+//  if (!fizz) {
+//    print("fizz");
+//  }
+//
+//  if (!buzz) {
+//    print("buzz");
+//  }
+//
+//  i = i + 1;
+//
+//  out(10);
+//}

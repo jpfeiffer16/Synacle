@@ -1,12 +1,25 @@
-function println(var strPtr) {
-  print(strPtr);
+function str_len(var str_ptr) {
+  var length;
+  length = 0;
+  while(~str_ptr) {
+    str_ptr = str_ptr + 1;
+    length = length + 1;
+  }
+  if (length) {
+    length = length + 1;
+  }
+  return length;
+}
+
+function println(var str_ptr) {
+  print(str_ptr);
   out(10);
 }
 
-function print(var strPtr) {
-  while (~strPtr) {
-    out(~strPtr);
-    strPtr = strPtr + 1;
+function print(var str_ptr) {
+  while (~str_ptr) {
+    out(~str_ptr);
+    str_ptr = str_ptr + 1;
   }
 }
 

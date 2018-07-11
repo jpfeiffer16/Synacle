@@ -205,7 +205,13 @@ namespace compiler {
         }
 
         if (token.Type == SyntaxTokenTypes.Return) {
-          node = new Return();
+          var nextToken = tokens[i + 1];
+          if (nextToken.Type != SyntaxTokenTypes.SemiColon) {
+            node = new Return(ParseTokens(new List<SyntaxToken> { nextToken })[0]);
+            i++;
+          } else {
+            node = new Return(null);
+          }
         }
 
         if (token.Type == SyntaxTokenTypes.AddressOf) {

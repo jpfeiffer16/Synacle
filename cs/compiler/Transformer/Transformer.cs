@@ -274,6 +274,12 @@ namespace compiler
 
         //TODO: Add params here when needed
         if (nodeType == typeof(Return)) {
+          var returnNode = node as Return;
+          if (returnNode.Parameter != null) {
+            lines.AddRange(
+              TransformAst(new List<AstNode> { returnNode.Parameter }, ctx)
+            );
+          }
           lines.Add("ret");
         }
 

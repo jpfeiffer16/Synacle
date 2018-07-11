@@ -1,9 +1,10 @@
 namespace compiler
 {
   public class Return : AstNode {
-    //TODO: Evenually we need params here
-    public Return() : base("RETURN") {
-
+    public Return(AstNode parameter) : base("RETURN") {
+      this.Parameter = parameter;
     }
+
+    public AstNode Parameter { get; }
   }
 }
