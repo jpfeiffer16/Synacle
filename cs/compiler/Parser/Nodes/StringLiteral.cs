@@ -1,8 +1,8 @@
 namespace compiler
 {
-    public class StringLitteral : AstNode
+    public class StringLiteral : AstNode
     {
-        public StringLitteral(string value) : base("STRING_LITTERAL") {
+        public StringLiteral(string value) : base("STRING_LITTERAL") {
             this.Value = value;
         }
 

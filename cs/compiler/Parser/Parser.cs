@@ -226,7 +226,7 @@ namespace compiler {
           }
           // i++;
           // i--;
-          node = new StringLitteral(
+          node = new StringLiteral(
             string.Join(string.Empty, tokens.GetRange(originalI, i - originalI).Select(tkn => tkn.Token))
           );
         }

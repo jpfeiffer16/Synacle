@@ -289,8 +289,8 @@ namespace compiler
           lines.Add($"rmem reg0 reg0");
         }
 
-        if (nodeType == typeof(StringLitteral)) {
-          var strNode = node as StringLitteral;
+        if (nodeType == typeof(StringLiteral)) {
+          var strNode = node as StringLiteral;
           if (!string.IsNullOrEmpty(strNode.Value)) {
             var firstLetter = strNode.Value.Substring(0, 1);
             var value = strNode.Value.Substring(1);
