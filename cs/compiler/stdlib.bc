@@ -1,11 +1,18 @@
+//function input(var str_ptr) {
+//  var len;
+//  len = str_len(str_ptr);
+//  var in_char;
+//  in_char = in()
+//  while (!(in_char == 13) && (in_char)) {
+//    in_char = in()
+//  }
+//}
+
 function str_len(var str_ptr) {
   var length;
   length = 0;
   while(~str_ptr) {
     str_ptr = str_ptr + 1;
-    length = length + 1;
-  }
-  if (length) {
     length = length + 1;
   }
   return length;

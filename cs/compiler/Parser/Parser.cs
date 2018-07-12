@@ -119,9 +119,25 @@ namespace compiler {
           );
         }
 
+        if (token.Type == SyntaxTokenTypes.GreaterThanOrEqual) {
+          var previousAstNode = nodes.Pop();
+          node = new GreaterThanOrEqual(
+            previousAstNode,
+            ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+          );
+        }
+
         if (token.Type == SyntaxTokenTypes.LessThan) {
           var previousAstNode = nodes.Pop();
           node = new LessThan(
+            previousAstNode,
+            ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+          );
+        }
+
+        if (token.Type == SyntaxTokenTypes.LessThanOrEqual) {
+          var previousAstNode = nodes.Pop();
+          node = new LessThanOrEqual(
             previousAstNode,
             ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
           );

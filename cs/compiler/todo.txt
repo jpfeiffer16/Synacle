@@ -1,0 +1,7 @@
+-greater than or equal to
+-less than or equal to
+fix issue with variable scoping. eg: function do_stuff(i) {//i is essentially reference}
+true and false as pass throughs for 1 and 0
+inline declaration and assignment. eg: var i = 10;
+more advanced parsing of parens into one node. eg: !(i + 1)
+some kind of runtime allaocation system. especially for strings.

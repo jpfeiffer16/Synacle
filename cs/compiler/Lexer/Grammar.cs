@@ -23,7 +23,9 @@ namespace compiler
       LeftCurly,
       RightCurly,
       GreaterThan,
+      GreaterThanOrEqual,
       LessThan,
+      LessThanOrEqual,
       FunctionDeclaration,
       Return,
       Comma,
@@ -84,8 +86,16 @@ namespace compiler
             Type = SyntaxTokenTypes.GreaterThan
           },
           new SyntaxToken() {
+            Token = ">=",
+            Type = SyntaxTokenTypes.GreaterThanOrEqual
+          },
+          new SyntaxToken() {
             Token = "<",
             Type = SyntaxTokenTypes.LessThan
+          },
+          new SyntaxToken() {
+            Token = "<=",
+            Type = SyntaxTokenTypes.LessThanOrEqual
           },
           new SyntaxToken() {
             Token = "+",

@@ -127,6 +127,19 @@ namespace compiler
           lines.Add("gt reg0 reg0 reg1");
         }
 
+        if (nodeType == typeof(GreaterThanOrEqual))
+        {
+          var gtNode = node as GreaterThanOrEqual;
+
+          lines.AddRange(TransformAst(new List<AstNode> { gtNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { gtNode.Right }, ctx));
+          ctx.RegisterLevel--;
+          lines.Add("gt reg2 reg0 reg1");
+          lines.Add("eq reg3 reg0 reg1");
+          lines.Add("or reg0 reg2 reg3");
+        }
+
         if (nodeType == typeof(LessThan))
         {
           var ltNode = node as LessThan;
@@ -138,6 +151,19 @@ namespace compiler
           lines.Add("eq reg2 reg0 reg1");
           lines.Add("gt reg3 reg0 reg1");
           lines.Add("or reg0 reg2 reg3");
+          lines.Add("call >not");
+        }
+
+        if (nodeType == typeof(LessThanOrEqual))
+        {
+          var ltNode = node as LessThanOrEqual;
+
+          lines.AddRange(TransformAst(new List<AstNode> { ltNode.Left }, ctx));
+          ctx.RegisterLevel++;
+          lines.AddRange(TransformAst(new List<AstNode> { ltNode.Right }, ctx));
+          ctx.RegisterLevel--;
+          lines.Add("gt reg0 reg0 reg1");
+
           lines.Add("call >not");
         }
 
@@ -237,6 +263,8 @@ namespace compiler
           if (fcNode.Name == "out")
           {
             lines.Add("out reg0");
+          } else if (fcNode.Name == "in") {
+            lines.Add("in reg0");
           } else if (fcNode.Name == "exit") {
             lines.Add("halt");
           } else if (fcNode.Name == "push") {

@@ -1,9 +1,18 @@
-#include "stdlib.bc"
 
-println("Getting here");
-var length;
-length = str_len("Hello World!");
-print_number(length);
+
+var i;
+i = 10;
+
+do_stuff(i);
+
+function do_stuff(var ii) {
+  print_number(ii >= 10);
+}
+
+//println("Getting here");
+//var length;
+//length = str_len("Hello World!");
+//print_number(length);
 
 //var i;
 //i = 1;
