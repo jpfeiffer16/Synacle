@@ -1,13 +1,8 @@
 #include "stdlib.bc"
 
-var i = 200;
-
-while (i > 1) {
-  --i;
-  print_number(i);
-  out(10);
-}
-
+print_number(str_len("test"));
+out(10);
+dump_mem();
 
 //var length;
 //length = str_len("Hello World!");

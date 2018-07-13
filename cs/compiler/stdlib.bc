@@ -11,8 +11,8 @@
 function str_len(var str_ptr) {
   var length = 0;
   while(~str_ptr) {
-    str_ptr = str_ptr + 1;
-    length = length + 1;
+    ++str_ptr;
+    ++length;
   }
   return length;
 }
@@ -25,7 +25,7 @@ function println(var str_ptr) {
 function print(var str_ptr) {
   while (~str_ptr) {
     out(~str_ptr);
-    str_ptr = str_ptr + 1;
+    ++str_ptr;
   }
 }
 
@@ -40,12 +40,12 @@ function print_number(var num) {
   while (num > 10) {
     charNum = num % 10;
     push(charNum);
-    length = length + 1;
+    ++length;
     num = num / 10;
   }
   charNum = num % 10;
   push(charNum);
-  length = length + 1;
+  ++length;
 
   //Clean up the stack and output number
   var stackIndex = 0;
@@ -57,11 +57,10 @@ function print_number(var num) {
 }
 
 function dump_mem() {
-  var i;
-  i = 0;
+  var i = 0;
 
   while (~i) {
-    i = i + 1;
+    ++i;
     print_number(~i);
     out(10);
   }
