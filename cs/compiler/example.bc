@@ -1,6 +1,7 @@
 #include "stdlib.bc"
 
-print_number(str_len("test"));
+var len = str_len("test");
+print_number(len);
 out(10);
 dump_mem();
 
