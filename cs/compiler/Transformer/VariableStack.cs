@@ -21,7 +21,7 @@ namespace compiler
     }
 
     public void Add(Variable variable) {
-      this.Stack.Last().Add(variable);
+      this.Stack.First().Add(variable);
     }
 
     public Variable Get(string name) {

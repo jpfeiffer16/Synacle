@@ -1,15 +1,14 @@
+#include "stdlib.bc"
 
+var i = 200;
 
-var i;
-i = 10;
-
-do_stuff(i);
-
-function do_stuff(var ii) {
-  print_number(ii >= 10);
+while (i > 1) {
+  --i;
+  print_number(i);
+  out(10);
 }
 
-//println("Getting here");
+
 //var length;
 //length = str_len("Hello World!");
 //print_number(length);

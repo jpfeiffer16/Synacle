@@ -150,10 +150,20 @@ namespace compiler {
           
         }
 
+        if (token.Type == SyntaxTokenTypes.Incr) {
+          var next = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+          node = new Incr(next[0]);
+        }
+
         if (token.Type == SyntaxTokenTypes.Subtraction) {
           var left = nodes.Pop();
           var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
           node = new Subtraction(left, right[0]);
+        }
+
+        if (token.Type == SyntaxTokenTypes.Decr) {
+          var next = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+          node = new Decr(next[0]);
         }
 
         if (token.Type == SyntaxTokenTypes.Multiplication) {

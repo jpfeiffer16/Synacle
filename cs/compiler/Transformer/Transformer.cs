@@ -73,12 +73,18 @@ namespace compiler
         {
           var vaNode = node as VariableAssignment;
 
-          // var variable = ctx.Variables.Find(vr => vr.Name == (vaNode.Identifier as Identifier).Name);
-          var variable = ctx.Variables.Get((vaNode.Identifier as Identifier).Name);
+          Variable variable = null;
+
+          if (vaNode.Identifier.GetType() == typeof(Identifier)) {
+            variable = ctx.Variables.Get((vaNode.Identifier as Identifier).Name);
+          } else if (vaNode.Identifier.GetType() == typeof(VariableDeclaration))  {
+            lines.AddRange(TransformAst(new List<AstNode> { vaNode.Identifier }, ctx));
+            variable = ctx.Variables.Get((vaNode.Identifier as VariableDeclaration).Identifier);
+          }
 
           lines.AddRange(TransformAst(new List<AstNode> { vaNode.Parameter }, ctx));
           lines.Add($"wmem >{variable.MemoryAddress} reg0");
-
+          
         }
 
         if (nodeType == typeof(Equal))
@@ -178,6 +184,15 @@ namespace compiler
           lines.Add($"add reg0 reg0 reg1");
         }
 
+        if (nodeType == typeof(Incr))
+        {
+          var incrNode = node as Incr;
+          lines.AddRange(TransformAst(new List<AstNode> { incrNode.Parameter }, ctx));
+
+          lines.Add($"add reg0 reg0 1");
+          lines.Add($"wmem >{ctx.Variables.Get((incrNode.Parameter as Identifier).Name).MemoryAddress} reg0");
+        }
+
         if (nodeType == typeof(Subtraction))
         {
           var sbNode = node as Subtraction;
@@ -188,6 +203,16 @@ namespace compiler
           ctx.RegisterLevel--;
 
           lines.Add($"call >subtract");
+        }
+
+        if (nodeType == typeof(Decr))
+        {
+          var dcNode = node as Decr;
+
+          lines.AddRange(TransformAst(new List<AstNode> { dcNode.Parameter }, ctx));;
+          lines.Add("set reg1 1");
+          lines.Add($"call >subtract");
+          lines.Add($"wmem >{ctx.Variables.Get((dcNode.Parameter as Identifier).Name).MemoryAddress} reg0");
         }
 
         if (nodeType == typeof(Multiplication))

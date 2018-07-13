@@ -10,7 +10,9 @@ namespace compiler
       LeftParen,
       RightParen,
       Addition,
+      Incr,
       Subtraction,
+      Decr,
       Multiplication,
       Division,
       Mod,
@@ -102,8 +104,16 @@ namespace compiler
             Type = SyntaxTokenTypes.Addition
           },
           new SyntaxToken() {
+            Token = "++",
+            Type = SyntaxTokenTypes.Incr
+          },
+          new SyntaxToken() {
             Token = "-",
             Type = SyntaxTokenTypes.Subtraction
+          },
+          new SyntaxToken() {
+            Token = "--",
+            Type = SyntaxTokenTypes.Decr
           },
           new SyntaxToken() {
             Token = "*",

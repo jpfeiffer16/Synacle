@@ -9,8 +9,7 @@
 //}
 
 function str_len(var str_ptr) {
-  var length;
-  length = 0;
+  var length = 0;
   while(~str_ptr) {
     str_ptr = str_ptr + 1;
     length = length + 1;
@@ -37,8 +36,7 @@ function print_number(var num) {
     return;
   }
   var charNum;
-  var length;
-  length = 0;
+  var length = 0;
   while (num > 10) {
     charNum = num % 10;
     push(charNum);
@@ -50,8 +48,7 @@ function print_number(var num) {
   length = length + 1;
 
   //Clean up the stack and output number
-  var stackIndex;
-  stackIndex = 0;
+  var stackIndex = 0;
 
   while(stackIndex < length) {
     stackIndex = stackIndex + 1;
