@@ -300,7 +300,6 @@ namespace compiler
           } else {
             var originalRegisterLevel = ctx.RegisterLevel;
             foreach (var parameter in fcNode.Parameters) {
-              lines.AddRange(TransformAst(new List<AstNode> { parameter }, ctx));
               ctx.RegisterLevel++;
             }
             ctx.RegisterLevel = originalRegisterLevel;

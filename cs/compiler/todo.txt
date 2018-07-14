@@ -4,9 +4,7 @@
 ?true and false as pass throughs for 1 and 0
 -inline declaration and assignment. eg: var i = 10;
 -incremment and decrement ops eg: -- and ++
-
 allow whitespace in string literals
-
 more advanced parsing of parens into one node. eg: !(i + 1)
 some kind of runtime allaocation system. especially for strings.
 there is a stack empty bug happending on the c# vm. Program:
