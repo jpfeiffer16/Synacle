@@ -23,6 +23,7 @@ namespace compiler {
       var tokens = new List<SyntaxToken>();
       var currentToken = String.Empty;
       var currentCharType = CharType.Unknown;
+      var keepWhitespace = false;
 
       var strippedCode = string.Join(
         "\n",
@@ -35,7 +36,9 @@ namespace compiler {
 
       for (var i = 0; i < strippedCode.Length; i++) {
         var ch = strippedCode[i];
-        var chr = ch.ToString().Trim();
+        var chr = ch.ToString();
+        if (chr == "\"") keepWhitespace = !keepWhitespace;
+        if (!keepWhitespace) chr = chr.Trim();
         var charType = CharType.Unknown;
 
         if (isNumberChar(chr)) {
