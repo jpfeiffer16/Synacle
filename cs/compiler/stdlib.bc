@@ -1,13 +1,14 @@
-//function input() {
-//  var data_index = 16384;
-//  var in_char = in();
-//  var is_newline = in_char == 13;
-//  while (!is_newline && in_char) {
-//    
-//    in_char = in();
-//    is_newline = in_char == 13;
-//  }
-//}
+function input() {
+  var data_index = 16384;
+  var in_char = in();
+  var is_newline = in_char == 13;
+  while (!is_newline && in_char) {
+    wmem(data_index, in_char);
+    ++data_index;
+    in_char = in();
+    is_newline = in_char == 13;
+  }
+}
 
 function str_len(var str_ptr) {
   var length = 0;
