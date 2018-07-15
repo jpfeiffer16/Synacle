@@ -1,10 +1,11 @@
-//function input(var str_ptr) {
-//  var len;
-//  len = str_len(str_ptr);
-//  var in_char;
-//  in_char = in()
-//  while (!(in_char == 13) && (in_char)) {
-//    in_char = in()
+//function input() {
+//  var data_index = 16384;
+//  var in_char = in();
+//  var is_newline = in_char == 13;
+//  while (!is_newline && in_char) {
+//    
+//    in_char = in();
+//    is_newline = in_char == 13;
 //  }
 //}
 

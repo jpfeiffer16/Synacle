@@ -23,6 +23,8 @@ namespace compiler
       lines = EnsureDivisionSupport(ctx, lines);
       lines = EnsureAndSupport(ctx, lines);
       lines = EnsureOrSupport(ctx, lines);
+      //Manually add a halt so as not to trample over data
+      lines.Add("halt");
       return lines;
     }
     private List<string> TransformAst(List<AstNode> ast, Context ctx)
@@ -38,7 +40,7 @@ namespace compiler
           var vdNode = node as VariableDeclaration;
 
 
-
+          // this.AddVariable(ctx, vdNode.Identifier, lines);
           var guid = Guid.NewGuid();
           lines.Add($"jmp >var_{guid.ToString()}_end");
           lines.Add($":var_{guid.ToString()}");
@@ -282,7 +284,12 @@ namespace compiler
         if (nodeType == typeof(FunctionCall))
         {
           var fcNode = node as FunctionCall;
-          lines.AddRange(TransformAst(fcNode.Parameters, ctx));
+          var originalRegisterLevel = ctx.RegisterLevel;
+            foreach (var parameter in fcNode.Parameters) {
+              lines.AddRange(TransformAst(new List<AstNode> { parameter }, ctx));
+              ctx.RegisterLevel++;
+            }
+            ctx.RegisterLevel = originalRegisterLevel;
 
           //Handle special cases
           if (fcNode.Name == "out")
@@ -297,12 +304,10 @@ namespace compiler
             lines.Add("push reg0");
           } else if (fcNode.Name == "pop") {
             lines.Add("pop reg0");
+          } else if (fcNode.Name == "wmem") {
+            lines.Add($"wmem reg0 reg1");
           } else {
-            var originalRegisterLevel = ctx.RegisterLevel;
-            foreach (var parameter in fcNode.Parameters) {
-              ctx.RegisterLevel++;
-            }
-            ctx.RegisterLevel = originalRegisterLevel;
+            
             lines.Add($"call >{fcNode.Name}");
           }
         }
@@ -378,6 +383,23 @@ namespace compiler
       }
       return lines;
     }
+
+    // private VariableDeclaration AddVariable(
+    //   Context ctx,
+    //   string variableName,
+    //   List<string> lines
+    // ) {
+    //   var guid = Guid.NewGuid();
+    //   lines.Add($"jmp >var_{guid.ToString()}_end");
+    //   lines.Add($":var_{guid.ToString()}");
+    //   lines.Add($":var_{guid.ToString()}_end");
+
+    //   ctx.Variables.Add(new Variable()
+    //   {
+    //     Name = vdNode.Identifier,
+    //     MemoryAddress = $"var_{guid.ToString()}"
+    //   });
+    // }
 
     private List<string> EnsureDivisionSupport(Context ctx, List<string> lines)
     {

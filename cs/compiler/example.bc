@@ -1,9 +1,15 @@
 #include "stdlib.bc"
 
-var len = str_len("hello world");
-print_number(len);
-out(10);
-dump_mem();
+do_stuff();
+
+function do_stuff() {
+  wmem(1000, 65);
+
+  var i = 1000;
+
+  out(~i);
+}
+
 
 //var length;
 //length = str_len("Hello World!");
