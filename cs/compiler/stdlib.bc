@@ -1,12 +1,35 @@
 function input() {
   var data_index = 16384;
   var in_char = in();
-  var is_newline = in_char == 13;
+  var is_newline = in_char == 10;
   while (!is_newline && in_char) {
     wmem(data_index, in_char);
     ++data_index;
     in_char = in();
-    is_newline = in_char == 13;
+    is_newline = in_char == 10;
+  }
+  wmem(data_index, 0);
+  var alloc_ptr = alloc();
+  mem_cp(alloc_ptr, 16384, str_len(16384));
+  return alloc_ptr;
+}
+
+function alloc() {
+  var data_index = ~32768;
+  if (data_index < 2000) {
+    data_index = 10000;
+  }
+  data_index = data_index + 256;
+  wmem(32768, data_index);
+  return data_index;
+}
+
+function mem_cp(var s_ptr, var d_ptr, var len) {
+  var current_byte = 0;
+  while (current_byte <= len) {
+    var byte_to_write_ptr = s_ptr + current_byte;
+    wmem(d_ptr + current_byte, ~byte_to_write_ptr);
+    ++current_byte;
   }
 }
 

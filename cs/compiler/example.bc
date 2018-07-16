@@ -3,11 +3,7 @@
 do_stuff();
 
 function do_stuff() {
-  wmem(1000, 65);
-
-  var i = 1000;
-
-  out(~i);
+  print(input());
 }
 
 
