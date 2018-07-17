@@ -1,167 +1,193 @@
 jmp >input_end
 :input
-jmp >var_2fe86442-cebe-4c20-9b93-23236a1a9052_end
-:var_2fe86442-cebe-4c20-9b93-23236a1a9052
-:var_2fe86442-cebe-4c20-9b93-23236a1a9052_end
+jmp >var_1de61b09-b66e-4368-94f6-d52e53bb0cff_end
+:var_1de61b09-b66e-4368-94f6-d52e53bb0cff
+:var_1de61b09-b66e-4368-94f6-d52e53bb0cff_end
 set reg0 16384
-wmem >var_2fe86442-cebe-4c20-9b93-23236a1a9052 reg0
-jmp >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b_end
-:var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b
-:var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b_end
+wmem >var_1de61b09-b66e-4368-94f6-d52e53bb0cff reg0
+jmp >var_5df39e40-7541-4764-a572-9106cdb40e09_end
+:var_5df39e40-7541-4764-a572-9106cdb40e09
+:var_5df39e40-7541-4764-a572-9106cdb40e09_end
 in reg0
-wmem >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b reg0
-jmp >var_a3d1fcd7-edc7-4d75-8447-d5855f7f6399_end
-:var_a3d1fcd7-edc7-4d75-8447-d5855f7f6399
-:var_a3d1fcd7-edc7-4d75-8447-d5855f7f6399_end
-rmem reg0 >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b
+wmem >var_5df39e40-7541-4764-a572-9106cdb40e09 reg0
+jmp >var_462ef6ff-03c3-4a9e-ac5c-ddcd12d4835d_end
+:var_462ef6ff-03c3-4a9e-ac5c-ddcd12d4835d
+:var_462ef6ff-03c3-4a9e-ac5c-ddcd12d4835d_end
+rmem reg0 >var_5df39e40-7541-4764-a572-9106cdb40e09
 set reg1 10
 eq reg0 reg0 reg1
-wmem >var_a3d1fcd7-edc7-4d75-8447-d5855f7f6399 reg0
-:while_f87a2e1d-2bac-4fba-ab58-61863035cd07_begin
-rmem reg0 >var_a3d1fcd7-edc7-4d75-8447-d5855f7f6399
+wmem >var_462ef6ff-03c3-4a9e-ac5c-ddcd12d4835d reg0
+:while_03f4493a-495f-4866-bdfb-c2f9b7c74377_begin
+rmem reg0 >var_462ef6ff-03c3-4a9e-ac5c-ddcd12d4835d
 call >not
-rmem reg1 >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b
+rmem reg1 >var_5df39e40-7541-4764-a572-9106cdb40e09
 call >and
-jf reg0 >while_f87a2e1d-2bac-4fba-ab58-61863035cd07_end
-rmem reg0 >var_2fe86442-cebe-4c20-9b93-23236a1a9052
-rmem reg1 >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b
+jf reg0 >while_03f4493a-495f-4866-bdfb-c2f9b7c74377_end
+rmem reg0 >var_1de61b09-b66e-4368-94f6-d52e53bb0cff
+rmem reg1 >var_5df39e40-7541-4764-a572-9106cdb40e09
 wmem reg0 reg1
-rmem reg0 >var_2fe86442-cebe-4c20-9b93-23236a1a9052
+rmem reg0 >var_1de61b09-b66e-4368-94f6-d52e53bb0cff
 add reg0 reg0 1
-wmem >var_2fe86442-cebe-4c20-9b93-23236a1a9052 reg0
+wmem >var_1de61b09-b66e-4368-94f6-d52e53bb0cff reg0
 in reg0
-wmem >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b reg0
-rmem reg0 >var_16139a47-a678-4e4f-9ca8-3b3bb7f96d4b
+wmem >var_5df39e40-7541-4764-a572-9106cdb40e09 reg0
+rmem reg0 >var_5df39e40-7541-4764-a572-9106cdb40e09
 set reg1 10
 eq reg0 reg0 reg1
-wmem >var_a3d1fcd7-edc7-4d75-8447-d5855f7f6399 reg0
-jmp >while_f87a2e1d-2bac-4fba-ab58-61863035cd07_begin
-:while_f87a2e1d-2bac-4fba-ab58-61863035cd07_end
-rmem reg0 >var_2fe86442-cebe-4c20-9b93-23236a1a9052
+wmem >var_462ef6ff-03c3-4a9e-ac5c-ddcd12d4835d reg0
+jmp >while_03f4493a-495f-4866-bdfb-c2f9b7c74377_begin
+:while_03f4493a-495f-4866-bdfb-c2f9b7c74377_end
+rmem reg0 >var_1de61b09-b66e-4368-94f6-d52e53bb0cff
 set reg1 0
 wmem reg0 reg1
-jmp >var_20feb7a0-2391-4133-8270-54b6a4b207b8_end
-:var_20feb7a0-2391-4133-8270-54b6a4b207b8
-:var_20feb7a0-2391-4133-8270-54b6a4b207b8_end
+jmp >var_07e3f61b-1260-43c0-867a-79e00ee6a0f3_end
+:var_07e3f61b-1260-43c0-867a-79e00ee6a0f3
+:var_07e3f61b-1260-43c0-867a-79e00ee6a0f3_end
 call >alloc
-wmem >var_20feb7a0-2391-4133-8270-54b6a4b207b8 reg0
-rmem reg0 >var_20feb7a0-2391-4133-8270-54b6a4b207b8
-set reg1 16384
+wmem >var_07e3f61b-1260-43c0-867a-79e00ee6a0f3 reg0
+rmem reg0 >var_07e3f61b-1260-43c0-867a-79e00ee6a0f3
+call >print_number
+set reg0 16384
+rmem reg1 >var_07e3f61b-1260-43c0-867a-79e00ee6a0f3
 set reg2 16384
 call >str_len
 call >mem_cp
-rmem reg0 >var_20feb7a0-2391-4133-8270-54b6a4b207b8
-ret
+set reg0 10
+out reg0
+rmem reg0 >var_07e3f61b-1260-43c0-867a-79e00ee6a0f3
+call >print
+set reg0 10
+out reg0
 ret
 :input_end
 jmp >alloc_end
 :alloc
-jmp >var_af89da45-1e86-4aab-ad30-8107bbd13b57_end
-:var_af89da45-1e86-4aab-ad30-8107bbd13b57
-:var_af89da45-1e86-4aab-ad30-8107bbd13b57_end
-set reg0 32768
-rmem reg0 reg0
-wmem >var_af89da45-1e86-4aab-ad30-8107bbd13b57 reg0
-rmem reg0 >var_af89da45-1e86-4aab-ad30-8107bbd13b57
-set reg1 2000
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
+jmp >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5_end
+:var_c8e1482e-082e-400c-9316-cfe7b5b25cf5
+:var_c8e1482e-082e-400c-9316-cfe7b5b25cf5_end
+set reg0 0
+wmem >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5 reg0
+jmp >var_54b76353-0621-4480-bfd3-a28d598cf805_end
+:var_54b76353-0621-4480-bfd3-a28d598cf805
+:var_54b76353-0621-4480-bfd3-a28d598cf805_end
+set reg0 0
+wmem >var_54b76353-0621-4480-bfd3-a28d598cf805 reg0
+:while_b8039d7f-1301-4a80-917b-c19237bb25a7_begin
+rmem reg0 >var_54b76353-0621-4480-bfd3-a28d598cf805
+set reg1 6
+gt reg0 reg0 reg1
 call >not
-jf reg0 >end_ed978a56-9fbd-480e-a450-d4647129e056
-set reg0 10000
-wmem >var_af89da45-1e86-4aab-ad30-8107bbd13b57 reg0
-:end_ed978a56-9fbd-480e-a450-d4647129e056
-rmem reg0 >var_af89da45-1e86-4aab-ad30-8107bbd13b57
-set reg1 256
-add reg0 reg0 reg1
-wmem >var_af89da45-1e86-4aab-ad30-8107bbd13b57 reg0
-set reg0 32768
-rmem reg1 >var_af89da45-1e86-4aab-ad30-8107bbd13b57
-wmem reg0 reg1
-rmem reg0 >var_af89da45-1e86-4aab-ad30-8107bbd13b57
+jf reg0 >while_b8039d7f-1301-4a80-917b-c19237bb25a7_end
+jmp >var_58964557-dc6a-4927-b8f0-92a07121c3e6_end
+:var_58964557-dc6a-4927-b8f0-92a07121c3e6
+:var_58964557-dc6a-4927-b8f0-92a07121c3e6_end
+rmem reg0 >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5
+rmem reg0 reg0
+wmem >var_58964557-dc6a-4927-b8f0-92a07121c3e6 reg0
+rmem reg0 >var_58964557-dc6a-4927-b8f0-92a07121c3e6
+call >not
+jf reg0 >end_4226e130-6fbb-4780-b4ec-054540a8b333
+rmem reg0 >var_54b76353-0621-4480-bfd3-a28d598cf805
+add reg0 reg0 1
+wmem >var_54b76353-0621-4480-bfd3-a28d598cf805 reg0
+:end_4226e130-6fbb-4780-b4ec-054540a8b333
+rmem reg0 >var_58964557-dc6a-4927-b8f0-92a07121c3e6
+jf reg0 >end_964bcbbd-51e8-4439-8c90-c7caa3c0cec0
+set reg0 0
+wmem >var_54b76353-0621-4480-bfd3-a28d598cf805 reg0
+:end_964bcbbd-51e8-4439-8c90-c7caa3c0cec0
+rmem reg0 >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5
+add reg0 reg0 1
+wmem >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5 reg0
+jmp >while_b8039d7f-1301-4a80-917b-c19237bb25a7_begin
+:while_b8039d7f-1301-4a80-917b-c19237bb25a7_end
+rmem reg0 >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5
+set reg1 1
+call >subtract
+wmem >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5 reg0
+rmem reg0 >var_c8e1482e-082e-400c-9316-cfe7b5b25cf5
 ret
 ret
 :alloc_end
 jmp >mem_cp_end
 :mem_cp
-jmp >var_45d35b51-4e01-42f3-bbb5-a6ad5594d49c_end
-:var_45d35b51-4e01-42f3-bbb5-a6ad5594d49c
-:var_45d35b51-4e01-42f3-bbb5-a6ad5594d49c_end
-jmp >var_cd815ccc-502a-4ae1-bc55-c9f024ede3da_end
-:var_cd815ccc-502a-4ae1-bc55-c9f024ede3da
-:var_cd815ccc-502a-4ae1-bc55-c9f024ede3da_end
-jmp >var_67c90463-d56b-4a25-99b8-e58147e45063_end
-:var_67c90463-d56b-4a25-99b8-e58147e45063
-:var_67c90463-d56b-4a25-99b8-e58147e45063_end
-wmem >var_45d35b51-4e01-42f3-bbb5-a6ad5594d49c reg0
-wmem >var_cd815ccc-502a-4ae1-bc55-c9f024ede3da reg1
-wmem >var_67c90463-d56b-4a25-99b8-e58147e45063 reg2
-jmp >var_e054e0b2-59d9-476a-bb75-b12186864d90_end
-:var_e054e0b2-59d9-476a-bb75-b12186864d90
-:var_e054e0b2-59d9-476a-bb75-b12186864d90_end
+jmp >var_df8245f9-c43f-43cf-b83a-28c162827f47_end
+:var_df8245f9-c43f-43cf-b83a-28c162827f47
+:var_df8245f9-c43f-43cf-b83a-28c162827f47_end
+jmp >var_0ec97fdd-af8f-4a2f-9920-3d9e023a811c_end
+:var_0ec97fdd-af8f-4a2f-9920-3d9e023a811c
+:var_0ec97fdd-af8f-4a2f-9920-3d9e023a811c_end
+jmp >var_18a146b9-3ee6-4283-91f9-9829cdb8600a_end
+:var_18a146b9-3ee6-4283-91f9-9829cdb8600a
+:var_18a146b9-3ee6-4283-91f9-9829cdb8600a_end
+wmem >var_df8245f9-c43f-43cf-b83a-28c162827f47 reg0
+wmem >var_0ec97fdd-af8f-4a2f-9920-3d9e023a811c reg1
+wmem >var_18a146b9-3ee6-4283-91f9-9829cdb8600a reg2
+jmp >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11_end
+:var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11
+:var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11_end
 set reg0 0
-wmem >var_e054e0b2-59d9-476a-bb75-b12186864d90 reg0
-:while_98ef1831-46f2-4819-b11e-b84181089188_begin
-rmem reg0 >var_e054e0b2-59d9-476a-bb75-b12186864d90
-rmem reg1 >var_67c90463-d56b-4a25-99b8-e58147e45063
+wmem >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11 reg0
+:while_eb97329a-2f17-4dfd-b93e-ad545f8a9a45_begin
+rmem reg0 >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11
+rmem reg1 >var_18a146b9-3ee6-4283-91f9-9829cdb8600a
 gt reg0 reg0 reg1
 call >not
-jf reg0 >while_98ef1831-46f2-4819-b11e-b84181089188_end
-jmp >var_8665def5-ad73-4b53-b066-996bb3707409_end
-:var_8665def5-ad73-4b53-b066-996bb3707409
-:var_8665def5-ad73-4b53-b066-996bb3707409_end
-rmem reg0 >var_45d35b51-4e01-42f3-bbb5-a6ad5594d49c
-rmem reg1 >var_e054e0b2-59d9-476a-bb75-b12186864d90
+jf reg0 >while_eb97329a-2f17-4dfd-b93e-ad545f8a9a45_end
+jmp >var_422c440e-af50-4c5d-baba-a95135d669a5_end
+:var_422c440e-af50-4c5d-baba-a95135d669a5
+:var_422c440e-af50-4c5d-baba-a95135d669a5_end
+rmem reg0 >var_df8245f9-c43f-43cf-b83a-28c162827f47
+rmem reg1 >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11
 add reg0 reg0 reg1
-wmem >var_8665def5-ad73-4b53-b066-996bb3707409 reg0
-rmem reg0 >var_cd815ccc-502a-4ae1-bc55-c9f024ede3da
-rmem reg1 >var_e054e0b2-59d9-476a-bb75-b12186864d90
+wmem >var_422c440e-af50-4c5d-baba-a95135d669a5 reg0
+rmem reg0 >var_0ec97fdd-af8f-4a2f-9920-3d9e023a811c
+rmem reg1 >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11
 add reg0 reg0 reg1
-rmem reg1 >var_8665def5-ad73-4b53-b066-996bb3707409
+rmem reg1 >var_422c440e-af50-4c5d-baba-a95135d669a5
 rmem reg0 reg0
 wmem reg0 reg1
-rmem reg0 >var_e054e0b2-59d9-476a-bb75-b12186864d90
+rmem reg0 >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11
 add reg0 reg0 1
-wmem >var_e054e0b2-59d9-476a-bb75-b12186864d90 reg0
-jmp >while_98ef1831-46f2-4819-b11e-b84181089188_begin
-:while_98ef1831-46f2-4819-b11e-b84181089188_end
+wmem >var_34e56fbf-5bad-4aca-b7b5-a2120c2d1b11 reg0
+jmp >while_eb97329a-2f17-4dfd-b93e-ad545f8a9a45_begin
+:while_eb97329a-2f17-4dfd-b93e-ad545f8a9a45_end
 ret
 :mem_cp_end
 jmp >str_len_end
 :str_len
-jmp >var_457635aa-b72a-4faa-a274-65f5a244992a_end
-:var_457635aa-b72a-4faa-a274-65f5a244992a
-:var_457635aa-b72a-4faa-a274-65f5a244992a_end
-wmem >var_457635aa-b72a-4faa-a274-65f5a244992a reg0
-jmp >var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac_end
-:var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac
-:var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac_end
+jmp >var_50a08e6e-8cab-4994-aafb-d87d56594185_end
+:var_50a08e6e-8cab-4994-aafb-d87d56594185
+:var_50a08e6e-8cab-4994-aafb-d87d56594185_end
+wmem >var_50a08e6e-8cab-4994-aafb-d87d56594185 reg0
+jmp >var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc_end
+:var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc
+:var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc_end
 set reg0 0
-wmem >var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac reg0
-:while_f73a5280-26a0-496e-9bbc-b4c79bbc1759_begin
-rmem reg0 >var_457635aa-b72a-4faa-a274-65f5a244992a
+wmem >var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc reg0
+:while_b3011dfa-5b17-4767-b5c8-addbfbbacf05_begin
+rmem reg0 >var_50a08e6e-8cab-4994-aafb-d87d56594185
 rmem reg0 reg0
-jf reg0 >while_f73a5280-26a0-496e-9bbc-b4c79bbc1759_end
-rmem reg0 >var_457635aa-b72a-4faa-a274-65f5a244992a
+jf reg0 >while_b3011dfa-5b17-4767-b5c8-addbfbbacf05_end
+rmem reg0 >var_50a08e6e-8cab-4994-aafb-d87d56594185
 add reg0 reg0 1
-wmem >var_457635aa-b72a-4faa-a274-65f5a244992a reg0
-rmem reg0 >var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac
+wmem >var_50a08e6e-8cab-4994-aafb-d87d56594185 reg0
+rmem reg0 >var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc
 add reg0 reg0 1
-wmem >var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac reg0
-jmp >while_f73a5280-26a0-496e-9bbc-b4c79bbc1759_begin
-:while_f73a5280-26a0-496e-9bbc-b4c79bbc1759_end
-rmem reg0 >var_5f0b62a3-ca42-4c41-84fa-09bfb58687ac
+wmem >var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc reg0
+jmp >while_b3011dfa-5b17-4767-b5c8-addbfbbacf05_begin
+:while_b3011dfa-5b17-4767-b5c8-addbfbbacf05_end
+rmem reg0 >var_7a2f27d6-2047-4b98-bd06-4e0fa9de46bc
 ret
 ret
 :str_len_end
 jmp >println_end
 :println
-jmp >var_34ff8263-8f78-478e-bb37-88689b08376a_end
-:var_34ff8263-8f78-478e-bb37-88689b08376a
-:var_34ff8263-8f78-478e-bb37-88689b08376a_end
-wmem >var_34ff8263-8f78-478e-bb37-88689b08376a reg0
-rmem reg0 >var_34ff8263-8f78-478e-bb37-88689b08376a
+jmp >var_560e9e66-f171-46ba-ae7d-acbf95610d04_end
+:var_560e9e66-f171-46ba-ae7d-acbf95610d04
+:var_560e9e66-f171-46ba-ae7d-acbf95610d04_end
+wmem >var_560e9e66-f171-46ba-ae7d-acbf95610d04 reg0
+rmem reg0 >var_560e9e66-f171-46ba-ae7d-acbf95610d04
 call >print
 set reg0 10
 out reg0
@@ -169,132 +195,135 @@ ret
 :println_end
 jmp >print_end
 :print
-jmp >var_c6e7836f-d005-4004-b590-d0eb185dd9c2_end
-:var_c6e7836f-d005-4004-b590-d0eb185dd9c2
-:var_c6e7836f-d005-4004-b590-d0eb185dd9c2_end
-wmem >var_c6e7836f-d005-4004-b590-d0eb185dd9c2 reg0
-:while_5841e5d1-5b94-4733-823c-940735cabee9_begin
-rmem reg0 >var_c6e7836f-d005-4004-b590-d0eb185dd9c2
+jmp >var_1e7f4800-a496-442e-a8ee-06b1b69cba36_end
+:var_1e7f4800-a496-442e-a8ee-06b1b69cba36
+:var_1e7f4800-a496-442e-a8ee-06b1b69cba36_end
+wmem >var_1e7f4800-a496-442e-a8ee-06b1b69cba36 reg0
+:while_7d43af8d-7a3e-4851-8f89-fcf0dbedb171_begin
+rmem reg0 >var_1e7f4800-a496-442e-a8ee-06b1b69cba36
 rmem reg0 reg0
-jf reg0 >while_5841e5d1-5b94-4733-823c-940735cabee9_end
-rmem reg0 >var_c6e7836f-d005-4004-b590-d0eb185dd9c2
+jf reg0 >while_7d43af8d-7a3e-4851-8f89-fcf0dbedb171_end
+rmem reg0 >var_1e7f4800-a496-442e-a8ee-06b1b69cba36
 rmem reg0 reg0
 out reg0
-rmem reg0 >var_c6e7836f-d005-4004-b590-d0eb185dd9c2
+rmem reg0 >var_1e7f4800-a496-442e-a8ee-06b1b69cba36
 add reg0 reg0 1
-wmem >var_c6e7836f-d005-4004-b590-d0eb185dd9c2 reg0
-jmp >while_5841e5d1-5b94-4733-823c-940735cabee9_begin
-:while_5841e5d1-5b94-4733-823c-940735cabee9_end
+wmem >var_1e7f4800-a496-442e-a8ee-06b1b69cba36 reg0
+jmp >while_7d43af8d-7a3e-4851-8f89-fcf0dbedb171_begin
+:while_7d43af8d-7a3e-4851-8f89-fcf0dbedb171_end
 ret
 :print_end
 jmp >print_number_end
 :print_number
-jmp >var_37aba1ad-879c-4bf3-915c-61d9f4b38772_end
-:var_37aba1ad-879c-4bf3-915c-61d9f4b38772
-:var_37aba1ad-879c-4bf3-915c-61d9f4b38772_end
-wmem >var_37aba1ad-879c-4bf3-915c-61d9f4b38772 reg0
-rmem reg0 >var_37aba1ad-879c-4bf3-915c-61d9f4b38772
+jmp >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade_end
+:var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade
+:var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade_end
+wmem >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade reg0
+rmem reg0 >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade
 set reg1 10
 eq reg0 reg0 reg1
-jf reg0 >end_d816b6a9-eacf-464e-b5d6-043adfe84cb2
+jf reg0 >end_3e10428b-7652-41be-be68-c33de74c4986
 set reg0 49
 out reg0
 set reg0 48
 out reg0
 ret
-:end_d816b6a9-eacf-464e-b5d6-043adfe84cb2
-jmp >var_14824f89-4f9a-487b-a5bb-cb9de475500f_end
-:var_14824f89-4f9a-487b-a5bb-cb9de475500f
-:var_14824f89-4f9a-487b-a5bb-cb9de475500f_end
-jmp >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9_end
-:var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9
-:var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9_end
+:end_3e10428b-7652-41be-be68-c33de74c4986
+jmp >var_ff0b9816-438a-43cf-81ec-22f939d31332_end
+:var_ff0b9816-438a-43cf-81ec-22f939d31332
+:var_ff0b9816-438a-43cf-81ec-22f939d31332_end
+jmp >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a_end
+:var_eb328bd2-11ad-41b9-99f3-929b69a90b5a
+:var_eb328bd2-11ad-41b9-99f3-929b69a90b5a_end
 set reg0 0
-wmem >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9 reg0
-:while_6f965cbb-a953-4af9-9d1a-e2ecc4b683a6_begin
-rmem reg0 >var_37aba1ad-879c-4bf3-915c-61d9f4b38772
+wmem >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a reg0
+:while_0a126d5b-f5fe-44c4-bda2-a09d324b34fb_begin
+rmem reg0 >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade
 set reg1 10
 gt reg0 reg0 reg1
-jf reg0 >while_6f965cbb-a953-4af9-9d1a-e2ecc4b683a6_end
-rmem reg0 >var_37aba1ad-879c-4bf3-915c-61d9f4b38772
+jf reg0 >while_0a126d5b-f5fe-44c4-bda2-a09d324b34fb_end
+rmem reg0 >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade
 set reg1 10
 mod reg0 reg0 reg1
-wmem >var_14824f89-4f9a-487b-a5bb-cb9de475500f reg0
-rmem reg0 >var_14824f89-4f9a-487b-a5bb-cb9de475500f
-rmem reg0 >var_14824f89-4f9a-487b-a5bb-cb9de475500f
+wmem >var_ff0b9816-438a-43cf-81ec-22f939d31332 reg0
+rmem reg0 >var_ff0b9816-438a-43cf-81ec-22f939d31332
+rmem reg0 >var_ff0b9816-438a-43cf-81ec-22f939d31332
 push reg0
-rmem reg0 >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9
+rmem reg0 >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a
 add reg0 reg0 1
-wmem >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9 reg0
-rmem reg0 >var_37aba1ad-879c-4bf3-915c-61d9f4b38772
+wmem >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a reg0
+rmem reg0 >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade
 set reg1 10
 call >divide
-wmem >var_37aba1ad-879c-4bf3-915c-61d9f4b38772 reg0
-jmp >while_6f965cbb-a953-4af9-9d1a-e2ecc4b683a6_begin
-:while_6f965cbb-a953-4af9-9d1a-e2ecc4b683a6_end
-rmem reg0 >var_37aba1ad-879c-4bf3-915c-61d9f4b38772
+wmem >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade reg0
+jmp >while_0a126d5b-f5fe-44c4-bda2-a09d324b34fb_begin
+:while_0a126d5b-f5fe-44c4-bda2-a09d324b34fb_end
+rmem reg0 >var_6743e9a9-6d82-4b7e-85b8-4987bdcb9ade
 set reg1 10
 mod reg0 reg0 reg1
-wmem >var_14824f89-4f9a-487b-a5bb-cb9de475500f reg0
-rmem reg0 >var_14824f89-4f9a-487b-a5bb-cb9de475500f
-rmem reg0 >var_14824f89-4f9a-487b-a5bb-cb9de475500f
+wmem >var_ff0b9816-438a-43cf-81ec-22f939d31332 reg0
+rmem reg0 >var_ff0b9816-438a-43cf-81ec-22f939d31332
+rmem reg0 >var_ff0b9816-438a-43cf-81ec-22f939d31332
 push reg0
-rmem reg0 >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9
+rmem reg0 >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a
 add reg0 reg0 1
-wmem >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9 reg0
-jmp >var_44e70b6a-0fcc-4525-8a7f-2463f90cb994_end
-:var_44e70b6a-0fcc-4525-8a7f-2463f90cb994
-:var_44e70b6a-0fcc-4525-8a7f-2463f90cb994_end
+wmem >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a reg0
+jmp >var_f934cb00-3d33-433a-bf0f-4ca399205dcc_end
+:var_f934cb00-3d33-433a-bf0f-4ca399205dcc
+:var_f934cb00-3d33-433a-bf0f-4ca399205dcc_end
 set reg0 0
-wmem >var_44e70b6a-0fcc-4525-8a7f-2463f90cb994 reg0
-:while_59b80864-0b41-490d-b3ac-7e315ec3cf21_begin
-rmem reg0 >var_44e70b6a-0fcc-4525-8a7f-2463f90cb994
-rmem reg1 >var_7c217e3a-d17b-4824-b9bd-38a3dbb2f4d9
+wmem >var_f934cb00-3d33-433a-bf0f-4ca399205dcc reg0
+:while_9d07b0d9-d899-44cb-8e4a-8e8b0e7a0bf6_begin
+rmem reg0 >var_f934cb00-3d33-433a-bf0f-4ca399205dcc
+rmem reg1 >var_eb328bd2-11ad-41b9-99f3-929b69a90b5a
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while_59b80864-0b41-490d-b3ac-7e315ec3cf21_end
-rmem reg0 >var_44e70b6a-0fcc-4525-8a7f-2463f90cb994
+jf reg0 >while_9d07b0d9-d899-44cb-8e4a-8e8b0e7a0bf6_end
+rmem reg0 >var_f934cb00-3d33-433a-bf0f-4ca399205dcc
 set reg1 1
 add reg0 reg0 reg1
-wmem >var_44e70b6a-0fcc-4525-8a7f-2463f90cb994 reg0
+wmem >var_f934cb00-3d33-433a-bf0f-4ca399205dcc reg0
 pop reg0
 set reg1 48
 add reg0 reg0 reg1
 out reg0
-jmp >while_59b80864-0b41-490d-b3ac-7e315ec3cf21_begin
-:while_59b80864-0b41-490d-b3ac-7e315ec3cf21_end
+jmp >while_9d07b0d9-d899-44cb-8e4a-8e8b0e7a0bf6_begin
+:while_9d07b0d9-d899-44cb-8e4a-8e8b0e7a0bf6_end
 ret
 :print_number_end
 jmp >dump_mem_end
 :dump_mem
-jmp >var_527e4c5a-e216-4388-a261-542b9f561335_end
-:var_527e4c5a-e216-4388-a261-542b9f561335
-:var_527e4c5a-e216-4388-a261-542b9f561335_end
+jmp >var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99_end
+:var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99
+:var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99_end
 set reg0 0
-wmem >var_527e4c5a-e216-4388-a261-542b9f561335 reg0
-:while_442bbc28-d198-4831-8adc-a5e7c0aea6b3_begin
-rmem reg0 >var_527e4c5a-e216-4388-a261-542b9f561335
+wmem >var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99 reg0
+:while_4eb54ccf-3180-44af-bcb2-0cbc09c1016c_begin
+rmem reg0 >var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99
 rmem reg0 reg0
-jf reg0 >while_442bbc28-d198-4831-8adc-a5e7c0aea6b3_end
-rmem reg0 >var_527e4c5a-e216-4388-a261-542b9f561335
+jf reg0 >while_4eb54ccf-3180-44af-bcb2-0cbc09c1016c_end
+rmem reg0 >var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99
 add reg0 reg0 1
-wmem >var_527e4c5a-e216-4388-a261-542b9f561335 reg0
-rmem reg0 >var_527e4c5a-e216-4388-a261-542b9f561335
+wmem >var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99 reg0
+rmem reg0 >var_064d5c54-8f1f-4ce4-9412-4c90f7e65f99
 rmem reg0 reg0
 call >print_number
 set reg0 10
 out reg0
-jmp >while_442bbc28-d198-4831-8adc-a5e7c0aea6b3_begin
-:while_442bbc28-d198-4831-8adc-a5e7c0aea6b3_end
+jmp >while_4eb54ccf-3180-44af-bcb2-0cbc09c1016c_begin
+:while_4eb54ccf-3180-44af-bcb2-0cbc09c1016c_end
 ret
 :dump_mem_end
 call >do_stuff
 jmp >do_stuff_end
 :do_stuff
+jmp >var_c3ce7b23-f7c3-4690-988d-d3046e6fbce5_end
+:var_c3ce7b23-f7c3-4690-988d-d3046e6fbce5
+:var_c3ce7b23-f7c3-4690-988d-d3046e6fbce5_end
 call >input
-call >print
+wmem >var_c3ce7b23-f7c3-4690-988d-d3046e6fbce5 reg0
 ret
 :do_stuff_end
 

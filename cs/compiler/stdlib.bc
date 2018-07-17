@@ -10,18 +10,36 @@ function input() {
   }
   wmem(data_index, 0);
   var alloc_ptr = alloc();
-  mem_cp(alloc_ptr, 16384, str_len(16384));
-  return alloc_ptr;
+  print_number(alloc_ptr);
+  mem_cp(16384, alloc_ptr, str_len(16384));
+  out(10);
+  print(alloc_ptr);
+  out(10);
+  //return alloc_ptr;
 }
 
 function alloc() {
-  var data_index = ~32768;
-  if (data_index < 2000) {
-    data_index = 10000;
+  var data_index = 0;
+  var num_null = 0;
+  while(num_null <= 6) {
+    var is_null = ~data_index;
+    if (!is_null) {
+      ++num_null;
+    }
+    if (is_null) {
+      num_null = 0;
+    }
+    ++data_index;
   }
-  data_index = data_index + 256;
-  wmem(32768, data_index);
+  --data_index;
   return data_index;
+  //var data_index = ~32768;
+  //if (data_index < 2000) {
+  //  data_index = 10000;
+  //}
+  //data_index = data_index + 256;
+  //wmem(32768, data_index);
+  //return data_index;
 }
 
 function mem_cp(var s_ptr, var d_ptr, var len) {

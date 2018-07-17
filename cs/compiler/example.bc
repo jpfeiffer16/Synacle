@@ -3,7 +3,8 @@
 do_stuff();
 
 function do_stuff() {
-  print(input());
+  var input = input();
+  //print(input);
 }
 
 
