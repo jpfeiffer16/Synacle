@@ -377,7 +377,7 @@ namespace compiler
             } else {
               lines.Add($"wmem >var_{uuid} &{firstLetter}");
             }
-            lines.Add($"set reg0 >var_{uuid}");
+            lines.Add($"set reg{ctx.RegisterLevel} >var_{uuid}");
           }
         }
       }

@@ -1,12 +1,20 @@
 #include "stdlib.bc"
 
+//var a = "hi";
+//var b = "i am joe";
+//do_stuff(a, b);
+//
+//function do_stuff(var a, var b) {
+//  println(a);
+//  println(b);
+//}
+
 do_stuff();
 
 function do_stuff() {
   var input = input();
-  //print(input);
+  print(input);
 }
-
 
 //var length;
 //length = str_len("Hello World!");

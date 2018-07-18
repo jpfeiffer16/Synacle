@@ -10,12 +10,13 @@ function input() {
   }
   wmem(data_index, 0);
   var alloc_ptr = alloc();
-  print_number(alloc_ptr);
-  mem_cp(16384, alloc_ptr, str_len(16384));
-  out(10);
-  print(alloc_ptr);
-  out(10);
-  //return alloc_ptr;
+  //print_number(alloc_ptr);
+  //print_number(str_len(16384));
+  //mem_cp(16384, alloc_ptr, str_len(16384));
+  //out(10);
+  //print(alloc_ptr);
+  //out(10);
+  return alloc_ptr;
 }
 
 function alloc() {
