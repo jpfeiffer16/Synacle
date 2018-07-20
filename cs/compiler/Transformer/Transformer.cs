@@ -349,7 +349,7 @@ namespace compiler
         if (nodeType == typeof(Deref)) {
           var adofNode = node as Deref;
           lines.AddRange(TransformAst(new List<AstNode> { adofNode.Parameter }, ctx));
-          lines.Add($"rmem reg0 reg0");
+          lines.Add($"rmem reg{ctx.RegisterLevel} reg{ctx.RegisterLevel}");
         }
 
         if (nodeType == typeof(StringLiteral)) {
@@ -379,6 +379,10 @@ namespace compiler
             }
             lines.Add($"set reg{ctx.RegisterLevel} >var_{uuid}");
           }
+        }
+
+        if (nodeType == typeof(Breakpoint)) {
+          lines.Add("breakpoint");
         }
       }
       return lines;

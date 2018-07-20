@@ -12,8 +12,8 @@
 do_stuff();
 
 function do_stuff() {
-  var input = input();
-  print(input);
+  print(str_cat("Hello", " World!"));
+  breakpoint;
 }
 
 //var length;

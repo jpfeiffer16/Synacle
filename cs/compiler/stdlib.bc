@@ -1,3 +1,20 @@
+function str_cat(var str_a, var str_b) {
+  var a_len = str_len(str_a);
+  var b_len = str_len(str_b);
+  print_number(a_len);
+  out(10);
+  print_number(b_len);
+  out(10);
+  var alloc_ptr = alloc(a_len + b_len);
+  breakpoint;
+  mem_cp(str_a, alloc_ptr, a_len);
+
+  breakpoint;
+  mem_cp(str_b, alloc_ptr + a_len, b_len + 1);
+  //print_number(alloc_ptr);
+  return alloc_ptr;
+}
+
 function input() {
   var data_index = 16384;
   var in_char = in();
@@ -10,12 +27,8 @@ function input() {
   }
   wmem(data_index, 0);
   var alloc_ptr = alloc();
-  //print_number(alloc_ptr);
-  //print_number(str_len(16384));
-  //mem_cp(16384, alloc_ptr, str_len(16384));
-  //out(10);
-  //print(alloc_ptr);
-  //out(10);
+  var length = str_len(16384);
+  mem_cp(16384, alloc_ptr, length);
   return alloc_ptr;
 }
 
@@ -34,20 +47,25 @@ function alloc() {
   }
   --data_index;
   return data_index;
-  //var data_index = ~32768;
-  //if (data_index < 2000) {
-  //  data_index = 10000;
-  //}
-  //data_index = data_index + 256;
-  //wmem(32768, data_index);
-  //return data_index;
 }
 
 function mem_cp(var s_ptr, var d_ptr, var len) {
   var current_byte = 0;
+  //print_number(s_ptr);
+  //out(10);
+  //print_number(d_ptr);
+  //out(10);
+  //print_number(len);
+  //out(10);
   while (current_byte <= len) {
+    //print("Looping");
     var byte_to_write_ptr = s_ptr + current_byte;
-    wmem(d_ptr + current_byte, ~byte_to_write_ptr);
+    var dest_ptr = d_ptr + current_byte;
+    wmem(dest_ptr, ~byte_to_write_ptr);
+    //out(10);
+    //print_number(d_ptr + current_byte);
+    //out(10);
+    //print_number(~byte_to_write_ptr);
     ++current_byte;
   }
 }

@@ -209,6 +209,14 @@ module.exports = function(VMem) {
       action: function(memory) {
         //NOOP
       }
+    },
+    //Custom instructions
+    22: {
+      paramaterCount: 0,
+      instruction: 'breakpoint',
+      action: function(memory) {
+
+      }
     }
   };
 };

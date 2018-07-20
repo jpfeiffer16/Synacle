@@ -263,6 +263,10 @@ namespace compiler {
           );
         }
 
+        if (token.Type == SyntaxTokenTypes.Breakpoint) {
+          node = new Breakpoint();
+        }
+
         nodes.Add(node);
       }
       return nodes.Where(nd => nd != null).ToList();

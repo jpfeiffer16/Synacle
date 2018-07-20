@@ -33,7 +33,8 @@ namespace compiler
       Comma,
       AddressOf,
       Deref,
-      Quote
+      Quote,
+      Breakpoint
   }
 
     public static class Grammar {
@@ -162,6 +163,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "\"",
             Type = SyntaxTokenTypes.Quote
+          },
+          new SyntaxToken() {
+            Token = "breakpoint",
+            Type = SyntaxTokenTypes.Breakpoint
           }
         };
     } 
