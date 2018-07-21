@@ -7,9 +7,9 @@
 -allow whitespace in string literals
 add some escape chars such as \n
 more advanced parsing of parens into one node. eg: !(i + 1)
-some kind of runtime allaocation system. especially for strings.
+-some kind of runtime allaocation system. especially for strings.
 nested function calls aren't working correctly.
-there is an issue with printing the number 101
+there is an issue with printing the number 101 also 1023
 there is a stack empty bug happending on the c# vm. Program:
     var i;
     i = 10;

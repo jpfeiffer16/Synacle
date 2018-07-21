@@ -1,19 +1,10 @@
 #include "stdlib.bc"
 
-//var a = "hi";
-//var b = "i am joe";
-//do_stuff(a, b);
-//
-//function do_stuff(var a, var b) {
-//  println(a);
-//  println(b);
-//}
-
 do_stuff();
 
 function do_stuff() {
-  print(str_cat("Hello", " World!"));
-  breakpoint;
+  var a = input();
+  println(str_cat("Hi, ", a));
 }
 
 //var length;

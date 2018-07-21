@@ -37,8 +37,9 @@ function Debugger(memory, interpreter) {
         memory.registers[parseInt(inputParts[1])] = parseInt(inputParts[2]);
         break;
       case 'mem':
-        var arg = parseInt(inputParts[1]);
-        console.log(memory.heap.slice(arg, arg + 5));
+        var address = parseInt(inputParts[1]);
+        var len = inputParts.length > 1 ? parseInt(inputParts) : 5;
+        console.log(memory.heap.slice(address, address + len));
         break;
       case 'step':
         interpreter.step();

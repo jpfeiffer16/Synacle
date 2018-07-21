@@ -1,17 +1,13 @@
 function str_cat(var str_a, var str_b) {
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
-  print_number(a_len);
   out(10);
-  print_number(b_len);
   out(10);
-  var alloc_ptr = alloc(a_len + b_len);
-  breakpoint;
+  var alloc_ptr = alloc();
   mem_cp(str_a, alloc_ptr, a_len);
-
-  breakpoint;
-  mem_cp(str_b, alloc_ptr + a_len, b_len + 1);
-  //print_number(alloc_ptr);
+  var end_address = alloc_ptr + a_len;
+  ++b_len;
+  mem_cp(str_b, end_address, b_len);
   return alloc_ptr;
 }
 
