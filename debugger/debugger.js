@@ -38,8 +38,12 @@ function Debugger(memory, interpreter) {
         break;
       case 'mem':
         var address = parseInt(inputParts[1]);
-        var len = inputParts.length > 1 ? parseInt(inputParts) : 5;
+        var len = inputParts.length > 2 ? parseInt(inputParts[2]) : 5;
+        console.log(len);
         console.log(memory.heap.slice(address, address + len));
+        break;
+      case 'stack':
+        console.log(memory.stack);
         break;
       case 'step':
         interpreter.step();

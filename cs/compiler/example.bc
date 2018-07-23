@@ -3,8 +3,9 @@
 do_stuff();
 
 function do_stuff() {
-  var a = input();
-  println(str_cat("Hi, ", a));
+  //var a = input();
+  //println(str_cat("Hi, ", a));
+  int(input());
 }
 
 //var length;

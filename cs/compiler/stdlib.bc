@@ -1,3 +1,69 @@
+function int(var str_ptr) {
+  var flipped = flip_str(str_ptr);
+  var len = str_len(flipped);
+  //Get rid of the null byte
+  --len;
+  var index = 0;
+  var num = 0;
+  while (index <= len) {
+    var char = str_ptr + index;
+    char = ~char;
+    var is_greater_than = char > 47;
+    var is_less_than = char < 58;
+    var is_correct = is_greater_than && is_greater_than;
+    print_number(char);
+    out(10);
+    if (is_greater_than && is_greater_than) {
+      var this_digit = char - 48;
+      //print_number(this_digit);
+      //out(10);
+      //print_number(index);
+      //out(10);
+      var digit_index = 0;
+      while (digit_index < index) {
+        //print("looping for ");
+        //print_number(this_digit);
+        //out(10);
+        this_digit = this_digit * 10;
+        ++digit_index;
+      }
+      //print_number(this_digit);
+      //out(10);
+      num = num + this_digit;
+    }
+    ++index;
+  }
+
+  print_number(num);
+  return num;
+}
+
+function flip_str(var str_ptr) {
+  var alloc_ptr = alloc();
+  var len = str_len(str_ptr);
+  //push(0);
+  //var current_byte = str_ptr;
+  var index = 0;
+  while (index < len) {
+    var source_index = str_ptr + index;
+    push(~source_index);
+    ++index;
+  }
+
+  var current_byte = pop();
+  index = 0;
+  while (index < len) {
+    var dest_index = alloc_ptr + index;
+    wmem(dest_index, current_byte);
+
+    ++index;
+    current_byte = pop();
+  }
+  push(current_byte);
+
+  return alloc_ptr;
+}
+
 function str_cat(var str_a, var str_b) {
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
