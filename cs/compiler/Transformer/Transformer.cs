@@ -41,7 +41,7 @@ namespace compiler
 
 
           // this.AddVariable(ctx, vdNode.Identifier, lines);
-          var guid = Guid.NewGuid();
+          var guid = this.GetUID();
           lines.Add($"jmp >var_{guid.ToString()}_end");
           lines.Add($":var_{guid.ToString()}");
           lines.Add($":var_{guid.ToString()}_end");
@@ -256,7 +256,7 @@ namespace compiler
         if (nodeType == typeof(If)) {
           var ifNode = node as If;
 
-          var uuid = Guid.NewGuid();
+          var uuid = this.GetUID();
 
           lines.AddRange(TransformAst(ifNode.Condition, ctx));
           lines.Add($"jf reg0 >end_{uuid}");
@@ -267,7 +267,7 @@ namespace compiler
         if (nodeType == typeof(While))
         {
           var whNode = node as While;
-          var uuid = Guid.NewGuid();
+          var uuid = this.GetUID();
 
           //Begin
           lines.Add($":while_{uuid}_begin");
@@ -357,7 +357,7 @@ namespace compiler
           if (!string.IsNullOrEmpty(strNode.Value)) {
             var firstLetter = strNode.Value.Substring(0, 1);
             var value = strNode.Value.Substring(1);
-            var uuid = Guid.NewGuid();
+            var uuid = this.GetUID();
             lines.Add($"jmp >var_{uuid}_end");
             lines.Add($":var_{uuid}");
             foreach (var ch in value) {
@@ -388,22 +388,9 @@ namespace compiler
       return lines;
     }
 
-    // private VariableDeclaration AddVariable(
-    //   Context ctx,
-    //   string variableName,
-    //   List<string> lines
-    // ) {
-    //   var guid = Guid.NewGuid();
-    //   lines.Add($"jmp >var_{guid.ToString()}_end");
-    //   lines.Add($":var_{guid.ToString()}");
-    //   lines.Add($":var_{guid.ToString()}_end");
-
-    //   ctx.Variables.Add(new Variable()
-    //   {
-    //     Name = vdNode.Identifier,
-    //     MemoryAddress = $"var_{guid.ToString()}"
-    //   });
-    // }
+    private string GetUID() {
+      return Guid.NewGuid().ToString().Substring(24);
+    }
 
     private List<string> EnsureDivisionSupport(Context ctx, List<string> lines)
     {

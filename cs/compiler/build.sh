@@ -1,4 +1,5 @@
-dotnet run
+dotnet bin/Debug/netcoreapp2.0/compiler.dll
+#dotnet run
 cd ../../
 node assembler/asm.js cs/compiler/example.asm
 node vm -d -b cs/compiler/example.bin

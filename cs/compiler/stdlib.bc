@@ -6,17 +6,17 @@ function int(var str_ptr) {
   var index = 0;
   var num = 0;
   while (index <= len) {
-    var char = str_ptr + index;
+    var char = flipped + index;
     char = ~char;
     var is_greater_than = char > 47;
     var is_less_than = char < 58;
-    var is_correct = is_greater_than && is_greater_than;
-    print_number(char);
-    out(10);
-    if (is_greater_than && is_greater_than) {
+    //var is_correct = is_greater_than && is_less_than;
+    //print_number(char);
+    //out(10);
+    if (is_greater_than && is_less_than) {
       var this_digit = char - 48;
-      //print_number(this_digit);
-      //out(10);
+      print_number(this_digit);
+      out(10);
       //print_number(index);
       //out(10);
       var digit_index = 0;
@@ -34,7 +34,7 @@ function int(var str_ptr) {
     ++index;
   }
 
-  print_number(num);
+  //print_number(num);
   return num;
 }
 
