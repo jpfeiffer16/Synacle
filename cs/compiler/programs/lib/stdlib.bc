@@ -20,7 +20,8 @@ function int(var str_ptr) {
       //print_number(index);
       //out(10);
       var digit_index = 0;
-      while (digit_index < index) {
+      var this_index = index - 1;
+      while (digit_index < this_index) {
         //print("looping for ");
         //print_number(this_digit);
         //out(10);
@@ -34,7 +35,7 @@ function int(var str_ptr) {
     ++index;
   }
 
-  //print_number(num);
+  print_number(num);
   return num;
 }
 

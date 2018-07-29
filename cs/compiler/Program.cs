@@ -10,10 +10,20 @@ namespace compiler
         // out
         static void Main(string[] args)
         {
+            // Console.WriteLine(string.Join(",", args));
+            // Environment.Exit(0);
+
+            var filePath = args.Length > 0 ? args[0] : "./programs/example.bc";
+
+            var fileInfo = new FileInfo(filePath);
+            var workingDirectory = fileInfo.Directory.FullName;
+            
             //Get code
-            var code = File.ReadAllText("./example.bc");
+            var code = File.ReadAllText(
+                filePath
+            );
             //Preprocess
-            var preprocessor = new Preprocessor(code);
+            var preprocessor = new Preprocessor(code, workingDirectory);
             code = preprocessor.Preprocess();
             //Lex
             var lexer = new Lexer(code);
@@ -26,7 +36,7 @@ namespace compiler
             var asmLines = transformer.Transform();
 
             //Write file
-            File.WriteAllLines("./example.asm", asmLines);
+            File.WriteAllLines($"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}", asmLines);
         }
     }
 }
