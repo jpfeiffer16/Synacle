@@ -21,7 +21,7 @@ The language used in the compiler toolchain is a custom language developed just 
 Hello World
 
 ```javascript
-#include "stdlib.bc"
+#include "lib/stdlib.bc"
 
 function main() {
   println("Hello, World!");

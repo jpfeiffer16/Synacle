@@ -1,11 +1,9 @@
 #include "lib/stdlib.bc"
 
-print("Hello, World! 2!");
+do_stuff();
 
-//do_stuff();
-//
-//function do_stuff() {
-//  //var a = input();
-//  //println(str_cat("Hi, ", a));
-//  int(input());
-//}
+function do_stuff() {
+  //var a = input();
+  //println(str_cat("Hi, ", a));
+  int(input());
+}

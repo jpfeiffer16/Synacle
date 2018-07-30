@@ -10,9 +10,6 @@ namespace compiler
         // out
         static void Main(string[] args)
         {
-            // Console.WriteLine(string.Join(",", args));
-            // Environment.Exit(0);
-
             var filePath = args.Length > 0 ? args[0] : "./programs/example.bc";
 
             var fileInfo = new FileInfo(filePath);
