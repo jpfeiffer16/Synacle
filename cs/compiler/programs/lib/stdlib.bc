@@ -1,3 +1,144 @@
+function alloc() {
+  var data_index = 0;
+  var num_null = 0;
+  while(num_null <= 6) {
+    var is_null = ~data_index;
+    if (!is_null) {
+      ++num_null;
+    }
+    if (is_null) {
+      num_null = 0;
+    }
+    ++data_index;
+  }
+  --data_index;
+  return data_index;
+}
+
+function mem_cp(var s_ptr, var d_ptr, var len) {
+  var current_byte = 0;
+  while (current_byte <= len) {
+    var byte_to_write_ptr = s_ptr + current_byte;
+    var dest_ptr = d_ptr + current_byte;
+    wmem(dest_ptr, ~byte_to_write_ptr);;
+    ++current_byte;
+  }
+}
+
+function str_len(var str_ptr) {
+  var length = 0;
+  while(~str_ptr) {
+    ++str_ptr;
+    ++length;
+  }
+  return length;
+}
+
+function str_cat(var str_a, var str_b) {
+  var a_len = str_len(str_a);
+  var b_len = str_len(str_b);
+  out(10);
+  out(10);
+  var alloc_ptr = alloc();
+  mem_cp(str_a, alloc_ptr, a_len);
+  var end_address = alloc_ptr + a_len;
+  ++b_len;
+  mem_cp(str_b, end_address, b_len);
+  return alloc_ptr;
+}
+
+function flip_str(var str_ptr) {
+  var alloc_ptr = alloc();
+  var len = str_len(str_ptr);
+  //push(0);
+  //var current_byte = str_ptr;
+  var index = 0;
+  while (index < len) {
+    var source_index = str_ptr + index;
+    push(~source_index);
+    ++index;
+  }
+
+  var current_byte = pop();
+  index = 0;
+  while (index < len) {
+    var dest_index = alloc_ptr + index;
+    wmem(dest_index, current_byte);
+
+    ++index;
+    current_byte = pop();
+  }
+  push(current_byte);
+
+  return alloc_ptr;
+}
+
+function input() {
+  var data_index = 16384;
+  var in_char = in();
+  var is_newline = in_char == 10;
+  while (!is_newline && in_char) {
+    wmem(data_index, in_char);
+    ++data_index;
+    in_char = in();
+    is_newline = in_char == 10;
+  }
+  wmem(data_index, 0);
+  var alloc_ptr = alloc();
+  var length = str_len(16384);
+  mem_cp(16384, alloc_ptr, length);
+  return alloc_ptr;
+}
+
+function print(var str_ptr) {
+  while (~str_ptr) {
+    out(~str_ptr);
+    ++str_ptr;
+  }
+}
+
+function println(var str_ptr) {
+  print(str_ptr);
+  out(10);
+}
+
+function print_number(var num) {
+  if (num == 10) {
+    out(49);
+    out(48);
+    return;
+  }
+  var charNum;
+  var length = 0;
+  while (num > 10) {
+    charNum = num % 10;
+    push(charNum);
+    ++length;
+    num = num / 10;
+  }
+  charNum = num % 10;
+  push(charNum);
+  ++length;
+
+  //Clean up the stack and output number
+  var stackIndex = 0;
+
+  while(stackIndex < length) {
+    stackIndex = stackIndex + 1;
+    out(pop() + 48);
+  }
+}
+
+function dump_mem() {
+  var i = 0;
+
+  while (~i) {
+    ++i;
+    print_number(~i);
+    out(10);
+  }
+}
+
 function int(var str_ptr) {
   var flipped = flip_str(str_ptr);
   var len = str_len(flipped);
@@ -37,156 +178,4 @@ function int(var str_ptr) {
 
   print_number(num);
   return num;
-}
-
-function flip_str(var str_ptr) {
-  var alloc_ptr = alloc();
-  var len = str_len(str_ptr);
-  //push(0);
-  //var current_byte = str_ptr;
-  var index = 0;
-  while (index < len) {
-    var source_index = str_ptr + index;
-    push(~source_index);
-    ++index;
-  }
-
-  var current_byte = pop();
-  index = 0;
-  while (index < len) {
-    var dest_index = alloc_ptr + index;
-    wmem(dest_index, current_byte);
-
-    ++index;
-    current_byte = pop();
-  }
-  push(current_byte);
-
-  return alloc_ptr;
-}
-
-function str_cat(var str_a, var str_b) {
-  var a_len = str_len(str_a);
-  var b_len = str_len(str_b);
-  out(10);
-  out(10);
-  var alloc_ptr = alloc();
-  mem_cp(str_a, alloc_ptr, a_len);
-  var end_address = alloc_ptr + a_len;
-  ++b_len;
-  mem_cp(str_b, end_address, b_len);
-  return alloc_ptr;
-}
-
-function input() {
-  var data_index = 16384;
-  var in_char = in();
-  var is_newline = in_char == 10;
-  while (!is_newline && in_char) {
-    wmem(data_index, in_char);
-    ++data_index;
-    in_char = in();
-    is_newline = in_char == 10;
-  }
-  wmem(data_index, 0);
-  var alloc_ptr = alloc();
-  var length = str_len(16384);
-  mem_cp(16384, alloc_ptr, length);
-  return alloc_ptr;
-}
-
-function alloc() {
-  var data_index = 0;
-  var num_null = 0;
-  while(num_null <= 6) {
-    var is_null = ~data_index;
-    if (!is_null) {
-      ++num_null;
-    }
-    if (is_null) {
-      num_null = 0;
-    }
-    ++data_index;
-  }
-  --data_index;
-  return data_index;
-}
-
-function mem_cp(var s_ptr, var d_ptr, var len) {
-  var current_byte = 0;
-  //print_number(s_ptr);
-  //out(10);
-  //print_number(d_ptr);
-  //out(10);
-  //print_number(len);
-  //out(10);
-  while (current_byte <= len) {
-    //print("Looping");
-    var byte_to_write_ptr = s_ptr + current_byte;
-    var dest_ptr = d_ptr + current_byte;
-    wmem(dest_ptr, ~byte_to_write_ptr);
-    //out(10);
-    //print_number(d_ptr + current_byte);
-    //out(10);
-    //print_number(~byte_to_write_ptr);
-    ++current_byte;
-  }
-}
-
-function str_len(var str_ptr) {
-  var length = 0;
-  while(~str_ptr) {
-    ++str_ptr;
-    ++length;
-  }
-  return length;
-}
-
-function println(var str_ptr) {
-  print(str_ptr);
-  out(10);
-}
-
-function print(var str_ptr) {
-  while (~str_ptr) {
-    out(~str_ptr);
-    ++str_ptr;
-  }
-}
-
-function print_number(var num) {
-  if (num == 10) {
-    out(49);
-    out(48);
-    return;
-  }
-  var charNum;
-  var length = 0;
-  while (num > 10) {
-    charNum = num % 10;
-    push(charNum);
-    ++length;
-    num = num / 10;
-  }
-  charNum = num % 10;
-  push(charNum);
-  ++length;
-
-  //Clean up the stack and output number
-  var stackIndex = 0;
-
-  while(stackIndex < length) {
-    stackIndex = stackIndex + 1;
-    out(pop() + 48);
-  }
-}
-
-function dump_mem() {
-  var i = 0;
-
-  while (~i) {
-    ++i;
-    print_number(~i);
-    out(10);
-  }
 }

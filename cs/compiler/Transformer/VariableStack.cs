@@ -16,9 +16,7 @@ namespace compiler
       this.Stack.Push(new List<Variable>());
     }
 
-    public void Pop() {
-      this.Stack.Pop();
-    }
+    public void Pop() => this.Stack.Pop();
 
     public void Add(Variable variable) {
       this.Stack.First().Add(variable);

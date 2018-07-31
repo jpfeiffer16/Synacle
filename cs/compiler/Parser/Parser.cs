@@ -28,7 +28,10 @@ namespace compiler {
             var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i));
             i = nextClose;
             
-            node = new FunctionCall(parametersNodes, token.Token);
+            node = new FunctionCall(
+              parametersNodes,
+              ParseTokens(new List<SyntaxToken> { token })[0]
+            );
           }
           else
           {

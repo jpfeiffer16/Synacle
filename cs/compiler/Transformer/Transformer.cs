@@ -55,9 +55,15 @@ namespace compiler
 
         if (nodeType == typeof(FunctionDeclaration)) {
           var fcNode = node as FunctionDeclaration;
-
-          lines.Add($"jmp >{fcNode.Name}_end");
+          var memoryAddress = $"{fcNode.Name}";
+          lines.Add($"jmp >{memoryAddress}_end");
           lines.Add($":{fcNode.Name}");
+          ctx.Variables.Add(
+            new Variable() {
+              Name = fcNode.Name,
+              MemoryAddress = memoryAddress
+            }
+          );
           ctx.Variables.Push();
           lines.AddRange(TransformAst(fcNode.Parameters, ctx));
           for (var index = 0; index < fcNode.Parameters.Count; index++) {
@@ -67,7 +73,8 @@ namespace compiler
           }
           lines.AddRange(TransformAst(fcNode.Expression, ctx));
           lines.Add("ret");
-          lines.Add($":{fcNode.Name}_end");
+          lines.Add($":{memoryAddress}_end");
+          lines.Add($"set reg0 >{fcNode.Name}");
           ctx.Variables.Pop();
         }
 
@@ -292,23 +299,27 @@ namespace compiler
             ctx.RegisterLevel = originalRegisterLevel;
 
           //Handle special cases
-          if (fcNode.Name == "out")
+          if ((fcNode.Name as Identifier)?.Name == "out")
           {
             lines.Add("out reg0");
-          } else if (fcNode.Name == "in") {
+          } else if ((fcNode.Name as Identifier)?.Name == "in") {
             lines.Add("in reg0");
-          } else if (fcNode.Name == "exit") {
+          } else if ((fcNode.Name as Identifier)?.Name == "exit") {
             lines.Add("halt");
-          } else if (fcNode.Name == "push") {
+          } else if ((fcNode.Name as Identifier)?.Name == "push") {
             lines.AddRange(TransformAst(fcNode.Parameters, ctx));
             lines.Add("push reg0");
-          } else if (fcNode.Name == "pop") {
+          } else if ((fcNode.Name as Identifier)?.Name == "pop") {
             lines.Add("pop reg0");
-          } else if (fcNode.Name == "wmem") {
+          } else if ((fcNode.Name as Identifier)?.Name == "wmem") {
             lines.Add($"wmem reg0 reg1");
           } else {
-            
-            lines.Add($"call >{fcNode.Name}");
+            // var variable = ctx.Variables.Get(fcNode.Name);
+            var regLevel = ctx.RegisterLevel;
+            ctx.RegisterLevel = 7;
+            lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
+            lines.Add($"call reg7");
+            ctx.RegisterLevel = regLevel;
           }
         }
 

@@ -1,9 +1,10 @@
 #include "lib/stdlib.bc"
 
-do_stuff();
-
-function do_stuff() {
-  //var a = input();
-  //println(str_cat("Hi, ", a));
-  int(input());
+function do_stuff(var cb) {
+  cb();
+  print("do_stuff");
 }
+
+do_stuff(function test() {
+  print("test");
+});
