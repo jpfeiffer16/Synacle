@@ -1,10 +1,12 @@
-#include "lib/stdlib.bc"
+
 
 function do_stuff(var cb) {
   cb();
-  print("do_stuff");
+  //print("do_stuff");
 }
 
-do_stuff(function test() {
-  print("test");
-});
+function test() {
+  //print("test");
+}
+
+do_stuff(test);

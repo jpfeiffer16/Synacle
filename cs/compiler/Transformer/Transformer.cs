@@ -58,12 +58,6 @@ namespace compiler
           var memoryAddress = $"{fcNode.Name}";
           lines.Add($"jmp >{memoryAddress}_end");
           lines.Add($":{fcNode.Name}");
-          ctx.Variables.Add(
-            new Variable() {
-              Name = fcNode.Name,
-              MemoryAddress = memoryAddress
-            }
-          );
           ctx.Variables.Push();
           lines.AddRange(TransformAst(fcNode.Parameters, ctx));
           for (var index = 0; index < fcNode.Parameters.Count; index++) {
@@ -74,7 +68,22 @@ namespace compiler
           lines.AddRange(TransformAst(fcNode.Expression, ctx));
           lines.Add("ret");
           lines.Add($":{memoryAddress}_end");
-          lines.Add($"set reg0 >{fcNode.Name}");
+          //Manually add variable
+          var vd = new VariableDeclaration(memoryAddress);
+          var va = new VariableAssignment(vd, new Identifier(memoryAddress));
+          lines.AddRange(TransformAst(
+            new List<AstNode> {
+              va
+            },
+            ctx
+          ));
+          // ctx.Variables.Add(
+          //   new Variable() {
+          //     Name = fcNode.Name,
+          //     MemoryAddress = memoryAddress
+          //   }
+          // );
+          // lines.Add($"set reg0 >{fcNode.Name}");
           ctx.Variables.Pop();
         }
 
