@@ -18,13 +18,13 @@ namespace compiler
     {
       var ctx = new Context();
       var lines = TransformAst(this.nodes, ctx);
+      //Manually add a halt so as not to trample over data
+      lines.Add("halt");
       lines = EnsureSubtractSupport(ctx, lines);
       lines = EnsureNotSupport(ctx, lines);
       lines = EnsureDivisionSupport(ctx, lines);
       lines = EnsureAndSupport(ctx, lines);
       lines = EnsureOrSupport(ctx, lines);
-      //Manually add a halt so as not to trample over data
-      lines.Add("halt");
       return lines;
     }
     private List<string> TransformAst(List<AstNode> ast, Context ctx)
@@ -55,9 +55,10 @@ namespace compiler
 
         if (nodeType == typeof(FunctionDeclaration)) {
           var fcNode = node as FunctionDeclaration;
-          var memoryAddress = $"{fcNode.Name}";
+          var name = fcNode.Name ?? $"function_{this.GetUID()}";
+          var memoryAddress = $"{name}";
           lines.Add($"jmp >{memoryAddress}_end");
-          lines.Add($":{fcNode.Name}");
+          lines.Add($":{name}");
           ctx.Variables.Push();
           lines.AddRange(TransformAst(fcNode.Parameters, ctx));
           for (var index = 0; index < fcNode.Parameters.Count; index++) {
@@ -69,21 +70,7 @@ namespace compiler
           lines.Add("ret");
           lines.Add($":{memoryAddress}_end");
           //Manually add variable
-          var vd = new VariableDeclaration(memoryAddress);
-          var va = new VariableAssignment(vd, new Identifier(memoryAddress));
-          lines.AddRange(TransformAst(
-            new List<AstNode> {
-              va
-            },
-            ctx
-          ));
-          // ctx.Variables.Add(
-          //   new Variable() {
-          //     Name = fcNode.Name,
-          //     MemoryAddress = memoryAddress
-          //   }
-          // );
-          // lines.Add($"set reg0 >{fcNode.Name}");
+          lines.Add($"set reg{ctx.RegisterLevel} >{name}");
           ctx.Variables.Pop();
         }
 
@@ -308,27 +295,33 @@ namespace compiler
             ctx.RegisterLevel = originalRegisterLevel;
 
           //Handle special cases
-          if ((fcNode.Name as Identifier)?.Name == "out")
+          if (fcNode.Name == "out")
           {
             lines.Add("out reg0");
-          } else if ((fcNode.Name as Identifier)?.Name == "in") {
+          } else if (fcNode.Name == "in") {
             lines.Add("in reg0");
-          } else if ((fcNode.Name as Identifier)?.Name == "exit") {
+          } else if (fcNode.Name == "exit") {
             lines.Add("halt");
-          } else if ((fcNode.Name as Identifier)?.Name == "push") {
+          } else if (fcNode.Name == "push") {
             lines.AddRange(TransformAst(fcNode.Parameters, ctx));
             lines.Add("push reg0");
-          } else if ((fcNode.Name as Identifier)?.Name == "pop") {
+          } else if (fcNode.Name == "pop") {
             lines.Add("pop reg0");
-          } else if ((fcNode.Name as Identifier)?.Name == "wmem") {
+          } else if (fcNode.Name == "wmem") {
             lines.Add($"wmem reg0 reg1");
           } else {
-            // var variable = ctx.Variables.Get(fcNode.Name);
-            var regLevel = ctx.RegisterLevel;
-            ctx.RegisterLevel = 7;
-            lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
-            lines.Add($"call reg7");
-            ctx.RegisterLevel = regLevel;
+            var variable = ctx.Variables.Get(fcNode.Name);
+            if (variable != null) {
+              var regLevel = ctx.RegisterLevel;
+              // ctx.RegisterLevel = 7;
+              // lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
+              lines.Add($"rmem reg7 >{variable.MemoryAddress}");
+              lines.Add($"call reg7");
+              // ctx.RegisterLevel = regLevel;
+            } else {
+              lines.Add($"call >{fcNode.Name}");
+            }
+            
           }
         }
 

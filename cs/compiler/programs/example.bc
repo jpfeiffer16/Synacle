@@ -1,12 +1,16 @@
+#include "lib/stdlib.bc"
 
-
-function do_stuff(var cb) {
-  cb();
-  //print("do_stuff");
+function main(var pr) {
+  var i = 0;
+  while (i < 100) {
+    pr(i);
+    ++i;
+  }
 }
 
-function test() {
-  //print("test");
-}
+var print_arg  = function(var arg) {
+  print_number(arg);
+  out(10);
+};
 
-do_stuff(test);
+main(print_arg);
