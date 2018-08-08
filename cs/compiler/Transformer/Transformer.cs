@@ -284,6 +284,22 @@ namespace compiler
           lines.Add($":while_{uuid}_end");
         }
 
+        if (nodeType == typeof(For)) {
+          var forNode = node as For;
+          var uuid = this.GetUID();
+
+          lines.Add($":for_{uuid}_begin");
+          lines.AddRange(TransformAst(forNode.Init, ctx));
+          lines.AddRange(TransformAst(forNode.Condition, ctx));
+          lines.Add($"jf reg0 >for_{uuid}_end");
+
+          lines.AddRange(TransformAst(forNode.Expression, ctx));
+          lines.AddRange(TransformAst(forNode.Incrementor, ctx));
+
+          lines.Add($"jmp >for_{uuid}_begin");
+          lines.Add($":for_{uuid}_end");
+        }
+
         if (nodeType == typeof(FunctionCall))
         {
           var fcNode = node as FunctionCall;

@@ -2,39 +2,40 @@ using System.Collections.Generic;
 
 namespace compiler
 {
-    public enum SyntaxTokenType {
-      VariableDeclaration,
-      VariableAssignment,
-      Identifier,
-      SemiColon,
-      LeftParen,
-      RightParen,
-      Addition,
-      Incr,
-      Subtraction,
-      Decr,
-      Multiplication,
-      Division,
-      Mod,
-      If,
-      While,
-      Equal,
-      Not,
-      And,
-      Or,
-      LeftCurly,
-      RightCurly,
-      GreaterThan,
-      GreaterThanOrEqual,
-      LessThan,
-      LessThanOrEqual,
-      FunctionDeclaration,
-      Return,
-      Comma,
-      AddressOf,
-      Deref,
-      Quote,
-      Breakpoint
+  public enum SyntaxTokenType {
+    VariableDeclaration,
+    VariableAssignment,
+    Identifier,
+    SemiColon,
+    LeftParen,
+    RightParen,
+    Addition,
+    Incr,
+    Subtraction,
+    Decr,
+    Multiplication,
+    Division,
+    Mod,
+    If,
+    While,
+    For,
+    Equal,
+    Not,
+    And,
+    Or,
+    LeftCurly,
+    RightCurly,
+    GreaterThan,
+    GreaterThanOrEqual,
+    LessThan,
+    LessThanOrEqual,
+    FunctionDeclaration,
+    Return,
+    Comma,
+    AddressOf,
+    Deref,
+    Quote,
+    Breakpoint
   }
 
     public static class Grammar {
@@ -135,6 +136,10 @@ namespace compiler
           new SyntaxToken() {
             Token = "while",
             Type = SyntaxTokenType.While
+          },
+          new SyntaxToken() {
+            Token = "for",
+            Type = SyntaxTokenType.For
           },
           new SyntaxToken() {
             Token = "{",

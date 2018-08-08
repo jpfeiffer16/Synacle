@@ -1,20 +1,4 @@
-#include "lib/stdlib.bc"
 
-function main(var pr) {
-  //print_number(num);
-  var i = 0;
-  while (i < 100) {
-    pr(i);
-    ++i;
-  }
+for (var test = 0; test < 10; ++test) {
+  out(65);
 }
-
-//var print_arg  = function(var arg) {
-//  print_number(arg);
-//  out(10);
-//};
-
-main(function(var arg) {
-  print_number(arg);
-  out(10);
-});
