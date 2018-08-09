@@ -288,8 +288,8 @@ namespace compiler
           var forNode = node as For;
           var uuid = this.GetUID();
 
-          lines.Add($":for_{uuid}_begin");
           lines.AddRange(TransformAst(forNode.Init, ctx));
+          lines.Add($":for_{uuid}_begin");
           lines.AddRange(TransformAst(forNode.Condition, ctx));
           lines.Add($"jf reg0 >for_{uuid}_end");
 

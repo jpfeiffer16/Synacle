@@ -1,4 +1,7 @@
+#include "lib/stdlib.bc"
 
-for (var test = 0; test < 10; ++test) {
-  out(65);
+
+for (var test = 1; test <= 10; ++test) {
+  print_number(test);
+  out(10);
 }
