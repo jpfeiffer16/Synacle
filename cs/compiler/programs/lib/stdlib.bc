@@ -1,3 +1,23 @@
+function str_equal(var str_a, var str_b) {
+  var a_len = str_len(str_a);
+  var b_len = str_len(str_b);
+  var len_equal = a_len == b_len;
+  if (!len_equal) {
+    return 0;
+  }
+  for (var i = 0; i < a_len; ++i) {
+    var a_ptr = str_a + i;
+    var b_ptr = str_b + i;
+    var a_val = ~a_ptr;
+    var b_val = ~b_ptr;
+    var val_equal = a_val == b_val;
+    if (!val_equal) {
+      return 0;
+    }
+  }
+  return 1;
+}
+
 function alloc() {
   var data_index = 0;
   var num_null = 0;

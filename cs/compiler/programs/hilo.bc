@@ -1,0 +1,7 @@
+#include "lib/stdlib.bc"
+
+function loop() {
+  print("Enter a guess: ");
+  //TODO: We can't convert strings to ints yet
+  var guess = in();
+}
