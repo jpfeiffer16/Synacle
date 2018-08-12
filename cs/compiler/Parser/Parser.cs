@@ -25,6 +25,7 @@ namespace compiler {
 
             i++;
             var nextClose = GetExpression(SyntaxTokenType.LeftParen, SyntaxTokenType.RightParen, i, tokens);
+            ++i;
             var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i));
             i = nextClose;
             
@@ -62,6 +63,7 @@ namespace compiler {
             i,
             tokens
           );
+          ++i;
           var parameters = ParseTokens(
             tokens.GetRange(i, nextClosingParen - i)
           );
@@ -102,7 +104,9 @@ namespace compiler {
         }
 
         if (token.Type == SyntaxTokenType.Not) {
-          var next = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          var nextTerminator = this.GetNextTerminator(i, tokens);
+          var next = ParseTokens(tokens.GetRange(++i, nextTerminator - i))[0];
+          i = nextTerminator;
           node = new Not(next);
         }
 
@@ -199,6 +203,7 @@ namespace compiler {
             i,
             tokens
           );
+          ++i;
           var condition = tokens.GetRange(i, conditionEnd - i);
           i = conditionEnd;
           i++;
@@ -222,6 +227,7 @@ namespace compiler {
             i,
             tokens
           );
+          ++i;
           var condition = tokens.GetRange(i, conditionEnd - i);
           i = conditionEnd;
           i++;
@@ -296,7 +302,14 @@ namespace compiler {
         }
 
         if (token.Type == SyntaxTokenType.Deref) {
-          var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          var nextTerminator = this.GetNextTerminator(i, tokens);
+          ++i;
+
+          // var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+          var nextNode = ParseTokens(
+            tokens.GetRange(i, nextTerminator - i)
+          )[0];
+          i = nextTerminator;
           node = new Deref(nextNode);
         }
 
@@ -306,11 +319,25 @@ namespace compiler {
           while (tokens[i].Type != SyntaxTokenType.Quote) {
             i++;
           }
-          // i++;
-          // i--;
           node = new StringLiteral(
             string.Join(string.Empty, tokens.GetRange(originalI, i - originalI).Select(tkn => tkn.Token))
           );
+        }
+
+        if (token.Type == SyntaxTokenType.LeftParen) {
+          var expressionEnd = this.GetExpression(
+            SyntaxTokenType.LeftParen,
+            SyntaxTokenType.RightParen,
+            i,
+            tokens
+          );
+
+          ++i;
+          node = new ParenGroup(
+            ParseTokens(tokens.GetRange(i, expressionEnd - i))
+          );
+          
+          i = expressionEnd + 1;
         }
 
         if (token.Type == SyntaxTokenType.Breakpoint) {

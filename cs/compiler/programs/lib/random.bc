@@ -5,3 +5,7 @@ function rand() {
   seed = seed % 1202;
   return seed;
 }
+
+function rand_init_seed(var rand_seed) {
+  seed = rand_seed;
+}

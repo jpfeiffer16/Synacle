@@ -64,7 +64,7 @@ namespace compiler {
         tokens.Add(new SyntaxToken(currentToken));
       }
 
-      tokens = AggriegateLikeTokens(tokens);
+      tokens = AggregateLikeTokens(tokens);
       return tokens;
     }
 
@@ -76,7 +76,7 @@ namespace compiler {
       return new Regex(@"\w").Match(ch).Success;
     }
 
-    private List<SyntaxToken> AggriegateLikeTokens(List<SyntaxToken> tokens) {
+    private List<SyntaxToken> AggregateLikeTokens(List<SyntaxToken> tokens) {
       var multiCharTokens = Grammar.Tokens.Where(tkn => tkn.Token.Length > 1);
 
       for (var i = 0; i < tokens.Count; i++) {

@@ -1,0 +1,21 @@
+#include "lib/stdlib.bc";
+
+function main() {
+  print("Enter your name or 'exit' to stop: ");
+  var name = input();
+  if (str_equal(name, "exit")) {
+    return;
+  }
+  var first_letter = alloc();
+  wmem(first_letter, ~name);
+  ++name;
+  println(
+    str_cat(
+      str_cat(name, first_letter),
+      "ay"
+    )
+  );
+  main();
+}
+
+main();

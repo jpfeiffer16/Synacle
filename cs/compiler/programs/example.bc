@@ -1,11 +1,7 @@
 #include "lib/stdlib.bc"
-#include "lib/random.bc"
 
-function main() {
-  for (var i = 0; i < 10; ++i) {
-    print_number(rand());
-    println(" ");
-  }
-}
+var main = function() {
+  print_number((5 + 5) + 5);
+};
 
 main();

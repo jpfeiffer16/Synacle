@@ -410,6 +410,11 @@ namespace compiler
           }
         }
 
+        if (nodeType == typeof(ParenGroup)) {
+          var pgNode = node as ParenGroup;
+          lines.AddRange(TransformAst(pgNode.Nodes, ctx));
+        }
+
         if (nodeType == typeof(Breakpoint)) {
           lines.Add("breakpoint");
         }
