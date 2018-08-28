@@ -13,23 +13,52 @@
 
 const fs = require('fs');
 const path = require('path');
+const stream = require('stream');
 const VMem = require('../virtualMemoryLayer');
 const instructions = require('../instructions')(VMem);
 
-const programName = path.normalize(process.argv[2]);
+if (process.argv[2] === '-') {
+  var text = '';
+  process.stdin.on('data', data => {
+    text += data;
+  });
+  process.stdin.on('end', () => {
+    if (!text.length) {
+      console.error("No data provided on stdin!");
+      return;
+    }
+    var resultBuff = assemble(text);
+    var strm = new stream.PassThrough();
+    strm.pipe(process.stdout);
+    strm.push(resultBuff);
+  });
+} else {
+  const programName = path.normalize(process.argv[2]);
 
-const programPath = path.parse(programName);
-const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`);
+  const programPath = path.parse(programName);
+  const outputPath = path.join(programPath.dir, `${ programPath.name }.bin`);
+  
+  fs.readFile(programName, 'utf8', (err, text) => {
+    if (err) throw err;
+    var resultBuff = assemble(text);
+    // Write to output file
+    fs.writeFile(outputPath, resultBuff, (err) => {
+      if (err) throw err;
+  
+      console.log(`Assembly done. File: ${ outputPath }`);
+    });
+  });
+}
 
-fs.readFile(programName, 'utf8', (err, text) => {
-  if (err) throw err;
 
+
+
+function assemble(text) {
   let symbols = parseText(text);
 
   // Preprocessor
 
   //   Import pass
-  // symbols.forEach((symbol, index) => {
   for (let index = 0; index < symbols.length; index++) {
     symbol = symbols[index];
     if (symbol && symbol.length) {
@@ -101,23 +130,21 @@ fs.readFile(programName, 'utf8', (err, text) => {
     }
   });
 
-
-  // Write to output file
+  //Prepare output buffer
   let bytes = [];
   symbols.forEach(symbol => bytes.push(parseInt(symbol)));
   let outputBuffer = new Buffer(bytes.length * 2);
   bytes.forEach((byte, index) => outputBuffer.writeUInt16LE(byte, index * 2));
-  fs.writeFile(outputPath, outputBuffer, (err) => {
-    if (err) throw err;
+  return outputBuffer;
+}
 
-    console.log(`Assembly done. File: ${ outputPath }`);
-  });
-});
+
 
 function parseText(text) {
   // Get rid of comments
   const lines = text.split('\n');
 
+  
   for (var i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (!line.length || line[0] === '#') {

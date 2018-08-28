@@ -6,7 +6,7 @@
 -incremment and decrement ops eg: -- and ++
 -allow whitespace in string literals
 add some escape chars such as \n
-more advanced parsing of parens into one node. eg: !(i + 1)
+-more advanced parsing of parens into one node. eg: !(i + 1)
 string to int conversion
 -some kind of runtime allaocation system. especially for strings.
 -nested function calls aren't working correctly.

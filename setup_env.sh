@@ -2,7 +2,7 @@
 
 cwd=$(pwd)
 
-alias compiler="node $cwd/compiler/compiler.js $0"
-alias vm="node $cwd/vm.js $0"
-alias asm="node $cwd/assembler/asm.js $0"
-alias disasm="node $cwd/assembler/disasm.js $0"
+alias compiler="dotnet $cwd/cs/compiler/bin/Debug/netcoreapp2.0/compiler.dll $@"
+alias vm="node $cwd/vm.js $@"
+alias asm="node $cwd/assembler/asm.js $@"
+alias disasm="node $cwd/assembler/disasm.js $@"
