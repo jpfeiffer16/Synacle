@@ -1,0 +1,57 @@
+//BrainF*ck compiler written in bc
+
+#include "../lib/stdlib.bc"
+#include "symbols.bc"
+
+var code = input();
+var code_len = str_len(code);
+
+for (var i = 0; i < code_len; ++i) {
+  var char = ~(code + i);
+
+  if (char == symbol_plus) {
+    println("rmem reg0 16383");
+    println("rmem reg1 reg0");
+    println("add reg1 1");
+    println("wmem reg0 reg1");
+  }
+
+  if (char == symbol_minus) {
+    println("rmem reg0 16383");
+    println("rmem reg1 reg0");
+    println("add reg1 32767");
+    println("wmem reg0 reg1");
+  }
+
+  if (char == symbol_left_bracket) {
+    println("left bracket");
+  }
+
+  if (char == symbol_right_bracket) {
+    println("right bracket");
+  }
+
+  if (char == symbol_less_than) {
+    println("rmem reg0 16383");
+    println("add reg0 32767");
+    println("wmem 16383 reg0");
+  }
+
+  if (char == symbol_greater_than) {
+    println("rmem reg0 16383");
+    println("add reg0 1");
+    println("wmem 16383 reg0");    
+  }
+
+  if (char == symbol_input) {
+    println("rmem reg0 16383");
+    println("in reg1");
+    println("wmem reg0 reg1");
+  }
+
+  if (char == symbol_output) {
+    println("rmem reg0 16383");
+    println("rmem reg1 reg0");
+    println("out reg1");
+  }
+}
