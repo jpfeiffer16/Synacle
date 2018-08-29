@@ -1,8 +1,7 @@
 function str_equal(var str_a, var str_b) {
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
-  var len_equal = a_len == b_len;
-  if (!len_equal) {
+  if (!(a_len == b_len)) {
     return 0;
   }
   for (var i = 0; i < a_len; ++i) {

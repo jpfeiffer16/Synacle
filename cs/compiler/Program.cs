@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace compiler
@@ -12,13 +13,31 @@ namespace compiler
         {
             var filePath = args.Length > 0 ? args[0] : "./programs/example.bc";
 
-            var fileInfo = new FileInfo(filePath);
-            var workingDirectory = fileInfo.Directory.FullName;
+            if (filePath == "-") {
+                //Make this async once the above comment is done
+                var code = Console.In.ReadToEnd();
+                var workingDirectory = Directory.GetCurrentDirectory();
+
+                var asmLines = CompileCode(code, workingDirectory);
+                Console.Write(string.Join("\n", asmLines));
+            } else {
+                var fileInfo = new FileInfo(filePath);
+                var workingDirectory = fileInfo.Directory.FullName;
+                
+                //Get code
+                var code = File.ReadAllText(
+                    filePath
+                );
+                var asmLines = CompileCode(code, workingDirectory);
+
+                //Write file
+                File.WriteAllLines($"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}", asmLines);
+            }
+
             
-            //Get code
-            var code = File.ReadAllText(
-                filePath
-            );
+        }
+
+        private static List<string> CompileCode(string code, string workingDirectory) {
             //Preprocess
             var preprocessor = new Preprocessor(code, workingDirectory);
             code = preprocessor.Preprocess();
@@ -30,10 +49,7 @@ namespace compiler
             var ast = parser.Parse();
             //Transform
             var transformer = new Transformer(ast);
-            var asmLines = transformer.Transform();
-
-            //Write file
-            File.WriteAllLines($"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}", asmLines);
+            return transformer.Transform();
         }
     }
 }

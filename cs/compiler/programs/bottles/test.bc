@@ -1,0 +1,30 @@
+#include "../lib/stdlib.bc"
+
+var bottle_count = 3;
+
+function main() {
+    while(1) {
+        print("You have ");
+        print_number(bottle_count);
+        println(" bottles left. What do you do?");
+        
+        var inp = input();
+
+        if(str_equal(inp, "+")) {
+            println("You add one");
+            ++bottle_count;
+        }
+
+        if(str_equal(inp, "-")) {
+            println("You drink one");
+            --bottle_count;
+        }
+
+        if(bottle_count < 1) {
+            println("You die...");
+            return;
+        }
+    }
+}
+
+main();

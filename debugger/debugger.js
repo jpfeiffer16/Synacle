@@ -1,4 +1,5 @@
 const fs = require('fs');
+const Interpreter = require('../interpreter');
 const breakpoints  = JSON.parse(
     fs.readFileSync('./.breakpoints', 'utf8')
   ).breakpoints;
@@ -6,13 +7,21 @@ const VMemLayer = require('../virtualMemoryLayer');
 const instructions = require('../instructions')(VMemLayer);
 const readlineSync = require('readline-sync');
 
-function Debugger(memory, interpreter) {
+function Debugger(memory, interpreter, stdinMode = false) {
+  let codeBuffer = '';
+  process.stdin.on('data', data => {
+    codeBuffer += data;
+  });
+
   while (true) {
     
     if (~breakpoints.indexOf(memory.inPtr) || memory.heap[memory.inPtr] == 22) {
-      //break
-      console.log(`Hit breakpoint on ${ memory.inPtr }`);
-      debugPrompt(interpreter);
+      if (!stdinMode) {
+        console.log(`Hit breakpoint on ${ memory.inPtr }`);
+        debugPrompt(interpreter);
+      } else {
+        stdinPrompt();
+      }
     }
     interpreter.step();
   }
@@ -52,7 +61,19 @@ function Debugger(memory, interpreter) {
         return;
     }
     debugPrompt(interpreter);
-  }  
+  }
+
+  function stdinPrompt() {
+    if (codeBuffer.length > 0) {
+      const memCopy = JSON.parse(JSON.stringify(memory));
+      memCopy.inPtr = 0;
+      const interpreter = Interpreter(memCopy);
+      while (!memCopy.stopped) {
+        interpreter.step();
+      }
+      stdinPrompt();
+    }
+  }
 };
 
 
