@@ -1,7 +1,8 @@
 var seed = 1220;
 
 function rand() {
-  seed = seed * 1103 + 12345 % 1202;
+  seed = seed * 1103 + 12345;
+  seed = seed % 1202;
   return seed;
 }
 

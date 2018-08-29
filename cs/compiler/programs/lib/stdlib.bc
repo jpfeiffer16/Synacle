@@ -6,12 +6,9 @@ function str_equal(var str_a, var str_b) {
     return 0;
   }
   for (var i = 0; i < a_len; ++i) {
-    var a_ptr = str_a + i;
-    var b_ptr = str_b + i;
-    var a_val = ~a_ptr;
-    var b_val = ~b_ptr;
-    var val_equal = a_val == b_val;
-    if (!val_equal) {
+    var a_val = ~(str_a + i);
+    var b_val = ~(str_b + i);
+    if (!(a_val == b_val)) {
       return 0;
     }
   }
@@ -68,8 +65,6 @@ function str_cat(var str_a, var str_b) {
 function flip_str(var str_ptr) {
   var alloc_ptr = alloc();
   var len = str_len(str_ptr);
-  //push(0);
-  //var current_byte = str_ptr;
   var index = 0;
   while (index < len) {
     var source_index = str_ptr + index;
