@@ -7,7 +7,6 @@ let startTime;
 
 program
   .option('-d, --debug', 'Launch interactive debugger')
-  .option('-wd, --web-debug', 'Launch interactive web debugger')
   .option('-b, --binary [string]', 'Binary to run. Defaults to challenge.bin')
   .option('-i, --information [bool]', 'Display information about the program once it exits')
   .parse(process.argv);
@@ -48,9 +47,6 @@ function step() {
 if (program.debug) {
   const Debugger = require('./debugger/debugger');
   Debugger(memory, interpreter);
-} else if (program.webDebug) {
-  const SynacorDebugger = require('./webDebugger/debugger');  
-  SynacorDebugger(memory, interpreter);
 } else {
   startTime = moment();
   step();
