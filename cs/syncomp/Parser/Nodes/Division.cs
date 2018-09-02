@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
     public class Division : AstNode {
         public Division(AstNode left, AstNode right) : base("DIVISION") {

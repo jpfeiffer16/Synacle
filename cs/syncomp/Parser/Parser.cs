@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace compiler {
+namespace syncomp {
   public class Parser {
     private List<SyntaxToken> tokens;
     public Parser(List<SyntaxToken> tokens) {

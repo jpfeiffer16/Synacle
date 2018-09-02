@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
     public class Identifier : AstNode
     {

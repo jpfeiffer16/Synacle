@@ -1,4 +1,4 @@
-namespace compiler {
+namespace syncomp {
     public class VariableAssignment : AstNode {
         public AstNode Identifier { get; } 
         public AstNode Parameter { get; }

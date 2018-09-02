@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace compiler
+namespace syncomp
 {
     public class While : AstNode {
         public While(List<AstNode> condition, List<AstNode> expression) : base("WHILE") {

@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
   public class Incr : AstNode {
     public Incr(AstNode parameter) : base("INCR") {

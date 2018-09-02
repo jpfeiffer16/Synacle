@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
   public class Not : AstNode {
     public Not(AstNode parameter) : base("NOT") {

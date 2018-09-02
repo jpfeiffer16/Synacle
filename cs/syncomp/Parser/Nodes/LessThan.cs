@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
     public class LessThan : AstNode {
       public LessThan(AstNode left, AstNode right) : base ("LESS_THAN") {

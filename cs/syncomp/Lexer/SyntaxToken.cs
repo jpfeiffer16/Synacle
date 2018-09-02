@@ -1,4 +1,4 @@
-namespace compiler {
+namespace syncomp {
   public class SyntaxToken {
     public string Token { get; set; }
     public SyntaxTokenType Type { get; set; }

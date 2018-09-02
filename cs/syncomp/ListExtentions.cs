@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace compiler
+namespace syncomp
 {
     public static class ListExtentions {
         public static T Pop<T>(this List<T> list) {

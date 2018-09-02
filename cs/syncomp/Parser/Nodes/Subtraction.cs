@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
     public class Subtraction : AstNode {
         public Subtraction(AstNode left, AstNode right) : base("SUBTRACTION") {

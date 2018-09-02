@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
   public class AddressOf : AstNode {
     public AddressOf(AstNode parameter) : base("ADDRESSOF") {

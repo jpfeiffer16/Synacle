@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace compiler
+namespace syncomp
 {
   public class For : AstNode {
     public For(

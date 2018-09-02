@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace compiler
+namespace syncomp
 {
   public class VariableStack {
     // public List<Variable> Variables = new List<Variable>();

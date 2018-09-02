@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
     public class Multiplication : AstNode {
         public Multiplication(AstNode left, AstNode right) : base("MULTIPLICATION") {

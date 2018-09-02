@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace compiler
+namespace syncomp
 {
   public class Preprocessor
   {

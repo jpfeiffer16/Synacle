@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
   public class Deref : AstNode {
     public Deref(AstNode parameter) : base("DEREF") {

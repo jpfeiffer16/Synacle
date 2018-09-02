@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace compiler
+namespace syncomp
 {
   public enum SyntaxTokenType {
     VariableDeclaration,

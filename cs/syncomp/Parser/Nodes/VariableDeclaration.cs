@@ -1,4 +1,4 @@
-namespace compiler {
+namespace syncomp {
     public class VariableDeclaration: AstNode {
         public string Identifier { get; }
         public VariableDeclaration(string identifier) : base("VARIABLE_DECLARATION") {

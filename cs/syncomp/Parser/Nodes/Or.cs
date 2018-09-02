@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
   public class Or : AstNode {
     public Or(AstNode left, AstNode right) : base("OR") {

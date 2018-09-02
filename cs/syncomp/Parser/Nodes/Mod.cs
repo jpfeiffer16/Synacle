@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
     public class Mod : AstNode {
         public Mod(AstNode left, AstNode right) : base("MOD") {

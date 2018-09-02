@@ -1,4 +1,4 @@
-namespace compiler
+namespace syncomp
 {
   public class And : AstNode {
     public And(AstNode left, AstNode right) : base("AND") {
