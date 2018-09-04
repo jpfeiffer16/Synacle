@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,7 +11,12 @@ namespace syncomp
         // out
         static void Main(string[] args)
         {
-            var filePath = args.Length > 0 ? args[0] : "./programs/example.bc";
+            if (args.Length == 0) {
+                PrintUsage();
+                Environment.Exit(1);
+            }
+
+            var filePath = args[0];
 
             if (filePath == "-") {
                 //Make this async once the above comment is done
@@ -50,6 +55,15 @@ namespace syncomp
             //Transform
             var transformer = new Transformer(ast);
             return transformer.Transform();
+        }
+
+        private static void PrintUsage() {
+            Console.WriteLine(@"
+                Must provide a filename or - for stdin.
+                Examples:
+                    syncomp test.bc
+                    echo ""print(\""test\"");\"" | syncomp -
+            ");
         }
     }
 }
