@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const instructions = require('../synvm/instructions')(require('../synvm/virtualMemoryLayer'));
 
 const fs = require('fs');

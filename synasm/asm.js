@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
   Rules
     Every contiguous set of chars separated by some whitespace can be assumed
