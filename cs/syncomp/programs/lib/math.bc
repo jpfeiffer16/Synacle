@@ -1,0 +1,7 @@
+function power(var n, var p) {
+    //var agr = number;
+    //for (var i = 0; i < power; ++i) {
+    //    agr = agr * number;
+    //}
+    //return number;
+}

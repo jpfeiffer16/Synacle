@@ -1,0 +1,27 @@
+#include "lib/stdlib.bc"
+#include "lib/array_wrapper.bc"
+#include "lib/error.bc"
+
+var array = array_new(10);
+for (var i = 0; i < 10; ++i) {
+    var value = i + 1;
+    array_set_nth(array, i, value);
+}
+
+//var element = array_get_nth(array, 3);
+//print_number(element);
+
+
+var new_array = array_map(array, function(var value) {
+    ++value;
+    return value;
+});
+
+var foreach_callback = function(var elem_ptr) {
+    print_number(~elem_ptr);
+    println(" ");
+};
+
+array_foreach(new_array, foreach_callback);
+
+breakpoint;

@@ -14,8 +14,8 @@
 const fs = require('fs');
 const path = require('path');
 const stream = require('stream');
-const VMem = require('../virtualMemoryLayer');
-const instructions = require('../instructions')(VMem);
+const VMem = require('../synvm/virtualMemoryLayer');
+const instructions = require('../synvm/instructions')(VMem);
 
 if (process.argv[2] === '-') {
   var text = '';

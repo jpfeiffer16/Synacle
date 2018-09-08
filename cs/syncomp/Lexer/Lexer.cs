@@ -19,7 +19,8 @@ namespace syncomp {
       this.code = code;
     }
 
-    public List<SyntaxToken> Lex() {
+    public (List<SyntaxToken>, List<SyntaxTokenMapping>) Lex() {
+      var map = new List<SyntaxTokenMapping>();
       var tokens = new List<SyntaxToken>();
       var currentToken = String.Empty;
       var currentCharType = CharType.Unknown;
@@ -51,8 +52,14 @@ namespace syncomp {
 
         if (currentCharType != charType || charType == CharType.Symbol || i == strippedCode.Length - 1) {
           if (currentToken.Length > 0) {
-          tokens.Add(new SyntaxToken(currentToken));
-          currentToken = String.Empty;
+            tokens.Add(new SyntaxToken(currentToken));
+            map.Add(new SyntaxTokenMapping {
+              SyntaxTokenIndex = tokens.Count() - 1,
+              Width = 1,
+              Start = i,
+              Line = 0
+            });
+            currentToken = String.Empty;
           }
         }
 
@@ -62,10 +69,16 @@ namespace syncomp {
 
       if (currentToken.Length > 0) {
         tokens.Add(new SyntaxToken(currentToken));
+        map.Add(new SyntaxTokenMapping {
+          SyntaxTokenIndex = tokens.Count() - 1,
+          Width = 1,
+          Start = tokens.Count() - 2,
+          Line = 0
+        });
       }
 
       tokens = AggregateLikeTokens(tokens);
-      return tokens;
+      return (tokens, map);
     }
 
     private bool isNumberChar(string ch) {

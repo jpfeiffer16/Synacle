@@ -48,7 +48,7 @@ namespace syncomp
             code = preprocessor.Preprocess();
             //Lex
             var lexer = new Lexer(code);
-            var tokens = lexer.Lex();
+            var (tokens, syntaxTokensMap) = lexer.Lex();
             //Parse
             var parser = new Parser(tokens);
             var ast = parser.Parse();

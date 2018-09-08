@@ -1,0 +1,4 @@
+function throw(var msg) {
+  println(msg);
+  exit();
+}

@@ -15,20 +15,19 @@ function str_equal(var str_a, var str_b) {
 }
 
 function alloc() {
-  var data_index = 0;
-  var num_null = 0;
-  while(num_null <= 6) {
-    var is_null = ~data_index;
-    if (!is_null) {
-      ++num_null;
-    }
-    if (is_null) {
-      num_null = 0;
-    }
-    ++data_index;
+  var data_index = 16382;
+  while (!(~(data_index))) {
+    --data_index;
   }
-  --data_index;
+  data_index = data_index + 2;
   return data_index;
+}
+
+function alloc_chunk(var length) {
+  var ptr = alloc();
+  var dest_ptr = ptr + length;
+  wmem(dest_ptr, 32767);
+  return ptr;
 }
 
 function mem_cp(var s_ptr, var d_ptr, var len) {

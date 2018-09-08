@@ -1,25 +1,6 @@
--greater than or equal to
--less than or equal to
--fix issue with variable scoping. eg: function do_stuff(i) {//i is essentially reference}
 ?true and false as pass throughs for 1 and 0
--inline declaration and assignment. eg: var i = 10;
--incremment and decrement ops eg: -- and ++
--allow whitespace in string literals
+postfix for incremment and decrement ops eg: i-- and i++
 add some escape chars such as \n
--more advanced parsing of parens into one node. eg: !(i + 1)
 string to int conversion
--some kind of runtime allaocation system. especially for strings.
--nested function calls aren't working correctly.
 there is an issue with printing the number 101 also 1023
 implement looping contructs break and continue
-there is a stack empty bug happending on the c# vm. Program:
-    var i;
-    i = 10;
-
-    do_stuff(i);
-
-    function do_stuff(var ii) {
-        out(ii >= 10);
-    }
-
-

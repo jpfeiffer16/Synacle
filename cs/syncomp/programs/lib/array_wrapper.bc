@@ -1,0 +1,54 @@
+// Assume all depenencies are imported at the root level, since we don't want
+// to introduce hard depenencies in the std libs.
+
+var INDEX_OUT_OF_BOUNDS_MESSAGE = "Index outside of the bounds of array";
+
+function array_new(var length) {
+    var alloc_ptr = alloc_chunk(length);
+    return alloc_ptr;
+}
+
+function array_get_nth(var ptr, var index) {
+    var length = array_length(ptr);
+    if (index >= length) {
+        throw(INDEX_OUT_OF_BOUNDS_MESSAGE);
+    }
+    var return_value = ~(ptr + index);
+    return return_value;
+}
+
+function array_set_nth(var ptr, var index, var value) {
+    var length = array_length(ptr);
+    if (index >= length) {
+        throw(INDEX_OUT_OF_BOUNDS_MESSAGE);
+    }
+    wmem(ptr + index, value);
+}
+
+function array_length(var ptr) {
+    var length = 0;
+    var value = (~(ptr + length));
+    while (!(value == 32767)) {
+        ++length;
+        value = (~(ptr + length));
+    }
+    return length;
+}
+
+function array_foreach(var ptr, var cb) {
+    var length = array_length(ptr);
+    for (var i = 0; i < length; ++i) {
+        cb(ptr + i, i);
+    }
+}
+
+function array_map(var ptr, var cb) {
+    var length = array_length(ptr);
+    var new_array = alloc_chunk(length);
+    for (var i = 0; i < length; ++i) {
+        var value = array_get_nth(ptr, i);
+        var new_value = cb(value);
+        array_set_nth(new_array, i, new_value);
+    }
+    return new_array;
+}

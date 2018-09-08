@@ -1,0 +1,24 @@
+#include "lib/stdlib.bc"
+#inculde "lib/math.bc"
+
+function main() {
+    print_number(power(2, 15));
+    //var a = "this is a test string. One more!";
+    //println("a's memory address is: ");
+    //print_number(a);
+    //println(" ");
+    //println("the first letter of a is:");
+    //out(~a);
+    //println("Now we will loop through and print it out");
+    //var len = str_len(a);
+    //for (var i = 0; i < len; ++i) {
+    //    out(~(a + i));
+    //    out(10);
+    //}
+    //println(" ");
+    //println("a's length is:");
+    //print_number(str_len(a));
+    //println(" ");
+}
+
+main();

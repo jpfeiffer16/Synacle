@@ -1,4 +1,4 @@
-const instructions = require('../instructions')(require('../virtualMemoryLayer'));
+const instructions = require('../synvm/instructions')(require('../synvm/virtualMemoryLayer'));
 
 const fs = require('fs');
 const path = require('path');

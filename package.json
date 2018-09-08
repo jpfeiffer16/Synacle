@@ -13,5 +13,10 @@
     "moment": "^2.22.1",
     "readline-sync": "^1.4.9"
   },
+  "bin": {
+    "syn-vm": "synvm/vm.js",
+    "syn-asm": "synasm/asm.js",
+    "syn-disasm": "synasm/disasm.js"
+  },
   "devDependencies": {}
 }
