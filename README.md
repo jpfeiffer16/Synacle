@@ -9,7 +9,7 @@ There are two vms. One in witten JS and one in C#. Right now the JS vm is the pr
 
 There is an assembler written in JS that assembles text files into synacor binaries.
 It is located in the synvm folder. To install the assembler, disassembler, and primary vm,
-run `npm install -g .` from the root of the repo. This will install the `syn-asm`,
+run `sudo npm install -g .` from the root of the repo. This will install the `syn-asm`,
 `syn-disasm`, and `syn-vm` commands.
 
 ## Compiler
@@ -33,13 +33,13 @@ or later, and some make program.
 
 Then from cs/syncomp run:
 
-`make install`
+`sudo make install`
 
 This will add the syncomp command to your system.
 
 and run:
 
-`make uninstall`
+`sudo make uninstall`
 
 to uninstall it.
 
