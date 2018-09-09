@@ -1,6 +1,0 @@
-?true and false as pass throughs for 1 and 0
-postfix for incremment and decrement ops eg: i-- and i++
-add some escape chars such as \n
-string to int conversion
-there is an issue with printing the number 101 also 1023
-implement looping contructs break and continue
