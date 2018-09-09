@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,6 +16,11 @@ namespace syncomp
                 PrintUsage();
                 Environment.Exit(1);
             }
+            var includeList = new List<string>();
+            var includeVariable = Environment.GetEnvironmentVariable("INCLUDE");
+            if (!string.IsNullOrWhiteSpace(includeVariable)) {
+                includeList = includeVariable.Split(";").ToList();
+            }
 
             var filePath = args[0];
 
@@ -23,7 +29,7 @@ namespace syncomp
                 var code = Console.In.ReadToEnd();
                 var workingDirectory = Directory.GetCurrentDirectory();
 
-                var asmLines = CompileCode(code, workingDirectory);
+                var asmLines = CompileCode(code, workingDirectory, includeList);
                 Console.Write(string.Join("\n", asmLines));
             } else {
                 var fileInfo = new FileInfo(filePath);
@@ -33,18 +39,16 @@ namespace syncomp
                 var code = File.ReadAllText(
                     filePath
                 );
-                var asmLines = CompileCode(code, workingDirectory);
+                var asmLines = CompileCode(code, workingDirectory, includeList);
 
                 //Write file
                 File.WriteAllLines($"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}", asmLines);
             }
-
-            
         }
 
-        private static List<string> CompileCode(string code, string workingDirectory) {
+        private static List<string> CompileCode(string code, string workingDirectory, List<string> includeLocations) {
             //Preprocess
-            var preprocessor = new Preprocessor(code, workingDirectory);
+            var preprocessor = new Preprocessor(code, workingDirectory, includeLocations);
             code = preprocessor.Preprocess();
             //Lex
             var lexer = new Lexer(code);

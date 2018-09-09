@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace syncomp
@@ -7,10 +8,14 @@ namespace syncomp
   public class Preprocessor
   {
     private readonly Regex IncludeRegex = new Regex("#include \"(\\S*)\"");
-    public Preprocessor(string code, string workingDirectory) {
+    public Preprocessor(string code, string workingDirectory, List<string> includeLocations) {
       this.Code = code;
       this.WorkingDirectory = workingDirectory;
+      this.IncludeLocations = includeLocations;
     }
+
+    public Preprocessor(string code, string workingDirectory) :
+      this(code, workingDirectory, new List<string>()) {}
 
     public string Preprocess() {
       MatchCollection includeMatches;
@@ -28,15 +33,39 @@ namespace syncomp
     }
 
     private string GetCode(string filePath) {
-      return File.ReadAllText(
-        Path.Combine(
-          this.WorkingDirectory,
-          filePath
-        )
+      /*
+        Resolution steps:
+          1.) Working dir + filepath
+          2.) Loop through include paths + filepath
+      */
+      var path = Path.Combine(
+        this.WorkingDirectory,
+        filePath
+      );
+
+      if (!File.Exists(path)) {
+        foreach (var includeLocation in IncludeLocations) {
+          var thisPath = Path.Combine(
+            includeLocation,
+            filePath
+          );
+          if (File.Exists(thisPath))
+            return File.ReadAllText(
+              thisPath
+            );
+        }
+      } else {
+        return File.ReadAllText(
+          path
+        );
+      }
+      throw new Exception(
+        $"Preprocessor: File {path} could not be found in any of the include paths. Check your INCLUDE environment variable"
       );
     }
 
     public string Code { get; private set; }
-
-    public string WorkingDirectory { get; private set; }  }
+    public string WorkingDirectory { get; private set; }
+    public List<string> IncludeLocations { get; private set; }
+  }
 }
