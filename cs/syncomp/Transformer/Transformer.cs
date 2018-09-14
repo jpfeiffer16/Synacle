@@ -389,7 +389,17 @@ namespace syncomp
             var uuid = this.GetUID();
             lines.Add($"jmp >var_{uuid}_end");
             lines.Add($":var_{uuid}");
-            foreach (var ch in value) {
+            for (var charIndex = 0; charIndex < value.Length; charIndex++)
+            {
+              var ch = value[charIndex];
+              if (ch == '\\') {
+                var nextChar = value[++charIndex];
+                switch(nextChar) {
+                  case 'n':
+                    ch = Convert.ToChar("\n");
+                    break;
+                }
+              }
               var str = ch.ToString();
               if (str.Trim().Count() == 0) {
                 lines.Add(Encoding.ASCII.GetBytes(str).FirstOrDefault().ToString());
