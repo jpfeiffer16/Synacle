@@ -398,6 +398,9 @@ namespace syncomp
                   case 'n':
                     ch = Convert.ToChar("\n");
                     break;
+                  case 't':
+                    ch = Convert.ToChar("\t");
+                    break;
                 }
               }
               var str = ch.ToString();
