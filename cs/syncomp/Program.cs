@@ -16,6 +16,10 @@ namespace syncomp
                 PrintUsage();
                 Environment.Exit(1);
             }
+            if (args[0] == "-h" || args[0] == "--help") {
+                PrintUsage();
+                Environment.Exit(1);
+            }
             var includeList = new List<string>();
             var includeVariable = Environment.GetEnvironmentVariable("INCLUDE");
             if (!string.IsNullOrWhiteSpace(includeVariable)) {
