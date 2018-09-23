@@ -35,7 +35,7 @@ Then from cs/syncomp run:
 
 `sudo make install`
 
-This will add the syncomp command to your system.
+This will add the `syncomp` command to your system.
 
 and run:
 
@@ -53,7 +53,7 @@ The language used in the compiler toolchain is a custom language developed just 
 Hello World
 
 ```javascript
-#include "lib/stdlib.bc"
+#include "stdlib.bc"
 
 function main() {
   println("Hello, World!");
