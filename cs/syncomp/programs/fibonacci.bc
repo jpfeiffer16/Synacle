@@ -1,0 +1,14 @@
+#include "stdlib.bc";
+
+var CEIL = 100;
+
+function fib(var prev, var next) {
+  var next_number = prev + next;
+  if (next < CEIL) {
+    print_number(next_number);
+    out(10);
+    fib(next, next_number);
+  }
+}
+
+fib(0, 1);
