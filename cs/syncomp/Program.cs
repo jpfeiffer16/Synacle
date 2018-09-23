@@ -8,8 +8,8 @@ namespace syncomp
 {
     class Program
     {
-        // TODO: try making this an async entry point once I can get that figured
-        // out
+        // TODO: try making this an async entry point once I can get that
+        // figured out
         static void Main(string[] args)
         {
             if (args.Length == 0) {
@@ -46,11 +46,18 @@ namespace syncomp
                 var asmLines = CompileCode(code, workingDirectory, includeList);
 
                 //Write file
-                File.WriteAllLines($"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}", asmLines);
+                File.WriteAllLines(
+                    $"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}",
+                    asmLines
+                );
             }
         }
 
-        private static List<string> CompileCode(string code, string workingDirectory, List<string> includeLocations) {
+        private static List<string> CompileCode(
+            string code,
+            string workingDirectory,
+            List<string> includeLocations
+        ) {
             //Preprocess
             var preprocessor = new Preprocessor(code, workingDirectory, includeLocations);
             code = preprocessor.Preprocess();

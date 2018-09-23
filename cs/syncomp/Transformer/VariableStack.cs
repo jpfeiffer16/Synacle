@@ -4,7 +4,6 @@ using System.Linq;
 namespace syncomp
 {
   public class VariableStack {
-    // public List<Variable> Variables = new List<Variable>();
 
     private Stack<List<Variable>> Stack = new Stack<List<Variable>>();
 

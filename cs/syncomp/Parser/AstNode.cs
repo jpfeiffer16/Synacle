@@ -7,6 +7,5 @@ namespace syncomp {
         public AstNode(string type) {
             this.Type = type;
         }
-
-  }
+    }
 }

@@ -40,7 +40,6 @@ namespace syncomp
           var vdNode = node as VariableDeclaration;
 
 
-          // this.AddVariable(ctx, vdNode.Identifier, lines);
           var guid = this.GetUID();
           lines.Add($"jmp >var_{guid.ToString()}_end");
           lines.Add($":var_{guid.ToString()}");
@@ -345,7 +344,6 @@ namespace syncomp
         {
           var idNode = node as Identifier;
 
-          // var variable = ctx.Variables.Find(vr => vr.Name == idNode.Name);
           var variable = ctx.Variables.Get(idNode.Name);
 
           lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");

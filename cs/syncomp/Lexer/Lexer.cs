@@ -22,7 +22,7 @@ namespace syncomp {
     public (List<SyntaxToken>, List<SyntaxTokenMapping>) Lex() {
       var map = new List<SyntaxTokenMapping>();
       var tokens = new List<SyntaxToken>();
-      var currentToken = String.Empty;
+      var currentToken = string.Empty;
       var currentCharType = CharType.Unknown;
       var keepWhitespace = false;
 

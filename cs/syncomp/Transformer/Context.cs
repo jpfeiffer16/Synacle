@@ -3,7 +3,6 @@ using System.Collections.Generic;
 namespace syncomp
 {
     public class Context {
-        // public List<Variable> Variables = new List<Variable>();
         public VariableStack Variables = new VariableStack();
         public int RegisterLevel = 0;
         public bool HasSubtractSupport = false;
