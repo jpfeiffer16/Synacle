@@ -10,39 +10,20 @@ namespace syncomp {
     }
 
     public List<AstNode> Parse() {
-      return ParseTokens(this.tokens);
+      // return ParseTokens(this.tokens);
+      return new ParserPath().ParseTokens(this.tokens);
     }
 
     private List<AstNode> ParseTokens(List<SyntaxToken> tokens) {
+    {
       var nodes = new List<AstNode>();
       for (var i = 0; i < tokens.Count; i++) {
         var token = tokens[i];
         AstNode node = null;
-        if (token.Type == SyntaxTokenType.Identifier) {
+        // if (token.Type == SyntaxTokenType.Identifier) {
 
-          SyntaxToken nextToken;
-          if (i + 1 < tokens.Count && (nextToken = tokens[i + 1]).Type == SyntaxTokenType.LeftParen) {
-
-            i++;
-            var nextClose = GetExpression(SyntaxTokenType.LeftParen, SyntaxTokenType.RightParen, i, tokens);
-            ++i;
-            var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i));
-            i = nextClose;
-            
-            node = new FunctionCall(
-              parametersNodes,
-              token.Token
-            );
-          }
-          else
-          {
-            if (int.TryParse(token.Token, out _)) {
-              node = new IntegerLiteral(token.Token);
-            } else {
-              node = new Identifier(token.Token);
-            }
-          }
-        }
+          
+        // }
 
         if (token.Type == SyntaxTokenType.VariableDeclaration) {
           var nextToken = tokens[++i];
