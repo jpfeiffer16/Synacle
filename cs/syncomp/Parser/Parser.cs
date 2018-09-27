@@ -14,7 +14,7 @@ namespace syncomp {
       return new ParserPath().ParseTokens(this.tokens);
     }
 
-    private List<AstNode> ParseTokens(List<SyntaxToken> tokens) {
+    private List<AstNode> ParseTokens(List<SyntaxToken> tokens)
     {
       var nodes = new List<AstNode>();
       for (var i = 0; i < tokens.Count; i++) {
@@ -25,99 +25,99 @@ namespace syncomp {
           
         // }
 
-        if (token.Type == SyntaxTokenType.VariableDeclaration) {
-          var nextToken = tokens[++i];
+        // if (token.Type == SyntaxTokenType.VariableDeclaration) {
+        //   var nextToken = tokens[++i];
 
-          node = new VariableDeclaration(nextToken.Token);
-        }
+        //   node = new VariableDeclaration(nextToken.Token);
+        // }
 
-        if (token.Type == SyntaxTokenType.FunctionDeclaration) {
-          var name = tokens[++i];
-          if (name.Type != SyntaxTokenType.Identifier) {
-            name = null;
-            i--;
-          }
-          i++;
-          var nextClosingParen = GetExpression(
-            SyntaxTokenType.LeftParen,
-            SyntaxTokenType.RightParen,
-            i,
-            tokens
-          );
-          ++i;
-          var parameters = ParseTokens(
-            tokens.GetRange(i, nextClosingParen - i)
-          );
+        // if (token.Type == SyntaxTokenType.FunctionDeclaration) {
+        //   var name = tokens[++i];
+        //   if (name.Type != SyntaxTokenType.Identifier) {
+        //     name = null;
+        //     i--;
+        //   }
+        //   i++;
+        //   var nextClosingParen = GetExpression(
+        //     SyntaxTokenType.LeftParen,
+        //     SyntaxTokenType.RightParen,
+        //     i,
+        //     tokens
+        //   );
+        //   ++i;
+        //   var parameters = ParseTokens(
+        //     tokens.GetRange(i, nextClosingParen - i)
+        //   );
 
-          i = nextClosingParen + 1;
+        //   i = nextClosingParen + 1;
 
-          var nextClosingCurly = GetExpression(
-            SyntaxTokenType.LeftCurly,
-            SyntaxTokenType.RightCurly,
-            i,
-            tokens
-          );
+        //   var nextClosingCurly = GetExpression(
+        //     SyntaxTokenType.LeftCurly,
+        //     SyntaxTokenType.RightCurly,
+        //     i,
+        //     tokens
+        //   );
 
-          var expression = ParseTokens(
-            tokens.GetRange(i, nextClosingCurly - i + 1)
-          );
+        //   var expression = ParseTokens(
+        //     tokens.GetRange(i, nextClosingCurly - i + 1)
+        //   );
 
-          i = nextClosingCurly;
+        //   i = nextClosingCurly;
 
 
 
-          node = new FunctionDeclaration(parameters, expression, name?.Token);
-        }
+        //   node = new FunctionDeclaration(parameters, expression, name?.Token);
+        // }
 
-        if (token.Type == SyntaxTokenType.VariableAssignment) {
-          var previousAstNode = nodes.Pop();
-          var nextTerminator = GetNextTerminator(i, tokens);
-          var tokensToParse = tokens.GetRange(i + 1, nextTerminator - i);
-          i = nextTerminator;
-          var parsedParameter = ParseTokens(tokensToParse)[0];
-          node = new VariableAssignment(previousAstNode, parsedParameter);
-        }
+        // if (token.Type == SyntaxTokenType.VariableAssignment) {
+        //   var previousAstNode = nodes.Pop();
+        //   var nextTerminator = GetNextTerminator(i, tokens);
+        //   var tokensToParse = tokens.GetRange(i + 1, nextTerminator - i);
+        //   i = nextTerminator;
+        //   var parsedParameter = ParseTokens(tokensToParse)[0];
+        //   node = new VariableAssignment(previousAstNode, parsedParameter);
+        // }
 
-        if (token.Type == SyntaxTokenType.Equal) {
-          var left = nodes.Pop();
-          var right = ParseTokens(new List<SyntaxToken> { tokens[++i]})[0];
-          node = new Equal(left, right);
-        }
+        // if (token.Type == SyntaxTokenType.Equal) {
+        //   var left = nodes.Pop();
+        //   var right = ParseTokens(new List<SyntaxToken> { tokens[++i]})[0];
+        //   node = new Equal(left, right);
+        // }
 
-        if (token.Type == SyntaxTokenType.Not) {
-          var nextTerminator = this.GetNextTerminator(i, tokens);
-          var next = ParseTokens(tokens.GetRange(++i, nextTerminator - i))[0];
-          i = nextTerminator;
-          node = new Not(next);
-        }
+        // if (token.Type == SyntaxTokenType.Not) {
+        //   var nextTerminator = this.GetNextTerminator(i, tokens);
+        //   var next = ParseTokens(tokens.GetRange(++i, nextTerminator - i))[0];
+        //   i = nextTerminator;
+        //   node = new Not(next);
+        // }
 
-        if (token.Type == SyntaxTokenType.And) {
-          var left = nodes.Pop();
-          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
-          node = new And(left, right);
-        }
+        // if (token.Type == SyntaxTokenType.And) {
+        //   var left = nodes.Pop();
+        //   var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+        //   node = new And(left, right);
+        // }
 
-        if (token.Type == SyntaxTokenType.Or) {
-          var left = nodes.Pop();
-          var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
-          node = new Or(left, right);
-        }
+        // if (token.Type == SyntaxTokenType.Or) {
+        //   var left = nodes.Pop();
+        //   var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+        //   node = new Or(left, right);
+        // }
 
-        if (token.Type == SyntaxTokenType.GreaterThan) {
-          var previousAstNode = nodes.Pop();
-          node = new GreaterThan(
-            previousAstNode,
-            ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
-          );
-        }
+        // if (token.Type == SyntaxTokenType.GreaterThan) {
+        //   var previousAstNode = nodes.Pop();
+        //   node = new GreaterThan(
+        //     previousAstNode,
+        //     ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+        //   );
+        // }
 
-        if (token.Type == SyntaxTokenType.GreaterThanOrEqual) {
-          var previousAstNode = nodes.Pop();
-          node = new GreaterThanOrEqual(
-            previousAstNode,
-            ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
-          );
-        }
+        // if (token.Type == SyntaxTokenType.GreaterThanOrEqual) {
+        //   var previousAstNode = nodes.Pop();
+        //   node = new GreaterThanOrEqual(
+        //     previousAstNode,
+        //     ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+        //   );
+        // }
 
         if (token.Type == SyntaxTokenType.LessThan) {
           var previousAstNode = nodes.Pop();
@@ -330,48 +330,48 @@ namespace syncomp {
       return nodes.Where(nd => nd != null).ToList();
     }
     
-    private int GetNextTerminator(int index, List<SyntaxToken> tokens) {
-      var openers = new List<SyntaxTokenType> {
-        SyntaxTokenType.LeftCurly,
-        SyntaxTokenType.LeftParen
-      };
-      var closers = new List<SyntaxTokenType> {
-        SyntaxTokenType.RightCurly,
-        SyntaxTokenType.RightParen
-      };
-      var nestingLevel = 0;
-      while (
-        index < tokens.Count
-      ) {
-        if (openers.Contains(tokens[index].Type)) nestingLevel++;
-        if (closers.Contains(tokens[index].Type)) nestingLevel--;
-        if (
-          tokens[index].Type == SyntaxTokenType.SemiColon &&
-          nestingLevel == 0
-        ) break;
-        index++;
-      }
+    // private int GetNextTerminator(int index, List<SyntaxToken> tokens) {
+    //   var openers = new List<SyntaxTokenType> {
+    //     SyntaxTokenType.LeftCurly,
+    //     SyntaxTokenType.LeftParen
+    //   };
+    //   var closers = new List<SyntaxTokenType> {
+    //     SyntaxTokenType.RightCurly,
+    //     SyntaxTokenType.RightParen
+    //   };
+    //   var nestingLevel = 0;
+    //   while (
+    //     index < tokens.Count
+    //   ) {
+    //     if (openers.Contains(tokens[index].Type)) nestingLevel++;
+    //     if (closers.Contains(tokens[index].Type)) nestingLevel--;
+    //     if (
+    //       tokens[index].Type == SyntaxTokenType.SemiColon &&
+    //       nestingLevel == 0
+    //     ) break;
+    //     index++;
+    //   }
 
-      return index;
-    }
+    //   return index;
+    // }
 
-    private int GetExpression(
-      SyntaxTokenType openerType,
-      SyntaxTokenType closerType,
-      int index,
-      List<SyntaxToken> tokens)
-    {
-      var indentLevel = 0;
+    // private int GetExpression(
+    //   SyntaxTokenType openerType,
+    //   SyntaxTokenType closerType,
+    //   int index,
+    //   List<SyntaxToken> tokens)
+    // {
+    //   var indentLevel = 0;
 
-      do {
-        var token = tokens[index];
-        if (token.Type == openerType) indentLevel++;
-        if (token.Type == closerType) indentLevel--;
-        index++;
-      } while ((indentLevel > 0));
+    //   do {
+    //     var token = tokens[index];
+    //     if (token.Type == openerType) indentLevel++;
+    //     if (token.Type == closerType) indentLevel--;
+    //     index++;
+    //   } while ((indentLevel > 0));
 
-      //Return one less as we will over-step by one
-      return index - 1;
-    }
+    //   //Return one less as we will over-step by one
+    //   return index - 1;
+    // }
   }
 }

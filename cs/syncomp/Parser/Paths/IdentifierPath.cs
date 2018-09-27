@@ -5,15 +5,16 @@ namespace syncomp
 {
   public class IdentifierPath : ParserPath
   {
-    public SyntaxTokenType Match {
+    public override SyntaxTokenType Match {
       get => SyntaxTokenType.Identifier;
     }
 
-    public Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
           SyntaxToken nextToken;
           AstNode node;
+          var token = tokens[i];
 
           if (i + 1 < tokens.Count && (nextToken = tokens[i + 1]).Type == SyntaxTokenType.LeftParen) {
 
@@ -36,6 +37,8 @@ namespace syncomp
               node = new Identifier(token.Token);
             }
           }
+
+          return node;
       };
     }
   }
