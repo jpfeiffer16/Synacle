@@ -14,12 +14,14 @@ namespace syncomp
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var nextToken = tokens[i + 1];
+        AstNode node;
         if (nextToken.Type != SyntaxTokenType.SemiColon) {
-          return new Return(ParseTokens(new List<SyntaxToken> { nextToken })[0]);
+          node = new Return(ParseTokens(new List<SyntaxToken> { nextToken })[0]);
           i++;
         } else {
-          return new Return(null);
+          node = new Return(null);
         }
+        return node;
       };
     }
   }

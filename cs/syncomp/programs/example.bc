@@ -1,7 +1,7 @@
-#include "lib/stdlib.bc"
 
-var main = function() {
-  print_number((5 + 5) + 5);
-};
+
+function main() {
+  out(65);
+}
 
 main();

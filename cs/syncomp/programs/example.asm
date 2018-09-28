@@ -1,25 +1,18 @@
-jmp >var_d962d561d277_end
-:var_d962d561d277
-:var_d962d561d277_end
-set reg0 10
-wmem >var_d962d561d277 reg0
-rmem reg0 >var_d962d561d277
-call >do_stuff
-jmp >do_stuff_end
-:do_stuff
-jmp >var_a1eae2729b83_end
-:var_a1eae2729b83
-:var_a1eae2729b83_end
-wmem >var_a1eae2729b83 reg0
-rmem reg0 >var_a1eae2729b83
-set reg1 10
-gt reg2 reg0 reg1
-eq reg3 reg0 reg1
-or reg0 reg2 reg3
+jmp >main_end
+:main
+set reg0 65
 out reg0
+set reg0 65
+set reg0 65
 ret
-:do_stuff_end
-set reg0 >do_stuff
+:main_end
+set reg0 >main
+call >main
+set reg0 65
+out reg0
+set reg0 65
+set reg0 65
+call >main
 halt
 
 :subtract

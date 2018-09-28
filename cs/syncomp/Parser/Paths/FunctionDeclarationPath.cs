@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class FunctionDeclarationnPath : ParserPath
+  public class FunctionDeclarationPath : ParserPath
   {
     public override SyntaxTokenType Match
     {
