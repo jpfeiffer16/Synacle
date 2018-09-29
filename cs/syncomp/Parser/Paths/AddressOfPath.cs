@@ -10,11 +10,11 @@ namespace syncomp
       get => SyntaxTokenType.AddressOf;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
-        return new AddressOf(nextNode);
+        return new Tuple<int, AstNode>(i, new AddressOf(nextNode));
       };
     }
   }

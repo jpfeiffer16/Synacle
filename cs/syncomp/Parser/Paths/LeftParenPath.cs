@@ -10,7 +10,7 @@ namespace syncomp
       get => SyntaxTokenType.LeftParen;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var expressionEnd = this.GetExpression(
@@ -27,7 +27,7 @@ namespace syncomp
         
         i = expressionEnd + 1;
 
-        return node;
+        return new Tuple<int, AstNode>(i, node);
       };
     }
   }

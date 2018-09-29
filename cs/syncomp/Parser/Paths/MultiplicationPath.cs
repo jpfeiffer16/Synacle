@@ -10,12 +10,12 @@ namespace syncomp
       get => SyntaxTokenType.Multiplication;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var left = nodes.Pop();
         var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });
-        return new Subtraction(left, right[0]);
+        return new Tuple<int, AstNode>(i, new Subtraction(left, right[0]));
       };
     }
   }

@@ -10,7 +10,7 @@ namespace syncomp
       get => SyntaxTokenType.While;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         i++;
@@ -33,7 +33,7 @@ namespace syncomp
 
         var expression = tokens.GetRange(i, expressionEnd - i);
         i = expressionEnd;
-        return new While(ParseTokens(condition), ParseTokens(expression));
+        return new Tuple<int, AstNode>(i, new While(ParseTokens(condition), ParseTokens(expression)));
       };
     }
   }

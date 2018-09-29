@@ -8,7 +8,7 @@ namespace syncomp
   {
     public virtual SyntaxTokenType Match { get; }
 
-    public virtual Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval 
+    public virtual Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval 
     { get; }
 
     public List<AstNode> ParseTokens(List<SyntaxToken> tokens)
@@ -27,7 +27,9 @@ namespace syncomp
         var matches = paths.Where(path => path.Match == tokens[i].Type);
         foreach (var match in matches)
         {
-          nodes.Add(match.Eval(i, tokens, nodes));
+          var (index, node) = match.Eval(i, tokens, nodes);
+          i = index;
+          nodes.Add(node);
         }
       }
 

@@ -11,7 +11,7 @@ namespace syncomp
       get => SyntaxTokenType.Quote;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         ++i;
@@ -19,9 +19,9 @@ namespace syncomp
         while (tokens[i].Type != SyntaxTokenType.Quote) {
           i++;
         }
-        return new StringLiteral(
+        return new Tuple<int, AstNode>(i, new StringLiteral(
           string.Join(string.Empty, tokens.GetRange(originalI, i - originalI).Select(tkn => tkn.Token))
-        );
+        ));
       };
     }
   }

@@ -10,7 +10,7 @@ namespace syncomp
       get => SyntaxTokenType.Deref;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var nextTerminator = this.GetNextTerminator(i, tokens);
@@ -19,7 +19,7 @@ namespace syncomp
           tokens.GetRange(i, nextTerminator - i)
         )[0];
         i = nextTerminator;
-        return new Deref(nextNode);
+        return new Tuple<int, AstNode>(i, new Deref(nextNode));
       };
     }
   }

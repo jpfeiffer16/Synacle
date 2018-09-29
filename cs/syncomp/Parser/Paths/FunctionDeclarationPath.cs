@@ -10,7 +10,7 @@ namespace syncomp
       get => SyntaxTokenType.FunctionDeclaration;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, AstNode> Eval
+    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
     {
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var name = tokens[++i];
@@ -47,7 +47,7 @@ namespace syncomp
 
 
 
-          return new FunctionDeclaration(parameters, expression, name?.Token);
+          return new Tuple<int, AstNode>(i, new FunctionDeclaration(parameters, expression, name?.Token));
       };
     }
   }
