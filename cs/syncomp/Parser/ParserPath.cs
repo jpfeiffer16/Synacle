@@ -13,6 +13,7 @@ namespace syncomp
 
     public List<AstNode> ParseTokens(List<SyntaxToken> tokens)
     {
+      //Load all ParserPaths
       var paths = AppDomain.CurrentDomain.GetAssemblies()
         .Where(asm => asm.FullName.Contains("syncomp"))
         .SelectMany(asm => asm.GetTypes())
