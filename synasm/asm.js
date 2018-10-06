@@ -9,7 +9,7 @@
       1.) Parse file into an array of string symbols
       2.) A macro engine that will run and replace, and rearrange symbols as
           needed
-      3.) The actuall assembler wich will then iterate over that list and convert
+      3.) The actual assembler wich will then iterate over that list and convert
           the symbols to the output binary.
 */
 
