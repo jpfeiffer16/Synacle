@@ -6,26 +6,27 @@ namespace syncomp
 {
   public class ParserPath
   {
+      //Load all ParserPaths
+    private static List<ParserPath> Paths = AppDomain
+        .CurrentDomain.GetAssemblies()
+        .Where(asm => asm.FullName.Contains("syncomp"))
+        .SelectMany(asm => asm.GetTypes())
+        .Where(tp => tp != typeof(ParserPath))
+        .Where(tp => typeof(ParserPath).IsAssignableFrom(tp))
+        .Select(tp => (ParserPath)Activator.CreateInstance(tp))
+        .ToList();
     public virtual SyntaxTokenType Match { get; }
 
     public virtual Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval 
     { get; }
 
     public List<AstNode> ParseTokens(List<SyntaxToken> tokens)
-    {
-      //Load all ParserPaths
-      var paths = AppDomain.CurrentDomain.GetAssemblies()
-        .Where(asm => asm.FullName.Contains("syncomp"))
-        .SelectMany(asm => asm.GetTypes())
-        .Where(tp => tp != typeof(ParserPath))
-        .Where(tp => typeof(ParserPath).IsAssignableFrom(tp))
-        .Select(tp => (ParserPath)Activator.CreateInstance(tp));
-      
+    { 
       var nodes = new List<AstNode>();
 
       for (var i = 0; i < tokens.Count(); i++)
       {
-        var matches = paths.Where(path => path.Match == tokens[i].Type);
+        var matches = Paths.Where(path => path.Match == tokens[i].Type).ToList();
         foreach (var match in matches)
         {
           var (index, node) = match.Eval(i, tokens, nodes);
