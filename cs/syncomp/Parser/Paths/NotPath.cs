@@ -15,7 +15,7 @@ namespace syncomp
       get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
         var nextTerminator = this.GetNextTerminator(i, tokens);
         var next = ParseTokens(tokens.GetRange(++i, nextTerminator - i))[0];
-        i = nextTerminator;
+        i = nextTerminator - 1;
         return new Tuple<int, AstNode>(i, new Not(next));
       };
     }

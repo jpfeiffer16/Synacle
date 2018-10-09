@@ -1,6 +1,9 @@
+#include "lib/stdlib.bc";
+
 var a = 10;
 var b = 20;
 
-if (!(a == b)) {
-  out(65);
+if (!a) {
+  println("Sometimes");
 }
+println("Always");

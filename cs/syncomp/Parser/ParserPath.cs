@@ -6,7 +6,7 @@ namespace syncomp
 {
   public class ParserPath
   {
-      //Load all ParserPaths
+    //Load all ParserPaths
     private static List<ParserPath> Paths = AppDomain
         .CurrentDomain.GetAssemblies()
         .Where(asm => asm.FullName.Contains("syncomp"))
