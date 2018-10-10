@@ -1,7 +1,9 @@
 namespace syncomp
 {
-  public class Decr : AstNode {
-    public Decr(AstNode parameter) : base("DECR") {
+  public class Decr : AstNode
+	{
+    public Decr(AstNode parameter) : base("DECR")
+		{
       this.Parameter = parameter;
     }
 

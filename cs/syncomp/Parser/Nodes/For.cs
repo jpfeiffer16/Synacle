@@ -2,13 +2,15 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class For : AstNode {
+  public class For : AstNode
+  {
     public For(
       List<AstNode> init,
       List<AstNode> condition,
       List<AstNode> incrementor,
       List<AstNode> expression
-    ) : base("FOR") {
+    ) : base("FOR")
+    {
       this.Init = init;
       this.Condition = condition;
       this.Incrementor = incrementor;

@@ -1,7 +1,9 @@
 namespace syncomp
 {
-  public class Deref : AstNode {
-    public Deref(AstNode parameter) : base("DEREF") {
+  public class Deref : AstNode
+  {
+    public Deref(AstNode parameter) : base("DEREF")
+    {
       this.Parameter = parameter;
     }
 

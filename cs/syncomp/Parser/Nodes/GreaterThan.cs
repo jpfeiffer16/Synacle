@@ -1,6 +1,9 @@
-namespace syncomp {
-  public class GreaterThan : AstNode {
-    public GreaterThan(AstNode left, AstNode right) : base("GEATER_THAN") {
+namespace syncomp
+{
+  public class GreaterThan : AstNode
+  {
+    public GreaterThan(AstNode left, AstNode right) : base("GEATER_THAN")
+    {
       this.Left = left;
       this.Right = right;
     }

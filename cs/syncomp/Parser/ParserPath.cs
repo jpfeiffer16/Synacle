@@ -57,7 +57,8 @@ namespace syncomp
       return index - 1;
     }
 
-    protected int GetNextTerminator(int index, List<SyntaxToken> tokens) {
+    protected int GetNextTerminator(int index, List<SyntaxToken> tokens)
+		{
       var openers = new List<SyntaxTokenType> {
         SyntaxTokenType.LeftCurly,
         SyntaxTokenType.LeftParen

@@ -10,7 +10,10 @@ namespace syncomp {
     }
 
     public List<AstNode> Parse() {
-      return new ParserPath().ParseTokens(this.tokens).Where(nd => nd != null).ToList();
+      return new ParserPath()
+        .ParseTokens(this.tokens)
+        .Where(nd => nd != null)
+        .ToList();
     }
   }
 }

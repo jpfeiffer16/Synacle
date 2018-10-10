@@ -1,11 +1,12 @@
 namespace syncomp
 {
-    public class StringLiteral : AstNode
+  public class StringLiteral : AstNode
+  {
+    public StringLiteral(string value) : base("STRING_LITTERAL")
     {
-        public StringLiteral(string value) : base("STRING_LITTERAL") {
-            this.Value = value;
-        }
-
-        public string Value { get; }
+      this.Value = value;
     }
+
+    public string Value { get; }
+  }
 }

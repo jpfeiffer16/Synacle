@@ -1,7 +1,9 @@
 namespace syncomp
 {
-  public class Or : AstNode {
-    public Or(AstNode left, AstNode right) : base("OR") {
+  public class Or : AstNode
+  {
+    public Or(AstNode left, AstNode right) : base("OR")
+    {
       this.Left = left;
       this.Right = right;
     }

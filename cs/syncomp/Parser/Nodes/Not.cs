@@ -1,7 +1,9 @@
 namespace syncomp
 {
-  public class Not : AstNode {
-    public Not(AstNode parameter) : base("NOT") {
+  public class Not : AstNode
+  {
+    public Not(AstNode parameter) : base("NOT")
+    {
       this.Parameter = parameter;
     }
 
