@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 
-namespace syncomp {
-    public class AstNode {
-        public string Type { get; private set; }
+namespace syncomp
+{
+  public class AstNode
+  {
+    public string Type { get; private set; }
 
-        public AstNode(string type)
-				{
-            this.Type = type;
-        }
+    public AstNode(string type)
+    {
+      this.Type = type;
     }
+  }
 }
