@@ -8,19 +8,26 @@ namespace syncomp
   public class Preprocessor
   {
     private readonly Regex IncludeRegex = new Regex("#include \"(\\S*)\"");
-    public Preprocessor(string code, string workingDirectory, List<string> includeLocations) {
+    public Preprocessor(
+      string code,
+      string workingDirectory,
+      List<string> includeLocations)
+    {
       this.Code = code;
       this.WorkingDirectory = workingDirectory;
       this.IncludeLocations = includeLocations;
     }
 
     public Preprocessor(string code, string workingDirectory) :
-      this(code, workingDirectory, new List<string>()) {}
+      this(code, workingDirectory, new List<string>())
+    { }
 
-    public string Preprocess() {
+    public string Preprocess()
+    {
       MatchCollection includeMatches;
 
-      while ((includeMatches = this.IncludeRegex.Matches(this.Code)).Count > 0) {
+      while ((includeMatches = this.IncludeRegex.Matches(this.Code)).Count > 0)
+      {
         var match = includeMatches[0];
         var group = includeMatches[0].Groups[1];
         this.Code = this.Code
@@ -32,7 +39,8 @@ namespace syncomp
       return this.Code;
     }
 
-    private string GetCode(string filePath) {
+    private string GetCode(string filePath)
+    {
       /*
         Resolution steps:
           1.) Working dir + filepath
@@ -43,8 +51,10 @@ namespace syncomp
         filePath
       );
 
-      if (!File.Exists(path)) {
-        foreach (var includeLocation in IncludeLocations) {
+      if (!File.Exists(path))
+      {
+        foreach (var includeLocation in IncludeLocations)
+        {
           var thisPath = Path.Combine(
             includeLocation,
             filePath
@@ -54,12 +64,14 @@ namespace syncomp
               thisPath
             );
         }
-      } else {
+      }
+      else
+      {
         return File.ReadAllText(
           path
         );
       }
-      throw new Exception(
+      throw new FileNotFoundException(
         $"Preprocessor: File {path} could not be found in any of the include paths. Check your INCLUDE environment variable"
       );
     }
