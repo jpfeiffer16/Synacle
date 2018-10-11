@@ -6,7 +6,7 @@ using syncomp;
 namespace syncomp.Tests
 {
   [TestClass]
-  public class NotEval : Behavior
+  public class NotPathEval : Behavior
   {
     public NotPath notPath { get; private set; }
 
@@ -34,9 +34,15 @@ namespace syncomp.Tests
     }
 
     [TestMethod]
-    public void IndexIsNow2()
+    public void IndexIsCorrect()
     {
-      Assert.IsTrue(this.result.Item1 == 2);
+      Assert.AreEqual(1, result.Item1);
+    }
+
+    [TestMethod]
+    public void AstNodeIsNot()
+    {
+      Assert.IsInstanceOfType(result.Item2, typeof(Not));
     }
   }
 }
