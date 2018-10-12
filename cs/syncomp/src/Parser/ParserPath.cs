@@ -17,8 +17,11 @@ namespace syncomp
         .ToList();
     public virtual SyntaxTokenType Match { get; }
 
-    public virtual Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval 
-    { get; }
+    public virtual (int, AstNode) Eval(
+      int index, List<SyntaxToken> tokens, List<AstNode> nodes)
+    {
+      throw new NotImplementedException("Must implement the Eval() method");
+    }
 
     public List<AstNode> ParseTokens(List<SyntaxToken> tokens)
     { 
