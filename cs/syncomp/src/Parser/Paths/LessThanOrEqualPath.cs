@@ -10,15 +10,14 @@ namespace syncomp
       get => SyntaxTokenType.LessThanOrEqual;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
-      get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
-        var previousAstNode = nodes.Pop();
-        return new Tuple<int, AstNode>(i, new LessThanOrEqual(
-          previousAstNode,
-          ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
-        ));
-      };
+      var previousAstNode = nodes.Pop();
+      return (i, new LessThanOrEqual(
+        previousAstNode,
+        ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+      ));
     }
   }
 }

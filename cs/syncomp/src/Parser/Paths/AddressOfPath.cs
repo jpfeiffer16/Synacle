@@ -10,7 +10,8 @@ namespace syncomp
       get => SyntaxTokenType.AddressOf;
     }
 
-    public override (int, AstNode) Eval (int i, List<SyntaxToken> tokens, List<AstNode> nodes)
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
       var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
       return (i, new AddressOf(nextNode));

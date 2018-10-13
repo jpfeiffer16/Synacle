@@ -10,12 +10,11 @@ namespace syncomp
       get => SyntaxTokenType.Incr;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
-      get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
-        var next = ParseTokens(new List<SyntaxToken> { tokens[++i] });
-        return new Tuple<int, AstNode>(i, new Incr(next[0]));
-      };
+      var next = ParseTokens(new List<SyntaxToken> { tokens[++i] });
+      return (i, new Incr(next[0]));
     }
   }
 }

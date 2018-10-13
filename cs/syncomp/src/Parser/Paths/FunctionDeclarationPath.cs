@@ -10,45 +10,45 @@ namespace syncomp
       get => SyntaxTokenType.FunctionDeclaration;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
-      get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
-        var name = tokens[++i];
-          if (name.Type != SyntaxTokenType.Identifier) {
-            name = null;
-            i--;
-          }
-          i++;
-          var nextClosingParen = GetExpression(
-            SyntaxTokenType.LeftParen,
-            SyntaxTokenType.RightParen,
-            i,
-            tokens
-          );
-          ++i;
-          var parameters = ParseTokens(
-            tokens.GetRange(i, nextClosingParen - i)
-          );
+      var name = tokens[++i];
+      if (name.Type != SyntaxTokenType.Identifier)
+      {
+        name = null;
+        i--;
+      }
+      i++;
+      var nextClosingParen = GetExpression(
+        SyntaxTokenType.LeftParen,
+        SyntaxTokenType.RightParen,
+        i,
+        tokens
+      );
+      ++i;
+      var parameters = ParseTokens(
+        tokens.GetRange(i, nextClosingParen - i)
+      );
 
-          i = nextClosingParen + 1;
+      i = nextClosingParen + 1;
 
-          var nextClosingCurly = GetExpression(
-            SyntaxTokenType.LeftCurly,
-            SyntaxTokenType.RightCurly,
-            i,
-            tokens
-          );
+      var nextClosingCurly = GetExpression(
+        SyntaxTokenType.LeftCurly,
+        SyntaxTokenType.RightCurly,
+        i,
+        tokens
+      );
 
-          var expression = ParseTokens(
-            tokens.GetRange(i, nextClosingCurly - i + 1)
-          );
+      var expression = ParseTokens(
+        tokens.GetRange(i, nextClosingCurly - i + 1)
+      );
 
-          i = nextClosingCurly;
+      i = nextClosingCurly;
 
 
 
-          return new Tuple<int, AstNode>(i, new FunctionDeclaration(parameters, expression, name?.Token));
-      };
+      return (i, new FunctionDeclaration(parameters, expression, name?.Token));
     }
   }
 }

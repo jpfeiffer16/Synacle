@@ -10,7 +10,8 @@ namespace syncomp
       get => SyntaxTokenType.Addition;
     }
 
-    public override (int, AstNode) Eval (int i, List<SyntaxToken> tokens, List<AstNode> nodes)
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
       var left = nodes.Pop();
       var right = ParseTokens(new List<SyntaxToken> { tokens[++i] });

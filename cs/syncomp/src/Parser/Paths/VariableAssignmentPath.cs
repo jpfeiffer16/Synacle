@@ -10,16 +10,15 @@ namespace syncomp
       get => SyntaxTokenType.VariableAssignment;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
-      get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
-        var previousAstNode = nodes.Pop();
-        var nextTerminator = GetNextTerminator(i, tokens);
-        var tokensToParse = tokens.GetRange(i + 1, nextTerminator - i);
-        i = nextTerminator;
-        var parsedParameter = ParseTokens(tokensToParse)[0];
-        return new Tuple<int, AstNode>(i, new VariableAssignment(previousAstNode, parsedParameter));
-      };
+      var previousAstNode = nodes.Pop();
+      var nextTerminator = GetNextTerminator(i, tokens);
+      var tokensToParse = tokens.GetRange(i + 1, nextTerminator - i);
+      i = nextTerminator;
+      var parsedParameter = ParseTokens(tokensToParse)[0];
+      return (i, new VariableAssignment(previousAstNode, parsedParameter));
     }
   }
 }

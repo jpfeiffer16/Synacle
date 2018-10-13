@@ -10,13 +10,12 @@ namespace syncomp
       get => SyntaxTokenType.Or;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
-      get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
-        var left = nodes.Pop();
-        var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
-        return new Tuple<int, AstNode>(i, new Or(left, right));
-      };
+      var left = nodes.Pop();
+      var right = ParseTokens(new List<SyntaxToken> { tokens[++i] })[0];
+      return (i, new Or(left, right));
     }
   }
 }

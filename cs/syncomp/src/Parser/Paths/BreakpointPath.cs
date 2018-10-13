@@ -10,11 +10,10 @@ namespace syncomp
       get => SyntaxTokenType.Breakpoint;
     }
 
-    public override Func<int, List<SyntaxToken>, List<AstNode>, Tuple<int, AstNode>> Eval
+    public override (int, AstNode) Eval(
+      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
-      get => (int i, List<SyntaxToken> tokens, List<AstNode> nodes) => {
-        return new Tuple<int, AstNode>(i, new Breakpoint());
-      };
+        return (i, new Breakpoint());
     }
   }
 }
