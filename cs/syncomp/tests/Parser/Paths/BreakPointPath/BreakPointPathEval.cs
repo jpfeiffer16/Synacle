@@ -7,7 +7,7 @@ namespace syncomp.Tests
   [TestClass]
   public class BreakPointPathEval : Behavior
   {
-    private Tuple<int, AstNode> result;
+    private (int, AstNode) result;
 
     protected override void Given()
     {

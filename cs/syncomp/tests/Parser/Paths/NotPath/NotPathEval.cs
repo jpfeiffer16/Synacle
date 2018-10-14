@@ -8,9 +8,7 @@ namespace syncomp.Tests
   [TestClass]
   public class NotPathEval : Behavior
   {
-    public NotPath notPath { get; private set; }
-
-    private Tuple<int, AstNode> result;
+    private (int, AstNode) result;
 
     protected override void Given()
     {
@@ -29,8 +27,7 @@ namespace syncomp.Tests
       };
       var nodes = new List<AstNode>();
       var index = 0;
-      this.notPath = new NotPath();
-      this.result = this.notPath.Eval(index, tokens, nodes);
+      this.result = new NotPath().Eval(index, tokens, nodes);
     }
 
     [TestMethod]
