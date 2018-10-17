@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace syncomp.Tests
@@ -82,6 +83,16 @@ namespace syncomp.Tests
         {
           Type = SyntaxTokenType.RightParen,
           Token = ")"
+        },
+        new SyntaxToken
+        {
+          Type = SyntaxTokenType.LeftCurly,
+          Token = "{"
+        },
+        new SyntaxToken
+        {
+          Type = SyntaxTokenType.RightCurly,
+          Token = "}"
         }
       };
       var nodes = new List<AstNode>();
@@ -94,7 +105,7 @@ namespace syncomp.Tests
     [TestMethod]
     public void IndexIsCorrect()
     {
-      Assert.AreEqual(10, this.result.Item1);
+      Assert.AreEqual(15, this.result.Item1);
     }
   
     [TestMethod]
@@ -104,9 +115,36 @@ namespace syncomp.Tests
     }
 
     [TestMethod]
-    public void AstNodeInitIsCorrect()
+    public void AstNodeInitSectionIsCorrect()
     {
-      Assert.IsInstanceOfType(this.forNode.Init, typeof(VariableAssignment));
+      Assert.IsInstanceOfType(
+        this.forNode.Init.FirstOrDefault(),
+        typeof(VariableAssignment)
+      );
+    }
+
+    [TestMethod]
+    public void AstNodeConditionSectionIsCorrect()
+    {
+      Assert.IsInstanceOfType(
+        this.forNode.Condition.FirstOrDefault(),
+        typeof(LessThan)
+      );
+    }
+
+    [TestMethod]
+    public void AstNodeIncrementSectionIsCorrect()
+    {
+      Assert.IsInstanceOfType(
+        this.forNode.Incrementor.FirstOrDefault(),
+        typeof(Incr)
+      );
+    }
+
+    [TestMethod]
+    public void AstNodeExpressionSectionIsCorrect()
+    {
+      Assert.AreEqual(0, this.forNode.Expression.Count());
     }
   }
 }
