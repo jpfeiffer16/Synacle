@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
   [TestClass]
-  public class GreaterThanOrEqualPathEval : Behavior
+  public class GreaterThanPathEval : Behavior
   {
     private (int, AstNode) result;
 
@@ -14,8 +14,8 @@ namespace syncomp.Tests
       {
         new SyntaxToken
         {
-          Type = SyntaxTokenType.GreaterThanOrEqual,
-          Token = ">="
+          Type = SyntaxTokenType.GreaterThan,
+          Token = ">"
         },
         new SyntaxToken
         {
@@ -29,7 +29,7 @@ namespace syncomp.Tests
       };
       var index = 0;
 
-      this.result = new GreaterThanOrEqualPath().Eval(index, tokens, nodes);
+      this.result = new GreaterThanPath().Eval(index, tokens, nodes);
     }
 
     [TestMethod]
@@ -41,23 +41,23 @@ namespace syncomp.Tests
     [TestMethod]
     public void AstNodeIsCorrect()
     {
-      Assert.IsInstanceOfType(this.result.Item2, typeof(GreaterThanOrEqual));
+      Assert.IsInstanceOfType(this.result.Item2, typeof(GreaterThan));
     }
 
     [TestMethod]
     public void AstNodeLeftIsCorrect()
     {
       Assert.IsInstanceOfType(
-        ((GreaterThanOrEqual)this.result.Item2).Left,
+        ((GreaterThan)this.result.Item2).Left,
         typeof(Identifier)
       );
     }
 
     [TestMethod]
-    public void AstNodRightIsCorrect()
+    public void AstNodeRightIsCorrect()
     {
       Assert.IsInstanceOfType(
-        ((GreaterThanOrEqual)this.result.Item2).Right,
+        ((GreaterThan)this.result.Item2).Right,
         typeof(IntegerLiteral)
       );
     }

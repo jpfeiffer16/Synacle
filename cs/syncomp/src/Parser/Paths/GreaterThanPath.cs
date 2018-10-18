@@ -14,9 +14,10 @@ namespace syncomp
       int i, List<SyntaxToken> tokens, List<AstNode> nodes)
     {
         var previousAstNode = nodes.Pop();
+        ++i;
         return (i, new GreaterThan(
           previousAstNode,
-          ParseTokens(new List<SyntaxToken>() { tokens[++i] })[0]
+          ParseTokens(new List<SyntaxToken>() { tokens[i] })[0]
         ));
     }
   }
