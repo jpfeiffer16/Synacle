@@ -1,0 +1,14 @@
+//Hard deps are error.bc and stdlib.bc
+var ARGUMENTS_NOT_EQUAL = "Arguments are not equal";
+
+
+function assert_are_equal(var expected, var actual) {
+  if (expected != actual) {
+    print("Expected: ");
+    print_number(expected);
+    print(" Recieved: ");
+    print_number(actual);
+    out(10);
+    throw(ARGUMENTS_NOT_EQUAL);
+  };
+}

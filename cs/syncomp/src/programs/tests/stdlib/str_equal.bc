@@ -1,0 +1,7 @@
+include "stdlib.bc"
+include "error.bc"
+include "testlib.bc"
+
+
+
+assert_are_equal();
