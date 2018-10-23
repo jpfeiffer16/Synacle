@@ -7,36 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Compiler",
-            "cwd": "${workspaceFolder}/compiler",
-            "program": "${workspaceFolder}/compiler/compiler.js",
-            "args": [
-                "-p",
-                "testexpression.bc"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Assembler",
-            "program": "${workspaceFolder}/assembler/asm.js",
-            "args": [
-                "./programs/pig-latin.asm"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "console": "externalTerminal",
-            // "program": "${workspaceFolder}/toInt.js".
-            "program": "${workspaceFolder}/vm.js",
+            "name": "Launch VM",
+            "cwd": "${workspaceFolder}/",
+            "program": "${workspaceFolder}/synvm/vm.js",
             "args": [
                 "-b",
-                // "assembler/programs/echo.bin"
-                "assembler/programs/pig-latin.bin"
+                "cs/syncomp/src/programs/example.bin"
             ]
-            // "program": "${workspaceFolder}/test.js"
         }
     ]
 }

@@ -1,9 +1,48 @@
-var a = 10;
-var b = 5;
+var num_test = 4;
+var test = num_test < 3;
+out(65 + test);
 
-var c = a >= b;
-
-if (c) {
-  out(65);
+var i = 0;
+while (i < 3) {
+  ++i;
+  out(65 + i);
 }
+
 out(66);
+
+
+//function print_number(var num) {
+//  if (num == 10) {
+//    out(49);
+//    out(48);
+//    return;
+//  }
+//  var charNum;
+//  var length = 0;
+//  while (num > 10) {
+//    charNum = num % 10;
+//    push(charNum);
+//    ++length;
+//    num = num / 10;
+//  }
+//  charNum = num % 10;
+//  push(charNum);
+//  ++length;
+//  breakpoint;
+//
+//  //Clean up the stack and output number
+//  var stackIndex = 0;
+//  breakpoint;
+//
+//  while(stackIndex < length) {
+//    stackIndex = stackIndex + 1;
+//    out(pop() + 48);
+//  }
+//}
+//
+//
+//function main() {
+//  print_number(123);
+//}
+//
+//main();
