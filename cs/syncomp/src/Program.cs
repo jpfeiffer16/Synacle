@@ -28,23 +28,43 @@ namespace syncomp
 
             var filePath = args[0];
 
+
+            string code;
+            string workingDirectory;
+            FileInfo fileInfo = null;
             if (filePath == "-") {
                 //Make this async once the above comment is done
-                var code = Console.In.ReadToEnd();
-                var workingDirectory = Directory.GetCurrentDirectory();
+                code = Console.In.ReadToEnd();
+                workingDirectory = Directory.GetCurrentDirectory();
 
-                var asmLines = CompileCode(code, workingDirectory, includeList);
-                Console.Write(string.Join("\n", asmLines));
+                
             } else {
-                var fileInfo = new FileInfo(filePath);
-                var workingDirectory = fileInfo.Directory.FullName;
+                fileInfo = new FileInfo(filePath);
+                workingDirectory = fileInfo.Directory.FullName;
                 
                 //Get code
-                var code = File.ReadAllText(
+                code = File.ReadAllText(
                     filePath
                 );
-                var asmLines = CompileCode(code, workingDirectory, includeList);
+                
+            }
+            List<string> asmLines = new List<string>();
+            try
+            {
+                asmLines = CompileCode(code, workingDirectory, includeList);
+            }
+            catch(Exception e)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                throw;
+            }
 
+            if (filePath == "-") {
+                //Write to stdout
+                Console.Write(string.Join("\n", asmLines));
+            }
+            else
+            {
                 //Write file
                 File.WriteAllLines(
                     $"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}",

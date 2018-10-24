@@ -1,7 +1,8 @@
-include "stdlib.bc"
-include "error.bc"
-include "testlib.bc"
+#include "stdlib.bc"
+#include "error.bc"
+#include "testlib.bc"
 
-
-
-assert_are_equal();
+//var not_equal = str_equal("test", "test2");
+//assert(function() {
+//  return eq(0, not_equal);
+//});
