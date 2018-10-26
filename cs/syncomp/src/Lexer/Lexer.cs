@@ -19,66 +19,66 @@ namespace syncomp {
       this.code = code;
     }
 
-    public (List<SyntaxToken>, List<SyntaxTokenMapping>) Lex() {
-      var map = new List<SyntaxTokenMapping>();
+    public List<SyntaxToken> Lex() {
       var tokens = new List<SyntaxToken>();
       var currentToken = string.Empty;
       var currentCharType = CharType.Unknown;
       var keepWhitespace = false;
 
-      var strippedCode = string.Join(
-        "\n",
+      var strippedCode =
         this
           .code
           .Split("\n")
-          .Where(line => !line.Trim().StartsWith("//"))
-      );
+          .Where(line => !line.Trim().StartsWith("//"));
         
+      for (var li = 0; li < strippedCode.Count(); li++) {
+        var lineCode = strippedCode.ElementAt(li);
+        for (var i = 0; i < lineCode.Length; i++) {
+          var ch = lineCode[i];
+          var chr = ch.ToString();
+          if (chr == "\"") keepWhitespace = !keepWhitespace;
+          if (!keepWhitespace) chr = chr.Trim();
+          var charType = CharType.Unknown;
 
-      for (var i = 0; i < strippedCode.Length; i++) {
-        var ch = strippedCode[i];
-        var chr = ch.ToString();
-        if (chr == "\"") keepWhitespace = !keepWhitespace;
-        if (!keepWhitespace) chr = chr.Trim();
-        var charType = CharType.Unknown;
-
-        if (isNumberChar(chr)) {
-          charType = CharType.Number;
-        } else if (isWordChar(chr)) {
-          charType = CharType.Char;
-        } else {
-          charType = CharType.Symbol;
-        }
-
-        if (currentCharType != charType || charType == CharType.Symbol || i == strippedCode.Length - 1) {
-          if (currentToken.Length > 0) {
-            tokens.Add(new SyntaxToken(currentToken));
-            map.Add(new SyntaxTokenMapping {
-              SyntaxTokenIndex = tokens.Count() - 1,
-              Width = 1,
-              Start = i,
-              Line = 0
-            });
-            currentToken = String.Empty;
+          if (isNumberChar(chr)) {
+            charType = CharType.Number;
+          } else if (isWordChar(chr)) {
+            charType = CharType.Char;
+          } else {
+            charType = CharType.Symbol;
           }
-        }
 
-        currentCharType = charType;
-        currentToken += chr;
+          if (currentCharType != charType ||
+            charType == CharType.Symbol ||
+            i == lineCode.Length - 1)
+          {
+            if (currentToken.Length > 0) {
+              tokens.Add(
+                new SyntaxToken(currentToken)
+                {
+                  Index = i - currentToken.Length,
+                  Line = li 
+                }
+              );
+              currentToken = String.Empty;
+            }
+          }
+
+          currentCharType = charType;
+          currentToken += chr;
+        }
       }
 
       if (currentToken.Length > 0) {
-        tokens.Add(new SyntaxToken(currentToken));
-        map.Add(new SyntaxTokenMapping {
-          SyntaxTokenIndex = tokens.Count() - 1,
-          Width = 1,
-          Start = tokens.Count() - 2,
-          Line = 0
-        });
+        tokens.Add(
+          new SyntaxToken(currentToken) {
+            Line = strippedCode.Count(),
+            Index = strippedCode.LastOrDefault().Count() - currentToken.Length
+          }
+        );
       }
-
       tokens = AggregateLikeTokens(tokens);
-      return (tokens, map);
+      return tokens;
     }
 
     private bool isNumberChar(string ch) {
@@ -109,7 +109,10 @@ namespace syncomp {
               tokens.Splice(
                 i,
                 mToken.Token.Length,
-                new List<SyntaxToken>() { new SyntaxToken(aggrTokens) }
+                new List<SyntaxToken>()
+                {
+                  new SyntaxToken(aggrTokens) { Index = i, Line = token.Line }
+                }
               );
             }
           }

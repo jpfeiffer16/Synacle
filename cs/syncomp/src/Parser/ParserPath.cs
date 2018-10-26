@@ -32,9 +32,16 @@ namespace syncomp
         var matches = Paths.Where(path => path.Match == tokens[i].Type).ToList();
         foreach (var match in matches)
         {
-          var (index, node) = match.Eval(i, tokens, nodes);
-          i = index;
-          nodes.Add(node);
+          try
+          {
+            var (index, node) = match.Eval(i, tokens, nodes);
+            i = index;
+            nodes.Add(node);
+          }
+          catch (Exception e)
+          {
+            throw new ParseException(i, tokens, nodes);
+          }
         }
       }
 

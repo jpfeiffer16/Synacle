@@ -53,7 +53,7 @@ namespace syncomp
             {
                 asmLines = CompileCode(code, workingDirectory, includeList);
             }
-            catch(Exception e)
+            catch(ParseException e)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 throw;
@@ -83,7 +83,7 @@ namespace syncomp
             code = preprocessor.Preprocess();
             //Lex
             var lexer = new Lexer(code);
-            var (tokens, syntaxTokensMap) = lexer.Lex();
+            var tokens = lexer.Lex();
             //Parse
             var parser = new Parser(tokens);
             var ast = parser.Parse();
