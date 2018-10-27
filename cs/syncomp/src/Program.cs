@@ -49,15 +49,7 @@ namespace syncomp
                 
             }
             List<string> asmLines = new List<string>();
-            try
-            {
-                asmLines = CompileCode(code, workingDirectory, includeList);
-            }
-            catch(ParseException e)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                throw;
-            }
+            asmLines = CompileCode(code, workingDirectory, includeList);
 
             if (filePath == "-") {
                 //Write to stdout
@@ -83,13 +75,54 @@ namespace syncomp
             code = preprocessor.Preprocess();
             //Lex
             var lexer = new Lexer(code);
-            var tokens = lexer.Lex();
-            //Parse
-            var parser = new Parser(tokens);
-            var ast = parser.Parse();
+            var (tokens, lines) = lexer.Lex();
+            List<AstNode> ast = null;
+            try
+            {
+                //Parse
+                var parser = new Parser(tokens);
+                ast = parser.Parse();
+            }
+            catch(ParseException e)
+            {
+                DisplayParseErrorContext(e, lines);
+                var token = e.Tokens[e.Index];
+                Console.WriteLine($"Syntax error in {token.File}:{token.Line},{token.Index}");
+                Console.WriteLine($"Near token '{token.Token}'");
+                Environment.Exit(1);
+            }
             //Transform
             var transformer = new Transformer(ast);
             return transformer.Transform();
+        }
+
+        private static void DisplayParseErrorContext(
+            ParseException error, List<string> codeLines)
+        {
+            var originalConsoleColor = Console.ForegroundColor;
+            var token = error.Tokens[error.Index];
+            var from = token.Line - 2 < 0 ? 0 : token.Line - 2;
+            codeLines
+                .GetRange(from, token.Line - from)
+                .ForEach(t => Console.WriteLine(t));
+            var errorLine = codeLines.ElementAt(token.Line);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(errorLine);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            var i = 0;
+            for (; i < error.Index; i++)
+            {
+                Console.Write(" ");
+            }
+            i = i == 0 ? 0 : i - 1;
+            Console.WriteLine("^");
+            Console.ForegroundColor = originalConsoleColor;
+            if (token.Line + 1 < codeLines.Count())
+            {
+                var to = token.Line + 3 > codeLines.Count() ? codeLines.Count() : token.Line + 3;
+                codeLines.GetRange(token.Line + 1, to - (token.Line + 1)).ForEach(Console.WriteLine);
+            }
+            Console.WriteLine();
         }
 
         private static void PrintUsage() {

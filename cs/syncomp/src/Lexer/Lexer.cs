@@ -19,7 +19,7 @@ namespace syncomp {
       this.code = code;
     }
 
-    public List<SyntaxToken> Lex() {
+    public (List<SyntaxToken>, List<string>) Lex() {
       var tokens = new List<SyntaxToken>();
       var currentToken = string.Empty;
       var currentCharType = CharType.Unknown;
@@ -78,7 +78,7 @@ namespace syncomp {
         );
       }
       tokens = AggregateLikeTokens(tokens);
-      return tokens;
+      return (tokens, strippedCode.ToList());
     }
 
     private bool isNumberChar(string ch) {

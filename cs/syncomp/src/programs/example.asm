@@ -1,44 +1,44 @@
-jmp >var_7d16bdf44f23_end
-:var_7d16bdf44f23
-:var_7d16bdf44f23_end
+jmp >var_f0f55ea91d5a_end
+:var_f0f55ea91d5a
+:var_f0f55ea91d5a_end
 set reg0 4
-wmem >var_7d16bdf44f23 reg0
-jmp >var_dd6c44558634_end
-:var_dd6c44558634
-:var_dd6c44558634_end
-rmem reg0 >var_7d16bdf44f23
+wmem >var_f0f55ea91d5a reg0
+jmp >var_2a03bf294af5_end
+:var_2a03bf294af5
+:var_2a03bf294af5_end
+rmem reg0 >var_f0f55ea91d5a
 set reg1 3
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-wmem >var_dd6c44558634 reg0
+wmem >var_2a03bf294af5 reg0
 set reg0 65
-rmem reg1 >var_dd6c44558634
+rmem reg1 >var_2a03bf294af5
 add reg0 reg0 reg1
 out reg0
-jmp >var_d204b7825434_end
-:var_d204b7825434
-:var_d204b7825434_end
+jmp >var_33f5523fe4e1_end
+:var_33f5523fe4e1
+:var_33f5523fe4e1_end
 set reg0 0
-wmem >var_d204b7825434 reg0
-:while_9f6bf67321e2_begin
-rmem reg0 >var_d204b7825434
+wmem >var_33f5523fe4e1 reg0
+:while_98b0b46e47e4_begin
+rmem reg0 >var_33f5523fe4e1
 set reg1 3
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while_9f6bf67321e2_end
-rmem reg0 >var_d204b7825434
+jf reg0 >while_98b0b46e47e4_end
+rmem reg0 >var_33f5523fe4e1
 add reg0 reg0 1
-wmem >var_d204b7825434 reg0
+wmem >var_33f5523fe4e1 reg0
 set reg0 65
-rmem reg1 >var_d204b7825434
+rmem reg1 >var_33f5523fe4e1
 add reg0 reg0 reg1
 out reg0
-jmp >while_9f6bf67321e2_begin
-:while_9f6bf67321e2_end
+jmp >while_98b0b46e47e4_begin
+:while_98b0b46e47e4_end
 set reg0 66
 out reg0
 halt

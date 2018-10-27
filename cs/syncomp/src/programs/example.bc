@@ -1,4 +1,4 @@
-var num_test =;
+var num_test = 4;
 var test = num_test < 3;
 out(65 + test);
 

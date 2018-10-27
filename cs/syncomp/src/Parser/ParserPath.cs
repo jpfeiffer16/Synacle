@@ -40,7 +40,14 @@ namespace syncomp
           }
           catch (Exception e)
           {
-            throw new ParseException(i, tokens, nodes);
+            if (e.GetType() == typeof(ParseException))
+            {
+              throw;
+            }
+            else
+            {
+              throw new ParseException(i, tokens, nodes);
+            }
           }
         }
       }
