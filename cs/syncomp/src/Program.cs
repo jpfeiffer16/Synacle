@@ -87,8 +87,8 @@ namespace syncomp
             {
                 DisplayParseErrorContext(e, lines);
                 var token = e.Tokens[e.Index];
-                Console.WriteLine($"Syntax error in {token.File}:{token.Line},{token.Index}");
-                Console.WriteLine($"Near token '{token.Token}'");
+                Console.Error.WriteLine($"Syntax error in {token.File}:{token.Line},{token.Index}");
+                Console.Error.WriteLine($"Near token '{token.Token}'");
                 Environment.Exit(1);
             }
             //Transform
@@ -107,22 +107,22 @@ namespace syncomp
                 .ForEach(t => Console.WriteLine(t));
             var errorLine = codeLines.ElementAt(token.Line);
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(errorLine);
+            Console.Error.WriteLine(errorLine);
             Console.ForegroundColor = ConsoleColor.Yellow;
             var i = 0;
             for (; i < error.Index; i++)
             {
-                Console.Write(" ");
+                Console.Error.Write(" ");
             }
             i = i == 0 ? 0 : i - 1;
-            Console.WriteLine("^");
+            Console.Error.WriteLine("^");
             Console.ForegroundColor = originalConsoleColor;
             if (token.Line + 1 < codeLines.Count())
             {
                 var to = token.Line + 3 > codeLines.Count() ? codeLines.Count() : token.Line + 3;
                 codeLines.GetRange(token.Line + 1, to - (token.Line + 1)).ForEach(Console.WriteLine);
             }
-            Console.WriteLine();
+            Console.Error.WriteLine();
         }
 
         private static void PrintUsage() {

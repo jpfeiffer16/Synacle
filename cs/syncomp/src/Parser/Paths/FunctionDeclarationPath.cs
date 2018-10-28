@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -29,7 +30,12 @@ namespace syncomp
       ++i;
       var parameters = ParseTokens(
         tokens.GetRange(i, nextClosingParen - i)
-      );
+      )
+        // Catch any params that are not VariableDeclaration types
+        // This cast will fail if any are not the right type
+        .Cast<VariableDeclaration>()
+        .Cast<AstNode>()
+        .ToList();
 
       i = nextClosingParen + 1;
 
