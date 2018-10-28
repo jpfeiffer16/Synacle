@@ -99,7 +99,7 @@ namespace syncomp.Tests
       this.result = new FunctionDeclarationPath().Eval(index, tokens, nodes);
       index = 0;
 
-      this.resultAnonymous = new FunctionDeclarationPath().Eval(index, tokens, nodes);
+      this.resultAnonymous = new FunctionDeclarationPath().Eval(index, tokensAnon, nodes);
     }
 
     [TestMethod]
@@ -141,10 +141,11 @@ namespace syncomp.Tests
       );
     }
 
+    [TestMethod]
     public void AstNodeAnonymousHasNoName()
     {
       Assert.AreEqual(
-        ((FunctionDeclaration)this.result.Item2).Name,
+        ((FunctionDeclaration)this.resultAnonymous.Item2).Name,
         null
       );
     }

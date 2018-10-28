@@ -1,3 +1,4 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace syncomp.Tests
@@ -9,6 +10,20 @@ namespace syncomp.Tests
     {
       this.Given();
     }
+
+    protected T TrapException<T>(Action cb) where T : Exception
+    {
+      try
+      {
+        cb();
+      }
+      catch(T error)
+      {
+        return (T)error;
+      }
+      return null;
+    }
+
     protected abstract void Given();
   }
 }
