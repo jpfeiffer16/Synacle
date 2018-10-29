@@ -110,7 +110,7 @@ namespace syncomp
             Console.Error.WriteLine(errorLine);
             Console.ForegroundColor = ConsoleColor.Yellow;
             var i = 0;
-            for (; i < error.Index; i++)
+            for (; i < token.Index; i++)
             {
                 Console.Error.Write(" ");
             }
