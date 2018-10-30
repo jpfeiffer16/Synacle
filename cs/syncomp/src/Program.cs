@@ -74,12 +74,21 @@ namespace syncomp
             var preprocessor = new Preprocessor(code, workingDirectory, includeLocations);
             code = preprocessor.Preprocess();
             //Lex
-            var lexer = new Lexer(code);
-            var (tokens, lines) = lexer.Lex();
+            List<SyntaxToken> tokens = null;
+            List<string> lines = null;
+            try
+            {
+                var lexer = new Lexer(code);
+                (tokens, lines) = lexer.Lex();
+            }
+            catch(Exception e)
+            {
+                Console.Error.WriteLine("Lexer error");
+            }
+            //Parse
             List<AstNode> ast = null;
             try
             {
-                //Parse
                 var parser = new Parser(tokens);
                 ast = parser.Parse();
             }

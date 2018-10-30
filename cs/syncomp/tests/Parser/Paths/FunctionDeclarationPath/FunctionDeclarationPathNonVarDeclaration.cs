@@ -52,7 +52,6 @@ namespace syncomp.Tests
       };
 
       var nodes = new List<AstNode>();
-      var index = 0;
 
       this.result = this.TrapException<ParseException>(() => 
         // new FunctionDeclarationPath().Eval(index, tokens, nodes)
