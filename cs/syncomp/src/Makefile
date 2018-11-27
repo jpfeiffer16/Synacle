@@ -1,4 +1,5 @@
 install:
+	uninstall
 	#Install library code for includes
 	mkdir -p /usr/include/bc
 	cp programs/lib/* /usr/include/bc/

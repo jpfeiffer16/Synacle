@@ -96,7 +96,7 @@ namespace syncomp
             {
                 DisplayParseErrorContext(e, lines);
                 var token = e.Tokens[e.Index];
-                Console.Error.WriteLine($"Syntax error in {token.File}:{token.Line},{token.Index}");
+                Console.Error.WriteLine($"Syntax error :{token.Line},{token.Index}");
                 Console.Error.WriteLine($"Near token '{token.Token}'");
                 Environment.Exit(1);
             }

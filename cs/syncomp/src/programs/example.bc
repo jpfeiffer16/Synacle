@@ -7,7 +7,7 @@ function main()
   var ar = array_new(10);
   array_foreach(
     ar,
-    function(elem_ptr, var index)
+    function(var elem_ptr, var index)
     {
       print_number(index);
       println(" ");

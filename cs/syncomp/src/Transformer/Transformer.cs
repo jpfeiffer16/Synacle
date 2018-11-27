@@ -7,12 +7,26 @@ namespace syncomp
 {
   public class Transformer
   {
+    private static List<IEmitter> Emitters = AppDomain
+        .CurrentDomain.GetAssemblies()
+        .Where(asm => asm.FullName.Contains("syncomp"))
+        .SelectMany(asm => asm.GetTypes())
+        .Where(tp => tp != typeof(IEmitter))
+        .Where(tp => typeof(IEmitter).IsAssignableFrom(tp))
+        .Select(tp => (IEmitter)Activator.CreateInstance(tp))
+        .ToList();
+
     private readonly List<AstNode> nodes;
 
     public Transformer(List<AstNode> nodes)
     {
       this.nodes = nodes;
     }
+
+    // public List<string> Transform(List<AstNode> astNodes, Context ctx)
+    // {
+    //   return this.TransformAst(astNodes, ctx);
+    // }
 
     public List<string> Transform()
     {
@@ -27,6 +41,9 @@ namespace syncomp
       lines = EnsureOrSupport(ctx, lines);
       return lines;
     }
+
+
+
     private List<string> TransformAst(List<AstNode> ast, Context ctx)
     {
       var lines = new List<string>();
