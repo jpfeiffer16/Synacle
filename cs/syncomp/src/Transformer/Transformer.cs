@@ -221,48 +221,48 @@ namespace syncomp
         //   lines.Add($"add reg0 reg0 reg1");
         // }
 
-        if (nodeType == typeof(Incr))
-        {
-          var incrNode = node as Incr;
-          lines.AddRange(TransformAst(new List<AstNode> { incrNode.Parameter }, ctx));
+        // if (nodeType == typeof(Incr))
+        // {
+        //   var incrNode = node as Incr;
+        //   lines.AddRange(TransformAst(new List<AstNode> { incrNode.Parameter }, ctx));
 
-          lines.Add($"add reg0 reg0 1");
-          lines.Add($"wmem >{ctx.Variables.Get((incrNode.Parameter as Identifier).Name).MemoryAddress} reg0");
-        }
+        //   lines.Add($"add reg0 reg0 1");
+        //   lines.Add($"wmem >{ctx.Variables.Get((incrNode.Parameter as Identifier).Name).MemoryAddress} reg0");
+        // }
 
-        if (nodeType == typeof(Subtraction))
-        {
-          var sbNode = node as Subtraction;
+        // if (nodeType == typeof(Subtraction))
+        // {
+        //   var sbNode = node as Subtraction;
 
-          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
-          ctx.RegisterLevel--;
+        //   lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
 
-          lines.Add($"call >subtract");
-        }
+        //   lines.Add($"call >subtract");
+        // }
 
-        if (nodeType == typeof(Decr))
-        {
-          var dcNode = node as Decr;
+        // if (nodeType == typeof(Decr))
+        // {
+        //   var dcNode = node as Decr;
 
-          lines.AddRange(TransformAst(new List<AstNode> { dcNode.Parameter }, ctx));;
-          lines.Add("set reg1 1");
-          lines.Add($"call >subtract");
-          lines.Add($"wmem >{ctx.Variables.Get((dcNode.Parameter as Identifier).Name).MemoryAddress} reg0");
-        }
+        //   lines.AddRange(TransformAst(new List<AstNode> { dcNode.Parameter }, ctx));;
+        //   lines.Add("set reg1 1");
+        //   lines.Add($"call >subtract");
+        //   lines.Add($"wmem >{ctx.Variables.Get((dcNode.Parameter as Identifier).Name).MemoryAddress} reg0");
+        // }
 
-        if (nodeType == typeof(Multiplication))
-        {
-          var sbNode = node as Multiplication;
+        // if (nodeType == typeof(Multiplication))
+        // {
+        //   var sbNode = node as Multiplication;
 
-          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
-          ctx.RegisterLevel--;
+        //   lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
 
-          lines.Add($"mult reg0 reg0 reg1");
-        }
+        //   lines.Add($"mult reg0 reg0 reg1");
+        // }
 
 
         if (nodeType == typeof(Division))
