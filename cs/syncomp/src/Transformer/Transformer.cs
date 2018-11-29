@@ -23,22 +23,38 @@ namespace syncomp
       this.nodes = nodes;
     }
 
-    // public List<string> Transform(List<AstNode> astNodes, Context ctx)
-    // {
-    //   return this.TransformAst(astNodes, ctx);
-    // }
+    public Transformer()
+    {}
+
+    public List<string> Transform(List<AstNode> astNodes, Context ctx)
+    {
+      return this.TransformAst(astNodes, ctx);
+    }
 
     public List<string> Transform()
     {
       var ctx = new Context();
-      var lines = TransformAst(this.nodes, ctx);
+      // var lines = TransformAst(this.nodes, ctx);
+      var lines = new List<string>();
+      
+      foreach (var node in nodes)
+      {
+        var matches = Emitters.Where(em =>
+          node.GetType().Equals(em.Match)
+        ).ToList();
+        foreach (var match in matches)
+        {
+          lines.AddRange(match.Transform(node, ctx));
+        }
+      }
+
       //Manually add a halt so as not to trample over data
       lines.Add("halt");
-      lines = EnsureSubtractSupport(ctx, lines);
-      lines = EnsureNotSupport(ctx, lines);
-      lines = EnsureDivisionSupport(ctx, lines);
-      lines = EnsureAndSupport(ctx, lines);
-      lines = EnsureOrSupport(ctx, lines);
+      // lines = EnsureSubtractSupport(ctx, lines);
+      // lines = EnsureNotSupport(ctx, lines);
+      // lines = EnsureDivisionSupport(ctx, lines);
+      // lines = EnsureAndSupport(ctx, lines);
+      // lines = EnsureOrSupport(ctx, lines);
       return lines;
     }
 
@@ -52,158 +68,158 @@ namespace syncomp
         var node = ast[i];
         var nodeType = node.GetType();
 
-        if (nodeType == typeof(VariableDeclaration))
-        {
-          var vdNode = node as VariableDeclaration;
+        // if (nodeType == typeof(VariableDeclaration))
+        // {
+        //   var vdNode = node as VariableDeclaration;
 
 
-          var guid = this.GetUID();
-          lines.Add($"jmp >var_{guid.ToString()}_end");
-          lines.Add($":var_{guid.ToString()}");
-          lines.Add($":var_{guid.ToString()}_end");
+        //   var guid = this.GetUID();
+        //   lines.Add($"jmp >var_{guid.ToString()}_end");
+        //   lines.Add($":var_{guid.ToString()}");
+        //   lines.Add($":var_{guid.ToString()}_end");
 
-          ctx.Variables.Add(new Variable()
-          {
-            Name = vdNode.Identifier,
-            MemoryAddress = $"var_{guid.ToString()}"
-          });
-        }
+        //   ctx.Variables.Add(new Variable()
+        //   {
+        //     Name = vdNode.Identifier,
+        //     MemoryAddress = $"var_{guid.ToString()}"
+        //   });
+        // }
 
-        if (nodeType == typeof(FunctionDeclaration)) {
-          var fcNode = node as FunctionDeclaration;
-          var name = fcNode.Name ?? $"function_{this.GetUID()}";
-          var memoryAddress = $"{name}";
-          lines.Add($"jmp >{memoryAddress}_end");
-          lines.Add($":{name}");
-          ctx.Variables.Push();
-          lines.AddRange(TransformAst(fcNode.Parameters, ctx));
-          for (var index = 0; index < fcNode.Parameters.Count; index++) {
-            var parameter = fcNode.Parameters[index];
-            var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
-            lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
-          }
-          lines.AddRange(TransformAst(fcNode.Expression, ctx));
-          lines.Add("ret");
-          lines.Add($":{memoryAddress}_end");
-          //Manually add variable
-          lines.Add($"set reg{ctx.RegisterLevel} >{name}");
-          ctx.Variables.Pop();
-        }
+        // if (nodeType == typeof(FunctionDeclaration)) {
+        //   var fcNode = node as FunctionDeclaration;
+        //   var name = fcNode.Name ?? $"function_{this.GetUID()}";
+        //   var memoryAddress = $"{name}";
+        //   lines.Add($"jmp >{memoryAddress}_end");
+        //   lines.Add($":{name}");
+        //   ctx.Variables.Push();
+        //   lines.AddRange(TransformAst(fcNode.Parameters, ctx));
+        //   for (var index = 0; index < fcNode.Parameters.Count; index++) {
+        //     var parameter = fcNode.Parameters[index];
+        //     var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
+        //     lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
+        //   }
+        //   lines.AddRange(TransformAst(fcNode.Expression, ctx));
+        //   lines.Add("ret");
+        //   lines.Add($":{memoryAddress}_end");
+        //   //Manually add variable
+        //   lines.Add($"set reg{ctx.RegisterLevel} >{name}");
+        //   ctx.Variables.Pop();
+        // }
 
-        if (nodeType == typeof(VariableAssignment))
-        {
-          var vaNode = node as VariableAssignment;
+        // if (nodeType == typeof(VariableAssignment))
+        // {
+        //   var vaNode = node as VariableAssignment;
 
-          Variable variable = null;
+        //   Variable variable = null;
 
-          if (vaNode.Identifier.GetType() == typeof(Identifier)) {
-            variable = ctx.Variables.Get((vaNode.Identifier as Identifier).Name);
-          } else if (vaNode.Identifier.GetType() == typeof(VariableDeclaration))  {
-            lines.AddRange(TransformAst(new List<AstNode> { vaNode.Identifier }, ctx));
-            variable = ctx.Variables.Get((vaNode.Identifier as VariableDeclaration).Identifier);
-          }
+        //   if (vaNode.Identifier.GetType() == typeof(Identifier)) {
+        //     variable = ctx.Variables.Get((vaNode.Identifier as Identifier).Name);
+        //   } else if (vaNode.Identifier.GetType() == typeof(VariableDeclaration))  {
+        //     lines.AddRange(TransformAst(new List<AstNode> { vaNode.Identifier }, ctx));
+        //     variable = ctx.Variables.Get((vaNode.Identifier as VariableDeclaration).Identifier);
+        //   }
 
-          lines.AddRange(TransformAst(new List<AstNode> { vaNode.Parameter }, ctx));
-          lines.Add($"wmem >{variable.MemoryAddress} reg0");
+        //   lines.AddRange(TransformAst(new List<AstNode> { vaNode.Parameter }, ctx));
+        //   lines.Add($"wmem >{variable.MemoryAddress} reg0");
           
-        }
+        // }
 
-        if (nodeType == typeof(Equal))
-        {
-          var eqNode = node as Equal;
+        // if (nodeType == typeof(Equal))
+        // {
+        //   var eqNode = node as Equal;
 
-          lines.AddRange(TransformAst(new List<AstNode> { eqNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { eqNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("eq reg0 reg0 reg1");
-        }
+        //   lines.AddRange(TransformAst(new List<AstNode> { eqNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { eqNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("eq reg0 reg0 reg1");
+        // }
 
-        if (nodeType == typeof(Not)) {
-          var notNode = node as Not;
-          lines.AddRange(TransformAst(new List<AstNode> { notNode.Parameter }, ctx));
-          lines.Add("call >not");
-        }
+        // if (nodeType == typeof(Not)) {
+        //   var notNode = node as Not;
+        //   lines.AddRange(TransformAst(new List<AstNode> { notNode.Parameter }, ctx));
+        //   lines.Add("call >not");
+        // }
 
-        if (nodeType == typeof(And)) {
-          var andNode = node as And;
-          lines.AddRange(TransformAst(new List<AstNode> { andNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("call >and");
-        }
+        // if (nodeType == typeof(And)) {
+        //   var andNode = node as And;
+        //   lines.AddRange(TransformAst(new List<AstNode> { andNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("call >and");
+        // }
 
-        if (nodeType == typeof(Or)) {
-          var andNode = node as Or;
-          lines.AddRange(TransformAst(new List<AstNode> { andNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("call >or");
-        }
+        // if (nodeType == typeof(Or)) {
+        //   var andNode = node as Or;
+        //   lines.AddRange(TransformAst(new List<AstNode> { andNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { andNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("call >or");
+        // }
 
-        if (nodeType == typeof(GreaterThan))
-        {
-          var gtNode = node as GreaterThan;
+        // if (nodeType == typeof(GreaterThan))
+        // {
+        //   var gtNode = node as GreaterThan;
 
-          lines.AddRange(TransformAst(new List<AstNode> { gtNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { gtNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("gt reg0 reg0 reg1");
-        }
+        //   lines.AddRange(TransformAst(new List<AstNode> { gtNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { gtNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("gt reg0 reg0 reg1");
+        // }
 
-        if (nodeType == typeof(GreaterThanOrEqual))
-        {
-          var gtNode = node as GreaterThanOrEqual;
+        // if (nodeType == typeof(GreaterThanOrEqual))
+        // {
+        //   var gtNode = node as GreaterThanOrEqual;
 
-          lines.AddRange(TransformAst(new List<AstNode> { gtNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { gtNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("gt reg2 reg0 reg1");
-          lines.Add("eq reg3 reg0 reg1");
-          lines.Add("or reg0 reg2 reg3");
-        }
+        //   lines.AddRange(TransformAst(new List<AstNode> { gtNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { gtNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("gt reg2 reg0 reg1");
+        //   lines.Add("eq reg3 reg0 reg1");
+        //   lines.Add("or reg0 reg2 reg3");
+        // }
 
-        if (nodeType == typeof(LessThan))
-        {
-          var ltNode = node as LessThan;
+        // if (nodeType == typeof(LessThan))
+        // {
+        //   var ltNode = node as LessThan;
 
-          lines.AddRange(TransformAst(new List<AstNode> { ltNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { ltNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("eq reg2 reg0 reg1");
-          lines.Add("gt reg3 reg0 reg1");
-          lines.Add("or reg0 reg2 reg3");
-          lines.Add("call >not");
-        }
+        //   lines.AddRange(TransformAst(new List<AstNode> { ltNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { ltNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("eq reg2 reg0 reg1");
+        //   lines.Add("gt reg3 reg0 reg1");
+        //   lines.Add("or reg0 reg2 reg3");
+        //   lines.Add("call >not");
+        // }
 
-        if (nodeType == typeof(LessThanOrEqual))
-        {
-          var ltNode = node as LessThanOrEqual;
+        // if (nodeType == typeof(LessThanOrEqual))
+        // {
+        //   var ltNode = node as LessThanOrEqual;
 
-          lines.AddRange(TransformAst(new List<AstNode> { ltNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { ltNode.Right }, ctx));
-          ctx.RegisterLevel--;
-          lines.Add("gt reg0 reg0 reg1");
+        //   lines.AddRange(TransformAst(new List<AstNode> { ltNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { ltNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
+        //   lines.Add("gt reg0 reg0 reg1");
 
-          lines.Add("call >not");
-        }
+        //   lines.Add("call >not");
+        // }
 
-        if (nodeType == typeof(Addition))
-        {
-          var addNode = node as Addition;
-          lines.AddRange(TransformAst(new List<AstNode> { addNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { addNode.Right }, ctx));
-          ctx.RegisterLevel--;
+        // if (nodeType == typeof(Addition))
+        // {
+        //   var addNode = node as Addition;
+        //   lines.AddRange(TransformAst(new List<AstNode> { addNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { addNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
 
-          lines.Add($"add reg0 reg0 reg1");
-        }
+        //   lines.Add($"add reg0 reg0 reg1");
+        // }
 
         if (nodeType == typeof(Incr))
         {

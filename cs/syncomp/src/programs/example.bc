@@ -1,18 +1,25 @@
-#include "lib/stdlib.bc"
-#include "lib/error.bc"
-#include "lib/array_wrapper.bc"
-
+var test;
 function main()
 {
-  var ar = array_new(10);
-  array_foreach(
-    ar,
-    function(var elem_ptr, var index)
-    {
-      print_number(index);
-      println(" ");
-    }
-  );
+  out(65);
 }
 
-main();
+
+//#include "lib/stdlib.bc"
+//#include "lib/error.bc"
+//#include "lib/array_wrapper.bc"
+//
+//function main()
+//{
+//  var ar = array_new(10);
+//  array_foreach(
+//    ar,
+//    function(var elem_ptr, var index)
+//    {
+//      print_number(index);
+//      println(" ");
+//    }
+//  );
+//}
+//
+//main();
