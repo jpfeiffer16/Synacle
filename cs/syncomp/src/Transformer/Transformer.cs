@@ -265,129 +265,129 @@ namespace syncomp
         // }
 
 
-        if (nodeType == typeof(Division))
-        {
-          var sbNode = node as Division;
+        // if (nodeType == typeof(Division))
+        // {
+        //   var sbNode = node as Division;
 
-          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
-          ctx.RegisterLevel--;
+        //   lines.AddRange(TransformAst(new List<AstNode> { sbNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { sbNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
 
-          lines.Add($"call >divide");
-        }
+        //   lines.Add($"call >divide");
+        // }
 
-        if (nodeType == typeof(Mod)) {
-          var modNode = node as Mod;
+        // if (nodeType == typeof(Mod)) {
+        //   var modNode = node as Mod;
 
-          lines.AddRange(TransformAst(new List<AstNode> { modNode.Left }, ctx));
-          ctx.RegisterLevel++;
-          lines.AddRange(TransformAst(new List<AstNode> { modNode.Right }, ctx));
-          ctx.RegisterLevel--;
+        //   lines.AddRange(TransformAst(new List<AstNode> { modNode.Left }, ctx));
+        //   ctx.RegisterLevel++;
+        //   lines.AddRange(TransformAst(new List<AstNode> { modNode.Right }, ctx));
+        //   ctx.RegisterLevel--;
 
-          lines.Add($"mod reg0 reg0 reg1");
-        }
+        //   lines.Add($"mod reg0 reg0 reg1");
+        // }
 
-        if (nodeType == typeof(If)) {
-          var ifNode = node as If;
+        // if (nodeType == typeof(If)) {
+        //   var ifNode = node as If;
 
-          var uuid = this.GetUID();
+        //   var uuid = this.GetUID();
 
-          lines.AddRange(TransformAst(ifNode.Condition, ctx));
-          lines.Add($"jf reg0 >end_{uuid}");
-          lines.AddRange(TransformAst(ifNode.Expression, ctx));
-          lines.Add($":end_{uuid}");
-        }
+        //   lines.AddRange(TransformAst(ifNode.Condition, ctx));
+        //   lines.Add($"jf reg0 >end_{uuid}");
+        //   lines.AddRange(TransformAst(ifNode.Expression, ctx));
+        //   lines.Add($":end_{uuid}");
+        // }
 
-        if (nodeType == typeof(While))
-        {
-          var whNode = node as While;
-          var uuid = this.GetUID();
+        // if (nodeType == typeof(While))
+        // {
+        //   var whNode = node as While;
+        //   var uuid = this.GetUID();
 
-          //Begin
-          lines.Add($":while_{uuid}_begin");
-          //Condition
-          lines.AddRange(TransformAst(whNode.Condition, ctx));
-          lines.Add($"jf reg0 >while_{uuid}_end");
-          //Expression
-          lines.AddRange(TransformAst(whNode.Expression, ctx));
-          //End
-          lines.Add($"jmp >while_{uuid}_begin");
-          lines.Add($":while_{uuid}_end");
-        }
+        //   //Begin
+        //   lines.Add($":while_{uuid}_begin");
+        //   //Condition
+        //   lines.AddRange(TransformAst(whNode.Condition, ctx));
+        //   lines.Add($"jf reg0 >while_{uuid}_end");
+        //   //Expression
+        //   lines.AddRange(TransformAst(whNode.Expression, ctx));
+        //   //End
+        //   lines.Add($"jmp >while_{uuid}_begin");
+        //   lines.Add($":while_{uuid}_end");
+        // }
 
-        if (nodeType == typeof(For)) {
-          var forNode = node as For;
-          var uuid = this.GetUID();
+        // if (nodeType == typeof(For)) {
+        //   var forNode = node as For;
+        //   var uuid = this.GetUID();
 
-          lines.AddRange(TransformAst(forNode.Init, ctx));
-          lines.Add($":for_{uuid}_begin");
-          lines.AddRange(TransformAst(forNode.Condition, ctx));
-          lines.Add($"jf reg0 >for_{uuid}_end");
+        //   lines.AddRange(TransformAst(forNode.Init, ctx));
+        //   lines.Add($":for_{uuid}_begin");
+        //   lines.AddRange(TransformAst(forNode.Condition, ctx));
+        //   lines.Add($"jf reg0 >for_{uuid}_end");
 
-          lines.AddRange(TransformAst(forNode.Expression, ctx));
-          lines.AddRange(TransformAst(forNode.Incrementor, ctx));
+        //   lines.AddRange(TransformAst(forNode.Expression, ctx));
+        //   lines.AddRange(TransformAst(forNode.Incrementor, ctx));
 
-          lines.Add($"jmp >for_{uuid}_begin");
-          lines.Add($":for_{uuid}_end");
-        }
+        //   lines.Add($"jmp >for_{uuid}_begin");
+        //   lines.Add($":for_{uuid}_end");
+        // }
 
-        if (nodeType == typeof(FunctionCall))
-        {
-          var fcNode = node as FunctionCall;
-          var originalRegisterLevel = ctx.RegisterLevel;
-            foreach (var parameter in fcNode.Parameters) {
-              lines.AddRange(TransformAst(new List<AstNode> { parameter }, ctx));
-              ctx.RegisterLevel++;
-            }
-            ctx.RegisterLevel = originalRegisterLevel;
+        // if (nodeType == typeof(FunctionCall))
+        // {
+        //   var fcNode = node as FunctionCall;
+        //   var originalRegisterLevel = ctx.RegisterLevel;
+        //     foreach (var parameter in fcNode.Parameters) {
+        //       lines.AddRange(TransformAst(new List<AstNode> { parameter }, ctx));
+        //       ctx.RegisterLevel++;
+        //     }
+        //     ctx.RegisterLevel = originalRegisterLevel;
 
-          //Handle special cases
-          if (fcNode.Name == "out")
-          {
-            lines.Add("out reg0");
-          } else if (fcNode.Name == "in") {
-            lines.Add("in reg0");
-          } else if (fcNode.Name == "exit") {
-            lines.Add("halt");
-          } else if (fcNode.Name == "push") {
-            lines.AddRange(TransformAst(fcNode.Parameters, ctx));
-            lines.Add("push reg0");
-          } else if (fcNode.Name == "pop") {
-            lines.Add("pop reg0");
-          } else if (fcNode.Name == "wmem") {
-            lines.Add($"wmem reg0 reg1");
-          } else {
-            var variable = ctx.Variables.Get(fcNode.Name);
-            if (variable != null) {
-              var regLevel = ctx.RegisterLevel;
-              // ctx.RegisterLevel = 7;
-              // lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
-              lines.Add($"rmem reg7 >{variable.MemoryAddress}");
-              lines.Add($"call reg7");
-              // ctx.RegisterLevel = regLevel;
-            } else {
-              lines.Add($"call >{fcNode.Name}");
-            }
+        //   //Handle special cases
+        //   if (fcNode.Name == "out")
+        //   {
+        //     lines.Add("out reg0");
+        //   } else if (fcNode.Name == "in") {
+        //     lines.Add("in reg0");
+        //   } else if (fcNode.Name == "exit") {
+        //     lines.Add("halt");
+        //   } else if (fcNode.Name == "push") {
+        //     lines.AddRange(TransformAst(fcNode.Parameters, ctx));
+        //     lines.Add("push reg0");
+        //   } else if (fcNode.Name == "pop") {
+        //     lines.Add("pop reg0");
+        //   } else if (fcNode.Name == "wmem") {
+        //     lines.Add($"wmem reg0 reg1");
+        //   } else {
+        //     var variable = ctx.Variables.Get(fcNode.Name);
+        //     if (variable != null) {
+        //       var regLevel = ctx.RegisterLevel;
+        //       // ctx.RegisterLevel = 7;
+        //       // lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
+        //       lines.Add($"rmem reg7 >{variable.MemoryAddress}");
+        //       lines.Add($"call reg7");
+        //       // ctx.RegisterLevel = regLevel;
+        //     } else {
+        //       lines.Add($"call >{fcNode.Name}");
+        //     }
             
-          }
-        }
+        //   }
+        // }
 
-        if (nodeType == typeof(Identifier))
-        {
-          var idNode = node as Identifier;
+        // if (nodeType == typeof(Identifier))
+        // {
+        //   var idNode = node as Identifier;
 
-          var variable = ctx.Variables.Get(idNode.Name);
+        //   var variable = ctx.Variables.Get(idNode.Name);
 
-          lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
-        }
+        //   lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
+        // }
 
-        if (nodeType == typeof(IntegerLiteral))
-        {
-          var inNode = node as IntegerLiteral;
+        // if (nodeType == typeof(IntegerLiteral))
+        // {
+        //   var inNode = node as IntegerLiteral;
 
-          lines.Add($"set reg{ctx.RegisterLevel} {inNode.Value}");
-        }
+        //   lines.Add($"set reg{ctx.RegisterLevel} {inNode.Value}");
+        // }
 
         //TODO: Add params here when needed
         if (nodeType == typeof(Return)) {
