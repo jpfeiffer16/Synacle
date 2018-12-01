@@ -11,7 +11,7 @@ namespace syncomp
     {
       var lines = new List<string>();
       var pgNode = node as ParenGroup;
-      lines.AddRange(new Transformer().Transform(pgNode.Nodes, ctx));
+      lines.AddRange(new Transformer(pgNode.Nodes, ctx).Transform());
 
       return lines;
     }

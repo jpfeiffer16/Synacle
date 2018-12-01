@@ -10,12 +10,11 @@ namespace syncomp
     public List<string> Transform<T>(T node, Context ctx) where T : AstNode
     {
       var lines = new List<string>();
-      var tranformer = new Transformer();
       var eqNode = node as Equal;
 
-      lines.AddRange(tranformer.Transform(new List<AstNode> { eqNode.Left }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { eqNode.Left }, ctx).Transform());
       ctx.RegisterLevel++;
-      lines.AddRange(tranformer.Transform(new List<AstNode> { eqNode.Right }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { eqNode.Right }, ctx).Transform());
       ctx.RegisterLevel--;
       lines.Add("eq reg0 reg0 reg1");
 

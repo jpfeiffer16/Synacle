@@ -13,17 +13,16 @@ namespace syncomp
       var fcNode = node as FunctionDeclaration;
       var name = fcNode.Name ?? $"function_{TransformerHelpers.GetUID()}";
       var memoryAddress = $"{name}";
-      var transformer = new Transformer();
       lines.Add($"jmp >{memoryAddress}_end");
       lines.Add($":{name}");
       ctx.Variables.Push();
-      lines.AddRange(transformer.Transform(fcNode.Parameters, ctx));
+      lines.AddRange(new Transformer(fcNode.Parameters, ctx).Transform());
       for (var index = 0; index < fcNode.Parameters.Count; index++) {
         var parameter = fcNode.Parameters[index];
         var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
         lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
       }
-      lines.AddRange(transformer.Transform(fcNode.Expression, ctx));
+      lines.AddRange(new Transformer(fcNode.Expression, ctx).Transform());
       lines.Add("ret");
       lines.Add($":{memoryAddress}_end");
       //Manually add variable

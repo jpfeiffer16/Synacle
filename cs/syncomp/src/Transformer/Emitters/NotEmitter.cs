@@ -9,10 +9,9 @@ namespace syncomp
 
     public List<string> Transform<T>(T node, Context ctx) where T : AstNode
     {
-      var transformer = new Transformer();
       var lines = new List<string>();
       var notNode = node as Not;
-      lines.AddRange(transformer.Transform(new List<AstNode> { notNode.Parameter }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { notNode.Parameter }, ctx).Transform());
       lines.Add("call >not");
 
       return lines;

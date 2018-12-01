@@ -12,7 +12,7 @@ namespace syncomp
       var lines = new List<string>();
       var dcNode = node as Decr;
 
-      lines.AddRange(new Transformer().Transform(new List<AstNode> { dcNode.Parameter }, ctx));;
+      lines.AddRange(new Transformer(new List<AstNode> { dcNode.Parameter }, ctx).Transform());
       lines.Add("set reg1 1");
       lines.Add($"call >subtract");
       lines.Add($"wmem >{ctx.Variables.Get((dcNode.Parameter as Identifier).Name).MemoryAddress} reg0");

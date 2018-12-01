@@ -102,7 +102,7 @@ namespace syncomp
             }
             //Transform
             var transformer = new Transformer(ast);
-            return transformer.Transform();
+            return transformer.TransformFullAst();
         }
 
         private static void DisplayParseErrorContext(

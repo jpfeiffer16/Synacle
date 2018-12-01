@@ -11,7 +11,7 @@ namespace syncomp
     {
       var lines = new List<string>();
       var adofNode = node as Deref;
-      lines.AddRange(new Transformer().Transform(new List<AstNode> { adofNode.Parameter }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { adofNode.Parameter }, ctx).Transform());
       lines.Add($"rmem reg{ctx.RegisterLevel} reg{ctx.RegisterLevel}");
 
       return lines;

@@ -10,14 +10,13 @@ namespace syncomp
     public List<string> Transform<T>(T node, Context ctx) where T : AstNode
     {
       var lines = new List<string>();
-      var tranformer = new Transformer();
       var ifNode = node as If;
 
       var uuid = TransformerHelpers.GetUID();
 
-      lines.AddRange(tranformer.Transform(ifNode.Condition, ctx));
+      lines.AddRange(new Transformer(ifNode.Condition, ctx).Transform());
       lines.Add($"jf reg0 >end_{uuid}");
-      lines.AddRange(tranformer.Transform(ifNode.Expression, ctx));
+      lines.AddRange(new Transformer(ifNode.Expression, ctx).Transform());
       lines.Add($":end_{uuid}");
 
       return lines;

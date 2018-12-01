@@ -15,7 +15,7 @@ namespace syncomp
       var returnNode = node as Return;
       if (returnNode.Parameter != null) {
         lines.AddRange(
-          new Transformer().Transform(new List<AstNode> { returnNode.Parameter }, ctx)
+          new Transformer(new List<AstNode> { returnNode.Parameter }, ctx).Transform()
         );
       }
       lines.Add("ret");

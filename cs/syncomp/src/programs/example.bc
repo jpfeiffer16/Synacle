@@ -1,25 +1,8 @@
-var test;
+#include "lib/stdlib.bc"
+
 function main()
 {
-  out(65);
+  println("Hello, world!");
 }
 
-
-//#include "lib/stdlib.bc"
-//#include "lib/error.bc"
-//#include "lib/array_wrapper.bc"
-//
-//function main()
-//{
-//  var ar = array_new(10);
-//  array_foreach(
-//    ar,
-//    function(var elem_ptr, var index)
-//    {
-//      print_number(index);
-//      println(" ");
-//    }
-//  );
-//}
-//
-//main();
+main();

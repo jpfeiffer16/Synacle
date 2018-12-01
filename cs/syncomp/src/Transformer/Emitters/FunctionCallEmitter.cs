@@ -10,11 +10,10 @@ namespace syncomp
     public List<string> Transform<T>(T node, Context ctx) where T : AstNode
     {
       var lines = new List<string>();
-      var transformer = new Transformer();
       var fcNode = node as FunctionCall;
       var originalRegisterLevel = ctx.RegisterLevel;
         foreach (var parameter in fcNode.Parameters) {
-          lines.AddRange(transformer.Transform(new List<AstNode> { parameter }, ctx));
+          lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
           ctx.RegisterLevel++;
         }
         ctx.RegisterLevel = originalRegisterLevel;
@@ -28,7 +27,7 @@ namespace syncomp
       } else if (fcNode.Name == "exit") {
         lines.Add("halt");
       } else if (fcNode.Name == "push") {
-        lines.AddRange(transformer.Transform(fcNode.Parameters, ctx));
+        lines.AddRange(new Transformer(fcNode.Parameters, ctx).Transform());
         lines.Add("push reg0");
       } else if (fcNode.Name == "pop") {
         lines.Add("pop reg0");

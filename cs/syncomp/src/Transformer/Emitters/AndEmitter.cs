@@ -9,12 +9,11 @@ namespace syncomp
 
     public List<string> Transform<T>(T node, Context ctx) where T : AstNode
     {
-      var transformer = new Transformer();
       var lines = new List<string>();
       var andNode = node as And;
-      lines.AddRange(transformer.Transform(new List<AstNode> { andNode.Left }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { andNode.Left }, ctx).Transform());
       ctx.RegisterLevel++;
-      lines.AddRange(transformer.Transform(new List<AstNode> { andNode.Right }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { andNode.Right }, ctx).Transform());
       ctx.RegisterLevel--;
       lines.Add("call >and");
 

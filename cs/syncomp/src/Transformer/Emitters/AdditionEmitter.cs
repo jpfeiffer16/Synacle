@@ -10,11 +10,10 @@ namespace syncomp
     public List<string> Transform<T>(T node, Context ctx) where T : AstNode
     {
       var lines = new List<string>();
-      var tranformer = new Transformer();
       var addNode = node as Addition;
-      lines.AddRange(tranformer.Transform(new List<AstNode> { addNode.Left }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { addNode.Left }, ctx).Transform());
       ctx.RegisterLevel++;
-      lines.AddRange(tranformer.Transform(new List<AstNode> { addNode.Right }, ctx));
+      lines.AddRange(new Transformer(new List<AstNode> { addNode.Right }, ctx).Transform());
       ctx.RegisterLevel--;
 
       lines.Add($"add reg0 reg0 reg1");

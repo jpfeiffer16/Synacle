@@ -17,24 +17,30 @@ namespace syncomp
         .ToList();
 
     private readonly List<AstNode> nodes;
+    private readonly Context ctx;
 
-    public Transformer(List<AstNode> nodes)
+    public Transformer(List<AstNode> nodes, Context ctx = null)
     {
       this.nodes = nodes;
+      this.ctx = ctx ?? new Context();
     }
 
-    public Transformer()
-    {}
-
-    public List<string> Transform(List<AstNode> astNodes, Context ctx)
+    public List<string> TransformFullAst()
     {
-      return this.Transform(astNodes, ctx);
+      var lines = this.Transform();
+
+      //Manually add a halt so as not to trample over data
+      lines.Add("halt");
+      lines = EnsureSubtractSupport(ctx, lines);
+      lines = EnsureNotSupport(ctx, lines);
+      lines = EnsureDivisionSupport(ctx, lines);
+      lines = EnsureAndSupport(ctx, lines);
+      lines = EnsureOrSupport(ctx, lines);
+      return lines;
     }
 
     public List<string> Transform()
     {
-      var ctx = new Context();
-      // var lines = TransformAst(this.nodes, ctx);
       var lines = new List<string>();
       
       foreach (var node in nodes)
@@ -48,13 +54,6 @@ namespace syncomp
         }
       }
 
-      //Manually add a halt so as not to trample over data
-      lines.Add("halt");
-      // lines = EnsureSubtractSupport(ctx, lines);
-      // lines = EnsureNotSupport(ctx, lines);
-      // lines = EnsureDivisionSupport(ctx, lines);
-      // lines = EnsureAndSupport(ctx, lines);
-      // lines = EnsureOrSupport(ctx, lines);
       return lines;
     }
 
