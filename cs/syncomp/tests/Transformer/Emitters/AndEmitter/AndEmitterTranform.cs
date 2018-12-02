@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using syncomp;
+
+namespace syncomp.Tests
+{
+  [TestClass]
+  public class AndEmitterTranform : Behavior
+  {
+    private List<string> result;
+
+    protected override void Given()
+    {
+
+      this.result = new AndEmitter()
+        .Transform(new And(
+          new IntegerLiteral("0"), new IntegerLiteral("1")
+        ), new Context());
+    }
+
+    [TestMethod]
+    public void TwoSets()
+    {
+      Assert.AreEqual(
+        2,
+        this.result.Where(line => line.Contains("set")).Count()
+      );
+    }
+
+    [TestMethod]
+    public void OneAndCall()
+    {
+      Assert.AreEqual(
+        2,
+        this.result.Where(line => line.Contains("call >and")).Count()
+      );
+    }
+  }
+}
