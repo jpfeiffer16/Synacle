@@ -7,7 +7,7 @@ using syncomp;
 namespace syncomp.Tests
 {
   [TestClass]
-  public class AndEmitterTranform : Behavior
+  public class AndEmitterTransform : Behavior
   {
     private List<string> result;
 
