@@ -33,7 +33,7 @@ namespace syncomp.Tests
     public void OneAndCall()
     {
       Assert.AreEqual(
-        2,
+        1,
         this.result.Where(line => line.Contains("call >and")).Count()
       );
     }

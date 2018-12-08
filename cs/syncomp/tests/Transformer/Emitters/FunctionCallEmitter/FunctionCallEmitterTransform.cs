@@ -13,7 +13,20 @@ namespace syncomp.Tests
 
     protected override void Given()
     {
-      
+      // TODO: Test intrinsics here
+      this.result = new FunctionCallEmitter().Transform(
+        new FunctionCall(new List<AstNode>(), "test"),
+        new Context()
+      );
+    }
+
+    [TestMethod]
+    public void OneCallToTest()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("call >test")).Count()
+      );
     }
   }
 }
