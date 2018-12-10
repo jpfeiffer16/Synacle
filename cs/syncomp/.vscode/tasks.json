@@ -10,6 +10,22 @@
                 "${workspaceFolder}/src/syncomp.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/tests.csproj",
+                "/p:CollectCoverage=true",
+                "/p:CoverletOutput=\"./lcov.info\"",
+                "/p:CoverletOutputFormat=lcov"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
         }
     ]
 }

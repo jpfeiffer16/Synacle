@@ -13,7 +13,22 @@ namespace syncomp.Tests
 
     protected override void Given()
     {
-      
+      this.result = new GreaterThanEmitter().Transform(
+        new GreaterThan(
+          new IntegerLiteral("1"),
+          new IntegerLiteral("2")
+        ),
+        new Context()
+      );
+    }
+
+    [TestMethod]
+    public void OneGt()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line == "gt reg0 reg0 reg1").Count()
+      );
     }
   }
 }
