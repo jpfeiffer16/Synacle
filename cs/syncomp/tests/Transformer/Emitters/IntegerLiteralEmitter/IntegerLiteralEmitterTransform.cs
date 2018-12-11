@@ -13,7 +13,19 @@ namespace syncomp.Tests
 
     protected override void Given()
     {
-      
+      this.result = new IntegerLiteralEmitter().Transform(
+        new IntegerLiteral("a"),
+        new Context()
+      );
+    }
+
+    [TestMethod]
+    public void OneSet()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("set")).Count()
+      );
     }
   }
 }

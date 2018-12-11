@@ -13,7 +13,19 @@ namespace syncomp.Tests
 
     protected override void Given()
     {
-      
+      this.result = new NotEmitter().Transform(
+        new Not(new IntegerLiteral("1")),
+        new Context()
+      );
+    }
+
+    [TestMethod]
+    public void OneCallToNot()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line == "call >not").Count()
+      );
     }
   }
 }

@@ -13,7 +13,23 @@ namespace syncomp.Tests
 
     protected override void Given()
     {
-      
+      this.result = new ParenGroupEmitter().Transform(
+        new ParenGroup(new List<AstNode>{
+          new IntegerLiteral("1")
+        }),
+        new Context()
+      );
+    }
+
+    // NOTE: Test the contained integer literal since ParenGroupEmitter
+    // doesn't actually emit anything itself
+    [TestMethod]
+    public void OneSet()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("set")).Count()
+      );
     }
   }
 }

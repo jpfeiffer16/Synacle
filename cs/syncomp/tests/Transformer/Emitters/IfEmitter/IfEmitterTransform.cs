@@ -13,7 +13,31 @@ namespace syncomp.Tests
 
     protected override void Given()
     {
-      
+      this.result = new IfEmitter().Transform(
+        new If(
+          new List<AstNode> { new IntegerLiteral("1") },
+          new List<AstNode> { new IntegerLiteral("1") }
+        ),
+        new Context()
+      );
+    }
+
+    [TestMethod]
+    public void OneJf()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("jf")).Count()
+      );
+    }
+
+    [TestMethod]
+    public void OneEndLabel()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains(":end_")).Count()
+      );
     }
   }
 }
