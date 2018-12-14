@@ -1,76 +1,75 @@
 jmp >str_equal_end
 :str_equal
-jmp >var_3dfbb667057e_end
-:var_3dfbb667057e
-:var_3dfbb667057e_end
-jmp >var_733fe049a54a_end
-:var_733fe049a54a
-:var_733fe049a54a_end
-wmem >var_3dfbb667057e reg0
-wmem >var_733fe049a54a reg1
-jmp >var_3cf83f17bb50_end
-:var_3cf83f17bb50
-:var_3cf83f17bb50_end
-rmem reg0 >var_3dfbb667057e
+jmp >var_c9c01cde17ce_end
+:var_c9c01cde17ce
+:var_c9c01cde17ce_end
+jmp >var_62ba11143574_end
+:var_62ba11143574
+:var_62ba11143574_end
+wmem >var_c9c01cde17ce reg0
+wmem >var_62ba11143574 reg1
+jmp >var_021bdc4a6e39_end
+:var_021bdc4a6e39
+:var_021bdc4a6e39_end
+rmem reg0 >var_c9c01cde17ce
 call >str_len
-wmem >var_3cf83f17bb50 reg0
-jmp >var_b301a219fb0f_end
-:var_b301a219fb0f
-:var_b301a219fb0f_end
-rmem reg0 >var_733fe049a54a
+wmem >var_021bdc4a6e39 reg0
+jmp >var_fcdf82565c3e_end
+:var_fcdf82565c3e
+:var_fcdf82565c3e_end
+rmem reg0 >var_62ba11143574
 call >str_len
-wmem >var_b301a219fb0f reg0
-rmem reg0 >var_3cf83f17bb50
-rmem reg1 >var_b301a219fb0f
+wmem >var_fcdf82565c3e reg0
+rmem reg0 >var_021bdc4a6e39
+rmem reg1 >var_fcdf82565c3e
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end_417a49305aec
+jf reg0 >end_df9e5405ffae
 set reg0 0
 ret
-:end_417a49305aec
-jmp >var_41c58b4435e0_end
-:var_41c58b4435e0
-:var_41c58b4435e0_end
+:end_df9e5405ffae
+jmp >var_67e9a078a2ff_end
+:var_67e9a078a2ff
+:var_67e9a078a2ff_end
 set reg0 0
-wmem >var_41c58b4435e0 reg0
-:for_0db68d0b0a66_begin
-rmem reg0 >var_41c58b4435e0
-rmem reg1 >var_3cf83f17bb50
+wmem >var_67e9a078a2ff reg0
+:for_62461d28bb34_begin
+rmem reg0 >var_67e9a078a2ff
+rmem reg1 >var_021bdc4a6e39
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-rmem reg0 >var_3cf83f17bb50
-jf reg0 >for_0db68d0b0a66_end
-jmp >var_fce2cdaad20d_end
-:var_fce2cdaad20d
-:var_fce2cdaad20d_end
-rmem reg0 >var_3dfbb667057e
-rmem reg1 >var_41c58b4435e0
+jf reg0 >for_62461d28bb34_end
+jmp >var_eac882dc6205_end
+:var_eac882dc6205
+:var_eac882dc6205_end
+rmem reg0 >var_c9c01cde17ce
+rmem reg1 >var_67e9a078a2ff
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_fce2cdaad20d reg0
-jmp >var_49ef4036c014_end
-:var_49ef4036c014
-:var_49ef4036c014_end
-rmem reg0 >var_733fe049a54a
-rmem reg1 >var_41c58b4435e0
+wmem >var_eac882dc6205 reg0
+jmp >var_7152ba238430_end
+:var_7152ba238430
+:var_7152ba238430_end
+rmem reg0 >var_62ba11143574
+rmem reg1 >var_67e9a078a2ff
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_49ef4036c014 reg0
-rmem reg0 >var_fce2cdaad20d
-rmem reg1 >var_49ef4036c014
+wmem >var_7152ba238430 reg0
+rmem reg0 >var_eac882dc6205
+rmem reg1 >var_7152ba238430
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end_f7db64a4ac10
+jf reg0 >end_b8c6893e59a7
 set reg0 0
 ret
-:end_f7db64a4ac10
-rmem reg0 >var_41c58b4435e0
+:end_b8c6893e59a7
+rmem reg0 >var_67e9a078a2ff
 add reg0 reg0 1
-wmem >var_41c58b4435e0 reg0
-jmp >for_0db68d0b0a66_begin
-:for_0db68d0b0a66_end
+wmem >var_67e9a078a2ff reg0
+jmp >for_62461d28bb34_begin
+:for_62461d28bb34_end
 set reg0 1
 ret
 ret
@@ -78,366 +77,363 @@ ret
 set reg0 >str_equal
 jmp >alloc_end
 :alloc
-jmp >var_5c04b28d90f2_end
-:var_5c04b28d90f2
-:var_5c04b28d90f2_end
+jmp >var_4dff39d5dd0b_end
+:var_4dff39d5dd0b
+:var_4dff39d5dd0b_end
 set reg0 16382
-wmem >var_5c04b28d90f2 reg0
-:while_8b745f9d4564_begin
-rmem reg0 >var_5c04b28d90f2
+wmem >var_4dff39d5dd0b reg0
+:while_05f91e06e782_begin
+rmem reg0 >var_4dff39d5dd0b
 rmem reg0 reg0
 call >not
-jf reg0 >while_8b745f9d4564_end
-rmem reg0 >var_5c04b28d90f2
+jf reg0 >while_05f91e06e782_end
+rmem reg0 >var_4dff39d5dd0b
 set reg1 1
 call >subtract
-wmem >var_5c04b28d90f2 reg0
-jmp >while_8b745f9d4564_begin
-:while_8b745f9d4564_end
-rmem reg0 >var_5c04b28d90f2
+wmem >var_4dff39d5dd0b reg0
+jmp >while_05f91e06e782_begin
+:while_05f91e06e782_end
+rmem reg0 >var_4dff39d5dd0b
 set reg1 2
 add reg0 reg0 reg1
-wmem >var_5c04b28d90f2 reg0
-rmem reg0 >var_5c04b28d90f2
+wmem >var_4dff39d5dd0b reg0
+rmem reg0 >var_4dff39d5dd0b
 ret
 ret
 :alloc_end
 set reg0 >alloc
 jmp >alloc_chunk_end
 :alloc_chunk
-jmp >var_843aa2795e9f_end
-:var_843aa2795e9f
-:var_843aa2795e9f_end
-wmem >var_843aa2795e9f reg0
-jmp >var_19fda8b27888_end
-:var_19fda8b27888
-:var_19fda8b27888_end
+jmp >var_6018f0a5489d_end
+:var_6018f0a5489d
+:var_6018f0a5489d_end
+wmem >var_6018f0a5489d reg0
+jmp >var_aa450e5bc21a_end
+:var_aa450e5bc21a
+:var_aa450e5bc21a_end
 call >alloc
-wmem >var_19fda8b27888 reg0
-jmp >var_f9effea3b48c_end
-:var_f9effea3b48c
-:var_f9effea3b48c_end
-rmem reg0 >var_19fda8b27888
-rmem reg1 >var_843aa2795e9f
+wmem >var_aa450e5bc21a reg0
+jmp >var_57093b45107a_end
+:var_57093b45107a
+:var_57093b45107a_end
+rmem reg0 >var_aa450e5bc21a
+rmem reg1 >var_6018f0a5489d
 add reg0 reg0 reg1
-wmem >var_f9effea3b48c reg0
-rmem reg0 >var_f9effea3b48c
+wmem >var_57093b45107a reg0
+rmem reg0 >var_57093b45107a
 set reg1 32767
 wmem reg0 reg1
-rmem reg0 >var_19fda8b27888
+rmem reg0 >var_aa450e5bc21a
 ret
 ret
 :alloc_chunk_end
 set reg0 >alloc_chunk
 jmp >mem_cp_end
 :mem_cp
-jmp >var_665d29ea4c89_end
-:var_665d29ea4c89
-:var_665d29ea4c89_end
-jmp >var_d29329f5f64b_end
-:var_d29329f5f64b
-:var_d29329f5f64b_end
-jmp >var_4aa10ee94a10_end
-:var_4aa10ee94a10
-:var_4aa10ee94a10_end
-wmem >var_665d29ea4c89 reg0
-wmem >var_d29329f5f64b reg1
-wmem >var_4aa10ee94a10 reg2
-jmp >var_aa666b7a15fc_end
-:var_aa666b7a15fc
-:var_aa666b7a15fc_end
+jmp >var_ffe9441f4932_end
+:var_ffe9441f4932
+:var_ffe9441f4932_end
+jmp >var_822cb3d61c3e_end
+:var_822cb3d61c3e
+:var_822cb3d61c3e_end
+jmp >var_5ecd78808d57_end
+:var_5ecd78808d57
+:var_5ecd78808d57_end
+wmem >var_ffe9441f4932 reg0
+wmem >var_822cb3d61c3e reg1
+wmem >var_5ecd78808d57 reg2
+jmp >var_1347a0e5dab2_end
+:var_1347a0e5dab2
+:var_1347a0e5dab2_end
 set reg0 0
-wmem >var_aa666b7a15fc reg0
-:while_6c93e2eaa4ab_begin
-rmem reg0 >var_aa666b7a15fc
-rmem reg1 >var_4aa10ee94a10
+wmem >var_1347a0e5dab2 reg0
+:while_0c6cbd699136_begin
+rmem reg0 >var_1347a0e5dab2
+rmem reg1 >var_5ecd78808d57
 gt reg0 reg0 reg1
 call >not
-rmem reg0 >var_4aa10ee94a10
-jf reg0 >while_6c93e2eaa4ab_end
-jmp >var_a510262fcef3_end
-:var_a510262fcef3
-:var_a510262fcef3_end
-rmem reg0 >var_665d29ea4c89
-rmem reg1 >var_aa666b7a15fc
+jf reg0 >while_0c6cbd699136_end
+jmp >var_e32aca62d123_end
+:var_e32aca62d123
+:var_e32aca62d123_end
+rmem reg0 >var_ffe9441f4932
+rmem reg1 >var_1347a0e5dab2
 add reg0 reg0 reg1
-wmem >var_a510262fcef3 reg0
-jmp >var_179f75a4eadd_end
-:var_179f75a4eadd
-:var_179f75a4eadd_end
-rmem reg0 >var_d29329f5f64b
-rmem reg1 >var_aa666b7a15fc
+wmem >var_e32aca62d123 reg0
+jmp >var_d0856f684f61_end
+:var_d0856f684f61
+:var_d0856f684f61_end
+rmem reg0 >var_822cb3d61c3e
+rmem reg1 >var_1347a0e5dab2
 add reg0 reg0 reg1
-wmem >var_179f75a4eadd reg0
-rmem reg0 >var_179f75a4eadd
-rmem reg1 >var_a510262fcef3
+wmem >var_d0856f684f61 reg0
+rmem reg0 >var_d0856f684f61
+rmem reg1 >var_e32aca62d123
 rmem reg1 reg1
 wmem reg0 reg1
-rmem reg0 >var_aa666b7a15fc
+rmem reg0 >var_1347a0e5dab2
 add reg0 reg0 1
-wmem >var_aa666b7a15fc reg0
-jmp >while_6c93e2eaa4ab_begin
-:while_6c93e2eaa4ab_end
+wmem >var_1347a0e5dab2 reg0
+jmp >while_0c6cbd699136_begin
+:while_0c6cbd699136_end
 ret
 :mem_cp_end
 set reg0 >mem_cp
 jmp >str_len_end
 :str_len
-jmp >var_dbf3d6cddd56_end
-:var_dbf3d6cddd56
-:var_dbf3d6cddd56_end
-wmem >var_dbf3d6cddd56 reg0
-jmp >var_2198b54e9ea5_end
-:var_2198b54e9ea5
-:var_2198b54e9ea5_end
+jmp >var_e87493704de8_end
+:var_e87493704de8
+:var_e87493704de8_end
+wmem >var_e87493704de8 reg0
+jmp >var_2652dc857962_end
+:var_2652dc857962
+:var_2652dc857962_end
 set reg0 0
-wmem >var_2198b54e9ea5 reg0
-:while_2791a95e0f72_begin
-rmem reg0 >var_dbf3d6cddd56
+wmem >var_2652dc857962 reg0
+:while_4b03bc881095_begin
+rmem reg0 >var_e87493704de8
 rmem reg0 reg0
-jf reg0 >while_2791a95e0f72_end
-rmem reg0 >var_dbf3d6cddd56
+jf reg0 >while_4b03bc881095_end
+rmem reg0 >var_e87493704de8
 add reg0 reg0 1
-wmem >var_dbf3d6cddd56 reg0
-rmem reg0 >var_2198b54e9ea5
+wmem >var_e87493704de8 reg0
+rmem reg0 >var_2652dc857962
 add reg0 reg0 1
-wmem >var_2198b54e9ea5 reg0
-jmp >while_2791a95e0f72_begin
-:while_2791a95e0f72_end
-rmem reg0 >var_2198b54e9ea5
+wmem >var_2652dc857962 reg0
+jmp >while_4b03bc881095_begin
+:while_4b03bc881095_end
+rmem reg0 >var_2652dc857962
 ret
 ret
 :str_len_end
 set reg0 >str_len
 jmp >str_cat_end
 :str_cat
-jmp >var_1576ab0a6ccd_end
-:var_1576ab0a6ccd
-:var_1576ab0a6ccd_end
-jmp >var_92cde4db5d34_end
-:var_92cde4db5d34
-:var_92cde4db5d34_end
-wmem >var_1576ab0a6ccd reg0
-wmem >var_92cde4db5d34 reg1
-jmp >var_78583a008ac9_end
-:var_78583a008ac9
-:var_78583a008ac9_end
-rmem reg0 >var_1576ab0a6ccd
+jmp >var_f2d3b52e4c24_end
+:var_f2d3b52e4c24
+:var_f2d3b52e4c24_end
+jmp >var_715e4b506cb8_end
+:var_715e4b506cb8
+:var_715e4b506cb8_end
+wmem >var_f2d3b52e4c24 reg0
+wmem >var_715e4b506cb8 reg1
+jmp >var_eed7f0a46c65_end
+:var_eed7f0a46c65
+:var_eed7f0a46c65_end
+rmem reg0 >var_f2d3b52e4c24
 call >str_len
-wmem >var_78583a008ac9 reg0
-jmp >var_8a886c83a0d6_end
-:var_8a886c83a0d6
-:var_8a886c83a0d6_end
-rmem reg0 >var_92cde4db5d34
+wmem >var_eed7f0a46c65 reg0
+jmp >var_44524e0230c7_end
+:var_44524e0230c7
+:var_44524e0230c7_end
+rmem reg0 >var_715e4b506cb8
 call >str_len
-wmem >var_8a886c83a0d6 reg0
-jmp >var_7968c0f1f6a7_end
-:var_7968c0f1f6a7
-:var_7968c0f1f6a7_end
+wmem >var_44524e0230c7 reg0
+jmp >var_fb260ff4a769_end
+:var_fb260ff4a769
+:var_fb260ff4a769_end
 call >alloc
-wmem >var_7968c0f1f6a7 reg0
-rmem reg0 >var_1576ab0a6ccd
-rmem reg1 >var_7968c0f1f6a7
-rmem reg2 >var_78583a008ac9
+wmem >var_fb260ff4a769 reg0
+rmem reg0 >var_f2d3b52e4c24
+rmem reg1 >var_fb260ff4a769
+rmem reg2 >var_eed7f0a46c65
 call >mem_cp
-jmp >var_c53de2961d92_end
-:var_c53de2961d92
-:var_c53de2961d92_end
-rmem reg0 >var_7968c0f1f6a7
-rmem reg1 >var_78583a008ac9
+jmp >var_aaa631dbb225_end
+:var_aaa631dbb225
+:var_aaa631dbb225_end
+rmem reg0 >var_fb260ff4a769
+rmem reg1 >var_eed7f0a46c65
 add reg0 reg0 reg1
-wmem >var_c53de2961d92 reg0
-rmem reg0 >var_8a886c83a0d6
+wmem >var_aaa631dbb225 reg0
+rmem reg0 >var_44524e0230c7
 add reg0 reg0 1
-wmem >var_8a886c83a0d6 reg0
-rmem reg0 >var_92cde4db5d34
-rmem reg1 >var_c53de2961d92
-rmem reg2 >var_8a886c83a0d6
+wmem >var_44524e0230c7 reg0
+rmem reg0 >var_715e4b506cb8
+rmem reg1 >var_aaa631dbb225
+rmem reg2 >var_44524e0230c7
 call >mem_cp
-rmem reg0 >var_7968c0f1f6a7
+rmem reg0 >var_fb260ff4a769
 ret
 ret
 :str_cat_end
 set reg0 >str_cat
 jmp >flip_str_end
 :flip_str
-jmp >var_962872f8f8d1_end
-:var_962872f8f8d1
-:var_962872f8f8d1_end
-wmem >var_962872f8f8d1 reg0
-jmp >var_adc61deb3fe7_end
-:var_adc61deb3fe7
-:var_adc61deb3fe7_end
+jmp >var_f1b8e5753bf2_end
+:var_f1b8e5753bf2
+:var_f1b8e5753bf2_end
+wmem >var_f1b8e5753bf2 reg0
+jmp >var_f790d88587c4_end
+:var_f790d88587c4
+:var_f790d88587c4_end
 call >alloc
-wmem >var_adc61deb3fe7 reg0
-jmp >var_8461bfca3c90_end
-:var_8461bfca3c90
-:var_8461bfca3c90_end
-rmem reg0 >var_962872f8f8d1
+wmem >var_f790d88587c4 reg0
+jmp >var_a90d945f9dbb_end
+:var_a90d945f9dbb
+:var_a90d945f9dbb_end
+rmem reg0 >var_f1b8e5753bf2
 call >str_len
-wmem >var_8461bfca3c90 reg0
-jmp >var_184c0b20273f_end
-:var_184c0b20273f
-:var_184c0b20273f_end
+wmem >var_a90d945f9dbb reg0
+jmp >var_a9206715b007_end
+:var_a9206715b007
+:var_a9206715b007_end
 set reg0 0
-wmem >var_184c0b20273f reg0
-:while_97e8c56b19a4_begin
-rmem reg0 >var_184c0b20273f
-rmem reg1 >var_8461bfca3c90
+wmem >var_a9206715b007 reg0
+:while_4a8be09c5f90_begin
+rmem reg0 >var_a9206715b007
+rmem reg1 >var_a90d945f9dbb
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-rmem reg0 >var_8461bfca3c90
-jf reg0 >while_97e8c56b19a4_end
-jmp >var_14e9226d1e7f_end
-:var_14e9226d1e7f
-:var_14e9226d1e7f_end
-rmem reg0 >var_962872f8f8d1
-rmem reg1 >var_184c0b20273f
+jf reg0 >while_4a8be09c5f90_end
+jmp >var_2b314dcf477f_end
+:var_2b314dcf477f
+:var_2b314dcf477f_end
+rmem reg0 >var_f1b8e5753bf2
+rmem reg1 >var_a9206715b007
 add reg0 reg0 reg1
-wmem >var_14e9226d1e7f reg0
-rmem reg0 >var_14e9226d1e7f
+wmem >var_2b314dcf477f reg0
+rmem reg0 >var_2b314dcf477f
 rmem reg0 reg0
-rmem reg0 >var_14e9226d1e7f
+rmem reg0 >var_2b314dcf477f
 rmem reg0 reg0
 push reg0
-rmem reg0 >var_184c0b20273f
+rmem reg0 >var_a9206715b007
 add reg0 reg0 1
-wmem >var_184c0b20273f reg0
-jmp >while_97e8c56b19a4_begin
-:while_97e8c56b19a4_end
-jmp >var_c356b5eca553_end
-:var_c356b5eca553
-:var_c356b5eca553_end
+wmem >var_a9206715b007 reg0
+jmp >while_4a8be09c5f90_begin
+:while_4a8be09c5f90_end
+jmp >var_30028f729acc_end
+:var_30028f729acc
+:var_30028f729acc_end
 pop reg0
-wmem >var_c356b5eca553 reg0
+wmem >var_30028f729acc reg0
 set reg0 0
-wmem >var_184c0b20273f reg0
-:while_006e9172d0a0_begin
-rmem reg0 >var_184c0b20273f
-rmem reg1 >var_8461bfca3c90
+wmem >var_a9206715b007 reg0
+:while_4ba20a4dd624_begin
+rmem reg0 >var_a9206715b007
+rmem reg1 >var_a90d945f9dbb
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-rmem reg0 >var_8461bfca3c90
-jf reg0 >while_006e9172d0a0_end
-jmp >var_0d2b239d50fc_end
-:var_0d2b239d50fc
-:var_0d2b239d50fc_end
-rmem reg0 >var_adc61deb3fe7
-rmem reg1 >var_184c0b20273f
+jf reg0 >while_4ba20a4dd624_end
+jmp >var_930122ce937a_end
+:var_930122ce937a
+:var_930122ce937a_end
+rmem reg0 >var_f790d88587c4
+rmem reg1 >var_a9206715b007
 add reg0 reg0 reg1
-wmem >var_0d2b239d50fc reg0
-rmem reg0 >var_0d2b239d50fc
-rmem reg1 >var_c356b5eca553
+wmem >var_930122ce937a reg0
+rmem reg0 >var_930122ce937a
+rmem reg1 >var_30028f729acc
 wmem reg0 reg1
-rmem reg0 >var_184c0b20273f
+rmem reg0 >var_a9206715b007
 add reg0 reg0 1
-wmem >var_184c0b20273f reg0
+wmem >var_a9206715b007 reg0
 pop reg0
-wmem >var_c356b5eca553 reg0
-jmp >while_006e9172d0a0_begin
-:while_006e9172d0a0_end
-rmem reg0 >var_c356b5eca553
-rmem reg0 >var_c356b5eca553
+wmem >var_30028f729acc reg0
+jmp >while_4ba20a4dd624_begin
+:while_4ba20a4dd624_end
+rmem reg0 >var_30028f729acc
+rmem reg0 >var_30028f729acc
 push reg0
-rmem reg0 >var_adc61deb3fe7
+rmem reg0 >var_f790d88587c4
 ret
 ret
 :flip_str_end
 set reg0 >flip_str
 jmp >input_end
 :input
-jmp >var_cd9383aadda6_end
-:var_cd9383aadda6
-:var_cd9383aadda6_end
+jmp >var_7fa7f38cac3c_end
+:var_7fa7f38cac3c
+:var_7fa7f38cac3c_end
 set reg0 16384
-wmem >var_cd9383aadda6 reg0
-jmp >var_066a8485b30c_end
-:var_066a8485b30c
-:var_066a8485b30c_end
+wmem >var_7fa7f38cac3c reg0
+jmp >var_28bb40b3e875_end
+:var_28bb40b3e875
+:var_28bb40b3e875_end
 in reg0
-wmem >var_066a8485b30c reg0
-jmp >var_b278d093108f_end
-:var_b278d093108f
-:var_b278d093108f_end
-rmem reg0 >var_066a8485b30c
+wmem >var_28bb40b3e875 reg0
+jmp >var_67d019750538_end
+:var_67d019750538
+:var_67d019750538_end
+rmem reg0 >var_28bb40b3e875
 set reg1 10
 eq reg0 reg0 reg1
-wmem >var_b278d093108f reg0
-:while_04feaf85efd3_begin
-rmem reg0 >var_b278d093108f
-rmem reg1 >var_066a8485b30c
+wmem >var_67d019750538 reg0
+:while_82eb814c3dbc_begin
+rmem reg0 >var_67d019750538
+rmem reg1 >var_28bb40b3e875
 call >and
 call >not
-jf reg0 >while_04feaf85efd3_end
-rmem reg0 >var_cd9383aadda6
-rmem reg1 >var_066a8485b30c
+jf reg0 >while_82eb814c3dbc_end
+rmem reg0 >var_7fa7f38cac3c
+rmem reg1 >var_28bb40b3e875
 wmem reg0 reg1
-rmem reg0 >var_cd9383aadda6
+rmem reg0 >var_7fa7f38cac3c
 add reg0 reg0 1
-wmem >var_cd9383aadda6 reg0
+wmem >var_7fa7f38cac3c reg0
 in reg0
-wmem >var_066a8485b30c reg0
-rmem reg0 >var_066a8485b30c
+wmem >var_28bb40b3e875 reg0
+rmem reg0 >var_28bb40b3e875
 set reg1 10
 eq reg0 reg0 reg1
-wmem >var_b278d093108f reg0
-jmp >while_04feaf85efd3_begin
-:while_04feaf85efd3_end
-rmem reg0 >var_cd9383aadda6
+wmem >var_67d019750538 reg0
+jmp >while_82eb814c3dbc_begin
+:while_82eb814c3dbc_end
+rmem reg0 >var_7fa7f38cac3c
 set reg1 0
 wmem reg0 reg1
-jmp >var_a78cf8c1f105_end
-:var_a78cf8c1f105
-:var_a78cf8c1f105_end
+jmp >var_3755c214ffa5_end
+:var_3755c214ffa5
+:var_3755c214ffa5_end
 call >alloc
-wmem >var_a78cf8c1f105 reg0
-jmp >var_f2f27c258a95_end
-:var_f2f27c258a95
-:var_f2f27c258a95_end
+wmem >var_3755c214ffa5 reg0
+jmp >var_151b3625be48_end
+:var_151b3625be48
+:var_151b3625be48_end
 set reg0 16384
 call >str_len
-wmem >var_f2f27c258a95 reg0
+wmem >var_151b3625be48 reg0
 set reg0 16384
-rmem reg1 >var_a78cf8c1f105
-rmem reg2 >var_f2f27c258a95
+rmem reg1 >var_3755c214ffa5
+rmem reg2 >var_151b3625be48
 call >mem_cp
-rmem reg0 >var_a78cf8c1f105
+rmem reg0 >var_3755c214ffa5
 ret
 ret
 :input_end
 set reg0 >input
 jmp >print_end
 :print
-jmp >var_177c72f131ae_end
-:var_177c72f131ae
-:var_177c72f131ae_end
-wmem >var_177c72f131ae reg0
-:while_4db2bd2f4a8b_begin
-rmem reg0 >var_177c72f131ae
+jmp >var_3abd65a960fa_end
+:var_3abd65a960fa
+:var_3abd65a960fa_end
+wmem >var_3abd65a960fa reg0
+:while_f46c42210b8e_begin
+rmem reg0 >var_3abd65a960fa
 rmem reg0 reg0
-jf reg0 >while_4db2bd2f4a8b_end
-rmem reg0 >var_177c72f131ae
+jf reg0 >while_f46c42210b8e_end
+rmem reg0 >var_3abd65a960fa
 rmem reg0 reg0
 out reg0
-rmem reg0 >var_177c72f131ae
+rmem reg0 >var_3abd65a960fa
 add reg0 reg0 1
-wmem >var_177c72f131ae reg0
-jmp >while_4db2bd2f4a8b_begin
-:while_4db2bd2f4a8b_end
+wmem >var_3abd65a960fa reg0
+jmp >while_f46c42210b8e_begin
+:while_f46c42210b8e_end
 ret
 :print_end
 set reg0 >print
 jmp >println_end
 :println
-jmp >var_e5c2f03e3fda_end
-:var_e5c2f03e3fda
-:var_e5c2f03e3fda_end
-wmem >var_e5c2f03e3fda reg0
-rmem reg0 >var_e5c2f03e3fda
+jmp >var_751dfb466407_end
+:var_751dfb466407
+:var_751dfb466407_end
+wmem >var_751dfb466407 reg0
+rmem reg0 >var_751dfb466407
 call >print
 set reg0 10
 out reg0
@@ -446,309 +442,304 @@ ret
 set reg0 >println
 jmp >print_number_end
 :print_number
-jmp >var_b7cd8dcc0be0_end
-:var_b7cd8dcc0be0
-:var_b7cd8dcc0be0_end
-wmem >var_b7cd8dcc0be0 reg0
-rmem reg0 >var_b7cd8dcc0be0
+jmp >var_3f85740b7dbb_end
+:var_3f85740b7dbb
+:var_3f85740b7dbb_end
+wmem >var_3f85740b7dbb reg0
+rmem reg0 >var_3f85740b7dbb
 set reg1 10
 eq reg0 reg0 reg1
-jf reg0 >end_7453b63cb559
+jf reg0 >end_c0831617fea5
 set reg0 49
 out reg0
 set reg0 48
 out reg0
 ret
-:end_7453b63cb559
-jmp >var_4a32de8104ab_end
-:var_4a32de8104ab
-:var_4a32de8104ab_end
-jmp >var_4b5daf17e40f_end
-:var_4b5daf17e40f
-:var_4b5daf17e40f_end
+:end_c0831617fea5
+jmp >var_5ccf359846b0_end
+:var_5ccf359846b0
+:var_5ccf359846b0_end
+jmp >var_86f26371b9f6_end
+:var_86f26371b9f6
+:var_86f26371b9f6_end
 set reg0 0
-wmem >var_4b5daf17e40f reg0
-:while_d45fd962e309_begin
-rmem reg0 >var_b7cd8dcc0be0
+wmem >var_86f26371b9f6 reg0
+:while_2c7f5fb868ce_begin
+rmem reg0 >var_3f85740b7dbb
 set reg1 10
 gt reg0 reg0 reg1
-set reg0 10
-jf reg0 >while_d45fd962e309_end
-rmem reg0 >var_b7cd8dcc0be0
+jf reg0 >while_2c7f5fb868ce_end
+rmem reg0 >var_3f85740b7dbb
 set reg1 10
 mod reg0 reg0 reg1
-wmem >var_4a32de8104ab reg0
-rmem reg0 >var_4a32de8104ab
-rmem reg0 >var_4a32de8104ab
+wmem >var_5ccf359846b0 reg0
+rmem reg0 >var_5ccf359846b0
+rmem reg0 >var_5ccf359846b0
 push reg0
-rmem reg0 >var_4b5daf17e40f
+rmem reg0 >var_86f26371b9f6
 add reg0 reg0 1
-wmem >var_4b5daf17e40f reg0
-rmem reg0 >var_b7cd8dcc0be0
+wmem >var_86f26371b9f6 reg0
+rmem reg0 >var_3f85740b7dbb
 set reg1 10
 call >divide
-wmem >var_b7cd8dcc0be0 reg0
-jmp >while_d45fd962e309_begin
-:while_d45fd962e309_end
-rmem reg0 >var_b7cd8dcc0be0
+wmem >var_3f85740b7dbb reg0
+jmp >while_2c7f5fb868ce_begin
+:while_2c7f5fb868ce_end
+rmem reg0 >var_3f85740b7dbb
 set reg1 10
 mod reg0 reg0 reg1
-wmem >var_4a32de8104ab reg0
-rmem reg0 >var_4a32de8104ab
-rmem reg0 >var_4a32de8104ab
+wmem >var_5ccf359846b0 reg0
+rmem reg0 >var_5ccf359846b0
+rmem reg0 >var_5ccf359846b0
 push reg0
-rmem reg0 >var_4b5daf17e40f
+rmem reg0 >var_86f26371b9f6
 add reg0 reg0 1
-wmem >var_4b5daf17e40f reg0
-jmp >var_370f5a488cb5_end
-:var_370f5a488cb5
-:var_370f5a488cb5_end
+wmem >var_86f26371b9f6 reg0
+jmp >var_b7a9442920ef_end
+:var_b7a9442920ef
+:var_b7a9442920ef_end
 set reg0 0
-wmem >var_370f5a488cb5 reg0
-:while_2b5a7495aab9_begin
-rmem reg0 >var_370f5a488cb5
-rmem reg1 >var_4b5daf17e40f
+wmem >var_b7a9442920ef reg0
+:while_e59919a38374_begin
+rmem reg0 >var_b7a9442920ef
+rmem reg1 >var_86f26371b9f6
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-rmem reg0 >var_4b5daf17e40f
-jf reg0 >while_2b5a7495aab9_end
-rmem reg0 >var_370f5a488cb5
+jf reg0 >while_e59919a38374_end
+rmem reg0 >var_b7a9442920ef
 set reg1 1
 add reg0 reg0 reg1
-wmem >var_370f5a488cb5 reg0
+wmem >var_b7a9442920ef reg0
 pop reg0
 set reg1 48
 add reg0 reg0 reg1
 out reg0
-jmp >while_2b5a7495aab9_begin
-:while_2b5a7495aab9_end
+jmp >while_e59919a38374_begin
+:while_e59919a38374_end
 ret
 :print_number_end
 set reg0 >print_number
 jmp >dump_mem_end
 :dump_mem
-jmp >var_67d86a1764f2_end
-:var_67d86a1764f2
-:var_67d86a1764f2_end
+jmp >var_8a76ac12f3aa_end
+:var_8a76ac12f3aa
+:var_8a76ac12f3aa_end
 set reg0 0
-wmem >var_67d86a1764f2 reg0
-:while_add286b71c91_begin
-rmem reg0 >var_67d86a1764f2
+wmem >var_8a76ac12f3aa reg0
+:while_0093cf085381_begin
+rmem reg0 >var_8a76ac12f3aa
 rmem reg0 reg0
-jf reg0 >while_add286b71c91_end
-rmem reg0 >var_67d86a1764f2
+jf reg0 >while_0093cf085381_end
+rmem reg0 >var_8a76ac12f3aa
 add reg0 reg0 1
-wmem >var_67d86a1764f2 reg0
-rmem reg0 >var_67d86a1764f2
+wmem >var_8a76ac12f3aa reg0
+rmem reg0 >var_8a76ac12f3aa
 rmem reg0 reg0
 call >print_number
 set reg0 10
 out reg0
-jmp >while_add286b71c91_begin
-:while_add286b71c91_end
+jmp >while_0093cf085381_begin
+:while_0093cf085381_end
 ret
 :dump_mem_end
 set reg0 >dump_mem
 jmp >int_end
 :int
-jmp >var_43676107c277_end
-:var_43676107c277
-:var_43676107c277_end
-wmem >var_43676107c277 reg0
-jmp >var_f942c04bdedf_end
-:var_f942c04bdedf
-:var_f942c04bdedf_end
-rmem reg0 >var_43676107c277
+jmp >var_f7be30c2b044_end
+:var_f7be30c2b044
+:var_f7be30c2b044_end
+wmem >var_f7be30c2b044 reg0
+jmp >var_bcf2e2b664e0_end
+:var_bcf2e2b664e0
+:var_bcf2e2b664e0_end
+rmem reg0 >var_f7be30c2b044
 call >flip_str
-wmem >var_f942c04bdedf reg0
-jmp >var_d6bcd6faac43_end
-:var_d6bcd6faac43
-:var_d6bcd6faac43_end
-rmem reg0 >var_f942c04bdedf
+wmem >var_bcf2e2b664e0 reg0
+jmp >var_92619eb7467f_end
+:var_92619eb7467f
+:var_92619eb7467f_end
+rmem reg0 >var_bcf2e2b664e0
 call >str_len
-wmem >var_d6bcd6faac43 reg0
-rmem reg0 >var_d6bcd6faac43
+wmem >var_92619eb7467f reg0
+rmem reg0 >var_92619eb7467f
 set reg1 1
 call >subtract
-wmem >var_d6bcd6faac43 reg0
-jmp >var_f4e680225d35_end
-:var_f4e680225d35
-:var_f4e680225d35_end
+wmem >var_92619eb7467f reg0
+jmp >var_cf924570dd1c_end
+:var_cf924570dd1c
+:var_cf924570dd1c_end
 set reg0 0
-wmem >var_f4e680225d35 reg0
-jmp >var_9846fede9387_end
-:var_9846fede9387
-:var_9846fede9387_end
+wmem >var_cf924570dd1c reg0
+jmp >var_e38e0e88c70c_end
+:var_e38e0e88c70c
+:var_e38e0e88c70c_end
 set reg0 0
-wmem >var_9846fede9387 reg0
-:while_5fac1e1aad7b_begin
-rmem reg0 >var_f4e680225d35
-rmem reg1 >var_d6bcd6faac43
+wmem >var_e38e0e88c70c reg0
+:while_dae494a051a7_begin
+rmem reg0 >var_cf924570dd1c
+rmem reg1 >var_92619eb7467f
 gt reg0 reg0 reg1
 call >not
-rmem reg0 >var_d6bcd6faac43
-jf reg0 >while_5fac1e1aad7b_end
-jmp >var_6e21960c2ba6_end
-:var_6e21960c2ba6
-:var_6e21960c2ba6_end
-rmem reg0 >var_f942c04bdedf
-rmem reg1 >var_f4e680225d35
+jf reg0 >while_dae494a051a7_end
+jmp >var_2077b8f150fe_end
+:var_2077b8f150fe
+:var_2077b8f150fe_end
+rmem reg0 >var_bcf2e2b664e0
+rmem reg1 >var_cf924570dd1c
 add reg0 reg0 reg1
-wmem >var_6e21960c2ba6 reg0
-rmem reg0 >var_6e21960c2ba6
+wmem >var_2077b8f150fe reg0
+rmem reg0 >var_2077b8f150fe
 rmem reg0 reg0
-wmem >var_6e21960c2ba6 reg0
-jmp >var_75bdfea3f9d8_end
-:var_75bdfea3f9d8
-:var_75bdfea3f9d8_end
-rmem reg0 >var_6e21960c2ba6
+wmem >var_2077b8f150fe reg0
+jmp >var_26745fe7c3ce_end
+:var_26745fe7c3ce
+:var_26745fe7c3ce_end
+rmem reg0 >var_2077b8f150fe
 set reg1 47
 gt reg0 reg0 reg1
-wmem >var_75bdfea3f9d8 reg0
-jmp >var_86b5083174bc_end
-:var_86b5083174bc
-:var_86b5083174bc_end
-rmem reg0 >var_6e21960c2ba6
+wmem >var_26745fe7c3ce reg0
+jmp >var_744140dfe4a3_end
+:var_744140dfe4a3
+:var_744140dfe4a3_end
+rmem reg0 >var_2077b8f150fe
 set reg1 58
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-wmem >var_86b5083174bc reg0
-rmem reg0 >var_75bdfea3f9d8
-rmem reg1 >var_86b5083174bc
+wmem >var_744140dfe4a3 reg0
+rmem reg0 >var_26745fe7c3ce
+rmem reg1 >var_744140dfe4a3
 call >and
-jf reg0 >end_7f810eae6764
-jmp >var_bd69011a92b3_end
-:var_bd69011a92b3
-:var_bd69011a92b3_end
-rmem reg0 >var_6e21960c2ba6
+jf reg0 >end_20273e822b55
+jmp >var_33acc02aa3a6_end
+:var_33acc02aa3a6
+:var_33acc02aa3a6_end
+rmem reg0 >var_2077b8f150fe
 set reg1 48
 call >subtract
-wmem >var_bd69011a92b3 reg0
-rmem reg0 >var_bd69011a92b3
+wmem >var_33acc02aa3a6 reg0
+rmem reg0 >var_33acc02aa3a6
 call >print_number
 set reg0 10
 out reg0
-jmp >var_bd6b3d5a7c25_end
-:var_bd6b3d5a7c25
-:var_bd6b3d5a7c25_end
+jmp >var_3c935febcc3f_end
+:var_3c935febcc3f
+:var_3c935febcc3f_end
 set reg0 0
-wmem >var_bd6b3d5a7c25 reg0
-jmp >var_e1bc503fe8a0_end
-:var_e1bc503fe8a0
-:var_e1bc503fe8a0_end
-rmem reg0 >var_f4e680225d35
+wmem >var_3c935febcc3f reg0
+jmp >var_c440dc34204a_end
+:var_c440dc34204a
+:var_c440dc34204a_end
+rmem reg0 >var_cf924570dd1c
 set reg1 1
 call >subtract
-wmem >var_e1bc503fe8a0 reg0
-:while_d95666637f24_begin
-rmem reg0 >var_bd6b3d5a7c25
-rmem reg1 >var_e1bc503fe8a0
+wmem >var_c440dc34204a reg0
+:while_3a100919470f_begin
+rmem reg0 >var_3c935febcc3f
+rmem reg1 >var_c440dc34204a
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-rmem reg0 >var_e1bc503fe8a0
-jf reg0 >while_d95666637f24_end
-rmem reg0 >var_bd69011a92b3
+jf reg0 >while_3a100919470f_end
+rmem reg0 >var_33acc02aa3a6
 set reg1 10
-call >subtract
-wmem >var_bd69011a92b3 reg0
-rmem reg0 >var_bd6b3d5a7c25
+mult reg0 reg0 reg1
+wmem >var_33acc02aa3a6 reg0
+rmem reg0 >var_3c935febcc3f
 add reg0 reg0 1
-wmem >var_bd6b3d5a7c25 reg0
-jmp >while_d95666637f24_begin
-:while_d95666637f24_end
-rmem reg0 >var_9846fede9387
-rmem reg1 >var_bd69011a92b3
+wmem >var_3c935febcc3f reg0
+jmp >while_3a100919470f_begin
+:while_3a100919470f_end
+rmem reg0 >var_e38e0e88c70c
+rmem reg1 >var_33acc02aa3a6
 add reg0 reg0 reg1
-wmem >var_9846fede9387 reg0
-:end_7f810eae6764
-rmem reg0 >var_f4e680225d35
+wmem >var_e38e0e88c70c reg0
+:end_20273e822b55
+rmem reg0 >var_cf924570dd1c
 add reg0 reg0 1
-wmem >var_f4e680225d35 reg0
-jmp >while_5fac1e1aad7b_begin
-:while_5fac1e1aad7b_end
-rmem reg0 >var_9846fede9387
+wmem >var_cf924570dd1c reg0
+jmp >while_dae494a051a7_begin
+:while_dae494a051a7_end
+rmem reg0 >var_e38e0e88c70c
 call >print_number
-rmem reg0 >var_9846fede9387
+rmem reg0 >var_e38e0e88c70c
 ret
 ret
 :int_end
 set reg0 >int
-jmp >var_c92a4ea837fa_end
-:var_c92a4ea837fa
-:var_c92a4ea837fa_end
+jmp >var_b105425371e9_end
+:var_b105425371e9
+:var_b105425371e9_end
 set reg0 1
-wmem >var_c92a4ea837fa reg0
-:for_cf62e1322ac8_begin
-rmem reg0 >var_c92a4ea837fa
+wmem >var_b105425371e9 reg0
+:for_0e87c21e0944_begin
+rmem reg0 >var_b105425371e9
 set reg1 40
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-set reg0 40
-jf reg0 >for_cf62e1322ac8_end
-jmp >var_780ad467c21a_end
-:var_780ad467c21a
-:var_780ad467c21a_end
-rmem reg0 >var_c92a4ea837fa
+jf reg0 >for_0e87c21e0944_end
+jmp >var_e229a2f192de_end
+:var_e229a2f192de
+:var_e229a2f192de_end
+rmem reg0 >var_b105425371e9
 set reg1 3
 mod reg0 reg0 reg1
-wmem >var_780ad467c21a reg0
-jmp >var_ed67cb1f0cb2_end
-:var_ed67cb1f0cb2
-:var_ed67cb1f0cb2_end
-rmem reg0 >var_c92a4ea837fa
+wmem >var_e229a2f192de reg0
+jmp >var_18b37ada0be7_end
+:var_18b37ada0be7
+:var_18b37ada0be7_end
+rmem reg0 >var_b105425371e9
 set reg1 5
 mod reg0 reg0 reg1
-wmem >var_ed67cb1f0cb2 reg0
-rmem reg0 >var_780ad467c21a
-rmem reg1 >var_ed67cb1f0cb2
+wmem >var_18b37ada0be7 reg0
+rmem reg0 >var_e229a2f192de
+rmem reg1 >var_18b37ada0be7
 call >and
-jf reg0 >end_97a8ee7f2137
-rmem reg0 >var_c92a4ea837fa
+jf reg0 >end_183919a05653
+rmem reg0 >var_b105425371e9
 call >print_number
-:end_97a8ee7f2137
-rmem reg0 >var_780ad467c21a
+:end_183919a05653
+rmem reg0 >var_e229a2f192de
 call >not
-jf reg0 >end_a4c63782b41f
-jmp >var_a5d4a9bc99c8_end
-:var_a5d4a9bc99c8
+jf reg0 >end_50f0bcf3c161
+jmp >var_48d6ad6f5972_end
+:var_48d6ad6f5972
 &i
 &z
 &z
 0
-:var_a5d4a9bc99c8_end
-wmem >var_a5d4a9bc99c8 &f
-set reg0 >var_a5d4a9bc99c8
+:var_48d6ad6f5972_end
+wmem >var_48d6ad6f5972 &f
+set reg0 >var_48d6ad6f5972
 call >print
-:end_a4c63782b41f
-rmem reg0 >var_ed67cb1f0cb2
+:end_50f0bcf3c161
+rmem reg0 >var_18b37ada0be7
 call >not
-jf reg0 >end_d296ac499710
-jmp >var_c87c50068f99_end
-:var_c87c50068f99
+jf reg0 >end_683af59c5975
+jmp >var_9d5f2a7f2404_end
+:var_9d5f2a7f2404
 &u
 &z
 &z
 0
-:var_c87c50068f99_end
-wmem >var_c87c50068f99 &b
-set reg0 >var_c87c50068f99
+:var_9d5f2a7f2404_end
+wmem >var_9d5f2a7f2404 &b
+set reg0 >var_9d5f2a7f2404
 call >print
-:end_d296ac499710
+:end_683af59c5975
 set reg0 10
 out reg0
-rmem reg0 >var_c92a4ea837fa
+rmem reg0 >var_b105425371e9
 add reg0 reg0 1
-wmem >var_c92a4ea837fa reg0
-jmp >for_cf62e1322ac8_begin
-:for_cf62e1322ac8_end
+wmem >var_b105425371e9 reg0
+jmp >for_0e87c21e0944_begin
+:for_0e87c21e0944_end
 halt
 
 :subtract
