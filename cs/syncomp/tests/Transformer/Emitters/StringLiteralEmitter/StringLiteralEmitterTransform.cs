@@ -11,10 +11,6 @@ namespace syncomp.Tests
   public class StringLiteralEmitterTransform : Behavior
   {
     private List<string> result;
-    private Regex VarLabelBeginRegex = 
-      new Regex("var_\\S*\\n");
-    private Regex VarLabelEndRegex =
-      new Regex("var_\\S*_end");
 
     protected override void Given()
     {
@@ -25,11 +21,60 @@ namespace syncomp.Tests
     }
 
     [TestMethod]
+    public void OneJmp()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("jmp")).Count()
+      );
+    }
+
+    [TestMethod]
     public void OneVarBeginLabel()
     {
       Assert.AreEqual(
         1,
-        this.result.Where(line => VarLabelBeginRegex.IsMatch(line)).Count()
+        this.result.Where(
+          line => line.Contains(":var_") && !line.Contains("_end")
+        ).Count()
+      );
+    }
+
+    [TestMethod]
+    public void One0()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line == "0").Count()
+      );
+    }
+
+    [TestMethod]
+    public void OneVarEndLabel()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(
+          line => line.Contains(":var_") && line.Contains("_end")
+        ).Count()
+      );
+    }
+
+    [TestMethod]
+    public void OneWmem()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("wmem")).Count()
+      );
+    }
+
+    [TestMethod]
+    public void OneSet()
+    {
+      Assert.AreEqual(
+        1,
+        this.result.Where(line => line.Contains("set")).Count()
       );
     }
   }
