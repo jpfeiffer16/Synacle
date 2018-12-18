@@ -83,7 +83,8 @@ namespace syncomp
             }
             catch(Exception e)
             {
-                Console.Error.WriteLine("Lexer error");
+                Console.Error.WriteLine("Lexer error:");
+                Console.Error.WriteLine(e);
             }
             //Parse
             List<AstNode> ast = null;
