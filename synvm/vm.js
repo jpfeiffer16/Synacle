@@ -45,7 +45,13 @@ if (!stateExists) {
       init(buff);
     });
   } else {
-    fs.readFile(program.binary, init);  
+    console.log(program.binary);
+    fs.readFile(program.binary, (err, buff) => {
+      if (err) {
+        throw err
+      }
+      init(buff);
+    });  
   }
 }
 
