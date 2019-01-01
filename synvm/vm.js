@@ -45,7 +45,6 @@ if (!stateExists) {
       init(buff);
     });
   } else {
-    console.log(program.binary);
     fs.readFile(program.binary, (err, buff) => {
       if (err) {
         throw err
