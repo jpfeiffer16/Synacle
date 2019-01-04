@@ -35,7 +35,8 @@ namespace syncomp
     AddressOf,
     Deref,
     Quote,
-    Breakpoint
+    Breakpoint,
+    Struct
   }
 
     public static class Grammar {
@@ -172,6 +173,10 @@ namespace syncomp
           new SyntaxToken() {
             Token = "breakpoint",
             Type = SyntaxTokenType.Breakpoint
+          },
+          new SyntaxToken() {
+            Token = "struct",
+            Type = SyntaxTokenType.Struct
           }
         };
     } 

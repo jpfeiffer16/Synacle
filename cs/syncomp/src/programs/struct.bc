@@ -1,0 +1,13 @@
+
+
+struct stuff {
+  var house_number;
+};
+
+
+function main()
+{
+  //println("working 2");
+}
+
+main();
