@@ -33,10 +33,10 @@ namespace syncomp
             FileInfo fileInfo = null;
             if (filePath == "-") {
                 //Make this async once the above comment is done
+                // Console.WriteLine("Before read");
                 code = Console.In.ReadToEnd();
+                // Console.WriteLine("After read");
                 workingDirectory = Directory.GetCurrentDirectory();
-
-                
             } else {
                 fileInfo = new FileInfo(filePath);
                 workingDirectory = fileInfo.Directory.FullName;
@@ -45,7 +45,6 @@ namespace syncomp
                 code = File.ReadAllText(
                     filePath
                 );
-                
             }
             List<string> asmLines = new List<string>();
             asmLines = CompileCode(code, workingDirectory, includeList);
