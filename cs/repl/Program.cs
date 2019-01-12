@@ -26,7 +26,6 @@ namespace repl
                 StartInfo = new ProcessStartInfo
                 {
                     FileName = "/bin/bash",
-                    // Arguments = $"-c \"echo '{codeLine}' | syncomp -\"",
                     Arguments = $"-c \"{command}\"",
                     RedirectStandardInput = true,
                     RedirectStandardError = true,

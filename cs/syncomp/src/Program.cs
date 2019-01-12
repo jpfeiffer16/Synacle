@@ -83,6 +83,7 @@ namespace syncomp
             {
                 Console.Error.WriteLine("Lexer error:");
                 Console.Error.WriteLine(e);
+                Environment.Exit(1);
             }
             //Parse
             List<AstNode> ast = null;
