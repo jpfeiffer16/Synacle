@@ -60,9 +60,9 @@ namespace repl
             {
                 Console.Write("> ");
                 var codeLine = Console.ReadLine();
-                codeBuffer += string.Format("{0}\n", codeLine);
+                var tempCodeBuffer = string.Format("{0}{1}\n", codeBuffer, codeLine);
 
-                var asm = RunProc("syncomp -", Encoding.UTF8.GetBytes(codeBuffer));
+                var asm = RunProc("syncomp -", Encoding.UTF8.GetBytes(tempCodeBuffer));
                 if (asm != null)
                 {
                     var bin = RunProc("syn-asm -", asm);
@@ -71,6 +71,7 @@ namespace repl
                         var runOutput = RunProc("syn-vm --stdin", bin);
                         if (runOutput != null)
                         {
+                            codeBuffer = tempCodeBuffer;
                             var outputStr = Encoding.UTF8.GetString(runOutput);
                             Console.WriteLine(GetDiff(prevousOutput, outputStr));
                             prevousOutput = outputStr;
