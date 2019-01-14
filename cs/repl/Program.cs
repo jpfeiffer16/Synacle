@@ -56,10 +56,8 @@ namespace repl
 
         static void Main(string[] args)
         {
-            while (true)
+            var prompt = new Prompt((codeLine) =>
             {
-                Console.Write("> ");
-                var codeLine = Console.ReadLine();
                 var tempCodeBuffer = string.Format("{0}{1}\n", codeBuffer, codeLine);
 
                 var asm = RunProc("syncomp -", Encoding.UTF8.GetBytes(tempCodeBuffer));
@@ -78,7 +76,14 @@ namespace repl
                         }
                     }
                 }
-            }
+            });
+            prompt.Read();
+            // while (true)
+            // {
+            //     Console.Write("> ");
+            //     var codeLine = Console.ReadLine();
+            // }
         }
+
     }
 }

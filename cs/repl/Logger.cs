@@ -2,11 +2,19 @@ using System.IO;
 
 namespace repl
 {
-    public static class Logger
+    public class Logger
     {
-        public static void Log(string message)
+        private const string FILEPATH = "./log.txt";
+
+        public Logger()
         {
-            File.AppendAllText("./log.txt", string.Format("{0}\n", message));
+            File.AppendAllText(FILEPATH, ">--\n");
+        }
+
+        public void Log(string message)
+        {
+            File.AppendAllText(FILEPATH, "--\n");
+            File.AppendAllText(FILEPATH, string.Format("{0}\n", message));
         }
     }
 }
