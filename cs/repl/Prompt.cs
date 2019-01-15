@@ -95,39 +95,44 @@ namespace repl
 
         public void Read()
         {
-            Console.Write(">");
-            // var keys = new StringBuilder();
-            // var pointerIndex = 0;
             while (true)
             {
-                var key = Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
+                Console.Write(">");
+                // var keys = new StringBuilder();
+                // var pointerIndex = 0;
+                while (true)
                 {
-                    Console.WriteLine("Enter key!");
-                }
-                // if (key.Key == ConsoleKey.UpArrow)
-                // {
-                //     Console.WriteLine("UpArrow key!");
-                // }
-                // if (key.Key == ConsoleKey.DownArrow)
-                // {
-                //     Console.WriteLine("DownArrow key!");
-                // }
-                if (key.Key == ConsoleKey.Backspace)
-                {
-                    this.DeleteChar();
-                }
-                else if (key.Key == ConsoleKey.LeftArrow)
-                {
-                    this.CursorLeft();
-                }
-                else if (key.Key == ConsoleKey.RightArrow)
-                {
-                    this.CursorRight();
-                }
-                else
-                {
-                    this.InsertChar(key.KeyChar);
+                    var key = Console.ReadKey(true);
+                    if (key.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                        this.lineAction(this.keys.ToString());
+                        break;
+                    }
+                    // if (key.Key == ConsoleKey.UpArrow)
+                    // {
+                    //     Console.WriteLine("UpArrow key!");
+                    // }
+                    // if (key.Key == ConsoleKey.DownArrow)
+                    // {
+                    //     Console.WriteLine("DownArrow key!");
+                    // }
+                    if (key.Key == ConsoleKey.Backspace)
+                    {
+                        this.DeleteChar();
+                    }
+                    else if (key.Key == ConsoleKey.LeftArrow)
+                    {
+                        this.CursorLeft();
+                    }
+                    else if (key.Key == ConsoleKey.RightArrow)
+                    {
+                        this.CursorRight();
+                    }
+                    else
+                    {
+                        this.InsertChar(key.KeyChar);
+                    }
                 }
             }
         }
