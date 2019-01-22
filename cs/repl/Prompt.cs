@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
+using System.Collections.Generic;
 
 namespace repl
 {
@@ -41,8 +41,6 @@ namespace repl
                 keys.Remove(this.cursorIndex - 1, 1);
                 this.cursorIndex--;
                 Console.Write("\b");
-                // Console.Write(" ");
-                // Console.Write("\b");
                 this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
                 if (this.cursorIndex == this.keys.Length)
                 {
@@ -58,6 +56,8 @@ namespace repl
                         var reWritechar = this.keys[i];
                         Console.Write(reWritechar);
                     }
+                    Console.Write(" ");
+                    Console.Write("\b");
                     for (var i = this.cursorIndex; i < this.keys.Length; i++)
                     {
                         Console.Write("\b");
@@ -98,36 +98,43 @@ namespace repl
             while (true)
             {
                 Console.Write(">");
-                // var keys = new StringBuilder();
-                // var pointerIndex = 0;
                 while (true)
                 {
                     var key = Console.ReadKey(true);
                     if (key.Key == ConsoleKey.Enter)
                     {
                         Console.WriteLine();
-                        this.lineAction(this.keys.ToString());
+                        this.lineAction(string.Format("{0}\n", this.keys.ToString()));
+                        this.cursorIndex = 0;
+                        this.keys = new StringBuilder();
                         break;
                     }
-                    // if (key.Key == ConsoleKey.UpArrow)
-                    // {
-                    //     Console.WriteLine("UpArrow key!");
-                    // }
-                    // if (key.Key == ConsoleKey.DownArrow)
-                    // {
-                    //     Console.WriteLine("DownArrow key!");
-                    // }
+                    if (key.Key == ConsoleKey.UpArrow)
+                    {
+                        for (var i = 0; i < this.keys.Length; i++)
+                        {
+                            Console.Write("\b");
+                            Console.Write(" ");
+                            Console.Write("\b");
+                        }
+                        this.cursorIndex = 0;
+                        this.keys = new StringBuilder();
+                    }
+                    if (key.Key == ConsoleKey.DownArrow)
+                    {
+                    }
                     if (key.Key == ConsoleKey.Backspace)
                     {
                         this.DeleteChar();
                     }
+                    // TODO: Enable the left and right keys
                     else if (key.Key == ConsoleKey.LeftArrow)
                     {
-                        this.CursorLeft();
+                        // this.CursorLeft();
                     }
                     else if (key.Key == ConsoleKey.RightArrow)
                     {
-                        this.CursorRight();
+                        // this.CursorRight();
                     }
                     else
                     {
