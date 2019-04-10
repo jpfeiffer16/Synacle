@@ -17,12 +17,16 @@ namespace syncomp
       this.WorkingDirectory = workingDirectory;
       this.IncludeLocations = includeLocations;
     }
-
+    
     public Preprocessor(string code, string workingDirectory) :
       this(code, workingDirectory, new List<string>())
     { }
 
-    public string Preprocess()
+    ///<summary>
+    ///Returns a mapping of lines to files with all include statements interpolated
+    ///</summary>
+    ///<returns cref="List<Tuple<string, string>>"></returns>
+    public List<Tuple<string, string>> Preprocess()
     {
       MatchCollection includeMatches;
 
