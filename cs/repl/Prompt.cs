@@ -6,91 +6,57 @@ namespace repl
 {
     public class Prompt
     {
+        private string prompt;
         private readonly Action<string> lineAction;
-        private readonly List<string> historyStack = new List<string>();
-
+        private readonly List<StringBuilder> historyStack = new List<StringBuilder>();
         //NOTE: For debuggin purposes only!
         private readonly Logger logger = new Logger();
-
         private StringBuilder keys = new StringBuilder();
-        private int cursorIndex = 0;
+
+        private void SetCursorX(int x)
+        {
+            Console.SetCursorPosition(x, Console.CursorTop);
+        }
+
+        private void ClearAll()
+        {
+            this.Clear();
+            this.keys = new StringBuilder();
+        }
+
+        private void Clear()
+        {
+            this.SetCursorX(prompt.Length + this.keys.Length);
+            for (var i = 0; i < this.keys.Length; i++)
+            {
+                Console.Write("\b");
+                Console.Write(" ");
+                Console.Write("\b");
+            }
+        }
+
+        private void Render()
+        {
+            this.SetCursorX(prompt.Length);
+            for (var i = 0; i < this.keys.Length; i++)
+            {
+                Console.Write(this.keys[i]);
+            }
+        }
 
         private void InsertChar(char insertChar)
         {
-            this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-            Console.Write(insertChar);
-            keys.Insert(this.cursorIndex, insertChar);
-            this.cursorIndex++;
-            for (var i = this.cursorIndex; i < this.keys.Length; i++)
-            {
-                var reWriteChar = this.keys[i];
-                Console.Write(reWriteChar);
-            }
-            for (var i = this.cursorIndex; i < this.keys.Length; i++)
-            {
-                Console.Write("\b");
-            }
-            this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
+            var index = Console.CursorLeft - prompt.Length;
+            this.Clear();
+            this.keys.Insert(index, insertChar);
+            this.Render();
+            this.SetCursorX(index + prompt.Length + 1);
         }
 
-        private void DeleteChar()
-        {
-            if (this.cursorIndex > 0)
-            {
-                this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-                keys.Remove(this.cursorIndex - 1, 1);
-                this.cursorIndex--;
-                Console.Write("\b");
-                this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-                if (this.cursorIndex == this.keys.Length)
-                {
-                    this.logger.Log("One");
-                    Console.Write(" ");
-                    Console.Write("\b");
-                }
-                else
-                {
-                    this.logger.Log("Two");
-                    for (var i = this.cursorIndex; i < this.keys.Length; i++)
-                    {
-                        var reWritechar = this.keys[i];
-                        Console.Write(reWritechar);
-                    }
-                    Console.Write(" ");
-                    Console.Write("\b");
-                    for (var i = this.cursorIndex; i < this.keys.Length; i++)
-                    {
-                        Console.Write("\b");
-                    }
-                }
-            }
-        }
-
-        private void CursorLeft()
-        {
-            this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-            if (this.cursorIndex > 0)
-            {
-                this.cursorIndex--;
-                Console.Write("\b");
-            }
-            this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-        }
-
-        private void CursorRight()
-        {
-            this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-            if (this.cursorIndex < this.keys.Length)
-            {
-                this.cursorIndex++;
-                Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
-            }
-            this.logger.Log(string.Format("{0}, {1}", this.cursorIndex, this.keys.Length));
-        }
-
-        public Prompt(Action<string> lineAction)
+        public Prompt(Action<string> lineAction, string prompt = ">"/* , string bad */)
         {
             this.lineAction = lineAction;
+            this.prompt = prompt;
         }
 
         public void Read()
@@ -105,27 +71,26 @@ namespace repl
                     {
                         Console.WriteLine();
                         this.lineAction(string.Format("{0}\n", this.keys.ToString()));
-                        this.cursorIndex = 0;
+                        this.historyStack.Add(this.keys);
                         this.keys = new StringBuilder();
                         break;
                     }
-                    if (key.Key == ConsoleKey.UpArrow)
+                    else if (key.Key == ConsoleKey.UpArrow)
                     {
-                        for (var i = 0; i < this.keys.Length; i++)
+                        if (this.historyStack.Count > 0)
                         {
-                            Console.Write("\b");
-                            Console.Write(" ");
-                            Console.Write("\b");
+                            this.Clear();
+                            this.keys = this.historyStack[this.historyStack.Count - 1];
+                            this.Render();
                         }
-                        this.cursorIndex = 0;
-                        this.keys = new StringBuilder();
                     }
-                    if (key.Key == ConsoleKey.DownArrow)
+                    else if (key.Key == ConsoleKey.DownArrow)
                     {
+                        this.Clear();
                     }
-                    if (key.Key == ConsoleKey.Backspace)
+                    else if (key.Key == ConsoleKey.Backspace)
                     {
-                        this.DeleteChar();
+                        // this.DeleteChar();
                     }
                     // TODO: Enable the left and right keys
                     else if (key.Key == ConsoleKey.LeftArrow)
