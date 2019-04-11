@@ -2,14 +2,19 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-    public static class ListExtentions {
-        public static T Pop<T>(this List<T> list) {
+    public static class ListExtentions
+    {
+        public static T Pop<T>(this List<T> list)
+        {
             var count = list.Count;
-            if (count > 0) {
+            if (count > 0)
+            {
                 var val = list[count - 1];
                 list.RemoveAt(count - 1);
                 return val;
-            } else {
+            }
+            else
+            {
                 return default(T);
             }
             

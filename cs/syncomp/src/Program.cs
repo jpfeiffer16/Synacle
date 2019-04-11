@@ -11,33 +11,38 @@ namespace syncomp
         // figured out
         static void Main(string[] args)
         {
-            if (args.Length == 0) {
+            if (args.Length == 0)
+            {
                 PrintUsage();
                 Environment.Exit(1);
             }
-            if (args[0] == "-h" || args[0] == "--help") {
+            if (args[0] == "-h" || args[0] == "--help")
+            {
                 PrintUsage();
                 Environment.Exit(1);
             }
             var includeList = new List<string>();
             var includeVariable = Environment.GetEnvironmentVariable("INCLUDE");
-            if (!string.IsNullOrWhiteSpace(includeVariable)) {
+            if (!string.IsNullOrWhiteSpace(includeVariable))
+            {
                 includeList = includeVariable.Split(";").ToList();
             }
 
             var filePath = args[0];
 
-
             string code;
             string workingDirectory;
             FileInfo fileInfo = null;
-            if (filePath == "-") {
+            if (filePath == "-")
+            {
                 //Make this async once the above comment is done
                 // Console.WriteLine("Before read");
                 code = Console.In.ReadToEnd();
                 // Console.WriteLine("After read");
                 workingDirectory = Directory.GetCurrentDirectory();
-            } else {
+            }
+            else
+            {
                 fileInfo = new FileInfo(filePath);
                 workingDirectory = fileInfo.Directory.FullName;
                 
@@ -49,7 +54,8 @@ namespace syncomp
             List<string> asmLines = new List<string>();
             asmLines = CompileCode(code, workingDirectory, includeList);
 
-            if (filePath == "-") {
+            if (filePath == "-")
+            {
                 //Write to stdout
                 Console.Write(string.Join("\n", asmLines));
             }
@@ -66,8 +72,8 @@ namespace syncomp
         private static List<string> CompileCode(
             string code,
             string workingDirectory,
-            List<string> includeLocations
-        ) {
+            List<string> includeLocations)
+        {
             //Preprocess
             var preprocessor = new Preprocessor(code, workingDirectory, includeLocations);
             code = preprocessor.Preprocess();
@@ -134,7 +140,8 @@ namespace syncomp
             Console.Error.WriteLine();
         }
 
-        private static void PrintUsage() {
+        private static void PrintUsage()
+        {
             Console.WriteLine(@"
                 Must provide a filename or - for stdin.
                 Examples:

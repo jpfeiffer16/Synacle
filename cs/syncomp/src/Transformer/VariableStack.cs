@@ -3,8 +3,8 @@ using System.Linq;
 
 namespace syncomp
 {
-  public class VariableStack {
-
+  public class VariableStack
+  {
     private Stack<List<Variable>> Stack = new Stack<List<Variable>>();
 
     public VariableStack() {

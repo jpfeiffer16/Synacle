@@ -57,7 +57,8 @@ namespace syncomp
       return lines;
     }
 
-    private string GetUID() {
+    private string GetUID()
+    {
       return Guid.NewGuid().ToString().Substring(24);
     }
 

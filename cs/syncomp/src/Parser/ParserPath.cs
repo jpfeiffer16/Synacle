@@ -63,24 +63,28 @@ namespace syncomp
     {
       var indentLevel = 0;
 
-      do {
+      do
+      {
         var token = tokens[index];
         if (token.Type == openerType) indentLevel++;
         if (token.Type == closerType) indentLevel--;
         index++;
-      } while ((indentLevel > 0));
+      }
+      while ((indentLevel > 0));
 
       //Return one less as we will over-step by one
       return index - 1;
     }
 
     protected int GetNextTerminator(int index, List<SyntaxToken> tokens)
-		{
-      var openers = new List<SyntaxTokenType> {
+    {
+      var openers = new List<SyntaxTokenType>
+      {
         SyntaxTokenType.LeftCurly,
         SyntaxTokenType.LeftParen
       };
-      var closers = new List<SyntaxTokenType> {
+      var closers = new List<SyntaxTokenType>
+      {
         SyntaxTokenType.RightCurly,
         SyntaxTokenType.RightParen
       };

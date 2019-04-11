@@ -2,7 +2,8 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public enum SyntaxTokenType {
+  public enum SyntaxTokenType
+  {
     VariableDeclaration,
     VariableAssignment,
     Identifier,
@@ -38,138 +39,173 @@ namespace syncomp
     Breakpoint
   }
 
-    public static class Grammar {
+    public static class Grammar
+    {
       public readonly static List<SyntaxToken> Tokens =
-        new List<SyntaxToken>() {
-          new SyntaxToken() {
+        new List<SyntaxToken>
+        {
+          new SyntaxToken
+          {
             Token = "var",
             Type = SyntaxTokenType.VariableDeclaration
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "function",
             Type = SyntaxTokenType.FunctionDeclaration
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "=",
             Type = SyntaxTokenType.VariableAssignment
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "",
             Type = SyntaxTokenType.Identifier
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = ";",
             Type = SyntaxTokenType.SemiColon
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "(",
             Type = SyntaxTokenType.LeftParen
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = ")",
             Type = SyntaxTokenType.RightParen
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "==",
             Type = SyntaxTokenType.Equal
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "!",
             Type = SyntaxTokenType.Not
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "&&",
             Type = SyntaxTokenType.And
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "||",
             Type = SyntaxTokenType.Or
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = ">",
             Type = SyntaxTokenType.GreaterThan
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = ">=",
             Type = SyntaxTokenType.GreaterThanOrEqual
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "<",
             Type = SyntaxTokenType.LessThan
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "<=",
             Type = SyntaxTokenType.LessThanOrEqual
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "+",
             Type = SyntaxTokenType.Addition
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "++",
             Type = SyntaxTokenType.Incr
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "-",
             Type = SyntaxTokenType.Subtraction
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "--",
             Type = SyntaxTokenType.Decr
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "*",
             Type = SyntaxTokenType.Multiplication
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "/",
             Type = SyntaxTokenType.Division
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "%",
             Type = SyntaxTokenType.Mod
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "if",
             Type = SyntaxTokenType.If
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "while",
             Type = SyntaxTokenType.While
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "for",
             Type = SyntaxTokenType.For
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "{",
             Type = SyntaxTokenType.LeftCurly
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "}",
             Type = SyntaxTokenType.RightCurly
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "return",
             Type = SyntaxTokenType.Return
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = ",",
             Type = SyntaxTokenType.Comma
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "&",
             Type = SyntaxTokenType.AddressOf
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "~",
             Type = SyntaxTokenType.Deref
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "\"",
             Type = SyntaxTokenType.Quote
           },
-          new SyntaxToken() {
+          new SyntaxToken
+          {
             Token = "breakpoint",
             Type = SyntaxTokenType.Breakpoint
           }
