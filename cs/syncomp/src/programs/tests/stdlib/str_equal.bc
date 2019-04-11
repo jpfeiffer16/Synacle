@@ -1,8 +1,12 @@
-#include "stdlib.bc"
-#include "error.bc"
-#include "testlib.bc"
+#include "../../lib/stdlib.bc"
+#include "../../lib/error.bc"
+#include "../../lib/testlib.bc"
 
-//var not_equal = str_equal("test", "test2");
-//assert(function() {
-//  return eq(0, not_equal);
-//});
+var test  = "test";
+var testtwo = "test2";
+
+println("Getting here");
+
+assert(test, str_is_eq(testtwo));
+
+println("Getting here");

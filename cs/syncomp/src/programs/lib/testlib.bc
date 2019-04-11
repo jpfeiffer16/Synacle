@@ -1,18 +1,19 @@
 //Hard deps are error.bc and stdlib.bc
 
-//function assert(var fn_ptr) {
-//  fn_ptr();
-//  println("Success");
-//}
-//
-//function eq(var expected, var actual) {
-//  var ARGUMENTS_NOT_EQUAL = "Arguments are not equal";
-//  if (expected != actual) {
-//    print("Expected: ");
-//    print_number(expected);
-//    print(" Recieved: ");
-//    print_number(actual);
-//    out(10);
-//    throw(ARGUMENTS_NOT_EQUAL);
-//  };
-//}
+function str_is_eq(var str_actual) {
+  var curry = function(var str_expected) {
+    if (!str_equal(str_expected, str_actual)) {
+      println("Not Equal");
+      // throw("stuff");
+    }
+    println("Getting here");
+  }
+  return curry;
+}
+
+function assert(var expected, var curry) {
+  println("assert");
+  print_number(curry);
+  curry(expected);
+}
+

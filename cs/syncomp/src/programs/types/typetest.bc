@@ -1,0 +1,8 @@
+
+type Test
+{
+
+}
+
+function test<T>(T obj_ptr) {
+}

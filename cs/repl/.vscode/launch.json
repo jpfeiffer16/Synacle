@@ -14,8 +14,12 @@
             "args": [],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
-            "console": "externalTerminal",
+            // "console": "externalTerminal",
             "stopAtEntry": false,
+            "debugServer": 4711,
+            // "logging": {
+            //     "engineLogging": true
+            // }
         },
         {
             "name": ".NET Core Attach",

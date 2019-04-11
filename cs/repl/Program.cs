@@ -78,12 +78,6 @@ namespace repl
                 }
             });
             prompt.Read();
-            // while (true)
-            // {
-            //     Console.Write("> ");
-            //     var codeLine = Console.ReadLine();
-            // }
         }
-
     }
 }

@@ -12,13 +12,20 @@
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/syncomp.dll",
             "args": [
-                "programs/example.bc"
+                "${workspaceFolder}/programs/tests/stdlib/str_equal.bc"
             ],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
             "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
+            "internalConsoleOptions": "openOnSessionStart",
+            // "debugServer": 4711,
+            "logging": {
+                "engineLogging": true
+            },
+            "env": {
+              "INCLUDE": "/usr/include/bc"
+            }
         },
         {
             "name": ".NET Core Attach",
@@ -26,5 +33,5 @@
             "request": "attach",
             "processId": "${command:pickProcess}"
         }
-    ,]
+    ]
 }
