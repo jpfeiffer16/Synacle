@@ -1,32 +1,30 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using syncomp;
 
 namespace syncomp.Tests
 {
-  [TestClass]
-  public class FunctionCallEmitterTransform : Behavior
-  {
-    private List<string> result;
-
-    protected override void Given()
+    [TestClass]
+    public class FunctionCallEmitterTransform : Behavior
     {
-      // TODO: Test intrinsics here
-      this.result = new FunctionCallEmitter().Transform(
-        new FunctionCall(new List<AstNode>(), "test"),
-        new Context()
-      );
-    }
+        private List<string> result;
 
-    [TestMethod]
-    public void OneCallToTest()
-    {
-      Assert.AreEqual(
-        1,
-        this.result.Where(line => line.Contains("call >test")).Count()
-      );
+        protected override void Given()
+        {
+            // TODO: Test intrinsics here
+            this.result = new FunctionCallEmitter().Transform(
+              new FunctionCall(new List<AstNode>(), "test"),
+              new Context()
+            );
+        }
+
+        [TestMethod]
+        public void OneCallToTest()
+        {
+            Assert.AreEqual(
+              1,
+              this.result.Where(line => line.Contains("call >test")).Count()
+            );
+        }
     }
-  }
 }

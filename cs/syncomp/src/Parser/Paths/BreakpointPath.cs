@@ -1,19 +1,18 @@
-using System;
 using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class BreakpointPath : ParserPath
-  {
-    public override SyntaxTokenType Match
+    public class BreakpointPath : ParserPath
     {
-      get => SyntaxTokenType.Breakpoint;
-    }
+        public override SyntaxTokenType Match
+        {
+            get => SyntaxTokenType.Breakpoint;
+        }
 
-    public override (int, AstNode) Eval(
-      int i, List<SyntaxToken> tokens, List<AstNode> nodes)
-    {
-        return (i, new Breakpoint());
+        public override (int, AstNode) Eval(
+          int i, List<SyntaxToken> tokens, List<AstNode> nodes)
+        {
+            return (i, new Breakpoint());
+        }
     }
-  }
 }

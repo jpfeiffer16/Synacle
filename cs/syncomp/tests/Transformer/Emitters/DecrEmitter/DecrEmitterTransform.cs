@@ -1,12 +1,10 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using syncomp;
 
 namespace syncomp.Tests
 {
-  [TestClass]
+    [TestClass]
   public class DecrEmitterTransform : Behavior
   {
     private List<string> result;

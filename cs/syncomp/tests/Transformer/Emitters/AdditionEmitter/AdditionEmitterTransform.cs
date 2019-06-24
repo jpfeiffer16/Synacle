@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using syncomp;
 
 namespace syncomp.Tests
 {
-  [TestClass]
+    [TestClass]
   public class AdditionEmitterTranform : Behavior
   {
     private List<string> result;

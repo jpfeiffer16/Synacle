@@ -1,0 +1,1 @@
+[1,{"file":"!node /home/jpfeiffer/Source/dotdbg/dotdbg/client/client.js","breakpoints":[{"signs":[{"lnum":111,"id":111,"name":"brk","priority":10,"group":""}],"bufnr":3,"filename":"/home/jpfeiffer/Source/Synacor/cs/syncomp/src/Program.cs"}]}]

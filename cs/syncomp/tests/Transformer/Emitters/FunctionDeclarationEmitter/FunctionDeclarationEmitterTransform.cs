@@ -1,28 +1,26 @@
-using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using syncomp;
 
 namespace syncomp.Tests
 {
-  [TestClass]
-  public class FunctionDeclarationEmitterTransform : Behavior
-  {
-    private List<string> result;
-
-    protected override void Given()
+    [TestClass]
+    public class FunctionDeclarationEmitterTransform : Behavior
     {
-      var ctx = new Context();
+        private List<string> result;
 
-      this.result = new FunctionDeclarationEmitter().Transform(
-        new FunctionDeclaration(
-          new List<AstNode>
-          {
+        protected override void Given()
+        {
+            var ctx = new Context();
+
+            this.result = new FunctionDeclarationEmitter().Transform(
+              new FunctionDeclaration(
+                new List<AstNode>
+                {
             new VariableDeclaration("a")
-          },
-          new List<AstNode>
-          {
+                },
+                new List<AstNode>
+                {
             new FunctionCall(
               new List<AstNode>
               {
@@ -30,38 +28,38 @@ namespace syncomp.Tests
               },
               "out"
             )
-          },
-          "test"
-        ),
-        ctx
-      );
-    }
+                },
+                "test"
+              ),
+              ctx
+            );
+        }
 
-    [TestMethod]
-    public void OneNameLabel()
-    {
-      Assert.AreEqual(
-        1,
-        this.result.Where(line => line == ":test").Count()
-      );
-    }
+        [TestMethod]
+        public void OneNameLabel()
+        {
+            Assert.AreEqual(
+              1,
+              this.result.Where(line => line == ":test").Count()
+            );
+        }
 
-    [TestMethod]
-    public void OneEndNameLabel()
-    {
-      Assert.AreEqual(
-        1,
-        this.result.Where(line => line == ":test_end").Count()
-      );
-    }
+        [TestMethod]
+        public void OneEndNameLabel()
+        {
+            Assert.AreEqual(
+              1,
+              this.result.Where(line => line == ":test_end").Count()
+            );
+        }
 
-    [TestMethod]
-    public void OneSetReg()
-    {
-      Assert.AreEqual(
-        1,
-        this.result.Where(line => line == "set reg0 >test").Count()
-      );
+        [TestMethod]
+        public void OneSetReg()
+        {
+            Assert.AreEqual(
+              1,
+              this.result.Where(line => line == "set reg0 >test").Count()
+            );
+        }
     }
-  }
 }

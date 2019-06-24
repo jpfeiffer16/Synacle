@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace syncomp.Tests
 {
-  [TestClass]
+    [TestClass]
   public class AddressOfPathEval : Behavior
   {
     private (int, AstNode) result;

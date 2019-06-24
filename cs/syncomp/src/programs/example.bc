@@ -1,4 +1,4 @@
-#include "lib/stdlib.bc"
+#include "stdlib.bc"
 
 function main()
 {

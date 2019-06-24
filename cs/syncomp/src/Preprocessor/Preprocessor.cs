@@ -1,11 +1,10 @@
-using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace syncomp
 {
-  public class Preprocessor
+    public class Preprocessor
   {
     private readonly Regex IncludeRegex = new Regex("#include \"(\\S*)\"");
     public Preprocessor(

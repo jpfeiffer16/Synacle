@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace syncomp.Tests
 {
-  [TestClass]
+    [TestClass]
   public class FunctionDeclarationPathNonVarDeclaration : Behavior
   {
     private ParseException result;
