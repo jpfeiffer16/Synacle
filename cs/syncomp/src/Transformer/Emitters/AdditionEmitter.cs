@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class AdditionEmitter : IEmitter
-  {
-    public Type Match => typeof(Addition);
-
-    public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+    public class AdditionEmitter : IEmitter
     {
-      var lines = new List<string>();
-      var addNode = node as Addition;
-      lines.AddRange(new Transformer(new List<AstNode> { addNode.Left }, ctx).Transform());
-      ctx.RegisterLevel++;
-      lines.AddRange(new Transformer(new List<AstNode> { addNode.Right }, ctx).Transform());
-      ctx.RegisterLevel--;
+        public Type Match => typeof(Addition);
 
-      lines.Add($"add reg0 reg0 reg1");
+        public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+        {
+            var lines = new List<string>();
+            var addNode = node as Addition;
+            lines.AddRange(new Transformer(new List<AstNode> { addNode.Left }, ctx).Transform());
+            ctx.RegisterLevel++;
+            lines.AddRange(new Transformer(new List<AstNode> { addNode.Right }, ctx).Transform());
+            ctx.RegisterLevel--;
 
-      return lines;
+            lines.Add($"add reg0 reg0 reg1");
+
+            return lines;
+        }
     }
-  }
 }

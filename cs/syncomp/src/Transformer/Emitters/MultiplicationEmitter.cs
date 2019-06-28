@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class MultiplicationEmitter : IEmitter
-  {
-    public Type Match => typeof(Multiplication);
-
-    public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+    public class MultiplicationEmitter : IEmitter
     {
-      var lines = new List<string>();
-      var sbNode = node as Multiplication;
+        public Type Match => typeof(Multiplication);
 
-      lines.AddRange(new Transformer(new List<AstNode> { sbNode.Left }, ctx).Transform());
-      ctx.RegisterLevel++;
-      lines.AddRange(new Transformer(new List<AstNode> { sbNode.Right }, ctx).Transform());
-      ctx.RegisterLevel--;
+        public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+        {
+            var lines = new List<string>();
+            var sbNode = node as Multiplication;
 
-      lines.Add($"mult reg0 reg0 reg1");
+            lines.AddRange(new Transformer(new List<AstNode> { sbNode.Left }, ctx).Transform());
+            ctx.RegisterLevel++;
+            lines.AddRange(new Transformer(new List<AstNode> { sbNode.Right }, ctx).Transform());
+            ctx.RegisterLevel--;
 
-      return lines;
+            lines.Add($"mult reg0 reg0 reg1");
+
+            return lines;
+        }
     }
-  }
 }

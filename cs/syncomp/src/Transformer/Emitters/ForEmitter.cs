@@ -3,28 +3,28 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class ForEmitter : IEmitter
-  {
-    public Type Match => typeof(For);
-
-    public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+    public class ForEmitter : IEmitter
     {
-      var lines = new List<string>();
-      var forNode = node as For;
-      var uuid = TransformerHelpers.GetUID();
+        public Type Match => typeof(For);
 
-      lines.AddRange(new Transformer(forNode.Init, ctx).Transform());
-      lines.Add($":for_{uuid}_begin");
-      lines.AddRange(new Transformer(forNode.Condition, ctx).Transform());
-      lines.Add($"jf reg0 >for_{uuid}_end");
+        public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+        {
+            var lines = new List<string>();
+            var forNode = node as For;
+            var uuid = TransformerHelpers.GetUID();
 
-      lines.AddRange(new Transformer(forNode.Expression, ctx).Transform());
-      lines.AddRange(new Transformer(forNode.Incrementor, ctx).Transform());
+            lines.AddRange(new Transformer(forNode.Init, ctx).Transform());
+            lines.Add($":for_{uuid}_begin");
+            lines.AddRange(new Transformer(forNode.Condition, ctx).Transform());
+            lines.Add($"jf reg0 >for_{uuid}_end");
 
-      lines.Add($"jmp >for_{uuid}_begin");
-      lines.Add($":for_{uuid}_end");
+            lines.AddRange(new Transformer(forNode.Expression, ctx).Transform());
+            lines.AddRange(new Transformer(forNode.Incrementor, ctx).Transform());
 
-      return lines;
+            lines.Add($"jmp >for_{uuid}_begin");
+            lines.Add($":for_{uuid}_end");
+
+            return lines;
+        }
     }
-  }
 }

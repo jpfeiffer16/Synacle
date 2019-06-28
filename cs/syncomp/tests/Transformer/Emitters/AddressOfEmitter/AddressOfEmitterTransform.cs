@@ -5,34 +5,34 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-  public class AddressOfEmitterTransform : Behavior
-  {
-    private List<string> result;
-
-    protected override void Given()
+    public class AddressOfEmitterTransform : Behavior
     {
-      var context = new Context
-      {
-        Variables = new VariableStack()
-      };
+        private List<string> result;
 
-      context.Variables.Add(new Variable
-      {
-        MemoryAddress = "123",
-        Name = "a"
-      });
+        protected override void Given()
+        {
+            var context = new Context
+            {
+                Variables = new VariableStack()
+            };
 
-      this.result = new AddressOfEmitter()
-        .Transform(new AddressOf(new Identifier("a")), context);
+            context.Variables.Add(new Variable
+            {
+                MemoryAddress = "123",
+                Name = "a"
+            });
+
+            this.result = new AddressOfEmitter()
+              .Transform(new AddressOf(new Identifier("a")), context);
+        }
+
+        [TestMethod]
+        public void OneSet()
+        {
+            Assert.AreEqual(
+              1,
+              this.result.Where(line => line.Contains("set")).Count()
+            );
+        }
     }
-
-    [TestMethod]
-    public void OneSet()
-    {
-      Assert.AreEqual(
-        1,
-        this.result.Where(line => line.Contains("set")).Count()
-      );
-    }
-  }
 }

@@ -3,24 +3,24 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class LessThanOrEqualEmitter : IEmitter
-  {
-    public Type Match => typeof(LessThanOrEqual);
-
-    public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+    public class LessThanOrEqualEmitter : IEmitter
     {
-      var lines = new List<string>();
-      var ltNode = node as LessThanOrEqual;
+        public Type Match => typeof(LessThanOrEqual);
 
-      lines.AddRange(new Transformer(new List<AstNode> { ltNode.Left }, ctx).Transform());
-      ctx.RegisterLevel++;
-      lines.AddRange(new Transformer(new List<AstNode> { ltNode.Right }, ctx).Transform());
-      ctx.RegisterLevel--;
-      lines.Add("gt reg0 reg0 reg1");
+        public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+        {
+            var lines = new List<string>();
+            var ltNode = node as LessThanOrEqual;
 
-      lines.Add("call >not");
+            lines.AddRange(new Transformer(new List<AstNode> { ltNode.Left }, ctx).Transform());
+            ctx.RegisterLevel++;
+            lines.AddRange(new Transformer(new List<AstNode> { ltNode.Right }, ctx).Transform());
+            ctx.RegisterLevel--;
+            lines.Add("gt reg0 reg0 reg1");
 
-      return lines;
+            lines.Add("call >not");
+
+            return lines;
+        }
     }
-  }
 }

@@ -3,23 +3,23 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class ModEmitter : IEmitter
-  {
-    public Type Match => typeof(Mod);
-
-    public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+    public class ModEmitter : IEmitter
     {
-      var lines = new List<string>();
-      var modNode = node as Mod;
+        public Type Match => typeof(Mod);
 
-      lines.AddRange(new Transformer(new List<AstNode> { modNode.Left }, ctx).Transform());
-      ctx.RegisterLevel++;
-      lines.AddRange(new Transformer(new List<AstNode> { modNode.Right }, ctx).Transform());
-      ctx.RegisterLevel--;
+        public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+        {
+            var lines = new List<string>();
+            var modNode = node as Mod;
 
-      lines.Add($"mod reg0 reg0 reg1");
+            lines.AddRange(new Transformer(new List<AstNode> { modNode.Left }, ctx).Transform());
+            ctx.RegisterLevel++;
+            lines.AddRange(new Transformer(new List<AstNode> { modNode.Right }, ctx).Transform());
+            ctx.RegisterLevel--;
 
-      return lines;
+            lines.Add($"mod reg0 reg0 reg1");
+
+            return lines;
+        }
     }
-  }
 }

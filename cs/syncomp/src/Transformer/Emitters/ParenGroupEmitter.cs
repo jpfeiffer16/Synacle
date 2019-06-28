@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-  public class ParenGroupEmitter : IEmitter
-  {
-    public Type Match => typeof(ParenGroup);
-
-    public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+    public class ParenGroupEmitter : IEmitter
     {
-      var lines = new List<string>();
-      var pgNode = node as ParenGroup;
-      lines.AddRange(new Transformer(pgNode.Nodes, ctx).Transform());
+        public Type Match => typeof(ParenGroup);
 
-      return lines;
+        public List<string> Transform<T>(T node, Context ctx) where T : AstNode
+        {
+            var lines = new List<string>();
+            var pgNode = node as ParenGroup;
+            lines.AddRange(new Transformer(pgNode.Nodes, ctx).Transform());
+
+            return lines;
+        }
     }
-  }
 }

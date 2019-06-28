@@ -5,35 +5,35 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-  public class AndEmitterTransform : Behavior
-  {
-    private List<string> result;
-
-    protected override void Given()
+    public class AndEmitterTransform : Behavior
     {
+        private List<string> result;
 
-      this.result = new AndEmitter()
-        .Transform(new And(
-          new IntegerLiteral("0"), new IntegerLiteral("1")
-        ), new Context());
-    }
+        protected override void Given()
+        {
 
-    [TestMethod]
-    public void TwoSets()
-    {
-      Assert.AreEqual(
-        2,
-        this.result.Where(line => line.Contains("set")).Count()
-      );
-    }
+            this.result = new AndEmitter()
+              .Transform(new And(
+                new IntegerLiteral("0"), new IntegerLiteral("1")
+              ), new Context());
+        }
 
-    [TestMethod]
-    public void OneAndCall()
-    {
-      Assert.AreEqual(
-        1,
-        this.result.Where(line => line.Contains("call >and")).Count()
-      );
+        [TestMethod]
+        public void TwoSets()
+        {
+            Assert.AreEqual(
+              2,
+              this.result.Where(line => line.Contains("set")).Count()
+            );
+        }
+
+        [TestMethod]
+        public void OneAndCall()
+        {
+            Assert.AreEqual(
+              1,
+              this.result.Where(line => line.Contains("call >and")).Count()
+            );
+        }
     }
-  }
 }
