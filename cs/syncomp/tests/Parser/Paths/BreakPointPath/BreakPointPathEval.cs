@@ -4,35 +4,35 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-  public class BreakPointPathEval : Behavior
-  {
-    private (int, AstNode) result;
-
-    protected override void Given()
+    public class BreakPointPathEval : Behavior
     {
-      var tokens = new List<SyntaxToken>
-      {
-        new SyntaxToken
+        private (int, AstNode) result;
+
+        protected override void Given()
         {
-          Type = SyntaxTokenType.Breakpoint,
-          Token = "breakpoint"
+            var tokens = new List<SyntaxToken>
+            {
+                new SyntaxToken
+                {
+                    Type = SyntaxTokenType.Breakpoint,
+                    Token = "breakpoint"
+                }
+            };
+            var nodes = new List<AstNode>();
+            var index = 0;
+            this.result = new BreakpointPath().Eval(index, tokens, nodes);
         }
-      };
-      var nodes = new List<AstNode>();
-      var index = 0;
-      this.result = new BreakpointPath().Eval(index, tokens, nodes);
-    }
 
-    [TestMethod]
-    public void IndexIsCorrect()
-    {
-      Assert.AreEqual(0, this.result.Item1);
-    }
+        [TestMethod]
+        public void IndexIsCorrect()
+        {
+            Assert.AreEqual(0, this.result.Item1);
+        }
 
-    [TestMethod]
-    public void AstNodeIsCorrect()
-    {
-      Assert.IsInstanceOfType(this.result.Item2, typeof(Breakpoint));
+        [TestMethod]
+        public void AstNodeIsCorrect()
+        {
+            Assert.IsInstanceOfType(this.result.Item2, typeof(Breakpoint));
+        }
     }
-  }
 }
