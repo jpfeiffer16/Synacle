@@ -1,8 +1,6 @@
-#include "stdlib.bc"
-
 function main()
 {
-  println("Hello, world!");
+    out("a");
 }
 
 main();
