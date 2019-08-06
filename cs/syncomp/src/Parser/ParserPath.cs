@@ -61,16 +61,16 @@ namespace syncomp
       int index,
       List<SyntaxToken> tokens)
     {
-      var indentLevel = 0;
+      var nestingLevel = 0;
 
       do
       {
         var token = tokens[index];
-        if (token.Type == openerType) indentLevel++;
-        if (token.Type == closerType) indentLevel--;
+        if (token.Type == openerType) nestingLevel++;
+        if (token.Type == closerType) nestingLevel--;
         index++;
       }
-      while ((indentLevel > 0));
+      while ((nestingLevel > 0));
 
       //Return one less as we will over-step by one
       return index - 1;

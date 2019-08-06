@@ -1,8 +1,8 @@
+// var test = "test";
+// var temp = "temp"";
 
-type Test
+type Y
 {
-
-}
-
-function test<T>(T obj_ptr) {
+    var id,
+    var tp
 }

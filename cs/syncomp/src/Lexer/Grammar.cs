@@ -36,7 +36,8 @@ namespace syncomp
     AddressOf,
     Deref,
     Quote,
-    Breakpoint
+    Breakpoint,
+    LangType
   }
 
     public static class Grammar
@@ -44,6 +45,11 @@ namespace syncomp
       public readonly static List<SyntaxToken> Tokens =
         new List<SyntaxToken>
         {
+          new SyntaxToken
+          {
+            Token = "type",
+            Type = SyntaxTokenType.LangType
+          },
           new SyntaxToken
           {
             Token = "var",
