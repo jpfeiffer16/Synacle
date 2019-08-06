@@ -85,11 +85,11 @@ namespace syncomp
             if (currentToken.Length > 0)
             {
                 tokens.Add(
-                  new SyntaxToken(currentToken)
-                  {
-                      Line = strippedCode.Count(),
-                      Index = strippedCode.LastOrDefault().Count() - currentToken.Length
-                  }
+                    new SyntaxToken(currentToken)
+                    {
+                        Line = strippedCode.Count(),
+                        Index = strippedCode.LastOrDefault().Count() - currentToken.Length
+                    }
                 );
             }
             tokens = AggregateLikeTokens(tokens);
@@ -108,6 +108,28 @@ namespace syncomp
 
         private List<SyntaxToken> AggregateLikeTokens(List<SyntaxToken> tokens)
         {
+            // Identifier pass
+            // List<SyntaxToken> currentList = null;
+            var length = tokens.Count;
+            for (var i = 0; i < length; i++)
+            {
+                var token = tokens[i];
+                if (i < tokens.Count - 1 && token.Type == SyntaxTokenType.Identifier)
+                {
+                    var nextToken = tokens[i + 1];
+                    if(nextToken.Type == SyntaxTokenType.Identifier)
+                    {
+                        tokens.Splice(
+                            i,
+                            2,
+                            new List<SyntaxToken> { new SyntaxToken(token.Token + nextToken.Token) }
+                        );
+                        length = tokens.Count;
+                        i--;
+                    }
+                }
+            }
+            // Multi-Char pass
             var multiCharTokens = Grammar.Tokens.Where(tkn => tkn.Token.Length > 1);
 
             for (var i = 0; i < tokens.Count; i++)
