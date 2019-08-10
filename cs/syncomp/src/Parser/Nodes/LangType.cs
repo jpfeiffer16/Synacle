@@ -4,11 +4,13 @@ namespace syncomp
 {
     public class LangType : AstNode
     {
-        public LangType(List<AstNode> body) : base("TYPE")
+        public LangType(string name, List<AstNode> body) : base("TYPE")
         {
+            this.Name = name;
             this.Body = body;
         }
 
+        public string Name { get; }
         public List<AstNode> Body { get; }
     }
 }

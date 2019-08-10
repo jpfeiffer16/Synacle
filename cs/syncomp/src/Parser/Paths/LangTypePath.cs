@@ -13,6 +13,12 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes)
         {
+            var nameToken = tokens[i + 1];
+            if (nameToken.Type  != SyntaxTokenType.Identifier)
+            {
+                throw new ParseException(i, tokens, nodes, "No type name found");
+            }
+            var name = nameToken.Token;
             i += 2;
             var typeBodyEnd = GetExpression(
               SyntaxTokenType.LeftCurly,
@@ -38,7 +44,7 @@ namespace syncomp
                 }
             }
             sectionList.Add(currentList);
-            return (i, new LangType(ParseTokens(bodyExpression)));
+            return (i, new LangType(name, ParseTokens(bodyExpression)));
         }
     }
 }
