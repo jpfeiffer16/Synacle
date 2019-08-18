@@ -1,8 +1,0 @@
-// var test = "test";
-// var temp = "temp"";
-
-type Y
-{
-    var id,
-    var tp
-}

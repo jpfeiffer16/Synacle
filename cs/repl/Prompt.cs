@@ -9,7 +9,7 @@ namespace repl
         private readonly Action<string> lineAction;
         private readonly List<string> historyStack = new List<string>();
 
-        //NOTE: For debuggin purposes only!
+        //NOTE: For debugging purposes only!
         private readonly Logger logger = new Logger();
 
         private StringBuilder keys = new StringBuilder();

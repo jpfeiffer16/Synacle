@@ -1,0 +1,28 @@
+// var test = "test";
+// var temp = "temp"";
+
+type Y
+{
+    var id,
+    var tp
+}
+
+type Test
+{
+    var id,
+    var tp
+}
+
+Y test;
+//test.id = 123;
+//test.tp = function() { out(65) };
+
+//Y test {
+//    id = 123,
+//    tp = function() { out(65) }
+//}
+
+//if (test.id == 123)
+//{
+//    test.tp();
+//}

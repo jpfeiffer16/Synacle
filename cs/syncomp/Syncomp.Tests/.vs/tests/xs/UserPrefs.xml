@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{B0AAF213-5FE0-40D5-863F-2B50E971900C}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Behavior.cs">
+    <Files>
+      <File FileName="coverage.json" Line="1" Column="1" />
+      <File FileName="Behavior.cs" Line="9" Column="21" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="tests" expanded="True">
+            <Node name="tests" expanded="True">
+              <Node name="Transformer" expanded="True" />
+              <Node name="Behavior.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="tests" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="tests" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
