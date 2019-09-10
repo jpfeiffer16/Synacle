@@ -7,13 +7,5 @@ namespace syncomp
     public int Index { get; set; }
     public int Line { get; set; }
     public string File { get; set; }
-    public SyntaxToken() {}
-    public SyntaxToken(string token)
-    {
-      this.Token = token;
-      this.Type = Grammar
-        .Tokens
-        .Find(tkn => tkn.Token == token)?.Type ?? SyntaxTokenType.Identifier;
-    }
   }
 }

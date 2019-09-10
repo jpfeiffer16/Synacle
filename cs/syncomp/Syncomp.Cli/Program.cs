@@ -83,8 +83,8 @@ namespace syncomp
             try
             {
                 // var lexer = new Lexer(code);
-                var lexer = new NewLexer(code);
-                (tokens, lines) = lexer.Lex();
+                // var lexer = new NewLexer(code);
+                // (tokens, lines) = lexer.Lex();
             }
             catch(Exception e)
             {

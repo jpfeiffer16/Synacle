@@ -7,96 +7,109 @@ namespace syncomp
 
     public class NewLexer
     {
-        private enum CharType
+        #region "Properties and Fields"
+        private int _index = 0;
+        public string _code = string.Empty;
+        private List<SyntaxToken> _tokens = new List<SyntaxToken>();
+        private string[] _lines;
+        public string[] Lines
         {
-            Char,
-            Digit,
-            Symbol,
-            Whitespace,
-            Comment,
-            StringLiteral,
-            Unknown
+            get => _lines ?? (_lines = _code.Split('\n'));
         }
+        #endregion
 
-        private string code;
-
+        #region "Constuctor"
         public NewLexer(string code)
         {
-            this.code = code;
+            this._code = code ?? throw new ArgumentNullException(nameof(code));
+        }
+        #endregion
+
+        #region "Public Methods"
+        public List<SyntaxToken> Lex()
+        {
+            SyntaxToken nextToken;
+            while ((nextToken = NextToken()).Type != SyntaxTokenType.EOF)
+            {
+                _tokens.Add(nextToken);
+            }
+
+            return _tokens;
         }
 
-        public (List<SyntaxToken>, List<string>) Lex()
+        private SyntaxToken NextToken()
         {
-            var tokenList = new List<(int line, int index, string token)>();
-            var currentType = CharType.Unknown;
-            var currentToken = string.Empty;
-            var line = 0;
-            var index = 0;
-            foreach (var ch in this.code)
+            var ch = Pop();
+            #region "Comments"
+            if (ch == "/")
             {
-                var charType = GetCharType(ch);
-                if (charType != currentType || charType == CharType.Symbol)
+                var pkChar = Peek();
+                if (pkChar == "/")
                 {
-                    tokenList.Add((line, index, currentToken));
-                    currentToken = string.Empty;
-                    currentType = charType;
-                }
-                currentToken += ch;
-                if (ch == '\n')
-                {
-                    line++;
-                    index = 0;
-                }
-                else
-                {
-                    index++;
+                    Pop();
+                    string commentChar = string.Empty;
+                    string comment = string.Empty;
+                    do
+                    {
+                        ch = Pop();
+                        comment += ch;
+                    } while (Peek() != "\n");
+                    return CreateSyntaxToken(SyntaxTokenType.Comment, comment);
                 }
             }
-            // TODO: Collapse this
-            tokenList = tokenList.Where(tkn => !string.IsNullOrEmpty(tkn.token)).ToList();
-            var tokens = new List<SyntaxToken>();
-            foreach (var token in tokenList)
+            #endregion
+
+            #region "Whitespace"
+            if (ch == "\n")
+                return CreateSyntaxToken(SyntaxTokenType.NewLine, ch);
+            if (ch == "\t")
+                return CreateSyntaxToken(SyntaxTokenType.Tab, ch);
+            if (ch == " ")
+                return CreateSyntaxToken(SyntaxTokenType.Space, ch);
+            #endregion
+
+            #region "EOL and Unknown"
+            if (this._index >= this._code.Length)
+                return CreateSyntaxToken(SyntaxTokenType.EOF, "");
+            else
+                return CreateSyntaxToken(SyntaxTokenType.Unknown, "");
+            #endregion
+        }
+        #endregion
+
+        #region "Helpers"
+        // private string Current() => this._code[this._index].ToString();
+
+        private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token) => new SyntaxToken
+        {
+            Type = tokenType,
+            Token = token,
+            // TODO:
+            // File = file,
+            Index = _index,
+            Line = GetLineFromIndex()
+        };
+
+        private int GetLineFromIndex()
+        {
+            var count = 0;
+            for (int i = 0; i < Lines.Length; i++)
             {
-                tokens.Add(new SyntaxToken(token.token));
-                // var match = Grammar.Tokens.Where(tkn => tkn.Token == token.token);
-                // if (match != null) tokens.Add(match);
+                string line = (string)Lines[i];
+                count += line.Length;
+                if (count > _index) return i;
             }
-            throw new NotImplementedException();
+            return 0;
         }
 
-        private static CharType GetCharType(char ch)
+        private string Pop()
         {
-            // TODO: Ghaa! Think about the perforances!
-            if (int.TryParse(new String(new[] { ch }), out var _))
-                return CharType.Digit;
-            switch (ch)
-            {
-                case ' ':
-                    return CharType.Whitespace;
-                case '\t':
-                    return CharType.Whitespace;
-                case '\n':
-                    return CharType.Whitespace;
-                case '(':
-                    return CharType.Symbol;
-                case ')':
-                    return CharType.Symbol;
-                case '[':
-                    return CharType.Symbol;
-                case ']':
-                    return CharType.Symbol;
-                case '{':
-                    return CharType.Symbol;
-                case '}':
-                    return CharType.Symbol;
-                case '/':
-                    return CharType.Symbol;
-                case ';':
-                    return CharType.Symbol;
-                case '"':
-                    return CharType.StringLiteral;
-            }
-            return CharType.Char;
+            return _index < _code.Length ? _code[_index++].ToString() : null;
         }
+        private string Peek()
+        {
+            return _index < _code.Length ? _code[_index].ToString() : null;
+        }
+        #endregion
     }
 }
