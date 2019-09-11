@@ -107,7 +107,7 @@ namespace syncomp
             if (ch is null)
                 return CreateSyntaxToken(SyntaxTokenType.EOF, "");
             else
-                return CreateSyntaxToken(SyntaxTokenType.Unknown, "");
+                return CreateSyntaxToken(SyntaxTokenType.Unknown, ch);
             #endregion
         }
 
@@ -124,6 +124,7 @@ namespace syncomp
         {
             if (string.IsNullOrEmpty(str)) return false;
             var ch = str[0];
+            // A - Z or a -z
             return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
         }
 

@@ -12,6 +12,9 @@ namespace Syncomp.DevConsole
             var tokens = lexer.Lex();
             tokens.ForEach(token =>
                 Console.WriteLine($"{token.Type}: {token.Token}"));
+            Console.WriteLine("Full reconstruction:");
+            tokens.ForEach(token => 
+                    Console.Write(token.Token));
         }
     }
 }
