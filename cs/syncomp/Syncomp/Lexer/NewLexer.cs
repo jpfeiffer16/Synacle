@@ -102,8 +102,9 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.Identifier, token);
             }
             #endregion
+
             #region "EOF and Unknown"
-            if (this._index >= this._code.Length)
+            if (ch is null)
                 return CreateSyntaxToken(SyntaxTokenType.EOF, "");
             else
                 return CreateSyntaxToken(SyntaxTokenType.Unknown, "");
@@ -123,7 +124,7 @@ namespace syncomp
         {
             if (string.IsNullOrEmpty(str)) return false;
             var ch = str[0];
-            return ch > 64 && ch < 123;
+            return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
         }
 
         // private string Current() => this._code[this._index].ToString();
