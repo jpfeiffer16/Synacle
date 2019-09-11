@@ -68,18 +68,65 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.Space, ch);
             #endregion
 
-            #region "EOL and Unknown"
+            #region "Digits"
+            if (IsNumber(ch))
+            {
+                var number = ch;
+                while (IsNumber(Peek()))
+                {
+                    number += Pop();
+                }
+                return CreateSyntaxToken(SyntaxTokenType.Integer, number);
+            }
+            #endregion
+
+            #region "Logic Operators"
+            if (ch == "=" && Peek() == "=")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.Equal, "==");
+            }
+            #endregion
+
+            #region "Symbols"
+            #endregion
+
+            #region "Letters"
+            if (IsLetter(ch))
+            {
+                var token = ch;
+                while (IsLetter(Peek()))
+                {
+                    token += Pop();
+                }
+                return CreateSyntaxToken(SyntaxTokenType.Identifier, token);
+            }
+            #endregion
+            #region "EOF and Unknown"
             if (this._index >= this._code.Length)
                 return CreateSyntaxToken(SyntaxTokenType.EOF, "");
             else
                 return CreateSyntaxToken(SyntaxTokenType.Unknown, "");
             #endregion
         }
+
         #endregion
 
         #region "Helpers"
-        // private string Current() => this._code[this._index].ToString();
+        private bool IsNumber(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return false;
+            return int.TryParse(str, out _);
+        }
 
+        private bool IsLetter(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return false;
+            var ch = str[0];
+            return ch > 64 && ch < 123;
+        }
+
+        // private string Current() => this._code[this._index].ToString();
         private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token) => new SyntaxToken
         {
             Type = tokenType,

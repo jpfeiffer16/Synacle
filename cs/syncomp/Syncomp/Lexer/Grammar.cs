@@ -44,7 +44,8 @@ namespace syncomp
         Unknown,
         NewLine,
         Tab,
-        Space
+        Space,
+        Integer
     }
 
     public static class Grammar
