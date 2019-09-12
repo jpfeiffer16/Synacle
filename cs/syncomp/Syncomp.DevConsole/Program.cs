@@ -7,7 +7,17 @@ namespace Syncomp.DevConsole
     {
         static void Main(string[] args)
         {
-            var testCode = @"function() {};";
+            var testCode = @"
+type Test {
+    int id
+}
+
+// Main function
+function main() {
+    out(10);
+}
+main();
+";
             var lexer = new NewLexer(testCode);
             var tokens = lexer.Lex();
             tokens.ForEach(token =>

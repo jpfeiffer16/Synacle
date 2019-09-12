@@ -54,12 +54,17 @@ namespace syncomp
                         ch = Pop();
                         comment += ch;
                     } while (Peek() != "\n");
-                    return CreateSyntaxToken(SyntaxTokenType.Comment, comment);
+                    return CreateSyntaxToken(SyntaxTokenType.Comment, "//" + comment);
                 }
             }
             #endregion
 
             #region "Whitespace"
+            if (ch == "\r" && Peek() == "\n")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.NewLine, "\r\n");
+            }
             if (ch == "\n")
                 return CreateSyntaxToken(SyntaxTokenType.NewLine, ch);
             if (ch == "\t")
@@ -89,6 +94,16 @@ namespace syncomp
             #endregion
 
             #region "Symbols"
+            if (ch == "(")
+                return CreateSyntaxToken(SyntaxTokenType.LeftParen, ch);
+            if (ch == ")")
+                return CreateSyntaxToken(SyntaxTokenType.RightParen, ch);
+            if (ch == "{")
+                return CreateSyntaxToken(SyntaxTokenType.LeftCurly, ch);
+            if (ch == "}")
+                return CreateSyntaxToken(SyntaxTokenType.RightCurly, ch);
+            if (ch == ";")
+                return CreateSyntaxToken(SyntaxTokenType.SemiColon, ch);
             #endregion
 
             #region "Letters"
