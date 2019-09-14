@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace syncomp
 {
-    public class Paths
+    public static class Paths
     {
         public static readonly List<ParserPath> ParserPaths = new List<ParserPath>
         {

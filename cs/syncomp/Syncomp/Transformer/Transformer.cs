@@ -6,15 +6,6 @@ namespace syncomp
 {
     public class Transformer
     {
-        private static List<IEmitter> Emitters = AppDomain
-            .CurrentDomain.GetAssemblies()
-            .Where(asm => asm.FullName.Contains("syncomp"))
-            .SelectMany(asm => asm.GetTypes())
-            .Where(tp => tp != typeof(IEmitter))
-            .Where(tp => typeof(IEmitter).IsAssignableFrom(tp))
-            .Select(tp => (IEmitter)Activator.CreateInstance(tp))
-            .ToList();
-
         private readonly List<AstNode> nodes;
         private readonly Context ctx;
 
@@ -44,7 +35,7 @@ namespace syncomp
 
             foreach (var node in nodes)
             {
-                var matches = Emitters.Where(em =>
+                var matches = Emitters.EmitterPaths.Where(em =>
                   node.GetType().Equals(em.Match)
                 ).ToList();
                 foreach (var match in matches)

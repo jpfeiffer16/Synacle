@@ -1,3 +1,10 @@
+jmp >main_end
+:main
+out reg0
+ret
+:main_end
+set reg0 >main
+call >main
 halt
 
 :subtract
