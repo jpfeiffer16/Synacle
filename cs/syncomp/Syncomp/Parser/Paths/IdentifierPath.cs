@@ -41,7 +41,7 @@ namespace syncomp
                     throw new ParseException(i,
                         tokens,
                         nodes,
-                        $"Invalid variable declaration. Unknown type '{token}'");
+                        $"Invalid variable declaration. Unknown type '{token.Token}'");
                 node = new VariableDeclaration(nextToken.Token, type);
             }
             else

@@ -73,7 +73,7 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.Space, ch);
             #endregion
 
-            #region "Digits"
+            #region "Integer"
             if (IsNumber(ch))
             {
                 var number = ch;
@@ -81,7 +81,8 @@ namespace syncomp
                 {
                     number += Pop();
                 }
-                return CreateSyntaxToken(SyntaxTokenType.Integer, number);
+                //NOTE: We have an integer syntax type. We should use it at some point
+                return CreateSyntaxToken(SyntaxTokenType.Identifier, number);
             }
             #endregion
 
@@ -147,7 +148,8 @@ namespace syncomp
             if (string.IsNullOrEmpty(str)) return false;
             var ch = str[0];
             // A - Z or a -z
-            return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
+            // return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
+            return (ch > 64 && ch < 123);
         }
 
         // private string Current() => this._code[this._index].ToString();
