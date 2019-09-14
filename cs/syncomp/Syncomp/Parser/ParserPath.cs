@@ -1,20 +1,22 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace syncomp
 {
   public class ParserPath
   {
     //Load all ParserPaths
-    private static List<ParserPath> Paths = AppDomain
-        .CurrentDomain.GetAssemblies()
-        .Where(asm => asm.FullName.Contains("syncomp"))
-        .SelectMany(asm => asm.GetTypes())
-        .Where(tp => tp != typeof(ParserPath))
-        .Where(tp => typeof(ParserPath).IsAssignableFrom(tp))
-        .Select(tp => (ParserPath)Activator.CreateInstance(tp))
-        .ToList();
+    // private static List<ParserPath> Paths = AppDomain
+    //     .CurrentDomain.GetAssemblies()
+    //     .Where(asm => asm.FullName.Contains("syncomp"))
+    //     .SelectMany(asm => asm.GetTypes())
+    //     .Where(tp => tp != typeof(ParserPath))
+    //     .Where(tp => typeof(ParserPath).IsAssignableFrom(tp))
+    //     .Select(tp => (ParserPath)Activator.CreateInstance(tp))
+    //     .ToList();
+
     public virtual SyntaxTokenType Match { get; }
 
     public virtual (int, AstNode) Eval(
@@ -29,7 +31,9 @@ namespace syncomp
 
       for (var i = 0; i < tokens.Count(); i++)
       {
-        var staticMatches = Paths.Where(path => path.Match == tokens[i].Type).ToList();
+        var thisToken = tokens[i];
+        Console.WriteLine(thisToken.Type);
+        var staticMatches = Paths.ParserPaths.Where(path => path.Match == tokens[i].Type).ToList();
         foreach (var match in staticMatches)
         {
           try

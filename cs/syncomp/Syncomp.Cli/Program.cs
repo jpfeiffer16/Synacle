@@ -83,8 +83,11 @@ namespace syncomp
             try
             {
                 // var lexer = new Lexer(code);
-                // var lexer = new NewLexer(code);
+                var lexer = new NewLexer(code);
                 // (tokens, lines) = lexer.Lex();
+                tokens = lexer.Lex();
+                // Trim out whitespace
+                tokens = tokens.Where(tkn => !string.IsNullOrWhiteSpace(tkn.Token)).ToList();
             }
             catch(Exception e)
             {

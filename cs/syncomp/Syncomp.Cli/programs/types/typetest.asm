@@ -1,12 +1,3 @@
-jmp >type_d186ba8bff97_end
-:type_d186ba8bff97
-jmp >var_f3880a3f681e_end
-:var_f3880a3f681e
-:var_f3880a3f681e_end
-jmp >var_caa75998d1f0_end
-:var_caa75998d1f0
-:var_caa75998d1f0_end
-:type_d186ba8bff97_end
 halt
 
 :subtract

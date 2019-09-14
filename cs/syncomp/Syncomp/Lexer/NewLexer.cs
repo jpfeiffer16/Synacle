@@ -106,7 +106,7 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.SemiColon, ch);
             #endregion
 
-            #region "Letters"
+            #region "Identifiers"
             if (IsLetter(ch))
             {
                 var token = ch;
@@ -114,7 +114,15 @@ namespace syncomp
                 {
                     token += Pop();
                 }
-                return CreateSyntaxToken(SyntaxTokenType.Identifier, token);
+                var tokenMatches = Grammar.Tokens.Where(tkn => tkn.Token == token);
+                if (tokenMatches.Count() > 0)
+                {
+                    return CreateSyntaxToken(tokenMatches.FirstOrDefault().Type, token);
+                }
+                else
+                {
+                    return CreateSyntaxToken(SyntaxTokenType.Identifier, token);
+                }
             }
             #endregion
 
@@ -127,7 +135,6 @@ namespace syncomp
         }
 
         #endregion
-
         #region "Helpers"
         private bool IsNumber(string str)
         {

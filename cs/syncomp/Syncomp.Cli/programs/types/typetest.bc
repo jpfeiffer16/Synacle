@@ -1,19 +1,19 @@
 // var test = "test";
 // var temp = "temp"";
 
-type Y
-{
-    var id,
-    var tp
-}
-
-type Test
-{
-    var id,
-    var tp
-}
-
-Y test;
+//type Y
+//{
+//    var id,
+//    var tp
+//}
+//
+//type Test
+//{
+//    var id,
+//    var tp
+//}
+//
+//Y test;
 //test.id = 123;
 //test.tp = function() { out(65) };
 
@@ -26,3 +26,9 @@ Y test;
 //{
 //    test.tp();
 //}
+
+function main() {
+    out(10);
+}
+
+main();

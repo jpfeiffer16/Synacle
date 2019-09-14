@@ -4,7 +4,7 @@
             "adapter": "netcoredbg",
              "configuration": {
                  "request": "launch", 
-                 "program": "/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.DevConsole/bin/Debug/netcoreapp2.0/Syncomp.DevConsole.dll",
+                 "program": "/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll",
                  "stopAtEntry": false,
                   "args": [
                       "/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.Cli/programs/types/typetest.bc"
