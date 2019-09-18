@@ -86,11 +86,55 @@ namespace syncomp
             }
             #endregion
 
+            #region "String Literals"
+            if (ch == "\"")
+            {
+                var str = string.Empty;
+                while (true)
+                {
+                    var strCh = Pop();
+                    if (strCh == "\"")
+                        break;
+                    else
+                        str += strCh;
+                }
+                return CreateSyntaxToken(SyntaxTokenType.StringLiteral, str);
+            }
+            #endregion
+
+            #region "Pointer Operators"
+            if (ch == "~")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Deref, ch);
+            }
+            if (ch == "&")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.AddressOf, ch);
+            }
+            #endregion
+
+            #region "Math Operators"
+            if (ch == "+" && Peek() == "+")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.Incr, "++");
+            }
+            if (ch == "-" && Peek() == "-")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.Decr, "--");
+            }
+            #endregion
+
             #region "Logic Operators"
             if (ch == "=" && Peek() == "=")
             {
                 Pop();
                 return CreateSyntaxToken(SyntaxTokenType.Equal, "==");
+            }
+            if (ch == "!")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Not, ch);
             }
             #endregion
 
@@ -148,8 +192,8 @@ namespace syncomp
             if (string.IsNullOrEmpty(str)) return false;
             var ch = str[0];
             // A - Z or a -z
-            // return (ch > 64 && ch < 91) || (ch > 96 && ch < 123);
-            return (ch > 64 && ch < 123);
+            return (ch > 64 && ch < 91) || (ch > 96 && ch < 123) || ch == 95;
+            // return (ch > 64 && ch < 123);
         }
 
         // private string Current() => this._code[this._index].ToString();

@@ -36,7 +36,6 @@ namespace syncomp
         Comma,
         AddressOf,
         Deref,
-        Quote,
         Breakpoint,
         LangType,
         Dot,
@@ -45,7 +44,8 @@ namespace syncomp
         NewLine,
         Tab,
         Space,
-        Integer
+        Integer,
+        StringLiteral
     }
 
     public static class Grammar
@@ -212,11 +212,6 @@ namespace syncomp
               {
                 Token = "~",
                 Type = SyntaxTokenType.Deref
-              },
-              new SyntaxToken
-              {
-                Token = "\"",
-                Type = SyntaxTokenType.Quote
               },
               new SyntaxToken
               {
