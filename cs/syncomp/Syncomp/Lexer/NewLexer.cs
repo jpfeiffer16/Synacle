@@ -107,7 +107,7 @@ namespace syncomp
             {
                 return CreateSyntaxToken(SyntaxTokenType.Deref, ch);
             }
-            if (ch == "&")
+            if (ch == "&" && Peek() != "&")
             {
                 return CreateSyntaxToken(SyntaxTokenType.AddressOf, ch);
             }
@@ -124,6 +124,26 @@ namespace syncomp
                 Pop();
                 return CreateSyntaxToken(SyntaxTokenType.Decr, "--");
             }
+            if (ch == "+")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Addition, ch);
+            }
+            if (ch == "-")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Subtraction, ch);
+            }
+            if (ch == "*")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Multiplication, ch);
+            }
+            if (ch == "/")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Division, ch);
+            }
+            if (ch == "%")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Mod, ch);
+            }
             #endregion
 
             #region "Logic Operators"
@@ -132,9 +152,36 @@ namespace syncomp
                 Pop();
                 return CreateSyntaxToken(SyntaxTokenType.Equal, "==");
             }
+            if (ch == "<" && Peek() != "=")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.LessThan, ch);
+            }
+            if (ch == "<" && Peek() == "=")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.LessThanOrEqual, "==");
+            }
+            if (ch == ">" && Peek() != "=")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.GreaterThan, ch);
+            }
+            if (ch == ">" && Peek() == "=")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.GreaterThanOrEqual, "==");
+            }
             if (ch == "!")
             {
                 return CreateSyntaxToken(SyntaxTokenType.Not, ch);
+            }
+            if (ch == "&" && Peek() == "&")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.And, "&&");
+            }
+            if (ch == "|" && Peek() == "|")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.And, ch);
             }
             #endregion
 
@@ -149,6 +196,13 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.RightCurly, ch);
             if (ch == ";")
                 return CreateSyntaxToken(SyntaxTokenType.SemiColon, ch);
+            #endregion
+
+            #region "Variables"
+            if (ch == "=")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.VariableAssignment, ch);
+            }
             #endregion
 
             #region "Identifiers"
