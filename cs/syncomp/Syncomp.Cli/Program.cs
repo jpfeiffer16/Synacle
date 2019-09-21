@@ -87,7 +87,7 @@ namespace syncomp
                 // (tokens, lines) = lexer.Lex();
                 tokens = lexer.Lex();
                 // Trim out whitespace
-                tokens = tokens.Where(tkn => !string.IsNullOrWhiteSpace(tkn.Token)).ToList();
+                tokens = tokens.Where(tkn => tkn.Type != SyntaxTokenType.Space).ToList();
             }
             catch(Exception e)
             {
