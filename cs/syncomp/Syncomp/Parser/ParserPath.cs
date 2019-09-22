@@ -106,5 +106,29 @@ namespace syncomp
 
       return index;
     }
+
+    protected int GetNext(
+        int index, List<SyntaxToken> tokens, SyntaxTokenType tokenType)
+    {
+        var currentTokenType = SyntaxTokenType.Unknown;
+        do
+        {
+            currentTokenType = tokens[index++].Type;
+        }
+        while (currentTokenType != tokenType);
+        return --index;
+    }
+
+    protected int GetNextNonWhitespace(int index, List<SyntaxToken> tokens)
+    {
+        while (
+            tokens[index].Type == SyntaxTokenType.NewLine
+            || tokens[index].Type == SyntaxTokenType.Space)
+        {
+            index++;
+        }
+
+        return index;
+    }
   }
 }

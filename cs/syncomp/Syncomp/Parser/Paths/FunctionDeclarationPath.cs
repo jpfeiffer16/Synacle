@@ -37,7 +37,7 @@ namespace syncomp
               .Cast<AstNode>()
               .ToList();
 
-            i = nextClosingParen + 1;
+            i = GetNextNonWhitespace(nextClosingParen + 1, tokens);
 
             var nextClosingCurly = GetExpression(
               SyntaxTokenType.LeftCurly,

@@ -1,3 +1,17 @@
-#include "lib/stdlib.bc"
 
-println("Test");
+function doathing(var cb)
+{
+    cb();
+}
+
+var test = function () {
+    //println("This is a declaration test");
+    out(65);
+};
+
+doathing(function () {
+    //println("This is an inline test");
+    out(66);
+});
+
+doathing(test);
