@@ -1,35 +1,15 @@
-jmp >doathing_end
-:doathing
-jmp >var_d96f5520a32d_end
-:var_d96f5520a32d
-:var_d96f5520a32d_end
-wmem >var_d96f5520a32d reg0
-rmem reg7 >var_d96f5520a32d
-call reg7
-ret
-:doathing_end
-set reg0 >doathing
-jmp >var_dd380d82b85c_end
-:var_dd380d82b85c
-:var_dd380d82b85c_end
-jmp >function_f57b74d63c0b_end
-:function_f57b74d63c0b
+jmp >test_end
+:test
+jmp >var_aba17bb88154_end
+:var_aba17bb88154
+:var_aba17bb88154_end
+wmem >var_aba17bb88154 reg0
 set reg0 65
 out reg0
 ret
-:function_f57b74d63c0b_end
-set reg0 >function_f57b74d63c0b
-wmem >var_dd380d82b85c reg0
-jmp >function_97116427c5b5_end
-:function_97116427c5b5
-set reg0 66
-out reg0
-ret
-:function_97116427c5b5_end
-set reg0 >function_97116427c5b5
-call >doathing
-rmem reg0 >var_dd380d82b85c
-call >doathing
+:test_end
+set reg0 >test
+call >test
 halt
 
 :subtract

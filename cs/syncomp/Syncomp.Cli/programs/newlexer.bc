@@ -1,17 +1,7 @@
-
-function doathing(var cb)
+function test(var par)
 {
-    cb();
+    out(65);
 }
 
-var test = function () {
-    //println("This is a declaration test");
-    out(65);
-};
 
-doathing(function () {
-    //println("This is an inline test");
-    out(66);
-});
-
-doathing(test);
+test();
