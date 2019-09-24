@@ -14,7 +14,8 @@ namespace syncomp
         {
             var left = nodes.Pop();
             var right = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx);
-            return (i, new Division(left, right[0]));
+            var divisionToken = tokens[i - 1];
+            return (i, new Division(left, right[0], divisionToken.File, divisionToken.Line, divisionToken.Index));
         }
     }
 }

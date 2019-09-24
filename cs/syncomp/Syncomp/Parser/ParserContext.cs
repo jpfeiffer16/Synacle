@@ -4,6 +4,7 @@ namespace syncomp
 {
     public class ParserContext
     {
+        // TODO: Fix!
         public List<LangType> LangTypes { get; set; } = new List<LangType>
         {
             NativeTypes.LangVar,

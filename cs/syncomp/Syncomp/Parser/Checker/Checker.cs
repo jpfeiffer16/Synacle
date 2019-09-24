@@ -55,7 +55,10 @@ namespace syncomp
                     diagnostics.Add(new Diagnostic
                     {
                         Code = DiagnosticCode.UnknownFunction,
-                        Message = $"Invalid function: {f.Name}"
+                        Message = $"Invalid function: {f.Name}",
+                        File = node.File,
+                        Line = node.Line,
+                        Column = node.Column
                     });
                 }
                 else if (function != null)

@@ -14,7 +14,8 @@ namespace syncomp
         {
             var left = nodes.Pop();
             var right = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx);
-            return (i, new Addition(left, right[0]));
+            var additionToken = tokens[i - 1];
+            return (i, new Addition(left, right[0], additionToken.File, additionToken.Line, additionToken.Index));
         }
     }
 }

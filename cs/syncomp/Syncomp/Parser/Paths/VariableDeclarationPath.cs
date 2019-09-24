@@ -12,11 +12,12 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
+            var tkn = tokens[i];
             var nextToken = tokens[++i];
 
             return (
                     i, new VariableDeclaration(
-                        nextToken.Token, ParserContext.NativeTypes.LangVar));
+                        nextToken.Token, ParserContext.NativeTypes.LangVar, tkn.File, tkn.Line, tkn.Index));
         }
     }
 }

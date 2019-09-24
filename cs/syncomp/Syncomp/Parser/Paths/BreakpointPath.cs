@@ -12,7 +12,8 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
-            return (i, new Breakpoint());
+            var breakpointToken = tokens[i];
+            return (i, new Breakpoint(breakpointToken.File, breakpointToken.Line, breakpointToken.Index));
         }
     }
 }

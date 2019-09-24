@@ -13,7 +13,8 @@ namespace syncomp
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
             var next = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx);
-            return (i, new Decr(next[0]));
+            var decrToken = tokens[i - 1];
+            return (i, new Decr(next[0], decrToken.File, decrToken.Line, decrToken.Index));
         }
     }
 }

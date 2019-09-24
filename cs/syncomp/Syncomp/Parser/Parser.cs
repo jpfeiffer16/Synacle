@@ -26,6 +26,8 @@ namespace syncomp
                 foreach (var diagnostic in diagnostics)
                 {
                     Console.WriteLine(diagnostic.FullMessage);
+                    Console.WriteLine(diagnostic.Line);
+                    Console.WriteLine(diagnostic.Column);
                 }
             }
 

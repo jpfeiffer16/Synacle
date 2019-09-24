@@ -12,6 +12,7 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
+            var tkn = tokens[i];
             i++;
             var conditionEnd = GetExpression(
               SyntaxTokenType.LeftParen,
@@ -32,7 +33,9 @@ namespace syncomp
 
             var expression = tokens.GetRange(i, expressionEnd - i);
             i = expressionEnd;
-            return (i, new While(ParseTokens(condition, ctx), ParseTokens(expression, ctx)));
+            return (i, new While(
+                        ParseTokens(condition, ctx),
+                        ParseTokens(expression, ctx), tkn.File, tkn.Line, tkn.Index));
         }
     }
 }

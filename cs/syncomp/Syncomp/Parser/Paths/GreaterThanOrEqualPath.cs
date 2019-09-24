@@ -12,10 +12,14 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
+            var gteToken = tokens[i];
             var previousAstNode = nodes.Pop();
             return (++i, new GreaterThanOrEqual(
               previousAstNode,
-              ParseTokens(new List<SyntaxToken>() { tokens[i] }, ctx)[0]
+              ParseTokens(new List<SyntaxToken>() { tokens[i] }, ctx)[0],
+              gteToken.File,
+              gteToken.Line,
+              gteToken.Index
             ));
         }
     }

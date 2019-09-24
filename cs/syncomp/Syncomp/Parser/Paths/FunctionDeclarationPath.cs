@@ -13,6 +13,7 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
+            var functionToken = tokens[i];
             var name = tokens[++i];
             if (name.Type != SyntaxTokenType.Identifier)
             {
@@ -53,9 +54,7 @@ namespace syncomp
 
             i = nextClosingCurly;
 
-
-
-            return (i, new FunctionDeclaration(parameters, expression, name?.Token));
+            return (i, new FunctionDeclaration(parameters, expression, name?.Token, functionToken.File, functionToken.Line, functionToken.Index));
         }
     }
 }

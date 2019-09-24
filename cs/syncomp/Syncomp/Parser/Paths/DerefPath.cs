@@ -12,6 +12,7 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
+            var derefToken = tokens[i];
             var nextTerminator = this.GetNextTerminator(i, tokens);
             ++i;
             var nextNode = ParseTokens(
@@ -19,7 +20,7 @@ namespace syncomp
               ctx
             )[0];
             i = nextTerminator;
-            return (i, new Deref(nextNode));
+            return (i, new Deref(nextNode, derefToken.File, derefToken.Line, derefToken.Index));
         }
     }
 }

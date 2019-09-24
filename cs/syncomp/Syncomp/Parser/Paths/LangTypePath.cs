@@ -13,6 +13,7 @@ namespace syncomp
         public override (int, AstNode) Eval(
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
+            var langTypeToken = tokens[i];
             var nameToken = tokens[i + 1];
             if (nameToken.Type  != SyntaxTokenType.Identifier)
             {
@@ -44,6 +45,8 @@ namespace syncomp
                 }
             }
             sectionList.Add(currentList);
+            // TODO: Fix!
+            // var langType = new LangType(name, ParseTokens(bodyExpression, ctx), langTypeToken.File, langTypeToken.Line, langTypeToken.Index);
             var langType = new LangType(name, ParseTokens(bodyExpression, ctx));
             ctx.LangTypes.Add(langType);
             return (i, langType);
