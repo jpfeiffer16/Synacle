@@ -4,7 +4,8 @@ namespace syncomp
 {
   public class If : AstNode
   {
-    public If(List<AstNode> condition, List<AstNode> expression) : base("IF")
+    public If(List<AstNode> condition, List<AstNode> expression, string file, int line, int column)
+        : base("IF", file, line, column)
     {
       this.Condition = condition;
       this.Expression = expression;

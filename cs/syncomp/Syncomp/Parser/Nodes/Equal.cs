@@ -2,7 +2,8 @@ namespace syncomp
 {
   public class Equal : AstNode
   {
-    public Equal(AstNode left, AstNode right) : base("EQUAL")
+    public Equal(AstNode left, AstNode right, string file, int line, int column)
+        : base("EQUAL", file, line, column)
     {
       this.Left = left;
       this.Right = right;

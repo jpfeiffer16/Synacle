@@ -2,7 +2,8 @@ namespace syncomp
 {
   public class Or : AstNode
   {
-    public Or(AstNode left, AstNode right) : base("OR")
+    public Or(AstNode left, AstNode right, string file, int line, int column)
+        : base("OR", file, line, column)
     {
       this.Left = left;
       this.Right = right;

@@ -7,8 +7,11 @@ namespace syncomp
     public FunctionDeclaration(
         List<AstNode> parameters,
         List<AstNode> expression,
-        string name)
-        : base("FUNCTION_DECLARATION")
+        string name,
+        string file,
+        int line,
+        int column)
+        : base("FUNCTION_DECLARATION", file, line, column)
     {
       this.Parameters = parameters;
       this.Expression = expression;

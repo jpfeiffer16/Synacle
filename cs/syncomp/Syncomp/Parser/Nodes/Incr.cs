@@ -2,7 +2,8 @@ namespace syncomp
 {
   public class Incr : AstNode
   {
-    public Incr(AstNode parameter) : base("INCR")
+    public Incr(AstNode parameter, string file, int line, int column)
+        : base("INCR", file, line, column)
     {
       this.Parameter = parameter;
     }

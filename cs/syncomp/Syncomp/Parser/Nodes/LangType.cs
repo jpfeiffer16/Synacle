@@ -4,7 +4,8 @@ namespace syncomp
 {
     public class LangType : AstNode
     {
-        public LangType(string name, List<AstNode> body) : base("LANGTYPE")
+        public LangType(string name, List<AstNode> body, string file, int line, int column)
+            : base("LANGTYPE", file, line, column)
         {
             this.Name = name;
             this.Body = body;

@@ -4,8 +4,8 @@ namespace syncomp
 {
   public class While : AstNode
   {
-    public While(List<AstNode> condition, List<AstNode> expression)
-      : base("WHILE")
+    public While(List<AstNode> condition, List<AstNode> expression, string file, int line, int column)
+      : base("WHILE", file, line, column)
     {
       this.Condition = condition;
       this.Expression = expression;

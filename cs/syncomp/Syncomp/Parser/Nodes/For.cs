@@ -8,8 +8,11 @@ namespace syncomp
       List<AstNode> init,
       List<AstNode> condition,
       List<AstNode> incrementor,
-      List<AstNode> expression
-    ) : base("FOR")
+      List<AstNode> expression,
+      string file,
+      int line,
+      int column
+    ) : base("FOR", file, line, column)
     {
       this.Init = init;
       this.Condition = condition;

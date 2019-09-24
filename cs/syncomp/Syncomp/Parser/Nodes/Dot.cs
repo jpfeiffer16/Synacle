@@ -2,7 +2,8 @@ namespace syncomp
 {
   public class Dot : AstNode
   {
-    public Dot(AstNode left, AstNode right) : base("DOT")
+    public Dot(AstNode left, AstNode right, string file, int line, int column)
+        : base("DOT", file, line, column)
     {
       this.Left = left;
       this.Right = right;
