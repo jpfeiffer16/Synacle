@@ -65,12 +65,12 @@ namespace syncomp
                 {
                     if (f.Parameters.Count != function.Node.Parameters.Count)
                     {
-                        //TODO: Look up the called function and make sure parameter
-                        // count is correct
                         diagnostics.Add(new Diagnostic
                         {
                             Code = DiagnosticCode.InvalidParameters,
-                            Message = $"Invalid parameters for function '{f.Name}'"
+                            Message = $"Invalid parameters for function '{f.Name}'",
+                            Line = node.Line,
+                            Column = node.Column
                         });
 
                     }

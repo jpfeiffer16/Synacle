@@ -1,5 +1,6 @@
 jmp >main_end
 :main
+set reg0 10
 out reg0
 ret
 :main_end

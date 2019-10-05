@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace syncomp
 {
@@ -12,6 +13,9 @@ namespace syncomp
         public string _code = string.Empty;
         private List<SyntaxToken> _tokens = new List<SyntaxToken>();
         private string[] _lines;
+        private int _line = 1;
+        private int _column = 0;
+        private string[] _fileMapping;
         public string[] Lines
         {
             get => _lines ?? (_lines = _code.Split('\n'));
@@ -22,6 +26,32 @@ namespace syncomp
         public NewLexer(string code)
         {
             this._code = code ?? throw new ArgumentNullException(nameof(code));
+        }
+
+        public NewLexer(IEnumerable<(string, string)> preprocessorContext)
+        {
+            var fileMappings = new List<string[]>();
+            var code = new StringBuilder();
+            foreach (var file in preprocessorContext)
+            {
+                var mapping = new string[file.Item2.Length];
+                code.Append(file.Item2);
+                for (var i = 0; i < file.Item2.Length; i++)
+                {
+                    mapping[i] = file.Item1;
+                }
+                fileMappings.Add(mapping);
+            }
+
+            // var count = 0;
+            this._fileMapping = new string[0];
+            foreach (var mapping in fileMappings)
+            {
+                this._fileMapping = this._fileMapping.Concat(mapping).ToArray();
+            }
+            // this._fileMapping = new string[count];
+
+            this._code = code.ToString();
         }
         #endregion
 
@@ -39,6 +69,7 @@ namespace syncomp
 
         private SyntaxToken NextToken()
         {
+            _column++;
             var ch = Pop();
             #region "Comments"
             if (ch == "/")
@@ -60,13 +91,21 @@ namespace syncomp
             #endregion
 
             #region "Whitespace"
-            if (ch == "\r" && Peek() == "\n")
+            // if (ch == "\r" && Peek() == "\n")
+            // {
+            //     Pop();
+            //     return CreateSyntaxToken(SyntaxTokenType.NewLine, "\r\n");
+            // }
+            if (ch == "\r")
             {
-                Pop();
-                return CreateSyntaxToken(SyntaxTokenType.NewLine, "\r\n");
+                ch = Pop();
             }
             if (ch == "\n")
+            {
+                _line++;
+                _column = 0;
                 return CreateSyntaxToken(SyntaxTokenType.NewLine, ch);
+            }
             if (ch == "\t")
                 return CreateSyntaxToken(SyntaxTokenType.Tab, ch);
             if (ch == " ")
@@ -255,10 +294,9 @@ namespace syncomp
         {
             Type = tokenType,
             Token = token,
-            // TODO:
-            // File = file,
-            Index = _index,
-            Line = GetLineFromIndex()
+            File = this._fileMapping is null ? null : this._fileMapping[_index - 1],
+            Index = _column,
+            Line = _line
         };
 
         private int GetLineFromIndex()

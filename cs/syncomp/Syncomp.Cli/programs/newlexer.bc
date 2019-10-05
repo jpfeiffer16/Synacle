@@ -1,3 +1,4 @@
+#include "lib/stdlib.bc"
 function test(var par)
 {
     out(65);

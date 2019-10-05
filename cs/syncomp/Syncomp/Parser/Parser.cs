@@ -26,8 +26,7 @@ namespace syncomp
                 foreach (var diagnostic in diagnostics)
                 {
                     Console.WriteLine(diagnostic.FullMessage);
-                    Console.WriteLine(diagnostic.Line);
-                    Console.WriteLine(diagnostic.Column);
+                    Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
                 }
             }
 

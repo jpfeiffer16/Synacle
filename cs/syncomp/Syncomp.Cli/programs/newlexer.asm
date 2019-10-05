@@ -1,9 +1,9 @@
 jmp >test_end
 :test
-jmp >var_aba17bb88154_end
-:var_aba17bb88154
-:var_aba17bb88154_end
-wmem >var_aba17bb88154 reg0
+jmp >var_c236464731d1_end
+:var_c236464731d1
+:var_c236464731d1_end
+wmem >var_c236464731d1 reg0
 set reg0 65
 out reg0
 ret

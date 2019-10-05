@@ -50,6 +50,10 @@ namespace syncomp
                 code = File.ReadAllText(
                     filePath
                 );
+                var pre = new NewPreProcessor(filePath, code);
+                var ctx = pre.BuildContext();
+                var testLexer = new NewLexer(ctx);
+                var testOut = testLexer.Lex();
             }
             List<string> asmLines = new List<string>();
             asmLines = CompileCode(code, workingDirectory, includeList);
