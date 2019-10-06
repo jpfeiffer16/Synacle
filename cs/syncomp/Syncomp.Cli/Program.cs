@@ -74,7 +74,7 @@ namespace syncomp
             {
                 foreach (var file in preprocessorContext)
                 {
-                    var lexer = new NewLexer(file.Item2);
+                    var lexer = new NewLexer(file.Item2, file.Item1);
                     tokens.AddRange(lexer.Lex());
                 }
                 // Trim out whitespace

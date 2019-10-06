@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -45,25 +44,19 @@ namespace syncomp
 
             foreach (Match match in includeMatches)
             {
-                // var test = includeMatches[0];
                 var group = match.Groups[1];
-                // TODO: Resolve path correctly
                 var path = ResolvePath(filename, group.Value);
                 Build(ctx, path, File.ReadAllText(path));
-                // foreach (var file in Build(ctx, path, File.ReadAllText(path)))
-                // {
-                //     ctx.Add(file.Key, file.Value);
-                // }
             }
 
             return ctx;
         }
 
+        // TODO: Use include paths
         public string ResolvePath(string sourcePath, string path)
         {
             var fileInfo = new FileInfo(sourcePath);
             var actualPath = Path.Combine(fileInfo.DirectoryName, path);
-            Console.WriteLine(actualPath);
             return actualPath;
         }
     }

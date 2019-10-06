@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace syncomp
 {
@@ -11,11 +10,11 @@ namespace syncomp
         #region "Properties and Fields"
         private int _index = 0;
         public string _code = string.Empty;
+        private readonly string _fileName;
         private List<SyntaxToken> _tokens = new List<SyntaxToken>();
         private string[] _lines;
         private int _line = 1;
         private int _column = 0;
-        private string[] _fileMapping;
         public string[] Lines
         {
             get => _lines ?? (_lines = _code.Split('\n'));
@@ -23,35 +22,10 @@ namespace syncomp
         #endregion
 
         #region "Constuctor"
-        public NewLexer(string code)
+        public NewLexer(string code, string fileName = "unknown.bc")
         {
             this._code = code ?? throw new ArgumentNullException(nameof(code));
-        }
-
-        public NewLexer(IEnumerable<(string, string)> preprocessorContext)
-        {
-            var fileMappings = new List<string[]>();
-            var code = new StringBuilder();
-            foreach (var file in preprocessorContext)
-            {
-                var mapping = new string[file.Item2.Length];
-                code.Append(file.Item2);
-                for (var i = 0; i < file.Item2.Length; i++)
-                {
-                    mapping[i] = file.Item1;
-                }
-                fileMappings.Add(mapping);
-            }
-
-            // var count = 0;
-            this._fileMapping = new string[0];
-            foreach (var mapping in fileMappings)
-            {
-                this._fileMapping = this._fileMapping.Concat(mapping).ToArray();
-            }
-            // this._fileMapping = new string[count];
-
-            this._code = code.ToString();
+            this._fileName = fileName;
         }
         #endregion
 
@@ -305,7 +279,7 @@ namespace syncomp
         {
             Type = tokenType,
             Token = token,
-            File = this._fileMapping is null ? null : this._fileMapping[_index - 1],
+            File = this._fileName,
             Index = _column,
             Line = _line
         };
