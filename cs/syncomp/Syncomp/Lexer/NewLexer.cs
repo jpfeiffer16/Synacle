@@ -78,7 +78,6 @@ namespace syncomp
                 if (pkChar == "/")
                 {
                     Pop();
-                    string commentChar = string.Empty;
                     string comment = string.Empty;
                     do
                     {
@@ -87,6 +86,19 @@ namespace syncomp
                     } while (Peek() != "\n");
                     return CreateSyntaxToken(SyntaxTokenType.Comment, "//" + comment);
                 }
+            }
+            #endregion
+
+            #region "Preprocessor Directives"
+            if (ch == "#")
+            {
+                string directive = string.Empty;
+                do
+                {
+                    ch = Pop();
+                    directive += ch;
+                } while (Peek() != "\n");
+                return CreateSyntaxToken(SyntaxTokenType.PreprocessorDirective, "#" + directive);
             }
             #endregion
 
@@ -289,7 +301,6 @@ namespace syncomp
             // return (ch > 64 && ch < 123);
         }
 
-        // private string Current() => this._code[this._index].ToString();
         private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token) => new SyntaxToken
         {
             Type = tokenType,

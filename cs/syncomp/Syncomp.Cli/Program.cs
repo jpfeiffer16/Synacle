@@ -30,33 +30,22 @@ namespace syncomp
 
             var filePath = args[0];
 
-            string code;
-            string workingDirectory;
-            FileInfo fileInfo = null;
+            NewPreProcessor preprocessor;
             if (filePath == "-")
             {
                 //Make this async once the above comment is done
-                // Console.WriteLine("Before read");
-                code = Console.In.ReadToEnd();
-                // Console.WriteLine("After read");
-                workingDirectory = Directory.GetCurrentDirectory();
+                var code = Console.In.ReadToEnd();
+                preprocessor = new NewPreProcessor("./stdin.bc", code);
             }
             else
             {
-                fileInfo = new FileInfo(filePath);
-                workingDirectory = fileInfo.Directory.FullName;
-                
-                //Get code
-                code = File.ReadAllText(
-                    filePath
-                );
-                var pre = new NewPreProcessor(filePath, code);
-                var ctx = pre.BuildContext();
-                var testLexer = new NewLexer(ctx);
-                var testOut = testLexer.Lex();
+                preprocessor = new NewPreProcessor(filePath);
             }
-            List<string> asmLines = new List<string>();
-            asmLines = CompileCode(code, workingDirectory, includeList);
+            var ctx = preprocessor.BuildContext();
+            var asmLines = CompileCode(ctx);
+
+             string workingDirectory;
+             FileInfo fileInfo = null;
 
             if (filePath == "-")
             {
@@ -65,6 +54,8 @@ namespace syncomp
             }
             else
             {
+                 fileInfo = new FileInfo(filePath);
+                 workingDirectory = fileInfo.Directory.FullName;
                 //Write file
                 File.WriteAllLines(
                     $"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}",
@@ -74,22 +65,18 @@ namespace syncomp
         }
 
         private static List<string> CompileCode(
-            string code,
-            string workingDirectory,
-            List<string> includeLocations)
+            IEnumerable<(string, string)> preprocessorContext)
         {
-            //Preprocess
-            var preprocessor = new Preprocessor(code, workingDirectory, includeLocations);
-            code = preprocessor.Preprocess();
             //Lex
-            List<SyntaxToken> tokens = null;
+            var tokens = new List<SyntaxToken>();
             List<string> lines = null;
             try
             {
-                // var lexer = new Lexer(code);
-                var lexer = new NewLexer(code);
-                // (tokens, lines) = lexer.Lex();
-                tokens = lexer.Lex();
+                foreach (var file in preprocessorContext)
+                {
+                    var lexer = new NewLexer(file.Item2);
+                    tokens.AddRange(lexer.Lex());
+                }
                 // Trim out whitespace
                 tokens = tokens.Where(tkn => tkn.Type != SyntaxTokenType.Space).ToList();
             }

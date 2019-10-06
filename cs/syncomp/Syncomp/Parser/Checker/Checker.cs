@@ -69,6 +69,7 @@ namespace syncomp
                         {
                             Code = DiagnosticCode.InvalidParameters,
                             Message = $"Invalid parameters for function '{f.Name}'",
+                            File = node.File,
                             Line = node.Line,
                             Column = node.Column
                         });

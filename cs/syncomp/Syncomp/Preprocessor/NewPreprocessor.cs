@@ -11,6 +11,7 @@ namespace syncomp
         private readonly Regex IncludeRegex = new Regex("#include \"(\\S*)\"");
         private readonly string _name;
         private readonly string _code;
+        // TODO: Need to take include paths
         public NewPreProcessor(string filepath) : this(filepath, File.ReadAllText(filepath))
         { }
 

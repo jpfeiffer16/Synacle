@@ -45,7 +45,8 @@ namespace syncomp
         Tab,
         Space,
         Integer,
-        StringLiteral
+        StringLiteral,
+        PreprocessorDirective
     }
 
     public static class Grammar
