@@ -1,3 +1,22 @@
 #include "lib/stdlib.bc"
 
-int test;
+func test = 10;
+out(test);
+out(test);
+out(test);
+
+funct test = function() : int {
+
+}
+
+func test = int function() {
+
+}
+
+int function test() {
+
+}
+
+func<int> test = function() : int {
+
+}

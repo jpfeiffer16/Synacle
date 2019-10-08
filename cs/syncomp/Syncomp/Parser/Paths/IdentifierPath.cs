@@ -36,11 +36,11 @@ namespace syncomp
                   functionCallToken.Index
                 );
             }
-            // Type declaration
+            // Typed variable declaration
             else if(i + 1 < tokens.Count && tokens[i + 1].Type == SyntaxTokenType.Identifier)
             {
                 var typeDecToken = tokens[i];
-                var nextToken = tokens[i + 1];
+                var nextToken = tokens[++i];
                 var type = ctx.LangTypes.Where(tp => tp.Name == token.Token).FirstOrDefault();
                 if (type == null)
                     throw new ParseException(i,

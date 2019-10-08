@@ -40,6 +40,39 @@ namespace syncomp
             AstNode node, CheckerContext ctx)
         {
             var diagnostics = new List<Diagnostic>();
+            #region "VariableAssignment"
+            if (node is VariableAssignment va)
+            {
+                if (va.Identifier is VariableDeclaration def)
+                {
+                    if (def.LangType != va.Parameter.NodeType)
+                    {
+                        diagnostics.Add(new Diagnostic(
+                            def.File,
+                            def.Line,
+                            def.Column,
+                            $"Unable to convert type '{def.LangType?.Name}' to  '{va.Parameter.NodeType?.Name}'",
+                            DiagnosticCode.InvalidTypes));
+                    }
+                    ctx.Variables.AddVariable(new CheckerVariable
+                    {
+                        Node = def
+                    });
+                }
+                else if (va.Identifier is Identifier id)
+                {
+                    if (id.NodeType != va.Parameter.NodeType)
+                    diagnostics.Add(new Diagnostic(
+                        id.File,
+                        id.Line,
+                        id.Column,
+                        $"Unable to convert type '{id.NodeType?.Name}' to  '{va.Parameter.NodeType?.Name}'",
+                        DiagnosticCode.InvalidTypes));
+
+                }
+            }
+            #endregion
+            #region "FunctionCall"
             if (node is FunctionCall f)
             {
                 var function = ctx.Variables.GetFunction(f.Name);
@@ -52,31 +85,29 @@ namespace syncomp
                     && f.Name != "pop"
                     && f.Name != "wmem")
                 {
-                    diagnostics.Add(new Diagnostic
-                    {
-                        Code = DiagnosticCode.UnknownFunction,
-                        Message = $"Invalid function: {f.Name}",
-                        File = node.File,
-                        Line = node.Line,
-                        Column = node.Column
-                    });
+                    diagnostics.Add(new Diagnostic(
+                        node.File,
+                        node.Line,
+                        node.Column,
+                        $"Invalid function: {f.Name}",
+                        DiagnosticCode.UnknownFunction));
                 }
                 else if (function != null)
                 {
                     if (f.Parameters.Count != function.Node.Parameters.Count)
                     {
-                        diagnostics.Add(new Diagnostic
-                        {
-                            Code = DiagnosticCode.InvalidParameters,
-                            Message = $"Invalid parameters for function '{f.Name}'",
-                            File = node.File,
-                            Line = node.Line,
-                            Column = node.Column
-                        });
+                        diagnostics.Add(new Diagnostic(
+                            node.File,
+                            node.Line,
+                            node.Column,
+                            $"Invalid parameters for function '{f.Name}'",
+                            DiagnosticCode.InvalidParameters));
 
                     }
                 }
             }
+            #endregion
+            #region "FunctionDeclaration"
             if (node is FunctionDeclaration fd)
             {
                 ctx.Variables.AddFunction(new CheckerFunction
@@ -99,7 +130,8 @@ namespace syncomp
                 }
                 ctx.Variables.Pop();
             }
-
+            #endregion
+            #region "VariableDeclaration"
             if (node is VariableDeclaration vd)
             {
                 ctx.Variables.AddVariable(new CheckerVariable
@@ -107,6 +139,7 @@ namespace syncomp
                     Node = vd
                 });
             }
+            #endregion
             return diagnostics;
         }
         #endregion

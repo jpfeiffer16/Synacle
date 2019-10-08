@@ -7,6 +7,7 @@ namespace syncomp
         : base("INTEGER_LITERAL", file, line, column)
     {
       this.Value = value;
+      this.NodeType = ParserContext.NativeTypes.LangInt;
     }
   }
 }

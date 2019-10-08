@@ -77,11 +77,6 @@ namespace syncomp
             #endregion
 
             #region "Whitespace"
-            // if (ch == "\r" && Peek() == "\n")
-            // {
-            //     Pop();
-            //     return CreateSyntaxToken(SyntaxTokenType.NewLine, "\r\n");
-            // }
             if (ch == "\r")
             {
                 ch = Pop();

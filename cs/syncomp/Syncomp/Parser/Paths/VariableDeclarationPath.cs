@@ -17,7 +17,7 @@ namespace syncomp
 
             return (
                     i, new VariableDeclaration(
-                        nextToken.Token, ParserContext.NativeTypes.LangVar, tkn.File, tkn.Line, tkn.Index));
+                        nextToken.Token, ParserContext.NativeTypes.LangInt, tkn.File, tkn.Line, tkn.Index));
         }
     }
 }

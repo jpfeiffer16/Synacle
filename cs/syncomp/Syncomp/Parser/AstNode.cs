@@ -6,6 +6,7 @@ namespace syncomp
         public string File { get; }
         public int Line { get; }
         public int Column { get; }
+        public LangType NodeType { get; set; }
 
         public AstNode(string type, string file, int line, int column)
         {

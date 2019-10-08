@@ -46,8 +46,7 @@ namespace syncomp
             }
             sectionList.Add(currentList);
             // TODO: Fix!
-            // var langType = new LangType(name, ParseTokens(bodyExpression, ctx), langTypeToken.File, langTypeToken.Line, langTypeToken.Index);
-            var langType = new LangType(name, ParseTokens(bodyExpression, ctx));
+            var langType = new LangType(name, ParseTokens(bodyExpression, ctx), langTypeToken.File, langTypeToken.Line, langTypeToken.Index);
             ctx.LangTypes.Add(langType);
             return (i, langType);
         }

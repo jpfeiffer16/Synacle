@@ -6,6 +6,7 @@ namespace syncomp
         : base("STRING_LITTERAL", file, line, column)
     {
       this.Value = value;
+      this.NodeType = ParserContext.NativeTypes.LangString;
     }
 
     public string Value { get; }
