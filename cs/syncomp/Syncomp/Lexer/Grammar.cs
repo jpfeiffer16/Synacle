@@ -46,7 +46,8 @@ namespace syncomp
         Space,
         Integer,
         StringLiteral,
-        PreprocessorDirective
+        PreprocessorDirective,
+        Colon
     }
 
     public static class Grammar
@@ -223,6 +224,11 @@ namespace syncomp
               {
                   Token = ".",
                   Type = SyntaxTokenType.Dot
+              },
+              new SyntaxToken
+              {
+                  Token = ":",
+                  Type = SyntaxTokenType.Colon
               }
         };
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,6 +41,16 @@ namespace syncomp
 
             i = GetNextNonWhitespace(nextClosingParen + 1, tokens);
 
+            var langType = ParserContext.NativeTypes.LangVoid;
+            if (tokens[i].Type == SyntaxTokenType.Colon)
+            {
+                i++;
+                var type = tokens[GetNextNonWhitespace(i, tokens)];
+                langType = ctx.LangTypes.Where(tp => tp.Name == type.Token).FirstOrDefault();
+                i++;
+                i = GetNextNonWhitespace(i, tokens);
+            }
+
             var nextClosingCurly = GetExpression(
               SyntaxTokenType.LeftCurly,
               SyntaxTokenType.RightCurly,
@@ -54,7 +65,13 @@ namespace syncomp
 
             i = nextClosingCurly;
 
-            return (i, new FunctionDeclaration(parameters, expression, name?.Token, functionToken.File, functionToken.Line, functionToken.Index));
+            return (i, new FunctionDeclaration(
+                parameters,
+                expression,
+                name?.Token,
+                functionToken.File,
+                functionToken.Line,
+                functionToken.Index) { NodeType = langType });
         }
     }
 }

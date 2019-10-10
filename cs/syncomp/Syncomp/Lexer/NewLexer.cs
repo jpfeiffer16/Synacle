@@ -245,6 +245,13 @@ namespace syncomp
             }
             #endregion
 
+            #region "Colon"
+            if (ch == ":")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Colon, ch);
+            }
+            #endregion
+
             #region "EOF and Unknown"
             if (ch is null)
                 return CreateSyntaxToken(SyntaxTokenType.EOF, "");

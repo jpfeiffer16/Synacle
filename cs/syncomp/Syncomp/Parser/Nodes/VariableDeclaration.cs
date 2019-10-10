@@ -10,6 +10,7 @@ namespace syncomp
     {
       this.Identifier = identifier;
       this.LangType = langType;
+      this.NodeType = langType;
     }
   }
 }

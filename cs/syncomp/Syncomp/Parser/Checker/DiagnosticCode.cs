@@ -4,6 +4,8 @@ namespace syncomp
     {
         UnknownFunction,
         InvalidParameters,
-        InvalidTypes
+        InvalidTypes,
+        UnknownVariable,
+        ControlFlowError
     }
 }

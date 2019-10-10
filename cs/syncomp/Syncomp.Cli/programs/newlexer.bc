@@ -1,22 +1,19 @@
-#include "lib/stdlib.bc"
 
-func test = 10;
-out(test);
-out(test);
-out(test);
+// func test = 10;
 
-funct test = function() : int {
-
+function print(var str_ptr) {
+  while (~str_ptr) {
+    out(~str_ptr);
+    ++str_ptr;
+  }
 }
 
-func test = int function() {
-
+function println(var str_ptr) {
+  print(str_ptr);
+  out(10);
 }
 
-int function test() {
+int test_val;
+test_val = "test";
 
-}
-
-func<int> test = function() : int {
-
-}
+println(test_val);

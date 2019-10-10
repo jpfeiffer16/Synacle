@@ -45,31 +45,52 @@ namespace syncomp
             {
                 if (va.Identifier is VariableDeclaration def)
                 {
-                    if (def.LangType != va.Parameter.NodeType)
-                    {
-                        diagnostics.Add(new Diagnostic(
-                            def.File,
-                            def.Line,
-                            def.Column,
-                            $"Unable to convert type '{def.LangType?.Name}' to  '{va.Parameter.NodeType?.Name}'",
-                            DiagnosticCode.InvalidTypes));
-                    }
                     ctx.Variables.AddVariable(new CheckerVariable
                     {
                         Node = def
                     });
                 }
-                else if (va.Identifier is Identifier id)
+                // TODO: Hack to deal with lack of actual parser context in the parser.
+                // Hence, need to look up the function in the checker context.
+                // Please help me...
+                var identifierType = va.Identifier.NodeType;
+                var parameterType = va.Parameter.NodeType;
+                if (va.Parameter is FunctionCall fc)
                 {
-                    if (id.NodeType != va.Parameter.NodeType)
-                    diagnostics.Add(new Diagnostic(
-                        id.File,
-                        id.Line,
-                        id.Column,
-                        $"Unable to convert type '{id.NodeType?.Name}' to  '{va.Parameter.NodeType?.Name}'",
-                        DiagnosticCode.InvalidTypes));
-
+                    var function = ctx.Variables.GetFunction(fc.Name);
+                    if (function is null)
+                    {
+                        diagnostics.Add(
+                        new Diagnostic(
+                            fc.File,
+                            fc.Line,
+                            fc.Column,
+                            $"Unknown function: {fc.Name}",
+                            DiagnosticCode.UnknownFunction));
+                    }
+                    else
+                    {
+                        parameterType = function.Node.NodeType;
+                    }
                 }
+                if (va.Parameter is Identifier parameter)
+                {
+                    var variable = ctx.Variables.GetVariable(parameter.Name);
+                    parameterType = variable.Node.NodeType;
+                }
+                if (va.Identifier is Identifier identifier)
+                {
+                    var variable = ctx.Variables.GetVariable(identifier.Name);
+                    identifierType = variable.Node.NodeType;
+                }
+
+                if (identifierType != parameterType)
+                    diagnostics.Add(new Diagnostic(
+                        va.Identifier.File,
+                        va.Identifier.Line,
+                        va.Identifier.Column,
+                        $"Unable to convert type '{parameterType?.Name}' to  '{identifierType?.Name}'",
+                        DiagnosticCode.InvalidTypes));
             }
             #endregion
             #region "FunctionCall"
@@ -104,6 +125,27 @@ namespace syncomp
                             DiagnosticCode.InvalidParameters));
 
                     }
+                    var minCount = Math.Min(f.Parameters.Count, function.Node.Parameters.Count);
+                    for (var i = 0; i < minCount; i++)
+                    {
+                        var callParam = f.Parameters[i];
+                        var callParamType = callParam.NodeType;
+                        if (callParam is Identifier callParamTp)
+                        {
+                            var variable = ctx.Variables.GetVariable(callParamTp.Name);
+                            callParamType = variable.Node.NodeType;
+                        }
+                        var declParam = function.Node.Parameters[i];
+                        if (callParamType != declParam.NodeType)
+                        {
+                            diagnostics.Add(new Diagnostic(
+                                callParam.File,
+                                callParam.Line,
+                                callParam.Column,
+                                $"Unable to convert type '{callParamType?.Name}' to  '{declParam.NodeType?.Name}'",
+                                DiagnosticCode.InvalidTypes));
+                        }
+                    }
                 }
             }
             #endregion
@@ -128,6 +170,17 @@ namespace syncomp
                 {
                     diagnostics.AddRange(Check(expressionNode, ctx));
                 }
+                var controlFlowChecker = new ReturnControlFlowChecker(fd);
+                if (!controlFlowChecker.Check())
+                {
+                    diagnostics.Add(new Diagnostic(
+                        fd.File,
+                        fd.Line,
+                        fd.Column,
+                        $"Not all code paths return value of type {fd.NodeType.Name}",
+                        DiagnosticCode.ControlFlowError
+                    ));
+                }
                 ctx.Variables.Pop();
             }
             #endregion
@@ -138,6 +191,21 @@ namespace syncomp
                 {
                     Node = vd
                 });
+            }
+            #endregion
+            #region "Identifier"
+            if (node is Identifier idNode)
+            {
+                var variable = ctx.Variables.GetVariable(idNode.Name);
+                if (variable is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        idNode.File,
+                        idNode.Line,
+                        idNode.Column,
+                        $"Unknown variable '{idNode.Name}'",
+                        DiagnosticCode.UnknownVariable));
+                }
             }
             #endregion
             return diagnostics;
