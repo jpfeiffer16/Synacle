@@ -1,19 +1,25 @@
 
 // func test = 10;
 
-function print(var str_ptr) {
+function alloc() : int {
+  var data_index = 16382;
+  while (!(~(data_index))) {
+    --data_index;
+  }
+  data_index = data_index + 2;
+  return data_index;
+}
+
+function print(string str_ptr) : void {
   while (~str_ptr) {
     out(~str_ptr);
     ++str_ptr;
   }
 }
 
-function println(var str_ptr) {
+function println(string str_ptr) : void {
   print(str_ptr);
   out(10);
 }
 
-int test_val;
-test_val = "test";
-
-println(test_val);
+int ptr = alloc();
