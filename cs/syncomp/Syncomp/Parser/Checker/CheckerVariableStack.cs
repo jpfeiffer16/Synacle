@@ -6,11 +6,28 @@ namespace syncomp
     public class CheckerVariableStack
     {
 
-        private Stack<(List<CheckerFunction> functions, List<CheckerVariable> variables)> Stack             = new Stack<(List<CheckerFunction>, List<CheckerVariable>)>();
+        private Stack<(List<CheckerFunction> functions, List<CheckerVariable> variables)> Stack
+            = new Stack<(List<CheckerFunction>, List<CheckerVariable>)>();
 
         public CheckerVariableStack()
         {
             this.Push();
+            // Typing for intrinsic functions
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(new List<AstNode>
+                {
+                    new VariableDeclaration("char", ParserContext.NativeTypes.LangInt, null, 0, 0)
+                }, null, "out", null, 0, 0)
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "pop", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "in", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+            });
         }
 
         public void Push()

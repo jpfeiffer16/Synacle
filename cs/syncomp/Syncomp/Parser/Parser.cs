@@ -20,16 +20,6 @@ namespace syncomp
                 .Where(nd => nd != null)
                 .ToList();
 
-            var diagnostics = new Checker(ast).Check();
-            if (diagnostics.Count > 0)
-            {
-                foreach (var diagnostic in diagnostics)
-                {
-                    Console.WriteLine(diagnostic.FullMessage);
-                    Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
-                }
-            }
-
             return (parserContext, ast);
         }
     }

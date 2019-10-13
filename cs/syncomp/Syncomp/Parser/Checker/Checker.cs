@@ -81,7 +81,18 @@ namespace syncomp
                 if (va.Identifier is Identifier identifier)
                 {
                     var variable = ctx.Variables.GetVariable(identifier.Name);
-                    identifierType = variable.Node.NodeType;
+                    if (variable is null) {
+                        diagnostics.Add(new Diagnostic(
+                            identifier.File,
+                            identifier.Line,
+                            identifier.Column,
+                            $"Unknown variable '{identifier.Name}'",
+                            DiagnosticCode.UnknownVariable));
+                    }
+                    else
+                    {
+                        identifierType = variable.Node.NodeType;
+                    }
                 }
 
                 if (identifierType != parameterType)

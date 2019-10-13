@@ -1,0 +1,44 @@
+#include "./lib/stdlib.bc"
+
+function test_dump_mem() {
+  var i = 0;
+
+  while (~i) {
+    ++i;
+    print_number(~i);
+    out(10);
+  }
+}
+
+function internal_dump_mem() : void {
+  int i = 0;
+  int num_zero = 0;
+
+  while (!(num_zero == 5)) {
+    if (~i) {
+      ++num_zero;
+    }
+    ++i;
+    print_number(~i);
+    out(10);
+  }
+}
+
+function interpret_command(string cmd) : void {
+    if (str_equal(cmd, "help")) {
+      println("This is help");
+    }
+    if (str_equal(cmd, "mem")) {
+      internal_dump_mem();
+    }
+}
+
+function interpret_loop() : void {
+    print("> ");
+    string command;
+    command = input();
+    interpret_command(command);
+    interpret_loop();
+}
+
+interpret_loop();

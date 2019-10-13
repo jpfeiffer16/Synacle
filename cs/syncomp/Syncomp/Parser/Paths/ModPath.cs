@@ -15,7 +15,7 @@ namespace syncomp
             var tkn = tokens[i];
             var left = nodes.Pop();
             var right = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx);
-            return (i, new Mod(left, right[0], tkn.File, tkn.Line, tkn.Index));
+            return (i, new Mod(left, right[0], tkn.File, tkn.Line, tkn.Index) { NodeType = ParserContext.NativeTypes.LangInt });
         }
     }
 }
