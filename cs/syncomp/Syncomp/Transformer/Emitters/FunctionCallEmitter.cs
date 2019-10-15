@@ -19,7 +19,7 @@ namespace syncomp
             }
             ctx.RegisterLevel = originalRegisterLevel;
 
-            //Handle special cases
+            //Handle intrinsic functions
             if (fcNode.Name == "out")
             {
                 lines.Add("out reg0");
@@ -44,6 +44,10 @@ namespace syncomp
             else if (fcNode.Name == "wmem")
             {
                 lines.Add($"wmem reg0 reg1");
+            }
+            else if (fcNode.Name == "rmem")
+            {
+                lines.Add($"rmem reg0 reg1");
             }
             else
             {

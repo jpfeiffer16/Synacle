@@ -22,11 +22,49 @@ namespace syncomp
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
-                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "pop", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+                Node = new FunctionDeclaration(new List<AstNode>
+                {
+                    new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
+                    new VariableDeclaration("source", ParserContext.NativeTypes.LangInt, null, 0, 0)
+                }, null, "wmem", null, 0, 0)
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
-                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "in", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+                Node = new FunctionDeclaration(new List<AstNode>
+                {
+                    new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
+                }, null, "rmem", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(new List<AstNode>
+                {
+                    new VariableDeclaration("value", ParserContext.NativeTypes.LangInt, null, 0, 0),
+                }, null, "push", null, 0, 0)
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(null, null, "pop", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(
+                    Enumerable.Empty<AstNode>().ToList(),
+                    null,
+                    "pop",
+                    null,
+                    0,
+                    0) { NodeType = ParserContext.NativeTypes.LangInt }
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(
+                    Enumerable.Empty<AstNode>().ToList(),
+                    null,
+                    "in",
+                    null,
+                    0,
+                    0) { NodeType = ParserContext.NativeTypes.LangInt }
             });
         }
 

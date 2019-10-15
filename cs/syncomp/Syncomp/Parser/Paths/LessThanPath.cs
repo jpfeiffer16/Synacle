@@ -20,7 +20,7 @@ namespace syncomp
               tkn.File,
               tkn.Line,
               tkn.Index
-            ));
+            ) { NodeType = ParserContext.NativeTypes.LangInt });
         }
     }
 }

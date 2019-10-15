@@ -20,7 +20,7 @@ namespace syncomp
               gteToken.File,
               gteToken.Line,
               gteToken.Index
-            ));
+            ) { NodeType = ParserContext.NativeTypes.LangInt });
         }
     }
 }

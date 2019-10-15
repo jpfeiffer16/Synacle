@@ -110,12 +110,13 @@ namespace syncomp
                 var function = ctx.Variables.GetFunction(f.Name);
                 if (function is null
                     // Handle intrinsics
-                    && f.Name != "out"
-                    && f.Name != "in"
-                    && f.Name != "exit"
-                    && f.Name != "push"
-                    && f.Name != "pop"
-                    && f.Name != "wmem")
+                    // && f.Name != "out"
+                    // && f.Name != "in"
+                    // && f.Name != "exit"
+                    // && f.Name != "push"
+                    // && f.Name != "pop"
+                    // && f.Name != "wmem"
+                    )
                 {
                     diagnostics.Add(new Diagnostic(
                         node.File,
@@ -216,6 +217,51 @@ namespace syncomp
                         idNode.Column,
                         $"Unknown variable '{idNode.Name}'",
                         DiagnosticCode.UnknownVariable));
+                }
+            }
+            #endregion
+            #region "For"
+            // TODO: Type check args
+            if (node is For forNode)
+            {
+                foreach (var exNode in forNode.Init)
+                {
+                    diagnostics.AddRange(Check(exNode, ctx));
+                }
+                foreach (var exNode in forNode.Condition)
+                {
+                    diagnostics.AddRange(Check(exNode, ctx));
+                }
+                foreach (var exNode in forNode.Incrementor)
+                {
+                    diagnostics.AddRange(Check(exNode, ctx));
+                }
+                foreach (var exNode in forNode.Expression)
+                {
+                    diagnostics.AddRange(Check(exNode, ctx));
+                }
+            }
+            #endregion
+            #region "If"
+            // TODO: Type check args
+            if (node is If ifNode)
+            {
+                foreach (var conditionnode in ifNode.Condition)
+                {
+                    diagnostics.AddRange(Check(conditionnode, ctx));
+                }
+                foreach (var exNode in ifNode.Expression)
+                {
+                    diagnostics.AddRange(Check(exNode, ctx));
+                }
+            }
+            #endregion
+            #region "While"
+            if (node is While whileNode)
+            {
+                foreach (var exNode in whileNode.Expression)
+                {
+                    diagnostics.AddRange(Check(exNode, ctx));
                 }
             }
             #endregion
