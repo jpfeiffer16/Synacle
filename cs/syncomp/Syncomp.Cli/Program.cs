@@ -42,7 +42,24 @@ namespace syncomp
                 preprocessor = new NewPreProcessor(filePath);
             }
             var ctx = preprocessor.BuildContext();
-            var asmLines = CompileCode(ctx);
+            var ast = CompileCode(ctx);
+            var checker = new Checker(ast);
+            var diagnostics = checker.Check();
+            if (diagnostics.Count > 0)
+            {
+                if (diagnostics.Count > 0)
+                {
+                    foreach (var diagnostic in diagnostics)
+                    {
+                        Console.WriteLine(diagnostic.FullMessage);
+                        Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
+                    }
+                    Console.WriteLine();
+                    Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
+                }
+                return;
+            }
+            var asmLines = EmitAst(ast);
 
              string workingDirectory;
              FileInfo fileInfo = null;
@@ -64,7 +81,7 @@ namespace syncomp
             }
         }
 
-        private static List<string> CompileCode(
+        private static List<AstNode> CompileCode(
             IEnumerable<(string, string)> preprocessorContext)
         {
             //Lex
@@ -102,9 +119,14 @@ namespace syncomp
                 Console.Error.WriteLine($"Near token '{token.Token}'");
                 Environment.Exit(1);
             }
-            //Transform
-            var transformer = new Transformer(ast);
-            return transformer.TransformFullAst();
+            return ast;
+        }
+
+        private static List<string> EmitAst(List<AstNode> ast)
+        {
+                //Transform
+                var transformer = new Transformer(ast);
+                return transformer.TransformFullAst();
         }
 
         private static void DisplayParseErrorContext(
