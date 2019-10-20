@@ -17,7 +17,7 @@ namespace syncomp
             {
                 var firstLetter = strNode.Value.Substring(0, 1);
                 var value = strNode.Value.Substring(1);
-                var uuid = TransformerHelpers.GetUID();
+                var uuid = TransformerHelpers.GetUID(strNode.File, strNode.Line, null);
                 lines.Add($"jmp >var_{uuid}_end");
                 lines.Add($":var_{uuid}");
                 for (var charIndex = 0; charIndex < value.Length; charIndex++)

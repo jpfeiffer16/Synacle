@@ -252,6 +252,13 @@ namespace syncomp
             }
             #endregion
 
+            #region "casting"
+            if (ch == "as")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.As, ch);
+            }
+            #endregion
+
             #region "EOF and Unknown"
             if (ch is null)
                 return CreateSyntaxToken(SyntaxTokenType.EOF, "");

@@ -47,7 +47,8 @@ namespace syncomp
         Integer,
         StringLiteral,
         PreprocessorDirective,
-        Colon
+        Colon,
+        As
     }
 
     public static class Grammar
@@ -229,6 +230,11 @@ namespace syncomp
               {
                   Token = ":",
                   Type = SyntaxTokenType.Colon
+              },
+              new SyntaxToken
+              {
+                  Token = "as",
+                  Type = SyntaxTokenType.As
               }
         };
     }

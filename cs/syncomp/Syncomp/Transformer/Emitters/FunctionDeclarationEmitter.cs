@@ -11,7 +11,7 @@ namespace syncomp
         {
             var lines = new List<string>();
             var fcNode = node as FunctionDeclaration;
-            var name = fcNode.Name ?? $"function_{TransformerHelpers.GetUID()}";
+            var name = fcNode.Name ?? $"function_{TransformerHelpers.GetUID(fcNode.File, fcNode.Line, fcNode.Name)}";
             var memoryAddress = $"{name}";
             lines.Add($"jmp >{memoryAddress}_end");
             lines.Add($":{name}");

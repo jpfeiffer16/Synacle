@@ -11,15 +11,15 @@ namespace syncomp
         {
             var lines = new List<string>();
             var vdNode = node as VariableDeclaration;
-            var guid = TransformerHelpers.GetUID();
-            lines.Add($"jmp >var_{guid.ToString()}_end");
-            lines.Add($":var_{guid.ToString()}");
-            lines.Add($":var_{guid.ToString()}_end");
+            var guid = TransformerHelpers.GetUID(vdNode.File, vdNode.Line, vdNode.Identifier);
+            lines.Add($"jmp >var_{guid}_end");
+            lines.Add($":var_{guid}");
+            lines.Add($":var_{guid}_end");
 
             ctx.Variables.Add(new Variable()
             {
                 Name = vdNode.Identifier,
-                MemoryAddress = $"var_{guid.ToString()}"
+                MemoryAddress = $"var_{guid}"
             });
 
             return lines;

@@ -35,7 +35,8 @@ namespace syncomp
             new SubtractionPath(),
             new VariableAssignmentPath(),
             new VariableDeclarationPath(),
-            new WhilePath()
+            new WhilePath(),
+            new AsPath()
         };
     }
 }

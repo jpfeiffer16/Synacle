@@ -61,12 +61,12 @@ namespace syncomp
                     if (function is null)
                     {
                         diagnostics.Add(
-                        new Diagnostic(
-                            fc.File,
-                            fc.Line,
-                            fc.Column,
-                            $"Unknown function: {fc.Name}",
-                            DiagnosticCode.UnknownFunction));
+                            new Diagnostic(
+                                fc.File,
+                                fc.Line,
+                                fc.Column,
+                                $"Unknown function: {fc.Name}",
+                                DiagnosticCode.UnknownFunction));
                     }
                     else
                     {
@@ -137,6 +137,10 @@ namespace syncomp
                             DiagnosticCode.InvalidParameters));
 
                     }
+                    foreach (var parameter in f.Parameters)
+                    {
+                        diagnostics.AddRange(Check(parameter, ctx));
+                    }
                     var minCount = Math.Min(f.Parameters.Count, function.Node.Parameters.Count);
                     for (var i = 0; i < minCount; i++)
                     {
@@ -147,6 +151,21 @@ namespace syncomp
                             var variable = ctx.Variables.GetVariable(callParamTp.Name);
                             callParamType = variable.Node.NodeType;
                         }
+                        // if (callParam is FunctionCall callParamFunc)
+                        // {
+                        //     var funcParam = ctx.Variables.GetFunction(callParamFunc.Name);
+                        //     if (funcParam is null)
+                        //     {
+                        //     diagnostics.Add(
+                        //         new Diagnostic(
+                        //             callParamFunc.File,
+                        //             callParamFunc.Line,
+                        //             callParamFunc.Column,
+                        //             $"Unknown function: {callParamFunc.Name}",
+                        //             DiagnosticCode.UnknownFunction));
+                        //     }
+                        //     callParamType = funcParam.Node.NodeType;
+                        // }
                         var declParam = function.Node.Parameters[i];
                         if (callParamType != declParam.NodeType)
                         {
