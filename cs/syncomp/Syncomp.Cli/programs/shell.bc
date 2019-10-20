@@ -1,13 +1,40 @@
 #include "./lib/stdlib.bc"
 
+type entity {
+  int id,
+   string name
+}
+
+entity test;
+test.id = 1;
+
+function test_mem() : void {
+  int last_full_byte = 0;
+  for (int i = 0; i < 32768; ++i) {
+    if (rmem(i)) {
+      last_full_byte = i;
+    }
+  }
+  // print_number(last_full_byte / 32768);
+  print_number(last_full_byte);
+  println(" ");
+  // print_number(32768);
+  // println("");
+}
+
 function test_dump_mem() {
   var i = 0;
 
-  while (~i) {
-    ++i;
-    print_number(~i);
-    out(10);
-  }
+  // while (~i) {
+  //   ++i;
+  //   print_number(~i);
+  //   out(10);
+  // }
+  // for (;i < 400; ++i) {
+  //   print_number(~i);
+  // }
+  int len = str_len(" ");
+  print_number(len);
 }
 
 function internal_dump_mem() : void {
@@ -30,6 +57,10 @@ function interpret_command(string cmd) : void {
     }
     if (str_equal(cmd, "mem")) {
       internal_dump_mem();
+    }
+    if (str_equal(cmd, "mem_usage")) {
+      // test_mem();
+      test_dump_mem();
     }
 }
 

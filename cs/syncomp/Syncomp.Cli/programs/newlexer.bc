@@ -1,25 +1,13 @@
+#include "./lib/stdlib.bc"
 
-// func test = 10;
-
-function alloc() : int {
-  var data_index = 16382;
-  while (!(~(data_index))) {
-    --data_index;
-  }
-  data_index = data_index + 2;
-  return data_index;
+function main() : void {
+    println("Enter your name:");
+    print(">");
+    string name = input();
+    print("Hello, ");
+    print(name);
+    println(" ");
+    main();
 }
 
-function print(string str_ptr) : void {
-  while (~str_ptr) {
-    out(~str_ptr);
-    ++str_ptr;
-  }
-}
-
-function println(string str_ptr) : void {
-  print(str_ptr);
-  out(10);
-}
-
-int ptr = alloc();
+main();
