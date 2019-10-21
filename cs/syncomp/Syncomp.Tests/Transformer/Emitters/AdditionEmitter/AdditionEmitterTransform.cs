@@ -13,7 +13,7 @@ namespace syncomp.Tests
         {
             this.result = new AdditionEmitter()
               .Transform(
-                new Addition(new IntegerLiteral("1"), new IntegerLiteral("2")),
+                new Addition(new IntegerLiteral("1", null, 0, 0), new IntegerLiteral("2", null, 0, 0), null, 0, 0),
                 new Context()
               );
         }

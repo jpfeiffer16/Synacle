@@ -21,7 +21,7 @@ namespace syncomp.Tests
             var nodes = new List<AstNode>();
             var index = 0;
 
-            this.result = new IdentifierPath().Eval(index, tokens, nodes);
+            this.result = new IdentifierPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]

@@ -96,10 +96,10 @@ namespace syncomp.Tests
             var nodes = new List<AstNode>();
             var index = 0;
 
-            this.result = new FunctionDeclarationPath().Eval(index, tokens, nodes);
+            this.result = new FunctionDeclarationPath().Eval(index, tokens, nodes, new ParserContext());
             index = 0;
 
-            this.resultAnonymous = new FunctionDeclarationPath().Eval(index, tokensAnon, nodes);
+            this.resultAnonymous = new FunctionDeclarationPath().Eval(index, tokensAnon, nodes, new ParserContext());
         }
 
         [TestMethod]

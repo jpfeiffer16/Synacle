@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new IntegerLiteralEmitter().Transform(
-              new IntegerLiteral("a"),
+              new IntegerLiteral("a", null, 0, 0),
               new Context()
             );
         }

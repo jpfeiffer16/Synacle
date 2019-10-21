@@ -23,7 +23,7 @@ namespace syncomp.Tests
             });
 
             this.result = new AddressOfEmitter()
-              .Transform(new AddressOf(new Identifier("a")), context);
+              .Transform(new AddressOf(new Identifier("a", null, 0, 0), null, 0, 0), context);
         }
 
         [TestMethod]

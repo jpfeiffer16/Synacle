@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-    public class QuotePathEval : Behavior
+    public class StringLiteralPathEval : Behavior
     {
         private (int, AstNode) result;
 
@@ -14,30 +14,20 @@ namespace syncomp.Tests
             {
                 new SyntaxToken
                 {
-                    Type = SyntaxTokenType.Quote,
-                    Token = "\""
-                },
-                new SyntaxToken
-                {
-                    Type = SyntaxTokenType.Identifier,
-                    Token = "test"
-                },
-                new SyntaxToken
-                {
-                    Type = SyntaxTokenType.Quote,
-                    Token = "\""
+                    Type = SyntaxTokenType.StringLiteral,
+                    Token = "\"test\""
                 }
             };
             var nodes = new List<AstNode>();
             var index = 0;
 
-            this.result = new QuotePath().Eval(index, tokens, nodes);
+            this.result = new StringLiteralPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]
         public void IndexIsCorrect()
         {
-            Assert.AreEqual(2, this.result.Item1);
+            Assert.AreEqual(0, this.result.Item1);
         }
 
         [TestMethod]

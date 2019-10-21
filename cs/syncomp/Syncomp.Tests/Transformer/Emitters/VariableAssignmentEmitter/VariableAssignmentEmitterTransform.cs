@@ -18,7 +18,7 @@ namespace syncomp.Tests
                 Name = "a"
             });
             this.result = new VariableAssignmentEmitter().Transform(
-              new VariableAssignment(new Identifier("a"), new IntegerLiteral("1")),
+              new VariableAssignment(new Identifier("a", null, 0, 0), new IntegerLiteral("1", null, 0, 0), null, 0, 0),
               ctx
             );
         }

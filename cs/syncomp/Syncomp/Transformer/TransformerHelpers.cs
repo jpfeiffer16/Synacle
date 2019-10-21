@@ -6,8 +6,13 @@ namespace syncomp
     {
         public static string GetUID(string file, int line, string name)
         {
-            var fileInfo = new FileInfo(file);
-            return $"{name}_{fileInfo.Name.Replace(fileInfo.Extension, string.Empty)}_{line}";
+            var fileName = string.Empty;
+            if (file != null)
+            {
+                var fileInfo = new FileInfo(file);
+                fileName = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
+            }
+            return $"{name}_{fileName}_{line}";
         }
     }
 }

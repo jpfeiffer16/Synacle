@@ -18,7 +18,7 @@ namespace syncomp.Tests
                 Name = "a"
             });
             this.result = new DecrEmitter().Transform(
-              new Decr(new Identifier("a")),
+              new Decr(new Identifier("a", null ,0, 0), null ,0, 0),
               ctx
             );
         }

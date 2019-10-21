@@ -25,10 +25,10 @@ namespace syncomp.Tests
             };
             var nodes = new List<AstNode>
             {
-            new IntegerLiteral("40")
+            new IntegerLiteral("40", null , 0, 0)
             };
             var index = 0;
-            this.result = new DivisionPath().Eval(index, tokens, nodes);
+            this.result = new DivisionPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]

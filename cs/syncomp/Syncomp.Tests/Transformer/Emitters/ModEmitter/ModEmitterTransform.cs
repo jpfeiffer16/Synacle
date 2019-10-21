@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new ModEmitter().Transform(
-              new Mod(new IntegerLiteral("5"), new IntegerLiteral("2")),
+              new Mod(new IntegerLiteral("5", null, 0, 0), new IntegerLiteral("2", null, 0, 0), null, 0, 0),
               new Context()
             );
         }

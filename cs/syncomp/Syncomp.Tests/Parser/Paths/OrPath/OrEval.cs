@@ -25,10 +25,10 @@ namespace syncomp.Tests
             };
             var astNodes = new List<AstNode>
             {
-                new Identifier("a")
+                new Identifier("a", null, 0, 0)
             };
             var index = 0;
-            this.result = new OrPath().Eval(index, tokens, astNodes);
+            this.result = new OrPath().Eval(index, tokens, astNodes, new ParserContext());
         }
 
         [TestMethod]

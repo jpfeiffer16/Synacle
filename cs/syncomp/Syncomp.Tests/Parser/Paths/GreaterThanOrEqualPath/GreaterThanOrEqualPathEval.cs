@@ -25,11 +25,11 @@ namespace syncomp.Tests
             };
             var nodes = new List<AstNode>
             {
-                new Identifier("a")
+                new Identifier("a", null, 0, 0)
             };
             var index = 0;
 
-            this.result = new GreaterThanOrEqualPath().Eval(index, tokens, nodes);
+            this.result = new GreaterThanOrEqualPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]

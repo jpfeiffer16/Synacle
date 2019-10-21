@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new EqualEmitter().Transform(
-              new Equal(new IntegerLiteral("1"), new IntegerLiteral("1")),
+              new Equal(new IntegerLiteral("1", null ,0, 0), new IntegerLiteral("1", null ,0, 0), null ,0, 0),
               new Context()
             );
         }

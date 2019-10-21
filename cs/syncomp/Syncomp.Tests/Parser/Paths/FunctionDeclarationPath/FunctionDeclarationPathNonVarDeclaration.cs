@@ -54,7 +54,7 @@ namespace syncomp.Tests
 
             this.result = this.TrapException<ParseException>(() =>
               // new FunctionDeclarationPath().Eval(index, tokens, nodes)
-              new ParserPath().ParseTokens(tokens)
+              new ParserPath().ParseTokens(tokens, new ParserContext())
             );
         }
 

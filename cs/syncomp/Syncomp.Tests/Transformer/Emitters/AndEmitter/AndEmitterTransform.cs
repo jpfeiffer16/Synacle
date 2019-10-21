@@ -14,8 +14,8 @@ namespace syncomp.Tests
 
             this.result = new AndEmitter()
               .Transform(new And(
-                new IntegerLiteral("0"), new IntegerLiteral("1")
-              ), new Context());
+                new IntegerLiteral("0", null, 0, 0), new IntegerLiteral("1", null, 0, 0)
+              , null, 0, 0), new Context());
         }
 
         [TestMethod]

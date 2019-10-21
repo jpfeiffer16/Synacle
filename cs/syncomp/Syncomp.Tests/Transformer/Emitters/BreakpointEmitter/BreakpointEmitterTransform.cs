@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new BreakpointEmitter().Transform(
-                new Breakpoint(), new Context());
+                new Breakpoint(null, 0, 0), new Context());
         }
 
         private void OneBrekpoint()

@@ -18,7 +18,7 @@ namespace syncomp.Tests
                 Name = "a"
             });
             this.result = new IdentifierEmitter().Transform(
-              new Identifier("a"),
+              new Identifier("a", null, 0, 0),
               ctx
             );
         }

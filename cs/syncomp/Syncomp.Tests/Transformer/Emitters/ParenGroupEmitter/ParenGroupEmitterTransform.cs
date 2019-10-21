@@ -13,8 +13,8 @@ namespace syncomp.Tests
         {
             this.result = new ParenGroupEmitter().Transform(
               new ParenGroup(new List<AstNode>{
-                  new IntegerLiteral("1")
-              }),
+                  new IntegerLiteral("1", null, 0, 0)
+              }, null, 0, 0),
               new Context()
             );
         }

@@ -13,7 +13,7 @@ namespace syncomp.Tests
         {
             // TODO: Test intrinsics here
             this.result = new FunctionCallEmitter().Transform(
-              new FunctionCall(new List<AstNode>(), "test"),
+              new FunctionCall(new List<AstNode>(), "test", null, 0, 0),
               new Context()
             );
         }

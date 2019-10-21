@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new VariableDeclarationEmitter().Transform(
-              new VariableDeclaration("a"),
+              new VariableDeclaration("a", null, null, 0, 0),
               new Context()
             );
         }

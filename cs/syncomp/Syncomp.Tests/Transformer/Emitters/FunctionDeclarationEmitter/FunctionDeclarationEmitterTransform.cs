@@ -17,20 +17,20 @@ namespace syncomp.Tests
               new FunctionDeclaration(
                 new List<AstNode>
                 {
-            new VariableDeclaration("a")
+            new VariableDeclaration("a",null, null, 0, 0)
                 },
                 new List<AstNode>
                 {
             new FunctionCall(
               new List<AstNode>
               {
-                new IntegerLiteral("65")
+                new IntegerLiteral("65", null, 0, 0)
               },
               "out"
-            )
+            , null, 0, 0)
                 },
                 "test"
-              ),
+              , null, 0, 0),
               ctx
             );
         }

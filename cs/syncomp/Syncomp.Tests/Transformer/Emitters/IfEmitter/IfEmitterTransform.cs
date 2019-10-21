@@ -13,9 +13,9 @@ namespace syncomp.Tests
         {
             this.result = new IfEmitter().Transform(
               new If(
-                new List<AstNode> { new IntegerLiteral("1") },
-                new List<AstNode> { new IntegerLiteral("1") }
-              ),
+                new List<AstNode> { new IntegerLiteral("1", null, 0, 0) },
+                new List<AstNode> { new IntegerLiteral("1", null, 0, 0) }
+              , null, 0, 0),
               new Context()
             );
         }

@@ -13,9 +13,9 @@ namespace syncomp.Tests
         {
             this.result = new SubtractionEmitter().Transform(
               new Subtraction(
-                new IntegerLiteral("3"),
-                new IntegerLiteral("1")
-              ),
+                new IntegerLiteral("3", null, 0, 0),
+                new IntegerLiteral("1", null, 0, 0)
+              , null, 0, 0),
               new Context()
             );
         }

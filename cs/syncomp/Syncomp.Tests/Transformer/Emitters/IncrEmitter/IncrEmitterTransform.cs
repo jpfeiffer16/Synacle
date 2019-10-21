@@ -18,7 +18,7 @@ namespace syncomp.Tests
                 Name = "a"
             });
             this.result = new IncrEmitter().Transform(
-              new Incr(new Identifier("a")),
+              new Incr(new Identifier("a", null, 0, 0), null, 0, 0),
               ctx
             );
         }

@@ -13,9 +13,9 @@ namespace syncomp.Tests
         {
             this.result = new LessThanEmitter().Transform(
               new LessThan(
-                new IntegerLiteral("1"),
-                new IntegerLiteral("2")
-              ),
+                new IntegerLiteral("1", null, 0, 0),
+                new IntegerLiteral("2", null, 0, 0)
+              , null, 0, 0),
               new Context()
             );
         }

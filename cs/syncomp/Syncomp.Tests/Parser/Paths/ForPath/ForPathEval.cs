@@ -98,7 +98,7 @@ namespace syncomp.Tests
             var nodes = new List<AstNode>();
             var index = 0;
 
-            this.result = new ForPath().Eval(index, tokens, nodes);
+            this.result = new ForPath().Eval(index, tokens, nodes, new ParserContext());
             this.forNode = (For)this.result.Item2;
         }
 

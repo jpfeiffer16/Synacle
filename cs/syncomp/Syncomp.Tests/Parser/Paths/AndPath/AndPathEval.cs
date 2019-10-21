@@ -26,11 +26,11 @@ namespace syncomp.Tests
 
             var nodes = new List<AstNode>
             {
-                new IntegerLiteral("10")
+                new IntegerLiteral("10", null, 0, 0)
             };
             var index = 0;
 
-            this.result = new AndPath().Eval(index, tokes, nodes);
+            this.result = new AndPath().Eval(index, tokes, nodes, new ParserContext());
         }
 
         [TestMethod]

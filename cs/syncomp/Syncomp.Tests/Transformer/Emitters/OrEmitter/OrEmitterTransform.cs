@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new OrEmitter().Transform(
-              new Or(new IntegerLiteral("1"), new IntegerLiteral("1")),
+              new Or(new IntegerLiteral("1", null, 0, 0), new IntegerLiteral("1", null, 0, 0), null, 0, 0),
               new Context()
             );
         }

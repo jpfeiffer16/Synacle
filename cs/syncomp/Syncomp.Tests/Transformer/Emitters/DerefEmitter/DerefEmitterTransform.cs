@@ -18,7 +18,7 @@ namespace syncomp.Tests
                 Name = "a"
             });
             this.result = new DerefEmitter().Transform(
-              new Deref(new Identifier("a")),
+              new Deref(new Identifier("a", null ,0, 0), null ,0, 0),
               ctx
             );
         }

@@ -30,8 +30,7 @@ namespace syncomp.Tests
             };
 
             var index = 0;
-            var ctx = new ParserContext();
-            this.result = new AdditionPath().Eval(index, tokens, nodes, ctx);
+            this.result = new AdditionPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]

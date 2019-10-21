@@ -12,7 +12,7 @@ namespace syncomp.Tests
         protected override void Given()
         {
             this.result = new NotEmitter().Transform(
-              new Not(new IntegerLiteral("1")),
+              new Not(new IntegerLiteral("1", null, 0, 0), null, 0, 0),
               new Context()
             );
         }
