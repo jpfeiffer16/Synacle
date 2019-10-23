@@ -67,28 +67,47 @@ This compiles to:
 ```assembly
 jmp >main_end
 :main
-jmp >var_df09edc2309d_end
-:var_df09edc2309d
+jmp >var_name_example_3_end
+:var_name_example_3
+:var_name_example_3_end
+wmem >var_name_example_3 reg0
+jmp >var__example_4_end
+:var__example_4
 &e
 &l
 &l
 &o
 &,
 32
-&W
+0
+:var__example_4_end
+wmem >var__example_4 &H
+set reg0 >var__example_4
+call >print
+rmem reg0 >var_name_example_3
+call >print
+jmp >var__example_6_end
+:var__example_6
+0
+:var__example_6_end
+wmem >var__example_6 &!
+set reg0 >var__example_6
+call >println
+ret
+:main_end
+set reg0 >main
+jmp >var__example_10_end
+:var__example_10
 &o
 &r
 &l
 &d
-&!
 0
-:var_df09edc2309d_end
-wmem >var_df09edc2309d &H
-set reg0 >var_df09edc2309d
-call >println
-ret
-:main_end
+:var__example_10_end
+wmem >var__example_10 &W
+set reg0 >var__example_10
 call >main
+halt
 ```
 
 Library code in the above assembly has been omitted for brevity.
