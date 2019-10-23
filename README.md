@@ -53,13 +53,16 @@ The language used in the compiler toolchain is a custom language developed just 
 Hello World
 
 ```javascript
-#include "stdlib.bc"
+#include "./lib/stdlib.bc"
 
-function main() {
-  println("Hello, World!");
+function main(string name) : void {
+    print("Hello, ");
+    print(name);
+    println("!");
+
 }
 
-main();
+main("World");
 ```
 
 This compiles to:
