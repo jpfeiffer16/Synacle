@@ -116,5 +116,3 @@ halt
 Library code in the above assembly has been omitted for brevity.
 
 This can then be assembled with the assembler into a binary.
-
-There is only one type in the language, int. Strings for example are just contiguous ascii codes in memory terminated by a null byte.
