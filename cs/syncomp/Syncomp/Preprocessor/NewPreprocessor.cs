@@ -53,7 +53,7 @@ namespace syncomp
         }
 
         // TODO: Use include paths
-        public string ResolvePath(string sourcePath, string path)
+        private string ResolvePath(string sourcePath, string path)
         {
             var fileInfo = new FileInfo(sourcePath);
             var actualPath = Path.Combine(fileInfo.DirectoryName, path);
