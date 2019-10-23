@@ -1,4 +1,4 @@
-# Synacor Challenge Toolchain
+# Syancle - A Toolchain for the Synacor Challenge
 My code for the [Synacor challenge](https://challenge.synacor.com/) and related toolchains I have developed for it.
 
 ## VMs
