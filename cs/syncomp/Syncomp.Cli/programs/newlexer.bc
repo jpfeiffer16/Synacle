@@ -11,3 +11,6 @@ function main() : void {
 }
 
 main();
+
+function test_func(int count) : void {
+}

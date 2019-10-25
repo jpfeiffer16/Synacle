@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace syncomp
 {
     public class ReturnControlFlowChecker
@@ -18,10 +16,10 @@ namespace syncomp
          */
         public bool Check()
         {
+            if (_declaration.NodeType == ParserContext.NativeTypes.LangVoid)
+                return true;
             foreach (var node in this._declaration.Expression)
             {
-                if (node.NodeType == ParserContext.NativeTypes.LangVoid)
-                    return true;
                 if (node is Return ret && ret.NodeType == node.NodeType)
                 {
                     return true;
