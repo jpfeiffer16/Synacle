@@ -2,11 +2,11 @@
 
 function main() {
   print("Enter your name or 'exit' to stop: ");
-  var name = input();
+  string name = input();
   if (str_equal(name, "exit")) {
     return;
   }
-  var first_letter = alloc();
+  int first_letter = alloc();
   wmem(first_letter, ~name);
   ++name;
   println(

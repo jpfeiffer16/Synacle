@@ -1,4 +1,13 @@
-function str_equal(var str_a, var str_b) {
+function str_len(string str_ptr) : int {
+  var length = 0;
+  while(~str_ptr) {
+    ++str_ptr;
+    ++length;
+  }
+  return length;
+}
+
+function str_equal(string str_a, string str_b) : int {
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
   if (!(a_len == b_len)) {
@@ -14,7 +23,7 @@ function str_equal(var str_a, var str_b) {
   return 1;
 }
 
-function alloc() {
+function alloc() : int {
   var data_index = 16382;
   while (!(~(data_index))) {
     --data_index;
@@ -30,7 +39,7 @@ function alloc_chunk(var length) {
   return ptr;
 }
 
-function mem_cp(var s_ptr, var d_ptr, var len) {
+function mem_cp(int s_ptr, int d_ptr, int len) {
   var current_byte = 0;
   while (current_byte <= len) {
     var byte_to_write_ptr = s_ptr + current_byte;
@@ -40,27 +49,18 @@ function mem_cp(var s_ptr, var d_ptr, var len) {
   }
 }
 
-function str_len(var str_ptr) {
-  var length = 0;
-  while(~str_ptr) {
-    ++str_ptr;
-    ++length;
-  }
-  return length;
-}
-
-function str_cat(var str_a, var str_b) {
+function str_cat(string str_a, string str_b) : string {
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
   var alloc_ptr = alloc();
-  mem_cp(str_a, alloc_ptr, a_len);
+  mem_cp(str_a as int, alloc_ptr as int, a_len);
   var end_address = alloc_ptr + a_len;
   ++b_len;
-  mem_cp(str_b, end_address, b_len);
+  mem_cp(str_b as int, end_address as int, b_len);
   return alloc_ptr;
 }
 
-function flip_str(var str_ptr) {
+function flip_str(var str_ptr) :string {
   var alloc_ptr = alloc();
   var len = str_len(str_ptr);
   var index = 0;
@@ -84,7 +84,7 @@ function flip_str(var str_ptr) {
   return alloc_ptr;
 }
 
-function input() {
+function input() : string {
   var data_index = 16384;
   var in_char = in();
   var is_newline = in_char == 10;
@@ -101,14 +101,14 @@ function input() {
   return alloc_ptr;
 }
 
-function print(var str_ptr) {
+function print(string str_ptr) {
   while (~str_ptr) {
     out(~str_ptr);
     ++str_ptr;
   }
 }
 
-function println(var str_ptr) {
+function println(string str_ptr) {
   print(str_ptr);
   out(10);
 }
@@ -150,8 +150,8 @@ function dump_mem() {
   }
 }
 
-function int(var str_ptr) {
-  var flipped = flip_str(str_ptr);
+function int(string str_ptr) {
+  string flipped = flip_str(str_ptr);
   var len = str_len(flipped);
   //Get rid of the null byte
   --len;

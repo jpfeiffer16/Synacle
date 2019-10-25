@@ -1,6 +1,11 @@
-function main()
-{
-    out("a");
+#include "./lib/stdlib.bc"
+
+function main(string name) : void {
+    print("Hello, ");
+    print(name);
+    println("!");
+    return;
+    test;
 }
 
-main();
+main("World");
