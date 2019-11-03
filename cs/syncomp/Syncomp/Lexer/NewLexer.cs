@@ -284,14 +284,18 @@ namespace syncomp
             // return (ch > 64 && ch < 123);
         }
 
-        private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token) => new SyntaxToken
+        private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token)
         {
-            Type = tokenType,
-            Token = token,
-            File = this._fileName,
-            Index = _column,
-            Line = _line
-        };
+            _column += token.Length;
+            return new SyntaxToken
+            {
+                Type = tokenType,
+                Token = token,
+                File = this._fileName,
+                Index = _column,
+                Line = _line
+            };
+        }
 
         private int GetLineFromIndex()
         {
@@ -307,6 +311,7 @@ namespace syncomp
 
         private string Pop()
         {
+            _column++;
             return _index < _code.Length ? _code[_index++].ToString() : null;
         }
         private string Peek()

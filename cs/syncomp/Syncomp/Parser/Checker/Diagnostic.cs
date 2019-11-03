@@ -2,18 +2,34 @@ namespace syncomp
 {
     public class Diagnostic
     {
-        public string File { get; set; }
-        public int Line { get; set; }
-        public int Column { get; set; }
-        public string Message { get; set; }
-        public string FullMessage => $"{Code}: {Message}";
-        public DiagnosticCode Code { get; set; }
+        public string File { get; }
+        public int Line { get; }
+        public int Column { get; }
+        public int EndLine { get; }
+        public int EndColumn {get; }
 
-        public Diagnostic(string file, int line, int column, string message, DiagnosticCode code)
+        public string Message { get; }
+        public string FullMessage => $"{Code}: {Message}";
+        public DiagnosticCode Code { get; }
+
+        public Diagnostic(
+            string file, int line, int column, string message, DiagnosticCode code)
+            : this(file, line, column, line, column, message, code)
+        { }
+
+        public Diagnostic(
+            string file, int line, int column, int length, string message, DiagnosticCode code)
+            : this(file, line, column, line + length, column, message, code)
+        { }
+         
+        public Diagnostic(
+            string file, int line, int column, int endLine, int endColumn, string message, DiagnosticCode code)
         {
             this.File = file;
             this.Line = line;
             this.Column = column;
+            this.EndLine = endLine;
+            this.EndColumn = endColumn;
             this.Message = message;
             this.Code = code;
         }

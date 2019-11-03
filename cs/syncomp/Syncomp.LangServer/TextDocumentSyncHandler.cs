@@ -42,9 +42,15 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
 
     public Task<Unit> Handle(DidChangeTextDocumentParams request, CancellationToken cancellationToken)
     {
+        SurfaceDiagnostics(request.TextDocument.Uri, request.ContentChanges.FirstOrDefault()?.Text);
+        return Unit.Task;
+    }
+
+    private void SurfaceDiagnostics(Uri uri, string text)
+    {
         try
         {
-            var preprocessor = new NewPreProcessor(request.TextDocument.Uri.AbsolutePath, request.ContentChanges.FirstOrDefault()?.Text);
+            var preprocessor = new NewPreProcessor(uri.AbsolutePath, text);
             var prepCtx = preprocessor.BuildContext();
             var tokens = new List<SyntaxToken>();
             foreach (var file in prepCtx)
@@ -60,7 +66,7 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
             var diagnostics = checker.Check();
             _server.Document.PublishDiagnostics(new PublishDiagnosticsParams
             {
-                Uri = request.TextDocument.Uri,
+                Uri = uri,
                 Diagnostics = diagnostics.Select(di => new OmniSharp.Extensions.LanguageServer.Protocol.Models.Diagnostic
                 {
                     // Code = OmniSharp.Extensions.LanguageServer.Protocol.Models.DiagnosticCode
@@ -90,12 +96,12 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
                 _server.Window.LogError(e.InnerException.ToString());
             }
         }
-        return Unit.Task;
     }
 
     public Task<Unit> Handle(DidOpenTextDocumentParams request, CancellationToken cancellationToken)
     {
         _bufferManager.UpdateBuffer(request.TextDocument.Uri.ToString(), request.TextDocument.Text);
+        SurfaceDiagnostics(request.TextDocument.Uri, request.TextDocument.Text);
         return Unit.Task;
     }
 
