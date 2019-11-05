@@ -1,82 +1,63 @@
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace syncomp
 {
-    public class Preprocessor
-  {
-    private readonly Regex IncludeRegex = new Regex("#include \"(\\S*)\"");
-    public Preprocessor(
-      string code,
-      string workingDirectory,
-      List<string> includeLocations)
+    public class PreProcessor
     {
-      this.Code = code;
-      this.WorkingDirectory = workingDirectory;
-      this.IncludeLocations = includeLocations;
-    }
+        private readonly Regex IncludeRegex = new Regex("#include \"(\\S*)\"");
+        private readonly string _name;
+        private readonly string _code;
+        // TODO: Need to take include paths
+        public PreProcessor(string filepath) : this(filepath, File.ReadAllText(filepath))
+        { }
 
-    public Preprocessor(string code, string workingDirectory) :
-      this(code, workingDirectory, new List<string>())
-    { }
-
-    public string Preprocess()
-    {
-      MatchCollection includeMatches;
-
-      while ((includeMatches = this.IncludeRegex.Matches(this.Code)).Count > 0)
-      {
-        var match = includeMatches[0];
-        var group = includeMatches[0].Groups[1];
-        this.Code = this.Code
-          .Substring(0, match.Index) +
-          this.GetCode(group.Value) +
-          this.Code.Substring(match.Index + match.Length);
-      }
-
-      return this.Code;
-    }
-
-    private string GetCode(string filePath)
-    {
-      /*
-        Resolution steps:
-          1.) Working dir + filepath
-          2.) Loop through include paths + filepath
-      */
-      var path = Path.Combine(
-        this.WorkingDirectory,
-        filePath
-      );
-
-      if (!File.Exists(path))
-      {
-        foreach (var includeLocation in IncludeLocations)
+        public PreProcessor(string name, string code)
         {
-          var thisPath = Path.Combine(
-            includeLocation,
-            filePath
-          );
-          if (File.Exists(thisPath))
-            return File.ReadAllText(
-              thisPath
-            );
+            this._name = name;
+            this._code = code;
         }
-      }
-      else
-      {
-        return File.ReadAllText(
-          path
-        );
-      }
-      throw new FileNotFoundException(
-        $"Preprocessor: File {path} could not be found in any of the include paths. Check your INCLUDE environment variable"
-      );
-    }
 
-    public string Code { get; private set; }
-    public string WorkingDirectory { get; private set; }
-    public List<string> IncludeLocations { get; private set; }
-  }
+
+        public IEnumerable<(string, string)> BuildContext()
+        {
+            var ctx = new List<(string, string)>();
+            return Build(ctx, _name, _code);
+        }
+
+        private IEnumerable<(string, string)> Build(
+                List<(string, string)> ctx, string filename, string code)
+        {
+            ctx.Add((filename, code));
+            ctx.Reverse();
+            var importLines = code
+                .Split('\n')
+                .Select(ln => ln.Trim())
+                .Where(ln => ln.StartsWith("#include"));
+            if (importLines.Count() > 0)
+            {
+            }
+
+            var includeMatches = this.IncludeRegex.Matches(code);
+
+            foreach (Match match in includeMatches)
+            {
+                var group = match.Groups[1];
+                var path = ResolvePath(filename, group.Value);
+                Build(ctx, path, File.ReadAllText(path));
+            }
+
+            return ctx;
+        }
+
+        // TODO: Use include paths
+        private string ResolvePath(string sourcePath, string path)
+        {
+            var fileInfo = new FileInfo(sourcePath);
+            var actualPath = Path.Combine(fileInfo.DirectoryName, path);
+            return actualPath;
+        }
+    }
 }

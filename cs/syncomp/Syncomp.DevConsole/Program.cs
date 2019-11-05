@@ -18,7 +18,7 @@ function main() {
 }
 main();
 ";
-            var lexer = new NewLexer(testCode);
+            var lexer = new Lexer(testCode);
             var tokens = lexer.Lex();
             tokens.ForEach(token =>
                 Console.WriteLine($"{token.Type}: {token.Token}"));

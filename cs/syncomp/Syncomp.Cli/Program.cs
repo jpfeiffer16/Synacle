@@ -30,16 +30,16 @@ namespace syncomp
 
             var filePath = args[0];
 
-            NewPreProcessor preprocessor;
+            PreProcessor preprocessor;
             if (filePath == "-")
             {
                 //Make this async once the above comment is done
                 var code = Console.In.ReadToEnd();
-                preprocessor = new NewPreProcessor("./stdin.bc", code);
+                preprocessor = new PreProcessor("./stdin.bc", code);
             }
             else
             {
-                preprocessor = new NewPreProcessor(filePath);
+                preprocessor = new PreProcessor(filePath);
             }
             var ctx = preprocessor.BuildContext();
             var ast = CompileCode(ctx);
@@ -91,7 +91,7 @@ namespace syncomp
             {
                 foreach (var file in preprocessorContext)
                 {
-                    var lexer = new NewLexer(file.Item2, file.Item1);
+                    var lexer = new Lexer(file.Item2, file.Item1);
                     tokens.AddRange(lexer.Lex());
                 }
                 // Trim out whitespace
