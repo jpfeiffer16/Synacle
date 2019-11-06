@@ -43,7 +43,7 @@ namespace syncomp
 
         private SyntaxToken NextToken()
         {
-            _column++;
+            // _column++;
             var ch = Pop();
             #region "Comments"
             if (ch == "/")
@@ -311,7 +311,7 @@ namespace syncomp
 
         private string Pop()
         {
-            _column++;
+            // _column++;
             return _index < _code.Length ? _code[_index++].ToString() : null;
         }
         private string Peek()
