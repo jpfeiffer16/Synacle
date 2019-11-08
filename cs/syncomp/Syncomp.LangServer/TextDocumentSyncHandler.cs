@@ -81,8 +81,8 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
                         },
                         End = new OmniSharp.Extensions.LanguageServer.Protocol.Models.Position
                         {
-                            Line = di.Line - 1,
-                            Character = di.Column + 1
+                            Line = di.EndLine - 1,
+                            Character = di.EndColumn
                         }
                     }
                 }).ToList()

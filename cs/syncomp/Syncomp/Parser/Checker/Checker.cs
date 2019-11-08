@@ -55,6 +55,7 @@ namespace syncomp
                 // Please help me...
                 var identifierType = va.Identifier.NodeType;
                 var parameterType = va.Parameter.NodeType;
+                var length = 1;
                 if (va.Parameter is FunctionCall fc)
                 {
                     var function = ctx.Variables.GetFunction(fc.Name);
@@ -80,6 +81,7 @@ namespace syncomp
                 }
                 if (va.Identifier is Identifier identifier)
                 {
+                    length = identifier.Name.Length;
                     var variable = ctx.Variables.GetVariable(identifier.Name);
                     if (variable is null) {
                         diagnostics.Add(new Diagnostic(
@@ -94,12 +96,17 @@ namespace syncomp
                         identifierType = variable.Node.NodeType;
                     }
                 }
+                if (va.Identifier is VariableDeclaration declaration)
+                {
+                    length = declaration.Identifier.Length;
+                }
 
                 if (identifierType != parameterType)
                     diagnostics.Add(new Diagnostic(
                         va.Identifier.File,
                         va.Identifier.Line,
                         va.Identifier.Column,
+                        length: length,
                         $"Unable to convert type '{parameterType?.Name}' to  '{identifierType?.Name}'",
                         DiagnosticCode.InvalidTypes));
             }
@@ -208,6 +215,7 @@ namespace syncomp
                         fd.File,
                         fd.Line,
                         fd.Column,
+                        length: fd.Name.Length,
                         $"Not all code paths return value of type {fd.NodeType.Name}",
                         DiagnosticCode.ControlFlowError
                     ));
