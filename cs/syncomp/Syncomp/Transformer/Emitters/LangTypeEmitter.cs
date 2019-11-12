@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -17,7 +18,7 @@ namespace syncomp
             var guid = TransformerHelpers.GetUID(tNode.File, tNode.Line, tNode.Name);
             lines.Add($"jmp >type_{guid.ToString()}_end");
             lines.Add($":type_{guid.ToString()}");
-            lines.AddRange(new Transformer(tNode.Body, ctx).Transform());
+            lines.AddRange(new Transformer(tNode.Body.Cast<AstNode>().ToList(), ctx).Transform());
             lines.Add($":type_{guid.ToString()}_end");
             return lines;
         }

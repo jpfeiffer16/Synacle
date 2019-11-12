@@ -5,7 +5,7 @@ namespace syncomp
     public class LangType : AstNode
     {
         //TODO: Fix!
-        public LangType(string name, List<AstNode> body, string file, int line, int column)
+        public LangType(string name, List<VariableDeclaration> body, string file, int line, int column)
             : base("LANGTYPE", file, line, column)
         {
             this.Name = name;
@@ -13,6 +13,6 @@ namespace syncomp
         }
 
         public string Name { get; }
-        public List<AstNode> Body { get; }
+        public List<VariableDeclaration> Body { get; }
     }
 }

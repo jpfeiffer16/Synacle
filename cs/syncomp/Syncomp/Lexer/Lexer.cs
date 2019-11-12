@@ -205,6 +205,13 @@ namespace syncomp
             }
             #endregion
 
+            #region "Type Operators"
+            if (ch == ".")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.Dot, ch);
+            }
+            #endregion
+
             #region "Symbols"
             if (ch == "(")
                 return CreateSyntaxToken(SyntaxTokenType.LeftParen, ch);
@@ -252,7 +259,7 @@ namespace syncomp
             }
             #endregion
 
-            #region "casting"
+            #region "Casting"
             if (ch == "as")
             {
                 return CreateSyntaxToken(SyntaxTokenType.As, ch);

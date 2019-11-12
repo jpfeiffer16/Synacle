@@ -6,6 +6,8 @@ namespace syncomp
         InvalidParameters,
         InvalidTypes,
         UnknownVariable,
-        ControlFlowError
+        ControlFlowError,
+        UnknownType,
+        UnknownField
     }
 }

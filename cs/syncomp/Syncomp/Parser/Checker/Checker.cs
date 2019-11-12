@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -53,6 +54,7 @@ namespace syncomp
                 // TODO: Hack to deal with lack of actual parser context in the parser.
                 // Hence, need to look up the function in the checker context.
                 // Please help me...
+                diagnostics.AddRange(Check(va.Identifier, ctx));
                 var identifierType = va.Identifier.NodeType;
                 var parameterType = va.Parameter.NodeType;
                 var length = 1;
@@ -242,6 +244,7 @@ namespace syncomp
                         idNode.File,
                         idNode.Line,
                         idNode.Column,
+                        length: idNode.Name.Length,
                         $"Unknown variable '{idNode.Name}'",
                         DiagnosticCode.UnknownVariable));
                 }
@@ -290,6 +293,47 @@ namespace syncomp
                 {
                     diagnostics.AddRange(Check(exNode, ctx));
                 }
+            }
+            #endregion
+            #region "Dot"
+            if (node is Dot dot)
+            {
+                // Need to set up the types on the Dot
+                var variableName =  dot.Left as Identifier;
+                if (variableName is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        dot.Left.File,
+                        dot.Left.Line,
+                        dot.Left.Column,
+                        "Unknown variable",
+                        DiagnosticCode.UnknownVariable));
+                }
+                var variable = ctx.Variables.GetVariable(variableName.Name);
+                // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
+                var type = variable.Node.NodeType;
+                if (type is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        dot.Left.File,
+                        dot.Left.Line,
+                        dot.Left.Column,
+                        $"Unknown type: {variableName.Name}",
+                        DiagnosticCode.UnknownType));
+                }
+                var fieldName = dot.Right as Identifier;
+                // if (right is null) throw new ParseException(i, tokens, nodes, "Right node is not an identifier");
+                var field = type.Body.Where(fld => fld.Identifier == fieldName.Name).FirstOrDefault();
+                if (field is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        dot.Right.File,
+                        dot.Right.Line,
+                        dot.Right.Column,
+                        $"Unknown field: {fieldName.Name}",
+                        DiagnosticCode.UnknownField));
+                }
+                dot.NodeType = field.NodeType;
             }
             #endregion
             return diagnostics;
