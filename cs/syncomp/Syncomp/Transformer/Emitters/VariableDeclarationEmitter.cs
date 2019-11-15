@@ -14,12 +14,21 @@ namespace syncomp
             var guid = TransformerHelpers.GetUID(vdNode.File, vdNode.Line, vdNode.Identifier);
             lines.Add($"jmp >var_{guid}_end");
             lines.Add($":var_{guid}");
+            if (vdNode.NodeType.Body?.Count > 0)
+            {
+                foreach (VariableDeclaration bodyNode in vdNode.NodeType.Body)
+                {
+                    // lines.AddRange(Transform(bodyNode, ctx));
+                    lines.Add($":fld_{guid}_{bodyNode.Identifier}");
+                }
+            }
             lines.Add($":var_{guid}_end");
 
             ctx.Variables.Add(new Variable()
             {
                 Name = vdNode.Identifier,
-                MemoryAddress = $"var_{guid}"
+                MemoryAddress = $"var_{guid}",
+                VariableDeclaration = vdNode
             });
 
             return lines;

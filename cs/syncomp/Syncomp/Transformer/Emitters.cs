@@ -23,7 +23,7 @@ namespace syncomp
             new IfEmitter(),
             new IncrEmitter(),
             new IntegerLiteralEmitter(),
-            new LangTypeEmitter(),
+            // new LangTypeEmitter(),
             new LessThanEmitter(),
             new LessThanOrEqualEmitter(),
             new ModEmitter(),
@@ -36,7 +36,8 @@ namespace syncomp
             new SubtractionEmitter(),
             new VariableAssignmentEmitter(),
             new VariableDeclarationEmitter(),
-            new WhileEmitter()
+            new WhileEmitter(),
+            new DotEmitter()
         };
     }
 }
