@@ -14,7 +14,7 @@ namespace syncomp
             var guid = TransformerHelpers.GetUID(vdNode.File, vdNode.Line, vdNode.Identifier);
             lines.Add($"jmp >var_{guid}_end");
             lines.Add($":var_{guid}");
-            if (vdNode.NodeType.Body?.Count > 0)
+            if (vdNode?.NodeType?.Body?.Count > 0)
             {
                 foreach (VariableDeclaration bodyNode in vdNode.NodeType.Body)
                 {
