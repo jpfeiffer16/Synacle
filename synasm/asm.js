@@ -135,7 +135,7 @@ function assemble(text) {
   //Prepare output buffer
   let bytes = [];
   symbols.forEach(symbol => bytes.push(parseInt(symbol)));
-  let outputBuffer = new Buffer(bytes.length * 2);
+  let outputBuffer = Buffer.alloc(bytes.length * 2);
   bytes.forEach((byte, index) => outputBuffer.writeUInt16LE(byte, index * 2));
   return outputBuffer;
 }
