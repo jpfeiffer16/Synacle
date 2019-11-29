@@ -1,16 +1,22 @@
 #include "./lib/stdlib.bc"
 
-function main() : void {
-    println("Enter your name:");
-    print(">");
-    string name = input();
-    print("Hello, ");
-    print(name);
-    println(" ");
-    main();
-}
+type entity {
+    int id,
+    string data
+};
 
-main();
+type test {
+    ptr<entity> ent
+};
 
-function test_func(int count) : void {
-}
+entity e;
+ptr<entity> en = &e;
+
+test tt;
+ptr<test> tst = &tt;
+
+tst->ent = en;
+
+tst->ent->data;
+
+// yay->test;

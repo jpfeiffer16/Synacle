@@ -14,8 +14,8 @@ function str_equal(string str_a, string str_b) : int {
     return 0;
   }
   for (var i = 0; i < a_len; ++i) {
-    var a_val = ~(str_a + i);
-    var b_val = ~(str_b + i);
+    var a_val = ~(str_a + i) as int;
+    var b_val = ~(str_b + i) as int;
     if (!(a_val == b_val)) {
       return 0;
     }
@@ -44,7 +44,7 @@ function mem_cp(int s_ptr, int d_ptr, int len) {
   while (current_byte <= len) {
     var byte_to_write_ptr = s_ptr + current_byte;
     var dest_ptr = d_ptr + current_byte;
-    wmem(dest_ptr, ~byte_to_write_ptr);
+    wmem(dest_ptr, ~byte_to_write_ptr as int);
     ++current_byte;
   }
 }
@@ -66,7 +66,7 @@ function flip_str(var str_ptr) :string {
   var index = 0;
   while (index < len) {
     var source_index = str_ptr + index;
-    push(~source_index);
+    push(~source_index as int);
     ++index;
   }
 
@@ -103,7 +103,7 @@ function input() : string {
 
 function print(string str_ptr) {
   while (~str_ptr) {
-    out(~str_ptr);
+    out(~str_ptr as int);
     ++str_ptr;
   }
 }
@@ -145,7 +145,7 @@ function dump_mem() {
 
   while (~i) {
     ++i;
-    print_number(~i);
+    print_number(~i as int);
     out(10);
   }
 }
@@ -159,7 +159,7 @@ function int(string str_ptr) {
   var num = 0;
   while (index <= len) {
     var char = flipped + index;
-    char = ~char;
+    char = ~char as int;
     var is_greater_than = char > 47;
     var is_less_than = char < 58;
     //var is_correct = is_greater_than && is_less_than;

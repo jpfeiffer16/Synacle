@@ -14,7 +14,12 @@ namespace syncomp
         {
             var nextNode = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx)[0];
             var addressOfToken = tokens[i - 1];
-            return (i, new AddressOf(nextNode, addressOfToken.File, addressOfToken.Line, addressOfToken.Index));
+            return (i, new AddressOf(
+                nextNode,
+                addressOfToken.File,
+                addressOfToken.Line,
+                addressOfToken.Index)
+                { NodeType = ParserContext.NativeTypes.Pointer });
         }
     }
 }

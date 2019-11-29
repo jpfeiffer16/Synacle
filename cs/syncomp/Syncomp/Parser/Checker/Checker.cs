@@ -336,6 +336,73 @@ namespace syncomp
                 dot.NodeType = field.NodeType;
             }
             #endregion
+            #region "DerefArrow"
+            if (node is DerefArrow derefArrowNode)
+            {
+
+                // Need to set up the types on the DerefArrow
+                var variableName =  derefArrowNode.Left as Identifier;
+                if (variableName is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        derefArrowNode.Left.File,
+                        derefArrowNode.Left.Line,
+                        derefArrowNode.Left.Column,
+                        "Unknown variable",
+                        DiagnosticCode.UnknownVariable));
+                    return diagnostics;
+                }
+                var variable = ctx.Variables.GetVariable(variableName.Name);
+                if (variable.Node.NodeType != ParserContext.NativeTypes.Pointer)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        derefArrowNode.File,
+                        derefArrowNode.Line,
+                        derefArrowNode.Column,
+                        2,
+                        "Type must be a ptr to use a Dereferencing Arrow",
+                        DiagnosticCode.InvalidTypes
+                    ));
+                    return diagnostics;
+                }
+                // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
+                var type = variable.Node.SubType;
+                if (type is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        derefArrowNode.Left.File,
+                        derefArrowNode.Left.Line,
+                        derefArrowNode.Left.Column,
+                        $"Unknown type: {variableName.Name}",
+                        DiagnosticCode.UnknownType));
+                }
+                var fieldName = derefArrowNode.Right as Identifier;
+                var field = type.Body.Where(fld => fld.Identifier == fieldName.Name).FirstOrDefault();
+                if (field is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        derefArrowNode.Right.File,
+                        derefArrowNode.Right.Line,
+                        derefArrowNode.Right.Column,
+                        $"Unknown field: {fieldName.Name}",
+                        DiagnosticCode.UnknownField));
+                }
+                derefArrowNode.NodeType = field.NodeType;
+            }
+            #endregion
+            #region "ParenGroup"
+            if (node is ParenGroup pGroup)
+            {
+                foreach (var childNode in pGroup.Nodes)
+                {
+                    Check(childNode, ctx);
+                }
+                if (pGroup.Nodes.Count > 0)
+                {
+                    pGroup.NodeType = pGroup.Nodes.LastOrDefault().NodeType;
+                }
+            }
+            #endregion
             return diagnostics;
         }
         #endregion

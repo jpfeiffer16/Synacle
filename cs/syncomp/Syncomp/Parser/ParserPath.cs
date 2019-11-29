@@ -7,16 +7,6 @@ namespace syncomp
 {
   public class ParserPath
   {
-    //Load all ParserPaths
-    // private static List<ParserPath> Paths = AppDomain
-    //     .CurrentDomain.GetAssemblies()
-    //     .Where(asm => asm.FullName.Contains("syncomp"))
-    //     .SelectMany(asm => asm.GetTypes())
-    //     .Where(tp => tp != typeof(ParserPath))
-    //     .Where(tp => typeof(ParserPath).IsAssignableFrom(tp))
-    //     .Select(tp => (ParserPath)Activator.CreateInstance(tp))
-    //     .ToList();
-
     public virtual SyntaxTokenType Match { get; }
 
     public virtual (int, AstNode) Eval(

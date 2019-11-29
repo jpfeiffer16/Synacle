@@ -48,7 +48,8 @@ namespace syncomp
         StringLiteral,
         PreprocessorDirective,
         Colon,
-        As
+        As,
+        DerefArrow
     }
 
     public static class Grammar
@@ -235,6 +236,11 @@ namespace syncomp
               {
                   Token = "as",
                   Type = SyntaxTokenType.As
+              },
+              new SyntaxToken
+              {
+                  Token = "->",
+                  Type = SyntaxTokenType.DerefArrow
               }
         };
     }

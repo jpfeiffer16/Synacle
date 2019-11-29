@@ -1,16 +1,18 @@
 namespace syncomp
 {
-  public class VariableDeclaration : AstNode
-  {
-    public string Identifier { get; }
-    public LangType LangType { get; }
-
-    public VariableDeclaration(string identifier, LangType langType, string file, int line, int column)
-        : base("VARIABLE_DECLARATION", file, line, column)
+    public class VariableDeclaration : AstNode
     {
-      this.Identifier = identifier;
-      this.LangType = langType;
-      this.NodeType = langType;
+        public string Identifier { get; }
+        public LangType LangType { get; }
+        public LangType SubType { get; }
+
+        public VariableDeclaration(string identifier, LangType langType, string file, int line, int column, LangType subType = null)
+        : base("VARIABLE_DECLARATION", file, line, column)
+        {
+            this.Identifier = identifier;
+            this.LangType = langType;
+            this.NodeType = langType;
+            this.SubType = subType;
+        }
     }
-  }
 }

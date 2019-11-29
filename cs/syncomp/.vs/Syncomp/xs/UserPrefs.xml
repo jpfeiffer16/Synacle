@@ -1,0 +1,44 @@
+﻿<Properties StartupConfiguration="{97B2FE7E-BC1D-47D4-934E-F631F5632532}|Default">
+  <MonoDevelop.Ide.ItemProperties.Syncomp.Cli PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Syncomp/Lexer/Grammar.cs">
+    <Files>
+      <File FileName="Syncomp.DevConsole/Program.cs" Line="11" Column="12" />
+      <File FileName="Syncomp.LangServer/Program.cs" Line="1" Column="1" />
+      <File FileName="Syncomp.LangServer/TextDocumentSyncHandler.cs" Line="1" Column="1" />
+      <File FileName="Syncomp/Lexer/Grammar.cs" Line="28" Column="18" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Syncomp" expanded="True">
+            <Node name="Syncomp" expanded="True">
+              <Node name="Lexer" expanded="True">
+                <Node name="Grammar.cs" selected="True" />
+              </Node>
+            </Node>
+            <Node name="Syncomp.LangServer" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="Syncomp" expanded="True" selected="True" />
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="Syncomp" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

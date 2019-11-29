@@ -37,7 +37,9 @@ namespace syncomp
             new VariableAssignmentEmitter(),
             new VariableDeclarationEmitter(),
             new WhileEmitter(),
-            new DotEmitter()
+            new DotEmitter(),
+            new AsEmitter(),
+            new DerefArrowEmitter()
         };
     }
 }

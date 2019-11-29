@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -21,12 +22,18 @@ namespace syncomp
             );
 
             ++i;
+            // For now make the right most node the NodeType of the ParenGroup
+            // Should eventually enforce that the expression resolve to one node
+            var childNodes = ParseTokens(tokens.GetRange(i, expressionEnd - i), ctx);
+            var nodeType = ParserContext.NativeTypes.LangVoid;
+            if (childNodes.Count > 0)
+                nodeType = childNodes.LastOrDefault().NodeType;
             var node = new ParenGroup(
-              ParseTokens(tokens.GetRange(i, expressionEnd - i), ctx),
+              childNodes,
               tkn.File,
               tkn.Line,
               tkn.Index
-            );
+            ) { NodeType = nodeType };
 
             i = expressionEnd + 1;
 

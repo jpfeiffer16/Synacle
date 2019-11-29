@@ -13,6 +13,7 @@ namespace syncomp
             var vaNode = node as VariableAssignment;
             // Variable variable = null;
             string memoryAddress = null;
+            var isMemoryAddressRuntimeComputed = false;
 
             if (vaNode.Identifier is Identifier)
             {
@@ -36,8 +37,22 @@ namespace syncomp
                 memoryAddress = $"fld_{fieldName}_{(dot.Right as Identifier).Name}";
             }
 
-            lines.AddRange(new Transformer(new List<AstNode> { vaNode.Parameter }, ctx).Transform());
-            lines.Add($"wmem >{memoryAddress ?? throw new Exception("Unknown memory address")} reg0");
+            // if (!isMemoryAddressRuntimeComputed)
+            // {
+                lines.AddRange(new Transformer(new List<AstNode> { vaNode.Parameter }, ctx).Transform());
+            // }
+            if (vaNode.Identifier is DerefArrow derefArrowNode)
+            {
+                var variable = ctx.Variables.Get((derefArrowNode.Left as Identifier).Name);
+                var type = variable.VariableDeclaration.SubType;
+                var offset = TypeHelper.GetFieldOffset(type, (derefArrowNode.Right as Identifier).Name);
+                lines.Add($"rmem reg7 >{variable.MemoryAddress}");
+                lines.Add($"add reg7 reg7 {offset}");
+                // lines.Add($"rmem reg{ctx.RegisterLevel} reg{ctx.RegisterLevel}");
+                isMemoryAddressRuntimeComputed = true;
+            }
+            var memoryAddressString = isMemoryAddressRuntimeComputed ? "reg7" : $">{memoryAddress ?? throw new Exception("Unknown memory address")}";
+            lines.Add($"wmem {memoryAddressString} reg0");
 
             return lines;
         }

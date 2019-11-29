@@ -131,6 +131,11 @@ namespace syncomp
             {
                 return CreateSyntaxToken(SyntaxTokenType.AddressOf, ch);
             }
+            if (ch == "-" && Peek() == ">")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.DerefArrow, "->");
+            }
             #endregion
 
             #region "Math Operators"

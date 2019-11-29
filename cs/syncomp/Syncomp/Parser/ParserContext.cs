@@ -11,7 +11,8 @@ namespace syncomp
             NativeTypes.LangInt,
             NativeTypes.LangString,
             NativeTypes.LangFunctionPointer,
-            NativeTypes.LangVoid
+            NativeTypes.LangVoid,
+            NativeTypes.Pointer
         };
         public static class NativeTypes
         {
@@ -20,6 +21,7 @@ namespace syncomp
             public static LangType LangString { get; } = new LangType(name: "string", body: null, file: null, line: 0, column: 0);
             public static LangType LangFunctionPointer { get; } = new LangType(name: "func", body: null, file: null, line: 0, column: 0);
             public static LangType LangVoid { get; } = new LangType(name: "void", body: null, file: null, line: 0, column: 0);
+            public static LangType Pointer { get; } = new LangType(name: "ptr", body: null, file: null, line: 0, column: 0);
         }
     }
 }

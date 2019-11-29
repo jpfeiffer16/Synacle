@@ -28,10 +28,13 @@ namespace syncomp.Tests
             this.result = new DerefPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
+        // NOTE: This can be 1 now since before it would have overflowed before it
+        // returned the terminator. This is because we were using GetNextTerminator()
+        // Now we are using 
         [TestMethod]
         public void IndexIsCorrect()
         {
-            Assert.AreEqual(2, this.result.Item1);
+            Assert.AreEqual(1, this.result.Item1);
         }
 
         [TestMethod]

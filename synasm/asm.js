@@ -104,12 +104,18 @@ function assemble(text) {
   symbols.forEach((symbol, index) => {
     if (symbol && symbol.length) {
       if (symbol[0] === '>') {
-        const label = symbol.substr(1);
+        let label = symbol.substr(1);
+        let offset = 0;
+        var split = label.split("+");
+        if (split.length === 2) {
+          label = split[0];
+          offset = parseInt(split[1]);
+        }
         const resolution = labels[label];
         if (resolution === undefined) {
           throw `Undefined label: ${ label }`;
         }
-        symbols[index] = resolution;
+        symbols[index] = parseInt(resolution) + offset;
       }
     }
   });

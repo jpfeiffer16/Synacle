@@ -14,5 +14,6 @@ namespace syncomp
 
         public string Name { get; }
         public List<VariableDeclaration> Body { get; }
+        public LangType SubType { get; set; }
     }
 }

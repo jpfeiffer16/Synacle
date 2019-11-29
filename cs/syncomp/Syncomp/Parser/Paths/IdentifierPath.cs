@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,9 +38,22 @@ namespace syncomp
                 );
             }
             // Typed variable declaration
-            else if(i + 1 < tokens.Count && tokens[i + 1].Type == SyntaxTokenType.Identifier)
+            else if (
+                i + 1 < tokens.Count
+                && (tokens[i + 1].Type == SyntaxTokenType.Identifier
+                    //Type is generic
+                    || (tokens.Count >= i + 4 && tokens[i + 1].Type == SyntaxTokenType.LessThan && tokens[i + 2].Type == SyntaxTokenType.Identifier && tokens[i + 3].Type == SyntaxTokenType.GreaterThan)))
             {
                 var typeDecToken = tokens[i];
+                LangType subType = null;
+                if (tokens[i + 1].Type == SyntaxTokenType.LessThan)
+                {
+                    var nextMatching = this.GetNext(i + 1, tokens, SyntaxTokenType.GreaterThan);
+                    var typeToken = tokens[nextMatching - 1];
+                    subType = ctx.LangTypes.Where(tp => tp.Name == typeToken.Token).FirstOrDefault();
+                    i = nextMatching;
+                    // ctx.LangTypes.Add(new LangType($"{typeDecToken.Token}<{typeToken.Token}>", null, null, 0, 0 ));
+                }
                 var nextToken = tokens[++i];
                 var type = ctx.LangTypes.Where(tp => tp.Name == token.Token).FirstOrDefault();
                 if (type == null)
@@ -47,7 +61,7 @@ namespace syncomp
                         tokens,
                         nodes,
                         $"Invalid variable declaration. Unknown type '{token.Token}'");
-                node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Index);
+                node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Index, subType);
             }
             else
             {

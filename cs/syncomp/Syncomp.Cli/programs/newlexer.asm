@@ -234,6 +234,8 @@ jmp >var_alloc_ptr_stdlib_55_end
 :var_alloc_ptr_stdlib_55_end
 call >alloc
 wmem >var_alloc_ptr_stdlib_55 reg0
+rmem reg0 >var_str_a_stdlib_52
+rmem reg1 >var_alloc_ptr_stdlib_55
 rmem reg2 >var_a_len_stdlib_53
 call >mem_cp
 jmp >var_end_address_stdlib_57_end
@@ -246,6 +248,8 @@ wmem >var_end_address_stdlib_57 reg0
 rmem reg0 >var_b_len_stdlib_54
 add reg0 reg0 1
 wmem >var_b_len_stdlib_54 reg0
+rmem reg0 >var_str_b_stdlib_52
+rmem reg1 >var_end_address_stdlib_57
 rmem reg2 >var_b_len_stdlib_54
 call >mem_cp
 rmem reg0 >var_alloc_ptr_stdlib_55
@@ -667,69 +671,32 @@ ret
 ret
 :int_end
 set reg0 >int
-jmp >main_end
-:main
-jmp >var__newlexer_4_end
-:var__newlexer_4
-&n
-&t
-&e
-&r
-32
-&y
-&o
-&u
-&r
-32
-&n
-&a
-&m
-&e
-&:
-0
-:var__newlexer_4_end
-wmem >var__newlexer_4 &E
-set reg0 >var__newlexer_4
-call >println
-jmp >var__newlexer_5_end
-:var__newlexer_5
-0
-:var__newlexer_5_end
-wmem >var__newlexer_5 &>
-set reg0 >var__newlexer_5
-call >print
-jmp >var_name_newlexer_6_end
-:var_name_newlexer_6
-:var_name_newlexer_6_end
-call >input
-wmem >var_name_newlexer_6 reg0
-jmp >var__newlexer_7_end
-:var__newlexer_7
-&e
-&l
-&l
-&o
-&,
-32
-0
-:var__newlexer_7_end
-wmem >var__newlexer_7 &H
-set reg0 >var__newlexer_7
-call >print
-rmem reg0 >var_name_newlexer_6
-call >print
-jmp >var__newlexer_9_end
-:var__newlexer_9
-0
-:var__newlexer_9_end
-wmem >var__newlexer_9 32
-set reg0 >var__newlexer_9
-call >println
-call >main
-ret
-:main_end
-set reg0 >main
-call >main
+jmp >var_e_newlexer_12_end
+:var_e_newlexer_12
+:fld_e_newlexer_12_id
+:fld_e_newlexer_12_data
+:var_e_newlexer_12_end
+jmp >var_en_newlexer_13_end
+:var_en_newlexer_13
+:var_en_newlexer_13_end
+set reg0 >var_e_newlexer_12
+wmem >var_en_newlexer_13 reg0
+jmp >var_tt_newlexer_15_end
+:var_tt_newlexer_15
+:fld_tt_newlexer_15_ent
+:var_tt_newlexer_15_end
+jmp >var_tst_newlexer_16_end
+:var_tst_newlexer_16
+:var_tst_newlexer_16_end
+set reg0 >var_tt_newlexer_15
+wmem >var_tst_newlexer_16 reg0
+rmem reg0 >var_en_newlexer_13
+rmem reg7 >var_tst_newlexer_16
+add reg7 reg7 1
+wmem reg7 reg0
+jmp >var_yay_newlexer_20_end
+:var_yay_newlexer_20
+:var_yay_newlexer_20_end
 halt
 
 :subtract
