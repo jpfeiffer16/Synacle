@@ -1,3 +1,5 @@
 bin/
 obj/
 *.info
+coverage.opencover.xml
+coveragereport/
