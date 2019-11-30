@@ -386,6 +386,7 @@ namespace syncomp
                         derefArrowNode.Right.Column,
                         $"Unknown field: {fieldName.Name}",
                         DiagnosticCode.UnknownField));
+                    return diagnostics;
                 }
                 derefArrowNode.NodeType = field.NodeType;
             }
