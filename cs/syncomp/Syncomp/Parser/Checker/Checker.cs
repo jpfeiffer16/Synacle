@@ -160,21 +160,22 @@ namespace syncomp
                             var variable = ctx.Variables.GetVariable(callParamTp.Name);
                             callParamType = variable.Node.NodeType;
                         }
-                        // if (callParam is FunctionCall callParamFunc)
-                        // {
-                        //     var funcParam = ctx.Variables.GetFunction(callParamFunc.Name);
-                        //     if (funcParam is null)
-                        //     {
-                        //     diagnostics.Add(
-                        //         new Diagnostic(
-                        //             callParamFunc.File,
-                        //             callParamFunc.Line,
-                        //             callParamFunc.Column,
-                        //             $"Unknown function: {callParamFunc.Name}",
-                        //             DiagnosticCode.UnknownFunction));
-                        //     }
-                        //     callParamType = funcParam.Node.NodeType;
-                        // }
+                        if (callParam is FunctionCall callParamFunc)
+                        {
+                            var funcParam = ctx.Variables.GetFunction(callParamFunc.Name);
+                            if (funcParam is null)
+                            {
+                                diagnostics.Add(
+                                    new Diagnostic(
+                                        callParamFunc.File,
+                                        callParamFunc.Line,
+                                        callParamFunc.Column,
+                                        $"Unknown function: {callParamFunc.Name}",
+                                        DiagnosticCode.UnknownFunction));
+                                return diagnostics;
+                            }
+                            callParamType = funcParam.Node.NodeType;
+                        }
                         var declParam = function.Node.Parameters[i];
                         if (callParamType != declParam.NodeType)
                         {
