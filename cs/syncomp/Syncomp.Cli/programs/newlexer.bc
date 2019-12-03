@@ -1,22 +1,14 @@
 #include "./lib/stdlib.bc"
 
-type entity {
-    int id,
-    string data
-};
+function main()
+{
+    string a = input();
+    string b = input();
+    if (str_equal(a, b))
+    {
+        return;
+    }
+    main();
+}
 
-type test {
-    ptr<entity> ent
-};
-
-entity e;
-ptr<entity> en = &e;
-
-test tt;
-ptr<test> tst = &tt;
-
-tst->ent = en;
-
-tst->ent->data;
-
-// yay->test;
+main();

@@ -12,6 +12,18 @@ namespace syncomp
             this.Body = body;
         }
 
+        public string GetName(VariableDeclaration decl)
+        {
+            if (!(decl.SubType is null))
+            {
+                return $"{this.Name}<{decl.SubType.Name}>";
+            }
+            else
+            {
+                return this.Name;
+            }
+        }
+
         public string Name { get; }
         public List<VariableDeclaration> Body { get; }
         public LangType SubType { get; set; }

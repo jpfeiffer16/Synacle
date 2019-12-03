@@ -23,7 +23,7 @@ namespace syncomp
             ++i;
             var condition = tokens.GetRange(i, conditionEnd - i);
             i = conditionEnd;
-            i++;
+            i = this.GetNextNonWhitespace(++i, tokens);
             var expressionEnd = GetExpression(
               SyntaxTokenType.LeftCurly,
               SyntaxTokenType.RightCurly,

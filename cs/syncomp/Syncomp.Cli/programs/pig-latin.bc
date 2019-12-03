@@ -7,11 +7,11 @@ function main() {
     return;
   }
   int first_letter = alloc();
-  wmem(first_letter, ~name);
+  wmem(first_letter, ~name as int);
   ++name;
   println(
     str_cat(
-      str_cat(name, first_letter),
+      str_cat(name, first_letter as string),
       "ay"
     )
   );

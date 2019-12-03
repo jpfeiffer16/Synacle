@@ -57,7 +57,7 @@ namespace syncomp
                     Console.WriteLine();
                     Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
                 }
-                return;
+                Environment.Exit(1);
             }
             var asmLines = EmitAst(ast);
 
