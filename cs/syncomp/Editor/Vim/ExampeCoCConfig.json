@@ -1,0 +1,15 @@
+
+{
+    "languageserver": {
+        "bc": {
+            "command": "dotnet",
+            "args": ["/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.LangServer/bin/Debug/netcoreapp3.0/Syncomp.LangServer.dll"],
+            "filetypes": ["bc"],
+            "cwd": "./",
+            "initializationOptions": {
+            },
+            "settings": {
+            }
+        }
+    }
+}
