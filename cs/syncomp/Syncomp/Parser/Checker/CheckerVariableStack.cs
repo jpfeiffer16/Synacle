@@ -44,7 +44,7 @@ namespace syncomp
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
-                Node = new FunctionDeclaration(null, null, "pop", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "pop", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {

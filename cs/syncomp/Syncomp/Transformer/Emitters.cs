@@ -23,7 +23,6 @@ namespace syncomp
             new IfEmitter(),
             new IncrEmitter(),
             new IntegerLiteralEmitter(),
-            // new LangTypeEmitter(),
             new LessThanEmitter(),
             new LessThanOrEqualEmitter(),
             new ModEmitter(),

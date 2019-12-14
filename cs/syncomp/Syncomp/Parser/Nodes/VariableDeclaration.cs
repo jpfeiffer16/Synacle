@@ -6,13 +6,12 @@ namespace syncomp
         public LangType LangType { get; }
         public LangType SubType { get; }
 
-        public VariableDeclaration(string identifier, LangType langType, string file, int line, int column, LangType subType = null)
+        public VariableDeclaration(string identifier, LangType langType, string file, int line, int column)
         : base("VARIABLE_DECLARATION", file, line, column)
         {
             this.Identifier = identifier;
             this.LangType = langType;
             this.NodeType = langType;
-            this.SubType = subType;
         }
     }
 }

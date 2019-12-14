@@ -15,8 +15,7 @@ namespace syncomp
             var tkn = tokens[i];
             var nextToken = tokens[++i];
 
-            return (
-                    i, new VariableDeclaration(
+            return (i, new VariableDeclaration(
                         nextToken.Token, ParserContext.NativeTypes.LangInt, tkn.File, tkn.Line, tkn.Index));
         }
     }

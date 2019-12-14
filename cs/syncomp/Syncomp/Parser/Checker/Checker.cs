@@ -44,6 +44,7 @@ namespace syncomp
             #region "VariableAssignment"
             if (node is VariableAssignment va)
             {
+                diagnostics.AddRange(Check(va.Parameter, ctx));
                 if (va.Identifier is VariableDeclaration def)
                 {
                     ctx.Variables.AddVariable(new CheckerVariable
@@ -103,13 +104,13 @@ namespace syncomp
                     length = declaration.Identifier.Length;
                 }
 
-                if (identifierType != parameterType)
+                if (!identifierType.Equals(parameterType))
                     diagnostics.Add(new Diagnostic(
                         va.Identifier.File,
                         va.Identifier.Line,
                         va.Identifier.Column,
                         length: length,
-                        $"Unable to convert type '{parameterType?.Name}' to  '{identifierType?.Name}'",
+                        $"Unable to convert type '{parameterType?.GetName()}' to  '{identifierType?.GetName()}'",
                         DiagnosticCode.InvalidTypes));
             }
             #endregion
@@ -136,7 +137,7 @@ namespace syncomp
                 }
                 else if (function != null)
                 {
-                    if (f.Parameters.Count != function.Node.Parameters.Count)
+                    if (f.Parameters.Count != function.Node.Parameters?.Count)
                     {
                         diagnostics.Add(new Diagnostic(
                             node.File,
@@ -177,7 +178,7 @@ namespace syncomp
                             callParamType = funcParam.Node.NodeType;
                         }
                         var declParam = function.Node.Parameters[i];
-                        if (callParamType != declParam.NodeType)
+                        if (!callParamType.Equals(declParam.NodeType))
                         {
                             diagnostics.Add(new Diagnostic(
                                 callParam.File,
@@ -248,7 +249,9 @@ namespace syncomp
                         length: idNode.Name.Length,
                         $"Unknown variable '{idNode.Name}'",
                         DiagnosticCode.UnknownVariable));
+                    return diagnostics;
                 }
+                idNode.NodeType = variable.Node.NodeType;
             }
             #endregion
             #region "For"
@@ -354,7 +357,7 @@ namespace syncomp
                     return diagnostics;
                 }
                 var variable = ctx.Variables.GetVariable(variableName.Name);
-                if (variable.Node.NodeType != ParserContext.NativeTypes.Pointer)
+                if (variable.Node.NodeType.Name != ParserContext.NativeTypes.Pointer.Name)
                 {
                     diagnostics.Add(new Diagnostic(
                         derefArrowNode.File,
@@ -397,12 +400,54 @@ namespace syncomp
             {
                 foreach (var childNode in pGroup.Nodes)
                 {
-                    Check(childNode, ctx);
+                    diagnostics.AddRange(Check(childNode, ctx));
                 }
                 if (pGroup.Nodes.Count > 0)
                 {
                     pGroup.NodeType = pGroup.Nodes.LastOrDefault().NodeType;
                 }
+            }
+            #endregion
+            #region "Incr"
+            if (node is Incr incrNode)
+            {
+                diagnostics.AddRange(Check(incrNode.Parameter, ctx));
+                if (!incrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
+                {
+                    diagnostics.Add(new Diagnostic(
+                        incrNode.File,
+                        incrNode.Line,
+                        incrNode.Column,
+                        $"Cannot perform incr op on type {incrNode.Parameter.NodeType.Name}",
+                        DiagnosticCode.InvalidTypes
+                    ));
+                    return diagnostics;
+                }
+            }
+            #endregion
+            #region "Decr"
+            if (node is Decr decrNode)
+            {
+                diagnostics.AddRange(Check(decrNode.Parameter, ctx));
+                if (!decrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
+                {
+                    diagnostics.Add(new Diagnostic(
+                        decrNode.File,
+                        decrNode.Line,
+                        decrNode.Column,
+                        $"Cannot perform incr op on type {decrNode.Parameter.NodeType.Name}",
+                        DiagnosticCode.InvalidTypes
+                    ));
+                    return diagnostics;
+                }
+            }
+            #endregion
+            #region "AddressOf"
+            if (node is AddressOf addressOfNode)
+            {
+                // Get the type on the parameter
+                diagnostics.AddRange(Check(addressOfNode.Parameter, ctx));
+                addressOfNode.NodeType = new LangType("ptr", null, null, 0, 0) { SubType = addressOfNode.Parameter.NodeType };
             }
             #endregion
             return diagnostics;

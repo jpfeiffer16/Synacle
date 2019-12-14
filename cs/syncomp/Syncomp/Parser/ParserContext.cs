@@ -14,6 +14,7 @@ namespace syncomp
             NativeTypes.LangVoid,
             NativeTypes.Pointer
         };
+
         public static class NativeTypes
         {
             // public static LangType LangVar { get; } = new LangType(name: "var", body: null, file: null, line: 0, column: 0);
@@ -22,6 +23,20 @@ namespace syncomp
             public static LangType LangFunctionPointer { get; } = new LangType(name: "func", body: null, file: null, line: 0, column: 0);
             public static LangType LangVoid { get; } = new LangType(name: "void", body: null, file: null, line: 0, column: 0);
             public static LangType Pointer { get; } = new LangType(name: "ptr", body: null, file: null, line: 0, column: 0);
+        }
+
+        /// <summary>
+        /// Generisize a parameter by creating a new type that has the specified subtype
+        /// and returning it
+        /// </summary>
+        /// <param name="parentType"></param>
+        /// <param name="subType"></param>
+        /// <returns>LangType</returns>
+        public LangType GetGenericType(LangType parentType, LangType subType)
+        {
+            var newType = new LangType(name: parentType.Name, body: null, file: null, line: 0, column: 0) { SubType = subType };
+            this.LangTypes.Add(newType);
+            return newType;
         }
     }
 }

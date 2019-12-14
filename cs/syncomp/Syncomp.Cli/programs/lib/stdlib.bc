@@ -72,7 +72,7 @@ function str_cat(string str_a, string str_b) : string {
   return alloc_ptr;
 }
 
-function flip_str(var str_ptr) :string {
+function flip_str(var str_ptr) : string {
   var alloc_ptr = alloc();
   var len = str_len(str_ptr);
   var index = 0;
