@@ -1,4 +1,5 @@
-function str_len(string str_ptr) : int {
+function str_len(string str) : int {
+  var str_ptr = str as int;
   var length = 0;
   while(~str_ptr) {
     ++str_ptr;
@@ -7,7 +8,8 @@ function str_len(string str_ptr) : int {
   return length;
 }
 
-function print(string str_ptr) {
+function print(string str) {
+  var str_ptr = str as int;
   while (~str_ptr) {
     out(~str_ptr as int);
     ++str_ptr;
@@ -72,7 +74,7 @@ function str_cat(string str_a, string str_b) : string {
   return alloc_ptr;
 }
 
-function flip_str(var str_ptr) : string {
+function flip_str(string str_ptr) : string {
   var alloc_ptr = alloc();
   var len = str_len(str_ptr);
   var index = 0;
@@ -108,7 +110,7 @@ function input() : string {
   }
   wmem(data_index, 0);
   var alloc_ptr = alloc();
-  var length = str_len(16384);
+  var length = str_len(16384 as string);
   mem_cp(16384, alloc_ptr, length);
   return alloc_ptr;
 }
