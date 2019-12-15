@@ -4,7 +4,6 @@ namespace syncomp
     {
         public string Identifier { get; }
         public LangType LangType { get; }
-        public LangType SubType { get; }
 
         public VariableDeclaration(string identifier, LangType langType, string file, int line, int column)
         : base("VARIABLE_DECLARATION", file, line, column)

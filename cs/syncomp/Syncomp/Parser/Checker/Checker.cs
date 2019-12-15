@@ -314,6 +314,15 @@ namespace syncomp
                         DiagnosticCode.UnknownVariable));
                 }
                 var variable = ctx.Variables.GetVariable(variableName.Name);
+                if (variable is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        dot.Left.File,
+                        dot.Left.Line,
+                        dot.Left.Column,
+                        "Unknown variable",
+                        DiagnosticCode.UnknownVariable));
+                }
                 // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
                 var type = variable.Node.NodeType;
                 if (type is null)
@@ -370,7 +379,7 @@ namespace syncomp
                     return diagnostics;
                 }
                 // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
-                var type = variable.Node.SubType;
+                var type = variable.Node.NodeType.SubType;
                 if (type is null)
                 {
                     diagnostics.Add(new Diagnostic(
@@ -379,6 +388,7 @@ namespace syncomp
                         derefArrowNode.Left.Column,
                         $"Unknown type: {variableName.Name}",
                         DiagnosticCode.UnknownType));
+                    return diagnostics;
                 }
                 var fieldName = derefArrowNode.Right as Identifier;
                 var field = type.Body.Where(fld => fld.Identifier == fieldName.Name).FirstOrDefault();
@@ -414,11 +424,17 @@ namespace syncomp
                 diagnostics.AddRange(Check(incrNode.Parameter, ctx));
                 if (!incrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
                 {
+                    var length = 0;
+                    if (incrNode.Parameter is Identifier incrId)
+                    {
+                        length = incrId.Name.Length;
+                    }
                     diagnostics.Add(new Diagnostic(
                         incrNode.File,
                         incrNode.Line,
                         incrNode.Column,
-                        $"Cannot perform incr op on type {incrNode.Parameter.NodeType.Name}",
+                        length,
+                        $"Cannot perform incr op on type {incrNode.Parameter.NodeType.GetName()}",
                         DiagnosticCode.InvalidTypes
                     ));
                     return diagnostics;
@@ -431,11 +447,17 @@ namespace syncomp
                 diagnostics.AddRange(Check(decrNode.Parameter, ctx));
                 if (!decrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
                 {
+                    var length = 1;
+                    if (decrNode.Parameter is Identifier decrId)
+                    {
+                        length = decrId.Name.Length;
+                    }
                     diagnostics.Add(new Diagnostic(
                         decrNode.File,
                         decrNode.Line,
                         decrNode.Column,
-                        $"Cannot perform incr op on type {decrNode.Parameter.NodeType.Name}",
+                        length,
+                        $"Cannot perform incr op on type {decrNode.Parameter.NodeType.GetName()}",
                         DiagnosticCode.InvalidTypes
                     ));
                     return diagnostics;

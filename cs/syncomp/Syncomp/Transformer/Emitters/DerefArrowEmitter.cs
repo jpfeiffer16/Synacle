@@ -11,7 +11,7 @@ namespace syncomp
         {
             var derefArrowNode = node as DerefArrow;
             var variable = ctx.Variables.Get((derefArrowNode.Left as Identifier).Name);
-            var type = variable.VariableDeclaration.SubType;
+            var type = variable.VariableDeclaration.NodeType.SubType;
             var offset = TypeHelper.GetFieldOffset(type, (derefArrowNode.Right as Identifier).Name);
             var lines = new List<string>();
             lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
