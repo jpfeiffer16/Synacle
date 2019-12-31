@@ -20,8 +20,8 @@ namespace syncomp
               ctx
             )[0];
             i = nextTerminator;
-            // return (i, new Deref(nextNode, derefToken.File, derefToken.Line, derefToken.Index) { NodeType = nextNode.NodeType });
-            return (i, new Deref(nextNode, derefToken.File, derefToken.Line, derefToken.Index));
+            return (i, new Deref(nextNode, derefToken.File, derefToken.Line, derefToken.Index) { NodeType = nextNode.NodeType });
+            // return (i, new Deref(nextNode, derefToken.File, derefToken.Line, derefToken.Index));
         }
     }
 }

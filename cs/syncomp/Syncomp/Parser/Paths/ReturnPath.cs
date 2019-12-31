@@ -15,14 +15,16 @@ namespace syncomp
             var tkn = tokens[i];
             var nextToken = tokens[i + 1];
             AstNode node;
+            var nextSemicolon = GetNext(i, tokens, SyntaxTokenType.SemiColon);
+            var returnExpression = tokens.GetRange(++i, nextSemicolon - i);
+            i = nextSemicolon;
             if (nextToken.Type != SyntaxTokenType.SemiColon)
             {
                 node = new Return(
-                        ParseTokens(new List<SyntaxToken> { nextToken }, ctx)[0],
+                        ParseTokens(returnExpression, ctx)[0],
                         tkn.File,
                         tkn.Line,
                         tkn.Index);
-                i++;
             }
             else
             {

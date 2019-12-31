@@ -1,14 +1,14 @@
 #include "./lib/stdlib.bc"
 
-function main()
+function t() : int
 {
-    string a = input();
-    string b = input();
-    if (str_equal(a, b))
-    {
-        return;
-    }
-    main();
+    int ret_val = 123;
+    // return &ret_val;
+    return "test" as int;
 }
 
-main();
+// ptr<int> test = t();
+// print_number(~test);
+// println(" ");
+
+println(t() as string);

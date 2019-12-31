@@ -71,7 +71,7 @@ function str_cat(string str_a, string str_b) : string {
   var end_address = alloc_ptr + a_len;
   ++b_len;
   mem_cp(str_b as int, end_address as int, b_len);
-  return alloc_ptr;
+  return alloc_ptr as string;
 }
 
 function flip_str(string str_ptr) : string {
@@ -95,7 +95,7 @@ function flip_str(string str_ptr) : string {
   }
   push(current_byte);
 
-  return alloc_ptr;
+  return alloc_ptr as string;
 }
 
 function input() : string {
@@ -112,7 +112,7 @@ function input() : string {
   var alloc_ptr = alloc();
   var length = str_len(16384 as string);
   mem_cp(16384, alloc_ptr, length);
-  return alloc_ptr;
+  return alloc_ptr as string;
 }
 
 function print_number(var num) {

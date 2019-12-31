@@ -86,7 +86,8 @@ namespace syncomp
                 {
                     length = identifier.Name.Length;
                     var variable = ctx.Variables.GetVariable(identifier.Name);
-                    if (variable is null) {
+                    if (variable is null)
+                    {
                         diagnostics.Add(new Diagnostic(
                             identifier.File,
                             identifier.Line,
@@ -184,7 +185,7 @@ namespace syncomp
                                 callParam.File,
                                 callParam.Line,
                                 callParam.Column,
-                                $"Unable to convert type '{callParamType?.Name}' to  '{declParam.NodeType?.Name}'",
+                                $"Unable to convert type '{callParamType?.GetName()}' to  '{declParam.NodeType?.GetName()}'",
                                 DiagnosticCode.InvalidTypes));
                         }
                     }
@@ -220,7 +221,7 @@ namespace syncomp
                         fd.Line,
                         fd.Column,
                         length: fd.Name.Length,
-                        $"Not all code paths return value of type {fd.NodeType.Name}",
+                        $"Not all code paths return value of type {fd.NodeType.GetName()}",
                         DiagnosticCode.ControlFlowError
                     ));
                 }
@@ -303,7 +304,7 @@ namespace syncomp
             if (node is Dot dot)
             {
                 // Need to set up the types on the Dot
-                var variableName =  dot.Left as Identifier;
+                var variableName = dot.Left as Identifier;
                 if (variableName is null)
                 {
                     diagnostics.Add(new Diagnostic(
@@ -354,7 +355,7 @@ namespace syncomp
             {
 
                 // Need to set up the types on the DerefArrow
-                var variableName =  derefArrowNode.Left as Identifier;
+                var variableName = derefArrowNode.Left as Identifier;
                 if (variableName is null)
                 {
                     diagnostics.Add(new Diagnostic(
@@ -470,6 +471,46 @@ namespace syncomp
                 // Get the type on the parameter
                 diagnostics.AddRange(Check(addressOfNode.Parameter, ctx));
                 addressOfNode.NodeType = new LangType("ptr", null, null, 0, 0) { SubType = addressOfNode.Parameter.NodeType };
+            }
+            #endregion
+            #region "Deref"
+            if (node is Deref derefNode)
+            {
+                var parameter = derefNode.Parameter;
+                if (parameter is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        parameter.File,
+                        parameter.Line,
+                        parameter.Column,
+                        "No parameter for deref op",
+                        DiagnosticCode.SyntaxError
+                    ));
+                    return diagnostics;
+                }
+                if (!(parameter is Identifier identifier))
+                {
+                    diagnostics.Add(new Diagnostic(
+                        parameter.File,
+                        parameter.Line,
+                        parameter.Column,
+                        $"Invalid token type. Expected {typeof(Identifier)}, got {parameter.GetType()}",
+                        DiagnosticCode.SyntaxError
+                    ));
+                    return diagnostics;
+                }
+                diagnostics.AddRange(Check(identifier, ctx));
+                derefNode.NodeType = identifier.NodeType.SubType;
+            }
+            #endregion
+            #region "Return"
+            if (node is Return returnNode)
+            {
+                if (!(returnNode.Parameter is null))
+                {
+                    diagnostics.AddRange(Check(returnNode.Parameter, ctx));
+                    returnNode.NodeType = returnNode.Parameter.NodeType;
+                }
             }
             #endregion
             return diagnostics;

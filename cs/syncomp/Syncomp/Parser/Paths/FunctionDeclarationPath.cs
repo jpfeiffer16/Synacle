@@ -45,10 +45,11 @@ namespace syncomp
             if (tokens[i].Type == SyntaxTokenType.Colon)
             {
                 i++;
-                var type = tokens[GetNextNonWhitespace(i, tokens)];
-                langType = ctx.LangTypes.Where(tp => tp.Name == type.Token).FirstOrDefault();
-                i++;
                 i = GetNextNonWhitespace(i, tokens);
+                var curlyStart = GetNext(i, tokens, SyntaxTokenType.LeftCurly);
+                var typeNameTokens = tokens.GetRange(i, curlyStart - i);
+                i = curlyStart;
+                langType = GetLangType(typeNameTokens);
             }
 
             var nextClosingCurly = GetExpression(
@@ -72,6 +73,32 @@ namespace syncomp
                 functionToken.File,
                 functionToken.Line,
                 functionToken.Index) { NodeType = langType });
+        }
+
+        private LangType GetLangType(List<SyntaxToken> tokens)
+        {
+            var left = tokens.FirstOrDefault(tkn => tkn.Type == SyntaxTokenType.LessThan);
+            // Type  is geneic
+            if (!(left is null))
+            {
+                int leftIndex = tokens.IndexOf(left);
+                var simpleTypeToken = tokens.Take(leftIndex).FirstOrDefault();
+                if (simpleTypeToken is null) throw new ParseException(left.Index, tokens, null, "No type before <");
+                var right = tokens.LastOrDefault(tkn => tkn.Type == SyntaxTokenType.GreaterThan);
+                if (right is null) throw new ParseException(left.Index, tokens, null, "No matching angle bracket");
+                var simpleType = new LangType(
+                    simpleTypeToken.Token,
+                    null,
+                    simpleTypeToken.File,
+                    simpleTypeToken.Line,
+                    simpleTypeToken.Index);
+                simpleType.SubType = GetLangType(tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1));
+                return simpleType;
+            }
+            // Type is not geneic
+            var typeToken = tokens.FirstOrDefault();
+            if (typeToken is null) throw new ParseException(0, null, null, "Unable to find type");
+            return new LangType(typeToken.Token, null, typeToken.File, typeToken.Line, typeToken.Index);
         }
     }
 }

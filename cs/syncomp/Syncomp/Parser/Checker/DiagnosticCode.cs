@@ -8,6 +8,7 @@ namespace syncomp
         UnknownVariable,
         ControlFlowError,
         UnknownType,
-        UnknownField
+        UnknownField,
+        SyntaxError
     }
 }

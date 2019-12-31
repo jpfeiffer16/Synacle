@@ -20,7 +20,7 @@ namespace syncomp
                 return true;
             foreach (var node in this._declaration.Expression)
             {
-                if (node is Return ret && ret.NodeType == node.NodeType)
+                if (node is Return ret && ret.NodeType.Equals(_declaration.NodeType))
                 {
                     return true;
                 }
