@@ -683,26 +683,30 @@ ret
 set reg0 >int
 jmp >t_end
 :t
-jmp >var_ret_val_newlexer_5_end
-:var_ret_val_newlexer_5
-:var_ret_val_newlexer_5_end
-set reg0 123
-wmem >var_ret_val_newlexer_5 reg0
-jmp >var__newlexer_7_end
-:var__newlexer_7
-&e
-&s
-&t
-0
-:var__newlexer_7_end
-wmem >var__newlexer_7 &t
-set reg0 >var__newlexer_7
+set reg0 321
+set reg1 123
+wmem reg0 reg1
+set reg0 321
 ret
 ret
 :t_end
 set reg0 >t
+jmp >r_end
+:r
+jmp >var_in_val_newlexer_9_end
+:var_in_val_newlexer_9
+:var_in_val_newlexer_9_end
+wmem >var_in_val_newlexer_9 reg0
+rmem reg0 >var_in_val_newlexer_9
+rmem reg0 reg0
+call >print_number
+rmem reg0 >var_in_val_newlexer_9
+ret
+ret
+:r_end
+set reg0 >r
 call >t
-call >println
+call >r
 halt
 
 :subtract

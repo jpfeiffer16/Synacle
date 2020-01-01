@@ -2,13 +2,15 @@
 
 function t() : int
 {
-    int ret_val = 123;
-    // return &ret_val;
-    return "test" as int;
+    wmem(321, 123);
+    return 321;
 }
 
-// ptr<int> test = t();
-// print_number(~test);
-// println(" ");
+function r(ptr<int> in_val) : ptr<int>
+{
+    print_number(~in_val);
+    return in_val;
+}
 
-println(t() as string);
+r(t() as ptr<int>);
+

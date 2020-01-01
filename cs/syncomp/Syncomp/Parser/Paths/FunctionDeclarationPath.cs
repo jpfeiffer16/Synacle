@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -29,16 +28,34 @@ namespace syncomp
               tokens
             );
             ++i;
-            var parameters = ParseTokens(
-              tokens.GetRange(i, nextClosingParen - i),
-              ctx
-            )
-              // Catch any params that are not VariableDeclaration types
-              // This cast will fail if any are not the right type
-              .Cast<VariableDeclaration>()
-              .Cast<AstNode>()
-              .ToList();
-
+            var paramTokens = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
+            foreach (var token in tokens.GetRange(i, nextClosingParen - i))
+            {
+                if (token.Type == SyntaxTokenType.Comma)
+                {
+                    paramTokens.Add(new List<SyntaxToken>());
+                }
+                else
+                {
+                    paramTokens.LastOrDefault().Add(token);
+                }
+            }
+            var parameters = paramTokens
+                .SelectMany(tkns => ParseTokens(tkns, ctx))
+                // Catch any params that are not VariableDeclaration types
+                // This cast will fail if any are not the right type
+                .Cast<VariableDeclaration>()
+                .Cast<AstNode>()
+                .ToList();
+            // var parameters = ParseTokens(
+            //   tokens.GetRange(i, nextClosingParen - i),
+            //   ctx
+            // )
+            // Catch any params that are not VariableDeclaration types
+            // This cast will fail if any are not the right type
+            // .Cast<VariableDeclaration>()
+            // .Cast<AstNode>()
+            // .ToList();
             i = GetNextNonWhitespace(nextClosingParen + 1, tokens);
 
             var langType = ParserContext.NativeTypes.LangVoid;
@@ -72,33 +89,8 @@ namespace syncomp
                 name?.Token,
                 functionToken.File,
                 functionToken.Line,
-                functionToken.Index) { NodeType = langType });
-        }
-
-        private LangType GetLangType(List<SyntaxToken> tokens)
-        {
-            var left = tokens.FirstOrDefault(tkn => tkn.Type == SyntaxTokenType.LessThan);
-            // Type  is geneic
-            if (!(left is null))
-            {
-                int leftIndex = tokens.IndexOf(left);
-                var simpleTypeToken = tokens.Take(leftIndex).FirstOrDefault();
-                if (simpleTypeToken is null) throw new ParseException(left.Index, tokens, null, "No type before <");
-                var right = tokens.LastOrDefault(tkn => tkn.Type == SyntaxTokenType.GreaterThan);
-                if (right is null) throw new ParseException(left.Index, tokens, null, "No matching angle bracket");
-                var simpleType = new LangType(
-                    simpleTypeToken.Token,
-                    null,
-                    simpleTypeToken.File,
-                    simpleTypeToken.Line,
-                    simpleTypeToken.Index);
-                simpleType.SubType = GetLangType(tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1));
-                return simpleType;
-            }
-            // Type is not geneic
-            var typeToken = tokens.FirstOrDefault();
-            if (typeToken is null) throw new ParseException(0, null, null, "Unable to find type");
-            return new LangType(typeToken.Token, null, typeToken.File, typeToken.Line, typeToken.Index);
+                functionToken.Index)
+            { NodeType = langType });
         }
     }
 }

@@ -26,7 +26,24 @@ namespace syncomp
                 i++;
                 var nextClose = GetExpression(SyntaxTokenType.LeftParen, SyntaxTokenType.RightParen, i, tokens);
                 ++i;
-                var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i), ctx);
+
+
+                var paramTokens = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
+                foreach (var tkn in tokens.GetRange(i, nextClose - i))
+                {
+                    if (tkn.Type == SyntaxTokenType.Comma)
+                    {
+                        paramTokens.Add(new List<SyntaxToken>());
+                    }
+                    else
+                    {
+                        paramTokens.LastOrDefault().Add(tkn);
+                    }
+                }
+                var parametersNodes = paramTokens
+                .SelectMany(tkns => ParseTokens(tkns, ctx)).ToList();
+
+                // var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i), ctx);
                 i = nextClose;
 
                 node = new FunctionCall(

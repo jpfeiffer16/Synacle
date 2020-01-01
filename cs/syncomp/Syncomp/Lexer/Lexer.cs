@@ -270,6 +270,10 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.As, ch);
             }
             #endregion
+            #region "Comma"
+            if (ch is ",")
+                return CreateSyntaxToken(SyntaxTokenType.Comma, ch);
+            #endregion
 
             #region "EOF and Unknown"
             if (ch is null)

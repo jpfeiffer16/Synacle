@@ -14,9 +14,8 @@ namespace syncomp
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
             var fromNode = nodes.Pop();
-            // var toNode = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx)[0] as LangType;
-            var typeName = tokens[++i].Token;
-            var toNode = ctx.LangTypes.Where(tp => tp.Name == typeName).FirstOrDefault();
+            var toNode = GetLangType(tokens.GetRange(++i, tokens.Count - i));
+            i = tokens.Count - 1;
             if (toNode is null)
             {
                 throw new ParseException(i, tokens, nodes, $"Unknown type: '{tokens[i].Token}'");
