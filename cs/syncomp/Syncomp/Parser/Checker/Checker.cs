@@ -380,7 +380,7 @@ namespace syncomp
                     return diagnostics;
                 }
                 // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
-                var type = variable.Node.NodeType.SubType;
+                var type = variable.Node.NodeType.SubTypes.FirstOrDefault();
                 if (type is null)
                 {
                     diagnostics.Add(new Diagnostic(
@@ -470,7 +470,7 @@ namespace syncomp
             {
                 // Get the type on the parameter
                 diagnostics.AddRange(Check(addressOfNode.Parameter, ctx));
-                addressOfNode.NodeType = new LangType("ptr", null, null, 0, 0) { SubType = addressOfNode.Parameter.NodeType };
+                addressOfNode.NodeType = new LangType("ptr", null, null, 0, 0) { SubTypes = new List<LangType> { addressOfNode.Parameter.NodeType  } };
             }
             #endregion
             #region "Deref"
@@ -500,7 +500,7 @@ namespace syncomp
                     return diagnostics;
                 }
                 diagnostics.AddRange(Check(identifier, ctx));
-                derefNode.NodeType = identifier.NodeType.SubType;
+                derefNode.NodeType = identifier.NodeType.SubTypes.FirstOrDefault();
             }
             #endregion
             #region "Return"

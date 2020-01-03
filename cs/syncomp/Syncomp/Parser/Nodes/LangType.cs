@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -15,9 +16,9 @@ namespace syncomp
 
         public string GetName()
         {
-            if (!(this.SubType is null))
+            if (!(this.SubTypes is null))
             {
-                return $"{this.Name}<{this.SubType.Name}>";
+                return $"{this.Name}<{this.SubTypes.FirstOrDefault().Name}>";
             }
             else
             {
@@ -29,13 +30,18 @@ namespace syncomp
         {
             if (other is null) return false;
             if (this.Name != other.Name) return false;
-            if (this.SubType == null && other.SubType == null) return true;
-            if (this.SubType == null ^ other.SubType == null) return false;
-            return this.SubType.Equals(other.SubType);
+            if (this.SubTypes == null && other.SubTypes == null) return true;
+            if (this.SubTypes == null ^ other.SubTypes == null) return false;
+            if (this.SubTypes.Count != other.SubTypes.Count) return false;
+            for (var i = 0; i < this.SubTypes.Count; i++)
+            {
+                if (!this.SubTypes[i].Equals(other.SubTypes[i])) return false;
+            }
+            return true;
         }
 
         public string Name { get; }
         public List<VariableDeclaration> Body { get; }
-        public LangType SubType { get; set; }
+        public List<LangType> SubTypes { get; set; }
     }
 }

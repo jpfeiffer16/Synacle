@@ -139,7 +139,7 @@ namespace syncomp
                     simpleTypeToken.File,
                     simpleTypeToken.Line,
                     simpleTypeToken.Index);
-                simpleType.SubType = GetLangType(tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1));
+                simpleType.SubTypes = new List<LangType> { GetLangType(tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1)) };
                 return simpleType;
             }
             // Type is not geneic

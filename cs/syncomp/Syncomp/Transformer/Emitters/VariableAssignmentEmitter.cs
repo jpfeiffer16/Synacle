@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -44,7 +45,7 @@ namespace syncomp
             if (vaNode.Identifier is DerefArrow derefArrowNode)
             {
                 var variable = ctx.Variables.Get((derefArrowNode.Left as Identifier).Name);
-                var type = variable.VariableDeclaration.NodeType.SubType;
+                var type = variable.VariableDeclaration.NodeType.SubTypes.FirstOrDefault();
                 var offset = TypeHelper.GetFieldOffset(type, (derefArrowNode.Right as Identifier).Name);
                 lines.Add($"rmem reg7 >{variable.MemoryAddress}");
                 lines.Add($"add reg7 reg7 {offset}");

@@ -41,7 +41,7 @@ namespace syncomp
                     }
                 }
                 var parametersNodes = paramTokens
-                .SelectMany(tkns => ParseTokens(tkns, ctx)).ToList();
+                    .SelectMany(tkns => ParseTokens(tkns, ctx)).ToList();
 
                 // var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i), ctx);
                 i = nextClose;

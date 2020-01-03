@@ -34,7 +34,7 @@ namespace syncomp
         /// <returns>LangType</returns>
         public LangType GetGenericType(LangType parentType, LangType subType)
         {
-            var newType = new LangType(name: parentType.Name, body: null, file: null, line: 0, column: 0) { SubType = subType };
+            var newType = new LangType(name: parentType.Name, body: null, file: null, line: 0, column: 0) { SubTypes = new List<LangType> { subType  } };
             this.LangTypes.Add(newType);
             return newType;
         }
