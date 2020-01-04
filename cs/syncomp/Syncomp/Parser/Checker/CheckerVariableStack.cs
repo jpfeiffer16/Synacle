@@ -33,7 +33,7 @@ namespace syncomp
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
                     new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
-                }, null, "rmem", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
+                }, null, "rmem", null, 0, 0) { ReturnType = ParserContext.NativeTypes.LangInt }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
@@ -44,17 +44,13 @@ namespace syncomp
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
-                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "pop", null, 0, 0) { NodeType = ParserContext.NativeTypes.LangInt }
-            });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
-            {
                 Node = new FunctionDeclaration(
                     Enumerable.Empty<AstNode>().ToList(),
                     null,
                     "pop",
                     null,
                     0,
-                    0) { NodeType = ParserContext.NativeTypes.LangInt }
+                    0) { ReturnType = ParserContext.NativeTypes.LangInt }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
@@ -64,7 +60,7 @@ namespace syncomp
                     "in",
                     null,
                     0,
-                    0) { NodeType = ParserContext.NativeTypes.LangInt }
+                    0) { ReturnType = ParserContext.NativeTypes.LangInt }
             });
         }
 

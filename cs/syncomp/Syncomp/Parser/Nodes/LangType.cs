@@ -16,9 +16,9 @@ namespace syncomp
 
         public string GetName()
         {
-            if (!(this.SubTypes is null))
+            if (!(this.SubTypes is null) && this.SubTypes.Count > 0)
             {
-                return $"{this.Name}<{this.SubTypes.FirstOrDefault().Name}>";
+                return $"{this.Name}<{string.Join(", ", this.SubTypes.Select(t => t.Name))}>";
             }
             else
             {
@@ -42,6 +42,6 @@ namespace syncomp
 
         public string Name { get; }
         public List<VariableDeclaration> Body { get; }
-        public List<LangType> SubTypes { get; set; }
+        public List<LangType> SubTypes { get; set; } = new List<LangType>();
     }
 }

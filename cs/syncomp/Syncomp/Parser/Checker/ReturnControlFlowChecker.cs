@@ -16,11 +16,11 @@ namespace syncomp
          */
         public bool Check()
         {
-            if (_declaration.NodeType == ParserContext.NativeTypes.LangVoid)
+            if (_declaration.ReturnType.Equals(ParserContext.NativeTypes.LangVoid))
                 return true;
             foreach (var node in this._declaration.Expression)
             {
-                if (node is Return ret && ret.NodeType.Equals(_declaration.NodeType))
+                if (node is Return ret && ret.NodeType.Equals(_declaration.ReturnType))
                 {
                     return true;
                 }

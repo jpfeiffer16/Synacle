@@ -1,16 +1,5 @@
-#include "./lib/stdlib.bc"
 
-function t() : int
+func<int, string> test = function(int i) : string
 {
-    wmem(321, 123);
-    return 321;
-}
-
-function r(ptr<int> in_val) : ptr<int>
-{
-    print_number(~in_val);
-    return in_val;
-}
-
-r(t() as ptr<int>);
-
+    return " ";
+};

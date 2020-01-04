@@ -62,19 +62,21 @@ namespace syncomp
                     || (tokens.Count >= i + 4 
                         && tokens[i + 1].Type == SyntaxTokenType.LessThan
                         && tokens[i + 2].Type == SyntaxTokenType.Identifier 
-                        && tokens[i + 3].Type == SyntaxTokenType.GreaterThan)))
+                        && (tokens[i + 3].Type == SyntaxTokenType.GreaterThan || tokens[i+3].Type == SyntaxTokenType.Comma))))
             {
                 var typeDecToken = tokens[i];
-                var type = ctx.LangTypes.Where(tp => tp.Name == token.Token).FirstOrDefault();
+                var typeTokens = new List<SyntaxToken> { typeDecToken };
                 if (tokens[i + 1].Type == SyntaxTokenType.LessThan)
                 {
                     var nextMatching = this.GetNext(i + 1, tokens, SyntaxTokenType.GreaterThan);
-                    var typeToken = tokens[nextMatching - 1];
-                    var subType = ctx.LangTypes.Where(tp => tp.Name == typeToken.Token).FirstOrDefault();
-                    type = ctx.GetGenericType(type, subType);
+                    // var typeToken = tokens[nextMatching - 1];
+                    // var subType = ctx.LangTypes.Where(tp => tp.Name == typeToken.Token).FirstOrDefault();
+                    typeTokens = tokens.GetRange(i, (nextMatching - i) + 1);
                     i = nextMatching;
                     // ctx.LangTypes.Add(new LangType($"{typeDecToken.Token}<{typeToken.Token}>", null, null, 0, 0 ));
                 }
+                // var type = ctx.LangTypes.Where(tp => tp.Name == token.Token).FirstOrDefault();
+                var type = GetLangType(typeTokens, ctx);
                 var nextToken = tokens[++i];
                 if (type == null)
                     throw new ParseException(i,

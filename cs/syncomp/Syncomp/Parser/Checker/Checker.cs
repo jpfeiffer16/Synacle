@@ -74,7 +74,7 @@ namespace syncomp
                     }
                     else
                     {
-                        parameterType = function.Node.NodeType;
+                        parameterType = function.Node.ReturnType;
                     }
                 }
                 if (va.Parameter is Identifier parameter)
@@ -220,7 +220,7 @@ namespace syncomp
                         fd.File,
                         fd.Line,
                         fd.Column,
-                        length: fd.Name.Length,
+                        length: fd != null ? fd.Name.Length : 7,
                         $"Not all code paths return value of type {fd.NodeType.GetName()}",
                         DiagnosticCode.ControlFlowError
                     ));

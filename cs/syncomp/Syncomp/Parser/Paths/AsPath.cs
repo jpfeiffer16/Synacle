@@ -14,7 +14,7 @@ namespace syncomp
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
             var fromNode = nodes.Pop();
-            var toNode = GetLangType(tokens.GetRange(++i, tokens.Count - i));
+            var toNode = GetLangType(tokens.GetRange(++i, tokens.Count - i), ctx);
             i = tokens.Count - 1;
             if (toNode is null)
             {

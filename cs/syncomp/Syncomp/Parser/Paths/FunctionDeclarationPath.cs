@@ -40,7 +40,7 @@ namespace syncomp
 
             i = GetNextNonWhitespace(nextClosingParen + 1, tokens);
 
-            var langType = ParserContext.NativeTypes.LangVoid;
+            var returnType = ParserContext.NativeTypes.LangVoid;
             if (tokens[i].Type == SyntaxTokenType.Colon)
             {
                 i++;
@@ -48,7 +48,7 @@ namespace syncomp
                 var curlyStart = GetNext(i, tokens, SyntaxTokenType.LeftCurly);
                 var typeNameTokens = tokens.GetRange(i, curlyStart - i);
                 i = curlyStart;
-                langType = GetLangType(typeNameTokens);
+                returnType = GetLangType(typeNameTokens, ctx);
             }
 
             var nextClosingCurly = GetExpression(
@@ -65,6 +65,10 @@ namespace syncomp
 
             i = nextClosingCurly;
 
+            var langType = new LangType("func", null, null, 0, 0);
+            langType.SubTypes.AddRange(parameters.Select(p => p.NodeType));
+            langType.SubTypes.Add(returnType);
+
             return (i, new FunctionDeclaration(
                 parameters,
                 expression,
@@ -72,7 +76,7 @@ namespace syncomp
                 functionToken.File,
                 functionToken.Line,
                 functionToken.Index)
-            { NodeType = langType });
+            { NodeType = langType, ReturnType = returnType });
         }
     }
 }
