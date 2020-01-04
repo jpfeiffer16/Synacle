@@ -28,34 +28,16 @@ namespace syncomp
               tokens
             );
             ++i;
-            var paramTokens = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
-            foreach (var token in tokens.GetRange(i, nextClosingParen - i))
-            {
-                if (token.Type == SyntaxTokenType.Comma)
-                {
-                    paramTokens.Add(new List<SyntaxToken>());
-                }
-                else
-                {
-                    paramTokens.LastOrDefault().Add(token);
-                }
-            }
-            var parameters = paramTokens
-                .SelectMany(tkns => ParseTokens(tkns, ctx))
-                // Catch any params that are not VariableDeclaration types
-                // This cast will fail if any are not the right type
-                .Cast<VariableDeclaration>()
-                .Cast<AstNode>()
-                .ToList();
-            // var parameters = ParseTokens(
-            //   tokens.GetRange(i, nextClosingParen - i),
-            //   ctx
-            // )
-            // Catch any params that are not VariableDeclaration types
-            // This cast will fail if any are not the right type
-            // .Cast<VariableDeclaration>()
-            // .Cast<AstNode>()
-            // .ToList();
+            var parameters = ParseTokens(
+              tokens.GetRange(i, nextClosingParen - i),
+              ctx
+            )
+              // Catch any params that are not VariableDeclaration types
+              // This cast will fail if any are not the right type
+              .Cast<VariableDeclaration>()
+              .Cast<AstNode>()
+              .ToList();
+
             i = GetNextNonWhitespace(nextClosingParen + 1, tokens);
 
             var langType = ParserContext.NativeTypes.LangVoid;
