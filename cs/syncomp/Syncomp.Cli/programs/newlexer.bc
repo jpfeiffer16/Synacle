@@ -1,5 +1,22 @@
+#include "lib/stdlib.bc"
 
-func<int, string> test = function(int i) : string
+type person
 {
-    return " ";
+    int id
 };
+
+func<int, ptr<person>> person_factory = function(int id) : ptr<person>
+{
+    person p;
+    p.id = id;
+    return &p;
+};
+
+function do_a_thing(func<int, string> greeting_factory)
+{
+    ptr<person> p = greeting_factory(123);
+    print_number(p->id);
+}
+
+
+do_a_thing(person_factory);

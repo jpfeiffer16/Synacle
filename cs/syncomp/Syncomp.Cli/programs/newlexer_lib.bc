@@ -1,0 +1,6 @@
+
+function do_a_thing(func<int, string> greeting_factory)
+{
+    string greeting = greeting_factory();
+    // println(greeting);
+}

@@ -61,7 +61,8 @@ namespace syncomp
                 var length = 1;
                 if (va.Parameter is FunctionCall fc)
                 {
-                    var function = ctx.Variables.GetFunction(fc.Name);
+                    var function = ctx.Variables.GetFunction(fc.Name)?.Node as AstNode;
+                    if (function is null) function = ctx.Variables.GetVariable(fc.Name)?.Node as AstNode;
                     if (function is null)
                     {
                         diagnostics.Add(
@@ -74,7 +75,7 @@ namespace syncomp
                     }
                     else
                     {
-                        parameterType = function.Node.ReturnType;
+                        parameterType = function.NodeType.SubTypes.LastOrDefault();
                     }
                 }
                 if (va.Parameter is Identifier parameter)
@@ -118,7 +119,8 @@ namespace syncomp
             #region "FunctionCall"
             if (node is FunctionCall f)
             {
-                var function = ctx.Variables.GetFunction(f.Name);
+                var function = ctx.Variables.GetFunction(f.Name)?.Node as AstNode;
+                if (function is null) function = ctx.Variables.GetVariable(f.Name)?.Node;
                 if (function is null
                     // Handle intrinsics
                     // && f.Name != "out"
@@ -138,7 +140,7 @@ namespace syncomp
                 }
                 else if (function != null)
                 {
-                    if (f.Parameters.Count != function.Node.Parameters?.Count)
+                    if (f.Parameters.Count != function.NodeType.SubTypes?.Count - 1)
                     {
                         diagnostics.Add(new Diagnostic(
                             node.File,
@@ -152,15 +154,16 @@ namespace syncomp
                     {
                         diagnostics.AddRange(Check(parameter, ctx));
                     }
-                    var minCount = Math.Min(f.Parameters.Count, function.Node.Parameters.Count);
+                    var minCount = Math.Min(f.Parameters.Count, function.NodeType.SubTypes.Count - 1);
                     for (var i = 0; i < minCount; i++)
                     {
                         var callParam = f.Parameters[i];
                         var callParamType = callParam.NodeType;
                         if (callParam is Identifier callParamTp)
                         {
-                            var variable = ctx.Variables.GetVariable(callParamTp.Name);
-                            callParamType = variable.Node.NodeType;
+                            diagnostics.AddRange(Check(callParamTp, ctx));
+                            // var variable = ctx.Variables.GetVariable(callParamTp.Name);
+                            callParamType = callParamTp.NodeType;
                         }
                         if (callParam is FunctionCall callParamFunc)
                         {
@@ -178,17 +181,18 @@ namespace syncomp
                             }
                             callParamType = funcParam.Node.NodeType;
                         }
-                        var declParam = function.Node.Parameters[i];
-                        if (!callParamType.Equals(declParam.NodeType))
+                        var declParamType = function.NodeType.SubTypes[i];
+                        if (!callParamType.Equals(declParamType))
                         {
                             diagnostics.Add(new Diagnostic(
                                 callParam.File,
                                 callParam.Line,
                                 callParam.Column,
-                                $"Unable to convert type '{callParamType?.GetName()}' to  '{declParam.NodeType?.GetName()}'",
+                                $"Unable to convert type '{callParamType?.GetName()}' to  '{declParamType?.GetName()}'",
                                 DiagnosticCode.InvalidTypes));
                         }
                     }
+                    f.NodeType = function.NodeType.SubTypes.LastOrDefault();
                 }
             }
             #endregion

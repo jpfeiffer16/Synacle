@@ -19,6 +19,9 @@ namespace syncomp
                 {
                     new VariableDeclaration("char", ParserContext.NativeTypes.LangInt, null, 0, 0)
                 }, null, "out", null, 0, 0)
+                {
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt, ParserContext.NativeTypes.LangVoid)
+                }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
@@ -27,13 +30,25 @@ namespace syncomp
                     new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
                     new VariableDeclaration("source", ParserContext.NativeTypes.LangInt, null, 0, 0)
                 }, null, "wmem", null, 0, 0)
+                {
+                    NodeType = GenerateFunctionPointerSig(
+                        ParserContext.NativeTypes.LangInt,
+                        ParserContext.NativeTypes.LangInt,
+                        ParserContext.NativeTypes.LangVoid)
+                }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
                     new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
-                }, null, "rmem", null, 0, 0) { ReturnType = ParserContext.NativeTypes.LangInt }
+                }, null, "rmem", null, 0, 0)
+                {
+                    ReturnType = ParserContext.NativeTypes.LangInt,
+                    NodeType = GenerateFunctionPointerSig(
+                        ParserContext.NativeTypes.LangInt,
+                        ParserContext.NativeTypes.LangInt)
+                }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
@@ -41,6 +56,9 @@ namespace syncomp
                 {
                     new VariableDeclaration("value", ParserContext.NativeTypes.LangInt, null, 0, 0),
                 }, null, "push", null, 0, 0)
+                {
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt, ParserContext.NativeTypes.LangVoid)
+                }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
@@ -50,7 +68,11 @@ namespace syncomp
                     "pop",
                     null,
                     0,
-                    0) { ReturnType = ParserContext.NativeTypes.LangInt }
+                    0)
+                {
+                    ReturnType = ParserContext.NativeTypes.LangInt,
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt)
+                }
             });
             this.Stack.LastOrDefault().functions.Add(new CheckerFunction
             {
@@ -60,7 +82,11 @@ namespace syncomp
                     "in",
                     null,
                     0,
-                    0) { ReturnType = ParserContext.NativeTypes.LangInt }
+                    0)
+                {
+                    ReturnType = ParserContext.NativeTypes.LangInt,
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt)
+                }
             });
         }
 
@@ -103,6 +129,16 @@ namespace syncomp
                     return function;
             }
             return null;
+        }
+
+        private LangType GenerateFunctionPointerSig(params LangType[] subTypes)
+        {
+            return GenerateLangType(ParserContext.NativeTypes.LangFunctionPointer, subTypes);
+        }
+
+        private LangType GenerateLangType(LangType originalLangType, params LangType[] subTypes)
+        {
+            return new LangType(originalLangType.Name, null, null, 0, 0) { SubTypes = subTypes.ToList() };
         }
     }
 }
