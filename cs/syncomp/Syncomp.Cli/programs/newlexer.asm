@@ -681,66 +681,48 @@ ret
 ret
 :int_end
 set reg0 >int
-jmp >var_greeting_factory_newlexer_3_end
-:var_greeting_factory_newlexer_3
-:var_greeting_factory_newlexer_3_end
-jmp >function__newlexer_3_end
-:function__newlexer_3
-jmp >var_id_newlexer_3_end
-:var_id_newlexer_3
-:var_id_newlexer_3_end
-wmem >var_id_newlexer_3 reg0
-jmp >var_test_newlexer_5_end
-:var_test_newlexer_5
-:var_test_newlexer_5_end
-set reg0 123
-wmem >var_test_newlexer_5 reg0
-jmp >var_t_newlexer_6_end
-:var_t_newlexer_6
-:var_t_newlexer_6_end
-set reg0 >var_test_newlexer_5
-wmem >var_t_newlexer_6 reg0
-jmp >var__newlexer_7_end
-:var__newlexer_7
-&e
-&l
-&l
-&o
-&,
-32
-&W
-&o
-&r
-&l
-&d
-0
-:var__newlexer_7_end
-wmem >var__newlexer_7 &H
-set reg0 >var__newlexer_7
+jmp >var_person_factory_newlexer_8_end
+:var_person_factory_newlexer_8
+:var_person_factory_newlexer_8_end
+jmp >function__newlexer_8_end
+:function__newlexer_8
+jmp >var_id_newlexer_8_end
+:var_id_newlexer_8
+:var_id_newlexer_8_end
+wmem >var_id_newlexer_8 reg0
+jmp >var_p_newlexer_10_end
+:var_p_newlexer_10
+:fld_p_newlexer_10_id
+:var_p_newlexer_10_end
+rmem reg0 >var_id_newlexer_8
+wmem >fld_p_newlexer_10_id reg0
+set reg0 >var_p_newlexer_10
 ret
 ret
-:function__newlexer_3_end
-set reg0 >function__newlexer_3
-wmem >var_greeting_factory_newlexer_3 reg0
+:function__newlexer_8_end
+set reg0 >function__newlexer_8
+wmem >var_person_factory_newlexer_8 reg0
 jmp >do_a_thing_end
 :do_a_thing
-jmp >var_greeting_factory_newlexer_10_end
-:var_greeting_factory_newlexer_10
-:var_greeting_factory_newlexer_10_end
-wmem >var_greeting_factory_newlexer_10 reg0
-jmp >var_greeting_newlexer_12_end
-:var_greeting_newlexer_12
-:var_greeting_newlexer_12_end
+jmp >var_person_factory_newlexer_15_end
+:var_person_factory_newlexer_15
+:var_person_factory_newlexer_15_end
+wmem >var_person_factory_newlexer_15 reg0
+jmp >var_p_newlexer_17_end
+:var_p_newlexer_17
+:var_p_newlexer_17_end
 set reg0 123
-rmem reg7 >var_greeting_factory_newlexer_10
+rmem reg7 >var_person_factory_newlexer_15
 call reg7
-wmem >var_greeting_newlexer_12 reg0
-rmem reg0 >var_greeting_newlexer_12
-call >println
+wmem >var_p_newlexer_17 reg0
+rmem reg0 >var_p_newlexer_17
+add reg0 reg0 1
+rmem reg0 reg0
+call >print_number
 ret
 :do_a_thing_end
 set reg0 >do_a_thing
-rmem reg0 >var_greeting_factory_newlexer_3
+rmem reg0 >var_person_factory_newlexer_8
 call >do_a_thing
 halt
 

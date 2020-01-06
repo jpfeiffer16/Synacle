@@ -1,20 +1,9 @@
 #include "lib/stdlib.bc"
+#include "newlexer_lib.bc"
 
-type person
+function do_a_thing(func<int, ptr<person>> person_factory)
 {
-    int id
-};
-
-func<int, ptr<person>> person_factory = function(int id) : ptr<person>
-{
-    person p;
-    p.id = id;
-    return &p;
-};
-
-function do_a_thing(func<int, string> greeting_factory)
-{
-    ptr<person> p = greeting_factory(123);
+    ptr<person> p = person_factory(123);
     print_number(p->id);
 }
 

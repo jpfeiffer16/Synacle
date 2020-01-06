@@ -1,6 +1,11 @@
-
-function do_a_thing(func<int, string> greeting_factory)
+type person
 {
-    string greeting = greeting_factory();
-    // println(greeting);
-}
+    int id
+};
+
+func<int, ptr<person>> person_factory = function(int id) : ptr<person>
+{
+    person p;
+    p.id = id;
+    return &p;
+};

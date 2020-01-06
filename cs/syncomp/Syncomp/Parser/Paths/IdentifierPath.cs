@@ -68,14 +68,10 @@ namespace syncomp
                 var typeTokens = new List<SyntaxToken> { typeDecToken };
                 if (tokens[i + 1].Type == SyntaxTokenType.LessThan)
                 {
-                    var nextMatching = this.GetNext(i + 1, tokens, SyntaxTokenType.GreaterThan);
-                    // var typeToken = tokens[nextMatching - 1];
-                    // var subType = ctx.LangTypes.Where(tp => tp.Name == typeToken.Token).FirstOrDefault();
+                    var nextMatching = this.GetExpression(SyntaxTokenType.LessThan, SyntaxTokenType.GreaterThan, i + 1, tokens);
                     typeTokens = tokens.GetRange(i, (nextMatching - i) + 1);
                     i = nextMatching;
-                    // ctx.LangTypes.Add(new LangType($"{typeDecToken.Token}<{typeToken.Token}>", null, null, 0, 0 ));
                 }
-                // var type = ctx.LangTypes.Where(tp => tp.Name == token.Token).FirstOrDefault();
                 var type = GetLangType(typeTokens, ctx);
                 var nextToken = tokens[++i];
                 if (type == null)
