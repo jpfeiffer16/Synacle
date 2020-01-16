@@ -24,14 +24,13 @@ namespace syncomp
         public IEnumerable<(string, string)> BuildContext()
         {
             var ctx = new List<(string, string)>();
-            return Build(ctx, _name, _code);
+            return Build(ctx, _name, _code).Reverse();
         }
 
         private IEnumerable<(string, string)> Build(
                 List<(string, string)> ctx, string filename, string code)
         {
             ctx.Add((filename, code));
-            ctx.Reverse();
             var importLines = code
                 .Split('\n')
                 .Select(ln => ln.Trim())
