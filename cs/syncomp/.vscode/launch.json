@@ -15,6 +15,7 @@
                 // "Syncomp.Cli/programs/types/typetest.bc"
                 // "Syncomp.Cli/programs/pig-latin.bc"
                 "Syncomp.Cli/programs/newlexer.bc"
+                // "Syncomp.Cli/programs/interpreter/bcin.bc"
             ],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window

@@ -742,7 +742,127 @@ call >interpret_loop
 ret
 :interpret_loop_end
 set reg0 >interpret_loop
-call >interpret_loop
+jmp >var_opcodes_bcin_29_end
+:var_opcodes_bcin_29
+:fld_opcodes_bcin_29_HALT
+:fld_opcodes_bcin_29_SET
+:fld_opcodes_bcin_29_PUSH
+:fld_opcodes_bcin_29_POP
+:fld_opcodes_bcin_29_EQ
+:fld_opcodes_bcin_29_GT
+:fld_opcodes_bcin_29_JMP
+:fld_opcodes_bcin_29_JT
+:fld_opcodes_bcin_29_JF
+:fld_opcodes_bcin_29_ADD
+:fld_opcodes_bcin_29_MULT
+:fld_opcodes_bcin_29_MOD
+:fld_opcodes_bcin_29_AND
+:fld_opcodes_bcin_29_OR
+:fld_opcodes_bcin_29_NOT
+:fld_opcodes_bcin_29_RMEM
+:fld_opcodes_bcin_29_WMEM
+:fld_opcodes_bcin_29_CALL
+:fld_opcodes_bcin_29_RET
+:fld_opcodes_bcin_29_OUT
+:fld_opcodes_bcin_29_IN
+:fld_opcodes_bcin_29_NOOP
+:var_opcodes_bcin_29_end
+set reg0 0
+wmem >fld_opcodes_bcin_29_HALT reg0
+set reg0 1
+wmem >fld_opcodes_bcin_29_SET reg0
+set reg0 2
+wmem >fld_opcodes_bcin_29_PUSH reg0
+set reg0 3
+wmem >fld_opcodes_bcin_29_POP reg0
+set reg0 4
+wmem >fld_opcodes_bcin_29_EQ reg0
+set reg0 5
+wmem >fld_opcodes_bcin_29_GT reg0
+set reg0 6
+wmem >fld_opcodes_bcin_29_JMP reg0
+set reg0 7
+wmem >fld_opcodes_bcin_29_JT reg0
+set reg0 8
+wmem >fld_opcodes_bcin_29_JF reg0
+set reg0 9
+wmem >fld_opcodes_bcin_29_ADD reg0
+set reg0 10
+wmem >fld_opcodes_bcin_29_MULT reg0
+set reg0 11
+wmem >fld_opcodes_bcin_29_MOD reg0
+set reg0 12
+wmem >fld_opcodes_bcin_29_AND reg0
+set reg0 13
+wmem >fld_opcodes_bcin_29_OR reg0
+set reg0 14
+wmem >fld_opcodes_bcin_29_NOT reg0
+set reg0 15
+wmem >fld_opcodes_bcin_29_RMEM reg0
+set reg0 16
+wmem >fld_opcodes_bcin_29_WMEM reg0
+set reg0 17
+wmem >fld_opcodes_bcin_29_CALL reg0
+set reg0 18
+wmem >fld_opcodes_bcin_29_RET reg0
+set reg0 19
+wmem >fld_opcodes_bcin_29_OUT reg0
+set reg0 20
+wmem >fld_opcodes_bcin_29_IN reg0
+set reg0 21
+wmem >fld_opcodes_bcin_29_NOOP reg0
+jmp >var_entrypoint_bcin_53_end
+:var_entrypoint_bcin_53
+:var_entrypoint_bcin_53_end
+jmp >function__bcin_53_end
+:function__bcin_53
+jmp >var__bcin_55_end
+:var__bcin_55
+&e
+&l
+&l
+&o
+&,
+32
+&w
+&o
+&r
+&l
+&d
+&!
+0
+:var__bcin_55_end
+wmem >var__bcin_55 &H
+set reg0 >var__bcin_55
+call >println
+ret
+:function__bcin_53_end
+set reg0 >function__bcin_53
+wmem >var_entrypoint_bcin_53 reg0
+jmp >var_p_counter_bcin_59_end
+:var_p_counter_bcin_59
+:var_p_counter_bcin_59_end
+rmem reg0 >var_entrypoint_bcin_53
+wmem >var_p_counter_bcin_59 reg0
+:for__bcin_60_begin
+rmem reg0 >var_p_counter_bcin_59
+set reg1 32767
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+jf reg0 >for__bcin_60_end
+jmp >var_op_bcin_61_end
+:var_op_bcin_61
+:var_op_bcin_61_end
+rmem reg0 >var_p_counter_bcin_59
+rmem reg0 reg0
+wmem >var_op_bcin_61 reg0
+rmem reg0 >var_p_counter_bcin_59
+add reg0 reg0 1
+wmem >var_p_counter_bcin_59 reg0
+jmp >for__bcin_60_begin
+:for__bcin_60_end
 halt
 
 :subtract

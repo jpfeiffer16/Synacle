@@ -1,0 +1,128 @@
+#include "../shell.bc"
+
+type codes
+{
+    int HALT,
+    int SET,
+    int PUSH,
+    int POP,
+    int EQ,
+    int GT,
+    int JMP,
+    int JT,
+    int JF,
+    int ADD,
+    int MULT,
+    int MOD,
+    int AND,
+    int OR,
+    int NOT,
+    int RMEM,
+    int WMEM,
+    int CALL,
+    int RET,
+    int OUT,
+    int IN,
+    int NOOP
+};
+
+codes opcodes;
+opcodes.HALT = 0;
+opcodes.SET = 1;
+opcodes.PUSH = 2;
+opcodes.POP = 3;
+opcodes.EQ = 4;
+opcodes.GT = 5;
+opcodes.JMP = 6;
+opcodes.JT = 7;
+opcodes.JF = 8;
+opcodes.ADD = 9;
+opcodes.MULT = 10;
+opcodes.MOD = 11;
+opcodes.AND = 12;
+opcodes.OR = 13;
+opcodes.NOT = 14;
+opcodes.RMEM = 15;
+opcodes.WMEM = 16;
+opcodes.CALL = 17;
+opcodes.RET = 18;
+opcodes.OUT = 19;
+opcodes.IN = 20;
+opcodes.NOOP = 21;
+
+func<void> entrypoint = function()
+{
+    println("Hello, world!");
+};
+
+
+int p_counter = entrypoint as int;
+for (; p_counter < 32767; ++p_counter) {
+    int op = ~p_counter as int;
+    if (op == opcodes.HALT) {
+        println("HALT");
+    }
+    if (op == opcodes.SET) {
+        println("SET");
+    }
+    if (op == opcodes.PUSH) {
+        println("PUSH");
+    }
+    if (op == opcodes.POP) {
+        println("POP");
+    }
+    if (op == opcodes.EQ) {
+        println("EQ");
+    }
+    if (op == opcodes.GT) {
+        println("GT");
+    }
+    if (op == opcodes.JMP) {
+        println("JMP");
+    }
+    if (op == opcodes.JT) {
+        println("JT");
+    }
+    if (op == opcodes.JF) {
+        println("JF");
+    }
+    if (op == opcodes.ADD) {
+        println("ADD");
+    }
+    if (op == opcodes.MULT) {
+        println("MULT");
+    }
+    if (op == opcodes.MOD) {
+        println("MOD");
+    }
+    if (op == opcodes.AND) {
+        println("AND");
+    }
+    if (op == opcodes.OR) {
+        println("OR");
+    }
+    if (op == opcodes.NOT) {
+        println("NOT");
+    }
+    if (op == opcodes.RMEM) {
+        println("RMEM");
+    }
+    if (op == opcodes.WMEM) {
+        println("WMEM");
+    }
+    if (op == opcodes.CALL) {
+        println("CALL");
+    }
+    if (op == opcodes.RET) {
+        println("RET");
+    }
+    if (op == opcodes.OUT) {
+        println("OUT");
+    }
+    if (op == opcodes.IN) {
+        println("IN");
+    }
+    if (op == opcodes.NOOP) {
+        println("NOOP");
+    }
+}

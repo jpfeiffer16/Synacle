@@ -39,6 +39,7 @@ namespace syncomp
             var incr = forConditionList[2];
 
             i++;
+            i = GetNextNonWhitespace(i, tokens);
             var expressionEnd = GetExpression(
               SyntaxTokenType.LeftCurly,
               SyntaxTokenType.RightCurly,

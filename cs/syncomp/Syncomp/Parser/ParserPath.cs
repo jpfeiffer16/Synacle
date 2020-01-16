@@ -159,7 +159,9 @@ namespace syncomp
             var typeToken = tokens.FirstOrDefault();
             if (typeToken is null) throw new ParseException(0, null, null, "Unable to find type");
             // return new LangType(typeToken.Token, null, typeToken.File, typeToken.Line, typeToken.Index);
-            return ctx.LangTypes.Where(lt => lt.Name == typeToken.Token).FirstOrDefault();
+            LangType langType = ctx.LangTypes.Where(lt => lt.Name == typeToken.Token).FirstOrDefault();
+            if (langType is null) throw new TypeNotFoundException(typeToken.Token);
+            return langType;
         }
     }
 }

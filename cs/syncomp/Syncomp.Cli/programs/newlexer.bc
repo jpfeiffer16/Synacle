@@ -1,11 +1,23 @@
-#include "lib/stdlib.bc"
-#include "newlexer_lib.bc"
+// function do_a_thing(func<int, ptr<person>> person_factory)
+// {
+//     ptr<person> p = person_factory(123);
+//     print_number(p->id);
+// }
+// 
+// 
+// do_a_thing(person_factory);
 
-function do_a_thing(func<int, ptr<person>> person_factory)
+type test
 {
-    ptr<person> p = person_factory(123);
-    print_number(p->id);
+    int id
+};
+
+test t;
+t.id = 123;
+
+if (t.id == t.id)
+{
+    out(10);
+    out(10);
+    out(10);
 }
-
-
-do_a_thing(person_factory);
