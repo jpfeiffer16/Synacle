@@ -23,7 +23,9 @@ namespace syncomp
             {
                 var thisToken = tokens[i];
                 var staticMatches = Paths.ParserPaths.Where(path => path.Match == tokens[i].Type).ToList();
-                foreach (var match in staticMatches)
+                if (staticMatches.Count > 1) throw new ParseException(i, tokens, nodes, $"There are more than one matches for token {thisToken.Token}");
+                var match = staticMatches.FirstOrDefault();
+                if (!(match is null))
                 {
                     try
                     {

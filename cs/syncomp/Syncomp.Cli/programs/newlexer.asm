@@ -5,7 +5,7 @@ jmp >var_t_newlexer_15_end
 set reg0 123
 wmem >fld_t_newlexer_15_id reg0
 rmem reg0 >fld_t_newlexer_15_id
-set reg1 123
+rmem reg1 >fld_t_newlexer_15_id
 eq reg0 reg0 reg1
 jf reg0 >end__newlexer_18
 set reg0 10
