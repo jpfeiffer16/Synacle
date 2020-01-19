@@ -492,19 +492,25 @@ namespace syncomp
                     ));
                     return diagnostics;
                 }
-                if (!(parameter is Identifier identifier))
+                // TODO: Improve
+                // if (!(parameter is Identifier identifier))
+                // {
+                //     diagnostics.Add(new Diagnostic(
+                //         parameter.File,
+                //         parameter.Line,
+                //         parameter.Column,
+                //         $"Invalid token type. Expected {typeof(Identifier)}, got {parameter.GetType()}",
+                //         DiagnosticCode.SyntaxError
+                //     ));
+                //     return diagnostics;
+                // }
+                // diagnostics.AddRange(Check(identifier, ctx));
+                // derefNode.NodeType = identifier.NodeType.SubTypes.FirstOrDefault();
+                if (parameter.NodeType.Name == "ptr")
                 {
-                    diagnostics.Add(new Diagnostic(
-                        parameter.File,
-                        parameter.Line,
-                        parameter.Column,
-                        $"Invalid token type. Expected {typeof(Identifier)}, got {parameter.GetType()}",
-                        DiagnosticCode.SyntaxError
-                    ));
-                    return diagnostics;
+                    derefNode.NodeType = parameter.NodeType.SubTypes.FirstOrDefault();
                 }
-                diagnostics.AddRange(Check(identifier, ctx));
-                derefNode.NodeType = identifier.NodeType.SubTypes.FirstOrDefault();
+                diagnostics.AddRange(Check(parameter, ctx));
             }
             #endregion
             #region "Return"

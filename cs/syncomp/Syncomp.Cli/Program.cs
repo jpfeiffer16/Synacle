@@ -82,7 +82,7 @@ namespace syncomp
         }
 
         private static List<AstNode> CompileCode(
-            IEnumerable<(string, string)> preprocessorContext)
+            List<KeyValuePair<string, string>> preprocessorContext)
         {
             //Lex
             var tokens = new List<SyntaxToken>();
@@ -91,7 +91,7 @@ namespace syncomp
             {
                 foreach (var file in preprocessorContext)
                 {
-                    var lexer = new Lexer(file.Item2, file.Item1);
+                    var lexer = new Lexer(file.Value, file.Key);
                     tokens.AddRange(lexer.Lex());
                 }
                 // Trim out whitespace

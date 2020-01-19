@@ -21,23 +21,31 @@ namespace syncomp
         }
 
 
-        public IEnumerable<(string, string)> BuildContext()
+        public List<KeyValuePair<string, string>> BuildContext()
         {
-            var ctx = new List<(string, string)>();
-            return Build(ctx, _name, _code).Reverse();
+            var ctx = new List<KeyValuePair<string, string>>();
+            var results = Build(ctx, _name, _code);
+            results.Reverse();
+            return results;
         }
 
-        private IEnumerable<(string, string)> Build(
-                List<(string, string)> ctx, string filename, string code)
+        private List<KeyValuePair<string, string>> Build(
+                List<KeyValuePair<string, string>> ctx, string filename, string code)
         {
-            ctx.Add((filename, code));
+            if (!ctx.Any(c => c.Key == filename))
+            { 
+                ctx.Add(new KeyValuePair<string, string>(filename, code));
+            }
+            else
+            {
+                var existingPair = ctx.Find(c => c.Key == filename);
+                ctx.Remove(existingPair);
+                ctx.Add(existingPair);
+            }
             var importLines = code
                 .Split('\n')
                 .Select(ln => ln.Trim())
                 .Where(ln => ln.StartsWith("#include"));
-            if (importLines.Count() > 0)
-            {
-            }
 
             var includeMatches = this.IncludeRegex.Matches(code);
 
@@ -55,7 +63,7 @@ namespace syncomp
         private string ResolvePath(string sourcePath, string path)
         {
             var fileInfo = new FileInfo(sourcePath);
-            var actualPath = Path.Combine(fileInfo.DirectoryName, path);
+            var actualPath = new FileInfo(Path.Combine(fileInfo.DirectoryName, path)).FullName;
             return actualPath;
         }
     }

@@ -46,7 +46,7 @@ function alloc() : int {
   return data_index;
 }
 
-function alloc_chunk(var length) {
+function alloc_chunk(var length) : int {
   var ptr = alloc();
   var dest_ptr = ptr + length;
   wmem(dest_ptr, 32767);

@@ -1,4 +1,5 @@
 #include "../shell.bc"
+#include "../lib/array_wrapper.bc"
 
 type codes
 {
@@ -50,6 +51,11 @@ opcodes.OUT = 19;
 opcodes.IN = 20;
 opcodes.NOOP = 21;
 
+function take(string op_name, int num)
+{
+
+}
+
 func<void> entrypoint = function()
 {
     println("Hello, world!");
@@ -63,13 +69,27 @@ for (; p_counter < 32767; ++p_counter) {
         println("HALT");
     }
     if (op == opcodes.SET) {
-        println("SET");
+        print("SET ");
+        ++p_counter;
+        int reg = ~p_counter as int;
+        print_number(reg);
+        ++p_counter;
+        int val = ~p_counter as int;
+        // TODO: Need set op intrinsic
+        // will wmem work?
     }
     if (op == opcodes.PUSH) {
         println("PUSH");
+        ++p_counter;
+        push(~p_counter as int);
+        return;
     }
     if (op == opcodes.POP) {
         println("POP");
+        ++p_counter;
+        int val = pop();
+        wmem(~p_counter as int, val);
+        return;
     }
     if (op == opcodes.EQ) {
         println("EQ");

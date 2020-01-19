@@ -1,4 +1,5 @@
-function throw(var msg) {
+#include "stdlib.bc"
+function throw(string msg) {
   println(msg);
   exit();
 }

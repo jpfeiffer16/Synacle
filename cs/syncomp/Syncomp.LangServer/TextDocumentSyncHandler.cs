@@ -56,7 +56,7 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
             foreach (var file in prepCtx)
             {
                 //TODO: Fix this tuple nonsense
-                var lexer = new Lexer(file.Item2, file.Item1);
+                var lexer = new Lexer(file.Key, file.Value);
                 tokens.AddRange(lexer.Lex());
             }
             tokens = tokens.Where(tkn => tkn.Type != SyntaxTokenType.Space).ToList();

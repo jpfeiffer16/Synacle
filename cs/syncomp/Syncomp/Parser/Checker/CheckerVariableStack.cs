@@ -88,6 +88,14 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt)
                 }
             });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "exit", null, 0, 0)
+                {
+                    ReturnType = ParserContext.NativeTypes.LangVoid,
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid)
+                }
+            });
         }
 
         public void Push()
