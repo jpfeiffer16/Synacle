@@ -51,9 +51,29 @@ opcodes.OUT = 19;
 opcodes.IN = 20;
 opcodes.NOOP = 21;
 
-function take(string op_name, int num)
+type takeresult
 {
+    int p_counter,
+    ptr<array> items
+};
 
+function take(string op_name, int num, int p_counter) : ptr<takeresult>
+{
+    print(op_name);
+    print(" ");
+    takeresult r; ptr<takeresult> result = &r;
+    ptr<array> take_array = array_new(3);
+    for (int i = 0; i < num; ++i)
+    {
+        print_number(~p_counter as int);
+        print(" ");
+        ++p_counter;
+        array_set_nth(take_array, i, ~p_counter as int);
+    }
+    println(" ");
+    result->p_counter = p_counter;
+    result->items = take_array;
+    return result;
 }
 
 func<void> entrypoint = function()
@@ -69,27 +89,13 @@ for (; p_counter < 32767; ++p_counter) {
         println("HALT");
     }
     if (op == opcodes.SET) {
-        print("SET ");
-        ++p_counter;
-        int reg = ~p_counter as int;
-        print_number(reg);
-        ++p_counter;
-        int val = ~p_counter as int;
-        // TODO: Need set op intrinsic
-        // will wmem work?
+        take("SET", 2, p_counter);
     }
     if (op == opcodes.PUSH) {
         println("PUSH");
-        ++p_counter;
-        push(~p_counter as int);
-        return;
     }
     if (op == opcodes.POP) {
         println("POP");
-        ++p_counter;
-        int val = pop();
-        wmem(~p_counter as int, val);
-        return;
     }
     if (op == opcodes.EQ) {
         println("EQ");

@@ -24,6 +24,7 @@ namespace syncomp
             var condition = tokens.GetRange(i, conditionEnd - i);
             i = conditionEnd;
             i++;
+            i = GetNextNonWhitespace(i, tokens);
             var expressionEnd = GetExpression(
               SyntaxTokenType.LeftCurly,
               SyntaxTokenType.RightCurly,

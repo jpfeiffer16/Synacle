@@ -3,7 +3,10 @@
 
 string INDEX_OUT_OF_BOUNDS_MESSAGE = "Index outside of the bounds of array";
 
-function array_length(int ptr) : int
+// Placeholder type for an array of int
+type array { };
+
+function array_length(ptr<array> ptr) : int
 {
     int length = 0;
     int value = (~(ptr + length));
@@ -15,13 +18,13 @@ function array_length(int ptr) : int
     return length;
 }
 
-function array_new(int length)
+function array_new(int length) : ptr<array>
 {
     int alloc_ptr = alloc_chunk(length);
-    return alloc_ptr;
+    return alloc_ptr as ptr<array>;
 }
 
-function array_get_nth(int ptr, int index): int
+function array_get_nth(ptr<array> ptr, int index): int
 {
     int length = array_length(ptr);
     if (index >= length)
@@ -32,7 +35,7 @@ function array_get_nth(int ptr, int index): int
     return return_value;
 }
 
-function array_set_nth(int ptr, int index, int value)
+function array_set_nth(ptr<array> ptr, int index, int value)
 {
     int length = array_length(ptr);
     if (index >= length)
@@ -43,7 +46,7 @@ function array_set_nth(int ptr, int index, int value)
 }
 
 
-function array_foreach(int ptr, func<int, int, void> cb)
+function array_foreach(ptr<array> ptr, func<int, int, void> cb)
 {
     int length = array_length(ptr);
     for (int i = 0; i < length; ++i)
@@ -52,10 +55,10 @@ function array_foreach(int ptr, func<int, int, void> cb)
     }
 }
 
-function array_map(int ptr, func<int, int> cb)
+function array_map(ptr<array> ptr, func<int, int> cb)
 {
     int length = array_length(ptr);
-    int new_array = alloc_chunk(length);
+    ptr<array> new_array = alloc_chunk(length) as ptr<array>;
     for (int i = 0; i < length; ++i)
     {
         int value = array_get_nth(ptr, i);
