@@ -766,24 +766,6 @@ jf reg0 >while__array_wrapper_13_end
 rmem reg0 >var_length_array_wrapper_11
 add reg0 reg0 1
 wmem >var_length_array_wrapper_11 reg0
-jmp >var__array_wrapper_16_end
-:var__array_wrapper_16
-&e
-&t
-&t
-&i
-&n
-&g
-32
-&h
-&e
-&r
-&e
-0
-:var__array_wrapper_16_end
-wmem >var__array_wrapper_16 &G
-set reg0 >var__array_wrapper_16
-call >println
 rmem reg0 >var_ptr_array_wrapper_9
 rmem reg1 >var_length_array_wrapper_11
 add reg0 reg0 reg1
@@ -798,198 +780,198 @@ ret
 set reg0 >array_length
 jmp >array_new_end
 :array_new
-jmp >var_length_array_wrapper_22_end
-:var_length_array_wrapper_22
-:var_length_array_wrapper_22_end
-wmem >var_length_array_wrapper_22 reg0
-jmp >var_alloc_ptr_array_wrapper_24_end
-:var_alloc_ptr_array_wrapper_24
-:var_alloc_ptr_array_wrapper_24_end
-rmem reg0 >var_length_array_wrapper_22
+jmp >var_length_array_wrapper_21_end
+:var_length_array_wrapper_21
+:var_length_array_wrapper_21_end
+wmem >var_length_array_wrapper_21 reg0
+jmp >var_alloc_ptr_array_wrapper_23_end
+:var_alloc_ptr_array_wrapper_23
+:var_alloc_ptr_array_wrapper_23_end
+rmem reg0 >var_length_array_wrapper_21
 call >alloc_chunk
-wmem >var_alloc_ptr_array_wrapper_24 reg0
-rmem reg0 >var_alloc_ptr_array_wrapper_24
+wmem >var_alloc_ptr_array_wrapper_23 reg0
+rmem reg0 >var_alloc_ptr_array_wrapper_23
 ret
 ret
 :array_new_end
 set reg0 >array_new
 jmp >array_get_nth_end
 :array_get_nth
-jmp >var_ptr_array_wrapper_28_end
-:var_ptr_array_wrapper_28
-:var_ptr_array_wrapper_28_end
-jmp >var_index_array_wrapper_28_end
-:var_index_array_wrapper_28
-:var_index_array_wrapper_28_end
-wmem >var_ptr_array_wrapper_28 reg0
-wmem >var_index_array_wrapper_28 reg1
-jmp >var_length_array_wrapper_30_end
-:var_length_array_wrapper_30
-:var_length_array_wrapper_30_end
-rmem reg0 >var_ptr_array_wrapper_28
+jmp >var_ptr_array_wrapper_27_end
+:var_ptr_array_wrapper_27
+:var_ptr_array_wrapper_27_end
+jmp >var_index_array_wrapper_27_end
+:var_index_array_wrapper_27
+:var_index_array_wrapper_27_end
+wmem >var_ptr_array_wrapper_27 reg0
+wmem >var_index_array_wrapper_27 reg1
+jmp >var_length_array_wrapper_29_end
+:var_length_array_wrapper_29
+:var_length_array_wrapper_29_end
+rmem reg0 >var_ptr_array_wrapper_27
 call >array_length
-wmem >var_length_array_wrapper_30 reg0
-rmem reg0 >var_index_array_wrapper_28
-rmem reg1 >var_length_array_wrapper_30
+wmem >var_length_array_wrapper_29 reg0
+rmem reg0 >var_index_array_wrapper_27
+rmem reg1 >var_length_array_wrapper_29
 gt reg2 reg0 reg1
 eq reg3 reg0 reg1
 or reg0 reg2 reg3
-jf reg0 >end__array_wrapper_31
+jf reg0 >end__array_wrapper_30
 rmem reg0 >var_INDEX_OUT_OF_BOUNDS_MESSAGE_array_wrapper_4
 call >throw
-:end__array_wrapper_31
-jmp >var_return_value_array_wrapper_35_end
-:var_return_value_array_wrapper_35
-:var_return_value_array_wrapper_35_end
-rmem reg0 >var_ptr_array_wrapper_28
-rmem reg1 >var_index_array_wrapper_28
+:end__array_wrapper_30
+jmp >var_return_value_array_wrapper_34_end
+:var_return_value_array_wrapper_34
+:var_return_value_array_wrapper_34_end
+rmem reg0 >var_ptr_array_wrapper_27
+rmem reg1 >var_index_array_wrapper_27
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_return_value_array_wrapper_35 reg0
-rmem reg0 >var_return_value_array_wrapper_35
+wmem >var_return_value_array_wrapper_34 reg0
+rmem reg0 >var_return_value_array_wrapper_34
 ret
 ret
 :array_get_nth_end
 set reg0 >array_get_nth
 jmp >array_set_nth_end
 :array_set_nth
-jmp >var_ptr_array_wrapper_39_end
-:var_ptr_array_wrapper_39
-:var_ptr_array_wrapper_39_end
-jmp >var_index_array_wrapper_39_end
-:var_index_array_wrapper_39
-:var_index_array_wrapper_39_end
-jmp >var_value_array_wrapper_39_end
-:var_value_array_wrapper_39
-:var_value_array_wrapper_39_end
-wmem >var_ptr_array_wrapper_39 reg0
-wmem >var_index_array_wrapper_39 reg1
-wmem >var_value_array_wrapper_39 reg2
-jmp >var_length_array_wrapper_41_end
-:var_length_array_wrapper_41
-:var_length_array_wrapper_41_end
-rmem reg0 >var_ptr_array_wrapper_39
+jmp >var_ptr_array_wrapper_38_end
+:var_ptr_array_wrapper_38
+:var_ptr_array_wrapper_38_end
+jmp >var_index_array_wrapper_38_end
+:var_index_array_wrapper_38
+:var_index_array_wrapper_38_end
+jmp >var_value_array_wrapper_38_end
+:var_value_array_wrapper_38
+:var_value_array_wrapper_38_end
+wmem >var_ptr_array_wrapper_38 reg0
+wmem >var_index_array_wrapper_38 reg1
+wmem >var_value_array_wrapper_38 reg2
+jmp >var_length_array_wrapper_40_end
+:var_length_array_wrapper_40
+:var_length_array_wrapper_40_end
+rmem reg0 >var_ptr_array_wrapper_38
 call >array_length
-wmem >var_length_array_wrapper_41 reg0
-rmem reg0 >var_index_array_wrapper_39
-rmem reg1 >var_length_array_wrapper_41
+wmem >var_length_array_wrapper_40 reg0
+rmem reg0 >var_index_array_wrapper_38
+rmem reg1 >var_length_array_wrapper_40
 gt reg2 reg0 reg1
 eq reg3 reg0 reg1
 or reg0 reg2 reg3
-jf reg0 >end__array_wrapper_42
+jf reg0 >end__array_wrapper_41
 rmem reg0 >var_INDEX_OUT_OF_BOUNDS_MESSAGE_array_wrapper_4
 call >throw
-:end__array_wrapper_42
-rmem reg0 >var_ptr_array_wrapper_39
-rmem reg1 >var_index_array_wrapper_39
+:end__array_wrapper_41
+rmem reg0 >var_ptr_array_wrapper_38
+rmem reg1 >var_index_array_wrapper_38
 add reg0 reg0 reg1
-rmem reg1 >var_value_array_wrapper_39
+rmem reg1 >var_value_array_wrapper_38
 wmem reg0 reg1
 ret
 :array_set_nth_end
 set reg0 >array_set_nth
 jmp >array_foreach_end
 :array_foreach
-jmp >var_ptr_array_wrapper_50_end
-:var_ptr_array_wrapper_50
-:var_ptr_array_wrapper_50_end
-jmp >var_cb_array_wrapper_50_end
-:var_cb_array_wrapper_50
-:var_cb_array_wrapper_50_end
-wmem >var_ptr_array_wrapper_50 reg0
-wmem >var_cb_array_wrapper_50 reg1
-jmp >var_length_array_wrapper_52_end
-:var_length_array_wrapper_52
-:var_length_array_wrapper_52_end
-rmem reg0 >var_ptr_array_wrapper_50
+jmp >var_ptr_array_wrapper_49_end
+:var_ptr_array_wrapper_49
+:var_ptr_array_wrapper_49_end
+jmp >var_cb_array_wrapper_49_end
+:var_cb_array_wrapper_49
+:var_cb_array_wrapper_49_end
+wmem >var_ptr_array_wrapper_49 reg0
+wmem >var_cb_array_wrapper_49 reg1
+jmp >var_length_array_wrapper_51_end
+:var_length_array_wrapper_51
+:var_length_array_wrapper_51_end
+rmem reg0 >var_ptr_array_wrapper_49
 call >array_length
-wmem >var_length_array_wrapper_52 reg0
-jmp >var_i_array_wrapper_53_end
-:var_i_array_wrapper_53
-:var_i_array_wrapper_53_end
+wmem >var_length_array_wrapper_51 reg0
+jmp >var_i_array_wrapper_52_end
+:var_i_array_wrapper_52
+:var_i_array_wrapper_52_end
 set reg0 0
-wmem >var_i_array_wrapper_53 reg0
-:for__array_wrapper_53_begin
-rmem reg0 >var_i_array_wrapper_53
-rmem reg1 >var_length_array_wrapper_52
+wmem >var_i_array_wrapper_52 reg0
+:for__array_wrapper_52_begin
+rmem reg0 >var_i_array_wrapper_52
+rmem reg1 >var_length_array_wrapper_51
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__array_wrapper_53_end
-rmem reg0 >var_ptr_array_wrapper_50
-rmem reg1 >var_i_array_wrapper_53
+jf reg0 >for__array_wrapper_52_end
+rmem reg0 >var_ptr_array_wrapper_49
+rmem reg1 >var_i_array_wrapper_52
 add reg0 reg0 reg1
-rmem reg1 >var_i_array_wrapper_53
-rmem reg7 >var_cb_array_wrapper_50
+rmem reg1 >var_i_array_wrapper_52
+rmem reg7 >var_cb_array_wrapper_49
 call reg7
-rmem reg0 >var_i_array_wrapper_53
+rmem reg0 >var_i_array_wrapper_52
 add reg0 reg0 1
-wmem >var_i_array_wrapper_53 reg0
-jmp >for__array_wrapper_53_begin
-:for__array_wrapper_53_end
+wmem >var_i_array_wrapper_52 reg0
+jmp >for__array_wrapper_52_begin
+:for__array_wrapper_52_end
 ret
 :array_foreach_end
 set reg0 >array_foreach
 jmp >array_map_end
 :array_map
-jmp >var_ptr_array_wrapper_59_end
-:var_ptr_array_wrapper_59
-:var_ptr_array_wrapper_59_end
-jmp >var_cb_array_wrapper_59_end
-:var_cb_array_wrapper_59
-:var_cb_array_wrapper_59_end
-wmem >var_ptr_array_wrapper_59 reg0
-wmem >var_cb_array_wrapper_59 reg1
-jmp >var_length_array_wrapper_61_end
-:var_length_array_wrapper_61
-:var_length_array_wrapper_61_end
-rmem reg0 >var_ptr_array_wrapper_59
+jmp >var_ptr_array_wrapper_58_end
+:var_ptr_array_wrapper_58
+:var_ptr_array_wrapper_58_end
+jmp >var_cb_array_wrapper_58_end
+:var_cb_array_wrapper_58
+:var_cb_array_wrapper_58_end
+wmem >var_ptr_array_wrapper_58 reg0
+wmem >var_cb_array_wrapper_58 reg1
+jmp >var_length_array_wrapper_60_end
+:var_length_array_wrapper_60
+:var_length_array_wrapper_60_end
+rmem reg0 >var_ptr_array_wrapper_58
 call >array_length
-wmem >var_length_array_wrapper_61 reg0
-jmp >var_new_array_array_wrapper_62_end
-:var_new_array_array_wrapper_62
-:var_new_array_array_wrapper_62_end
-rmem reg0 >var_length_array_wrapper_61
+wmem >var_length_array_wrapper_60 reg0
+jmp >var_new_array_array_wrapper_61_end
+:var_new_array_array_wrapper_61
+:var_new_array_array_wrapper_61_end
+rmem reg0 >var_length_array_wrapper_60
 call >alloc_chunk
-wmem >var_new_array_array_wrapper_62 reg0
-jmp >var_i_array_wrapper_63_end
-:var_i_array_wrapper_63
-:var_i_array_wrapper_63_end
+wmem >var_new_array_array_wrapper_61 reg0
+jmp >var_i_array_wrapper_62_end
+:var_i_array_wrapper_62
+:var_i_array_wrapper_62_end
 set reg0 0
-wmem >var_i_array_wrapper_63 reg0
-:for__array_wrapper_63_begin
-rmem reg0 >var_i_array_wrapper_63
-rmem reg1 >var_length_array_wrapper_61
+wmem >var_i_array_wrapper_62 reg0
+:for__array_wrapper_62_begin
+rmem reg0 >var_i_array_wrapper_62
+rmem reg1 >var_length_array_wrapper_60
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__array_wrapper_63_end
-jmp >var_value_array_wrapper_65_end
-:var_value_array_wrapper_65
-:var_value_array_wrapper_65_end
-rmem reg0 >var_ptr_array_wrapper_59
-rmem reg1 >var_i_array_wrapper_63
+jf reg0 >for__array_wrapper_62_end
+jmp >var_value_array_wrapper_64_end
+:var_value_array_wrapper_64
+:var_value_array_wrapper_64_end
+rmem reg0 >var_ptr_array_wrapper_58
+rmem reg1 >var_i_array_wrapper_62
 call >array_get_nth
-wmem >var_value_array_wrapper_65 reg0
-jmp >var_new_value_array_wrapper_66_end
-:var_new_value_array_wrapper_66
-:var_new_value_array_wrapper_66_end
-rmem reg0 >var_value_array_wrapper_65
-rmem reg7 >var_cb_array_wrapper_59
+wmem >var_value_array_wrapper_64 reg0
+jmp >var_new_value_array_wrapper_65_end
+:var_new_value_array_wrapper_65
+:var_new_value_array_wrapper_65_end
+rmem reg0 >var_value_array_wrapper_64
+rmem reg7 >var_cb_array_wrapper_58
 call reg7
-wmem >var_new_value_array_wrapper_66 reg0
-rmem reg0 >var_new_array_array_wrapper_62
-rmem reg1 >var_i_array_wrapper_63
-rmem reg2 >var_new_value_array_wrapper_66
+wmem >var_new_value_array_wrapper_65 reg0
+rmem reg0 >var_new_array_array_wrapper_61
+rmem reg1 >var_i_array_wrapper_62
+rmem reg2 >var_new_value_array_wrapper_65
 call >array_set_nth
-rmem reg0 >var_i_array_wrapper_63
+rmem reg0 >var_i_array_wrapper_62
 add reg0 reg0 1
-wmem >var_i_array_wrapper_63 reg0
-jmp >for__array_wrapper_63_begin
-:for__array_wrapper_63_end
-rmem reg0 >var_new_array_array_wrapper_62
+wmem >var_i_array_wrapper_62 reg0
+jmp >for__array_wrapper_62_begin
+:for__array_wrapper_62_end
+rmem reg0 >var_new_array_array_wrapper_61
 ret
 ret
 :array_map_end
@@ -1012,6 +994,39 @@ rmem reg0 >var_ar_newlexer_4
 set reg1 2
 set reg2 3
 call >array_set_nth
+rmem reg0 >var_ar_newlexer_4
+set reg1 0
+call >array_get_nth
+call >print_number
+jmp >var__newlexer_11_end
+:var__newlexer_11
+0
+:var__newlexer_11_end
+wmem >var__newlexer_11 32
+set reg0 >var__newlexer_11
+call >println
+rmem reg0 >var_ar_newlexer_4
+set reg1 1
+call >array_get_nth
+call >print_number
+jmp >var__newlexer_13_end
+:var__newlexer_13
+0
+:var__newlexer_13_end
+wmem >var__newlexer_13 32
+set reg0 >var__newlexer_13
+call >println
+rmem reg0 >var_ar_newlexer_4
+set reg1 2
+call >array_get_nth
+call >print_number
+jmp >var__newlexer_15_end
+:var__newlexer_15
+0
+:var__newlexer_15_end
+wmem >var__newlexer_15 32
+set reg0 >var__newlexer_15
+call >println
 halt
 
 :subtract

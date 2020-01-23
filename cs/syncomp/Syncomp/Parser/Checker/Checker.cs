@@ -179,7 +179,7 @@ namespace syncomp
                                         DiagnosticCode.UnknownFunction));
                                 return diagnostics;
                             }
-                            callParamType = funcParam.Node.NodeType;
+                            callParamType = funcParam.Node.NodeType.SubTypes.LastOrDefault();
                         }
                         var declParamType = function.NodeType.SubTypes[i];
                         if (!callParamType.Equals(declParamType))

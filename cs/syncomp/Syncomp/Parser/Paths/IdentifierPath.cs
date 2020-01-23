@@ -28,22 +28,31 @@ namespace syncomp
                 ++i;
 
 
-                // var paramTokens = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
-                // foreach (var tkn in tokens.GetRange(i, nextClose - i))
-                // {
-                //     if (tkn.Type == SyntaxTokenType.Comma)
-                //     {
-                //         paramTokens.Add(new List<SyntaxToken>());
-                //     }
-                //     else
-                //     {
-                //         paramTokens.LastOrDefault().Add(tkn);
-                //     }
-                // }
-                // var parametersNodes = paramTokens
-                //     .SelectMany(tkns => ParseTokens(tkns, ctx)).ToList();
+                var paramTokens = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
 
-                var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i), ctx);
+                var functionCallParamsList = tokens.GetRange(i, nextClose - i);
+                for (int j = 0; j < functionCallParamsList.Count; j++)
+                {
+                    var tkn = functionCallParamsList[j];
+                    if (tkn.Type == SyntaxTokenType.Comma)
+                    {
+                        paramTokens.Add(new List<SyntaxToken>());
+                    }
+                    if (tkn.Type == SyntaxTokenType.LeftParen)
+                    {
+                        var expressionEnd = GetExpression(SyntaxTokenType.LeftParen, SyntaxTokenType.RightParen, j, functionCallParamsList);
+                        paramTokens.LastOrDefault().AddRange(functionCallParamsList.GetRange(j, expressionEnd - j + 1));
+                        j = expressionEnd;
+                    }
+                    else
+                    {
+                        paramTokens.LastOrDefault().Add(tkn);
+                    }
+                }
+                var parametersNodes = paramTokens
+                    .SelectMany(tkns => ParseTokens(tkns, ctx)).ToList();
+
+                // var parametersNodes = ParseTokens(tokens.GetRange(i, nextClose - i), ctx);
                 i = nextClose;
 
                 node = new FunctionCall(
