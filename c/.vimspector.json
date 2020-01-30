@@ -1,0 +1,20 @@
+{
+    "configurations": {
+        "Sync: Launch": {
+            "adapter": "vscode-cpptools",
+            "configuration": {
+                "name": "Sync",
+                "type": "cppdbg",
+                "request": "launch",
+                "program": "${workspaceFolder}/bin/sync",
+                "args": [],
+                "stopAtEntry": true,
+                "cwd": "${workspaceFolder}",
+                "environment": [],
+                "externalConsole": false,
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            }
+        }
+    }
+}
