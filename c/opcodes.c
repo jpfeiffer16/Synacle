@@ -3,6 +3,11 @@
 #include <stdbool.h>
 #include "state.h"
 
+uint16_t normalize_next_param(state *vm_state) {
+    uint16_t mem_val = vm_state->mem[++vm_state->code_pointer];
+    return get_vmem(vm_state, mem_val);
+}
+
 void op_halt(state *vm_state) {
     vm_state->stopped = true;
     printf("exiting");
@@ -39,14 +44,15 @@ void op_jmp(state *vm_state) {
 void op_jt(state *vm_state) {
     uint16_t a = vm_state->mem[++vm_state->code_pointer];
     uint16_t b = vm_state->mem[++vm_state->code_pointer];
-    if (a) {
+    uint16_t vmem_val = get_vmem(vm_state, a);
+    if (vmem_val != 0) {
         vm_state->code_pointer = b - 1;
     }
 }
 void op_jf(state *vm_state) {
     uint16_t a = vm_state->mem[++vm_state->code_pointer];
     uint16_t b = vm_state->mem[++vm_state->code_pointer];
-    if (!a) {
+    if (a == 0) {
         vm_state->code_pointer = b - 1;
     }
 }
@@ -54,7 +60,7 @@ void op_add(state *vm_state) {
     uint16_t a = vm_state->mem[++vm_state->code_pointer];
     uint16_t b = vm_state->mem[++vm_state->code_pointer];
     uint16_t c = vm_state->mem[++vm_state->code_pointer];
-    set_vmem(vm_state, a, b + b);
+    set_vmem(vm_state, a, b + c);
 }
 void op_mult(state *vm_state) {
     uint16_t a = vm_state->mem[++vm_state->code_pointer];

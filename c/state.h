@@ -22,4 +22,6 @@ uint16_t vm_stack_pop(vm_stack *stack);
 
 void set_vmem(state *vm_state, uint16_t source, uint16_t value);
 
+uint16_t get_vmem(state *vm_state, uint16_t source);
+
 #endif

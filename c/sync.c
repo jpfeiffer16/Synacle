@@ -11,18 +11,25 @@ uint16_t* get_code(FILE* file) {
     long code_ptr = 0;
     int count;
     uint8_t buff[4];
-    while((count = fread(buff, 2, 2, file)) > 0) {
-        if (count != 2) {
-            fprintf(stderr, "Unable to read two 8 bit integers. Data is miss-aligned!\n");
-            exit(1);
-        }
-        uint8_t little_end = buff[0];
-        uint8_t big_end = buff[1];
-        uint16_t opnum = little_end;
-        opnum = opnum | big_end;
-        code_buffer[code_ptr] = opnum;
-        code_ptr++;
-    }
+    int bytes_read = fread(code_buffer, 1, 32767, file);
+    /* while((count = fread(buff, 2, 2, file)) > 0) { */
+    /*     #<{(| if (count != 2) { |)}># */
+    /*     #<{(|     fprintf(stderr, "Unable to read two 8 bit integers. Data is miss-aligned!\n"); |)}># */
+    /*     #<{(|     exit(1); |)}># */
+    /*     #<{(| } |)}># */
+    /*     #<{(| uint8_t little_end = buff[0]; |)}># */
+    /*     #<{(| uint8_t big_end = buff[1]; |)}># */
+    /*     #<{(| uint16_t opnum = little_end; |)}># */
+    /*     #<{(| opnum = opnum | big_end; |)}># */
+    /*     #<{(| code_buffer[code_ptr] = opnum; |)}># */
+    /*     #<{(| code_ptr++; |)}># */
+    /*  */
+    /*     #<{(| printf("%d", buff[0]); |)}># */
+    /*     if (count > 0) { */
+    /*         code_buffer[code_ptr] = buff[0]; */
+    /*         code_ptr++; */
+    /*     } */
+    /* } */
 
     return code_buffer;
 }

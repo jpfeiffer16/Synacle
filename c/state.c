@@ -34,8 +34,16 @@ uint16_t vm_stack_pop(vm_stack *stack) {
 
 void set_vmem(state *vm_state, uint16_t source, uint16_t value) {
     if (source > 32767) {
-        vm_state->mem[source] = value;
+        vm_state->registers[source - 32768] = value;
     } else {
-        vm_state->registers[source - 32767] = value;
+        vm_state->mem[source] = value;
+    }
+}
+
+uint16_t get_vmem(state *vm_state, uint16_t source) {
+    if (source > 32767) {
+        return vm_state->registers[source - 32768];
+    } else {
+        return source;
     }
 }
