@@ -21,7 +21,7 @@ void vm_stack_push(vm_stack *stack, uint16_t val) {
         fprintf(stderr, "Stack overflow!");
         exit(1);
     }
-    stack->array[++(stack->top)] = val;
+    stack->array[stack->top++] = val;
 }
 
 uint16_t vm_stack_pop(vm_stack *stack) {
@@ -29,7 +29,7 @@ uint16_t vm_stack_pop(vm_stack *stack) {
         fprintf(stderr, "Stack underflow!");
         exit(1);
     }
-    return stack->array[stack->top--];
+    return stack->array[--stack->top];
 }
 
 void set_vmem(state *vm_state, uint16_t source, uint16_t value) {

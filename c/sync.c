@@ -42,6 +42,7 @@ void run(state *vm_state) {
             fprintf(stderr, "Illegal opcode: %d\n", op);
             exit(1);
         }
+        /* printf("%d: %d\n", vm_state->code_pointer, op); */
         (opcodes[op])(vm_state);
         vm_state->code_pointer++;
     }
