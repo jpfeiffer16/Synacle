@@ -13,7 +13,7 @@ typedef struct state {
     uint16_t registers[8];
     vm_stack stack;
     bool stopped;
-    int code_pointer;
+    uint16_t code_pointer;
 } state;
 
 void vm_stack_push(vm_stack *stack, uint16_t val);

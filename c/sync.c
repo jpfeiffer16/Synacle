@@ -8,34 +8,12 @@
 
 uint16_t* get_code(FILE* file) {
     uint16_t *code_buffer = malloc(32767);
-    long code_ptr = 0;
-    int count;
-    uint8_t buff[4];
-    int bytes_read = fread(code_buffer, 1, 32767, file);
-    /* while((count = fread(buff, 2, 2, file)) > 0) { */
-    /*     #<{(| if (count != 2) { |)}># */
-    /*     #<{(|     fprintf(stderr, "Unable to read two 8 bit integers. Data is miss-aligned!\n"); |)}># */
-    /*     #<{(|     exit(1); |)}># */
-    /*     #<{(| } |)}># */
-    /*     #<{(| uint8_t little_end = buff[0]; |)}># */
-    /*     #<{(| uint8_t big_end = buff[1]; |)}># */
-    /*     #<{(| uint16_t opnum = little_end; |)}># */
-    /*     #<{(| opnum = opnum | big_end; |)}># */
-    /*     #<{(| code_buffer[code_ptr] = opnum; |)}># */
-    /*     #<{(| code_ptr++; |)}># */
-    /*  */
-    /*     #<{(| printf("%d", buff[0]); |)}># */
-    /*     if (count > 0) { */
-    /*         code_buffer[code_ptr] = buff[0]; */
-    /*         code_ptr++; */
-    /*     } */
-    /* } */
+    fread(code_buffer, 1, 32767, file);
 
     return code_buffer;
 }
 
 void run(state *vm_state) {
-    /* for (int i = 0; i < 32767; i++) { */
     while (!vm_state->stopped) {
         uint16_t op = vm_state->mem[vm_state->code_pointer];
         if (op > 21) {
@@ -43,6 +21,7 @@ void run(state *vm_state) {
             exit(1);
         }
         /* printf("%d: %d\n", vm_state->code_pointer, op); */
+        printf("%d\n", vm_state->code_pointer);
         (opcodes[op])(vm_state);
         vm_state->code_pointer++;
     }

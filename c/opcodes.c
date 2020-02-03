@@ -110,12 +110,12 @@ void op_call(state *vm_state) {
     vm_state->code_pointer = a - 1;
 }
 void op_ret(state *vm_state) {
-    uint16_t jmp_addr = vm_stack_pop(&(vm_state->stack));
+    uint16_t jmp_addr = get_vmem(vm_state, vm_stack_pop(&(vm_state->stack)));
     vm_state->code_pointer = jmp_addr - 1;
 }
 void op_out(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
-    putchar(a);
+    /* putchar(a); */
 }
 char input_buff[256] = {0};
 int input_ptr = 0;
