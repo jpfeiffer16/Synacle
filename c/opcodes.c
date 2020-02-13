@@ -3,8 +3,17 @@
 #include <stdbool.h>
 #include "state.h"
 
+extern bool should_trace;
+extern FILE *trace_file;
+
 uint16_t get_next_param(state *vm_state) {
-    return vm_state->mem[++vm_state->code_pointer];
+    uint16_t param = vm_state->mem[++vm_state->code_pointer];
+    if (should_trace)
+    {
+        fprintf(trace_file, " %u", param);
+        fflush(trace_file);
+    }
+    return param;
 }
 
 uint16_t normalize_next_param(state *vm_state) {
@@ -75,7 +84,7 @@ void op_mod(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
     uint16_t b = normalize_next_param(vm_state);
     uint16_t c = normalize_next_param(vm_state);
-    set_vmem(vm_state, a, b % c);
+    set_vmem(vm_state, a, (b % c) % 32768);
 }
 void op_and(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
@@ -96,7 +105,8 @@ void op_not(state *vm_state) {
 }
 void op_rmem(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
-    uint16_t b = vm_state->mem[normalize_next_param(vm_state)];
+    uint16_t norm_param = normalize_next_param(vm_state);
+    uint16_t b = vm_state->mem[norm_param];
     set_vmem(vm_state, a, b);
 }
 void op_wmem(state *vm_state) {
@@ -111,18 +121,25 @@ void op_call(state *vm_state) {
 }
 void op_ret(state *vm_state) {
     uint16_t jmp_addr = get_vmem(vm_state, vm_stack_pop(&(vm_state->stack)));
-    vm_state->code_pointer = jmp_addr - 1;
+    vm_state->code_pointer = (uint16_t)(jmp_addr - 1);
 }
 void op_out(state *vm_state) {
-    uint16_t a = get_next_param(vm_state);
-    /* putchar(a); */
+    uint16_t a = normalize_next_param(vm_state);
+    putchar(a);
 }
 char input_buff[256] = {0};
 int input_ptr = 0;
 void op_in(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
     if (input_buff[input_ptr] == 0) {
-        fgets(input_buff, sizeof(input_buff), stdin);
+        /* fgets(input_buff, sizeof(input_buff), stdin); */
+        unsigned int bytes_read = 0;
+        while((bytes_read = read(0,input_buff,sizeof(input_buff))) != 10){
+            /* printf("n: %d:",n); */
+            /* write(1,buf,n); */
+        }
+        printf("%s", input_buff);
+        exit(1);
         input_ptr = 0;
     }
     set_vmem(vm_state, a, input_buff[input_ptr]);
@@ -156,3 +173,28 @@ void (*opcodes[22])(state*) = {
     op_noop
 };
 
+
+char* opcode_names[22] = {
+    "halt",
+    "set",
+    "push",
+    "pop",
+    "eq",
+    "gt",
+    "jmp",
+    "jt",
+    "jf",
+    "add",
+    "mult",
+    "mod",
+    "and",
+    "or",
+    "not",
+    "rmem",
+    "wmem",
+    "call",
+    "ret",
+    "out",
+    "in",
+    "noop"
+};

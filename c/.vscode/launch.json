@@ -9,7 +9,9 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/bin/sync",
-            "args": [],
+            "args": [
+                // "-t"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

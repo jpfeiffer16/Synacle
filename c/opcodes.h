@@ -5,4 +5,6 @@
 
 void (*opcodes[22])(state*);
 
+char* opcode_names[22];
+
 #endif
