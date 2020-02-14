@@ -7,7 +7,13 @@
 #include "opcodes.h"
 
 FILE *trace_file;
+uint16_t *memory_buffer;
 bool should_trace = false;
+
+void cleanup_and_exit(int status_code) {
+    if (should_trace) fclose(trace_file);
+    free(memory_buffer);
+}
 
 uint16_t* get_code(FILE* file) {
     uint16_t *code_buffer = calloc(32768, sizeof(uint16_t));
@@ -24,7 +30,7 @@ void run(state *vm_state) {
         if (op > 21) {
             //TODO: Make sure we do resource cleanup here
             fprintf(stderr, "Illegal opcode: %d\n", op);
-            exit(1);
+            cleanup_and_exit(1);
         }
         if (should_trace)
         {
@@ -55,13 +61,12 @@ int main(int argc, char **argv) {
         trace_file = fopen("./out.txt", "w");
     }
     if ((bin = fopen("./program.bin", "r")) > 0) {
-        uint16_t *buff = get_code(bin);
+        memory_buffer = get_code(bin);
         fclose(bin);
-        state vm_state = {buff, { 0, 0, 0, 0, 0, 0, 0, 0 }};
+        state vm_state = {memory_buffer, { 0, 0, 0, 0, 0, 0, 0, 0 }};
         vm_state.stopped = false;
         run(&vm_state);
-        if (should_trace) fclose(trace_file);
-        free(buff);
+        cleanup_and_exit(EXIT_SUCCESS);
     } else {
         printf("Error opening file");
     }

@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "state.h"
+
+#define INPUT_BUFFER_SIZE 256
 
 extern bool should_trace;
 extern FILE *trace_file;
@@ -22,8 +25,6 @@ uint16_t normalize_next_param(state *vm_state) {
 
 void op_halt(state *vm_state) {
     vm_state->stopped = true;
-    printf("exiting\n");
-    printf("%d\n", vm_state->code_pointer);
 }
 void op_set(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
@@ -127,22 +128,29 @@ void op_out(state *vm_state) {
     uint16_t a = normalize_next_param(vm_state);
     putchar(a);
 }
-char input_buff[256] = {0};
+char input_buff[INPUT_BUFFER_SIZE] = {0};
 int input_ptr = 0;
 void op_in(state *vm_state) {
     uint16_t a = get_next_param(vm_state);
     if (input_buff[input_ptr] == 0) {
-        /* fgets(input_buff, sizeof(input_buff), stdin); */
-        unsigned int bytes_read = 0;
-        while((bytes_read = read(0,input_buff,sizeof(input_buff))) != 10){
-            /* printf("n: %d:",n); */
-            /* write(1,buf,n); */
+        char *input_line = NULL;
+        unsigned long int length = sizeof(input_buff);
+        for (int i = 0; i < INPUT_BUFFER_SIZE; i++) {
+            input_buff[i] = 0;
         }
-        printf("%s", input_buff);
-        exit(1);
-        input_ptr = 0;
+        int line_length = getline(&input_line, &length, stdin);
+        if (line_length > INPUT_BUFFER_SIZE) {
+            fprintf(stderr, "Input buffer overflow!\n");
+            vm_state->stopped = true;
+        } else {
+            sprintf(input_buff, "%s", input_line);
+            printf(input_buff);
+            input_ptr = 0;
+        }
+        free(input_line);
+        /* exit(1); */
     }
-    set_vmem(vm_state, a, input_buff[input_ptr]);
+    set_vmem(vm_state, a, input_buff[input_ptr++]);
 }
 void op_noop(state *vm_state) {
     // NOOP
