@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#define STACK_SIZE 1024
+
 typedef struct vm_stack {
-    uint16_t array[256];
+    uint16_t array[STACK_SIZE];
     int top;
 } vm_stack;
 
@@ -17,8 +19,9 @@ typedef struct state {
 } state;
 
 void vm_stack_push(vm_stack *stack, uint16_t val) {
-    if (stack->top == 255) {
+    if (stack->top == STACK_SIZE - 1) {
         fprintf(stderr, "Stack overflow!");
+        //TODO: Cleanup resource
         exit(1);
     }
     stack->array[stack->top++] = val;
@@ -27,6 +30,7 @@ void vm_stack_push(vm_stack *stack, uint16_t val) {
 uint16_t vm_stack_pop(vm_stack *stack) {
     if (stack->top == 0) {
         fprintf(stderr, "Stack underflow!");
+        //TODO: Cleanup resource
         exit(1);
     }
     return stack->array[--stack->top];

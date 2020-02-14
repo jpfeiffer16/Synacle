@@ -2,13 +2,16 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <getopt.h>
 #include <unistd.h>
+#include <string.h>
 #include "state.h"
 #include "opcodes.h"
 
 FILE *trace_file;
 uint16_t *memory_buffer;
 bool should_trace = false;
+char bin_file_path[256] = {0};
 
 void cleanup_and_exit(int status_code) {
     if (should_trace) fclose(trace_file);
@@ -17,7 +20,6 @@ void cleanup_and_exit(int status_code) {
 
 uint16_t* get_code(FILE* file) {
     uint16_t *code_buffer = calloc(32768, sizeof(uint16_t));
-    /* uint8_t file_buffer[32768] = {0}; */
     fread(code_buffer, 1, 32768 * sizeof(uint16_t), file);
 
     return code_buffer;
@@ -54,13 +56,32 @@ void run(state *vm_state) {
     }
 }
 
+void set_options(int argc, char **argv) {
+    int opt;
+    while ((opt = getopt(argc, argv, "tb:")) != -1) {
+        switch (opt) {
+            case 't':
+                should_trace = true;
+                break;
+            case 'b':
+                sprintf(bin_file_path, "%s", optarg);
+                break;
+        }
+    }
+    if (!strlen(bin_file_path)) {
+        fprintf(stderr, "Error: binary path required. Pass it with -b <binary path>\n");
+        // We have no resources to clean up here since we haven't allocated anything
+        exit(1);
+    }
+}
+
 int main(int argc, char **argv) {
+    set_options(argc, argv);
     FILE *bin;
-    should_trace = getopt(argc, argv, "t") == 't';
     if (should_trace) {
         trace_file = fopen("./out.txt", "w");
     }
-    if ((bin = fopen("./program.bin", "r")) > 0) {
+    if ((bin = fopen(bin_file_path, "r")) > 0) {
         memory_buffer = get_code(bin);
         fclose(bin);
         state vm_state = {memory_buffer, { 0, 0, 0, 0, 0, 0, 0, 0 }};
