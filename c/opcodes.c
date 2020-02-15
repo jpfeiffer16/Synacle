@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include "state.h"
@@ -148,7 +147,6 @@ void op_in(state *vm_state) {
             input_ptr = 0;
         }
         free(input_line);
-        /* exit(1); */
     }
     set_vmem(vm_state, a, input_buff[input_ptr++]);
 }

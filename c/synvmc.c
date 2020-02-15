@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <getopt.h>
-#include <unistd.h>
 #include <string.h>
 #include "state.h"
 #include "opcodes.h"
@@ -26,7 +25,6 @@ uint16_t* get_code(FILE* file) {
 }
 
 void run(state *vm_state) {
-    unsigned int diag_counter = 0;
     while (!vm_state->stopped) {
         uint16_t op = vm_state->mem[vm_state->code_pointer];
         if (op > 21) {
@@ -39,7 +37,6 @@ void run(state *vm_state) {
             fprintf(trace_file, "%u: %s", vm_state->code_pointer, opcode_names[vm_state->mem[vm_state->code_pointer]]);
             fflush(trace_file);
         }
-        diag_counter = diag_counter + 1;
         (opcodes[op])(vm_state);
         vm_state->code_pointer++;
 
