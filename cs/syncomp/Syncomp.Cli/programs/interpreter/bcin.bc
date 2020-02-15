@@ -65,9 +65,9 @@ function take(string op_name, int num, int p_counter) : ptr<takeresult>
     ptr<array> take_array = array_new(3);
     for (int i = 0; i < num; ++i)
     {
+        ++p_counter;
         print_number(~p_counter as int);
         print(" ");
-        ++p_counter;
         array_set_nth(take_array, i, ~p_counter as int);
     }
     println(" ");
@@ -86,69 +86,95 @@ int p_counter = entrypoint as int;
 for (; p_counter < 32767; ++p_counter) {
     int op = ~p_counter as int;
     if (op == opcodes.HALT) {
-        println("HALT");
+        ptr<takeresult> result = take("HALT", 0, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.SET) {
-        take("SET", 2, p_counter);
+        ptr<takeresult> result = take("SET", 2, p_counter);
+        p_counter = result->p_counter;
+        array_get_nth(result->items, 0);
+        breakpoint;
+        array_get_nth(result->items, 1);
+        breakpoint;
     }
     if (op == opcodes.PUSH) {
-        println("PUSH");
+        ptr<takeresult> result = take("PUSH", 1, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.POP) {
-        println("POP");
+        ptr<takeresult> result = take("POP", 1, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.EQ) {
-        println("EQ");
+        ptr<takeresult> result = take("EQ", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.GT) {
-        println("GT");
+        ptr<takeresult> result = take("GT", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.JMP) {
-        println("JMP");
+        ptr<takeresult> result = take("JMP", 1, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.JT) {
-        println("JT");
+        ptr<takeresult> result = take("JT", 2, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.JF) {
-        println("JF");
+        ptr<takeresult> result = take("JF", 2, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.ADD) {
-        println("ADD");
+        ptr<takeresult> result = take("ADD", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.MULT) {
-        println("MULT");
+        ptr<takeresult> result = take("MULT", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.MOD) {
-        println("MOD");
+        ptr<takeresult> result = take("MOD", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.AND) {
-        println("AND");
+        ptr<takeresult> result = take("AND", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.OR) {
-        println("OR");
+        ptr<takeresult> result = take("OR", 3, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.NOT) {
-        println("NOT");
+        ptr<takeresult> result = take("NOT", 2, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.RMEM) {
-        println("RMEM");
+        ptr<takeresult> result = take("RMEM", 2, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.WMEM) {
-        println("WMEM");
+        ptr<takeresult> result = take("WMEM", 2, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.CALL) {
-        println("CALL");
+        ptr<takeresult> result = take("CALL", 1, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.RET) {
-        println("RET");
+        ptr<takeresult> result = take("RET", 0, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.OUT) {
-        println("OUT");
+        ptr<takeresult> result = take("OUT", 1, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.IN) {
-        println("IN");
+        ptr<takeresult> result = take("IN", 1, p_counter);
+        p_counter = result->p_counter;
     }
     if (op == opcodes.NOOP) {
-        println("NOOP");
+        ptr<takeresult> result = take("NOOP", 0, p_counter);
+        p_counter = result->p_counter;
     }
 }

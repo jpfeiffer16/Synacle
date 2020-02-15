@@ -763,8 +763,6 @@ set reg1 32767
 eq reg0 reg0 reg1
 call >not
 jf reg0 >while__array_wrapper_13_end
-jmp >while__array_wrapper_13_begin
-:while__array_wrapper_13_end
 rmem reg0 >var_length_array_wrapper_11
 add reg0 reg0 1
 wmem >var_length_array_wrapper_11 reg0
@@ -773,6 +771,8 @@ rmem reg1 >var_length_array_wrapper_11
 add reg0 reg0 reg1
 rmem reg0 reg0
 wmem >var_value_array_wrapper_12 reg0
+jmp >while__array_wrapper_13_begin
+:while__array_wrapper_13_end
 rmem reg0 >var_length_array_wrapper_11
 ret
 ret
@@ -853,33 +853,15 @@ jmp >var_length_array_wrapper_40_end
 rmem reg0 >var_ptr_array_wrapper_38
 call >array_length
 wmem >var_length_array_wrapper_40 reg0
-jmp >var__array_wrapper_41_end
-:var__array_wrapper_41
-&e
-&t
-&t
-&i
-&n
-&g
-32
-&h
-&e
-&r
-&e
-0
-:var__array_wrapper_41_end
-wmem >var__array_wrapper_41 &G
-set reg0 >var__array_wrapper_41
-call >println
 rmem reg0 >var_index_array_wrapper_38
 rmem reg1 >var_length_array_wrapper_40
 gt reg2 reg0 reg1
 eq reg3 reg0 reg1
 or reg0 reg2 reg3
-jf reg0 >end__array_wrapper_42
+jf reg0 >end__array_wrapper_41
 rmem reg0 >var_INDEX_OUT_OF_BOUNDS_MESSAGE_array_wrapper_4
 call >throw
-:end__array_wrapper_42
+:end__array_wrapper_41
 rmem reg0 >var_ptr_array_wrapper_38
 rmem reg1 >var_index_array_wrapper_38
 add reg0 reg0 reg1
@@ -890,106 +872,106 @@ ret
 set reg0 >array_set_nth
 jmp >array_foreach_end
 :array_foreach
-jmp >var_ptr_array_wrapper_50_end
-:var_ptr_array_wrapper_50
-:var_ptr_array_wrapper_50_end
-jmp >var_cb_array_wrapper_50_end
-:var_cb_array_wrapper_50
-:var_cb_array_wrapper_50_end
-wmem >var_ptr_array_wrapper_50 reg0
-wmem >var_cb_array_wrapper_50 reg1
-jmp >var_length_array_wrapper_52_end
-:var_length_array_wrapper_52
-:var_length_array_wrapper_52_end
-rmem reg0 >var_ptr_array_wrapper_50
+jmp >var_ptr_array_wrapper_49_end
+:var_ptr_array_wrapper_49
+:var_ptr_array_wrapper_49_end
+jmp >var_cb_array_wrapper_49_end
+:var_cb_array_wrapper_49
+:var_cb_array_wrapper_49_end
+wmem >var_ptr_array_wrapper_49 reg0
+wmem >var_cb_array_wrapper_49 reg1
+jmp >var_length_array_wrapper_51_end
+:var_length_array_wrapper_51
+:var_length_array_wrapper_51_end
+rmem reg0 >var_ptr_array_wrapper_49
 call >array_length
-wmem >var_length_array_wrapper_52 reg0
-jmp >var_i_array_wrapper_53_end
-:var_i_array_wrapper_53
-:var_i_array_wrapper_53_end
+wmem >var_length_array_wrapper_51 reg0
+jmp >var_i_array_wrapper_52_end
+:var_i_array_wrapper_52
+:var_i_array_wrapper_52_end
 set reg0 0
-wmem >var_i_array_wrapper_53 reg0
-:for__array_wrapper_53_begin
-rmem reg0 >var_i_array_wrapper_53
-rmem reg1 >var_length_array_wrapper_52
+wmem >var_i_array_wrapper_52 reg0
+:for__array_wrapper_52_begin
+rmem reg0 >var_i_array_wrapper_52
+rmem reg1 >var_length_array_wrapper_51
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__array_wrapper_53_end
-rmem reg0 >var_ptr_array_wrapper_50
-rmem reg1 >var_i_array_wrapper_53
+jf reg0 >for__array_wrapper_52_end
+rmem reg0 >var_ptr_array_wrapper_49
+rmem reg1 >var_i_array_wrapper_52
 add reg0 reg0 reg1
-rmem reg1 >var_i_array_wrapper_53
-rmem reg7 >var_cb_array_wrapper_50
+rmem reg1 >var_i_array_wrapper_52
+rmem reg7 >var_cb_array_wrapper_49
 call reg7
-rmem reg0 >var_i_array_wrapper_53
+rmem reg0 >var_i_array_wrapper_52
 add reg0 reg0 1
-wmem >var_i_array_wrapper_53 reg0
-jmp >for__array_wrapper_53_begin
-:for__array_wrapper_53_end
+wmem >var_i_array_wrapper_52 reg0
+jmp >for__array_wrapper_52_begin
+:for__array_wrapper_52_end
 ret
 :array_foreach_end
 set reg0 >array_foreach
 jmp >array_map_end
 :array_map
-jmp >var_ptr_array_wrapper_59_end
-:var_ptr_array_wrapper_59
-:var_ptr_array_wrapper_59_end
-jmp >var_cb_array_wrapper_59_end
-:var_cb_array_wrapper_59
-:var_cb_array_wrapper_59_end
-wmem >var_ptr_array_wrapper_59 reg0
-wmem >var_cb_array_wrapper_59 reg1
-jmp >var_length_array_wrapper_61_end
-:var_length_array_wrapper_61
-:var_length_array_wrapper_61_end
-rmem reg0 >var_ptr_array_wrapper_59
+jmp >var_ptr_array_wrapper_58_end
+:var_ptr_array_wrapper_58
+:var_ptr_array_wrapper_58_end
+jmp >var_cb_array_wrapper_58_end
+:var_cb_array_wrapper_58
+:var_cb_array_wrapper_58_end
+wmem >var_ptr_array_wrapper_58 reg0
+wmem >var_cb_array_wrapper_58 reg1
+jmp >var_length_array_wrapper_60_end
+:var_length_array_wrapper_60
+:var_length_array_wrapper_60_end
+rmem reg0 >var_ptr_array_wrapper_58
 call >array_length
-wmem >var_length_array_wrapper_61 reg0
-jmp >var_new_array_array_wrapper_62_end
-:var_new_array_array_wrapper_62
-:var_new_array_array_wrapper_62_end
-rmem reg0 >var_length_array_wrapper_61
+wmem >var_length_array_wrapper_60 reg0
+jmp >var_new_array_array_wrapper_61_end
+:var_new_array_array_wrapper_61
+:var_new_array_array_wrapper_61_end
+rmem reg0 >var_length_array_wrapper_60
 call >alloc_chunk
-wmem >var_new_array_array_wrapper_62 reg0
-jmp >var_i_array_wrapper_63_end
-:var_i_array_wrapper_63
-:var_i_array_wrapper_63_end
+wmem >var_new_array_array_wrapper_61 reg0
+jmp >var_i_array_wrapper_62_end
+:var_i_array_wrapper_62
+:var_i_array_wrapper_62_end
 set reg0 0
-wmem >var_i_array_wrapper_63 reg0
-:for__array_wrapper_63_begin
-rmem reg0 >var_i_array_wrapper_63
-rmem reg1 >var_length_array_wrapper_61
+wmem >var_i_array_wrapper_62 reg0
+:for__array_wrapper_62_begin
+rmem reg0 >var_i_array_wrapper_62
+rmem reg1 >var_length_array_wrapper_60
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__array_wrapper_63_end
-jmp >var_value_array_wrapper_65_end
-:var_value_array_wrapper_65
-:var_value_array_wrapper_65_end
-rmem reg0 >var_ptr_array_wrapper_59
-rmem reg1 >var_i_array_wrapper_63
+jf reg0 >for__array_wrapper_62_end
+jmp >var_value_array_wrapper_64_end
+:var_value_array_wrapper_64
+:var_value_array_wrapper_64_end
+rmem reg0 >var_ptr_array_wrapper_58
+rmem reg1 >var_i_array_wrapper_62
 call >array_get_nth
-wmem >var_value_array_wrapper_65 reg0
-jmp >var_new_value_array_wrapper_66_end
-:var_new_value_array_wrapper_66
-:var_new_value_array_wrapper_66_end
-rmem reg0 >var_value_array_wrapper_65
-rmem reg7 >var_cb_array_wrapper_59
+wmem >var_value_array_wrapper_64 reg0
+jmp >var_new_value_array_wrapper_65_end
+:var_new_value_array_wrapper_65
+:var_new_value_array_wrapper_65_end
+rmem reg0 >var_value_array_wrapper_64
+rmem reg7 >var_cb_array_wrapper_58
 call reg7
-wmem >var_new_value_array_wrapper_66 reg0
-rmem reg0 >var_new_array_array_wrapper_62
-rmem reg1 >var_i_array_wrapper_63
-rmem reg2 >var_new_value_array_wrapper_66
+wmem >var_new_value_array_wrapper_65 reg0
+rmem reg0 >var_new_array_array_wrapper_61
+rmem reg1 >var_i_array_wrapper_62
+rmem reg2 >var_new_value_array_wrapper_65
 call >array_set_nth
-rmem reg0 >var_i_array_wrapper_63
+rmem reg0 >var_i_array_wrapper_62
 add reg0 reg0 1
-wmem >var_i_array_wrapper_63 reg0
-jmp >for__array_wrapper_63_begin
-:for__array_wrapper_63_end
-rmem reg0 >var_new_array_array_wrapper_62
+wmem >var_i_array_wrapper_62 reg0
+jmp >for__array_wrapper_62_begin
+:for__array_wrapper_62_end
+rmem reg0 >var_new_array_array_wrapper_61
 ret
 ret
 :array_map_end
@@ -1177,18 +1159,18 @@ or reg0 reg2 reg3
 call >not
 jf reg0 >for__bcin_66_end
 rmem reg0 >var_p_counter_bcin_60
-rmem reg0 reg0
-call >print_number
-jmp >var__bcin_69_end
-:var__bcin_69
-0
-:var__bcin_69_end
-wmem >var__bcin_69 32
-set reg0 >var__bcin_69
-call >print
-rmem reg0 >var_p_counter_bcin_60
 add reg0 reg0 1
 wmem >var_p_counter_bcin_60 reg0
+rmem reg0 >var_p_counter_bcin_60
+rmem reg0 reg0
+call >print_number
+jmp >var__bcin_70_end
+:var__bcin_70
+0
+:var__bcin_70_end
+wmem >var__bcin_70 32
+set reg0 >var__bcin_70
+call >print
 rmem reg0 >var_take_array_bcin_65
 rmem reg1 >var_i_bcin_66
 rmem reg2 >var_p_counter_bcin_60
@@ -1201,28 +1183,10 @@ jmp >for__bcin_66_begin
 :for__bcin_66_end
 jmp >var__bcin_73_end
 :var__bcin_73
-&e
-&t
-&t
-&i
-&n
-&g
-32
-&h
-&e
-&r
-&e
 0
 :var__bcin_73_end
-wmem >var__bcin_73 &G
+wmem >var__bcin_73 32
 set reg0 >var__bcin_73
-call >println
-jmp >var__bcin_74_end
-:var__bcin_74
-0
-:var__bcin_74_end
-wmem >var__bcin_74 32
-set reg0 >var__bcin_74
 call >println
 rmem reg0 >var_p_counter_bcin_60
 rmem reg7 >var_result_bcin_64
@@ -1237,13 +1201,13 @@ ret
 ret
 :take_end
 set reg0 >take
-jmp >var_entrypoint_bcin_80_end
-:var_entrypoint_bcin_80
-:var_entrypoint_bcin_80_end
-jmp >function__bcin_80_end
-:function__bcin_80
-jmp >var__bcin_82_end
-:var__bcin_82
+jmp >var_entrypoint_bcin_79_end
+:var_entrypoint_bcin_79
+:var_entrypoint_bcin_79_end
+jmp >function__bcin_79_end
+:function__bcin_79
+jmp >var__bcin_81_end
+:var__bcin_81
 &e
 &l
 &l
@@ -1257,52 +1221,65 @@ jmp >var__bcin_82_end
 &d
 &!
 0
-:var__bcin_82_end
-wmem >var__bcin_82 &H
-set reg0 >var__bcin_82
+:var__bcin_81_end
+wmem >var__bcin_81 &H
+set reg0 >var__bcin_81
 call >println
 ret
-:function__bcin_80_end
-set reg0 >function__bcin_80
-wmem >var_entrypoint_bcin_80 reg0
-jmp >var_p_counter_bcin_86_end
-:var_p_counter_bcin_86
-:var_p_counter_bcin_86_end
-rmem reg0 >var_entrypoint_bcin_80
-wmem >var_p_counter_bcin_86 reg0
-:for__bcin_87_begin
-rmem reg0 >var_p_counter_bcin_86
+:function__bcin_79_end
+set reg0 >function__bcin_79
+wmem >var_entrypoint_bcin_79 reg0
+jmp >var_p_counter_bcin_85_end
+:var_p_counter_bcin_85
+:var_p_counter_bcin_85_end
+rmem reg0 >var_entrypoint_bcin_79
+wmem >var_p_counter_bcin_85 reg0
+:for__bcin_86_begin
+rmem reg0 >var_p_counter_bcin_85
 set reg1 32767
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__bcin_87_end
-jmp >var_op_bcin_88_end
-:var_op_bcin_88
-:var_op_bcin_88_end
-rmem reg0 >var_p_counter_bcin_86
+jf reg0 >for__bcin_86_end
+jmp >var_op_bcin_87_end
+:var_op_bcin_87
+:var_op_bcin_87_end
+rmem reg0 >var_p_counter_bcin_85
 rmem reg0 reg0
-wmem >var_op_bcin_88 reg0
-rmem reg0 >var_op_bcin_88
+wmem >var_op_bcin_87 reg0
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_HALT
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_89
-jmp >var__bcin_90_end
-:var__bcin_90
+jf reg0 >end__bcin_88
+jmp >var_result_bcin_89_end
+:var_result_bcin_89
+:var_result_bcin_89_end
+jmp >var__bcin_89_end
+:var__bcin_89
 &A
 &L
 &T
 0
-:var__bcin_90_end
-wmem >var__bcin_90 &H
-set reg0 >var__bcin_90
-call >println
-:end__bcin_89
-rmem reg0 >var_op_bcin_88
+:var__bcin_89_end
+wmem >var__bcin_89 &H
+set reg0 >var__bcin_89
+set reg1 0
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_88
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_SET
 eq reg0 reg0 reg1
 jf reg0 >end__bcin_92
+jmp >var_result_bcin_93_end
+:var_result_bcin_93
+:var_result_bcin_93_end
 jmp >var__bcin_93_end
 :var__bcin_93
 &E
@@ -1312,294 +1289,511 @@ jmp >var__bcin_93_end
 wmem >var__bcin_93 &S
 set reg0 >var__bcin_93
 set reg1 2
-rmem reg2 >var_p_counter_bcin_86
+rmem reg2 >var_p_counter_bcin_85
 call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 2
+rmem reg0 reg0
+set reg1 0
+call >array_get_nth
+breakpoint
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 2
+rmem reg0 reg0
+set reg1 1
+call >array_get_nth
+breakpoint
 :end__bcin_92
-rmem reg0 >var_op_bcin_88
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_PUSH
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_95
-jmp >var__bcin_96_end
-:var__bcin_96
+jf reg0 >end__bcin_100
+jmp >var_result_bcin_101_end
+:var_result_bcin_101
+:var_result_bcin_101_end
+jmp >var__bcin_101_end
+:var__bcin_101
 &U
 &S
 &H
 0
-:var__bcin_96_end
-wmem >var__bcin_96 &P
-set reg0 >var__bcin_96
-call >println
-:end__bcin_95
-rmem reg0 >var_op_bcin_88
+:var__bcin_101_end
+wmem >var__bcin_101 &P
+set reg0 >var__bcin_101
+set reg1 1
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_100
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_POP
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_98
-jmp >var__bcin_99_end
-:var__bcin_99
+jf reg0 >end__bcin_104
+jmp >var_result_bcin_105_end
+:var_result_bcin_105
+:var_result_bcin_105_end
+jmp >var__bcin_105_end
+:var__bcin_105
 &O
 &P
 0
-:var__bcin_99_end
-wmem >var__bcin_99 &P
-set reg0 >var__bcin_99
-call >println
-:end__bcin_98
-rmem reg0 >var_op_bcin_88
+:var__bcin_105_end
+wmem >var__bcin_105 &P
+set reg0 >var__bcin_105
+set reg1 1
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_104
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_EQ
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_101
-jmp >var__bcin_102_end
-:var__bcin_102
+jf reg0 >end__bcin_108
+jmp >var_result_bcin_109_end
+:var_result_bcin_109
+:var_result_bcin_109_end
+jmp >var__bcin_109_end
+:var__bcin_109
 &Q
 0
-:var__bcin_102_end
-wmem >var__bcin_102 &E
-set reg0 >var__bcin_102
-call >println
-:end__bcin_101
-rmem reg0 >var_op_bcin_88
+:var__bcin_109_end
+wmem >var__bcin_109 &E
+set reg0 >var__bcin_109
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_108
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_GT
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_104
-jmp >var__bcin_105_end
-:var__bcin_105
+jf reg0 >end__bcin_112
+jmp >var_result_bcin_113_end
+:var_result_bcin_113
+:var_result_bcin_113_end
+jmp >var__bcin_113_end
+:var__bcin_113
 &T
 0
-:var__bcin_105_end
-wmem >var__bcin_105 &G
-set reg0 >var__bcin_105
-call >println
-:end__bcin_104
-rmem reg0 >var_op_bcin_88
+:var__bcin_113_end
+wmem >var__bcin_113 &G
+set reg0 >var__bcin_113
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_112
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_JMP
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_107
-jmp >var__bcin_108_end
-:var__bcin_108
+jf reg0 >end__bcin_116
+jmp >var_result_bcin_117_end
+:var_result_bcin_117
+:var_result_bcin_117_end
+jmp >var__bcin_117_end
+:var__bcin_117
 &M
 &P
 0
-:var__bcin_108_end
-wmem >var__bcin_108 &J
-set reg0 >var__bcin_108
-call >println
-:end__bcin_107
-rmem reg0 >var_op_bcin_88
+:var__bcin_117_end
+wmem >var__bcin_117 &J
+set reg0 >var__bcin_117
+set reg1 1
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_116
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_JT
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_110
-jmp >var__bcin_111_end
-:var__bcin_111
+jf reg0 >end__bcin_120
+jmp >var_result_bcin_121_end
+:var_result_bcin_121
+:var_result_bcin_121_end
+jmp >var__bcin_121_end
+:var__bcin_121
 &T
 0
-:var__bcin_111_end
-wmem >var__bcin_111 &J
-set reg0 >var__bcin_111
-call >println
-:end__bcin_110
-rmem reg0 >var_op_bcin_88
+:var__bcin_121_end
+wmem >var__bcin_121 &J
+set reg0 >var__bcin_121
+set reg1 2
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_120
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_JF
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_113
-jmp >var__bcin_114_end
-:var__bcin_114
+jf reg0 >end__bcin_124
+jmp >var_result_bcin_125_end
+:var_result_bcin_125
+:var_result_bcin_125_end
+jmp >var__bcin_125_end
+:var__bcin_125
 &F
 0
-:var__bcin_114_end
-wmem >var__bcin_114 &J
-set reg0 >var__bcin_114
-call >println
-:end__bcin_113
-rmem reg0 >var_op_bcin_88
+:var__bcin_125_end
+wmem >var__bcin_125 &J
+set reg0 >var__bcin_125
+set reg1 2
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_124
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_ADD
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_116
-jmp >var__bcin_117_end
-:var__bcin_117
+jf reg0 >end__bcin_128
+jmp >var_result_bcin_129_end
+:var_result_bcin_129
+:var_result_bcin_129_end
+jmp >var__bcin_129_end
+:var__bcin_129
 &D
 &D
 0
-:var__bcin_117_end
-wmem >var__bcin_117 &A
-set reg0 >var__bcin_117
-call >println
-:end__bcin_116
-rmem reg0 >var_op_bcin_88
+:var__bcin_129_end
+wmem >var__bcin_129 &A
+set reg0 >var__bcin_129
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_128
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_MULT
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_119
-jmp >var__bcin_120_end
-:var__bcin_120
+jf reg0 >end__bcin_132
+jmp >var_result_bcin_133_end
+:var_result_bcin_133
+:var_result_bcin_133_end
+jmp >var__bcin_133_end
+:var__bcin_133
 &U
 &L
 &T
 0
-:var__bcin_120_end
-wmem >var__bcin_120 &M
-set reg0 >var__bcin_120
-call >println
-:end__bcin_119
-rmem reg0 >var_op_bcin_88
+:var__bcin_133_end
+wmem >var__bcin_133 &M
+set reg0 >var__bcin_133
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_132
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_MOD
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_122
-jmp >var__bcin_123_end
-:var__bcin_123
+jf reg0 >end__bcin_136
+jmp >var_result_bcin_137_end
+:var_result_bcin_137
+:var_result_bcin_137_end
+jmp >var__bcin_137_end
+:var__bcin_137
 &O
 &D
 0
-:var__bcin_123_end
-wmem >var__bcin_123 &M
-set reg0 >var__bcin_123
-call >println
-:end__bcin_122
-rmem reg0 >var_op_bcin_88
+:var__bcin_137_end
+wmem >var__bcin_137 &M
+set reg0 >var__bcin_137
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_136
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_AND
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_125
-jmp >var__bcin_126_end
-:var__bcin_126
+jf reg0 >end__bcin_140
+jmp >var_result_bcin_141_end
+:var_result_bcin_141
+:var_result_bcin_141_end
+jmp >var__bcin_141_end
+:var__bcin_141
 &N
 &D
 0
-:var__bcin_126_end
-wmem >var__bcin_126 &A
-set reg0 >var__bcin_126
-call >println
-:end__bcin_125
-rmem reg0 >var_op_bcin_88
+:var__bcin_141_end
+wmem >var__bcin_141 &A
+set reg0 >var__bcin_141
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_140
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_OR
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_128
-jmp >var__bcin_129_end
-:var__bcin_129
+jf reg0 >end__bcin_144
+jmp >var_result_bcin_145_end
+:var_result_bcin_145
+:var_result_bcin_145_end
+jmp >var__bcin_145_end
+:var__bcin_145
 &R
 0
-:var__bcin_129_end
-wmem >var__bcin_129 &O
-set reg0 >var__bcin_129
-call >println
-:end__bcin_128
-rmem reg0 >var_op_bcin_88
+:var__bcin_145_end
+wmem >var__bcin_145 &O
+set reg0 >var__bcin_145
+set reg1 3
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_144
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_NOT
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_131
-jmp >var__bcin_132_end
-:var__bcin_132
+jf reg0 >end__bcin_148
+jmp >var_result_bcin_149_end
+:var_result_bcin_149
+:var_result_bcin_149_end
+jmp >var__bcin_149_end
+:var__bcin_149
 &O
 &T
 0
-:var__bcin_132_end
-wmem >var__bcin_132 &N
-set reg0 >var__bcin_132
-call >println
-:end__bcin_131
-rmem reg0 >var_op_bcin_88
+:var__bcin_149_end
+wmem >var__bcin_149 &N
+set reg0 >var__bcin_149
+set reg1 2
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_148
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_RMEM
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_134
-jmp >var__bcin_135_end
-:var__bcin_135
+jf reg0 >end__bcin_152
+jmp >var_result_bcin_153_end
+:var_result_bcin_153
+:var_result_bcin_153_end
+jmp >var__bcin_153_end
+:var__bcin_153
 &M
 &E
 &M
 0
-:var__bcin_135_end
-wmem >var__bcin_135 &R
-set reg0 >var__bcin_135
-call >println
-:end__bcin_134
-rmem reg0 >var_op_bcin_88
+:var__bcin_153_end
+wmem >var__bcin_153 &R
+set reg0 >var__bcin_153
+set reg1 2
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_152
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_WMEM
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_137
-jmp >var__bcin_138_end
-:var__bcin_138
+jf reg0 >end__bcin_156
+jmp >var_result_bcin_157_end
+:var_result_bcin_157
+:var_result_bcin_157_end
+jmp >var__bcin_157_end
+:var__bcin_157
 &M
 &E
 &M
 0
-:var__bcin_138_end
-wmem >var__bcin_138 &W
-set reg0 >var__bcin_138
-call >println
-:end__bcin_137
-rmem reg0 >var_op_bcin_88
+:var__bcin_157_end
+wmem >var__bcin_157 &W
+set reg0 >var__bcin_157
+set reg1 2
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_156
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_CALL
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_140
-jmp >var__bcin_141_end
-:var__bcin_141
+jf reg0 >end__bcin_160
+jmp >var_result_bcin_161_end
+:var_result_bcin_161
+:var_result_bcin_161_end
+jmp >var__bcin_161_end
+:var__bcin_161
 &A
 &L
 &L
 0
-:var__bcin_141_end
-wmem >var__bcin_141 &C
-set reg0 >var__bcin_141
-call >println
-:end__bcin_140
-rmem reg0 >var_op_bcin_88
+:var__bcin_161_end
+wmem >var__bcin_161 &C
+set reg0 >var__bcin_161
+set reg1 1
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_160
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_RET
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_143
-jmp >var__bcin_144_end
-:var__bcin_144
+jf reg0 >end__bcin_164
+jmp >var_result_bcin_165_end
+:var_result_bcin_165
+:var_result_bcin_165_end
+jmp >var__bcin_165_end
+:var__bcin_165
 &E
 &T
 0
-:var__bcin_144_end
-wmem >var__bcin_144 &R
-set reg0 >var__bcin_144
-call >println
-:end__bcin_143
-rmem reg0 >var_op_bcin_88
+:var__bcin_165_end
+wmem >var__bcin_165 &R
+set reg0 >var__bcin_165
+set reg1 0
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_164
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_OUT
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_146
-jmp >var__bcin_147_end
-:var__bcin_147
+jf reg0 >end__bcin_168
+jmp >var_result_bcin_169_end
+:var_result_bcin_169
+:var_result_bcin_169_end
+jmp >var__bcin_169_end
+:var__bcin_169
 &U
 &T
 0
-:var__bcin_147_end
-wmem >var__bcin_147 &O
-set reg0 >var__bcin_147
-call >println
-:end__bcin_146
-rmem reg0 >var_op_bcin_88
+:var__bcin_169_end
+wmem >var__bcin_169 &O
+set reg0 >var__bcin_169
+set reg1 1
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_168
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_IN
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_149
-jmp >var__bcin_150_end
-:var__bcin_150
+jf reg0 >end__bcin_172
+jmp >var_result_bcin_173_end
+:var_result_bcin_173
+:var_result_bcin_173_end
+jmp >var__bcin_173_end
+:var__bcin_173
 &N
 0
-:var__bcin_150_end
-wmem >var__bcin_150 &I
-set reg0 >var__bcin_150
-call >println
-:end__bcin_149
-rmem reg0 >var_op_bcin_88
+:var__bcin_173_end
+wmem >var__bcin_173 &I
+set reg0 >var__bcin_173
+set reg1 1
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
+add reg0 reg0 1
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_172
+rmem reg0 >var_op_bcin_87
 rmem reg1 >fld_opcodes_bcin_30_NOOP
 eq reg0 reg0 reg1
-jf reg0 >end__bcin_152
-jmp >var__bcin_153_end
-:var__bcin_153
+jf reg0 >end__bcin_176
+jmp >var_result_bcin_177_end
+:var_result_bcin_177
+:var_result_bcin_177_end
+jmp >var__bcin_177_end
+:var__bcin_177
 &O
 &O
 &P
 0
-:var__bcin_153_end
-wmem >var__bcin_153 &N
-set reg0 >var__bcin_153
-call >println
-:end__bcin_152
-rmem reg0 >var_p_counter_bcin_86
+:var__bcin_177_end
+wmem >var__bcin_177 &N
+set reg0 >var__bcin_177
+set reg1 0
+rmem reg2 >var_p_counter_bcin_85
+call >take
+wmem >var_result_bcin_89 reg0
+rmem reg0 >var_result_bcin_89
 add reg0 reg0 1
-wmem >var_p_counter_bcin_86 reg0
-jmp >for__bcin_87_begin
-:for__bcin_87_end
+rmem reg0 reg0
+wmem >var_p_counter_bcin_85 reg0
+:end__bcin_176
+rmem reg0 >var_p_counter_bcin_85
+add reg0 reg0 1
+wmem >var_p_counter_bcin_85 reg0
+jmp >for__bcin_86_begin
+:for__bcin_86_end
 halt
 
 :subtract
