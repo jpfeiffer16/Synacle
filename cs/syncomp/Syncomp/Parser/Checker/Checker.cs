@@ -427,46 +427,48 @@ namespace syncomp
             if (node is Incr incrNode)
             {
                 diagnostics.AddRange(Check(incrNode.Parameter, ctx));
-                if (!incrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
-                {
-                    var length = 0;
-                    if (incrNode.Parameter is Identifier incrId)
-                    {
-                        length = incrId.Name.Length;
-                    }
-                    diagnostics.Add(new Diagnostic(
-                        incrNode.File,
-                        incrNode.Line,
-                        incrNode.Column,
-                        length,
-                        $"Cannot perform incr op on type {incrNode.Parameter.NodeType.GetName()}",
-                        DiagnosticCode.InvalidTypes
-                    ));
-                    return diagnostics;
-                }
+                // Not sure if we want to disallow doing this on non ints yet:
+                // if (!incrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
+                // {
+                //     var length = 0;
+                //     if (incrNode.Parameter is Identifier incrId)
+                //     {
+                //         length = incrId.Name.Length;
+                //     }
+                //     diagnostics.Add(new Diagnostic(
+                //         incrNode.File,
+                //         incrNode.Line,
+                //         incrNode.Column,
+                //         length,
+                //         $"Cannot perform incr op on type {incrNode.Parameter.NodeType.GetName()}",
+                //         DiagnosticCode.InvalidTypes
+                //     ));
+                //     return diagnostics;
+                // }
             }
             #endregion
             #region "Decr"
             if (node is Decr decrNode)
             {
                 diagnostics.AddRange(Check(decrNode.Parameter, ctx));
-                if (!decrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
-                {
-                    var length = 1;
-                    if (decrNode.Parameter is Identifier decrId)
-                    {
-                        length = decrId.Name.Length;
-                    }
-                    diagnostics.Add(new Diagnostic(
-                        decrNode.File,
-                        decrNode.Line,
-                        decrNode.Column,
-                        length,
-                        $"Cannot perform incr op on type {decrNode.Parameter.NodeType.GetName()}",
-                        DiagnosticCode.InvalidTypes
-                    ));
-                    return diagnostics;
-                }
+                // Not sure if we want to disallow doing this on non ints yet:
+                // if (!decrNode.Parameter.NodeType.Equals(ParserContext.NativeTypes.LangInt))
+                // {
+                //     var length = 1;
+                //     if (decrNode.Parameter is Identifier decrId)
+                //     {
+                //         length = decrId.Name.Length;
+                //     }
+                //     diagnostics.Add(new Diagnostic(
+                //         decrNode.File,
+                //         decrNode.Line,
+                //         decrNode.Column,
+                //         length,
+                //         $"Cannot perform incr op on type {decrNode.Parameter.NodeType.GetName()}",
+                //         DiagnosticCode.InvalidTypes
+                //     ));
+                //     return diagnostics;
+                // }
             }
             #endregion
             #region "AddressOf"
