@@ -1,20 +1,22 @@
 const VirtualMemoryLayer = require('./virtualMemoryLayer');
 const machineInstructions = require('./instructions')(VirtualMemoryLayer);
 
-module.exports = function(memory) {
-  // let { heap, registers } = memory;
+module.exports = function(memory, settings = {}) {
   function step() {
     const instruction = 
       machineInstructions[memory.heap[memory.inPtr]];
     if (instruction) {
+      let instructionIndex = memory.inPtr;
       const params = [ memory ];
       for (let i = 0; i < instruction.paramaterCount; i++) {
         params.push(memory.heap[++memory.inPtr]);
       }
-      // let traceParams = [instruction.instruction];
-      // traceParams = traceParams.concat(params);
-      // trace.apply({}, traceParams);
       instruction.action.apply(machineInstructions, params);
+      if (settings.trace) {
+        let traceParams = [instructionIndex, instruction.instruction];
+        traceParams = traceParams.concat(params);
+        trace.apply({}, traceParams);
+      }
     }
     memory.inPtr++;
   }
@@ -26,25 +28,8 @@ module.exports = function(memory) {
 
 const fs = require('fs');
 
-function trace(instruction, memory, ...rest) {
+function trace(opIndex, instruction, memory, ...rest) {
   fs.appendFileSync('./log.txt', 
-    `${ memory.inPtr }: ${ instruction } ${ rest.join(' ') } | ${
-      rest.map((param) => {
-        switch(instruction) {
-          case 'out':
-            return String.fromCharCode(
-              VirtualMemoryLayer.getValue(memory, param)
-            );
-          default:
-            return VirtualMemoryLayer.getValue(memory, param);
-        }
-      })
-    }\n`
-  );
-}
-
-function trace(instruction, memory, ...rest) {
-  fs.appendFileSync('./log.txt', 
-    `${ memory.inPtr }: ${ instruction } ${ rest.join(' ') }\n`
+      `${ opIndex }: ${ instruction }${rest.length ? " " : ""}${ rest.join(' ') }\t|${ memory.registers.join("\t") }\n`
   );
 }

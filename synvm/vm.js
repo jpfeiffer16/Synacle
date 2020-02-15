@@ -9,6 +9,7 @@ let startTime;
 
 program
   .option('-d, --debug', 'Launch interactive debugger')
+  .option('-t, --trace [bool]', 'Trace execution in log file')
   .option('-b, --binary [string]', 'Binary to run. Defaults to challenge.bin')
   .option('-s, --stdin [bool]', 'Fetch binary from stdin')
   .option('-i, --information [bool]', 'Display information about the program once it exits')
@@ -59,7 +60,7 @@ function init(buf) {
     memory.heap[i ? i / 2 : i] = buf.readUInt16LE(i);
   }
 
-  const interpreter = Interpreter(memory);
+  const interpreter = Interpreter(memory, program);
 
   function step() {
     interpreter.step();
