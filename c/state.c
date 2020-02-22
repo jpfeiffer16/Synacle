@@ -5,6 +5,8 @@
 
 #define STACK_SIZE 1024
 
+extern void cleanup_and_exit(int exit_code);
+
 typedef struct vm_stack {
     uint16_t array[STACK_SIZE];
     int top;
@@ -21,8 +23,7 @@ typedef struct state {
 void vm_stack_push(vm_stack *stack, uint16_t val) {
     if (stack->top == STACK_SIZE - 1) {
         fprintf(stderr, "Stack overflow!");
-        //TODO: Cleanup resource
-        exit(1);
+        cleanup_and_exit(1);
     }
     stack->array[stack->top++] = val;
 }
@@ -31,7 +32,7 @@ uint16_t vm_stack_pop(vm_stack *stack) {
     if (stack->top == 0) {
         fprintf(stderr, "Stack underflow!");
         //TODO: Cleanup resource
-        exit(1);
+        cleanup_and_exit(1);
     }
     return stack->array[--stack->top];
 }

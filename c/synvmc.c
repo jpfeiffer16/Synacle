@@ -15,6 +15,7 @@ char bin_file_path[256] = {0};
 void cleanup_and_exit(int status_code) {
     if (should_trace) fclose(trace_file);
     free(memory_buffer);
+    exit(status_code);
 }
 
 uint16_t* get_code(FILE* file) {
