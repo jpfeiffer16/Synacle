@@ -1,10 +1,14 @@
 using System;
 
-public class TypeNotFoundException : Exception
+namespace syncomp
 {
-    string TypeName { get; }
-    public TypeNotFoundException(string typeName)
+    public class TypeNotFoundException : Exception
     {
-        this.TypeName = typeName;
+        string TypeName { get; }
+        public TypeNotFoundException(string typeName)
+        {
+            this.TypeName = typeName;
+        }
     }
+
 }

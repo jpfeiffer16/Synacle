@@ -681,50 +681,44 @@ ret
 ret
 :int_end
 set reg0 >int
-jmp >var_test_newlexer_3_end
-:var_test_newlexer_3
-:var_test_newlexer_3_end
-jmp >function__newlexer_3_end
-:function__newlexer_3
-jmp >var_num_newlexer_3_end
-:var_num_newlexer_3
-:var_num_newlexer_3_end
-wmem >var_num_newlexer_3 reg0
-rmem reg0 >var_num_newlexer_3
+jmp >count_end
+:count
+jmp >var_num_stresstest_3_end
+:var_num_stresstest_3
+:var_num_stresstest_3_end
+wmem >var_num_stresstest_3 reg0
+jmp >var_i_stresstest_4_end
+:var_i_stresstest_4
+:var_i_stresstest_4_end
+set reg0 0
+wmem >var_i_stresstest_4 reg0
+:for__stresstest_4_begin
+rmem reg0 >var_i_stresstest_4
+rmem reg1 >var_num_stresstest_3
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+jf reg0 >for__stresstest_4_end
+rmem reg0 >var_i_stresstest_4
 call >print_number
-jmp >var__newlexer_6_end
-:var__newlexer_6
+jmp >var__stresstest_6_end
+:var__stresstest_6
 0
-:var__newlexer_6_end
-wmem >var__newlexer_6 32
-set reg0 >var__newlexer_6
+:var__stresstest_6_end
+wmem >var__stresstest_6 32
+set reg0 >var__stresstest_6
 call >println
-jmp >var__newlexer_7_end
-:var__newlexer_7
-&e
-&l
-&l
-&o
-&,
-32
-&W
-&o
-&r
-&l
-&d
-&!
-0
-:var__newlexer_7_end
-wmem >var__newlexer_7 &H
-set reg0 >var__newlexer_7
-call >println
+rmem reg0 >var_i_stresstest_4
+add reg0 reg0 1
+wmem >var_i_stresstest_4 reg0
+jmp >for__stresstest_4_begin
+:for__stresstest_4_end
 ret
-:function__newlexer_3_end
-set reg0 >function__newlexer_3
-wmem >var_test_newlexer_3 reg0
-set reg0 123
-rmem reg7 >var_test_newlexer_3
-call reg7
+:count_end
+set reg0 >count
+set reg0 1000
+call >count
 halt
 
 :subtract

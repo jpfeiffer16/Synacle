@@ -224,7 +224,7 @@ namespace syncomp
                         fd.File,
                         fd.Line,
                         fd.Column,
-                        length: fd != null ? fd.Name.Length : 7,
+                        length: fd.Name != null ? fd.Name.Length : 7,
                         $"Not all code paths return value of type {fd.NodeType.GetName()}",
                         DiagnosticCode.ControlFlowError
                     ));

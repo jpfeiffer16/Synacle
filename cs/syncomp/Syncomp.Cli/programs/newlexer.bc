@@ -1,15 +1,10 @@
 #include "./lib/stdlib.bc"
-#include "./lib/array_wrapper.bc"
 
-ptr<array> ar = array_new(3);
+func<int, void> test = function(int num)
+{
+    print_number(num);
+    println(" ");
+    println("Hello, World!");
+};
 
-array_set_nth(ar, 0, 1);
-array_set_nth(ar, 1, 2);
-array_set_nth(ar, 2, 3);
-
-print_number(array_get_nth(ar, 0));
-println(" ");
-print_number(array_get_nth(ar, 1));
-println(" ");
-print_number(array_get_nth(ar, 2));
-println(" ");
+test(123);

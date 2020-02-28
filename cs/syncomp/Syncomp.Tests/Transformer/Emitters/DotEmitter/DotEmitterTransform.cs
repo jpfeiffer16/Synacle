@@ -16,7 +16,7 @@ namespace syncomp.Tests
             var right = new Identifier("id", null, 0, 0);
             var langType = new LangType("test_type", null, "test_file.bc", 1, 2);
             var typeVariable = new Variable {
-                Name = "test_variable", VariableDeclaration = new VariableDeclaration("test_variable", langType, null, 0, 0)
+                Name = "test_variable", VariableDeclaration = new VariableDeclaration("test_variable", langType, "test.bc", 1, 2)
             };
             var ctx = new Context { Variables = new VariableStack() };
             ctx.Variables.Add(typeVariable);
@@ -39,7 +39,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void FieldLabelIsCorrect()
         {
-            var expectedMemoryAddress = "fld_test_variable__0_id";
+            var expectedMemoryAddress = "fld_test_variable_test_1_id";
             Assert.AreEqual($"rmem reg0 >{expectedMemoryAddress}", this.result.FirstOrDefault());
         }
     }
