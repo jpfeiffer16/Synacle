@@ -37,23 +37,23 @@ function str_equal(string str_a, string str_b) : int {
   return 1;
 }
 
-function alloc() : int {
-  var data_index = 16382;
+function alloc() : ptr {
+  int data_index = 16382;
   while (!(~(data_index))) {
     --data_index;
   }
   data_index = data_index + 2;
-  return data_index;
+  return data_index as ptr;
 }
 
-function alloc_chunk(var length) : int {
-  var ptr = alloc();
-  var dest_ptr = ptr + length;
+function alloc_chunk(var length) : ptr {
+  ptr pointer = alloc();
+  var dest_ptr = pointer + length;
   wmem(dest_ptr, 32767);
-  return ptr;
+  return pointer;
 }
 
-function mem_cp(int s_ptr, int d_ptr, int len) {
+function mem_cp(ptr s_ptr, ptr d_ptr, int len) {
   var current_byte = 0;
   while (current_byte <= len) {
     var byte_to_write_ptr = s_ptr + current_byte;
@@ -66,16 +66,16 @@ function mem_cp(int s_ptr, int d_ptr, int len) {
 function str_cat(string str_a, string str_b) : string {
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
-  var alloc_ptr = alloc();
-  mem_cp(str_a as int, alloc_ptr as int, a_len);
+  ptr alloc_ptr = alloc();
+  mem_cp(str_a as ptr, alloc_ptr as ptr, a_len);
   var end_address = alloc_ptr + a_len;
   ++b_len;
-  mem_cp(str_b as int, end_address as int, b_len);
+  mem_cp(str_b as ptr, end_address as ptr, b_len);
   return alloc_ptr as string;
 }
 
 function flip_str(string str_ptr) : string {
-  var alloc_ptr = alloc();
+  ptr alloc_ptr = alloc();
   var len = str_len(str_ptr);
   var index = 0;
   while (index < len) {
@@ -109,9 +109,9 @@ function input() : string {
     is_newline = in_char == 10;
   }
   wmem(data_index, 0);
-  var alloc_ptr = alloc();
+  ptr alloc_ptr = alloc();
   var length = str_len(16384 as string);
-  mem_cp(16384, alloc_ptr, length);
+  mem_cp(16384 as ptr, alloc_ptr, length);
   return alloc_ptr as string;
 }
 
