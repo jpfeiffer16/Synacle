@@ -48,8 +48,8 @@ function alloc() : ptr {
 
 function alloc_chunk(var length) : ptr {
   ptr pointer = alloc();
-  var dest_ptr = pointer + length;
-  wmem(dest_ptr, 32767);
+  int dest_ptr = pointer + length;
+  wmem(dest_ptr as ptr, 32767);
   return pointer;
 }
 
@@ -58,7 +58,7 @@ function mem_cp(ptr s_ptr, ptr d_ptr, int len) {
   while (current_byte <= len) {
     var byte_to_write_ptr = s_ptr + current_byte;
     var dest_ptr = d_ptr + current_byte;
-    wmem(dest_ptr, ~byte_to_write_ptr as int);
+    wmem(dest_ptr as ptr, ~byte_to_write_ptr as int);
     ++current_byte;
   }
 }
@@ -88,7 +88,7 @@ function flip_str(string str_ptr) : string {
   index = 0;
   while (index < len) {
     var dest_index = alloc_ptr + index;
-    wmem(dest_index, current_byte);
+    wmem(dest_index as ptr, current_byte);
 
     ++index;
     current_byte = pop();
@@ -103,12 +103,12 @@ function input() : string {
   var in_char = in();
   var is_newline = in_char == 10;
   while (!is_newline && in_char) {
-    wmem(data_index, in_char);
+    wmem(data_index as ptr, in_char);
     ++data_index;
     in_char = in();
     is_newline = in_char == 10;
   }
-  wmem(data_index, 0);
+  wmem(data_index as ptr, 0);
   ptr alloc_ptr = alloc();
   var length = str_len(16384 as string);
   mem_cp(16384 as ptr, alloc_ptr, length);

@@ -45,74 +45,17 @@ namespace syncomp
             if (node is VariableAssignment va)
             {
                 diagnostics.AddRange(Check(va.Parameter, ctx));
-                if (va.Identifier is VariableDeclaration def)
-                {
-                    ctx.Variables.AddVariable(new CheckerVariable
-                    {
-                        Node = def
-                    });
-                }
-                // TODO: Hack to deal with lack of actual parser context in the parser.
-                // Hence, need to look up the function in the checker context.
-                // Please help me...
                 diagnostics.AddRange(Check(va.Identifier, ctx));
+
                 var identifierType = va.Identifier.NodeType;
                 var parameterType = va.Parameter.NodeType;
-                var length = 1;
-                if (va.Parameter is FunctionCall fc)
-                {
-                    var function = ctx.Variables.GetFunction(fc.Name)?.Node as AstNode;
-                    if (function is null) function = ctx.Variables.GetVariable(fc.Name)?.Node as AstNode;
-                    if (function is null)
-                    {
-                        diagnostics.Add(
-                            new Diagnostic(
-                                fc.File,
-                                fc.Line,
-                                fc.Column,
-                                $"Unknown function: {fc.Name}",
-                                DiagnosticCode.UnknownFunction));
-                    }
-                    else
-                    {
-                        parameterType = function.NodeType.SubTypes.LastOrDefault();
-                    }
-                }
-                if (va.Parameter is Identifier parameter)
-                {
-                    var variable = ctx.Variables.GetVariable(parameter.Name);
-                    parameterType = variable.Node.NodeType;
-                }
-                if (va.Identifier is Identifier identifier)
-                {
-                    length = identifier.Name.Length;
-                    var variable = ctx.Variables.GetVariable(identifier.Name);
-                    if (variable is null)
-                    {
-                        diagnostics.Add(new Diagnostic(
-                            identifier.File,
-                            identifier.Line,
-                            identifier.Column,
-                            $"Unknown variable '{identifier.Name}'",
-                            DiagnosticCode.UnknownVariable));
-                    }
-                    else
-                    {
-                        identifierType = variable.Node.NodeType;
-                    }
-                }
-                if (va.Identifier is VariableDeclaration declaration)
-                {
-                    length = declaration.Identifier.Length;
-                }
 
                 if (!identifierType.Equals(parameterType))
                     diagnostics.Add(new Diagnostic(
-                        va.Identifier.File,
-                        va.Identifier.Line,
-                        va.Identifier.Column,
-                        length: length,
-                        $"Unable to convert type '{parameterType?.GetName()}' to  '{identifierType?.GetName()}'",
+                        va.File,
+                        va.Line,
+                        va.Column,
+                        $"Unable to convert type '{parameterType?.GetName()}' to '{identifierType?.GetName()}'",
                         DiagnosticCode.InvalidTypes));
             }
             #endregion
@@ -121,15 +64,7 @@ namespace syncomp
             {
                 var function = ctx.Variables.GetFunction(f.Name)?.Node as AstNode;
                 if (function is null) function = ctx.Variables.GetVariable(f.Name)?.Node;
-                if (function is null
-                    // Handle intrinsics
-                    // && f.Name != "out"
-                    // && f.Name != "in"
-                    // && f.Name != "exit"
-                    // && f.Name != "push"
-                    // && f.Name != "pop"
-                    // && f.Name != "wmem"
-                    )
+                if (function is null)
                 {
                     diagnostics.Add(new Diagnostic(
                         node.File,
@@ -159,28 +94,6 @@ namespace syncomp
                     {
                         var callParam = f.Parameters[i];
                         var callParamType = callParam.NodeType;
-                        if (callParam is Identifier callParamTp)
-                        {
-                            diagnostics.AddRange(Check(callParamTp, ctx));
-                            // var variable = ctx.Variables.GetVariable(callParamTp.Name);
-                            callParamType = callParamTp.NodeType;
-                        }
-                        if (callParam is FunctionCall callParamFunc)
-                        {
-                            var funcParam = ctx.Variables.GetFunction(callParamFunc.Name);
-                            if (funcParam is null)
-                            {
-                                diagnostics.Add(
-                                    new Diagnostic(
-                                        callParamFunc.File,
-                                        callParamFunc.Line,
-                                        callParamFunc.Column,
-                                        $"Unknown function: {callParamFunc.Name}",
-                                        DiagnosticCode.UnknownFunction));
-                                return diagnostics;
-                            }
-                            callParamType = funcParam.Node.NodeType.SubTypes.LastOrDefault();
-                        }
                         var declParamType = function.NodeType.SubTypes[i];
                         if (!callParamType.Equals(declParamType))
                         {

@@ -84,8 +84,9 @@ namespace syncomp
             if (ch == "\n")
             {
                 _line++;
+                var tkn = CreateSyntaxToken(SyntaxTokenType.NewLine, ch);
                 _column = 0;
-                return CreateSyntaxToken(SyntaxTokenType.NewLine, ch);
+                return tkn;
             }
             if (ch == "\t")
                 return CreateSyntaxToken(SyntaxTokenType.Tab, ch);
@@ -302,8 +303,7 @@ namespace syncomp
 
         private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token)
         {
-            _column += token.Length;
-            return new SyntaxToken
+            var tkn = new SyntaxToken
             {
                 Type = tokenType,
                 Token = token,
@@ -311,6 +311,8 @@ namespace syncomp
                 Index = _column,
                 Line = _line
             };
+            _column += token.Length;
+            return tkn;
         }
 
         private int GetLineFromIndex()

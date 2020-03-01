@@ -180,22 +180,22 @@ jmp >var_length_stdlib_49_end
 :var_length_stdlib_49
 :var_length_stdlib_49_end
 wmem >var_length_stdlib_49 reg0
-jmp >var_ptr_stdlib_50_end
-:var_ptr_stdlib_50
-:var_ptr_stdlib_50_end
+jmp >var_pointer_stdlib_50_end
+:var_pointer_stdlib_50
+:var_pointer_stdlib_50_end
 call >alloc
-wmem >var_ptr_stdlib_50 reg0
+wmem >var_pointer_stdlib_50 reg0
 jmp >var_dest_ptr_stdlib_51_end
 :var_dest_ptr_stdlib_51
 :var_dest_ptr_stdlib_51_end
-rmem reg0 >var_ptr_stdlib_50
+rmem reg0 >var_pointer_stdlib_50
 rmem reg1 >var_length_stdlib_49
 add reg0 reg0 reg1
 wmem >var_dest_ptr_stdlib_51 reg0
 rmem reg0 >var_dest_ptr_stdlib_51
 set reg1 32767
 wmem reg0 reg1
-rmem reg0 >var_ptr_stdlib_50
+rmem reg0 >var_pointer_stdlib_50
 ret
 ret
 :alloc_chunk_end

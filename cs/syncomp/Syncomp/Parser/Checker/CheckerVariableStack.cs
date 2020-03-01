@@ -27,12 +27,12 @@ namespace syncomp
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
-                    new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
+                    new VariableDeclaration("dest", ParserContext.NativeTypes.Pointer, null, 0, 0),
                     new VariableDeclaration("source", ParserContext.NativeTypes.LangInt, null, 0, 0)
                 }, null, "wmem", null, 0, 0)
                 {
                     NodeType = GenerateFunctionPointerSig(
-                        ParserContext.NativeTypes.LangInt,
+                        ParserContext.NativeTypes.Pointer,
                         ParserContext.NativeTypes.LangInt,
                         ParserContext.NativeTypes.LangVoid)
                 }
@@ -41,12 +41,12 @@ namespace syncomp
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
-                    new VariableDeclaration("dest", ParserContext.NativeTypes.LangInt, null, 0, 0),
+                    new VariableDeclaration("source", ParserContext.NativeTypes.Pointer, null, 0, 0),
                 }, null, "rmem", null, 0, 0)
                 {
                     ReturnType = ParserContext.NativeTypes.LangInt,
                     NodeType = GenerateFunctionPointerSig(
-                        ParserContext.NativeTypes.LangInt,
+                        ParserContext.NativeTypes.Pointer,
                         ParserContext.NativeTypes.LangInt)
                 }
             });

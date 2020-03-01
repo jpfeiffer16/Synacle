@@ -1,0 +1,5 @@
+// VariableAssignment - InvalidTypes
+int a = "Test";
+
+// FunctionCall - UnknownFunction
+stuff();

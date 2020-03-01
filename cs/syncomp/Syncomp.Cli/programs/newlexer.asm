@@ -722,9 +722,20 @@ ret
 :function__newlexer_3_end
 set reg0 >function__newlexer_3
 wmem >var_test_newlexer_3 reg0
+jmp >main_end
+:main
+jmp >var_cb_newlexer_10_end
+:var_cb_newlexer_10
+:var_cb_newlexer_10_end
+wmem >var_cb_newlexer_10 reg0
 set reg0 123
-rmem reg7 >var_test_newlexer_3
+rmem reg7 >var_cb_newlexer_10
 call reg7
+ret
+:main_end
+set reg0 >main
+rmem reg0 >var_test_newlexer_3
+call >main
 halt
 
 :subtract

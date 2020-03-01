@@ -24,4 +24,11 @@
     <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.3.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None
+      Include="Checker/test_patterns.bc"
+      CopyToOutputDirectory="PreserveNewest"
+      Link="test_patterns.bc"/>
+  </ItemGroup>
+
 </Project>

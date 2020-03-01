@@ -6,7 +6,7 @@ function main() {
   if (str_equal(name, "exit")) {
     return;
   }
-  int first_letter = alloc();
+  ptr first_letter = alloc();
   wmem(first_letter, ~name as int);
   ++name;
   println(

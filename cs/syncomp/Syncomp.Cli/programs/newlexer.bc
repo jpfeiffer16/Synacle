@@ -1,5 +1,15 @@
 #include "./lib/stdlib.bc"
 
+interface itest
+{
+    int id
+}
+
+type test : itest
+{
+    int id
+}
+
 func<int, void> test = function(int num)
 {
     print_number(num);
@@ -7,4 +17,9 @@ func<int, void> test = function(int num)
     println("Hello, World!");
 };
 
-test(123);
+function main(func<int, void> cb)
+{
+    cb(123);
+}
+
+main(test);
