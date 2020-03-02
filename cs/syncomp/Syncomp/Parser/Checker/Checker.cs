@@ -70,6 +70,7 @@ namespace syncomp
                         node.File,
                         node.Line,
                         node.Column,
+                        length: f.Name.Length,
                         $"Invalid function: {f.Name}",
                         DiagnosticCode.UnknownFunction));
                 }
@@ -81,6 +82,7 @@ namespace syncomp
                             node.File,
                             node.Line,
                             node.Column,
+                            length: f.Name.Length,
                             $"Invalid parameters for function '{f.Name}'",
                             DiagnosticCode.InvalidParameters));
 

@@ -1,5 +1,11 @@
 // VariableAssignment - InvalidTypes
 int a = "Test";
 
-// FunctionCall - UnknownFunction
+// FunctionCall - InvalidFunction
+function test(int num) { }
+
 stuff();
+// FunctionCall - InvalidParameters
+test();
+// FunctionCall - InvalidTypes
+test("test");
