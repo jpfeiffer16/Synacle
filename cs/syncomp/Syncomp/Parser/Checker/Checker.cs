@@ -233,6 +233,7 @@ namespace syncomp
                         dot.Left.Column,
                         "Unknown variable",
                         DiagnosticCode.UnknownVariable));
+                    return diagnostics;
                 }
                 var variable = ctx.Variables.GetVariable(variableName.Name);
                 if (variable is null)
@@ -241,8 +242,10 @@ namespace syncomp
                         dot.Left.File,
                         dot.Left.Line,
                         dot.Left.Column,
+                        length: variableName.Name.Length,
                         "Unknown variable",
                         DiagnosticCode.UnknownVariable));
+                    return diagnostics;
                 }
                 // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
                 var type = variable.Node.NodeType;
@@ -254,6 +257,7 @@ namespace syncomp
                         dot.Left.Column,
                         $"Unknown type: {variableName.Name}",
                         DiagnosticCode.UnknownType));
+                    return diagnostics;
                 }
                 var fieldName = dot.Right as Identifier;
                 // if (right is null) throw new ParseException(i, tokens, nodes, "Right node is not an identifier");
@@ -264,8 +268,10 @@ namespace syncomp
                         dot.Right.File,
                         dot.Right.Line,
                         dot.Right.Column,
+                        length: fieldName.Length,
                         $"Unknown field: {fieldName.Name}",
                         DiagnosticCode.UnknownField));
+                    return diagnostics;
                 }
                 dot.NodeType = field.NodeType;
             }
@@ -287,6 +293,17 @@ namespace syncomp
                     return diagnostics;
                 }
                 var variable = ctx.Variables.GetVariable(variableName.Name);
+                if (variable is null)
+                {
+                    diagnostics.Add(new Diagnostic(
+                        derefArrowNode.Left.File,
+                        derefArrowNode.Left.Line,
+                        derefArrowNode.Left.Column,
+                        length: variableName.Name.Length,
+                        "Unknown variable",
+                        DiagnosticCode.UnknownVariable));
+                    return diagnostics;
+                }
                 if (variable.Node.NodeType.Name != ParserContext.NativeTypes.Pointer.Name)
                 {
                     diagnostics.Add(new Diagnostic(
@@ -319,6 +336,7 @@ namespace syncomp
                         derefArrowNode.Right.File,
                         derefArrowNode.Right.Line,
                         derefArrowNode.Right.Column,
+                        length: fieldName.Name.Length,
                         $"Unknown field: {fieldName.Name}",
                         DiagnosticCode.UnknownField));
                     return diagnostics;

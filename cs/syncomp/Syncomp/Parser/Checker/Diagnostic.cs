@@ -14,7 +14,7 @@ namespace syncomp
 
         public Diagnostic(
             string file, int line, int column, string message, DiagnosticCode code)
-            : this(file, line, column, line, column, message, code)
+            : this(file, line, column, line, column + 1, message, code)
         { }
 
         public Diagnostic(

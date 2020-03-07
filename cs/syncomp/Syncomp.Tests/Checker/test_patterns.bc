@@ -2,18 +2,44 @@
 int a = "Test";
 
 // FunctionCall - InvalidFunction
-function test(int num) { }
-
 stuff();
+
 // FunctionCall - InvalidParameters
+function test(int num) { }
 test();
+
 // FunctionCall - InvalidTypes
 test("test");
 test(123 as string);
 string test_string;
 test(test_string);
+
 // FunctionDeclaration - ControlFlowError
 function return_test() : int {}
 func<int> test_func = function () : int {};
+
 // Identifier - UnknownVariable
 stuff;
+
+// Dot - UnknownVariable
+stuff.id;
+
+// Identifier - UnknownField
+type test_type
+{
+    int id
+}
+test_type t_type;
+t_type.id = 123;
+t_type.name = "Name";
+
+// DerefArrow - UnknownVariable
+stuff->id;
+
+// DerefArrow - InvalidTypes
+int deref_test;
+deref_test->test;
+
+// DerefArrow - UnknownField
+ptr<test_type> t_type_ptr = &t_type;
+t_type_ptr->name = "Test";
