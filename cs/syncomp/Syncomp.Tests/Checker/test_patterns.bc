@@ -9,3 +9,11 @@ stuff();
 test();
 // FunctionCall - InvalidTypes
 test("test");
+test(123 as string);
+string test_string;
+test(test_string);
+// FunctionDeclaration - ControlFlowError
+function return_test() : int {}
+func<int> test_func = function () : int {};
+// Identifier - UnknownVariable
+stuff;

@@ -103,6 +103,7 @@ namespace syncomp
                                 callParam.File,
                                 callParam.Line,
                                 callParam.Column,
+                                length: callParam.Length,
                                 $"Unable to convert type '{callParamType?.GetName()}' to  '{declParamType?.GetName()}'",
                                 DiagnosticCode.InvalidTypes));
                         }
@@ -139,8 +140,8 @@ namespace syncomp
                         fd.File,
                         fd.Line,
                         fd.Column,
-                        length: fd.Name != null ? fd.Name.Length : 7,
-                        $"Not all code paths return value of type {fd.NodeType.GetName()}",
+                        length: 8, // The word 'function' is 8 chars long
+                        $"Not all code paths return value of type {fd.NodeType.SubTypes.LastOrDefault()?.GetName()}",
                         DiagnosticCode.ControlFlowError
                     ));
                 }
@@ -175,7 +176,7 @@ namespace syncomp
             }
             #endregion
             #region "For"
-            // TODO: Type check args
+            // TODO: Check for various parts
             if (node is For forNode)
             {
                 foreach (var exNode in forNode.Init)

@@ -6,6 +6,7 @@ namespace syncomp
 {
     public class LangType : AstNode, IEquatable<LangType>
     {
+        public override int Length => this.Name.Length;
         //TODO: Fix!
         public LangType(string name, List<VariableDeclaration> body, string file, int line, int column)
             : base("LANGTYPE", file, line, column)

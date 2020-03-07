@@ -309,6 +309,7 @@ namespace syncomp
                 Token = token,
                 File = this._fileName,
                 Column = _column,
+                Index = _index,
                 Line = _line
             };
             _column += token.Length;
