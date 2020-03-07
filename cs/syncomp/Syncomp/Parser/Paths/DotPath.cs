@@ -26,7 +26,7 @@ namespace syncomp
             // if (field is null) throw new ParseException(i, tokens, nodes, $"Unknown field: {right.Name}");
             var dotToken = tokens[i - 1];
             // return (i, new Dot(left, right, dotToken.File, dotToken.Line, dotToken.Index) { NodeType = field.NodeType });
-            return (i, new Dot(left, right, dotToken.File, dotToken.Line, dotToken.Index));
+            return (i, new Dot(left, right, dotToken.File, dotToken.Line, dotToken.Column));
         }
     }
 }

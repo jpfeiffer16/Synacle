@@ -36,7 +36,7 @@ namespace syncomp
             i = expressionEnd;
             return (i, new While(
                         ParseTokens(condition, ctx),
-                        ParseTokens(expression, ctx), tkn.File, tkn.Line, tkn.Index));
+                        ParseTokens(expression, ctx), tkn.File, tkn.Line, tkn.Column));
         }
     }
 }

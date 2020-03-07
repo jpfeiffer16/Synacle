@@ -14,7 +14,7 @@ namespace syncomp
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
             var tkn = tokens[i];
-            return (i, new StringLiteral(tokens[i].Token, tkn.File, tkn.Line, tkn.Index));
+            return (i, new StringLiteral(tokens[i].Token, tkn.File, tkn.Line, tkn.Column));
         }
 
     }

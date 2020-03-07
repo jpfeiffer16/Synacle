@@ -115,7 +115,7 @@ namespace syncomp
             {
                 DisplayParseErrorContext(e, lines);
                 var token = e.Tokens[e.Index];
-                Console.Error.WriteLine($"Syntax error :{token.Line},{token.Index}");
+                Console.Error.WriteLine($"Syntax error :{token.Line},{token.Column}");
                 Console.Error.WriteLine($"Near token '{token.Token}'");
                 Environment.Exit(1);
             }
@@ -143,7 +143,7 @@ namespace syncomp
             Console.Error.WriteLine(errorLine);
             Console.ForegroundColor = ConsoleColor.Yellow;
             var i = 0;
-            for (; i < token.Index; i++)
+            for (; i < token.Column; i++)
             {
                 Console.Error.Write(" ");
             }

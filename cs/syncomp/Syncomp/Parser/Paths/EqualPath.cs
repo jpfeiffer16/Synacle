@@ -19,7 +19,7 @@ namespace syncomp
             var right = ParseTokens(tokens.GetRange(i, stopToken - i), ctx)[0];
             var equalToken = tokens[i - 1];
             i = stopToken;
-            return (i, new Equal(left, right, equalToken.File, equalToken.Line, equalToken.Index) { NodeType = ParserContext.NativeTypes.LangInt });
+            return (i, new Equal(left, right, equalToken.File, equalToken.Line, equalToken.Column) { NodeType = ParserContext.NativeTypes.LangInt });
         }
     }
 }

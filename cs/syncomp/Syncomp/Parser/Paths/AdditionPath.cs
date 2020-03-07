@@ -20,7 +20,7 @@ namespace syncomp
                 right[0],
                 additionToken.File,
                 additionToken.Line,
-                additionToken.Index) { NodeType = ParserContext.NativeTypes.LangInt });
+                additionToken.Column) { NodeType = ParserContext.NativeTypes.LangInt });
         }
     }
 }

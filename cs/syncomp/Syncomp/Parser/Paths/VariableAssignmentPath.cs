@@ -20,7 +20,7 @@ namespace syncomp
             var parsedTokens = ParseTokens(tokensToParse, ctx);
             var parsedParameter = parsedTokens[0];
 
-            return (i, new VariableAssignment(previousAstNode, parsedParameter, tkn.File, tkn.Line, tkn.Index));
+            return (i, new VariableAssignment(previousAstNode, parsedParameter, tkn.File, tkn.Line, tkn.Column));
         }
     }
 }

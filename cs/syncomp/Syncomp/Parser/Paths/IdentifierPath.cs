@@ -60,7 +60,7 @@ namespace syncomp
                   token.Token,
                   functionCallToken.File,
                   functionCallToken.Line,
-                  functionCallToken.Index
+                  functionCallToken.Column
                 );
             }
             // Typed variable declaration
@@ -88,7 +88,7 @@ namespace syncomp
                         tokens,
                         nodes,
                         $"Invalid variable declaration. Unknown type '{token.Token}'");
-                node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Index);
+                node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Column);
             }
             else
             {
@@ -100,13 +100,13 @@ namespace syncomp
                             token.Token,
                             integerLiteralToken.File,
                             integerLiteralToken.Line,
-                            integerLiteralToken.Index);
+                            integerLiteralToken.Column);
                 }
                 // Identifier
                 else
                 {
                     var tkn = tokens[i];
-                    node = new Identifier(token.Token, tkn.File, tkn.Line, tkn.Index);
+                    node = new Identifier(token.Token, tkn.File, tkn.Line, tkn.Column);
                 }
             }
 

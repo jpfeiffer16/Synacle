@@ -34,7 +34,7 @@ namespace syncomp
             var expression = tokens.GetRange(i + 1, expressionEnd - i);
             i = expressionEnd;
             return (i, new If(
-                ParseTokens(condition, ctx), ParseTokens(expression, ctx), ifToken.File, ifToken.Line, ifToken.Index));
+                ParseTokens(condition, ctx), ParseTokens(expression, ctx), ifToken.File, ifToken.Line, ifToken.Column));
         }
     }
 }

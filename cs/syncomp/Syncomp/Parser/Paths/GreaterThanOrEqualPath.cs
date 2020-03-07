@@ -19,7 +19,7 @@ namespace syncomp
               ParseTokens(new List<SyntaxToken>() { tokens[i] }, ctx)[0],
               gteToken.File,
               gteToken.Line,
-              gteToken.Index
+              gteToken.Column
             ) { NodeType = ParserContext.NativeTypes.LangInt });
         }
     }

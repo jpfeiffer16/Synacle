@@ -16,7 +16,7 @@ namespace syncomp
             var drefArrowToken = tokens[i];
             var previous = nodes.Pop();
             var next = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx).FirstOrDefault();
-            return (i, new DerefArrow(previous, next,  drefArrowToken.File, drefArrowToken.Line, drefArrowToken.Index));
+            return (i, new DerefArrow(previous, next,  drefArrowToken.File, drefArrowToken.Line, drefArrowToken.Column));
         }
     }
 }

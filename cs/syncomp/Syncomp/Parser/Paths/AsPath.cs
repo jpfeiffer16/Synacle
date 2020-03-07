@@ -20,7 +20,7 @@ namespace syncomp
                 throw new ParseException(i, tokens, nodes, $"Unknown type: '{tokens[i].Token}'");
             }
             var asToken = tokens[i - 1];
-            return (i, new As(fromNode, toNode, asToken.File, asToken.Line, asToken.Index) { NodeType = toNode });
+            return (i, new As(fromNode, toNode, asToken.File, asToken.Line, asToken.Column) { NodeType = toNode });
         }
     }
 }

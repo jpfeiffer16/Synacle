@@ -75,7 +75,7 @@ namespace syncomp
                 name?.Token,
                 functionToken.File,
                 functionToken.Line,
-                functionToken.Index)
+                functionToken.Column)
             { NodeType = langType, ReturnType = returnType });
         }
     }

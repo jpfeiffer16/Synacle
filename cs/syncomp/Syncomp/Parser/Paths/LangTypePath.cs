@@ -51,7 +51,7 @@ namespace syncomp
                 ParseTokens(bodyExpression, ctx).Cast<VariableDeclaration>().ToList(),
                 langTypeToken.File,
                 langTypeToken.Line,
-                langTypeToken.Index);
+                langTypeToken.Column);
             ctx.LangTypes.Add(langType);
             return (i, langType);
         }

@@ -14,7 +14,7 @@ namespace syncomp
         {
             var next = ParseTokens(new List<SyntaxToken> { tokens[++i] }, ctx);
             var decrToken = tokens[i - 1];
-            return (i, new Decr(next[0], decrToken.File, decrToken.Line, decrToken.Index));
+            return (i, new Decr(next[0], decrToken.File, decrToken.Line, decrToken.Column));
         }
     }
 }

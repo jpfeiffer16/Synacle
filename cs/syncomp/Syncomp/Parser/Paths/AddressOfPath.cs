@@ -18,7 +18,7 @@ namespace syncomp
                 nextNode,
                 addressOfToken.File,
                 addressOfToken.Line,
-                addressOfToken.Index)
+                addressOfToken.Column)
                 { NodeType = ParserContext.NativeTypes.Pointer });
         }
     }

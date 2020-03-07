@@ -132,9 +132,9 @@ namespace syncomp
             {
                 int leftIndex = tokens.IndexOf(left);
                 var simpleTypeToken = tokens.Take(leftIndex).FirstOrDefault();
-                if (simpleTypeToken is null) throw new ParseException(left.Index, tokens, null, "No type before <");
+                if (simpleTypeToken is null) throw new ParseException(left.Column, tokens, null, "No type before <");
                 var right = tokens.LastOrDefault(tkn => tkn.Type == SyntaxTokenType.GreaterThan);
-                if (right is null) throw new ParseException(left.Index, tokens, null, "No matching angle bracket");
+                if (right is null) throw new ParseException(left.Column, tokens, null, "No matching angle bracket");
                 var subTypeList = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
                 foreach (var tkn in tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1))
                 {
@@ -152,7 +152,7 @@ namespace syncomp
                     null,
                     simpleTypeToken.File,
                     simpleTypeToken.Line,
-                    simpleTypeToken.Index);
+                    simpleTypeToken.Column);
                 simpleType.SubTypes = subTypeList.Select(t => GetLangType(t, ctx)).ToList();
                 // simpleType.SubTypes = new List<LangType> { GetLangType(tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1)) };
                 return simpleType;

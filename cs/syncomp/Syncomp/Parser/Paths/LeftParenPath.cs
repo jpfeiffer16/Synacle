@@ -32,7 +32,7 @@ namespace syncomp
               childNodes,
               tkn.File,
               tkn.Line,
-              tkn.Index
+              tkn.Column
             ) { NodeType = nodeType };
 
             i = expressionEnd + 1;

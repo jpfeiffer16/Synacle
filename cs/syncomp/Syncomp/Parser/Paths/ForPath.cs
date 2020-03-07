@@ -57,7 +57,7 @@ namespace syncomp
               ParseTokens(expression, ctx),
               forToken.File,
               forToken.Line,
-              forToken.Index
+              forToken.Column
             ));
         }
     }

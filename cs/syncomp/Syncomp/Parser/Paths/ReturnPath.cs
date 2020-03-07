@@ -24,11 +24,11 @@ namespace syncomp
                         ParseTokens(returnExpression, ctx)[0],
                         tkn.File,
                         tkn.Line,
-                        tkn.Index);
+                        tkn.Column);
             }
             else
             {
-                node = new Return(null, tkn.File, tkn.Line, tkn.Index);
+                node = new Return(null, tkn.File, tkn.Line, tkn.Column);
             }
             return (i, node);
         }

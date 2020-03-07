@@ -13,7 +13,7 @@ namespace syncomp
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
             var breakpointToken = tokens[i];
-            return (i, new Breakpoint(breakpointToken.File, breakpointToken.Line, breakpointToken.Index));
+            return (i, new Breakpoint(breakpointToken.File, breakpointToken.Line, breakpointToken.Column));
         }
     }
 }
