@@ -1,7 +1,18 @@
-function power(var n, var p) {
-    //var agr = number;
-    //for (var i = 0; i < power; ++i) {
-    //    agr = agr * number;
-    //}
-    //return number;
+function power(int n, int p) : int
+{
+    var agr = n;
+    for (var i = 0; i < p; ++i) {
+        agr = agr * n;
+    }
+    return agr;
+}
+
+function log(int n, int p) : int
+{
+    var agr = n;
+    for (var i = 0; i < p, ++i)
+    {
+        agr = agr * agr;
+    }
+    return agr;
 }

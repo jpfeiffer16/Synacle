@@ -1,25 +1,8 @@
 #include "./lib/stdlib.bc"
 
-interface itest
-{
-    int id
-}
-
-type test : itest
-{
-    int id
-}
-
 func<int, void> test = function(int num)
 {
-    print_number(num);
-    println(" ");
-    println("Hello, World!");
+    int test = 1 + 2;
 };
 
-function main(func<int, void> cb)
-{
-    cb(123);
-}
-
-main(test);
+test(123);
