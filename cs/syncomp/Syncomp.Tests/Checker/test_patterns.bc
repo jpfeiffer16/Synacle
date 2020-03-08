@@ -24,7 +24,7 @@ stuff;
 // Dot - UnknownVariable
 stuff.id;
 
-// Identifier - UnknownField
+// Dot - UnknownField
 type test_type
 {
     int id

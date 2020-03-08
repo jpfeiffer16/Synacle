@@ -102,5 +102,59 @@ namespace syncomp.Tests
             Assert.IsTrue(assignDiag.Message.Contains("int"));
             Assert.AreEqual(8, GetDiagLength(assignDiag));
         }
+
+        [TestMethod]
+        public void IdentifierUnknownVariable()
+        {
+            var diag = this.diagnostics.Where(dg => dg.Line == 22).FirstOrDefault();
+            Assert.IsNotNull(diag);
+            Assert.AreEqual(DiagnosticCode.UnknownVariable, diag.Code);
+            Assert.AreEqual(5, GetDiagLength(diag));
+        }
+
+        [TestMethod]
+        public void DotUnknownVariable()
+        {
+            var diag = this.diagnostics.Where(dg => dg.Line == 25).FirstOrDefault();
+            Assert.IsNotNull(diag);
+            Assert.AreEqual(DiagnosticCode.UnknownVariable, diag.Code);
+            Assert.AreEqual(5, GetDiagLength(diag));
+        }
+
+        [TestMethod]
+        public void DotUnknownField()
+        {
+            var diag = this.diagnostics.Where(dg => dg.Line == 34).FirstOrDefault();
+            Assert.IsNotNull(diag);
+            Assert.AreEqual(DiagnosticCode.UnknownField, diag.Code);
+            Assert.AreEqual(4, GetDiagLength(diag));
+        }
+
+        [TestMethod]
+        public void DerefArrowUnknownVariable()
+        {
+            var diag = this.diagnostics.Where(dg => dg.Line == 37).FirstOrDefault();
+            Assert.IsNotNull(diag);
+            Assert.AreEqual(DiagnosticCode.UnknownVariable, diag.Code);
+            Assert.AreEqual(5, GetDiagLength(diag));
+        }
+
+        [TestMethod]
+        public void DerefArrowInvalidTypes()
+        {
+            var diag = this.diagnostics.Where(dg => dg.Line == 41).FirstOrDefault();
+            Assert.IsNotNull(diag);
+            Assert.AreEqual(DiagnosticCode.InvalidTypes, diag.Code);
+            Assert.AreEqual(2, GetDiagLength(diag));
+        }
+
+        [TestMethod]
+        public void DerefArrowUnknownField()
+        {
+            var diag = this.diagnostics.Where(dg => dg.Line == 45).FirstOrDefault();
+            Assert.IsNotNull(diag);
+            Assert.AreEqual(DiagnosticCode.UnknownField, diag.Code);
+            Assert.AreEqual(4, GetDiagLength(diag));
+        }
     }
 }
