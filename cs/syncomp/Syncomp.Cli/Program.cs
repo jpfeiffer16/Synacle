@@ -47,22 +47,13 @@ namespace syncomp
             var diagnostics = checker.Check();
             if (diagnostics.Count > 0)
             {
-                if (diagnostics.Count > 0)
-                {
-                    foreach (var diagnostic in diagnostics)
-                    {
-                        Console.WriteLine(diagnostic.FullMessage);
-                        Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
-                    }
-                    Console.WriteLine();
-                    Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
-                }
+                DisplayCheckerDiagnostics(diagnostics);
                 Environment.Exit(1);
             }
             var asmLines = EmitAst(ast);
 
-             string workingDirectory;
-             FileInfo fileInfo = null;
+            string workingDirectory;
+            FileInfo fileInfo = null;
 
             if (filePath == "-")
             {
@@ -71,8 +62,8 @@ namespace syncomp
             }
             else
             {
-                 fileInfo = new FileInfo(filePath);
-                 workingDirectory = fileInfo.Directory.FullName;
+                fileInfo = new FileInfo(filePath);
+                workingDirectory = fileInfo.Directory.FullName;
                 //Write file
                 File.WriteAllLines(
                     $"{workingDirectory}/{fileInfo.Name.Replace(fileInfo.Extension, ".asm")}",
@@ -97,7 +88,7 @@ namespace syncomp
                 // Trim out whitespace
                 tokens = tokens.Where(tkn => tkn.Type != SyntaxTokenType.Space).ToList();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.Error.WriteLine("Lexer error:");
                 Console.Error.WriteLine(e);
@@ -111,7 +102,7 @@ namespace syncomp
                 var parser = new Parser(tokens);
                 (parserContext, ast) = parser.Parse();
             }
-            catch(ParseException e)
+            catch (ParseException e)
             {
                 DisplayParseErrorContext(e, lines);
                 var token = e.Tokens[e.Index];
@@ -124,9 +115,9 @@ namespace syncomp
 
         private static List<string> EmitAst(List<AstNode> ast)
         {
-                //Transform
-                var transformer = new Transformer(ast);
-                return transformer.TransformFullAst();
+            //Transform
+            var transformer = new Transformer(ast);
+            return transformer.TransformFullAst();
         }
 
         private static void DisplayParseErrorContext(
@@ -156,6 +147,20 @@ namespace syncomp
                 codeLines.GetRange(token.Line + 1, to - (token.Line + 1)).ForEach(Console.WriteLine);
             }
             Console.Error.WriteLine();
+        }
+
+        private static void DisplayCheckerDiagnostics(List<Diagnostic> diagnostics)
+        {
+            if (diagnostics.Count > 0)
+            {
+                foreach (var diagnostic in diagnostics)
+                {
+                    Console.WriteLine(diagnostic.FullMessage);
+                    Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
+                }
+                Console.WriteLine();
+                Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
+            }
         }
 
         private static void PrintUsage()
