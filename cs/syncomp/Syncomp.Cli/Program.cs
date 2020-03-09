@@ -151,16 +151,31 @@ namespace syncomp
 
         private static void DisplayCheckerDiagnostics(List<Diagnostic> diagnostics)
         {
-            if (diagnostics.Count > 0)
+            Dictionary<string, List<string>> fileCache = new Dictionary<string, List<string>>();
+            foreach (var diagnostic in diagnostics)
             {
-                foreach (var diagnostic in diagnostics)
+                Console.WriteLine(diagnostic.FullMessage);
+                if (!fileCache.ContainsKey(diagnostic.File))
                 {
-                    Console.WriteLine(diagnostic.FullMessage);
-                    Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
+                    var fileLines = File.ReadAllText(diagnostic.File).Split("\n").ToList();
+                    fileCache.Add(diagnostic.File, fileLines);
                 }
+                var line = fileCache[diagnostic.File][diagnostic.Line - 1];
+                var originalConsoleColor = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write($"\t{diagnostic.Line}: ");
+                Console.ForegroundColor = originalConsoleColor;
+                Console.Write(line.Substring(0, diagnostic.Column));
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(line.Substring(diagnostic.Column, diagnostic.EndColumn - diagnostic.Column));
+                Console.ForegroundColor = originalConsoleColor;
+                Console.Write(line.Substring(diagnostic.EndColumn, line.Length - diagnostic.EndColumn));
                 Console.WriteLine();
-                Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
+                Console.WriteLine($"\tin {diagnostic.File}:{diagnostic.Line},{diagnostic.Column}");
+                Console.WriteLine();
             }
+            Console.WriteLine();
+            Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
         }
 
         private static void PrintUsage()
