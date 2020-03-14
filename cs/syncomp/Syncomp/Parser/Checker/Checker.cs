@@ -442,11 +442,11 @@ namespace syncomp
                 // }
                 // diagnostics.AddRange(Check(identifier, ctx));
                 // derefNode.NodeType = identifier.NodeType.SubTypes.FirstOrDefault();
+                diagnostics.AddRange(Check(parameter, ctx));
                 if (parameter.NodeType.Name == "ptr")
                 {
                     derefNode.NodeType = parameter.NodeType.SubTypes.FirstOrDefault();
                 }
-                diagnostics.AddRange(Check(parameter, ctx));
             }
             #endregion
             #region "Return"

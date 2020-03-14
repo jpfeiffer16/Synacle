@@ -16,7 +16,7 @@ namespace syncomp
          */
         public bool Check()
         {
-            if (_declaration.ReturnType.Equals(ParserContext.NativeTypes.LangVoid))
+            if (ParserContext.NativeTypes.LangVoid.Equals(_declaration.ReturnType))
                 return true;
             foreach (var node in this._declaration.Expression)
             {

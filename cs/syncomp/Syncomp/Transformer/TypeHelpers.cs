@@ -9,5 +9,11 @@ namespace syncomp
             if (fld is null) return null;
             return langType.Body.IndexOf(fld) + 1;
         }
+
+        public static int GetTypeLength(LangType langType)
+        {
+            // If the type has a null body, its length is 1
+            return langType?.Body?.Count() > 0 ? langType.Body.Count() + 3 : 1;
+        }
     }
 }

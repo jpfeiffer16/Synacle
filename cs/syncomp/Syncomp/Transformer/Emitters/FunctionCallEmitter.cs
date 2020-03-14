@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -48,6 +49,16 @@ namespace syncomp
             else if (fcNode.Name == "rmem")
             {
                 lines.Add($"rmem reg0 reg1");
+            }
+            else if (fcNode.Name == "nameof")
+            {
+                lines.AddRange(
+                    new Transformer(new List<AstNode> { new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).Name, null, 0, 0) }, ctx)
+                    .Transform());
+            }
+            else if (fcNode.Name == "sizeof")
+            {
+                lines.Add($"set reg{ctx.RegisterLevel} {TypeHelper.GetTypeLength(fcNode.Parameters.FirstOrDefault().NodeType)}");
             }
             else
             {

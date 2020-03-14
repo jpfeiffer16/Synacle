@@ -96,6 +96,26 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid)
                 }
             });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(new List<AstNode> {
+                    new VariableDeclaration("arg", ParserContext.NativeTypes.LangVoid, null, 0, 0)
+                }, Enumerable.Empty<AstNode>().ToList(), "sizeof", null, 0, 0)
+                {
+                    ReturnType = ParserContext.NativeTypes.LangInt,
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid, ParserContext.NativeTypes.LangInt)
+                }
+            });
+            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            {
+                Node = new FunctionDeclaration(new List<AstNode> {
+                    new VariableDeclaration("arg", ParserContext.NativeTypes.LangVoid, null, 0, 0)
+                }, Enumerable.Empty<AstNode>().ToList(), "nameof", null, 0, 0)
+                {
+                    ReturnType = ParserContext.NativeTypes.LangInt,
+                    NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid, ParserContext.NativeTypes.LangString)
+                }
+            });
         }
 
         public void Push()

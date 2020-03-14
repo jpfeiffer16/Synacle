@@ -681,60 +681,42 @@ ret
 ret
 :int_end
 set reg0 >int
-jmp >var_test_newlexer_3_end
-:var_test_newlexer_3
-:var_test_newlexer_3_end
-jmp >function__newlexer_3_end
-:function__newlexer_3
-jmp >var_num_newlexer_3_end
-:var_num_newlexer_3
-:var_num_newlexer_3_end
-wmem >var_num_newlexer_3 reg0
-rmem reg0 >var_num_newlexer_3
-call >print_number
-jmp >var__newlexer_6_end
-:var__newlexer_6
-0
-:var__newlexer_6_end
-wmem >var__newlexer_6 32
-set reg0 >var__newlexer_6
-call >println
-jmp >var__newlexer_7_end
-:var__newlexer_7
-&e
-&l
-&l
-&o
-&,
-32
-&W
-&o
-&r
-&l
-&d
-&!
-0
-:var__newlexer_7_end
-wmem >var__newlexer_7 &H
-set reg0 >var__newlexer_7
-call >println
-ret
-:function__newlexer_3_end
-set reg0 >function__newlexer_3
-wmem >var_test_newlexer_3 reg0
 jmp >main_end
 :main
-jmp >var_cb_newlexer_10_end
-:var_cb_newlexer_10
-:var_cb_newlexer_10_end
-wmem >var_cb_newlexer_10 reg0
-set reg0 123
-rmem reg7 >var_cb_newlexer_10
-call reg7
+jmp >var_yay_newlexer_8_end
+:var_yay_newlexer_8
+:var_yay_newlexer_8_end
+wmem >var_yay_newlexer_8 reg0
+jmp >var_size_newlexer_10_end
+:var_size_newlexer_10
+:var_size_newlexer_10_end
+rmem reg0 >var_yay_newlexer_8
+rmem reg0 reg0
+set reg0 4
+wmem >var_size_newlexer_10 reg0
+jmp >var_name_newlexer_11_end
+:var_name_newlexer_11
+:var_name_newlexer_11_end
+rmem reg0 >var_yay_newlexer_8
+jmp >var___0_end
+:var___0
+&a
+&y
+0
+:var___0_end
+wmem >var___0 &y
+set reg0 >var___0
+wmem >var_name_newlexer_11 reg0
+rmem reg0 >var_name_newlexer_11
+call >println
 ret
 :main_end
 set reg0 >main
-rmem reg0 >var_test_newlexer_3
+jmp >var_test_var_newlexer_14_end
+:var_test_var_newlexer_14
+:fld_test_var_newlexer_14_id
+:var_test_var_newlexer_14_end
+set reg0 >var_test_var_newlexer_14
 call >main
 halt
 

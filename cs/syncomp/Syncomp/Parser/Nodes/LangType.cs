@@ -30,6 +30,7 @@ namespace syncomp
         public bool Equals(LangType other)
         {
             if (other is null) return false;
+            if (other.Name == "void") return true;
             if (this.Name != other.Name) return false;
             if (this.SubTypes == null && other.SubTypes == null) return true;
             if (this.SubTypes == null ^ other.SubTypes == null) return false;

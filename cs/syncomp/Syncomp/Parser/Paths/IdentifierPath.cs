@@ -7,8 +7,7 @@ namespace syncomp
     public class IdentifierPath : ParserPath
     {
         public override SyntaxTokenType Match
-        {
-            get => SyntaxTokenType.Identifier;
+        { get => SyntaxTokenType.Identifier;
         }
 
         public override (int, AstNode) Eval(

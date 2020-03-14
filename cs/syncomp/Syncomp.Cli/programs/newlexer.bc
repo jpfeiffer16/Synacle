@@ -1,8 +1,16 @@
 #include "./lib/stdlib.bc"
 
-func<int, void> test = function(int num)
+type test
 {
-    int test = 1 + 2;
-};
+    int id
+}
 
-test(123);
+function main(ptr<test> yay)
+{
+    int size = sizeof(~yay);
+    string name = nameof(yay);
+    println(name);
+}
+test test_var;
+
+main(&test_var);
