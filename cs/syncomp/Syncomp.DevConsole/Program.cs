@@ -1,5 +1,4 @@
 ﻿using System;
-using syncomp;
 
 namespace Syncomp.DevConsole
 {
@@ -8,23 +7,13 @@ namespace Syncomp.DevConsole
         static void Main(string[] args)
         {
             var testCode = @"
-type Test {
-    int id
-}
+function main()
+{
 
-// Main function
-function main() {
-    out(10);
 }
-main();
 ";
-            var lexer = new Lexer(testCode);
-            var tokens = lexer.Lex();
-            tokens.ForEach(token =>
-                Console.WriteLine($"{token.Type}: {token.Token}"));
-            Console.WriteLine("Full reconstruction:");
-            tokens.ForEach(token => 
-                    Console.Write(token.Token));
+            var asm = StaticWeb.Program.CompileCode(testCode);
+            Console.WriteLine(asm);
         }
     }
 }

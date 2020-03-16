@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="index.html" CopyToOutputDirectory="PreserveNewest" Link="index.html" />
+    <None Include="script.js" CopyToOutputDirectory="PreserveNewest" Link="script.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Syncomp\Syncomp.csproj" />
+  </ItemGroup>
+
+</Project>

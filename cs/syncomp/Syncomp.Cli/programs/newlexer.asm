@@ -709,14 +709,16 @@ set reg0 >var___0
 wmem >var_name_newlexer_11 reg0
 rmem reg0 >var_name_newlexer_11
 call >println
+rmem reg0 >var_size_newlexer_10
+call >print_number
 ret
 :main_end
 set reg0 >main
-jmp >var_test_var_newlexer_14_end
-:var_test_var_newlexer_14
-:fld_test_var_newlexer_14_id
-:var_test_var_newlexer_14_end
-set reg0 >var_test_var_newlexer_14
+jmp >var_test_var_newlexer_15_end
+:var_test_var_newlexer_15
+:fld_test_var_newlexer_15_id
+:var_test_var_newlexer_15_end
+set reg0 >var_test_var_newlexer_15
 call >main
 halt
 

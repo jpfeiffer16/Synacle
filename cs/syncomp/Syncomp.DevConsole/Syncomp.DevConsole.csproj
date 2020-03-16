@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Syncomp\Syncomp.csproj" />
+    <ProjectReference Include="..\Syncomp.StaticWeb\Syncomp.StaticWeb.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
