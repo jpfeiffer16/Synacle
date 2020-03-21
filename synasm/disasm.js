@@ -20,7 +20,7 @@ for (let i = 0; i < codepage.length; i++) {
     const params = [];
     for (let paramIndex = 0; paramIndex < instruction.paramaterCount; paramIndex++) {
       let instructionOp = codepage[++i];
-      params.push(instructionOp);
+      params.push(instructionOp > 32767 ? `reg${instructionOp - 32768}` : instructionOp);
     }
     if (instruction.instruction === 'out') {
       const char = String.fromCharCode(params[0]);
