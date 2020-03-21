@@ -1,11 +1,21 @@
 #include "./lib/stdlib.bc"
 
-function main(string name) : void {
-    print("Hello, ");
-    print(name);
-    println("!");
-    return;
-    test;
+type person
+{
+    string name
 }
 
-main("World");
+function factory(string name) : ptr<person>
+{
+    ptr<person> &p;
+    p->name = name;
+    return p;
+}
+
+function main() : void
+{
+    ptr<person> &joe = factory("Joe");
+    println(joe->name);
+}
+
+main();

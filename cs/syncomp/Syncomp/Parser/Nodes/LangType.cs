@@ -19,7 +19,7 @@ namespace syncomp
         {
             if (!(this.SubTypes is null) && this.SubTypes.Count > 0)
             {
-                return $"{this.Name}<{string.Join(", ", this.SubTypes.Select(t => t.Name))}>";
+                return $"{this.Name}<{string.Join(", ", this.SubTypes.Select(t => t.GetName()))}>";
             }
             else
             {

@@ -8,9 +8,10 @@
             "name": "gcc build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/bin/sync",
+            "program": "${fileDirname}/bin/synvmc",
             "args": [
-                // "-t"
+                "-b",
+                "/home/jpfeiffer/Source/Synacle/cs/syncomp/Syncomp.Cli/programs/newlexer.bin"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

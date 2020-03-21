@@ -81,13 +81,21 @@ namespace syncomp
                     i = nextMatching;
                 }
                 var type = GetLangType(typeTokens, ctx);
-                var nextToken = tokens[++i];
                 if (type == null)
                     throw new ParseException(i,
                         tokens,
                         nodes,
                         $"Invalid variable declaration. Unknown type '{token.Token}'");
-                node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Column);
+                var nextToken = tokens[++i];
+                if (nextToken.Type != SyntaxTokenType.AddressOf)
+                {
+                    node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Column);
+                }
+                else
+                {
+                    nextToken = tokens[++i];
+                    node = new PointerDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Column);
+                }
             }
             else
             {

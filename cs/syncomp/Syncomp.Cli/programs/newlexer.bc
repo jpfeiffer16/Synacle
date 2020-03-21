@@ -1,17 +1,20 @@
-#include "./lib/stdlib.bc"
-
 type test
 {
-    int id
+    int id,
+    string name
 }
 
-function main(ptr<test> yay)
-{
-    int size = sizeof(~yay);
-    string name = nameof(yay);
-    println(name);
-    print_number(size);
-}
-test test_var;
+// Problem
+// function main(func<ptr<test>, void> cb)
+//     function test(string str) {}
+//     ptr<test> &test_var;
+//     test_var->name = "Joe";
+//     //Problem
+//     test("" as int);
+// }
+// 
+// main(function(ptr<test> person) {
+//     // println(person->name);
+// });
 
-main(&test_var);
+func<ptr<test>> t;

@@ -148,7 +148,7 @@ namespace syncomp
                 ctx.Variables.Pop();
             }
             #endregion
-            #region "VariableDeclaration"
+            #region "VariableDeclaration and PointerDeclaration"
             if (node is VariableDeclaration vd)
             {
                 ctx.Variables.AddVariable(new CheckerVariable

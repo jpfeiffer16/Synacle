@@ -35,6 +35,7 @@ namespace syncomp
             new SubtractionEmitter(),
             new VariableAssignmentEmitter(),
             new VariableDeclarationEmitter(),
+            new PointerDeclarationEmitter(),
             new WhileEmitter(),
             new DotEmitter(),
             new AsEmitter(),
