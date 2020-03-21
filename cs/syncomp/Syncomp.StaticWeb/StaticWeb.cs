@@ -1,3 +1,5 @@
+using System.Linq;
+using Newtonsoft.Json;
 using syncomp;
 
 namespace StaticWeb
@@ -6,13 +8,17 @@ namespace StaticWeb
     {
         public static string CompileCode(string code)
         {
+            var result = new CompilationResult();
             var lexer = new Lexer(code);
             var tokens = lexer.Lex();
+            tokens = tokens.Where(t => !string.IsNullOrWhiteSpace(t.Token)).ToList();
             var parser = new Parser(tokens);
             var (_, astNodes) = parser.Parse();
+            var checker = new Checker(astNodes);
+            result.Diagnostics = checker.Check();
             var emiiter = new Transformer(astNodes);
-            var outputAsm = emiiter.TransformFullAst();
-            return string.Join("\n", outputAsm);
+            result.Assembly = string.Join("\n", emiiter.TransformFullAst());
+            return JsonConvert.SerializeObject(result);
         }
     }
 }

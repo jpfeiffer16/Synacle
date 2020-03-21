@@ -10,8 +10,8 @@
             "request": "launch",
             // "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            // "program": "${workspaceFolder}/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll",
-            "program": "${workspaceFolder}/Syncomp.StaticWeb/bin/Debug/netcoreapp2.0/Syncomp.StaticWeb.dll",
+            "program": "${workspaceFolder}/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll",
+            // "program": "${workspaceFolder}/Syncomp.DevConsole/bin/Debug/netcoreapp2.0/Syncomp.DevConsole.dll",
             "args": [
                 // "Syncomp.Cli/programs/types/typetest.bc"
                 // "Syncomp.Cli/programs/pig-latin.bc"

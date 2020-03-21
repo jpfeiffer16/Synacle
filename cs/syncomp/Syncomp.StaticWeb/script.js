@@ -10,7 +10,7 @@ var App = {
     //     that.output.value = that.execute("Ali");
     // },
     init: function () {
-        staticBinding = Module.mono_bind_static_method("[Syncomp.StaticWeb] Program:CompileCode");
+        staticBinding = Module.mono_bind_static_method("[Syncomp.StaticWeb] StaticWeb.Program:CompileCode");
         output = document.getElementById("output");
         button = document.getElementById("button");
         input = document.getElementById("input");
@@ -22,7 +22,7 @@ var App = {
 document.getElementById("button").addEventListener("click", () => {
     console.log(input.value);
     let result = staticBinding(input.value);
-    output.value = result;
+    output.innerText = result;
 });
 
 document.body.addEventListener("load", App.init);
