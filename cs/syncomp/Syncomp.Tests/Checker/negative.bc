@@ -13,6 +13,7 @@ test("test");
 test(123 as string);
 string test_string;
 test(test_string);
+test("" as ptr);
 
 // FunctionDeclaration - ControlFlowError
 function return_test() : int {}

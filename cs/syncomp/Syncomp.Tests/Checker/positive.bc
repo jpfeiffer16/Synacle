@@ -1,24 +1,17 @@
-#include "./lib/stdlib.bc"
-
 type test
 {
     int id,
     string name
 }
 
-// Problem
+// Here, we're trying to confuse the parser/typechecker on purpose
+
 function main(func<ptr<test>, void> cb)
 {
     function test(string str) {}
     ptr<test> &test_var;
-    test_var->name = "Joe";
-    //Problem
-    // test("" as int);
-    cb(test_var);
+    test_var->name = "Test";
 }
 
 main(function(ptr<test> person) {
-    println(person->name);
 });
-
-// func<ptr<test>> t;

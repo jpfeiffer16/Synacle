@@ -683,47 +683,56 @@ ret
 set reg0 >int
 jmp >main_end
 :main
-jmp >var_cb_newlexer_9_end
-:var_cb_newlexer_9
-:var_cb_newlexer_9_end
-wmem >var_cb_newlexer_9 reg0
-jmp >var_test_var_backing_newlexer_11_end
-:var_test_var_backing_newlexer_11
-:var_test_var_backing_newlexer_11_end
-jmp >var_test_var_newlexer_11_end
-:var_test_var_newlexer_11
-:var_test_var_newlexer_11_end
-wmem >var_test_var_newlexer_11 >var_test_var_backing_newlexer_11
-jmp >var__newlexer_12_end
-:var__newlexer_12
+jmp >var_cb_newlexer_10_end
+:var_cb_newlexer_10
+:var_cb_newlexer_10_end
+wmem >var_cb_newlexer_10 reg0
+jmp >test_end
+:test
+jmp >var_str_newlexer_12_end
+:var_str_newlexer_12
+:var_str_newlexer_12_end
+wmem >var_str_newlexer_12 reg0
+ret
+:test_end
+set reg0 >test
+jmp >var_test_var_backing_newlexer_13_end
+:var_test_var_backing_newlexer_13
+:var_test_var_backing_newlexer_13_end
+jmp >var_test_var_newlexer_13_end
+:var_test_var_newlexer_13
+:var_test_var_newlexer_13_end
+wmem >var_test_var_newlexer_13 >var_test_var_backing_newlexer_13
+jmp >var__newlexer_14_end
+:var__newlexer_14
 &o
 &e
 0
-:var__newlexer_12_end
-wmem >var__newlexer_12 &J
-set reg0 >var__newlexer_12
-rmem reg7 >var_test_var_newlexer_11
+:var__newlexer_14_end
+wmem >var__newlexer_14 &J
+set reg0 >var__newlexer_14
+rmem reg7 >var_test_var_newlexer_13
 add reg7 reg7 2
 wmem reg7 reg0
-rmem reg0 >var_test_var_newlexer_11
-add reg0 reg0 2
-rmem reg0 reg0
-rmem reg7 >var_cb_newlexer_9
+rmem reg0 >var_test_var_newlexer_13
+rmem reg7 >var_cb_newlexer_10
 call reg7
 ret
 :main_end
 set reg0 >main
-jmp >function__newlexer_16_end
-:function__newlexer_16
-jmp >var_name_newlexer_16_end
-:var_name_newlexer_16
-:var_name_newlexer_16_end
-wmem >var_name_newlexer_16 reg0
-rmem reg0 >var_name_newlexer_16
+jmp >function__newlexer_20_end
+:function__newlexer_20
+jmp >var_person_newlexer_20_end
+:var_person_newlexer_20
+:var_person_newlexer_20_end
+wmem >var_person_newlexer_20 reg0
+rmem reg0 >var_person_newlexer_20
+add reg0 reg0 2
+rmem reg0 reg0
 call >println
 ret
-:function__newlexer_16_end
-set reg0 >function__newlexer_16
+:function__newlexer_20_end
+set reg0 >function__newlexer_20
 call >main
 halt
 

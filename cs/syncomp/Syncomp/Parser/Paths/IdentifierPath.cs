@@ -67,10 +67,7 @@ namespace syncomp
                 i + 1 < tokens.Count
                 && (tokens[i + 1].Type == SyntaxTokenType.Identifier
                     //Type is generic
-                    || (tokens.Count >= i + 4 
-                        && tokens[i + 1].Type == SyntaxTokenType.LessThan
-                        && tokens[i + 2].Type == SyntaxTokenType.Identifier 
-                        && (tokens[i + 3].Type == SyntaxTokenType.GreaterThan || tokens[i+3].Type == SyntaxTokenType.Comma))))
+                    || ContainsGenericType(i, tokens)))
             {
                 var typeDecToken = tokens[i];
                 var typeTokens = new List<SyntaxToken> { typeDecToken };
@@ -118,6 +115,29 @@ namespace syncomp
             }
 
             return (i, node);
+        }
+
+        private bool ContainsGenericType(int index, List<SyntaxToken> tokens)
+        {
+            var containsOpener = false;
+            var depth = 0;
+            // var opens = new List<int>();
+            // var closes = new List<int>();
+            for (; index < tokens.Count(); index++)
+            {
+                var token = tokens[index];
+                switch(token.Type)
+                {
+                    case SyntaxTokenType.LessThan:
+                        containsOpener = true;
+                        depth++;
+                        break;
+                    case SyntaxTokenType.GreaterThan:
+                        depth--;
+                        break;
+                }
+            }
+            return containsOpener && depth == 0;
         }
     }
 }

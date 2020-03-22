@@ -5,10 +5,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace syncomp.Tests
 {
+
     [TestClass]
-    public class CheckerTests : Behavior
+    public class CheckerNegativeTests : Behavior
     {
-        private const string TestCodeFilename = "./test_patterns.bc";
+        private const string TestCodeFilename = "./negative.bc";
         private List<Diagnostic> diagnostics;
 
         private int GetDiagLength(Diagnostic diag)
@@ -18,7 +19,7 @@ namespace syncomp.Tests
 
         protected override void Given()
         {
-            var code = File.ReadAllText("./test_patterns.bc");
+            var code = File.ReadAllText(TestCodeFilename);
 
             var tokens = new List<SyntaxToken>();
 
