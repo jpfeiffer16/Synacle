@@ -126,6 +126,8 @@ namespace syncomp
             for (; index < tokens.Count(); index++)
             {
                 var token = tokens[index];
+                if (token.Type == SyntaxTokenType.SemiColon)
+                    break;
                 switch(token.Type)
                 {
                     case SyntaxTokenType.LessThan:

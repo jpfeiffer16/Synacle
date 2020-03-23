@@ -119,7 +119,7 @@ namespace syncomp
                     else
                         str += strCh;
                 }
-                return CreateSyntaxToken(SyntaxTokenType.StringLiteral, str);
+                return CreateCustomLengthSyntaxToken(SyntaxTokenType.StringLiteral, str, str.Length + 2);
             }
             #endregion
 
@@ -303,6 +303,11 @@ namespace syncomp
 
         private SyntaxToken CreateSyntaxToken(SyntaxTokenType tokenType, string token)
         {
+            return CreateCustomLengthSyntaxToken(tokenType, token, token.Length);
+        }
+
+        private SyntaxToken CreateCustomLengthSyntaxToken(SyntaxTokenType tokenType, string token, int length)
+        {
             var tkn = new SyntaxToken
             {
                 Type = tokenType,
@@ -312,7 +317,7 @@ namespace syncomp
                 Index = _index,
                 Line = _line
             };
-            _column += token.Length;
+            _column += length;
             return tkn;
         }
 
