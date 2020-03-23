@@ -3,7 +3,7 @@ My code for the [Synacor challenge](https://challenge.synacor.com/) and related 
 
 ## VMs
 
-There are two vms. One in witten JS and one in C#. Right now the JS vm is the primary used for testing as it was the first and is the most feature rich (debugging etc).
+There are three vms. One in witten JS, one in C# and another in C. Right now the JS vm is the primary used for testing as it was the first and is the most feature rich (debugging etc).
 
 ## Assembler
 
