@@ -19,6 +19,7 @@ function main(func<ptr<test>, void> cb)
 
 main(function(ptr<test> person) {
     println(person->name);
+    println(123 as string);
 });
 
 // func<ptr<test>> t;

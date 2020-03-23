@@ -13,7 +13,8 @@ test("test");
 test(123 as string);
 string test_string;
 test(test_string);
-test("" as ptr);
+function test_two(int num, string str) {}
+test_two("test" as ptr, 123);
 
 // FunctionDeclaration - ControlFlowError
 function return_test() : int {}

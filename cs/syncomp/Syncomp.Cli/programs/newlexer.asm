@@ -730,6 +730,8 @@ rmem reg0 >var_person_newlexer_20
 add reg0 reg0 2
 rmem reg0 reg0
 call >println
+set reg0 123
+call >println
 ret
 :function__newlexer_20_end
 set reg0 >function__newlexer_20

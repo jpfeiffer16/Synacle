@@ -78,7 +78,7 @@ namespace syncomp.Tests
             Assert.AreEqual(DiagnosticCode.InvalidTypes, asDiag.Code);
             Assert.IsTrue(asDiag.Message.Contains("string"));
             Assert.IsTrue(asDiag.Message.Contains("int"));
-            Assert.AreEqual(1, GetDiagLength(asDiag));
+            Assert.AreEqual(2, GetDiagLength(asDiag));
 
             var varDiag = this.diagnostics.Where(dg => dg.Line == 15).FirstOrDefault();
             Assert.IsNotNull(varDiag);
@@ -86,18 +86,34 @@ namespace syncomp.Tests
             Assert.IsTrue(varDiag.Message.Contains("string"));
             Assert.IsTrue(varDiag.Message.Contains("int"));
             Assert.AreEqual(11, GetDiagLength(varDiag));
+
+            var stringLeralAsOffetTestDiags = this.diagnostics.Where(dg => dg.Line == 17);
+
+            var asOffsetDiag = stringLeralAsOffetTestDiags.FirstOrDefault();
+            Assert.IsNotNull(asOffsetDiag);
+            Assert.AreEqual(DiagnosticCode.InvalidTypes, asOffsetDiag.Code);
+            Assert.IsTrue(asOffsetDiag.Message.Contains("ptr"));
+            Assert.IsTrue(asOffsetDiag.Message.Contains("int"));
+            Assert.AreEqual(2, GetDiagLength(asOffsetDiag));
+
+            var intLiteralDiag = stringLeralAsOffetTestDiags.LastOrDefault();
+            Assert.IsNotNull(intLiteralDiag);
+            Assert.AreEqual(DiagnosticCode.InvalidTypes, intLiteralDiag.Code);
+            Assert.IsTrue(intLiteralDiag.Message.Contains("int"));
+            Assert.IsTrue(intLiteralDiag.Message.Contains("string"));
+            Assert.AreEqual(3, GetDiagLength(intLiteralDiag));
         }
 
         [TestMethod]
         public void FunctionDeclarationControlFlowError()
         {
-            var defDiag = this.diagnostics.Where(dg => dg.Line == 18).FirstOrDefault();
+            var defDiag = this.diagnostics.Where(dg => dg.Line == 20).FirstOrDefault();
             Assert.IsNotNull(defDiag);
             Assert.AreEqual(DiagnosticCode.ControlFlowError, defDiag.Code);
             Assert.IsTrue(defDiag.Message.Contains("int"));
             Assert.AreEqual(8, GetDiagLength(defDiag));
 
-            var assignDiag = this.diagnostics.Where(dg => dg.Line == 19).FirstOrDefault();
+            var assignDiag = this.diagnostics.Where(dg => dg.Line == 21).FirstOrDefault();
             Assert.IsNotNull(assignDiag);
             Assert.AreEqual(DiagnosticCode.ControlFlowError, assignDiag.Code);
             Assert.IsTrue(assignDiag.Message.Contains("int"));
@@ -107,7 +123,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void IdentifierUnknownVariable()
         {
-            var diag = this.diagnostics.Where(dg => dg.Line == 22).FirstOrDefault();
+            var diag = this.diagnostics.Where(dg => dg.Line == 24).FirstOrDefault();
             Assert.IsNotNull(diag);
             Assert.AreEqual(DiagnosticCode.UnknownVariable, diag.Code);
             Assert.AreEqual(5, GetDiagLength(diag));
@@ -116,7 +132,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void DotUnknownVariable()
         {
-            var diag = this.diagnostics.Where(dg => dg.Line == 25).FirstOrDefault();
+            var diag = this.diagnostics.Where(dg => dg.Line == 27).FirstOrDefault();
             Assert.IsNotNull(diag);
             Assert.AreEqual(DiagnosticCode.UnknownVariable, diag.Code);
             Assert.AreEqual(5, GetDiagLength(diag));
@@ -125,7 +141,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void DotUnknownField()
         {
-            var diag = this.diagnostics.Where(dg => dg.Line == 34).FirstOrDefault();
+            var diag = this.diagnostics.Where(dg => dg.Line == 36).FirstOrDefault();
             Assert.IsNotNull(diag);
             Assert.AreEqual(DiagnosticCode.UnknownField, diag.Code);
             Assert.AreEqual(4, GetDiagLength(diag));
@@ -134,7 +150,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void DerefArrowUnknownVariable()
         {
-            var diag = this.diagnostics.Where(dg => dg.Line == 37).FirstOrDefault();
+            var diag = this.diagnostics.Where(dg => dg.Line == 39).FirstOrDefault();
             Assert.IsNotNull(diag);
             Assert.AreEqual(DiagnosticCode.UnknownVariable, diag.Code);
             Assert.AreEqual(5, GetDiagLength(diag));
@@ -143,7 +159,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void DerefArrowInvalidTypes()
         {
-            var diag = this.diagnostics.Where(dg => dg.Line == 41).FirstOrDefault();
+            var diag = this.diagnostics.Where(dg => dg.Line == 43).FirstOrDefault();
             Assert.IsNotNull(diag);
             Assert.AreEqual(DiagnosticCode.InvalidTypes, diag.Code);
             Assert.AreEqual(2, GetDiagLength(diag));
@@ -152,7 +168,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void DerefArrowUnknownField()
         {
-            var diag = this.diagnostics.Where(dg => dg.Line == 45).FirstOrDefault();
+            var diag = this.diagnostics.Where(dg => dg.Line == 47).FirstOrDefault();
             Assert.IsNotNull(diag);
             Assert.AreEqual(DiagnosticCode.UnknownField, diag.Code);
             Assert.AreEqual(4, GetDiagLength(diag));
