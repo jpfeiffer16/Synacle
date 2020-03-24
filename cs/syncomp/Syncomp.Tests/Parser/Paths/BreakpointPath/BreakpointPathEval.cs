@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-    public class BreakPointPathEval : Behavior
+    public class BreakpointPathEval : Behavior
     {
         private (int, AstNode) result;
 
@@ -20,7 +20,7 @@ namespace syncomp.Tests
             };
             var nodes = new List<AstNode>();
             var index = 0;
-            this.result = new BreakpointPath().Eval(index, tokens, nodes, new ParserContext());
+            this.result = new syncomp.BreakpointPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]
