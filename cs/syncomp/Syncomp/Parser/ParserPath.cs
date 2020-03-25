@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace syncomp
 {
@@ -18,7 +17,6 @@ namespace syncomp
         public List<AstNode> ParseTokens(List<SyntaxToken> tokens, ParserContext ctx)
         {
             var nodes = new List<AstNode>();
-
             for (var i = 0; i < tokens.Count(); i++)
             {
                 var thisToken = tokens[i];
@@ -46,7 +44,6 @@ namespace syncomp
                     }
                 }
             }
-
             return nodes;
         }
 

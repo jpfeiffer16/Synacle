@@ -1,4 +1,3 @@
-#include "./lib/stdlib.bc"
 
 type test
 {
@@ -18,8 +17,10 @@ function main(func<ptr<test>, void> cb)
 }
 
 main(function(ptr<test> person) {
-    println(person->name);
-    println(123 as string);
+    // println(person->name);
+    // println(123 as string);
+    int i = 1;
+    while(i == 0){}
 });
 
 // func<ptr<test>> t;
