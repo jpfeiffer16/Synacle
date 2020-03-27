@@ -9,6 +9,7 @@ namespace syncomp
         ControlFlowError,
         UnknownType,
         UnknownField,
-        SyntaxError
+        SyntaxError,
+        ParseError
     }
 }
