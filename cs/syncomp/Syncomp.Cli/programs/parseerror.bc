@@ -1,0 +1,24 @@
+type test
+{
+    func<string, void> do_a_thing
+}
+
+ptr<test> &t;
+// TOOD: Uhh. Fix this. No typechecking here
+t->do_a_thing = function(string str)
+{
+    out(65);
+};
+
+t->do_a_thing("Test");
+// func<string, void> t_func = t->do_a_thing;
+//t_func("test");
+
+func<string, void> main = function(string test_str)
+{
+    // TODO: Fix this
+    // Also, it does not show up correctly in the cli errors
+    // out(~test_str);
+};
+
+main("Hello");

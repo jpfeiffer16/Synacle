@@ -16,7 +16,8 @@
                 // "Syncomp.Cli/programs/types/typetest.bc"
                 // "Syncomp.Cli/programs/pig-latin.bc"
                 // "Syncomp.Tests/Checker/negative.bc"
-                "Syncomp.Cli/programs/newlexer.bc"
+                "Syncomp.Cli/programs/parseerror.bc"
+                // "Syncomp.Cli/programs/newlexer.bc"
                 // "Syncomp.Cli/programs/interpreter/bcin.bc"
                 // "Syncomp.Tests/Checker/test_patterns.bc"
             ],

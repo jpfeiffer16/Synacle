@@ -61,7 +61,43 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
             }
             tokens = tokens.Where(tkn => tkn.Type != SyntaxTokenType.Space).ToList();
             var parser = new Parser(tokens);
-            (_, var ast) = parser.Parse();
+            var ast = new List<AstNode>();
+            try
+            {
+                (_, ast) = parser.Parse();
+            }
+            catch (ParseException e)
+            {
+                var firstToken = e.Tokens.FirstOrDefault();
+                var lastToken = e.Tokens.LastOrDefault();
+                var tkn = e.Tokens[e.Index];
+                _server.Document.PublishDiagnostics(new PublishDiagnosticsParams
+                {
+                    Uri = uri,
+                    Diagnostics = new List<OmniSharp.Extensions.LanguageServer.Protocol.Models.Diagnostic>
+                    {
+                        new OmniSharp.Extensions.LanguageServer.Protocol.Models.Diagnostic
+                        {
+                            Severity = DiagnosticSeverity.Error,
+                            Message = "Parse error",
+                            Range = new OmniSharp.Extensions.LanguageServer.Protocol.Models.Range
+                            {
+                                Start = new OmniSharp.Extensions.LanguageServer.Protocol.Models.Position
+                                {
+                                    Line = tkn.Line - 1,
+                                    Character = tkn.Column
+                                },
+                                End = new OmniSharp.Extensions.LanguageServer.Protocol.Models.Position
+                                {
+                                    Line = tkn.Line - 1,
+                                    Character = tkn.Column + 1
+                                }
+                            }
+                        }
+                    }
+                });
+                return;
+            }
             var checker = new Checker(ast);
             var diagnostics = checker.Check();
             _server.Document.PublishDiagnostics(new PublishDiagnosticsParams

@@ -77,7 +77,7 @@ namespace syncomp
         {
             //Lex
             var tokens = new List<SyntaxToken>();
-            List<string> lines = null;
+            List<string> lines = preprocessorContext.SelectMany(kv => kv.Value.Split('\n')).ToList();
             try
             {
                 foreach (var file in preprocessorContext)
@@ -125,11 +125,11 @@ namespace syncomp
         {
             var originalConsoleColor = Console.ForegroundColor;
             var token = error.Tokens[error.Index];
-            var from = token.Line - 2 < 0 ? 0 : token.Line - 2;
+            var from = token.Line - 3 < 0 ? 0 : token.Line - 3;
             codeLines
-                .GetRange(from, token.Line - from)
+                .GetRange(from, (token.Line - 1) - from)
                 .ForEach(t => Console.WriteLine(t));
-            var errorLine = codeLines.ElementAt(token.Line);
+            var errorLine = codeLines.ElementAt(token.Line - 1);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Error.WriteLine(errorLine);
             Console.ForegroundColor = ConsoleColor.Yellow;
