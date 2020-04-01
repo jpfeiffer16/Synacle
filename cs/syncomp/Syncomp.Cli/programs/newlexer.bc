@@ -1,26 +1,9 @@
+#include "./lib/stdlib.bc"
 
-type test
+function test(string str)
 {
-    int id,
-    string name
+    println(str);
 }
 
-// Problem
-function main(func<ptr<test>, void> cb)
-{
-    function test(string str) {}
-    ptr<test> &test_var;
-    test_var->name = "Joe";
-    //Problem
-    // test("" as int);
-    cb(test_var);
-}
-
-main(function(ptr<test> person) {
-    // println(person->name);
-    // println(123 as string);
-    int i = 1;
-    while(i == 0){}
-});
-
-// func<ptr<test>> t;
+var t = "test";
+test(t);

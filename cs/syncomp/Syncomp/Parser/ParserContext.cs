@@ -7,6 +7,9 @@ namespace syncomp
         // TODO: Fix!
         public List<LangType> LangTypes { get; set; } = new List<LangType>
         {
+            // This should not actually be used in the type system. But instead
+            // only as an indicator that a type needs to be bound to a variable
+            // for implicit typing
             // NativeTypes.LangVar,
             NativeTypes.LangInt,
             NativeTypes.LangString,
@@ -17,7 +20,7 @@ namespace syncomp
 
         public static class NativeTypes
         {
-            // public static LangType LangVar { get; } = new LangType(name: "var", body: null, file: null, line: 0, column: 0);
+            public static LangType Implicit { get; } = new LangType(name: "implicit", body: null, file: null, line: 0, column: 0);
             public static LangType LangInt { get; } = new LangType(name: "int", body: null, file: null, line: 0, column: 0);
             public static LangType LangString { get; } = new LangType(name: "string", body: null, file: null, line: 0, column: 0);
             public static LangType LangFunctionPointer { get; } = new LangType(name: "func", body: null, file: null, line: 0, column: 0);

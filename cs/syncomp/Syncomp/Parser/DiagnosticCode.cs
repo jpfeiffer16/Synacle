@@ -10,6 +10,7 @@ namespace syncomp
         UnknownType,
         UnknownField,
         SyntaxError,
-        ParseError
+        ParseError,
+        ImplicitTypingError
     }
 }

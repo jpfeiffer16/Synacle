@@ -115,13 +115,13 @@ function input() : string {
   return alloc_ptr as string;
 }
 
-function print_number(var num) {
+function print_number(int num) {
   if (num == 10) {
     out(49);
     out(48);
     return;
   }
-  var charNum;
+  int charNum;
   var length = 0;
   while (num > 10) {
     charNum = num % 10;

@@ -45,6 +45,10 @@ namespace syncomp
             if (node is VariableAssignment va)
             {
                 diagnostics.AddRange(Check(va.Parameter, ctx));
+                if (va.Identifier.NodeType.Equals(ParserContext.NativeTypes.Implicit))
+                {
+                    va.Identifier.NodeType = va.Parameter.NodeType;
+                }
                 diagnostics.AddRange(Check(va.Identifier, ctx));
 
                 var identifierType = va.Identifier.NodeType;
@@ -151,6 +155,15 @@ namespace syncomp
             #region "VariableDeclaration and PointerDeclaration"
             if (node is VariableDeclaration vd)
             {
+                if (vd.NodeType.Equals(ParserContext.NativeTypes.Implicit))
+                {
+                    diagnostics.Add(new Diagnostic(
+                        vd.File,
+                        vd.Line,
+                        vd.Column,
+                        "Cannot implicitly type a variable declaration without an assignment",
+                        DiagnosticCode.ImplicitTypingError));
+                }
                 ctx.Variables.AddVariable(new CheckerVariable
                 {
                     Node = vd
