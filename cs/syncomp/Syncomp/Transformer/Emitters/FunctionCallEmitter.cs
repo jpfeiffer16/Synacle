@@ -52,13 +52,19 @@ namespace syncomp
             }
             else if (fcNode.Name == "nameof")
             {
-                lines.AddRange(
-                    new Transformer(new List<AstNode> { new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).Name, null, 0, 0) }, ctx)
+                lines.AddRange( new Transformer(new List<AstNode> {
+                        new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).Name, null, 0, 0) }, ctx)
                     .Transform());
             }
             else if (fcNode.Name == "sizeof")
             {
                 lines.Add($"set reg{ctx.RegisterLevel} {TypeHelper.GetTypeLength(fcNode.Parameters.FirstOrDefault().NodeType)}");
+            }
+            else if (fcNode.Name == "typeof")
+            {
+                lines.AddRange(new Transformer(new List<AstNode> {
+                        new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).NodeType.GetName(), null, 0, 0) }, ctx)
+                    .Transform());
             }
             else
             {

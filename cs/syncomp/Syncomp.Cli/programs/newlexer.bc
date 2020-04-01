@@ -1,9 +1,10 @@
 #include "./lib/stdlib.bc"
 
-function test(string str)
+var test = function (string str)
 {
     println(str);
-}
+};
 
+println(typeof(test));
 var t = "test";
 test(t);

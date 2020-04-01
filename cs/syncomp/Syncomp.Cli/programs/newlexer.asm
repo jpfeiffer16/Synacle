@@ -681,8 +681,11 @@ ret
 ret
 :int_end
 set reg0 >int
-jmp >test_end
-:test
+jmp >var_test_newlexer_3_end
+:var_test_newlexer_3
+:var_test_newlexer_3_end
+jmp >function__newlexer_3_end
+:function__newlexer_3
 jmp >var_str_newlexer_3_end
 :var_str_newlexer_3
 :var_str_newlexer_3_end
@@ -690,23 +693,50 @@ wmem >var_str_newlexer_3 reg0
 rmem reg0 >var_str_newlexer_3
 call >println
 ret
-:test_end
-set reg0 >test
-jmp >var_t_newlexer_8_end
-:var_t_newlexer_8
-:var_t_newlexer_8_end
-jmp >var__newlexer_8_end
-:var__newlexer_8
+:function__newlexer_3_end
+set reg0 >function__newlexer_3
+wmem >var_test_newlexer_3 reg0
+rmem reg0 >var_test_newlexer_3
+jmp >var___0_end
+:var___0
+&u
+&n
+&c
+&<
+&s
+&t
+&r
+&i
+&n
+&g
+&,
+32
+&v
+&o
+&i
+&d
+&>
+0
+:var___0_end
+wmem >var___0 &f
+set reg0 >var___0
+call >println
+jmp >var_t_newlexer_9_end
+:var_t_newlexer_9
+:var_t_newlexer_9_end
+jmp >var__newlexer_9_end
+:var__newlexer_9
 &e
 &s
 &t
 0
-:var__newlexer_8_end
-wmem >var__newlexer_8 &t
-set reg0 >var__newlexer_8
-wmem >var_t_newlexer_8 reg0
-rmem reg0 >var_t_newlexer_8
-call >test
+:var__newlexer_9_end
+wmem >var__newlexer_9 &t
+set reg0 >var__newlexer_9
+wmem >var_t_newlexer_9 reg0
+rmem reg0 >var_t_newlexer_9
+rmem reg7 >var_test_newlexer_3
+call reg7
 halt
 
 :subtract
