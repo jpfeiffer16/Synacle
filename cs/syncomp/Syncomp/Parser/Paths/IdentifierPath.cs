@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +6,8 @@ namespace syncomp
     public class IdentifierPath : ParserPath
     {
         public override SyntaxTokenType Match
-        { get => SyntaxTokenType.Identifier;
+        {
+            get => SyntaxTokenType.Identifier;
         }
 
         public override (int, AstNode) Eval(
@@ -128,7 +128,7 @@ namespace syncomp
                 var token = tokens[index];
                 if (token.Type == SyntaxTokenType.SemiColon)
                     break;
-                switch(token.Type)
+                switch (token.Type)
                 {
                     case SyntaxTokenType.LessThan:
                         containsOpener = true;
