@@ -7,10 +7,10 @@ jmp >var_t_parseerror_6_end
 wmem >var_t_parseerror_6 >var_t_backing_parseerror_6
 jmp >function__parseerror_8_end
 :function__parseerror_8
-jmp >var_str_parseerror_8_end
-:var_str_parseerror_8
-:var_str_parseerror_8_end
-wmem >var_str_parseerror_8 reg0
+jmp >var_name_parseerror_8_end
+:var_name_parseerror_8
+:var_name_parseerror_8_end
+wmem >var_name_parseerror_8 reg0
 set reg0 65
 out reg0
 ret
@@ -22,6 +22,10 @@ wmem reg7 reg0
 rmem reg0 >var_t_parseerror_6
 add reg0 reg0 1
 rmem reg0 reg0
+rmem reg0 >var_t_parseerror_6
+add reg0 reg0 1
+rmem reg0 reg0
+set reg7 reg0
 jmp >var__parseerror_13_end
 :var__parseerror_13
 &e
@@ -29,33 +33,80 @@ jmp >var__parseerror_13_end
 &t
 0
 :var__parseerror_13_end
-wmem >var__parseerror_13 &T
+wmem >var__parseerror_13 &t
 set reg0 >var__parseerror_13
-jmp >var_main_parseerror_17_end
-:var_main_parseerror_17
-:var_main_parseerror_17_end
-jmp >function__parseerror_17_end
-:function__parseerror_17
-jmp >var_test_str_parseerror_17_end
-:var_test_str_parseerror_17
-:var_test_str_parseerror_17_end
-wmem >var_test_str_parseerror_17 reg0
-ret
-:function__parseerror_17_end
-set reg0 >function__parseerror_17
-wmem >var_main_parseerror_17 reg0
-jmp >var__parseerror_24_end
-:var__parseerror_24
-&e
-&l
-&l
-&o
-0
-:var__parseerror_24_end
-wmem >var__parseerror_24 &H
-set reg0 >var__parseerror_24
-rmem reg7 >var_main_parseerror_17
 call reg7
+jmp >var_t_c_parseerror_15_end
+:var_t_c_parseerror_15
+:fld_t_c_parseerror_15_do_a_thing
+:var_t_c_parseerror_15_end
+jmp >function__parseerror_16_end
+:function__parseerror_16
+jmp >var_name_parseerror_16_end
+:var_name_parseerror_16
+:var_name_parseerror_16_end
+wmem >var_name_parseerror_16 reg0
+set reg0 66
+out reg0
+ret
+:function__parseerror_16_end
+set reg0 >function__parseerror_16
+wmem >fld_t_c_parseerror_15_do_a_thing reg0
+rmem reg0 >fld_t_c_parseerror_15_do_a_thing
+rmem reg0 >fld_t_c_parseerror_15_do_a_thing
+set reg7 reg0
+jmp >var__parseerror_21_end
+:var__parseerror_21
+&e
+&s
+&t
+0
+:var__parseerror_21_end
+wmem >var__parseerror_21 &T
+set reg0 >var__parseerror_21
+call reg7
+jmp >var_hello_parseerror_23_end
+:var_hello_parseerror_23
+:var_hello_parseerror_23_end
+rmem reg0 >fld_t_c_parseerror_15_do_a_thing
+wmem >var_hello_parseerror_23 reg0
+jmp >var__parseerror_25_end
+:var__parseerror_25
+&e
+&s
+&t
+0
+:var__parseerror_25_end
+wmem >var__parseerror_25 &t
+set reg0 >var__parseerror_25
+rmem reg7 >var_hello_parseerror_23
+call reg7
+jmp >straight_up_end
+:straight_up
+jmp >var_name_parseerror_27_end
+:var_name_parseerror_27
+:var_name_parseerror_27_end
+jmp >var_id_parseerror_27_end
+:var_id_parseerror_27
+:var_id_parseerror_27_end
+wmem >var_name_parseerror_27 reg0
+wmem >var_id_parseerror_27 reg1
+set reg0 67
+out reg0
+ret
+:straight_up_end
+set reg0 >straight_up
+jmp >var__parseerror_32_end
+:var__parseerror_32
+&e
+&s
+&t
+0
+:var__parseerror_32_end
+wmem >var__parseerror_32 &t
+set reg0 >var__parseerror_32
+set reg1 123
+call >straight_up
 halt
 
 :subtract

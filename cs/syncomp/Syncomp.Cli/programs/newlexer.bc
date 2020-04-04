@@ -1,10 +1,18 @@
 #include "./lib/stdlib.bc"
 
-var test = function (string str)
+type test
 {
-    println(str);
+    string name
+}
+
+var help = function(string str, ptr<test> t) : ptr<test>
+{
+    t->name = str;
+    return t;
 };
 
-println(typeof(test));
+println(typeof(help));
 var t = "test";
-test(t);
+ptr<test> &t_ptr;
+help(t, t_ptr);
+println(t_ptr->name);

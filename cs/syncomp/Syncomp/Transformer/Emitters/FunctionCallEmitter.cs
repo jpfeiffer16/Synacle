@@ -12,79 +12,95 @@ namespace syncomp
         {
             var lines = new List<string>();
             var fcNode = node as FunctionCall;
+
+            if (fcNode.Name is Identifier fcNodeIdentifier)
+            {
+                EmitFunctionArgs(lines, fcNode, ctx);
+                //Handle intrinsic functions
+                var fcName = fcNodeIdentifier.Name;
+                if (fcName == "out")
+                {
+                    lines.Add("out reg0");
+                }
+                else if (fcName == "in")
+                {
+                    lines.Add("in reg0");
+                }
+                else if (fcName == "exit")
+                {
+                    lines.Add("halt");
+                }
+                else if (fcName == "push")
+                {
+                    lines.AddRange(new Transformer(fcNode.Parameters, ctx).Transform());
+                    lines.Add("push reg0");
+                }
+                else if (fcName == "pop")
+                {
+                    lines.Add("pop reg0");
+                }
+                else if (fcName == "wmem")
+                {
+                    lines.Add($"wmem reg0 reg1");
+                }
+                else if (fcName == "rmem")
+                {
+                    lines.Add($"rmem reg0 reg1");
+                }
+                else if (fcName == "nameof")
+                {
+                    lines.AddRange(new Transformer(new List<AstNode> {
+                        new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).Name, null, 0, 0) }, ctx)
+                        .Transform());
+                }
+                else if (fcName == "sizeof")
+                {
+                    lines.Add($"set reg{ctx.RegisterLevel} {TypeHelper.GetTypeLength(fcNode.Parameters.FirstOrDefault().NodeType)}");
+                }
+                else if (fcName == "typeof")
+                {
+                    lines.AddRange(new Transformer(new List<AstNode> {
+                        new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).NodeType.GetName(), null, 0, 0) }, ctx)
+                        .Transform());
+                }
+                else
+                {
+                    var variable = ctx.Variables.Get(fcName);
+                    if (variable != null)
+                    {
+                        lines.Add($"rmem reg7 >{variable.MemoryAddress}");
+                        lines.Add($"call reg7");
+                    }
+                    else
+                    {
+                        lines.Add($"call >{fcName}");
+                    }
+                }
+            }
+            else
+            {
+                // var regLevel = ctx.RegisterLevel;
+                // ctx.RegisterLevel = 7;
+                lines.AddRange(new Transformer(new List<AstNode> { fcNode.Name }, ctx).Transform());
+                // lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
+                lines.Add($"set reg7 reg{ctx.RegisterLevel}");
+                EmitFunctionArgs(lines, fcNode, ctx);
+                lines.Add($"call reg7");
+                // ctx.RegisterLevel = regLevel;
+            }
+
+            return lines;
+        }
+
+        private void EmitFunctionArgs(List<string> lines, FunctionCall functionCallNode, Context ctx)
+        {
             var originalRegisterLevel = ctx.RegisterLevel;
-            foreach (var parameter in fcNode.Parameters)
+            foreach (var parameter in functionCallNode.Parameters)
             {
                 lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
                 ctx.RegisterLevel++;
             }
             ctx.RegisterLevel = originalRegisterLevel;
-
-            //Handle intrinsic functions
-            if (fcNode.Name == "out")
-            {
-                lines.Add("out reg0");
-            }
-            else if (fcNode.Name == "in")
-            {
-                lines.Add("in reg0");
-            }
-            else if (fcNode.Name == "exit")
-            {
-                lines.Add("halt");
-            }
-            else if (fcNode.Name == "push")
-            {
-                lines.AddRange(new Transformer(fcNode.Parameters, ctx).Transform());
-                lines.Add("push reg0");
-            }
-            else if (fcNode.Name == "pop")
-            {
-                lines.Add("pop reg0");
-            }
-            else if (fcNode.Name == "wmem")
-            {
-                lines.Add($"wmem reg0 reg1");
-            }
-            else if (fcNode.Name == "rmem")
-            {
-                lines.Add($"rmem reg0 reg1");
-            }
-            else if (fcNode.Name == "nameof")
-            {
-                lines.AddRange( new Transformer(new List<AstNode> {
-                        new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).Name, null, 0, 0) }, ctx)
-                    .Transform());
-            }
-            else if (fcNode.Name == "sizeof")
-            {
-                lines.Add($"set reg{ctx.RegisterLevel} {TypeHelper.GetTypeLength(fcNode.Parameters.FirstOrDefault().NodeType)}");
-            }
-            else if (fcNode.Name == "typeof")
-            {
-                lines.AddRange(new Transformer(new List<AstNode> {
-                        new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).NodeType.GetName(), null, 0, 0) }, ctx)
-                    .Transform());
-            }
-            else
-            {
-                var variable = ctx.Variables.Get(fcNode.Name);
-                if (variable != null)
-                {
-                    var regLevel = ctx.RegisterLevel;
-                    // ctx.RegisterLevel = 7;
-                    // lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
-                    lines.Add($"rmem reg7 >{variable.MemoryAddress}");
-                    lines.Add($"call reg7");
-                    // ctx.RegisterLevel = regLevel;
-                }
-                else
-                {
-                    lines.Add($"call >{fcNode.Name}");
-                }
-            }
-
-            return lines;
         }
     }
 }

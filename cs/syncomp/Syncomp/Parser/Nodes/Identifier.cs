@@ -9,5 +9,7 @@ namespace syncomp
         {
             this.Name = name;
         }
+
+        public override string ToString() => this.Name;
     }
 }

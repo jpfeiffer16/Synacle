@@ -681,22 +681,30 @@ ret
 ret
 :int_end
 set reg0 >int
-jmp >var_test_newlexer_3_end
-:var_test_newlexer_3
-:var_test_newlexer_3_end
-jmp >function__newlexer_3_end
-:function__newlexer_3
-jmp >var_str_newlexer_3_end
-:var_str_newlexer_3
-:var_str_newlexer_3_end
-wmem >var_str_newlexer_3 reg0
-rmem reg0 >var_str_newlexer_3
-call >println
+jmp >var_help_newlexer_8_end
+:var_help_newlexer_8
+:var_help_newlexer_8_end
+jmp >function__newlexer_8_end
+:function__newlexer_8
+jmp >var_str_newlexer_8_end
+:var_str_newlexer_8
+:var_str_newlexer_8_end
+jmp >var_t_newlexer_8_end
+:var_t_newlexer_8
+:var_t_newlexer_8_end
+wmem >var_str_newlexer_8 reg0
+wmem >var_t_newlexer_8 reg1
+rmem reg0 >var_str_newlexer_8
+rmem reg7 >var_t_newlexer_8
+add reg7 reg7 1
+wmem reg7 reg0
+rmem reg0 >var_t_newlexer_8
 ret
-:function__newlexer_3_end
-set reg0 >function__newlexer_3
-wmem >var_test_newlexer_3 reg0
-rmem reg0 >var_test_newlexer_3
+ret
+:function__newlexer_8_end
+set reg0 >function__newlexer_8
+wmem >var_help_newlexer_8 reg0
+rmem reg0 >var_help_newlexer_8
 jmp >var___0_end
 :var___0
 &u
@@ -711,32 +719,60 @@ jmp >var___0_end
 &g
 &,
 32
-&v
-&o
-&i
-&d
+&p
+&t
+&r
+&<
+&t
+&e
+&s
+&t
+&>
+&,
+32
+&p
+&t
+&r
+&<
+&t
+&e
+&s
+&t
+&>
 &>
 0
 :var___0_end
 wmem >var___0 &f
 set reg0 >var___0
 call >println
-jmp >var_t_newlexer_9_end
-:var_t_newlexer_9
-:var_t_newlexer_9_end
-jmp >var__newlexer_9_end
-:var__newlexer_9
+jmp >var_t_newlexer_15_end
+:var_t_newlexer_15
+:var_t_newlexer_15_end
+jmp >var__newlexer_15_end
+:var__newlexer_15
 &e
 &s
 &t
 0
-:var__newlexer_9_end
-wmem >var__newlexer_9 &t
-set reg0 >var__newlexer_9
-wmem >var_t_newlexer_9 reg0
-rmem reg0 >var_t_newlexer_9
-rmem reg7 >var_test_newlexer_3
+:var__newlexer_15_end
+wmem >var__newlexer_15 &t
+set reg0 >var__newlexer_15
+wmem >var_t_newlexer_15 reg0
+jmp >var_t_ptr_backing_newlexer_16_end
+:var_t_ptr_backing_newlexer_16
+:var_t_ptr_backing_newlexer_16_end
+jmp >var_t_ptr_newlexer_16_end
+:var_t_ptr_newlexer_16
+:var_t_ptr_newlexer_16_end
+wmem >var_t_ptr_newlexer_16 >var_t_ptr_backing_newlexer_16
+rmem reg0 >var_t_newlexer_15
+rmem reg1 >var_t_ptr_newlexer_16
+rmem reg7 >var_help_newlexer_8
 call reg7
+rmem reg0 >var_t_ptr_newlexer_16
+add reg0 reg0 1
+rmem reg0 reg0
+call >println
 halt
 
 :subtract

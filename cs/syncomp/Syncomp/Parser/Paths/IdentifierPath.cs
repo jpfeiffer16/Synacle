@@ -56,7 +56,7 @@ namespace syncomp
 
                 node = new FunctionCall(
                   parametersNodes,
-                  token.Token,
+                  ParseTokens(new List<SyntaxToken> { token }, ctx).FirstOrDefault(),
                   functionCallToken.File,
                   functionCallToken.Line,
                   functionCallToken.Column

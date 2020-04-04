@@ -26,7 +26,7 @@ namespace syncomp.Tests
               {
                 new IntegerLiteral("65", null, 0, 0)
               },
-              "out"
+              new Identifier("out", null, 0, 0)
             , null, 0, 0)
                 },
                 "test"

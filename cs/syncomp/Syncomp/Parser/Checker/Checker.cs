@@ -66,8 +66,16 @@ namespace syncomp
             #region "FunctionCall"
             if (node is FunctionCall f)
             {
-                var function = ctx.Variables.GetFunction(f.Name)?.Node as AstNode;
-                if (function is null) function = ctx.Variables.GetVariable(f.Name)?.Node;
+                AstNode function;
+                if (f.Name is Identifier)
+                {
+                    function = ctx.Variables.GetFunction((f.Name as Identifier).Name)?.Node as AstNode;
+                    if (function is null) function = ctx.Variables.GetVariable((f.Name as Identifier).Name)?.Node;
+                }
+                else
+                {
+                    function = f.Name;
+                }
                 if (function is null)
                 {
                     diagnostics.Add(new Diagnostic(

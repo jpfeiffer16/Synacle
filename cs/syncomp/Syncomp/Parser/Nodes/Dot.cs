@@ -11,5 +11,7 @@ namespace syncomp
 
     public AstNode Left { get; }
     public AstNode Right { get; }
+
+    public override string ToString() => $"{(this.Left as Identifier).Name}.{(this.Right as Identifier).Name}";
   }
 }
