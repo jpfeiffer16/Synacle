@@ -231,6 +231,14 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.SemiColon, ch);
             #endregion
 
+            #region "Lambda Arrow"
+            if (ch == "=" && Peek() == ">")
+            {
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.LambdaArrow, "=>");
+            }
+            #endregion
+
             #region "Variables"
             if (ch == "=")
             {
@@ -271,6 +279,7 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.As, ch);
             }
             #endregion
+
             #region "Comma"
             if (ch is ",")
                 return CreateSyntaxToken(SyntaxTokenType.Comma, ch);

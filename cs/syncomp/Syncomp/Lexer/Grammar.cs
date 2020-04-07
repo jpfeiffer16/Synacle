@@ -49,7 +49,8 @@ namespace syncomp
         PreprocessorDirective,
         Colon,
         As,
-        DerefArrow
+        DerefArrow,
+        LambdaArrow
     }
 
     public static class Grammar

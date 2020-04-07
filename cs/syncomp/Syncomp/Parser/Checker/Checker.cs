@@ -74,6 +74,7 @@ namespace syncomp
                 }
                 else
                 {
+                    diagnostics.AddRange(Check(f.Name, ctx));
                     function = f.Name;
                 }
                 if (function is null)

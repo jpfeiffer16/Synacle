@@ -97,6 +97,16 @@ namespace syncomp
             return index;
         }
 
+        protected bool LineContains(int i, List<SyntaxToken> tokens, SyntaxTokenType tokenType)
+        {
+            while (++i < tokens.Count() && tokens[i].Type != SyntaxTokenType.SemiColon)
+            {
+                if (tokens[i].Type == tokenType) return true;
+            }
+
+            return false;
+        }
+
         protected int GetNext(
             int index, List<SyntaxToken> tokens, SyntaxTokenType tokenType)
         {

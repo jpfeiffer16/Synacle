@@ -1,32 +1,18 @@
+#include "./lib/stdlib.bc"
+
 type test
 {
-    func<string, void> do_a_thing
+    func<string, string> do_a_thing
 }
 
 ptr<test> &t;
 
-t->do_a_thing = function(string name)
-{
-    out(65);
-};
+t->do_a_thing = (string name) : string
+    => name;
 
-t->do_a_thing("test");
+//Uhh.. FIX IT!!!
+var result = t->do_a_thing("test2");
 
-test t_c;
-t_c.do_a_thing = function(string name)
-{
-    out(66);
-};
-
-t_c.do_a_thing("Test");
- 
-var hello = t_c.do_a_thing;
-
-hello("test");
-
-function straight_up(string name, int id)
-{
-    out(67);
-}
-
-straight_up("test", 123);
+// out(~result as int);
+println(typeof(result));
+println(result);
