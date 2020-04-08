@@ -1,18 +1,4 @@
 #include "./lib/stdlib.bc"
 
-type test
-{
-    func<string, string> do_a_thing
-}
-
-ptr<test> &t;
-
-t->do_a_thing = (string name) : string
-    => name;
-
-//Uhh.. FIX IT!!!
-var result = t->do_a_thing("test2");
-
-// out(~result as int);
-println(typeof(result));
-println(result);
+print_number(1023);
+println(" ");

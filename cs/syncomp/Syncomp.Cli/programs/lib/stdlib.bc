@@ -116,14 +116,9 @@ function input() : string {
 }
 
 function print_number(int num) {
-  if (num == 10) {
-    out(49);
-    out(48);
-    return;
-  }
   int charNum;
   var length = 0;
-  while (num > 10) {
+  while (num > 9) {
     charNum = num % 10;
     push(charNum);
     ++length;
