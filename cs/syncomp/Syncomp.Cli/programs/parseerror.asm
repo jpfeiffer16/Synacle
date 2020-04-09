@@ -450,235 +450,314 @@ ret
 ret
 :input_end
 set reg0 >input
-jmp >print_number_end
-:print_number
-jmp >var_num_stdlib_118_end
-:var_num_stdlib_118
-:var_num_stdlib_118_end
-wmem >var_num_stdlib_118 reg0
-jmp >var_charNum_stdlib_119_end
-:var_charNum_stdlib_119
-:var_charNum_stdlib_119_end
-jmp >var_length_stdlib_120_end
-:var_length_stdlib_120
-:var_length_stdlib_120_end
+jmp >int_end
+:int
+jmp >var_str_stdlib_118_end
+:var_str_stdlib_118
+:var_str_stdlib_118_end
+wmem >var_str_stdlib_118 reg0
+jmp >var_len_stdlib_119_end
+:var_len_stdlib_119
+:var_len_stdlib_119_end
+rmem reg0 >var_str_stdlib_118
+call >str_len
+wmem >var_len_stdlib_119 reg0
+jmp >var_index_stdlib_120_end
+:var_index_stdlib_120
+:var_index_stdlib_120_end
 set reg0 0
-wmem >var_length_stdlib_120 reg0
-:while__stdlib_121_begin
-rmem reg0 >var_num_stdlib_118
+wmem >var_index_stdlib_120 reg0
+jmp >var_accumulation_stdlib_121_end
+:var_accumulation_stdlib_121
+:var_accumulation_stdlib_121_end
+set reg0 0
+wmem >var_accumulation_stdlib_121 reg0
+:for__stdlib_122_begin
+rmem reg0 >var_len_stdlib_119
+set reg1 0
+gt reg0 reg0 reg1
+jf reg0 >for__stdlib_122_end
+jmp >var_tens_place_stdlib_124_end
+:var_tens_place_stdlib_124
+:var_tens_place_stdlib_124_end
+set reg0 1
+set reg1 10
+rmem reg2 >var_len_stdlib_119
+set reg3 1
+push reg0
+push reg1
+set reg0 reg2
+set reg1 reg3
+call >subtract
+pop reg1
+set reg2 reg0
+pop reg0
+mult reg1 reg1 reg2
+rmem reg1 >var_len_stdlib_119
+set reg2 1
+push reg0
+push reg1
+set reg0 reg1
+set reg1 reg2
+call >subtract
+pop reg1
+set reg1 reg0
+pop reg0
+mult reg0 reg0 reg1
+wmem >var_tens_place_stdlib_124 reg0
+jmp >var_diget_stdlib_125_end
+:var_diget_stdlib_125
+:var_diget_stdlib_125_end
+rmem reg0 >var_str_stdlib_118
+rmem reg1 >var_index_stdlib_120
+add reg0 reg0 reg1
+rmem reg0 reg0
+wmem >var_diget_stdlib_125 reg0
+rmem reg0 >var_diget_stdlib_125
+set reg1 48
+call >subtract
+wmem >var_diget_stdlib_125 reg0
+:for__stdlib_127_begin
+rmem reg0 >var_tens_place_stdlib_124
+set reg1 0
+gt reg0 reg0 reg1
+jf reg0 >for__stdlib_127_end
+rmem reg0 >var_diget_stdlib_125
+set reg1 10
+mult reg0 reg0 reg1
+wmem >var_diget_stdlib_125 reg0
+rmem reg0 >var_tens_place_stdlib_124
+set reg1 1
+call >subtract
+wmem >var_tens_place_stdlib_124 reg0
+jmp >for__stdlib_127_begin
+:for__stdlib_127_end
+rmem reg0 >var_accumulation_stdlib_121
+rmem reg1 >var_diget_stdlib_125
+add reg0 reg0 reg1
+wmem >var_accumulation_stdlib_121 reg0
+rmem reg0 >var_index_stdlib_120
+add reg0 reg0 1
+wmem >var_index_stdlib_120 reg0
+rmem reg0 >var_len_stdlib_119
+set reg1 1
+call >subtract
+wmem >var_len_stdlib_119 reg0
+jmp >for__stdlib_122_begin
+:for__stdlib_122_end
+rmem reg0 >var_accumulation_stdlib_121
+ret
+ret
+:int_end
+set reg0 >int
+jmp >string_end
+:string
+jmp >var_num_stdlib_138_end
+:var_num_stdlib_138
+:var_num_stdlib_138_end
+wmem >var_num_stdlib_138 reg0
+jmp >var_charNum_stdlib_139_end
+:var_charNum_stdlib_139
+:var_charNum_stdlib_139_end
+jmp >var_length_stdlib_140_end
+:var_length_stdlib_140
+:var_length_stdlib_140_end
+set reg0 0
+wmem >var_length_stdlib_140 reg0
+:while__stdlib_141_begin
+rmem reg0 >var_num_stdlib_138
 set reg1 9
 gt reg0 reg0 reg1
-jf reg0 >while__stdlib_121_end
-rmem reg0 >var_num_stdlib_118
+jf reg0 >while__stdlib_141_end
+rmem reg0 >var_num_stdlib_138
 set reg1 10
 mod reg0 reg0 reg1
-wmem >var_charNum_stdlib_119 reg0
-rmem reg0 >var_charNum_stdlib_119
-rmem reg0 >var_charNum_stdlib_119
+wmem >var_charNum_stdlib_139 reg0
+rmem reg0 >var_charNum_stdlib_139
+rmem reg0 >var_charNum_stdlib_139
 push reg0
-rmem reg0 >var_length_stdlib_120
+rmem reg0 >var_length_stdlib_140
 add reg0 reg0 1
-wmem >var_length_stdlib_120 reg0
-rmem reg0 >var_num_stdlib_118
+wmem >var_length_stdlib_140 reg0
+rmem reg0 >var_num_stdlib_138
 set reg1 10
 call >divide
-wmem >var_num_stdlib_118 reg0
-jmp >while__stdlib_121_begin
-:while__stdlib_121_end
-rmem reg0 >var_num_stdlib_118
+wmem >var_num_stdlib_138 reg0
+jmp >while__stdlib_141_begin
+:while__stdlib_141_end
+rmem reg0 >var_num_stdlib_138
 set reg1 10
 mod reg0 reg0 reg1
-wmem >var_charNum_stdlib_119 reg0
-rmem reg0 >var_charNum_stdlib_119
-rmem reg0 >var_charNum_stdlib_119
+wmem >var_charNum_stdlib_139 reg0
+rmem reg0 >var_charNum_stdlib_139
+rmem reg0 >var_charNum_stdlib_139
 push reg0
-rmem reg0 >var_length_stdlib_120
+rmem reg0 >var_length_stdlib_140
 add reg0 reg0 1
-wmem >var_length_stdlib_120 reg0
-jmp >var_stackIndex_stdlib_132_end
-:var_stackIndex_stdlib_132
-:var_stackIndex_stdlib_132_end
+wmem >var_length_stdlib_140 reg0
+jmp >var_stack_index_stdlib_152_end
+:var_stack_index_stdlib_152
+:var_stack_index_stdlib_152_end
 set reg0 0
-wmem >var_stackIndex_stdlib_132 reg0
-:while__stdlib_134_begin
-rmem reg0 >var_stackIndex_stdlib_132
-rmem reg1 >var_length_stdlib_120
+wmem >var_stack_index_stdlib_152 reg0
+jmp >var_dest_ptr_stdlib_153_end
+:var_dest_ptr_stdlib_153
+:var_dest_ptr_stdlib_153_end
+call >alloc
+wmem >var_dest_ptr_stdlib_153 reg0
+:while__stdlib_155_begin
+rmem reg0 >var_stack_index_stdlib_152
+rmem reg1 >var_length_stdlib_140
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while__stdlib_134_end
-rmem reg0 >var_stackIndex_stdlib_132
+jf reg0 >while__stdlib_155_end
+rmem reg0 >var_dest_ptr_stdlib_153
+rmem reg1 >var_stack_index_stdlib_152
+add reg0 reg0 reg1
+pop reg1
+set reg2 48
+add reg1 reg1 reg2
+wmem reg0 reg1
+rmem reg0 >var_stack_index_stdlib_152
 set reg1 1
 add reg0 reg0 reg1
-wmem >var_stackIndex_stdlib_132 reg0
-pop reg0
-set reg1 48
+wmem >var_stack_index_stdlib_152 reg0
+jmp >while__stdlib_155_begin
+:while__stdlib_155_end
+rmem reg0 >var_dest_ptr_stdlib_153
+rmem reg1 >var_stack_index_stdlib_152
 add reg0 reg0 reg1
-out reg0
-jmp >while__stdlib_134_begin
-:while__stdlib_134_end
+set reg1 0
+wmem reg0 reg1
+rmem reg0 >var_dest_ptr_stdlib_153
+ret
+ret
+:string_end
+set reg0 >string
+jmp >print_number_end
+:print_number
+jmp >var_num_stdlib_164_end
+:var_num_stdlib_164
+:var_num_stdlib_164_end
+wmem >var_num_stdlib_164 reg0
+rmem reg0 >var_num_stdlib_164
+call >string
+call >print
 ret
 :print_number_end
 set reg0 >print_number
 jmp >dump_mem_end
 :dump_mem
-jmp >var_i_stdlib_141_end
-:var_i_stdlib_141
-:var_i_stdlib_141_end
+jmp >var_i_stdlib_170_end
+:var_i_stdlib_170
+:var_i_stdlib_170_end
 set reg0 0
-wmem >var_i_stdlib_141 reg0
-:while__stdlib_143_begin
-rmem reg0 >var_i_stdlib_141
+wmem >var_i_stdlib_170 reg0
+:while__stdlib_172_begin
+rmem reg0 >var_i_stdlib_170
 rmem reg0 reg0
-jf reg0 >while__stdlib_143_end
-rmem reg0 >var_i_stdlib_141
+jf reg0 >while__stdlib_172_end
+rmem reg0 >var_i_stdlib_170
 add reg0 reg0 1
-wmem >var_i_stdlib_141 reg0
-rmem reg0 >var_i_stdlib_141
+wmem >var_i_stdlib_170 reg0
+rmem reg0 >var_i_stdlib_170
 rmem reg0 reg0
 call >print_number
 set reg0 10
 out reg0
-jmp >while__stdlib_143_begin
-:while__stdlib_143_end
+jmp >while__stdlib_172_begin
+:while__stdlib_172_end
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >int_end
-:int
-jmp >var_str_ptr_stdlib_150_end
-:var_str_ptr_stdlib_150
-:var_str_ptr_stdlib_150_end
-wmem >var_str_ptr_stdlib_150 reg0
-jmp >var_flipped_stdlib_151_end
-:var_flipped_stdlib_151
-:var_flipped_stdlib_151_end
-rmem reg0 >var_str_ptr_stdlib_150
-call >flip_str
-wmem >var_flipped_stdlib_151 reg0
-jmp >var_len_stdlib_152_end
-:var_len_stdlib_152
-:var_len_stdlib_152_end
-rmem reg0 >var_flipped_stdlib_151
-call >str_len
-wmem >var_len_stdlib_152 reg0
-rmem reg0 >var_len_stdlib_152
-set reg1 1
-call >subtract
-wmem >var_len_stdlib_152 reg0
-jmp >var_index_stdlib_155_end
-:var_index_stdlib_155
-:var_index_stdlib_155_end
-set reg0 0
-wmem >var_index_stdlib_155 reg0
-jmp >var_num_stdlib_156_end
-:var_num_stdlib_156
-:var_num_stdlib_156_end
-set reg0 0
-wmem >var_num_stdlib_156 reg0
-:while__stdlib_157_begin
-rmem reg0 >var_index_stdlib_155
-rmem reg1 >var_len_stdlib_152
-gt reg0 reg0 reg1
-call >not
-jf reg0 >while__stdlib_157_end
-jmp >var_char_stdlib_158_end
-:var_char_stdlib_158
-:var_char_stdlib_158_end
-rmem reg0 >var_flipped_stdlib_151
-rmem reg1 >var_index_stdlib_155
-add reg0 reg0 reg1
-wmem >var_char_stdlib_158 reg0
-rmem reg0 >var_char_stdlib_158
-rmem reg0 reg0
-wmem >var_char_stdlib_158 reg0
-jmp >var_is_greater_than_stdlib_160_end
-:var_is_greater_than_stdlib_160
-:var_is_greater_than_stdlib_160_end
-rmem reg0 >var_char_stdlib_158
-set reg1 47
-gt reg0 reg0 reg1
-wmem >var_is_greater_than_stdlib_160 reg0
-jmp >var_is_less_than_stdlib_161_end
-:var_is_less_than_stdlib_161
-:var_is_less_than_stdlib_161_end
-rmem reg0 >var_char_stdlib_158
-set reg1 58
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-wmem >var_is_less_than_stdlib_161 reg0
-rmem reg0 >var_is_greater_than_stdlib_160
-rmem reg1 >var_is_less_than_stdlib_161
-call >and
-jf reg0 >end__stdlib_165
-jmp >var_this_digit_stdlib_166_end
-:var_this_digit_stdlib_166
-:var_this_digit_stdlib_166_end
-rmem reg0 >var_char_stdlib_158
-set reg1 48
-call >subtract
-wmem >var_this_digit_stdlib_166 reg0
-rmem reg0 >var_this_digit_stdlib_166
-call >print_number
-set reg0 10
-out reg0
-jmp >var_digit_index_stdlib_171_end
-:var_digit_index_stdlib_171
-:var_digit_index_stdlib_171_end
-set reg0 0
-wmem >var_digit_index_stdlib_171 reg0
-jmp >var_this_index_stdlib_172_end
-:var_this_index_stdlib_172
-:var_this_index_stdlib_172_end
-rmem reg0 >var_index_stdlib_155
-set reg1 1
-call >subtract
-wmem >var_this_index_stdlib_172 reg0
-:while__stdlib_173_begin
-rmem reg0 >var_digit_index_stdlib_171
-rmem reg1 >var_this_index_stdlib_172
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >while__stdlib_173_end
-rmem reg0 >var_this_digit_stdlib_166
-set reg1 10
-mult reg0 reg0 reg1
-wmem >var_this_digit_stdlib_166 reg0
-rmem reg0 >var_digit_index_stdlib_171
-add reg0 reg0 1
-wmem >var_digit_index_stdlib_171 reg0
-jmp >while__stdlib_173_begin
-:while__stdlib_173_end
-rmem reg0 >var_num_stdlib_156
-rmem reg1 >var_this_digit_stdlib_166
-add reg0 reg0 reg1
-wmem >var_num_stdlib_156 reg0
-:end__stdlib_165
-rmem reg0 >var_index_stdlib_155
-add reg0 reg0 1
-wmem >var_index_stdlib_155 reg0
-jmp >while__stdlib_157_begin
-:while__stdlib_157_end
-rmem reg0 >var_num_stdlib_156
-call >print_number
-rmem reg0 >var_num_stdlib_156
-ret
-ret
-:int_end
-set reg0 >int
-set reg0 1023
-call >print_number
-jmp >var__parseerror_4_end
-:var__parseerror_4
+jmp >var_test_parseerror_3_end
+:var_test_parseerror_3
+:var_test_parseerror_3_end
+jmp >function__parseerror_3_end
+:function__parseerror_3
+jmp >var__parseerror_5_end
+:var__parseerror_5
+&e
+&l
+&l
+&o
+32
+&W
+&o
+&r
+&l
+&d
+&!
 0
-:var__parseerror_4_end
-wmem >var__parseerror_4 32
-set reg0 >var__parseerror_4
+:var__parseerror_5_end
+wmem >var__parseerror_5 &H
+set reg0 >var__parseerror_5
+call >println
+ret
+:function__parseerror_3_end
+set reg0 >function__parseerror_3
+wmem >var_test_parseerror_3 reg0
+rmem reg0 >var_test_parseerror_3
+call >print_number
+jmp >var__parseerror_9_end
+:var__parseerror_9
+0
+:var__parseerror_9_end
+wmem >var__parseerror_9 32
+set reg0 >var__parseerror_9
+call >println
+jmp >var__parseerror_11_end
+:var__parseerror_11
+&n
+&t
+&e
+&r
+32
+&a
+&d
+&d
+&r
+&e
+&s
+&s
+32
+&t
+&o
+32
+&c
+&a
+&l
+&l
+&:
+0
+:var__parseerror_11_end
+wmem >var__parseerror_11 &E
+set reg0 >var__parseerror_11
+call >println
+jmp >var_addr_parseerror_12_end
+:var_addr_parseerror_12
+:var_addr_parseerror_12_end
+call >input
+call >int
+wmem >var_addr_parseerror_12 reg0
+rmem reg0 >var_addr_parseerror_12
+call >print_number
+jmp >var_funfunction_parseerror_15_end
+:var_funfunction_parseerror_15
+:var_funfunction_parseerror_15_end
+rmem reg0 >var_addr_parseerror_12
+wmem >var_funfunction_parseerror_15 reg0
+rmem reg7 >var_funfunction_parseerror_15
+call reg7
+jmp >var_str_num_parseerror_18_end
+:var_str_num_parseerror_18
+:var_str_num_parseerror_18_end
+rmem reg0 >var_addr_parseerror_12
+call >string
+wmem >var_str_num_parseerror_18 reg0
+rmem reg0 >var_str_num_parseerror_18
 call >println
 halt
 

@@ -115,7 +115,27 @@ function input() : string {
   return alloc_ptr as string;
 }
 
-function print_number(int num) {
+function int(string str) : int {
+    var len = str_len(str);
+    var index = 0;
+    var accumulation = 0;
+    for (; len > 0; --len)
+    {
+        var tens_place = 1 * (10 * (len - 1));
+        var diget = ~(str + index) as int;
+        diget = diget - 48;
+        for (; tens_place > 0; --tens_place)
+        {
+            diget = diget * 10;
+        }
+        accumulation = accumulation + diget;
+        ++index;
+    }
+
+    return accumulation;
+}
+
+function string(int num) : string {
   int charNum;
   var length = 0;
   while (num > 9) {
@@ -129,13 +149,22 @@ function print_number(int num) {
   ++length;
 
   //Clean up the stack and output number
-  var stackIndex = 0;
+  var stack_index = 0;
+  var dest_ptr = alloc();
 
-  while(stackIndex < length) {
-    stackIndex = stackIndex + 1;
-    out(pop() + 48);
+  while(stack_index < length) {
+    wmem(dest_ptr + stack_index as ptr, pop() + 48);
+    stack_index = stack_index + 1;
   }
+  wmem(dest_ptr + stack_index as ptr, 0);
+
+  return dest_ptr as string;
 }
+
+function print_number(int num) {
+    print(string(num));
+}
+
 
 function dump_mem() {
   var i = 0;
@@ -145,45 +174,4 @@ function dump_mem() {
     print_number(~i as int);
     out(10);
   }
-}
-
-function int(string str_ptr) {
-  string flipped = flip_str(str_ptr);
-  var len = str_len(flipped);
-  //Get rid of the null byte
-  --len;
-  var index = 0;
-  var num = 0;
-  while (index <= len) {
-    var char = flipped + index;
-    char = ~char as int;
-    var is_greater_than = char > 47;
-    var is_less_than = char < 58;
-    //var is_correct = is_greater_than && is_less_than;
-    //print_number(char);
-    //out(10);
-    if (is_greater_than && is_less_than) {
-      var this_digit = char - 48;
-      print_number(this_digit);
-      out(10);
-      //print_number(index);
-      //out(10);
-      var digit_index = 0;
-      var this_index = index - 1;
-      while (digit_index < this_index) {
-        //print("looping for ");
-        //print_number(this_digit);
-        //out(10);
-        this_digit = this_digit * 10;
-        ++digit_index;
-      }
-      //print_number(this_digit);
-      //out(10);
-      num = num + this_digit;
-    }
-    ++index;
-  }
-
-  print_number(num);
-  return num;
 }

@@ -17,6 +17,8 @@ namespace syncomp
             lines.AddRange(new Transformer(new List<AstNode> { sbNode.Right }, ctx).Transform());
             ctx.RegisterLevel--;
 
+            // TODO: Need to do the same thing that SubtractionEmitter emitter does
+            // here with the preserveRegisters option
             lines.Add($"call >divide");
 
             return lines;

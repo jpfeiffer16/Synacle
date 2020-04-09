@@ -1,4 +1,19 @@
 #include "./lib/stdlib.bc"
 
-print_number(1023);
+var test = () : void =>
+{
+    println("Hello World!");
+};
+
+print_number(test as int);
 println(" ");
+
+println("Enter address to call:");
+var addr = int(input());
+print_number(addr);
+
+var funfunction = addr as func<void>;
+funfunction();
+
+var str_num = string(addr);
+println(str_num);

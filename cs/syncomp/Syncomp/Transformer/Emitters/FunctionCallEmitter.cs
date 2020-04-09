@@ -37,7 +37,7 @@ namespace syncomp
                 }
                 else if (fcName == "pop")
                 {
-                    lines.Add("pop reg0");
+                    lines.Add($"pop reg{ctx.RegisterLevel}");
                 }
                 else if (fcName == "wmem")
                 {

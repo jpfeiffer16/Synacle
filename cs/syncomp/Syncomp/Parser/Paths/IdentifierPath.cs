@@ -119,6 +119,10 @@ namespace syncomp
 
         private bool ContainsGenericType(int index, List<SyntaxToken> tokens)
         {
+            if (tokens[index + 1].Type != SyntaxTokenType.LessThan)
+            {
+                return false;
+            }
             var containsOpener = false;
             var depth = 0;
             // var opens = new List<int>();

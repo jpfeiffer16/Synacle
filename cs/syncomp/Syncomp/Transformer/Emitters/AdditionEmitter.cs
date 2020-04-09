@@ -16,7 +16,7 @@ namespace syncomp
             lines.AddRange(new Transformer(new List<AstNode> { addNode.Right }, ctx).Transform());
             ctx.RegisterLevel--;
 
-            lines.Add($"add reg0 reg0 reg1");
+            lines.Add($"add reg{ctx.RegisterLevel} reg{ctx.RegisterLevel} reg{ctx.RegisterLevel + 1}");
 
             return lines;
         }

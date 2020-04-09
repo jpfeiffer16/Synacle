@@ -1,18 +1,9 @@
-#include "./lib/stdlib.bc"
+push(63);
 
-type test
-{
-    string name
-}
+wmem(123 as ptr, pop() + 2);
+// wmem(123 as ptr, 65);
 
-var help = function(string str, ptr<test> t) : ptr<test>
-{
-    t->name = str;
-    return t;
-};
+var test = 123 as string;
 
-println(typeof(help));
-var t = "test";
-ptr<test> &t_ptr;
-help(t, t_ptr);
-println(t_ptr->name);
+
+out(~test as int);
