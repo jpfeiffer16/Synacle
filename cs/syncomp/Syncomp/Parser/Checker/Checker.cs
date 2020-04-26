@@ -301,32 +301,32 @@ namespace syncomp
             #region "DerefArrow"
             if (node is DerefArrow derefArrowNode)
             {
-
+                diagnostics.AddRange(Check(derefArrowNode.Left, ctx));
                 // Need to set up the types on the DerefArrow
-                var variableName = derefArrowNode.Left as Identifier;
-                if (variableName is null)
-                {
-                    diagnostics.Add(new Diagnostic(
-                        derefArrowNode.Left.File,
-                        derefArrowNode.Left.Line,
-                        derefArrowNode.Left.Column,
-                        "Unknown variable",
-                        DiagnosticCode.UnknownVariable));
-                    return diagnostics;
-                }
-                var variable = ctx.Variables.GetVariable(variableName.Name);
-                if (variable is null)
-                {
-                    diagnostics.Add(new Diagnostic(
-                        derefArrowNode.Left.File,
-                        derefArrowNode.Left.Line,
-                        derefArrowNode.Left.Column,
-                        length: variableName.Name.Length,
-                        "Unknown variable",
-                        DiagnosticCode.UnknownVariable));
-                    return diagnostics;
-                }
-                if (variable.Node.NodeType.Name != ParserContext.NativeTypes.Pointer.Name)
+                // var variableName = derefArrowNode.Left as Identifier;
+                // if (variableName is null)
+                // {
+                //     diagnostics.Add(new Diagnostic(
+                //         derefArrowNode.Left.File,
+                //         derefArrowNode.Left.Line,
+                //         derefArrowNode.Left.Column,
+                //         "Unknown variable",
+                //         DiagnosticCode.UnknownVariable));
+                //     return diagnostics;
+                // }
+                // var variable = ctx.Variables.GetVariable(variableName.Name);
+                // if (variable is null)
+                // {
+                //     diagnostics.Add(new Diagnostic(
+                //         derefArrowNode.Left.File,
+                //         derefArrowNode.Left.Line,
+                //         derefArrowNode.Left.Column,
+                //         length: variableName.Name.Length,
+                //         "Unknown variable",
+                //         DiagnosticCode.UnknownVariable));
+                //     return diagnostics;
+                // }
+                if (derefArrowNode.Left.NodeType.Name != ParserContext.NativeTypes.Pointer.Name)
                 {
                     diagnostics.Add(new Diagnostic(
                         derefArrowNode.File,
@@ -339,14 +339,14 @@ namespace syncomp
                     return diagnostics;
                 }
                 // var type = ctx.Types.Where(tp => tp.Name == variableName.Name).FirstOrDefault();
-                var type = variable.Node.NodeType.SubTypes.FirstOrDefault();
+                var type = derefArrowNode.Left.NodeType.SubTypes.FirstOrDefault();
                 if (type is null)
                 {
                     diagnostics.Add(new Diagnostic(
                         derefArrowNode.Left.File,
                         derefArrowNode.Left.Line,
                         derefArrowNode.Left.Column,
-                        $"Unknown type: {variableName.Name}",
+                        $"Unknown type",
                         DiagnosticCode.UnknownType));
                     return diagnostics;
                 }
@@ -468,6 +468,29 @@ namespace syncomp
                 if (parameter.NodeType.Name == "ptr")
                 {
                     derefNode.NodeType = parameter.NodeType.SubTypes.FirstOrDefault();
+                }
+            }
+            #endregion
+            #region "LangTYpe"
+            if (node is LangType ltNode)
+            {
+                if (!(ltNode.Body is null) && ltNode.Body.Count() > 0)
+                {
+                    foreach (var fieldNode in ltNode.Body)
+                    {
+                        diagnostics.AddRange(Check(fieldNode, ctx));
+                    }
+                    // Warn about non-ptr types in custom types
+                    foreach(var warnNode in ltNode.Body.Where(fieldNode => fieldNode.NodeType.Body?.Count() > 0 && fieldNode.LangType.Name != "ptr"))
+                    {
+                        diagnostics.Add(new Diagnostic(
+                            warnNode.File,
+                            warnNode.Line,
+                            warnNode.Column,
+                            "You may wish to use ptr<T> types in custom types",
+                            DiagnosticCode.Warning
+                        ) { Level = DiagnosticCodeLevel.Warning });
+                    }
                 }
             }
             #endregion

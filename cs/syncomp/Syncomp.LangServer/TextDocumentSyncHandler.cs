@@ -106,7 +106,7 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
                 Diagnostics = diagnostics.Select(di => new OmniSharp.Extensions.LanguageServer.Protocol.Models.Diagnostic
                 {
                     // Code = OmniSharp.Extensions.LanguageServer.Protocol.Models.DiagnosticCode
-                    Severity = DiagnosticSeverity.Error,
+                    Severity = di.Level == DiagnosticCodeLevel.Error ? DiagnosticSeverity.Error : DiagnosticSeverity.Warning,
                     Message = di.FullMessage,
                     Range = new OmniSharp.Extensions.LanguageServer.Protocol.Models.Range
                     {

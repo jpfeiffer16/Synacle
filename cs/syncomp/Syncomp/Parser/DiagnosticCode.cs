@@ -11,6 +11,7 @@ namespace syncomp
         UnknownField,
         SyntaxError,
         ParseError,
-        ImplicitTypingError
+        ImplicitTypingError,
+        Warning
     }
 }

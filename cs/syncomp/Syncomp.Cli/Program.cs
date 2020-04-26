@@ -48,7 +48,15 @@ namespace syncomp
             if (diagnostics.Count > 0)
             {
                 DisplayCheckerDiagnostics(diagnostics);
-                Environment.Exit(1);
+                if (diagnostics.Where(d => d.Level == DiagnosticCodeLevel.Error).Count() > 0)
+                {
+                    Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
+                    Environment.Exit(1);
+                }
+                else
+                {
+                    Console.WriteLine($"There are {diagnostics.Count} warings.");
+                }
             }
             var asmLines = EmitAst(ast);
 
@@ -175,7 +183,6 @@ namespace syncomp
                 Console.WriteLine();
             }
             Console.WriteLine();
-            Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
         }
 
         private static void PrintUsage()
