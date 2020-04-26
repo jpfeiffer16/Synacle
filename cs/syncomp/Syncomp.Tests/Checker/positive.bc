@@ -15,3 +15,12 @@ function main(func<ptr<test>, void> cb)
 
 main(function(ptr<test> person) {
 });
+
+//Lambdas
+var lambda_test_one = () => {};
+lambda_test_one = () => "Test";
+
+var lambda_test_two = () : int => 123;
+lambda_test_two = () : int => {
+    return 123;
+};

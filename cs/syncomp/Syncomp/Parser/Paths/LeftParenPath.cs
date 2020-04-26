@@ -34,6 +34,10 @@ namespace syncomp
                     i = GetNextNonWhitespace(lambdaArrowIndex + 1, tokens);
                     returnType = GetLangType(typeNameTokens, ctx);
                 }
+                else
+                {
+                    ++i;
+                }
 
                 // i = nextClose + 3;
                 List<AstNode> expression;
