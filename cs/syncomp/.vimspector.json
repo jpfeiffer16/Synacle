@@ -7,7 +7,7 @@
                  "program": "/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll",
                  "stopAtEntry": false,
                   "args": [
-                      "/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.Cli/programs/newlexer.bc"
+                      "/home/jpfeiffer/Source/Synacor/cs/syncomp/Syncomp.Cli/programs/parseerror.bc"
                   ]
              }
         }
