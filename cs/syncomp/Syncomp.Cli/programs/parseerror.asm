@@ -672,93 +672,15 @@ jmp >while__stdlib_172_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >var_test_parseerror_3_end
-:var_test_parseerror_3
-:var_test_parseerror_3_end
-jmp >function__parseerror_3_end
-:function__parseerror_3
-jmp >var__parseerror_5_end
-:var__parseerror_5
-&e
-&l
-&l
-&o
-32
-&W
-&o
-&r
-&l
-&d
-&!
-0
-:var__parseerror_5_end
-wmem >var__parseerror_5 &H
-set reg0 >var__parseerror_5
-call >println
+jmp >var_fac_parseerror_8_end
+:var_fac_parseerror_8
+:var_fac_parseerror_8_end
+jmp >function__parseerror_8_end
+:function__parseerror_8
 ret
-:function__parseerror_3_end
-set reg0 >function__parseerror_3
-wmem >var_test_parseerror_3 reg0
-rmem reg0 >var_test_parseerror_3
-call >print_number
-jmp >var__parseerror_9_end
-:var__parseerror_9
-0
-:var__parseerror_9_end
-wmem >var__parseerror_9 32
-set reg0 >var__parseerror_9
-call >println
-jmp >var__parseerror_11_end
-:var__parseerror_11
-&n
-&t
-&e
-&r
-32
-&a
-&d
-&d
-&r
-&e
-&s
-&s
-32
-&t
-&o
-32
-&c
-&a
-&l
-&l
-&:
-0
-:var__parseerror_11_end
-wmem >var__parseerror_11 &E
-set reg0 >var__parseerror_11
-call >println
-jmp >var_addr_parseerror_12_end
-:var_addr_parseerror_12
-:var_addr_parseerror_12_end
-call >input
-call >int
-wmem >var_addr_parseerror_12 reg0
-rmem reg0 >var_addr_parseerror_12
-call >print_number
-jmp >var_funfunction_parseerror_15_end
-:var_funfunction_parseerror_15
-:var_funfunction_parseerror_15_end
-rmem reg0 >var_addr_parseerror_12
-wmem >var_funfunction_parseerror_15 reg0
-rmem reg7 >var_funfunction_parseerror_15
-call reg7
-jmp >var_str_num_parseerror_18_end
-:var_str_num_parseerror_18
-:var_str_num_parseerror_18_end
-rmem reg0 >var_addr_parseerror_12
-call >string
-wmem >var_str_num_parseerror_18 reg0
-rmem reg0 >var_str_num_parseerror_18
-call >println
+:function__parseerror_8_end
+set reg0 >function__parseerror_8
+wmem >var_fac_parseerror_8 reg0
 halt
 
 :subtract

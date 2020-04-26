@@ -1,7 +1,29 @@
 #include "lib/stdlib.bc"
+#include "lib/random.bc"
+
+// Get random number
+
+var num = rand();
 
 function loop() {
   print("Enter a guess: ");
-  //TODO: We can't convert strings to ints yet
-  var guess = in();
+  var guess = int(input());
+  if (guess == num)
+  {
+      println("Correct!");
+      // TODO: Fix this exit() call not being
+      // run correctly
+      // Also need to find a way of seeding
+      // non-deterministicly
+      exit();
+  }
+  if (guess < num)
+  {
+      println("To low");
+      loop();
+  }
+  println("To high");
+  loop();
 }
+
+loop();

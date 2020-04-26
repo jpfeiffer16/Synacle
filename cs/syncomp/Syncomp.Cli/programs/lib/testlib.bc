@@ -1,4 +1,4 @@
-//Hard deps are error.bc and stdlib.bc
+#include "./stdlib.bc"
 
 function str_is_eq(var str_actual) {
   var curry = function(var str_expected) {
@@ -11,9 +11,37 @@ function str_is_eq(var str_actual) {
   return curry;
 }
 
-function assert(var expected, var curry) {
+function assert(void expected, func<void, void> cb) {
   println("assert");
-  print_number(curry);
-  curry(expected);
+  print_number(cb as int);
+  cb(expected);
 }
 
+type assert_type
+{
+    func<void, int> equal_to,
+}
+
+function equal_to(void a, void b) : int
+{
+    print_number(a as int);
+    print_number(b as int);
+    return a == b;
+}
+
+function assert_type_factory() : ptr<assert_type>
+{
+    ptr<assert_type> &a_type;
+    a_type->equal_to = equal_to;
+    return a_type;
+}
+
+function is() : ptr<assert_type>
+{
+    return assert_type_factory();
+}
+
+// TODO: Test
+var a = 1;
+var b = 1;
+is()->equal_to(a, b);

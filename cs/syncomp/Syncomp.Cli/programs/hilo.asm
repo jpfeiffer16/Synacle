@@ -1,91 +1,38 @@
-jmp >var_symbol_plus_symbols_1_end
-:var_symbol_plus_symbols_1
-:var_symbol_plus_symbols_1_end
-jmp >var__symbols_1_end
-:var__symbols_1
-0
-:var__symbols_1_end
-wmem >var__symbols_1 &+
-set reg0 >var__symbols_1
-rmem reg0 reg0
-wmem >var_symbol_plus_symbols_1 reg0
-jmp >var_symbol_minus_symbols_2_end
-:var_symbol_minus_symbols_2
-:var_symbol_minus_symbols_2_end
-jmp >var__symbols_2_end
-:var__symbols_2
-0
-:var__symbols_2_end
-wmem >var__symbols_2 &-
-set reg0 >var__symbols_2
-rmem reg0 reg0
-wmem >var_symbol_minus_symbols_2 reg0
-jmp >var_symbol_left_bracket_symbols_3_end
-:var_symbol_left_bracket_symbols_3
-:var_symbol_left_bracket_symbols_3_end
-jmp >var__symbols_3_end
-:var__symbols_3
-0
-:var__symbols_3_end
-wmem >var__symbols_3 &[
-set reg0 >var__symbols_3
-rmem reg0 reg0
-wmem >var_symbol_left_bracket_symbols_3 reg0
-jmp >var_symbol_right_bracket_symbols_4_end
-:var_symbol_right_bracket_symbols_4
-:var_symbol_right_bracket_symbols_4_end
-jmp >var__symbols_4_end
-:var__symbols_4
-0
-:var__symbols_4_end
-wmem >var__symbols_4 &]
-set reg0 >var__symbols_4
-rmem reg0 reg0
-wmem >var_symbol_right_bracket_symbols_4 reg0
-jmp >var_symbol_less_than_symbols_5_end
-:var_symbol_less_than_symbols_5
-:var_symbol_less_than_symbols_5_end
-jmp >var__symbols_5_end
-:var__symbols_5
-0
-:var__symbols_5_end
-wmem >var__symbols_5 &<
-set reg0 >var__symbols_5
-rmem reg0 reg0
-wmem >var_symbol_less_than_symbols_5 reg0
-jmp >var_symbol_greater_than_symbols_6_end
-:var_symbol_greater_than_symbols_6
-:var_symbol_greater_than_symbols_6_end
-jmp >var__symbols_6_end
-:var__symbols_6
-0
-:var__symbols_6_end
-wmem >var__symbols_6 &>
-set reg0 >var__symbols_6
-rmem reg0 reg0
-wmem >var_symbol_greater_than_symbols_6 reg0
-jmp >var_symbol_input_symbols_7_end
-:var_symbol_input_symbols_7
-:var_symbol_input_symbols_7_end
-jmp >var__symbols_7_end
-:var__symbols_7
-0
-:var__symbols_7_end
-wmem >var__symbols_7 &,
-set reg0 >var__symbols_7
-rmem reg0 reg0
-wmem >var_symbol_input_symbols_7 reg0
-jmp >var_symbol_output_symbols_8_end
-:var_symbol_output_symbols_8
-:var_symbol_output_symbols_8_end
-jmp >var__symbols_8_end
-:var__symbols_8
-0
-:var__symbols_8_end
-wmem >var__symbols_8 &.
-set reg0 >var__symbols_8
-rmem reg0 reg0
-wmem >var_symbol_output_symbols_8 reg0
+jmp >var_seed_random_1_end
+:var_seed_random_1
+:var_seed_random_1_end
+set reg0 1220
+wmem >var_seed_random_1 reg0
+jmp >rand_end
+:rand
+rmem reg0 >var_seed_random_1
+set reg1 1103
+set reg2 12345
+add reg1 reg1 reg2
+mult reg0 reg0 reg1
+set reg1 12345
+add reg0 reg0 reg1
+wmem >var_seed_random_1 reg0
+rmem reg0 >var_seed_random_1
+set reg1 1202
+mod reg0 reg0 reg1
+wmem >var_seed_random_1 reg0
+rmem reg0 >var_seed_random_1
+ret
+ret
+:rand_end
+set reg0 >rand
+jmp >rand_init_seed_end
+:rand_init_seed
+jmp >var_rand_seed_random_9_end
+:var_rand_seed_random_9
+:var_rand_seed_random_9_end
+wmem >var_rand_seed_random_9 reg0
+rmem reg0 >var_rand_seed_random_9
+wmem >var_seed_random_1 reg0
+ret
+:rand_init_seed_end
+set reg0 >rand_init_seed
 jmp >str_len_end
 :str_len
 jmp >var_str_stdlib_1_end
@@ -760,691 +707,99 @@ jmp >while__stdlib_172_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >interpret_end
-:interpret
-jmp >var_code_bf_6_end
-:var_code_bf_6
-:var_code_bf_6_end
-wmem >var_code_bf_6 reg0
-jmp >var_stack_pointer_bf_8_end
-:var_stack_pointer_bf_8
-:var_stack_pointer_bf_8_end
-set reg0 800
-wmem >var_stack_pointer_bf_8 reg0
-jmp >var_code_len_bf_9_end
-:var_code_len_bf_9
-:var_code_len_bf_9_end
-rmem reg0 >var_code_bf_6
-call >str_len
-wmem >var_code_len_bf_9 reg0
-jmp >var_i_bf_10_end
-:var_i_bf_10
-:var_i_bf_10_end
-set reg0 0
-wmem >var_i_bf_10 reg0
-:for__bf_10_begin
-rmem reg0 >var_i_bf_10
-rmem reg1 >var_code_len_bf_9
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >for__bf_10_end
-jmp >var_char_bf_12_end
-:var_char_bf_12
-:var_char_bf_12_end
-rmem reg0 >var_code_bf_6
-rmem reg1 >var_i_bf_10
-add reg0 reg0 reg1
-rmem reg0 reg0
-wmem >var_char_bf_12 reg0
-rmem reg0 >var_char_bf_12
-rmem reg1 >var_symbol_plus_symbols_1
-eq reg0 reg0 reg1
-jf reg0 >end__bf_13
-jmp >var_cur_val_bf_15_end
-:var_cur_val_bf_15
-:var_cur_val_bf_15_end
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg0 reg0
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_cur_val_bf_15
-add reg0 reg0 1
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg1 >var_cur_val_bf_15
-wmem reg0 reg1
-:end__bf_13
-rmem reg0 >var_char_bf_12
-rmem reg1 >var_symbol_minus_symbols_2
-eq reg0 reg0 reg1
-jf reg0 >end__bf_19
-jmp >var_cur_val_bf_21_end
-:var_cur_val_bf_21
-:var_cur_val_bf_21_end
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg0 reg0
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_cur_val_bf_15
-set reg1 1
-call >subtract
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg1 >var_cur_val_bf_15
-wmem reg0 reg1
-:end__bf_19
-rmem reg0 >var_i_bf_10
-add reg0 reg0 1
-wmem >var_i_bf_10 reg0
-jmp >for__bf_10_begin
-:for__bf_10_end
-jmp >var_ot_bf_26_end
-:var_ot_bf_26
-:var_ot_bf_26_end
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg0 reg0
-wmem >var_ot_bf_26 reg0
-jmp >var__bf_28_end
-:var__bf_28
-0
-:var__bf_28_end
-wmem >var__bf_28 32
-set reg0 >var__bf_28
-call >println
-ret
-:interpret_end
-set reg0 >interpret
-jmp >compile_end
-:compile
-jmp >var_code_bf_31_end
-:var_code_bf_31
-:var_code_bf_31_end
-wmem >var_code_bf_31 reg0
-jmp >var_code_len_bf_33_end
-:var_code_len_bf_33
-:var_code_len_bf_33_end
-rmem reg0 >var_code_bf_31
-call >str_len
-wmem >var_code_len_bf_33 reg0
-jmp >var_i_bf_34_end
-:var_i_bf_34
-:var_i_bf_34_end
-set reg0 0
-wmem >var_i_bf_34 reg0
-:for__bf_34_begin
-rmem reg0 >var_i_bf_34
-rmem reg1 >var_code_len_bf_33
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >for__bf_34_end
-jmp >var_char_bf_35_end
-:var_char_bf_35
-:var_char_bf_35_end
-rmem reg0 >var_code_bf_31
-rmem reg1 >var_i_bf_34
-add reg0 reg0 reg1
-rmem reg0 reg0
-wmem >var_char_bf_35 reg0
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_plus_symbols_1
-eq reg0 reg0 reg1
-jf reg0 >end__bf_37
-jmp >var__bf_38_end
-:var__bf_38
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&1
-&6
-&3
-&8
-&3
-0
-:var__bf_38_end
-wmem >var__bf_38 &r
-set reg0 >var__bf_38
-call >println
-jmp >var__bf_39_end
-:var__bf_39
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&1
-32
-&r
-&e
-&g
-&0
-0
-:var__bf_39_end
-wmem >var__bf_39 &r
-set reg0 >var__bf_39
-call >println
-jmp >var__bf_40_end
-:var__bf_40
-&d
-&d
-32
-&r
-&e
-&g
-&1
-32
-&1
-0
-:var__bf_40_end
-wmem >var__bf_40 &a
-set reg0 >var__bf_40
-call >println
-jmp >var__bf_41_end
-:var__bf_41
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&r
-&e
-&g
-&1
-0
-:var__bf_41_end
-wmem >var__bf_41 &w
-set reg0 >var__bf_41
-call >println
-:end__bf_37
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_minus_symbols_2
-eq reg0 reg0 reg1
-jf reg0 >end__bf_44
-jmp >var__bf_45_end
-:var__bf_45
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&1
-&6
-&3
-&8
-&3
-0
-:var__bf_45_end
-wmem >var__bf_45 &r
-set reg0 >var__bf_45
-call >println
-jmp >var__bf_46_end
-:var__bf_46
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&1
-32
-&r
-&e
-&g
-&0
-0
-:var__bf_46_end
-wmem >var__bf_46 &r
-set reg0 >var__bf_46
-call >println
-jmp >var__bf_47_end
-:var__bf_47
-&d
-&d
-32
-&r
-&e
-&g
-&1
-32
-&3
-&2
-&7
-&6
-&7
-0
-:var__bf_47_end
-wmem >var__bf_47 &a
-set reg0 >var__bf_47
-call >println
-jmp >var__bf_48_end
-:var__bf_48
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&r
-&e
-&g
-&1
-0
-:var__bf_48_end
-wmem >var__bf_48 &w
-set reg0 >var__bf_48
-call >println
-:end__bf_44
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_left_bracket_symbols_3
-eq reg0 reg0 reg1
-jf reg0 >end__bf_51
-jmp >var__bf_52_end
-:var__bf_52
-&e
-&f
-&t
-32
-&b
-&r
-&a
-&c
-&k
-&e
-&t
-0
-:var__bf_52_end
-wmem >var__bf_52 &l
-set reg0 >var__bf_52
-call >println
-:end__bf_51
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_right_bracket_symbols_4
-eq reg0 reg0 reg1
-jf reg0 >end__bf_55
-jmp >var__bf_56_end
-:var__bf_56
-&i
-&g
-&h
-&t
-32
-&b
-&r
-&a
-&c
-&k
-&e
-&t
-0
-:var__bf_56_end
-wmem >var__bf_56 &r
-set reg0 >var__bf_56
-call >println
-:end__bf_55
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_less_than_symbols_5
-eq reg0 reg0 reg1
-jf reg0 >end__bf_59
-jmp >var__bf_60_end
-:var__bf_60
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&1
-&6
-&3
-&8
-&3
-0
-:var__bf_60_end
-wmem >var__bf_60 &r
-set reg0 >var__bf_60
-call >println
-jmp >var__bf_61_end
-:var__bf_61
-&d
-&d
-32
-&r
-&e
-&g
-&0
-32
-&3
-&2
-&7
-&6
-&7
-0
-:var__bf_61_end
-wmem >var__bf_61 &a
-set reg0 >var__bf_61
-call >println
-jmp >var__bf_62_end
-:var__bf_62
-&m
-&e
-&m
-32
-&1
-&6
-&3
-&8
-&3
-32
-&r
-&e
-&g
-&0
-0
-:var__bf_62_end
-wmem >var__bf_62 &w
-set reg0 >var__bf_62
-call >println
-:end__bf_59
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_greater_than_symbols_6
-eq reg0 reg0 reg1
-jf reg0 >end__bf_65
-jmp >var__bf_66_end
-:var__bf_66
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&1
-&6
-&3
-&8
-&3
-0
-:var__bf_66_end
-wmem >var__bf_66 &r
-set reg0 >var__bf_66
-call >println
-jmp >var__bf_67_end
-:var__bf_67
-&d
-&d
-32
-&r
-&e
-&g
-&0
-32
-&1
-0
-:var__bf_67_end
-wmem >var__bf_67 &a
-set reg0 >var__bf_67
-call >println
-jmp >var__bf_68_end
-:var__bf_68
-&m
-&e
-&m
-32
-&1
-&6
-&3
-&8
-&3
-32
-&r
-&e
-&g
-&0
-0
-:var__bf_68_end
-wmem >var__bf_68 &w
-set reg0 >var__bf_68
-call >println
-:end__bf_65
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_input_symbols_7
-eq reg0 reg0 reg1
-jf reg0 >end__bf_71
-jmp >var__bf_72_end
-:var__bf_72
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&1
-&6
-&3
-&8
-&3
-0
-:var__bf_72_end
-wmem >var__bf_72 &r
-set reg0 >var__bf_72
-call >println
-jmp >var__bf_73_end
-:var__bf_73
+jmp >var_num_hilo_6_end
+:var_num_hilo_6
+:var_num_hilo_6_end
+call >rand
+wmem >var_num_hilo_6 reg0
+jmp >loop_end
+:loop
+jmp >var__hilo_9_end
+:var__hilo_9
 &n
-32
+&t
+&e
 &r
-&e
-&g
-&1
-0
-:var__bf_73_end
-wmem >var__bf_73 &i
-set reg0 >var__bf_73
-call >println
-jmp >var__bf_74_end
-:var__bf_74
-&m
-&e
-&m
 32
-&r
-&e
-&g
-&0
+&a
 32
-&r
-&e
 &g
-&1
-0
-:var__bf_74_end
-wmem >var__bf_74 &w
-set reg0 >var__bf_74
-call >println
-:end__bf_71
-rmem reg0 >var_char_bf_35
-rmem reg1 >var_symbol_output_symbols_8
-eq reg0 reg0 reg1
-jf reg0 >end__bf_77
-jmp >var__bf_78_end
-:var__bf_78
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&0
-32
-&1
-&6
-&3
-&8
-&3
-0
-:var__bf_78_end
-wmem >var__bf_78 &r
-set reg0 >var__bf_78
-call >println
-jmp >var__bf_79_end
-:var__bf_79
-&m
-&e
-&m
-32
-&r
-&e
-&g
-&1
-32
-&r
-&e
-&g
-&0
-0
-:var__bf_79_end
-wmem >var__bf_79 &r
-set reg0 >var__bf_79
-call >println
-jmp >var__bf_80_end
-:var__bf_80
 &u
-&t
-32
-&r
 &e
-&g
-&1
+&s
+&s
+&:
+32
 0
-:var__bf_80_end
-wmem >var__bf_80 &o
-set reg0 >var__bf_80
-call >println
-:end__bf_77
-rmem reg0 >var_i_bf_34
-add reg0 reg0 1
-wmem >var_i_bf_34 reg0
-jmp >for__bf_34_begin
-:for__bf_34_end
-ret
-:compile_end
-set reg0 >compile
-jmp >var__bf_85_end
-:var__bf_85
-&i
-&n
-&i
-&m
-&a
-&l
-32
-&b
-&r
-&a
-&i
-&n
-&f
-&*
-&c
-&k
-32
-&e
-&n
-&v
-&i
-&r
-&o
-&n
-&m
-&e
-&n
-&t
-&.
-0
-:var__bf_85_end
-wmem >var__bf_85 &M
-set reg0 >var__bf_85
-call >println
-jmp >var__bf_86_end
-:var__bf_86
-&y
-&p
-&e
-32
-&c
-&o
-&d
-&e
-32
-&a
-&n
-&d
-32
-&h
-&i
-&t
-32
-&e
-&n
-&t
-&e
-&r
-32
-&t
-&o
-32
-&r
-&u
-&n
-0
-:var__bf_86_end
-wmem >var__bf_86 &T
-set reg0 >var__bf_86
-call >println
-jmp >var__bf_87_end
-:var__bf_87
-0
-:var__bf_87_end
-wmem >var__bf_87 &>
-set reg0 >var__bf_87
+:var__hilo_9_end
+wmem >var__hilo_9 &E
+set reg0 >var__hilo_9
 call >print
-jmp >var_code_bf_88_end
-:var_code_bf_88
-:var_code_bf_88_end
+jmp >var_guess_hilo_11_end
+:var_guess_hilo_11
+:var_guess_hilo_11_end
 call >input
-wmem >var_code_bf_88 reg0
-rmem reg0 >var_code_bf_88
-call >interpret
+call >int
+wmem >var_guess_hilo_11 reg0
+rmem reg0 >var_guess_hilo_11
+rmem reg1 >var_num_hilo_6
+eq reg0 reg0 reg1
+jf reg0 >end__hilo_12
+jmp >var__hilo_14_end
+:var__hilo_14
+&o
+&r
+&r
+&e
+&c
+&t
+&!
+0
+:var__hilo_14_end
+wmem >var__hilo_14 &C
+set reg0 >var__hilo_14
+call >println
+halt
+:end__hilo_12
+rmem reg0 >var_guess_hilo_11
+rmem reg1 >var_num_hilo_6
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+jf reg0 >end__hilo_17
+jmp >var__hilo_19_end
+:var__hilo_19
+&o
+32
+&l
+&o
+&w
+0
+:var__hilo_19_end
+wmem >var__hilo_19 &T
+set reg0 >var__hilo_19
+call >println
+call >loop
+:end__hilo_17
+jmp >var__hilo_22_end
+:var__hilo_22
+&o
+32
+&h
+&i
+&g
+&h
+0
+:var__hilo_22_end
+wmem >var__hilo_22 &T
+set reg0 >var__hilo_22
+call >println
+call >loop
+ret
+:loop_end
+set reg0 >loop
+call >loop
 halt
 
 :subtract

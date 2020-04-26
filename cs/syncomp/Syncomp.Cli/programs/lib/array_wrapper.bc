@@ -20,7 +20,7 @@ function array_length(ptr<array> ptr) : int
 
 function array_new(int length) : ptr<array>
 {
-    int alloc_ptr = alloc_chunk(length);
+    var alloc_ptr = alloc_chunk(length);
     return alloc_ptr as ptr<array>;
 }
 
@@ -42,7 +42,7 @@ function array_set_nth(ptr<array> ptr, int index, int value)
     {
         throw(INDEX_OUT_OF_BOUNDS_MESSAGE);
     }
-    wmem(ptr + index, value);
+    wmem(ptr + index as ptr, value);
 }
 
 

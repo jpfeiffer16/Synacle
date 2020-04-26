@@ -10,9 +10,14 @@ function power(int n, int p) : int
 function log(int n, int p) : int
 {
     var agr = n;
-    for (var i = 0; i < p, ++i)
+    for (var i = 0; i < p; ++i)
     {
         agr = agr * agr;
     }
     return agr;
+}
+
+function random()
+{
+
 }

@@ -46,7 +46,7 @@ function alloc() : ptr {
   return data_index as ptr;
 }
 
-function alloc_chunk(var length) : ptr {
+function alloc_chunk(int length) : ptr {
   ptr pointer = alloc();
   int dest_ptr = pointer + length;
   wmem(dest_ptr as ptr, 32767);

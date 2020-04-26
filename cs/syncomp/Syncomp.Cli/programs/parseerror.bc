@@ -1,19 +1,16 @@
 #include "./lib/stdlib.bc"
 
-var test = () : void =>
+type t_type
 {
-    println("Hello World!");
+    func<void> stuff
+}
+
+var fac = () : t_type => {
+    t_type ret;
+    ret.stuff = () => {
+        println("test");
+    };
+    return ret;
 };
 
-print_number(test as int);
-println(" ");
-
-println("Enter address to call:");
-var addr = int(input());
-print_number(addr);
-
-var funfunction = addr as func<void>;
-funfunction();
-
-var str_num = string(addr);
-println(str_num);
+fac().stuff();
