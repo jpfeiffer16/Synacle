@@ -1,8 +1,16 @@
 #include "./lib/stdlib.bc"
 
+type address
+{
+    string street,
+    int postal_code,
+    int house_number
+}
+
 type person
 {
-    string name
+    string name,
+    ptr<address> home_address
 }
 
 function factory(string name) : ptr<person>

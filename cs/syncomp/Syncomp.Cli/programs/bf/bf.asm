@@ -760,139 +760,233 @@ jmp >while__stdlib_172_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
+jmp >jump_back_end
+:jump_back
+jmp >var_code_bf_5_end
+:var_code_bf_5
+:var_code_bf_5_end
+jmp >var_index_bf_5_end
+:var_index_bf_5
+:var_index_bf_5_end
+wmem >var_code_bf_5 reg0
+wmem >var_index_bf_5 reg1
+jmp >var_nesting_level_bf_7_end
+:var_nesting_level_bf_7
+:var_nesting_level_bf_7_end
+set reg0 1
+wmem >var_nesting_level_bf_7 reg0
+:while__bf_8_begin
+rmem reg0 >var_nesting_level_bf_7
+set reg1 0
+gt reg0 reg0 reg1
+jf reg0 >while__bf_8_end
+rmem reg0 >var_index_bf_5
+set reg1 1
+call >subtract
+wmem >var_index_bf_5 reg0
+jmp >var_char_bf_11_end
+:var_char_bf_11
+:var_char_bf_11_end
+rmem reg0 >var_code_bf_5
+rmem reg1 >var_index_bf_5
+add reg0 reg0 reg1
+rmem reg0 reg0
+wmem >var_char_bf_11 reg0
+rmem reg0 >var_char_bf_11
+rmem reg1 >var_symbol_right_bracket_symbols_4
+eq reg0 reg0 reg1
+jf reg0 >end__bf_12
+rmem reg0 >var_nesting_level_bf_7
+add reg0 reg0 1
+wmem >var_nesting_level_bf_7 reg0
+:end__bf_12
+rmem reg0 >var_char_bf_11
+rmem reg1 >var_symbol_left_bracket_symbols_3
+eq reg0 reg0 reg1
+jf reg0 >end__bf_16
+rmem reg0 >var_nesting_level_bf_7
+set reg1 1
+call >subtract
+wmem >var_nesting_level_bf_7 reg0
+:end__bf_16
+jmp >while__bf_8_begin
+:while__bf_8_end
+rmem reg0 >var_index_bf_5
+ret
+ret
+:jump_back_end
+set reg0 >jump_back
 jmp >interpret_end
 :interpret
-jmp >var_code_bf_6_end
-:var_code_bf_6
-:var_code_bf_6_end
-wmem >var_code_bf_6 reg0
-jmp >var_stack_pointer_bf_8_end
-:var_stack_pointer_bf_8
-:var_stack_pointer_bf_8_end
-set reg0 800
-wmem >var_stack_pointer_bf_8 reg0
-jmp >var_code_len_bf_9_end
-:var_code_len_bf_9
-:var_code_len_bf_9_end
-rmem reg0 >var_code_bf_6
+jmp >var_code_bf_24_end
+:var_code_bf_24
+:var_code_bf_24_end
+wmem >var_code_bf_24 reg0
+jmp >var_stack_pointer_bf_26_end
+:var_stack_pointer_bf_26
+:var_stack_pointer_bf_26_end
+set reg0 4000
+wmem >var_stack_pointer_bf_26 reg0
+jmp >var_code_len_bf_27_end
+:var_code_len_bf_27
+:var_code_len_bf_27_end
+rmem reg0 >var_code_bf_24
 call >str_len
-wmem >var_code_len_bf_9 reg0
-jmp >var_i_bf_10_end
-:var_i_bf_10
-:var_i_bf_10_end
+wmem >var_code_len_bf_27 reg0
+jmp >var_i_bf_29_end
+:var_i_bf_29
+:var_i_bf_29_end
 set reg0 0
-wmem >var_i_bf_10 reg0
-:for__bf_10_begin
-rmem reg0 >var_i_bf_10
-rmem reg1 >var_code_len_bf_9
+wmem >var_i_bf_29 reg0
+:for__bf_29_begin
+rmem reg0 >var_i_bf_29
+rmem reg1 >var_code_len_bf_27
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__bf_10_end
-jmp >var_char_bf_12_end
-:var_char_bf_12
-:var_char_bf_12_end
-rmem reg0 >var_code_bf_6
-rmem reg1 >var_i_bf_10
+jf reg0 >for__bf_29_end
+jmp >var_char_bf_31_end
+:var_char_bf_31
+:var_char_bf_31_end
+rmem reg0 >var_code_bf_24
+rmem reg1 >var_i_bf_29
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_char_bf_12 reg0
-rmem reg0 >var_char_bf_12
+wmem >var_char_bf_31 reg0
+rmem reg0 >var_char_bf_31
 rmem reg1 >var_symbol_plus_symbols_1
 eq reg0 reg0 reg1
-jf reg0 >end__bf_13
-jmp >var_cur_val_bf_15_end
-:var_cur_val_bf_15
-:var_cur_val_bf_15_end
-rmem reg0 >var_stack_pointer_bf_8
+jf reg0 >end__bf_32
+jmp >var_cur_val_bf_34_end
+:var_cur_val_bf_34
+:var_cur_val_bf_34_end
+rmem reg0 >var_stack_pointer_bf_26
 rmem reg0 reg0
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_cur_val_bf_15
+wmem >var_cur_val_bf_34 reg0
+rmem reg0 >var_cur_val_bf_34
 add reg0 reg0 1
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg1 >var_cur_val_bf_15
+wmem >var_cur_val_bf_34 reg0
+rmem reg0 >var_stack_pointer_bf_26
+rmem reg1 >var_cur_val_bf_34
 wmem reg0 reg1
-:end__bf_13
-rmem reg0 >var_char_bf_12
+:end__bf_32
+rmem reg0 >var_char_bf_31
 rmem reg1 >var_symbol_minus_symbols_2
 eq reg0 reg0 reg1
-jf reg0 >end__bf_19
-jmp >var_cur_val_bf_21_end
-:var_cur_val_bf_21
-:var_cur_val_bf_21_end
-rmem reg0 >var_stack_pointer_bf_8
+jf reg0 >end__bf_38
+jmp >var_cur_val_bf_40_end
+:var_cur_val_bf_40
+:var_cur_val_bf_40_end
+rmem reg0 >var_stack_pointer_bf_26
 rmem reg0 reg0
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_cur_val_bf_15
+wmem >var_cur_val_bf_34 reg0
+rmem reg0 >var_cur_val_bf_34
 set reg1 1
 call >subtract
-wmem >var_cur_val_bf_15 reg0
-rmem reg0 >var_stack_pointer_bf_8
-rmem reg1 >var_cur_val_bf_15
+wmem >var_cur_val_bf_34 reg0
+rmem reg0 >var_stack_pointer_bf_26
+rmem reg1 >var_cur_val_bf_34
 wmem reg0 reg1
-:end__bf_19
-rmem reg0 >var_i_bf_10
+:end__bf_38
+rmem reg0 >var_char_bf_31
+rmem reg1 >var_symbol_greater_than_symbols_6
+eq reg0 reg0 reg1
+jf reg0 >end__bf_44
+rmem reg0 >var_stack_pointer_bf_26
 add reg0 reg0 1
-wmem >var_i_bf_10 reg0
-jmp >for__bf_10_begin
-:for__bf_10_end
-jmp >var_ot_bf_26_end
-:var_ot_bf_26
-:var_ot_bf_26_end
-rmem reg0 >var_stack_pointer_bf_8
+wmem >var_stack_pointer_bf_26 reg0
+:end__bf_44
+rmem reg0 >var_char_bf_31
+rmem reg1 >var_symbol_less_than_symbols_5
+eq reg0 reg0 reg1
+jf reg0 >end__bf_48
+rmem reg0 >var_stack_pointer_bf_26
+set reg1 1
+call >subtract
+wmem >var_stack_pointer_bf_26 reg0
+:end__bf_48
+rmem reg0 >var_char_bf_31
+rmem reg1 >var_symbol_input_symbols_7
+eq reg0 reg0 reg1
+jf reg0 >end__bf_52
+rmem reg0 >var_stack_pointer_bf_26
+in reg0
+wmem reg0 reg1
+:end__bf_52
+rmem reg0 >var_char_bf_31
+rmem reg1 >var_symbol_output_symbols_8
+eq reg0 reg0 reg1
+jf reg0 >end__bf_56
+rmem reg0 >var_stack_pointer_bf_26
 rmem reg0 reg0
-wmem >var_ot_bf_26 reg0
-jmp >var__bf_28_end
-:var__bf_28
-0
-:var__bf_28_end
-wmem >var__bf_28 32
-set reg0 >var__bf_28
-call >println
+out reg0
+:end__bf_56
+rmem reg0 >var_char_bf_31
+rmem reg1 >var_symbol_left_bracket_symbols_3
+eq reg0 reg0 reg1
+jf reg0 >end__bf_60
+:end__bf_60
+rmem reg0 >var_char_bf_31
+rmem reg1 >var_symbol_right_bracket_symbols_4
+eq reg0 reg0 reg1
+jf reg0 >end__bf_64
+rmem reg0 >var_stack_pointer_bf_26
+rmem reg0 reg0
+jf reg0 >end__bf_66
+rmem reg0 >var_code_bf_24
+rmem reg1 >var_i_bf_29
+call >jump_back
+wmem >var_i_bf_29 reg0
+:end__bf_66
+:end__bf_64
+rmem reg0 >var_i_bf_29
+add reg0 reg0 1
+wmem >var_i_bf_29 reg0
+jmp >for__bf_29_begin
+:for__bf_29_end
 ret
 :interpret_end
 set reg0 >interpret
 jmp >compile_end
 :compile
-jmp >var_code_bf_31_end
-:var_code_bf_31
-:var_code_bf_31_end
-wmem >var_code_bf_31 reg0
-jmp >var_code_len_bf_33_end
-:var_code_len_bf_33
-:var_code_len_bf_33_end
-rmem reg0 >var_code_bf_31
+jmp >var_code_bf_76_end
+:var_code_bf_76
+:var_code_bf_76_end
+wmem >var_code_bf_76 reg0
+jmp >var_code_len_bf_78_end
+:var_code_len_bf_78
+:var_code_len_bf_78_end
+rmem reg0 >var_code_bf_76
 call >str_len
-wmem >var_code_len_bf_33 reg0
-jmp >var_i_bf_34_end
-:var_i_bf_34
-:var_i_bf_34_end
+wmem >var_code_len_bf_78 reg0
+jmp >var_i_bf_79_end
+:var_i_bf_79
+:var_i_bf_79_end
 set reg0 0
-wmem >var_i_bf_34 reg0
-:for__bf_34_begin
-rmem reg0 >var_i_bf_34
-rmem reg1 >var_code_len_bf_33
+wmem >var_i_bf_79 reg0
+:for__bf_79_begin
+rmem reg0 >var_i_bf_79
+rmem reg1 >var_code_len_bf_78
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__bf_34_end
-jmp >var_char_bf_35_end
-:var_char_bf_35
-:var_char_bf_35_end
-rmem reg0 >var_code_bf_31
-rmem reg1 >var_i_bf_34
+jf reg0 >for__bf_79_end
+jmp >var_char_bf_80_end
+:var_char_bf_80
+:var_char_bf_80_end
+rmem reg0 >var_code_bf_76
+rmem reg1 >var_i_bf_79
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_char_bf_35 reg0
-rmem reg0 >var_char_bf_35
+wmem >var_char_bf_80 reg0
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_plus_symbols_1
 eq reg0 reg0 reg1
-jf reg0 >end__bf_37
-jmp >var__bf_38_end
-:var__bf_38
+jf reg0 >end__bf_82
+jmp >var__bf_83_end
+:var__bf_83
 &m
 &e
 &m
@@ -908,12 +1002,12 @@ jmp >var__bf_38_end
 &8
 &3
 0
-:var__bf_38_end
-wmem >var__bf_38 &r
-set reg0 >var__bf_38
+:var__bf_83_end
+wmem >var__bf_83 &r
+set reg0 >var__bf_83
 call >println
-jmp >var__bf_39_end
-:var__bf_39
+jmp >var__bf_84_end
+:var__bf_84
 &m
 &e
 &m
@@ -928,12 +1022,12 @@ jmp >var__bf_39_end
 &g
 &0
 0
-:var__bf_39_end
-wmem >var__bf_39 &r
-set reg0 >var__bf_39
+:var__bf_84_end
+wmem >var__bf_84 &r
+set reg0 >var__bf_84
 call >println
-jmp >var__bf_40_end
-:var__bf_40
+jmp >var__bf_85_end
+:var__bf_85
 &d
 &d
 32
@@ -944,12 +1038,12 @@ jmp >var__bf_40_end
 32
 &1
 0
-:var__bf_40_end
-wmem >var__bf_40 &a
-set reg0 >var__bf_40
+:var__bf_85_end
+wmem >var__bf_85 &a
+set reg0 >var__bf_85
 call >println
-jmp >var__bf_41_end
-:var__bf_41
+jmp >var__bf_86_end
+:var__bf_86
 &m
 &e
 &m
@@ -964,17 +1058,17 @@ jmp >var__bf_41_end
 &g
 &1
 0
-:var__bf_41_end
-wmem >var__bf_41 &w
-set reg0 >var__bf_41
+:var__bf_86_end
+wmem >var__bf_86 &w
+set reg0 >var__bf_86
 call >println
-:end__bf_37
-rmem reg0 >var_char_bf_35
+:end__bf_82
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_minus_symbols_2
 eq reg0 reg0 reg1
-jf reg0 >end__bf_44
-jmp >var__bf_45_end
-:var__bf_45
+jf reg0 >end__bf_89
+jmp >var__bf_90_end
+:var__bf_90
 &m
 &e
 &m
@@ -990,12 +1084,12 @@ jmp >var__bf_45_end
 &8
 &3
 0
-:var__bf_45_end
-wmem >var__bf_45 &r
-set reg0 >var__bf_45
+:var__bf_90_end
+wmem >var__bf_90 &r
+set reg0 >var__bf_90
 call >println
-jmp >var__bf_46_end
-:var__bf_46
+jmp >var__bf_91_end
+:var__bf_91
 &m
 &e
 &m
@@ -1010,12 +1104,12 @@ jmp >var__bf_46_end
 &g
 &0
 0
-:var__bf_46_end
-wmem >var__bf_46 &r
-set reg0 >var__bf_46
+:var__bf_91_end
+wmem >var__bf_91 &r
+set reg0 >var__bf_91
 call >println
-jmp >var__bf_47_end
-:var__bf_47
+jmp >var__bf_92_end
+:var__bf_92
 &d
 &d
 32
@@ -1030,12 +1124,12 @@ jmp >var__bf_47_end
 &6
 &7
 0
-:var__bf_47_end
-wmem >var__bf_47 &a
-set reg0 >var__bf_47
+:var__bf_92_end
+wmem >var__bf_92 &a
+set reg0 >var__bf_92
 call >println
-jmp >var__bf_48_end
-:var__bf_48
+jmp >var__bf_93_end
+:var__bf_93
 &m
 &e
 &m
@@ -1050,17 +1144,17 @@ jmp >var__bf_48_end
 &g
 &1
 0
-:var__bf_48_end
-wmem >var__bf_48 &w
-set reg0 >var__bf_48
+:var__bf_93_end
+wmem >var__bf_93 &w
+set reg0 >var__bf_93
 call >println
-:end__bf_44
-rmem reg0 >var_char_bf_35
+:end__bf_89
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_left_bracket_symbols_3
 eq reg0 reg0 reg1
-jf reg0 >end__bf_51
-jmp >var__bf_52_end
-:var__bf_52
+jf reg0 >end__bf_96
+jmp >var__bf_97_end
+:var__bf_97
 &e
 &f
 &t
@@ -1073,17 +1167,17 @@ jmp >var__bf_52_end
 &e
 &t
 0
-:var__bf_52_end
-wmem >var__bf_52 &l
-set reg0 >var__bf_52
+:var__bf_97_end
+wmem >var__bf_97 &l
+set reg0 >var__bf_97
 call >println
-:end__bf_51
-rmem reg0 >var_char_bf_35
+:end__bf_96
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_right_bracket_symbols_4
 eq reg0 reg0 reg1
-jf reg0 >end__bf_55
-jmp >var__bf_56_end
-:var__bf_56
+jf reg0 >end__bf_100
+jmp >var__bf_101_end
+:var__bf_101
 &i
 &g
 &h
@@ -1097,17 +1191,17 @@ jmp >var__bf_56_end
 &e
 &t
 0
-:var__bf_56_end
-wmem >var__bf_56 &r
-set reg0 >var__bf_56
+:var__bf_101_end
+wmem >var__bf_101 &r
+set reg0 >var__bf_101
 call >println
-:end__bf_55
-rmem reg0 >var_char_bf_35
+:end__bf_100
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_less_than_symbols_5
 eq reg0 reg0 reg1
-jf reg0 >end__bf_59
-jmp >var__bf_60_end
-:var__bf_60
+jf reg0 >end__bf_104
+jmp >var__bf_105_end
+:var__bf_105
 &m
 &e
 &m
@@ -1123,12 +1217,12 @@ jmp >var__bf_60_end
 &8
 &3
 0
-:var__bf_60_end
-wmem >var__bf_60 &r
-set reg0 >var__bf_60
+:var__bf_105_end
+wmem >var__bf_105 &r
+set reg0 >var__bf_105
 call >println
-jmp >var__bf_61_end
-:var__bf_61
+jmp >var__bf_106_end
+:var__bf_106
 &d
 &d
 32
@@ -1143,12 +1237,12 @@ jmp >var__bf_61_end
 &6
 &7
 0
-:var__bf_61_end
-wmem >var__bf_61 &a
-set reg0 >var__bf_61
+:var__bf_106_end
+wmem >var__bf_106 &a
+set reg0 >var__bf_106
 call >println
-jmp >var__bf_62_end
-:var__bf_62
+jmp >var__bf_107_end
+:var__bf_107
 &m
 &e
 &m
@@ -1164,17 +1258,17 @@ jmp >var__bf_62_end
 &g
 &0
 0
-:var__bf_62_end
-wmem >var__bf_62 &w
-set reg0 >var__bf_62
+:var__bf_107_end
+wmem >var__bf_107 &w
+set reg0 >var__bf_107
 call >println
-:end__bf_59
-rmem reg0 >var_char_bf_35
+:end__bf_104
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_greater_than_symbols_6
 eq reg0 reg0 reg1
-jf reg0 >end__bf_65
-jmp >var__bf_66_end
-:var__bf_66
+jf reg0 >end__bf_110
+jmp >var__bf_111_end
+:var__bf_111
 &m
 &e
 &m
@@ -1190,12 +1284,12 @@ jmp >var__bf_66_end
 &8
 &3
 0
-:var__bf_66_end
-wmem >var__bf_66 &r
-set reg0 >var__bf_66
+:var__bf_111_end
+wmem >var__bf_111 &r
+set reg0 >var__bf_111
 call >println
-jmp >var__bf_67_end
-:var__bf_67
+jmp >var__bf_112_end
+:var__bf_112
 &d
 &d
 32
@@ -1206,12 +1300,12 @@ jmp >var__bf_67_end
 32
 &1
 0
-:var__bf_67_end
-wmem >var__bf_67 &a
-set reg0 >var__bf_67
+:var__bf_112_end
+wmem >var__bf_112 &a
+set reg0 >var__bf_112
 call >println
-jmp >var__bf_68_end
-:var__bf_68
+jmp >var__bf_113_end
+:var__bf_113
 &m
 &e
 &m
@@ -1227,17 +1321,17 @@ jmp >var__bf_68_end
 &g
 &0
 0
-:var__bf_68_end
-wmem >var__bf_68 &w
-set reg0 >var__bf_68
+:var__bf_113_end
+wmem >var__bf_113 &w
+set reg0 >var__bf_113
 call >println
-:end__bf_65
-rmem reg0 >var_char_bf_35
+:end__bf_110
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_input_symbols_7
 eq reg0 reg0 reg1
-jf reg0 >end__bf_71
-jmp >var__bf_72_end
-:var__bf_72
+jf reg0 >end__bf_116
+jmp >var__bf_117_end
+:var__bf_117
 &m
 &e
 &m
@@ -1253,12 +1347,12 @@ jmp >var__bf_72_end
 &8
 &3
 0
-:var__bf_72_end
-wmem >var__bf_72 &r
-set reg0 >var__bf_72
+:var__bf_117_end
+wmem >var__bf_117 &r
+set reg0 >var__bf_117
 call >println
-jmp >var__bf_73_end
-:var__bf_73
+jmp >var__bf_118_end
+:var__bf_118
 &n
 32
 &r
@@ -1266,12 +1360,12 @@ jmp >var__bf_73_end
 &g
 &1
 0
-:var__bf_73_end
-wmem >var__bf_73 &i
-set reg0 >var__bf_73
+:var__bf_118_end
+wmem >var__bf_118 &i
+set reg0 >var__bf_118
 call >println
-jmp >var__bf_74_end
-:var__bf_74
+jmp >var__bf_119_end
+:var__bf_119
 &m
 &e
 &m
@@ -1286,17 +1380,17 @@ jmp >var__bf_74_end
 &g
 &1
 0
-:var__bf_74_end
-wmem >var__bf_74 &w
-set reg0 >var__bf_74
+:var__bf_119_end
+wmem >var__bf_119 &w
+set reg0 >var__bf_119
 call >println
-:end__bf_71
-rmem reg0 >var_char_bf_35
+:end__bf_116
+rmem reg0 >var_char_bf_80
 rmem reg1 >var_symbol_output_symbols_8
 eq reg0 reg0 reg1
-jf reg0 >end__bf_77
-jmp >var__bf_78_end
-:var__bf_78
+jf reg0 >end__bf_122
+jmp >var__bf_123_end
+:var__bf_123
 &m
 &e
 &m
@@ -1312,12 +1406,12 @@ jmp >var__bf_78_end
 &8
 &3
 0
-:var__bf_78_end
-wmem >var__bf_78 &r
-set reg0 >var__bf_78
+:var__bf_123_end
+wmem >var__bf_123 &r
+set reg0 >var__bf_123
 call >println
-jmp >var__bf_79_end
-:var__bf_79
+jmp >var__bf_124_end
+:var__bf_124
 &m
 &e
 &m
@@ -1332,12 +1426,12 @@ jmp >var__bf_79_end
 &g
 &0
 0
-:var__bf_79_end
-wmem >var__bf_79 &r
-set reg0 >var__bf_79
+:var__bf_124_end
+wmem >var__bf_124 &r
+set reg0 >var__bf_124
 call >println
-jmp >var__bf_80_end
-:var__bf_80
+jmp >var__bf_125_end
+:var__bf_125
 &u
 &t
 32
@@ -1346,21 +1440,21 @@ jmp >var__bf_80_end
 &g
 &1
 0
-:var__bf_80_end
-wmem >var__bf_80 &o
-set reg0 >var__bf_80
+:var__bf_125_end
+wmem >var__bf_125 &o
+set reg0 >var__bf_125
 call >println
-:end__bf_77
-rmem reg0 >var_i_bf_34
+:end__bf_122
+rmem reg0 >var_i_bf_79
 add reg0 reg0 1
-wmem >var_i_bf_34 reg0
-jmp >for__bf_34_begin
-:for__bf_34_end
+wmem >var_i_bf_79 reg0
+jmp >for__bf_79_begin
+:for__bf_79_end
 ret
 :compile_end
 set reg0 >compile
-jmp >var__bf_85_end
-:var__bf_85
+jmp >var__bf_130_end
+:var__bf_130
 &i
 &n
 &i
@@ -1391,12 +1485,12 @@ jmp >var__bf_85_end
 &t
 &.
 0
-:var__bf_85_end
-wmem >var__bf_85 &M
-set reg0 >var__bf_85
+:var__bf_130_end
+wmem >var__bf_130 &M
+set reg0 >var__bf_130
 call >println
-jmp >var__bf_86_end
-:var__bf_86
+jmp >var__bf_131_end
+:var__bf_131
 &y
 &p
 &e
@@ -1427,23 +1521,23 @@ jmp >var__bf_86_end
 &u
 &n
 0
-:var__bf_86_end
-wmem >var__bf_86 &T
-set reg0 >var__bf_86
+:var__bf_131_end
+wmem >var__bf_131 &T
+set reg0 >var__bf_131
 call >println
-jmp >var__bf_87_end
-:var__bf_87
+jmp >var__bf_132_end
+:var__bf_132
 0
-:var__bf_87_end
-wmem >var__bf_87 &>
-set reg0 >var__bf_87
+:var__bf_132_end
+wmem >var__bf_132 &$
+set reg0 >var__bf_132
 call >print
-jmp >var_code_bf_88_end
-:var_code_bf_88
-:var_code_bf_88_end
+jmp >var_code_bf_133_end
+:var_code_bf_133
+:var_code_bf_133_end
 call >input
-wmem >var_code_bf_88 reg0
-rmem reg0 >var_code_bf_88
+wmem >var_code_bf_133 reg0
+rmem reg0 >var_code_bf_133
 call >interpret
 halt
 

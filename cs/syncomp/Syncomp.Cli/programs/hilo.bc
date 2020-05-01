@@ -19,6 +19,7 @@ function loop() {
   }
   if (guess < num)
   {
+    println(123);
       println("To low");
       loop();
   }

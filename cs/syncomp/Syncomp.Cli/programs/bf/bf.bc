@@ -2,11 +2,30 @@
 #include "../lib/stdlib.bc"
 #include "symbols.bc"
 
+function jump_back(string code, int index) : int
+{
+    var nesting_level = 1;
+    while (nesting_level > 0)
+    {
+        --index;
+        var char = ~(code + index);
+        if (char == symbol_right_bracket)
+        {
+            ++nesting_level
+        }
+        if (char == symbol_left_bracket)
+        {
+            --nesting_level;
+        }
+    }
+    return index;
+}
 
 function interpret(string code)
 {
-    int stack_pointer = 800;
+    var stack_pointer = 4000;
     var code_len = str_len(code);
+    // var last_seen_left_bracket = 0;
     for (var i = 0; i < code_len; ++i)
     {
         var char = ~(code + i);
@@ -22,10 +41,36 @@ function interpret(string code)
             --cur_val;
             wmem(stack_pointer as ptr, cur_val);
         }
+        if (char == symbol_greater_than)
+        {
+            ++stack_pointer;
+        }
+        if (char == symbol_less_than)
+        {
+            --stack_pointer;
+        }
+        if (char == symbol_input)
+        {
+            wmem(stack_pointer as ptr, in());
+        }
+        if (char == symbol_output)
+        {
+            out(~stack_pointer as int);
+        }
+        if (char == symbol_left_bracket)
+        {
+            // last_seen_left_bracket = i;
+        }
+        if (char == symbol_right_bracket)
+        {
+            if (~stack_pointer)
+            {
+                i = jump_back(code, i);
+            }
+        }
     }
-    var ot = ~stack_pointer
-    print_number(ot as int);
-    println(" ");
+    // print_number(~stack_pointer as int);
+    // println(" ");
 }
 
 function compile(string code)
@@ -84,7 +129,7 @@ function compile(string code)
 
 println("Minimal brainf*ck environment.");
 println("Type code and hit enter to run");
-print(">");
+print("$");
 var code = input();
 interpret(code);
 
