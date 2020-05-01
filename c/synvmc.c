@@ -69,7 +69,7 @@ void set_options(int argc, char **argv) {
     if (!strlen(bin_file_path)) {
         fprintf(stderr, "Error: binary path required. Pass it with -b <binary path>\n");
         // We have no resources to clean up here since we haven't allocated anything
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -87,6 +87,7 @@ int main(int argc, char **argv) {
         run(&vm_state);
         cleanup_and_exit(EXIT_SUCCESS);
     } else {
-        printf("Error opening file");
+        fprintf(stderr, "Error opening file");
+        exit(EXIT_FAILURE);
     }
 }
