@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncomp.LangServer", "Synco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncomp.StaticWeb", "Syncomp.StaticWeb\Syncomp.StaticWeb.csproj", "{F7BFCEF4-4487-447B-B1E9-548A99288047}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncomp.Decompiler", "Syncomp.Decompiler\Syncomp.Decompiler.csproj", "{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,5 +102,17 @@ Global
 		{F7BFCEF4-4487-447B-B1E9-548A99288047}.Release|x64.Build.0 = Release|Any CPU
 		{F7BFCEF4-4487-447B-B1E9-548A99288047}.Release|x86.ActiveCfg = Release|Any CPU
 		{F7BFCEF4-4487-447B-B1E9-548A99288047}.Release|x86.Build.0 = Release|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Debug|x64.Build.0 = Debug|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Debug|x86.Build.0 = Debug|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Release|x64.ActiveCfg = Release|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Release|x64.Build.0 = Release|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Release|x86.ActiveCfg = Release|Any CPU
+		{33DFD958-5CC9-4CD9-B7E1-DB99EC58108C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
