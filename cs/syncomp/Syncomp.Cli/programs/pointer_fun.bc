@@ -1,0 +1,17 @@
+// Program to mess around with the bc langserver
+#include "./lib/stdlib.bc"
+
+// Declare a function
+var pointer_func = function()
+{
+    println("Made it!");
+};
+
+print("Memory address of pointer_func: ");
+print_number(pointer_func as int);
+println(" ");
+
+println("Enter memory address to call as func<void>: ");
+
+var func_ptr = int(input()) as func<void>;
+func_ptr();

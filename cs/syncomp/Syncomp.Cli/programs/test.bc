@@ -12,13 +12,13 @@ for (var i = 0; i < 10; ++i) {
 //print_number(element);
 
 
-var new_array = array_map(array, function(var value) {
+var new_array = array_map(array, function(int value) : int {
     ++value;
     return value;
 });
 
-var foreach_callback = function(var elem_ptr) {
-    print_number(~elem_ptr);
+var foreach_callback = function(ptr elem_ptr, int index) {
+    print_number(~elem_ptr as int);
     println(" ");
 };
 

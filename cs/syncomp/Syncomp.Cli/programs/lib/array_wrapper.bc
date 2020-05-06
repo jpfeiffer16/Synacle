@@ -46,16 +46,16 @@ function array_set_nth(ptr<array> ptr, int index, int value)
 }
 
 
-function array_foreach(ptr<array> ptr, func<int, int, void> cb)
+function array_foreach(ptr<array> ptr, func<ptr, int, void> cb)
 {
     int length = array_length(ptr);
     for (int i = 0; i < length; ++i)
     {
-        cb(ptr + i, i);
+        cb(ptr + i as ptr, i);
     }
 }
 
-function array_map(ptr<array> ptr, func<int, int> cb)
+function array_map(ptr<array> ptr, func<int, int> cb) : ptr<array>
 {
     int length = array_length(ptr);
     ptr<array> new_array = alloc_chunk(length) as ptr<array>;

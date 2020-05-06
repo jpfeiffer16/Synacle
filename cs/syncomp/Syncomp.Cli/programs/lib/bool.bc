@@ -1,0 +1,5 @@
+// Basic bool types
+
+type bool {}
+bool true = 1 as bool;
+bool false = 0 as bool;
