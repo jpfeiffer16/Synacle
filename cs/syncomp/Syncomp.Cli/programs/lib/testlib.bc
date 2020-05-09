@@ -26,15 +26,16 @@ type assert_type
     func<void, bool> less_than
 }
 
-function equal_to(void a, void b) : int
-{
-    print_number(a as int);
-    print_number(b as int);
-    return a == b;
-}
 
 function assert_type_factory(void left) : ptr<assert_type>
 {
+    var equal_to = (void right) : bool =>
+    {
+        // print_number(left as int);
+        // print_number(right as int);
+        var result = left == right;
+        return result as bool;
+    };
     ptr<assert_type> &a_type;
     a_type->left = left;
     a_type->equal_to = equal_to;
@@ -49,4 +50,33 @@ function is(void left) : ptr<assert_type>
 // TODO: Test
 var a = 1;
 var b = 1;
-is(a)->equal_to(b);
+// is(a)->equal_to(b);
+var temp = is(a);
+var is_equal = temp->equal_to(b);
+print_number(is_equal as int);
+println(" ");
+
+a = 1;
+b = 2;
+// is(a)->equal_to(b);
+temp = is(a);
+is_equal = temp->equal_to(b);
+print_number(is_equal as int);
+println(" ");
+
+a = 3;
+b = 3;
+// is(a)->equal_to(b);
+temp = is(a);
+is_equal = temp->equal_to(b);
+print_number(is_equal as int);
+println(" ");
+
+type test_type { };
+
+ptr<test_type> &t_a;
+ptr<test_type> &t_b;
+temp = is(t_a);
+var t_equal = is(t_a)->equal_to(t_b);
+print_number(t_equal as int);
+println(" ");

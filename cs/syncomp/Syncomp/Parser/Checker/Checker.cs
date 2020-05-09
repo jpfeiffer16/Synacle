@@ -471,7 +471,7 @@ namespace syncomp
                 }
             }
             #endregion
-            #region "LangTYpe"
+            #region "LangType"
             if (node is LangType ltNode)
             {
                 if (!(ltNode.Body is null) && ltNode.Body.Count() > 0)
@@ -502,6 +502,19 @@ namespace syncomp
                     diagnostics.AddRange(Check(returnNode.Parameter, ctx));
                     returnNode.NodeType = returnNode.Parameter.NodeType;
                 }
+            }
+            #endregion
+            #region "As"
+            if (node is As asNode)
+            {
+                diagnostics.AddRange(Check(asNode.From, ctx));
+            }
+            #endregion
+            #region "Equal"
+            if (node is Equal equalNode)
+            {
+                diagnostics.AddRange(Check(equalNode.Left, ctx));
+                diagnostics.AddRange(Check(equalNode.Right, ctx));
             }
             #endregion
             return diagnostics;
