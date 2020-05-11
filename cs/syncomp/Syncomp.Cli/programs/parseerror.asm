@@ -672,15 +672,48 @@ jmp >while__stdlib_172_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >var_fac_parseerror_8_end
-:var_fac_parseerror_8
-:var_fac_parseerror_8_end
-jmp >function__parseerror_8_end
-:function__parseerror_8
+jmp >var_fac_parseerror_13_end
+:var_fac_parseerror_13
+:var_fac_parseerror_13_end
+jmp >function__parseerror_13_end
+:function__parseerror_13
+jmp >var_ret_backing_parseerror_14_end
+:var_ret_backing_parseerror_14
+:var_ret_backing_parseerror_14_end
+jmp >var_ret_parseerror_14_end
+:var_ret_parseerror_14
+:var_ret_parseerror_14_end
+wmem >var_ret_parseerror_14 >var_ret_backing_parseerror_14
+jmp >function__parseerror_15_end
+:function__parseerror_15
+jmp >var__parseerror_16_end
+:var__parseerror_16
+&e
+&s
+&t
+0
+:var__parseerror_16_end
+wmem >var__parseerror_16 &t
+set reg0 >var__parseerror_16
+call >println
 ret
-:function__parseerror_8_end
-set reg0 >function__parseerror_8
-wmem >var_fac_parseerror_8 reg0
+:function__parseerror_15_end
+set reg0 >function__parseerror_15
+rmem reg7 >var_ret_parseerror_14
+add reg7 reg7 1
+wmem reg7 reg0
+rmem reg0 >var_ret_parseerror_14
+ret
+ret
+:function__parseerror_13_end
+set reg0 >function__parseerror_13
+wmem >var_fac_parseerror_13 reg0
+rmem reg7 >var_fac_parseerror_13
+call reg7
+add reg0 reg0 1
+rmem reg0 reg0
+set reg7 reg0
+call reg7
 halt
 
 :subtract

@@ -5,12 +5,17 @@ type t_type
     func<void> stuff
 }
 
-var fac = () : t_type => {
-    t_type ret;
-    ret.stuff = () => {
+// ptr<t_type> &t;
+// t->stuff = () => {};
+// breakpoint;
+// t->stuff();
+
+var fac = () : ptr<t_type> => {
+    ptr<t_type> &ret;
+    ret->stuff = () => {
         println("test");
     };
     return ret;
 };
 
-fac().stuff();
+fac()->stuff();

@@ -1,22 +1,14 @@
 #include "./stdlib.bc"
 #include "./bool.bc"
 
-// function str_is_eq(var str_actual) {
-//   var curry = function(var str_expected) {
-//     if (!str_equal(str_expected, str_actual)) {
-//       println("Not Equal");
-//       // throw("stuff");
-//     }
-//     println("Getting here");
-//   }
-//   return curry;
-// }
-
-// function assert(void expected, func<void, void> cb) {
-//   println("assert");
-//   print_number(cb as int);
-//   cb(expected);
-// }
+function assert(void fact, string test_name) {
+    if (!(fact == 1))
+    {
+        print(test_name);
+        println(" : Assert failed");
+    }
+    return true;
+}
 
 type assert_type
 {
@@ -29,16 +21,13 @@ type assert_type
 
 function assert_type_factory(void left) : ptr<assert_type>
 {
-    var equal_to = (void right) : bool =>
+    ptr<assert_type> &a_type;
+    a_type->left = left;
+    a_type->equal_to = (void right) : bool =>
     {
-        // print_number(left as int);
-        // print_number(right as int);
         var result = left == right;
         return result as bool;
     };
-    ptr<assert_type> &a_type;
-    a_type->left = left;
-    a_type->equal_to = equal_to;
     return a_type;
 }
 
@@ -50,33 +39,4 @@ function is(void left) : ptr<assert_type>
 // TODO: Test
 var a = 1;
 var b = 1;
-// is(a)->equal_to(b);
-var temp = is(a);
-var is_equal = temp->equal_to(b);
-print_number(is_equal as int);
-println(" ");
-
-a = 1;
-b = 2;
-// is(a)->equal_to(b);
-temp = is(a);
-is_equal = temp->equal_to(b);
-print_number(is_equal as int);
-println(" ");
-
-a = 3;
-b = 3;
-// is(a)->equal_to(b);
-temp = is(a);
-is_equal = temp->equal_to(b);
-print_number(is_equal as int);
-println(" ");
-
-type test_type { };
-
-ptr<test_type> &t_a;
-ptr<test_type> &t_b;
-temp = is(t_a);
-var t_equal = is(t_a)->equal_to(t_b);
-print_number(t_equal as int);
-println(" ");
+assert(is(a)->equal_to(b) as int, "a is b"));
