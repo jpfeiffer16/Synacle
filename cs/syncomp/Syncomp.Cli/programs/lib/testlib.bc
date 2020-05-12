@@ -1,6 +1,33 @@
 #include "./stdlib.bc"
 #include "./bool.bc"
 
+string current_category;
+string current_test;
+func<void> current_before_each = () => {};
+func<void> current_after_each = () => {};
+
+function category(string name, func<void> cat_func)
+{
+    current_category = name;
+    cat_func();
+}
+
+function before_each(func<void> before_each_func)
+{
+    current_before_each = before_each_func;
+}
+
+function after_each(func<void> after_each)
+{
+    current_after_each = current_after_each;
+}
+
+function test(string name, func<void> test_func)
+{
+    current_test = name;
+    test_func();
+}
+
 function assert(void fact, string test_name) {
     if (!(fact == 1))
     {

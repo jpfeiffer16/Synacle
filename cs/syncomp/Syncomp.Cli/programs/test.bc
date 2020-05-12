@@ -1,27 +1,30 @@
-#include "lib/stdlib.bc"
-#include "lib/array_wrapper.bc"
-#include "lib/error.bc"
+#include "./lib/testlib.bc"
 
-var array = array_new(10);
-for (var i = 0; i < 10; ++i) {
-    var value = i + 1;
-    array_set_nth(array, i, value);
+var global_state = 0;
+
+function test_function()
+{
+    global_state = 123;
 }
 
-//var element = array_get_nth(array, 3);
-//print_number(element);
+function free_test()
+{
+    global_state = 0;
+}
 
+category("global_state tests", () => {
+    before_each(() => test_function());
 
-var new_array = array_map(array, function(int value) : int {
-    ++value;
-    return value;
+    test("test_function sets global_state", () => {
+        test_function();
+        assert(is(global_state).equal_to(123));
+    });
+
+    test("test_function sets global_state", () => {
+        test_function();
+        assert(is(global_state).equal_to(123));
+    });
+
+    after_each(() => free_test());
 });
 
-var foreach_callback = function(ptr elem_ptr, int index) {
-    print_number(~elem_ptr as int);
-    println(" ");
-};
-
-array_foreach(new_array, foreach_callback);
-
-breakpoint;
