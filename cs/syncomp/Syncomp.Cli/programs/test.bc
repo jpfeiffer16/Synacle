@@ -1,40 +1,29 @@
-#include "./lib/testlib.bc"
 
-var global_state = 0;
-
-function test_function()
+function category(string name, func<void> cat_func)
 {
-    global_state = 123;
+    out(~"C" as int);
+    cat_func();
 }
 
-function free_test()
+function test(string name, func<void> test_func)
 {
-    global_state = 0;
+    out(~"T" as int);
+    test_func();
 }
 
-category("global_state tests", () => {
-    before_each(() => test_function());
+var stuff = function()
+{
+    out(~"A" as int);
+    // assert(is(global_state)->equal_to(123));
+};
+stuff;
+breakpoint;
 
-    test("test_function sets global_state", () => {
-        println("test");
-        assert(is(global_state)->equal_to(123));
-    });
-
-    test("test_function sets global_state", () => {
-        free_test();
-        assert(is(global_state)->equal_to(123));
-    });
-
-    after_each(() => free_test());
+category("c", function () {
+    stuff;
+    breakpoint;
+    test("t", stuff);
+    // test("t", () => {
+    //     out(~"v" as int);
+    // });
 });
-
-// function test(string name, func<void> test_func)
-// {
-// }
-// 
-// test("Test", () => {
-//     test("test1", () => {
-// 
-//     });
-// });
-// 

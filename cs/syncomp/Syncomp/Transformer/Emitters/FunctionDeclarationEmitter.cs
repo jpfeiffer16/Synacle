@@ -23,7 +23,10 @@ namespace syncomp
                 var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
                 lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
             }
+            var previousRegisterLevel = ctx.RegisterLevel;
+            ctx.RegisterLevel = 0;
             lines.AddRange(new Transformer(fcNode.Expression, ctx).Transform());
+            ctx.RegisterLevel = previousRegisterLevel;
             lines.Add("ret");
             lines.Add($":{memoryAddress}_end");
             //Manually add variable
