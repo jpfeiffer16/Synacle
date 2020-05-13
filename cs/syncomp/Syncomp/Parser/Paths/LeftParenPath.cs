@@ -36,7 +36,7 @@ namespace syncomp
                 }
                 else
                 {
-                    ++i;
+                    i = GetNextNonWhitespace(i + 1, tokens);
                 }
 
                 // i = nextClose + 3;
@@ -53,6 +53,7 @@ namespace syncomp
                     );
 
                     expression = ParseTokens(tokens.GetRange(i, nextClosingCurly - i + 1), ctx);
+                    i = nextClosingCurly + 1;
                 }
                 //Expression bodied method
                 else

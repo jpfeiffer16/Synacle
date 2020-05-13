@@ -8,6 +8,7 @@ func<void> current_after_each = () => {};
 
 function category(string name, func<void> cat_func)
 {
+    println("category");
     current_category = name;
     cat_func();
 }
@@ -24,16 +25,17 @@ function after_each(func<void> after_each)
 
 function test(string name, func<void> test_func)
 {
+    println("test");
     current_test = name;
     test_func();
 }
 
-function assert(void fact, string test_name) {
+function assert(void fact) {
     if (!(fact == 1))
     {
-        print(test_name);
-        println(" : Assert failed");
+        println("Assert failed");
     }
+    println("assert");
     return true;
 }
 
@@ -62,8 +64,3 @@ function is(void left) : ptr<assert_type>
 {
     return assert_type_factory(left);
 }
-
-// TODO: Test
-var a = 1;
-var b = 1;
-assert(is(a)->equal_to(b) as int, "a is b"));

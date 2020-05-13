@@ -16,15 +16,25 @@ category("global_state tests", () => {
     before_each(() => test_function());
 
     test("test_function sets global_state", () => {
-        test_function();
-        assert(is(global_state).equal_to(123));
+        println("test");
+        assert(is(global_state)->equal_to(123));
     });
 
     test("test_function sets global_state", () => {
-        test_function();
-        assert(is(global_state).equal_to(123));
+        free_test();
+        assert(is(global_state)->equal_to(123));
     });
 
     after_each(() => free_test());
 });
 
+// function test(string name, func<void> test_func)
+// {
+// }
+// 
+// test("Test", () => {
+//     test("test1", () => {
+// 
+//     });
+// });
+// 
