@@ -8,7 +8,6 @@ func<void> current_after_each = () => {};
 
 function category(string name, func<void> cat_func)
 {
-    println("category");
     current_category = name;
     cat_func();
 }
@@ -25,17 +24,18 @@ function after_each(func<void> after_each)
 
 function test(string name, func<void> test_func)
 {
-    println("test");
     current_test = name;
     test_func();
 }
 
 function assert(void fact) {
+    print(str_cat(current_test, " : "));
     if (!(fact == 1))
     {
-        println("Assert failed");
+        println("FAILED");
+        return false;
     }
-    println("assert");
+    println("PASSED");
     return true;
 }
 
