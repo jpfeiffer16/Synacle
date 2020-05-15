@@ -682,144 +682,46 @@ jmp >while__stdlib_172_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >var_current_category_testlib_4_end
-:var_current_category_testlib_4
-:var_current_category_testlib_4_end
-jmp >var_current_test_testlib_5_end
-:var_current_test_testlib_5
-:var_current_test_testlib_5_end
-jmp >var_current_before_each_testlib_6_end
-:var_current_before_each_testlib_6
-:var_current_before_each_testlib_6_end
-jmp >function__testlib_6_end
-:function__testlib_6
-ret
-:function__testlib_6_end
-set reg0 >function__testlib_6
-wmem >var_current_before_each_testlib_6 reg0
-jmp >var_current_after_each_testlib_7_end
-:var_current_after_each_testlib_7
-:var_current_after_each_testlib_7_end
-jmp >function__testlib_7_end
-:function__testlib_7
-ret
-:function__testlib_7_end
-set reg0 >function__testlib_7
-wmem >var_current_after_each_testlib_7 reg0
-jmp >category_end
-:category
-jmp >var_name_testlib_9_end
-:var_name_testlib_9
-:var_name_testlib_9_end
-jmp >var_cat_func_testlib_9_end
-:var_cat_func_testlib_9
-:var_cat_func_testlib_9_end
-wmem >var_name_testlib_9 reg0
-wmem >var_cat_func_testlib_9 reg1
-rmem reg0 >var_name_testlib_9
-call >println
-rmem reg0 >var_name_testlib_9
-wmem >var_current_category_testlib_4 reg0
-rmem reg7 >var_cat_func_testlib_9
-call reg7
-ret
-:category_end
-set reg0 >category
-jmp >before_each_end
-:before_each
-jmp >var_before_each_func_testlib_16_end
-:var_before_each_func_testlib_16
-:var_before_each_func_testlib_16_end
-wmem >var_before_each_func_testlib_16 reg0
-rmem reg0 >var_before_each_func_testlib_16
-wmem >var_current_before_each_testlib_6 reg0
-ret
-:before_each_end
-set reg0 >before_each
-jmp >after_each_end
-:after_each
-jmp >var_after_each_testlib_21_end
-:var_after_each_testlib_21
-:var_after_each_testlib_21_end
-wmem >var_after_each_testlib_21 reg0
-rmem reg0 >var_current_after_each_testlib_7
-wmem >var_current_after_each_testlib_7 reg0
-ret
-:after_each_end
-set reg0 >after_each
-jmp >test_end
-:test
-jmp >var_name_testlib_26_end
-:var_name_testlib_26
-:var_name_testlib_26_end
-jmp >var_test_func_testlib_26_end
-:var_test_func_testlib_26
-:var_test_func_testlib_26_end
-wmem >var_name_testlib_26 reg0
-wmem >var_test_func_testlib_26 reg1
-rmem reg0 >var_name_testlib_26
-wmem >var_current_test_testlib_5 reg0
-rmem reg7 >var_test_func_testlib_26
-call reg7
-ret
-:test_end
-set reg0 >test
 jmp >assert_end
 :assert
-jmp >var_fact_testlib_32_end
-:var_fact_testlib_32
-:var_fact_testlib_32_end
-wmem >var_fact_testlib_32 reg0
-jmp >var__testlib_33_end
-:var__testlib_33
-0
-:var__testlib_33_end
-wmem >var__testlib_33 9
-set reg0 >var__testlib_33
-call >print
-rmem reg0 >var_current_test_testlib_5
-jmp >var__testlib_34_end
-:var__testlib_34
-&:
-32
-0
-:var__testlib_34_end
-wmem >var__testlib_34 32
-set reg1 >var__testlib_34
-call >str_cat
-call >print
-rmem reg0 >var_fact_testlib_32
+jmp >var_fact_testlib_4_end
+:var_fact_testlib_4
+:var_fact_testlib_4_end
+jmp >var_test_name_testlib_4_end
+:var_test_name_testlib_4
+:var_test_name_testlib_4_end
+wmem >var_fact_testlib_4 reg0
+wmem >var_test_name_testlib_4 reg1
+rmem reg0 >var_fact_testlib_4
 set reg1 1
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end__testlib_35
-jmp >var__testlib_37_end
-:var__testlib_37
+jf reg0 >end__testlib_5
+rmem reg0 >var_test_name_testlib_4
+call >print
+jmp >var__testlib_8_end
+:var__testlib_8
+&:
+32
 &A
-&I
-&L
-&E
-&D
+&s
+&s
+&e
+&r
+&t
+32
+&f
+&a
+&i
+&l
+&e
+&d
 0
-:var__testlib_37_end
-wmem >var__testlib_37 &F
-set reg0 >var__testlib_37
+:var__testlib_8_end
+wmem >var__testlib_8 32
+set reg0 >var__testlib_8
 call >println
-rmem reg0 >var_false_bool_5
-ret
-:end__testlib_35
-jmp >var__testlib_40_end
-:var__testlib_40
-&A
-&S
-&S
-&E
-&D
-0
-:var__testlib_40_end
-wmem >var__testlib_40 &P
-set reg0 >var__testlib_40
-call >println
+:end__testlib_5
 rmem reg0 >var_true_bool_4
 ret
 ret
@@ -827,149 +729,93 @@ ret
 set reg0 >assert
 jmp >assert_type_factory_end
 :assert_type_factory
-jmp >var_left_testlib_53_end
-:var_left_testlib_53
-:var_left_testlib_53_end
-wmem >var_left_testlib_53 reg0
-jmp >var_a_type_backing_testlib_55_end
-:var_a_type_backing_testlib_55
-:var_a_type_backing_testlib_55_end
-jmp >var_a_type_testlib_55_end
-:var_a_type_testlib_55
-:var_a_type_testlib_55_end
-wmem >var_a_type_testlib_55 >var_a_type_backing_testlib_55
-rmem reg0 >var_left_testlib_53
-rmem reg7 >var_a_type_testlib_55
+jmp >var_left_testlib_22_end
+:var_left_testlib_22
+:var_left_testlib_22_end
+wmem >var_left_testlib_22 reg0
+jmp >var_a_type_backing_testlib_24_end
+:var_a_type_backing_testlib_24
+:var_a_type_backing_testlib_24_end
+jmp >var_a_type_testlib_24_end
+:var_a_type_testlib_24
+:var_a_type_testlib_24_end
+wmem >var_a_type_testlib_24 >var_a_type_backing_testlib_24
+rmem reg0 >var_left_testlib_22
+rmem reg7 >var_a_type_testlib_24
 add reg7 reg7 1
 wmem reg7 reg0
-jmp >function__testlib_57_end
-:function__testlib_57
-jmp >var_right_testlib_57_end
-:var_right_testlib_57
-:var_right_testlib_57_end
-wmem >var_right_testlib_57 reg0
-jmp >var_result_testlib_59_end
-:var_result_testlib_59
-:var_result_testlib_59_end
-rmem reg0 >var_left_testlib_53
-rmem reg1 >var_right_testlib_57
+jmp >function__testlib_26_end
+:function__testlib_26
+jmp >var_right_testlib_26_end
+:var_right_testlib_26
+:var_right_testlib_26_end
+wmem >var_right_testlib_26 reg0
+jmp >var_result_testlib_28_end
+:var_result_testlib_28
+:var_result_testlib_28_end
+rmem reg0 >var_left_testlib_22
+rmem reg1 >var_right_testlib_26
 eq reg0 reg0 reg1
-wmem >var_result_testlib_59 reg0
-rmem reg0 >var_result_testlib_59
+wmem >var_result_testlib_28 reg0
+rmem reg0 >var_result_testlib_28
 ret
 ret
-:function__testlib_57_end
-set reg0 >function__testlib_57
-rmem reg7 >var_a_type_testlib_55
+:function__testlib_26_end
+set reg0 >function__testlib_26
+rmem reg7 >var_a_type_testlib_24
 add reg7 reg7 2
 wmem reg7 reg0
-rmem reg0 >var_a_type_testlib_55
+rmem reg0 >var_a_type_testlib_24
 ret
 ret
 :assert_type_factory_end
 set reg0 >assert_type_factory
 jmp >is_end
 :is
-jmp >var_left_testlib_65_end
-:var_left_testlib_65
-:var_left_testlib_65_end
-wmem >var_left_testlib_65 reg0
-rmem reg0 >var_left_testlib_65
+jmp >var_left_testlib_34_end
+:var_left_testlib_34
+:var_left_testlib_34_end
+wmem >var_left_testlib_34 reg0
+rmem reg0 >var_left_testlib_34
 call >assert_type_factory
 ret
 ret
 :is_end
 set reg0 >is
-jmp >var_global_state_test_3_end
-:var_global_state_test_3
-:var_global_state_test_3_end
-set reg0 0
-wmem >var_global_state_test_3 reg0
-jmp >set_global_state_end
-:set_global_state
-set reg0 123
-wmem >var_global_state_test_3 reg0
-ret
-:set_global_state_end
-set reg0 >set_global_state
-jmp >var__test_10_end
-:var__test_10
-&l
-&o
-&b
-&a
-&l
-&_
-&s
-&t
-&a
-&t
-&e
-32
-&t
-&e
-&s
-&t
-&s
-0
-:var__test_10_end
-wmem >var__test_10 &g
-set reg0 >var__test_10
-jmp >function__test_10_end
-:function__test_10
-jmp >var__test_11_end
-:var__test_11
-&l
-&o
-&b
-&a
-&l
-&_
-&s
-&t
-&a
-&t
-&e
+jmp >var_a_testlib_40_end
+:var_a_testlib_40
+:var_a_testlib_40_end
+set reg0 1
+wmem >var_a_testlib_40 reg0
+jmp >var_b_testlib_41_end
+:var_b_testlib_41
+:var_b_testlib_41_end
+set reg0 2
+wmem >var_b_testlib_41 reg0
+jmp >var_temp_testlib_42_end
+:var_temp_testlib_42
+:var_temp_testlib_42_end
+rmem reg0 >var_a_testlib_40
+call >is
+wmem >var_temp_testlib_42 reg0
+rmem reg0 >var_temp_testlib_42
+add reg0 reg0 2
+rmem reg0 reg0
+set reg7 reg0
+rmem reg0 >var_b_testlib_41
+call reg7
+jmp >var__testlib_43_end
+:var__testlib_43
 32
 &i
 &s
 32
-&s
-&e
-&t
-32
-&c
-&o
-&r
-&r
-&e
-&c
-&t
-&l
-&y
+&b
 0
-:var__test_11_end
-wmem >var__test_11 &g
-set reg0 >var__test_11
-jmp >function__test_11_end
-:function__test_11
-call >set_global_state
-rmem reg0 >var_global_state_test_3
-call >is
-add reg0 reg0 2
-rmem reg0 reg0
-set reg7 reg0
-set reg0 123
-call reg7
+:var__testlib_43_end
+wmem >var__testlib_43 &a
+set reg1 >var__testlib_43
 call >assert
-ret
-:function__test_11_end
-set reg1 >function__test_11
-call >test
-ret
-:function__test_10_end
-set reg1 >function__test_10
-call >category
 halt
 
 :subtract

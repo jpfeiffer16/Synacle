@@ -15,27 +15,37 @@ namespace syncomp
             var strNode = node as StringLiteral;
             if (!string.IsNullOrEmpty(strNode.Value))
             {
-                var firstLetter = strNode.Value.Substring(0, 1);
-                var value = strNode.Value.Substring(1);
+                var emitSb = new StringBuilder();
+                for (var i = 0; i < strNode.Value.Count(); i++)
+                {
+                    var ch = strNode.Value[i];
+                    if (ch == '\\')
+                    {
+                        var nextChar = i + 1 < strNode.Value.Length ? strNode.Value[++i] : 0;
+                        if (nextChar != 0)
+                        {
+                            switch (nextChar)
+                            {
+                                case 'n':
+                                    ch = Convert.ToChar("\n");
+                                    break;
+                                case 't':
+                                    ch = Convert.ToChar("\t");
+                                    break;
+                            }
+                        }
+                    }
+                    emitSb.Append(ch);
+                }
+                var stringToEmit = emitSb.ToString();
+                var firstLetter = stringToEmit.Substring(0, 1);
+                var value = stringToEmit.Substring(1);
                 var uuid = TransformerHelpers.GetUID(strNode.File, strNode.Line, null);
                 lines.Add($"jmp >var_{uuid}_end");
                 lines.Add($":var_{uuid}");
                 for (var charIndex = 0; charIndex < value.Length; charIndex++)
                 {
                     var ch = value[charIndex];
-                    if (ch == '\\')
-                    {
-                        var nextChar = value[++charIndex];
-                        switch (nextChar)
-                        {
-                            case 'n':
-                                ch = Convert.ToChar("\n");
-                                break;
-                            case 't':
-                                ch = Convert.ToChar("\t");
-                                break;
-                        }
-                    }
                     var str = ch.ToString();
                     if (str.Trim().Count() == 0)
                     {

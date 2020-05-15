@@ -8,14 +8,13 @@ func<void> current_after_each = () => {};
 
 function category(string name, func<void> cat_func)
 {
+    println(name);
     current_category = name;
     cat_func();
 }
 
-function before_each(func<void> before_each_func)
-{
+var before_each = (func<void> before_each_func) =>
     current_before_each = before_each_func;
-}
 
 function after_each(func<void> after_each)
 {
@@ -29,6 +28,7 @@ function test(string name, func<void> test_func)
 }
 
 function assert(void fact) {
+    print("\t");
     print(str_cat(current_test, " : "));
     if (!(fact == 1))
     {

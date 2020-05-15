@@ -44,7 +44,6 @@ namespace syncomp
                 // Full expression
                 if (tokens[i].Type == SyntaxTokenType.LeftCurly)
                 {
-                    // expression = new List<AstNode>();
                     var nextClosingCurly = GetExpression(
                       SyntaxTokenType.LeftCurly,
                       SyntaxTokenType.RightCurly,
