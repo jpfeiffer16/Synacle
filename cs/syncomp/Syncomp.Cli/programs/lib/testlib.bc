@@ -1,5 +1,6 @@
 #include "./stdlib.bc"
 #include "./bool.bc"
+#include "./tty_colors.bc"
 
 string current_category;
 string current_test;
@@ -38,10 +39,14 @@ function assert(void fact) {
     print(str_cat(current_test, " : "));
     if (!(fact == 1))
     {
+        tty_set_red();
         println("FAILED");
+        tty_reset();
         return false;
     }
+    tty_set_green();
     println("PASSED");
+    tty_reset();
     return true;
 }
 

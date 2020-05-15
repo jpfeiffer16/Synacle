@@ -38,11 +38,9 @@ function str_equal(string str_a, string str_b) : int {
 }
 
 function alloc() : ptr {
-  println("init");
   int data_index = 16382;
   while (!(~(data_index))) {
     --data_index;
-    println("looping");
   }
   data_index = data_index + 2;
   return data_index as ptr;

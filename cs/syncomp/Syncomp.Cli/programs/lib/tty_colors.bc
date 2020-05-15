@@ -1,25 +1,47 @@
-function print(string str) {
-  var str_ptr = str as int;
-  while (~str_ptr) {
-    out(~str_ptr as int);
-    ++str_ptr;
-  }
+#include "./stdlib.bc"
+
+function tty_set_green()
+{
+    var str_ptr = alloc();
+    var write_ptr = str_ptr;
+    wmem(write_ptr, 27);
+    ++write_ptr;
+    wmem(write_ptr, ~"[" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"3" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"2" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"m" as int);
+    print(str_ptr as string);
 }
 
-function println(string str_ptr) {
-  print(str_ptr);
-  out(10);
+function tty_set_red()
+{
+    var str_ptr = alloc();
+    var write_ptr = str_ptr;
+    wmem(write_ptr, 27);
+    ++write_ptr;
+    wmem(write_ptr, ~"[" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"3" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"1" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"m" as int);
+    print(str_ptr as string);
 }
 
-function alloc() : ptr {
-  println("init");
-  int data_index = 16382;
-  while (!(~(data_index))) {
-    --data_index;
-    println("looping");
-  }
-  data_index = data_index + 2;
-  return data_index as ptr;
+function tty_reset()
+{
+    var str_ptr = alloc();
+    var write_ptr = str_ptr;
+    wmem(write_ptr, 27);
+    ++write_ptr;
+    wmem(write_ptr, ~"[" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"0" as int);
+    ++write_ptr;
+    wmem(write_ptr, ~"m" as int);
+    print(str_ptr as string);
 }
-
-// alloc();
