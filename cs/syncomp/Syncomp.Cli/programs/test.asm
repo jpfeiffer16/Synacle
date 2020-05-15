@@ -725,8 +725,11 @@ call reg7
 ret
 :category_end
 set reg0 >category
-jmp >before_each_end
-:before_each
+jmp >var_before_each_testlib_16_end
+:var_before_each_testlib_16
+:var_before_each_testlib_16_end
+jmp >function__testlib_16_end
+:function__testlib_16
 jmp >var_before_each_func_testlib_16_end
 :var_before_each_func_testlib_16
 :var_before_each_func_testlib_16_end
@@ -734,91 +737,108 @@ wmem >var_before_each_func_testlib_16 reg0
 rmem reg0 >var_before_each_func_testlib_16
 wmem >var_current_before_each_testlib_6 reg0
 ret
-:before_each_end
-set reg0 >before_each
-jmp >after_each_end
-:after_each
-jmp >var_after_each_testlib_21_end
-:var_after_each_testlib_21
-:var_after_each_testlib_21_end
-wmem >var_after_each_testlib_21 reg0
-rmem reg0 >var_current_after_each_testlib_7
+ret
+:function__testlib_16_end
+set reg0 >function__testlib_16
+wmem >var_before_each_testlib_16 reg0
+jmp >var_after_each_testlib_19_end
+:var_after_each_testlib_19
+:var_after_each_testlib_19_end
+jmp >function__testlib_19_end
+:function__testlib_19
+jmp >var_after_each_func_testlib_19_end
+:var_after_each_func_testlib_19
+:var_after_each_func_testlib_19_end
+wmem >var_after_each_func_testlib_19 reg0
+rmem reg0 >var_after_each_func_testlib_19
 wmem >var_current_after_each_testlib_7 reg0
 ret
-:after_each_end
-set reg0 >after_each
+ret
+:function__testlib_19_end
+set reg0 >function__testlib_19
+wmem >var_after_each_testlib_19 reg0
 jmp >test_end
 :test
-jmp >var_name_testlib_26_end
-:var_name_testlib_26
-:var_name_testlib_26_end
-jmp >var_test_func_testlib_26_end
-:var_test_func_testlib_26
-:var_test_func_testlib_26_end
-wmem >var_name_testlib_26 reg0
-wmem >var_test_func_testlib_26 reg1
-rmem reg0 >var_name_testlib_26
-wmem >var_current_test_testlib_5 reg0
-rmem reg7 >var_test_func_testlib_26
+jmp >var_name_testlib_22_end
+:var_name_testlib_22
+:var_name_testlib_22_end
+jmp >var_test_func_testlib_22_end
+:var_test_func_testlib_22
+:var_test_func_testlib_22_end
+wmem >var_name_testlib_22 reg0
+wmem >var_test_func_testlib_22 reg1
+rmem reg0 >var_current_before_each_testlib_6
+jf reg0 >end__testlib_24
+rmem reg7 >var_current_before_each_testlib_6
 call reg7
+:end__testlib_24
+rmem reg0 >var_name_testlib_22
+wmem >var_current_test_testlib_5 reg0
+rmem reg7 >var_test_func_testlib_22
+call reg7
+rmem reg0 >var_current_after_each_testlib_7
+jf reg0 >end__testlib_30
+rmem reg7 >var_current_after_each_testlib_7
+call reg7
+:end__testlib_30
 ret
 :test_end
 set reg0 >test
 jmp >assert_end
 :assert
-jmp >var_fact_testlib_32_end
-:var_fact_testlib_32
-:var_fact_testlib_32_end
-wmem >var_fact_testlib_32 reg0
-jmp >var__testlib_33_end
-:var__testlib_33
+jmp >var_fact_testlib_36_end
+:var_fact_testlib_36
+:var_fact_testlib_36_end
+wmem >var_fact_testlib_36 reg0
+jmp >var__testlib_37_end
+:var__testlib_37
 0
-:var__testlib_33_end
-wmem >var__testlib_33 9
-set reg0 >var__testlib_33
+:var__testlib_37_end
+wmem >var__testlib_37 9
+set reg0 >var__testlib_37
 call >print
 rmem reg0 >var_current_test_testlib_5
-jmp >var__testlib_34_end
-:var__testlib_34
+jmp >var__testlib_38_end
+:var__testlib_38
 &:
 32
 0
-:var__testlib_34_end
-wmem >var__testlib_34 32
-set reg1 >var__testlib_34
+:var__testlib_38_end
+wmem >var__testlib_38 32
+set reg1 >var__testlib_38
 call >str_cat
 call >print
-rmem reg0 >var_fact_testlib_32
+rmem reg0 >var_fact_testlib_36
 set reg1 1
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end__testlib_35
-jmp >var__testlib_37_end
-:var__testlib_37
+jf reg0 >end__testlib_39
+jmp >var__testlib_41_end
+:var__testlib_41
 &A
 &I
 &L
 &E
 &D
 0
-:var__testlib_37_end
-wmem >var__testlib_37 &F
-set reg0 >var__testlib_37
+:var__testlib_41_end
+wmem >var__testlib_41 &F
+set reg0 >var__testlib_41
 call >println
 rmem reg0 >var_false_bool_5
 ret
-:end__testlib_35
-jmp >var__testlib_40_end
-:var__testlib_40
+:end__testlib_39
+jmp >var__testlib_44_end
+:var__testlib_44
 &A
 &S
 &S
 &E
 &D
 0
-:var__testlib_40_end
-wmem >var__testlib_40 &P
-set reg0 >var__testlib_40
+:var__testlib_44_end
+wmem >var__testlib_44 &P
+set reg0 >var__testlib_44
 call >println
 rmem reg0 >var_true_bool_4
 ret
@@ -827,54 +847,54 @@ ret
 set reg0 >assert
 jmp >assert_type_factory_end
 :assert_type_factory
-jmp >var_left_testlib_53_end
-:var_left_testlib_53
-:var_left_testlib_53_end
-wmem >var_left_testlib_53 reg0
-jmp >var_a_type_backing_testlib_55_end
-:var_a_type_backing_testlib_55
-:var_a_type_backing_testlib_55_end
-jmp >var_a_type_testlib_55_end
-:var_a_type_testlib_55
-:var_a_type_testlib_55_end
-wmem >var_a_type_testlib_55 >var_a_type_backing_testlib_55
-rmem reg0 >var_left_testlib_53
-rmem reg7 >var_a_type_testlib_55
+jmp >var_left_testlib_57_end
+:var_left_testlib_57
+:var_left_testlib_57_end
+wmem >var_left_testlib_57 reg0
+jmp >var_a_type_backing_testlib_59_end
+:var_a_type_backing_testlib_59
+:var_a_type_backing_testlib_59_end
+jmp >var_a_type_testlib_59_end
+:var_a_type_testlib_59
+:var_a_type_testlib_59_end
+wmem >var_a_type_testlib_59 >var_a_type_backing_testlib_59
+rmem reg0 >var_left_testlib_57
+rmem reg7 >var_a_type_testlib_59
 add reg7 reg7 1
 wmem reg7 reg0
-jmp >function__testlib_57_end
-:function__testlib_57
-jmp >var_right_testlib_57_end
-:var_right_testlib_57
-:var_right_testlib_57_end
-wmem >var_right_testlib_57 reg0
-jmp >var_result_testlib_59_end
-:var_result_testlib_59
-:var_result_testlib_59_end
-rmem reg0 >var_left_testlib_53
-rmem reg1 >var_right_testlib_57
+jmp >function__testlib_61_end
+:function__testlib_61
+jmp >var_right_testlib_61_end
+:var_right_testlib_61
+:var_right_testlib_61_end
+wmem >var_right_testlib_61 reg0
+jmp >var_result_testlib_63_end
+:var_result_testlib_63
+:var_result_testlib_63_end
+rmem reg0 >var_left_testlib_57
+rmem reg1 >var_right_testlib_61
 eq reg0 reg0 reg1
-wmem >var_result_testlib_59 reg0
-rmem reg0 >var_result_testlib_59
+wmem >var_result_testlib_63 reg0
+rmem reg0 >var_result_testlib_63
 ret
 ret
-:function__testlib_57_end
-set reg0 >function__testlib_57
-rmem reg7 >var_a_type_testlib_55
+:function__testlib_61_end
+set reg0 >function__testlib_61
+rmem reg7 >var_a_type_testlib_59
 add reg7 reg7 2
 wmem reg7 reg0
-rmem reg0 >var_a_type_testlib_55
+rmem reg0 >var_a_type_testlib_59
 ret
 ret
 :assert_type_factory_end
 set reg0 >assert_type_factory
 jmp >is_end
 :is
-jmp >var_left_testlib_65_end
-:var_left_testlib_65
-:var_left_testlib_65_end
-wmem >var_left_testlib_65 reg0
-rmem reg0 >var_left_testlib_65
+jmp >var_left_testlib_69_end
+:var_left_testlib_69
+:var_left_testlib_69_end
+wmem >var_left_testlib_69 reg0
+rmem reg0 >var_left_testlib_69
 call >assert_type_factory
 ret
 ret
@@ -917,8 +937,70 @@ wmem >var__test_10 &g
 set reg0 >var__test_10
 jmp >function__test_10_end
 :function__test_10
-jmp >var__test_11_end
-:var__test_11
+jmp >function__test_11_end
+:function__test_11
+call >set_global_state
+ret
+:function__test_11_end
+set reg0 >function__test_11
+rmem reg7 >var_before_each_testlib_16
+call reg7
+jmp >function__test_14_end
+:function__test_14
+set reg0 0
+wmem >var_global_state_test_3 reg0
+ret
+:function__test_14_end
+set reg0 >function__test_14
+rmem reg7 >var_after_each_testlib_19
+call reg7
+jmp >var__test_18_end
+:var__test_18
+&l
+&o
+&b
+&a
+&l
+&_
+&s
+&t
+&a
+&t
+&e
+32
+&i
+&s
+32
+&0
+32
+&t
+&o
+32
+&b
+&e
+&g
+&i
+&n
+0
+:var__test_18_end
+wmem >var__test_18 &g
+set reg0 >var__test_18
+jmp >function__test_18_end
+:function__test_18
+rmem reg0 >var_global_state_test_3
+call >is
+add reg0 reg0 2
+rmem reg0 reg0
+set reg7 reg0
+set reg0 0
+call reg7
+call >assert
+ret
+:function__test_18_end
+set reg1 >function__test_18
+call >test
+jmp >var__test_22_end
+:var__test_22
 &l
 &o
 &b
@@ -948,12 +1030,11 @@ jmp >var__test_11_end
 &l
 &y
 0
-:var__test_11_end
-wmem >var__test_11 &g
-set reg0 >var__test_11
-jmp >function__test_11_end
-:function__test_11
-call >set_global_state
+:var__test_22_end
+wmem >var__test_22 &g
+set reg0 >var__test_22
+jmp >function__test_22_end
+:function__test_22
 rmem reg0 >var_global_state_test_3
 call >is
 add reg0 reg0 2
@@ -963,13 +1044,22 @@ set reg0 123
 call reg7
 call >assert
 ret
-:function__test_11_end
-set reg1 >function__test_11
+:function__test_22_end
+set reg1 >function__test_22
 call >test
 ret
 :function__test_10_end
 set reg1 >function__test_10
 call >category
+rmem reg0 >var_global_state_test_3
+call >print_number
+jmp >var__test_28_end
+:var__test_28
+0
+:var__test_28_end
+wmem >var__test_28 32
+set reg0 >var__test_28
+call >println
 halt
 
 :subtract

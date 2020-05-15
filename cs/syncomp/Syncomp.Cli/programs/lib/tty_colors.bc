@@ -1,0 +1,25 @@
+function print(string str) {
+  var str_ptr = str as int;
+  while (~str_ptr) {
+    out(~str_ptr as int);
+    ++str_ptr;
+  }
+}
+
+function println(string str_ptr) {
+  print(str_ptr);
+  out(10);
+}
+
+function alloc() : ptr {
+  println("init");
+  int data_index = 16382;
+  while (!(~(data_index))) {
+    --data_index;
+    println("looping");
+  }
+  data_index = data_index + 2;
+  return data_index as ptr;
+}
+
+// alloc();

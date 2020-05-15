@@ -1,3 +1,4 @@
+#include "./lib/stdlib.bc"
 #include "./lib/testlib.bc"
 
 var global_state = 0;
@@ -8,8 +9,18 @@ function set_global_state()
 }
 
 category("global_state tests", () => {
-    test("global_state is set correctly", () => {
+    before_each(() => {
         set_global_state();
+    });
+    after_each(() => {
+        global_state = 0;
+    });
+
+    test("global_state is 0 to begin", () => {
+        assert(is(global_state)->equal_to(0));
+    });
+
+    test("global_state is set correctly", () => {
         assert(is(global_state)->equal_to(123));
     });
 });
