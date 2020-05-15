@@ -15,7 +15,7 @@ namespace syncomp
             var tkn = tokens[i];
             var previousAstNode = nodes.Pop();
             var nextTerminator = GetNextTerminator(i, tokens);
-            var tokensToParse = tokens.GetRange(i + 1, nextTerminator - i);
+            var tokensToParse = tokens.GetRange(i + 1, (nextTerminator - i) - 1);
             i = nextTerminator;
             var parsedTokens = ParseTokens(tokensToParse, ctx);
             var parsedParameter = parsedTokens[0];
