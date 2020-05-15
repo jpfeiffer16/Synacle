@@ -17,6 +17,9 @@ module.exports = function(memory, settings = {}) {
         traceParams = traceParams.concat(params);
         trace.apply({}, traceParams);
       }
+    } else {
+        console.log("Invalid opcode", memory.heap[memory.inPtr]);
+        process.exit(1);
     }
     memory.inPtr++;
   }
