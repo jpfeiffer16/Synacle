@@ -22,6 +22,8 @@ function println(string str_ptr) {
 }
 
 function str_equal(string str_a, string str_b) : int {
+  println(str_a);
+  println(str_b);
   var a_len = str_len(str_a);
   var b_len = str_len(str_b);
   if (!(a_len == b_len)) {

@@ -1,26 +1,5 @@
 #include "./lib/stdlib.bc"
-#include "./lib/testlib.bc"
 
-var global_state = 0;
+var result = str_equal("123", "123");
 
-function set_global_state()
-{
-    global_state = 123;
-}
-
-category("global_state tests", () => {
-    before_each(() => {
-        set_global_state();
-    });
-    after_each(() => {
-        global_state = 0;
-    });
-
-    test("global_state is 0 to begin", () => {
-        assert(is(global_state)->equal_to(0));
-    });
-
-    test("global_state is set correctly", () => {
-        assert(is(global_state)->equal_to(123));
-    });
-});
+print_number(result);

@@ -13,6 +13,10 @@ category("str_len tests", () => {
 category("str_equal tests", () => {
     test("string should be equal" () => {
         var positive = str_equal("123", "123");
+        positive;
+        breakpoint;
+        print_number(positive);
+        println("");
         assert(is(positive)->equal_to(1));
     });
 

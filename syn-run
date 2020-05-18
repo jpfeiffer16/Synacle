@@ -1,0 +1,7 @@
+#!/bin/bash
+
+NAME=$(echo $1 | cut -d'.' -f 1)
+
+dotnet ~/Source/Synacle/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
+syn-asm $NAME.asm &&
+syn-vm -d -b $NAME.bin
