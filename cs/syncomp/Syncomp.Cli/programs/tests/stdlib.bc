@@ -1,0 +1,23 @@
+#include "../lib/stdlib.bc"
+#include "../lib/testlib.bc"
+
+category("str_len tests", () => {
+    var result = 0;
+    before_each(() => { result = str_len("123"); });
+
+    test("string length should be 3", () => {
+        assert(is(result)->equal_to(3));
+    });
+});
+
+category("str_equal tests", () => {
+    test("string should be equal" () => {
+        var positive = str_equal("123", "123");
+        assert(is(positive)->equal_to(1));
+    });
+
+    test("string not should be equal" () => {
+        var negative = str_equal("23", "123");
+        assert(is(negative)->equal_to(0));
+    });
+});
