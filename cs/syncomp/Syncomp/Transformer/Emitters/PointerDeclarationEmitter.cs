@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
@@ -13,7 +14,7 @@ namespace syncomp
             var lines = new List<string>();
             var name = pdNode.Identifier;
             var backingVarName = $"{pdNode.Identifier}_backing";
-            var backingVariableNode = new VariableDeclaration(backingVarName, pdNode.LangType, pdNode.File, pdNode.Line, pdNode.Column);
+            var backingVariableNode = new VariableDeclaration(backingVarName, pdNode.LangType.SubTypes.FirstOrDefault(), pdNode.File, pdNode.Line, pdNode.Column);
             lines.AddRange(new VariableDeclarationEmitter().Transform(backingVariableNode, ctx));
 
             lines.AddRange(new VariableDeclarationEmitter().Transform(pdNode, ctx));

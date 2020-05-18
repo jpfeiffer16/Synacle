@@ -1047,50 +1047,54 @@ jmp >var_left_testlib_62_end
 :var_left_testlib_62
 :var_left_testlib_62_end
 wmem >var_left_testlib_62 reg0
-jmp >var_a_type_backing_testlib_64_end
-:var_a_type_backing_testlib_64
-:var_a_type_backing_testlib_64_end
-jmp >var_a_type_testlib_64_end
-:var_a_type_testlib_64
-:var_a_type_testlib_64_end
-wmem >var_a_type_testlib_64 >var_a_type_backing_testlib_64
+jmp >var_a_type_backing_testlib_66_end
+:var_a_type_backing_testlib_66
+:fld_a_type_backing_testlib_66_left
+:fld_a_type_backing_testlib_66_equal_to
+:fld_a_type_backing_testlib_66_greater_than
+:fld_a_type_backing_testlib_66_less_than
+:var_a_type_backing_testlib_66_end
+jmp >var_a_type_testlib_66_end
+:var_a_type_testlib_66
+:var_a_type_testlib_66_end
+wmem >var_a_type_testlib_66 >var_a_type_backing_testlib_66
 rmem reg0 >var_left_testlib_62
-rmem reg7 >var_a_type_testlib_64
+rmem reg7 >var_a_type_testlib_66
 add reg7 reg7 1
 wmem reg7 reg0
-jmp >function__testlib_66_end
-:function__testlib_66
-jmp >var_right_testlib_66_end
-:var_right_testlib_66
-:var_right_testlib_66_end
-wmem >var_right_testlib_66 reg0
-jmp >var_result_testlib_68_end
-:var_result_testlib_68
-:var_result_testlib_68_end
+jmp >function__testlib_68_end
+:function__testlib_68
+jmp >var_right_testlib_68_end
+:var_right_testlib_68
+:var_right_testlib_68_end
+wmem >var_right_testlib_68 reg0
+jmp >var_result_testlib_70_end
+:var_result_testlib_70
+:var_result_testlib_70_end
 rmem reg0 >var_left_testlib_62
-rmem reg1 >var_right_testlib_66
+rmem reg1 >var_right_testlib_68
 eq reg0 reg0 reg1
-wmem >var_result_testlib_68 reg0
-rmem reg0 >var_result_testlib_68
+wmem >var_result_testlib_70 reg0
+rmem reg0 >var_result_testlib_70
 ret
 ret
-:function__testlib_66_end
-set reg0 >function__testlib_66
-rmem reg7 >var_a_type_testlib_64
+:function__testlib_68_end
+set reg0 >function__testlib_68
+rmem reg7 >var_a_type_testlib_66
 add reg7 reg7 2
 wmem reg7 reg0
-rmem reg0 >var_a_type_testlib_64
+rmem reg0 >var_a_type_testlib_66
 ret
 ret
 :assert_type_factory_end
 set reg0 >assert_type_factory
 jmp >is_end
 :is
-jmp >var_left_testlib_74_end
-:var_left_testlib_74
-:var_left_testlib_74_end
-wmem >var_left_testlib_74 reg0
-rmem reg0 >var_left_testlib_74
+jmp >var_left_testlib_76_end
+:var_left_testlib_76
+:var_left_testlib_76_end
+wmem >var_left_testlib_76 reg0
+rmem reg0 >var_left_testlib_76
 call >assert_type_factory
 ret
 ret
