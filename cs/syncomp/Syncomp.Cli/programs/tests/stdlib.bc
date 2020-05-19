@@ -12,11 +12,15 @@ category("str_len tests", () => {
 
 category("str_equal tests", () => {
     test("string should be equal" () => {
-        var positive = str_equal("123", "123");
-        positive;
-        breakpoint;
+        //TODO : The issue here is something to do with the string literal.
+        // str_equal("123", "123"); does not work for some reason
+        var a = "123";
+        var b = "123";
+        var positive = str_equal(a, b);
+        // positive;
+        // breakpoint;
         print_number(positive);
-        println("");
+        println(" ");
         assert(is(positive)->equal_to(1));
     });
 

@@ -1245,9 +1245,9 @@ wmem >var__stdlib_14 &s
 set reg0 >var__stdlib_14
 jmp >function__stdlib_14_end
 :function__stdlib_14
-jmp >var_positive_stdlib_15_end
-:var_positive_stdlib_15
-:var_positive_stdlib_15_end
+jmp >var_a_stdlib_15_end
+:var_a_stdlib_15
+:var_a_stdlib_15_end
 jmp >var__stdlib_15_end
 :var__stdlib_15
 &2
@@ -1256,22 +1256,36 @@ jmp >var__stdlib_15_end
 :var__stdlib_15_end
 wmem >var__stdlib_15 &1
 set reg0 >var__stdlib_15
-jmp >var__stdlib_15_end
-:var__stdlib_15
+wmem >var_a_stdlib_15 reg0
+jmp >var_b_stdlib_16_end
+:var_b_stdlib_16
+:var_b_stdlib_16_end
+jmp >var__stdlib_16_end
+:var__stdlib_16
 &2
 &3
 0
-:var__stdlib_15_end
-wmem >var__stdlib_15 &1
-set reg1 >var__stdlib_15
+:var__stdlib_16_end
+wmem >var__stdlib_16 &1
+set reg0 >var__stdlib_16
+wmem >var_b_stdlib_16 reg0
+jmp >var_positive_stdlib_17_end
+:var_positive_stdlib_17
+:var_positive_stdlib_17_end
+rmem reg0 >var_a_stdlib_15
+rmem reg1 >var_b_stdlib_16
 call >str_equal
-wmem >var_positive_stdlib_15 reg0
-rmem reg0 >var_positive_stdlib_15
-breakpoint
-rmem reg0 >var_positive_stdlib_15
+wmem >var_positive_stdlib_17 reg0
+rmem reg0 >var_positive_stdlib_17
 call >print_number
+jmp >var__stdlib_21_end
+:var__stdlib_21
+0
+:var__stdlib_21_end
+wmem >var__stdlib_21 32
+set reg0 >var__stdlib_21
 call >println
-rmem reg0 >var_positive_stdlib_15
+rmem reg0 >var_positive_stdlib_17
 call >is
 add reg0 reg0 2
 rmem reg0 reg0
@@ -1283,8 +1297,8 @@ ret
 :function__stdlib_14_end
 set reg1 >function__stdlib_14
 call >test
-jmp >var__stdlib_23_end
-:var__stdlib_23
+jmp >var__stdlib_25_end
+:var__stdlib_25
 &t
 &r
 &i
@@ -1311,32 +1325,32 @@ jmp >var__stdlib_23_end
 &a
 &l
 0
-:var__stdlib_23_end
-wmem >var__stdlib_23 &s
-set reg0 >var__stdlib_23
-jmp >function__stdlib_23_end
-:function__stdlib_23
-jmp >var_negative_stdlib_24_end
-:var_negative_stdlib_24
-:var_negative_stdlib_24_end
-jmp >var__stdlib_24_end
-:var__stdlib_24
+:var__stdlib_25_end
+wmem >var__stdlib_25 &s
+set reg0 >var__stdlib_25
+jmp >function__stdlib_25_end
+:function__stdlib_25
+jmp >var_negative_stdlib_26_end
+:var_negative_stdlib_26
+:var_negative_stdlib_26_end
+jmp >var__stdlib_26_end
+:var__stdlib_26
 &3
 0
-:var__stdlib_24_end
-wmem >var__stdlib_24 &2
-set reg0 >var__stdlib_24
-jmp >var__stdlib_24_end
-:var__stdlib_24
+:var__stdlib_26_end
+wmem >var__stdlib_26 &2
+set reg0 >var__stdlib_26
+jmp >var__stdlib_26_end
+:var__stdlib_26
 &2
 &3
 0
-:var__stdlib_24_end
-wmem >var__stdlib_24 &1
-set reg1 >var__stdlib_24
+:var__stdlib_26_end
+wmem >var__stdlib_26 &1
+set reg1 >var__stdlib_26
 call >str_equal
-wmem >var_negative_stdlib_24 reg0
-rmem reg0 >var_negative_stdlib_24
+wmem >var_negative_stdlib_26 reg0
+rmem reg0 >var_negative_stdlib_26
 call >is
 add reg0 reg0 2
 rmem reg0 reg0
@@ -1345,8 +1359,8 @@ set reg0 0
 call reg7
 call >assert
 ret
-:function__stdlib_23_end
-set reg1 >function__stdlib_23
+:function__stdlib_25_end
+set reg1 >function__stdlib_25
 call >test
 ret
 :function__stdlib_13_end
