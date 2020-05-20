@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace syncomp
@@ -12,7 +13,7 @@ namespace syncomp
                 var fileInfo = new FileInfo(file);
                 fileName = fileInfo.Name.Replace(fileInfo.Extension, string.Empty);
             }
-            return $"{name}_{fileName}_{line}";
+            return $"{name ?? Guid.NewGuid().ToString().Substring(0, 4)}_{fileName}_{line}";
         }
     }
 }
