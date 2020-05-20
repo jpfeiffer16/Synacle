@@ -12,20 +12,39 @@ category("str_len tests", () => {
 
 category("str_equal tests", () => {
     test("string should be equal" () => {
-        //TODO : The issue here is something to do with the string literal.
-        // str_equal("123", "123"); does not work for some reason
-        var a = "123";
-        var b = "123";
-        var positive = str_equal(a, b);
-        // positive;
-        // breakpoint;
-        print_number(positive);
-        println(" ");
-        assert(is(positive)->equal_to(1));
+        var result = str_equal("123", "123");
+        assert(is(result)->equal_to(1));
     });
 
     test("string not should be equal" () => {
-        var negative = str_equal("23", "123");
-        assert(is(negative)->equal_to(0));
+        var result = str_equal("23", "123");
+        assert(is(result)->equal_to(0));
+    });
+});
+
+category("alloc tests", () => {
+    test("returned pointer is not 0", () => {
+        assert(is(alloc())->greater_than(0))
+    });
+});
+
+category("alloc_chunk tests", () => {
+    test("returned pointer is not 0", () => {
+        assert(is(alloc_chunk(5))->greater_than(0))
+    });
+});
+
+category("mem_cp tests", () => {
+    var string_to_copy = "Test";
+    ptr string_ptr = alloc();
+    mem_cp(string_to_copy as ptr, string_ptr, str_len(string_to_copy));
+    test("strings should be equal", () => {
+        print_number(string_to_copy as int);
+        // println(string_ptr as string);
+        // print_number(str_len(string_to_copy));
+        // println(string_to_copy);
+        // println(string_ptr as string);
+        breakpoint;
+        assert(str_equal(string_to_copy, string_ptr as string));
     });
 });

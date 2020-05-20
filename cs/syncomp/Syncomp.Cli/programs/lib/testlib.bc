@@ -68,6 +68,11 @@ function assert_type_factory(void left) : ptr<assert_type>
         var result = left == right;
         return result as bool;
     };
+    a_type->greater_than = (void right) : bool =>
+    {
+        var result = left > right;
+        return result as bool;
+    };
     return a_type;
 }
 
