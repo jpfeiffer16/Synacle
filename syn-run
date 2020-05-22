@@ -1,7 +1,43 @@
 #!/bin/bash
 
+VM="syn-vm"
+DEBUG=""
+COMPILE_ONLY=""
+
+while getopts ":odcCjh" opt; do
+  case ${opt} in
+    o )
+        COMPILE_ONLY="true"
+      ;;
+    d )
+        DEBUG="-d"
+      ;;
+    c )
+        VM="$HOME/Source/Synacle/c/bin/synvmc"
+      ;;
+    C )
+        VM="dotnet $HOME/Source/Synacle/cs/synsharp/bin/Debug/netcoreapp2.0/synsharp.dll"
+      ;;
+    j )
+        VM="syn-vm"
+      ;;
+    h )
+        echo "Usage: syn-run [-d] [-c] [-C] [-j]"
+        echo "-o: only compile, do not run"
+        echo "-d: enable debugging (Currently only works with the js vm)"
+        echo "-c: use c vm"
+        echo "-C: use csharp vm"
+        echo "-j: use javascript vm (default)"
+        exit 1
+      ;;
+  esac
+done
+shift $((OPTIND -1))
+
 NAME=$(echo $1 | cut -d'.' -f 1)
 
+
 dotnet ~/Source/Synacle/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
-syn-asm $NAME.asm &&
-syn-vm -d -b $NAME.bin
+syn-asm $NAME.asm && [ -z $COMPILE_ONLY ] &&
+$VM $DEBUG -b $NAME.bin
+

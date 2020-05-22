@@ -1,24 +1,7 @@
-#include "./lib/stdlib.bc"
-
-function test(string name, func<void> f)
+function test_str(int val) : int
 {
-    f();
+    return val;
 }
 
-test("test1", () => {
-    test("test2", () => {
-        // var a = "123";
-        // var b = "123";
-        var result = str_equal("123", "123");
-        // var result = str_equal(a, b);
-
-        print_number(result);
-    });
-
-    // test("test2", () => {
-    //     var result = str_equal("123", "123");
-
-    //     print_number(result);
-    // });
-});
+test_str(test_str(123));
 

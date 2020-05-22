@@ -3,8 +3,8 @@
 
 #include "state.h"
 
-void (*opcodes[22])(state*);
+void (*opcodes[23])(state*);
 
-char* opcode_names[22];
+char* opcode_names[23];
 
 #endif

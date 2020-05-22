@@ -37,6 +37,8 @@ category("alloc_chunk tests", () => {
 category("mem_cp tests", () => {
     var string_to_copy = "Test";
     ptr string_ptr = alloc();
+    // var len = str_len(string_to_copy);
+    // mem_cp(string_to_copy as ptr, string_ptr, len);
     mem_cp(string_to_copy as ptr, string_ptr, str_len(string_to_copy));
     test("strings should be equal", () => {
         print_number(string_to_copy as int);
@@ -44,7 +46,7 @@ category("mem_cp tests", () => {
         // print_number(str_len(string_to_copy));
         // println(string_to_copy);
         // println(string_ptr as string);
-        breakpoint;
+        //breakpoint;
         assert(str_equal(string_to_copy, string_ptr as string));
     });
 });

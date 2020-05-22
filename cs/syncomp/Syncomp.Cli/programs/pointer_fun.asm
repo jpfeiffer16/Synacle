@@ -14,18 +14,18 @@ jmp >var_length_stdlib_3_end
 :var_length_stdlib_3_end
 set reg0 0
 wmem >var_length_stdlib_3 reg0
-:while__stdlib_4_begin
+:while_0f53_stdlib_4_begin
 rmem reg0 >var_str_ptr_stdlib_2
 rmem reg0 reg0
-jf reg0 >while__stdlib_4_end
+jf reg0 >while_0f53_stdlib_4_end
 rmem reg0 >var_str_ptr_stdlib_2
 add reg0 reg0 1
 wmem >var_str_ptr_stdlib_2 reg0
 rmem reg0 >var_length_stdlib_3
 add reg0 reg0 1
 wmem >var_length_stdlib_3 reg0
-jmp >while__stdlib_4_begin
-:while__stdlib_4_end
+jmp >while_0f53_stdlib_4_begin
+:while_0f53_stdlib_4_end
 rmem reg0 >var_length_stdlib_3
 ret
 ret
@@ -42,18 +42,18 @@ jmp >var_str_ptr_stdlib_12_end
 :var_str_ptr_stdlib_12_end
 rmem reg0 >var_str_stdlib_11
 wmem >var_str_ptr_stdlib_12 reg0
-:while__stdlib_13_begin
+:while_7ad0_stdlib_13_begin
 rmem reg0 >var_str_ptr_stdlib_12
 rmem reg0 reg0
-jf reg0 >while__stdlib_13_end
+jf reg0 >while_7ad0_stdlib_13_end
 rmem reg0 >var_str_ptr_stdlib_12
 rmem reg0 reg0
 out reg0
 rmem reg0 >var_str_ptr_stdlib_12
 add reg0 reg0 1
 wmem >var_str_ptr_stdlib_12 reg0
-jmp >while__stdlib_13_begin
-:while__stdlib_13_end
+jmp >while_7ad0_stdlib_13_begin
+:while_7ad0_stdlib_13_end
 ret
 :print_end
 set reg0 >print
@@ -96,23 +96,23 @@ rmem reg0 >var_a_len_stdlib_25
 rmem reg1 >var_b_len_stdlib_26
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end__stdlib_27
+jf reg0 >end_37ba_stdlib_27
 set reg0 0
 ret
-:end__stdlib_27
+:end_37ba_stdlib_27
 jmp >var_i_stdlib_30_end
 :var_i_stdlib_30
 :var_i_stdlib_30_end
 set reg0 0
 wmem >var_i_stdlib_30 reg0
-:for__stdlib_30_begin
+:for_a2c0_stdlib_30_begin
 rmem reg0 >var_i_stdlib_30
 rmem reg1 >var_a_len_stdlib_25
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__stdlib_30_end
+jf reg0 >for_a2c0_stdlib_30_end
 jmp >var_a_val_stdlib_31_end
 :var_a_val_stdlib_31
 :var_a_val_stdlib_31_end
@@ -133,15 +133,15 @@ rmem reg0 >var_a_val_stdlib_31
 rmem reg1 >var_b_val_stdlib_32
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end__stdlib_33
+jf reg0 >end_8f89_stdlib_33
 set reg0 0
 ret
-:end__stdlib_33
+:end_8f89_stdlib_33
 rmem reg0 >var_i_stdlib_30
 add reg0 reg0 1
 wmem >var_i_stdlib_30 reg0
-jmp >for__stdlib_30_begin
-:for__stdlib_30_end
+jmp >for_a2c0_stdlib_30_begin
+:for_a2c0_stdlib_30_end
 set reg0 1
 ret
 ret
@@ -154,17 +154,17 @@ jmp >var_data_index_stdlib_41_end
 :var_data_index_stdlib_41_end
 set reg0 16382
 wmem >var_data_index_stdlib_41 reg0
-:while__stdlib_42_begin
+:while_9c48_stdlib_42_begin
 rmem reg0 >var_data_index_stdlib_41
 rmem reg0 reg0
 call >not
-jf reg0 >while__stdlib_42_end
+jf reg0 >while_9c48_stdlib_42_end
 rmem reg0 >var_data_index_stdlib_41
 set reg1 1
 call >subtract
 wmem >var_data_index_stdlib_41 reg0
-jmp >while__stdlib_42_begin
-:while__stdlib_42_end
+jmp >while_9c48_stdlib_42_begin
+:while_9c48_stdlib_42_end
 rmem reg0 >var_data_index_stdlib_41
 set reg1 2
 add reg0 reg0 reg1
@@ -219,12 +219,12 @@ jmp >var_current_byte_stdlib_57_end
 :var_current_byte_stdlib_57_end
 set reg0 0
 wmem >var_current_byte_stdlib_57 reg0
-:while__stdlib_58_begin
+:while_b2e9_stdlib_58_begin
 rmem reg0 >var_current_byte_stdlib_57
 rmem reg1 >var_len_stdlib_56
 gt reg0 reg0 reg1
 call >not
-jf reg0 >while__stdlib_58_end
+jf reg0 >while_b2e9_stdlib_58_end
 jmp >var_byte_to_write_ptr_stdlib_59_end
 :var_byte_to_write_ptr_stdlib_59
 :var_byte_to_write_ptr_stdlib_59_end
@@ -246,8 +246,8 @@ wmem reg0 reg1
 rmem reg0 >var_current_byte_stdlib_57
 add reg0 reg0 1
 wmem >var_current_byte_stdlib_57 reg0
-jmp >while__stdlib_58_begin
-:while__stdlib_58_end
+jmp >while_b2e9_stdlib_58_begin
+:while_b2e9_stdlib_58_end
 ret
 :mem_cp_end
 set reg0 >mem_cp
@@ -323,14 +323,14 @@ jmp >var_index_stdlib_80_end
 :var_index_stdlib_80_end
 set reg0 0
 wmem >var_index_stdlib_80 reg0
-:while__stdlib_81_begin
+:while_a1d1_stdlib_81_begin
 rmem reg0 >var_index_stdlib_80
 rmem reg1 >var_len_stdlib_79
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while__stdlib_81_end
+jf reg0 >while_a1d1_stdlib_81_end
 jmp >var_source_index_stdlib_82_end
 :var_source_index_stdlib_82
 :var_source_index_stdlib_82_end
@@ -346,8 +346,8 @@ push reg0
 rmem reg0 >var_index_stdlib_80
 add reg0 reg0 1
 wmem >var_index_stdlib_80 reg0
-jmp >while__stdlib_81_begin
-:while__stdlib_81_end
+jmp >while_a1d1_stdlib_81_begin
+:while_a1d1_stdlib_81_end
 jmp >var_current_byte_stdlib_87_end
 :var_current_byte_stdlib_87
 :var_current_byte_stdlib_87_end
@@ -355,14 +355,14 @@ pop reg0
 wmem >var_current_byte_stdlib_87 reg0
 set reg0 0
 wmem >var_index_stdlib_80 reg0
-:while__stdlib_89_begin
+:while_cb12_stdlib_89_begin
 rmem reg0 >var_index_stdlib_80
 rmem reg1 >var_len_stdlib_79
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while__stdlib_89_end
+jf reg0 >while_cb12_stdlib_89_end
 jmp >var_dest_index_stdlib_90_end
 :var_dest_index_stdlib_90
 :var_dest_index_stdlib_90_end
@@ -378,8 +378,8 @@ add reg0 reg0 1
 wmem >var_index_stdlib_80 reg0
 pop reg0
 wmem >var_current_byte_stdlib_87 reg0
-jmp >while__stdlib_89_begin
-:while__stdlib_89_end
+jmp >while_cb12_stdlib_89_begin
+:while_cb12_stdlib_89_end
 rmem reg0 >var_current_byte_stdlib_87
 rmem reg0 >var_current_byte_stdlib_87
 push reg0
@@ -407,12 +407,12 @@ rmem reg0 >var_in_char_stdlib_103
 set reg1 10
 eq reg0 reg0 reg1
 wmem >var_is_newline_stdlib_104 reg0
-:while__stdlib_105_begin
+:while_1258_stdlib_105_begin
 rmem reg0 >var_is_newline_stdlib_104
 rmem reg1 >var_in_char_stdlib_103
 call >and
 call >not
-jf reg0 >while__stdlib_105_end
+jf reg0 >while_1258_stdlib_105_end
 rmem reg0 >var_data_index_stdlib_102
 rmem reg1 >var_in_char_stdlib_103
 wmem reg0 reg1
@@ -425,8 +425,8 @@ rmem reg0 >var_in_char_stdlib_103
 set reg1 10
 eq reg0 reg0 reg1
 wmem >var_is_newline_stdlib_104 reg0
-jmp >while__stdlib_105_begin
-:while__stdlib_105_end
+jmp >while_1258_stdlib_105_begin
+:while_1258_stdlib_105_end
 rmem reg0 >var_data_index_stdlib_102
 set reg1 0
 wmem reg0 reg1
@@ -472,11 +472,11 @@ jmp >var_accumulation_stdlib_121_end
 :var_accumulation_stdlib_121_end
 set reg0 0
 wmem >var_accumulation_stdlib_121 reg0
-:for__stdlib_122_begin
+:for_e6f4_stdlib_122_begin
 rmem reg0 >var_len_stdlib_119
 set reg1 0
 gt reg0 reg0 reg1
-jf reg0 >for__stdlib_122_end
+jf reg0 >for_e6f4_stdlib_122_end
 jmp >var_tens_place_stdlib_124_end
 :var_tens_place_stdlib_124
 :var_tens_place_stdlib_124_end
@@ -517,11 +517,11 @@ rmem reg0 >var_diget_stdlib_125
 set reg1 48
 call >subtract
 wmem >var_diget_stdlib_125 reg0
-:for__stdlib_127_begin
+:for_5ed5_stdlib_127_begin
 rmem reg0 >var_tens_place_stdlib_124
 set reg1 0
 gt reg0 reg0 reg1
-jf reg0 >for__stdlib_127_end
+jf reg0 >for_5ed5_stdlib_127_end
 rmem reg0 >var_diget_stdlib_125
 set reg1 10
 mult reg0 reg0 reg1
@@ -530,8 +530,8 @@ rmem reg0 >var_tens_place_stdlib_124
 set reg1 1
 call >subtract
 wmem >var_tens_place_stdlib_124 reg0
-jmp >for__stdlib_127_begin
-:for__stdlib_127_end
+jmp >for_5ed5_stdlib_127_begin
+:for_5ed5_stdlib_127_end
 rmem reg0 >var_accumulation_stdlib_121
 rmem reg1 >var_diget_stdlib_125
 add reg0 reg0 reg1
@@ -543,8 +543,8 @@ rmem reg0 >var_len_stdlib_119
 set reg1 1
 call >subtract
 wmem >var_len_stdlib_119 reg0
-jmp >for__stdlib_122_begin
-:for__stdlib_122_end
+jmp >for_e6f4_stdlib_122_begin
+:for_e6f4_stdlib_122_end
 rmem reg0 >var_accumulation_stdlib_121
 ret
 ret
@@ -564,11 +564,11 @@ jmp >var_length_stdlib_140_end
 :var_length_stdlib_140_end
 set reg0 0
 wmem >var_length_stdlib_140 reg0
-:while__stdlib_141_begin
+:while_a6e8_stdlib_141_begin
 rmem reg0 >var_num_stdlib_138
 set reg1 9
 gt reg0 reg0 reg1
-jf reg0 >while__stdlib_141_end
+jf reg0 >while_a6e8_stdlib_141_end
 rmem reg0 >var_num_stdlib_138
 set reg1 10
 mod reg0 reg0 reg1
@@ -583,8 +583,8 @@ rmem reg0 >var_num_stdlib_138
 set reg1 10
 call >divide
 wmem >var_num_stdlib_138 reg0
-jmp >while__stdlib_141_begin
-:while__stdlib_141_end
+jmp >while_a6e8_stdlib_141_begin
+:while_a6e8_stdlib_141_end
 rmem reg0 >var_num_stdlib_138
 set reg1 10
 mod reg0 reg0 reg1
@@ -605,14 +605,14 @@ jmp >var_dest_ptr_stdlib_153_end
 :var_dest_ptr_stdlib_153_end
 call >alloc
 wmem >var_dest_ptr_stdlib_153 reg0
-:while__stdlib_155_begin
+:while_a916_stdlib_155_begin
 rmem reg0 >var_stack_index_stdlib_152
 rmem reg1 >var_length_stdlib_140
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while__stdlib_155_end
+jf reg0 >while_a916_stdlib_155_end
 rmem reg0 >var_dest_ptr_stdlib_153
 rmem reg1 >var_stack_index_stdlib_152
 add reg0 reg0 reg1
@@ -624,8 +624,8 @@ rmem reg0 >var_stack_index_stdlib_152
 set reg1 1
 add reg0 reg0 reg1
 wmem >var_stack_index_stdlib_152 reg0
-jmp >while__stdlib_155_begin
-:while__stdlib_155_end
+jmp >while_a916_stdlib_155_begin
+:while_a916_stdlib_155_end
 rmem reg0 >var_dest_ptr_stdlib_153
 rmem reg1 >var_stack_index_stdlib_152
 add reg0 reg0 reg1
@@ -655,10 +655,10 @@ jmp >var_i_stdlib_170_end
 :var_i_stdlib_170_end
 set reg0 0
 wmem >var_i_stdlib_170 reg0
-:while__stdlib_172_begin
+:while_f2a7_stdlib_172_begin
 rmem reg0 >var_i_stdlib_170
 rmem reg0 reg0
-jf reg0 >while__stdlib_172_end
+jf reg0 >while_f2a7_stdlib_172_end
 rmem reg0 >var_i_stdlib_170
 add reg0 reg0 1
 wmem >var_i_stdlib_170 reg0
@@ -667,18 +667,18 @@ rmem reg0 reg0
 call >print_number
 set reg0 10
 out reg0
-jmp >while__stdlib_172_begin
-:while__stdlib_172_end
+jmp >while_f2a7_stdlib_172_begin
+:while_f2a7_stdlib_172_end
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >var_pointer_func_pointer_fun_6_end
-:var_pointer_func_pointer_fun_6
-:var_pointer_func_pointer_fun_6_end
-jmp >function__pointer_fun_6_end
-:function__pointer_fun_6
-jmp >var__pointer_fun_8_end
-:var__pointer_fun_8
+jmp >var_pointer_func_pointer_fun_5_end
+:var_pointer_func_pointer_fun_5
+:var_pointer_func_pointer_fun_5_end
+jmp >function_5880_pointer_fun_5_end
+:function_5880_pointer_fun_5
+jmp >var_8560_pointer_fun_7_end
+:var_8560_pointer_fun_7
 &a
 &d
 &e
@@ -687,16 +687,16 @@ jmp >var__pointer_fun_8_end
 &t
 &!
 0
-:var__pointer_fun_8_end
-wmem >var__pointer_fun_8 &M
-set reg0 >var__pointer_fun_8
+:var_8560_pointer_fun_7_end
+wmem >var_8560_pointer_fun_7 &M
+set reg0 >var_8560_pointer_fun_7
 call >println
 ret
-:function__pointer_fun_6_end
-set reg0 >function__pointer_fun_6
-wmem >var_pointer_func_pointer_fun_6 reg0
-jmp >var__pointer_fun_11_end
-:var__pointer_fun_11
+:function_5880_pointer_fun_5_end
+set reg0 >function_5880_pointer_fun_5
+wmem >var_pointer_func_pointer_fun_5 reg0
+jmp >var_11dd_pointer_fun_10_end
+:var_11dd_pointer_fun_10
 &e
 &m
 &o
@@ -729,21 +729,21 @@ jmp >var__pointer_fun_11_end
 &:
 32
 0
-:var__pointer_fun_11_end
-wmem >var__pointer_fun_11 &M
-set reg0 >var__pointer_fun_11
+:var_11dd_pointer_fun_10_end
+wmem >var_11dd_pointer_fun_10 &M
+set reg0 >var_11dd_pointer_fun_10
 call >print
-rmem reg0 >var_pointer_func_pointer_fun_6
+rmem reg0 >var_pointer_func_pointer_fun_5
 call >print_number
-jmp >var__pointer_fun_13_end
-:var__pointer_fun_13
+jmp >var_6a01_pointer_fun_12_end
+:var_6a01_pointer_fun_12
 0
-:var__pointer_fun_13_end
-wmem >var__pointer_fun_13 32
-set reg0 >var__pointer_fun_13
+:var_6a01_pointer_fun_12_end
+wmem >var_6a01_pointer_fun_12 32
+set reg0 >var_6a01_pointer_fun_12
 call >println
-jmp >var__pointer_fun_15_end
-:var__pointer_fun_15
+jmp >var_c51b_pointer_fun_14_end
+:var_c51b_pointer_fun_14
 &n
 &t
 &e
@@ -788,17 +788,17 @@ jmp >var__pointer_fun_15_end
 &:
 32
 0
-:var__pointer_fun_15_end
-wmem >var__pointer_fun_15 &E
-set reg0 >var__pointer_fun_15
+:var_c51b_pointer_fun_14_end
+wmem >var_c51b_pointer_fun_14 &E
+set reg0 >var_c51b_pointer_fun_14
 call >println
-jmp >var_func_ptr_pointer_fun_17_end
-:var_func_ptr_pointer_fun_17
-:var_func_ptr_pointer_fun_17_end
+jmp >var_func_ptr_pointer_fun_16_end
+:var_func_ptr_pointer_fun_16
+:var_func_ptr_pointer_fun_16_end
 call >input
 call >int
-wmem >var_func_ptr_pointer_fun_17 reg0
-rmem reg7 >var_func_ptr_pointer_fun_17
+wmem >var_func_ptr_pointer_fun_16 reg0
+rmem reg7 >var_func_ptr_pointer_fun_16
 call reg7
 halt
 

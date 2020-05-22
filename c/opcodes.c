@@ -154,7 +154,7 @@ void op_noop(state *vm_state) {
     // NOOP
 }
 
-void (*opcodes[22])(state*) = {
+void (*opcodes[23])(state*) = {
     op_halt,
     op_set,
     op_push,
@@ -176,11 +176,13 @@ void (*opcodes[22])(state*) = {
     op_ret,
     op_out,
     op_in,
+    op_noop,
+    // For now we will just do a noop for non-standard breakpoint op
     op_noop
 };
 
 
-char* opcode_names[22] = {
+char* opcode_names[23] = {
     "halt",
     "set",
     "push",
@@ -202,5 +204,6 @@ char* opcode_names[22] = {
     "ret",
     "out",
     "in",
-    "noop"
+    "noop",
+    "breakpoint"
 };

@@ -95,10 +95,14 @@ namespace syncomp
         private void EmitFunctionArgs(List<string> lines, FunctionCall functionCallNode, Context ctx)
         {
             var originalRegisterLevel = ctx.RegisterLevel;
+            // ctx.RegisterLevel = ctx.RegisterLevel + functionCallNode.Parameters.Count();
             foreach (var parameter in functionCallNode.Parameters)
+            // foreach (var parameter in functionCallNode.Parameters.AsQueryable().Reverse())
             {
                 lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
+                // lines.Add($"set reg{ctx.RegisterLevel} reg0");
                 ctx.RegisterLevel++;
+                // ctx.RegisterLevel--;
             }
             ctx.RegisterLevel = originalRegisterLevel;
         }

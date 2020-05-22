@@ -226,9 +226,13 @@ namespace synsharp {
         new Instruction() {
           OpCode = "noop",
           ArgCount = 0,
-          Action = (State state, ushort[] args) => {
-            //NOOP
-          }
+          Action = (State state, ushort[] args) => { /* NOOP */ }
+        },
+        // For now we just do a NOOP for the non-standard breakpoint op
+        new Instruction() {
+          OpCode = "breakpoint",
+          ArgCount = 0,
+          Action = (State state, ushort[] args) => { /* NOOP */ }
         }
       };
     }
