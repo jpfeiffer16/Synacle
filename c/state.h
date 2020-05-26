@@ -2,6 +2,7 @@
 #define STATE
 
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef struct vm_stack {
     uint16_t array[256];

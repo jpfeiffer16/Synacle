@@ -1,11 +1,13 @@
 #include "../lib/stdlib.bc"
 #include "../lib/testlib.bc"
 
+
 category("str_len tests", () => {
     var result = 0;
     before_each(() => { result = str_len("123"); });
 
     test("string length should be 3", () => {
+        println("Getting here");
         assert(is(result)->equal_to(3));
     });
 });
@@ -41,12 +43,6 @@ category("mem_cp tests", () => {
     // mem_cp(string_to_copy as ptr, string_ptr, len);
     mem_cp(string_to_copy as ptr, string_ptr, str_len(string_to_copy));
     test("strings should be equal", () => {
-        print_number(string_to_copy as int);
-        // println(string_ptr as string);
-        // print_number(str_len(string_to_copy));
-        // println(string_to_copy);
-        // println(string_ptr as string);
-        //breakpoint;
         assert(str_equal(string_to_copy, string_ptr as string));
     });
 });

@@ -1,5 +1,8 @@
+#include "./lib/stdlib.bc"
+
 function test_str(int val) : int
 {
+    println("Test");
     return val;
 }
 

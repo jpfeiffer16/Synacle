@@ -143,7 +143,6 @@ void op_in(state *vm_state) {
             vm_state->stopped = true;
         } else {
             sprintf(input_buff, "%s", input_line);
-            printf(input_buff);
             input_ptr = 0;
         }
         free(input_line);

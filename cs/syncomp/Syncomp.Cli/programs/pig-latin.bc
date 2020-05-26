@@ -3,6 +3,7 @@
 function main() {
   print("Enter your name or 'exit' to stop: ");
   string name = input();
+  println(name);
   if (str_equal(name, "exit")) {
     return;
   }

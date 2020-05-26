@@ -17,12 +17,15 @@ namespace syncomp
             lines.Add($":{name}");
             ctx.Variables.Push();
             lines.AddRange(new Transformer(fcNode.Parameters, ctx).Transform());
+            lines.Add("pop reg7");
             for (var index = 0; index < fcNode.Parameters.Count; index++)
             {
                 var parameter = fcNode.Parameters[index];
                 var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
+                lines.Add($"pop reg{index}");
                 lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
             }
+            lines.Add("push reg7");
             var previousRegisterLevel = ctx.RegisterLevel;
             ctx.RegisterLevel = 0;
             lines.AddRange(new Transformer(fcNode.Expression, ctx).Transform());
