@@ -3,6 +3,7 @@
 VM="syn-vm"
 DEBUG=""
 COMPILE_ONLY=""
+TRACE=""
 
 while getopts ":odcCjh" opt; do
   case ${opt} in
@@ -20,6 +21,9 @@ while getopts ":odcCjh" opt; do
       ;;
     j )
         VM="syn-vm"
+      ;;
+    t )
+        TRACE="-t"
       ;;
     h )
         echo "Usage: syn-run [-d] [-c] [-C] [-j]"
@@ -39,5 +43,5 @@ NAME=$(echo $1 | cut -d'.' -f 1)
 
 dotnet ~/Source/Synacle/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
 syn-asm $NAME.asm && [ -z $COMPILE_ONLY ] &&
-$VM $DEBUG -b $NAME.bin
+$VM $DEBUG $TRACE -b $NAME.bin
 
