@@ -39,7 +39,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void FieldLabelIsCorrect()
         {
-            var expectedMemoryAddress = "fld_test_variable_test_1_id";
+            var expectedMemoryAddress = "fld_test_variable_test_1_2_id";
             Assert.AreEqual($"rmem reg0 >{expectedMemoryAddress}", this.result.FirstOrDefault());
         }
     }

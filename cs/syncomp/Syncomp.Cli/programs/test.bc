@@ -52,7 +52,7 @@ function twenty_args(
     println(seventeen);
     println(eighteen);
     println(nineteen);
-    println(twenty)
+    println(twenty);
 }
 
 defer("1", () => {

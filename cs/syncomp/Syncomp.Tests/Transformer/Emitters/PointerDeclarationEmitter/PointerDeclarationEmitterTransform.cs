@@ -35,7 +35,7 @@ namespace syncomp.Tests
         public void OneBackingVarLabel()
         {
             Assert.IsTrue(
-              this.result.Contains(":var_test_ptr_backing__0")
+              this.result.Contains(":var_test_ptr_backing__0_0")
             );
         }
 
@@ -43,7 +43,7 @@ namespace syncomp.Tests
         public void OneBackingVarField()
         {
             Assert.IsTrue(
-              this.result.Contains(":fld_test_ptr_backing__0_id")
+              this.result.Contains(":fld_test_ptr_backing__0_0_id")
             );
         }
 
@@ -51,7 +51,7 @@ namespace syncomp.Tests
         public void OneVarLabel()
         {
             Assert.IsTrue(
-              this.result.Contains(":var_test_ptr__0")
+              this.result.Contains(":var_test_ptr__0_0")
             );
         }
 
@@ -59,7 +59,7 @@ namespace syncomp.Tests
         public void OneWmemForVar()
         {
             Assert.IsTrue(
-              this.result.Contains("wmem >var_test_ptr__0 >var_test_ptr_backing__0")
+              this.result.Contains("wmem >var_test_ptr__0_0 >var_test_ptr_backing__0_0")
             );
         }
     }
