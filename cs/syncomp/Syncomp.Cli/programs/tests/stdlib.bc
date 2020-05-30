@@ -44,3 +44,27 @@ category("mem_cp tests", () => {
         assert(str_equal(string_to_copy, string_ptr as string));
     });
 });
+
+category("str_cat tests", () => {
+    test("strings should be concatinated", () => {
+        assert(str_equal(str_cat("123", "456"), "123456"));
+    });
+});
+
+category("flip_str tests", () => {
+    test("string should be fliped", () => {
+        assert(str_equal(flip_str("123"), "321"));
+    });
+});
+
+category("int tests", () => {
+    test("string should be converted to an int", () => {
+        assert(is(int("123"))->equal_to(123));
+    });
+});
+
+category("string tests", () => {
+    test("int should be converted to a string", () => {
+        assert(str_equal(string(123), "123"));
+    });
+});
