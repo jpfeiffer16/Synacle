@@ -11,6 +11,50 @@ function test_str(int val) : int
     return val;
 }
 
+function twenty_args(
+    string one,
+    string two,
+    string three,
+    string four,
+    string five,
+    string six,
+    string seven,
+    string eight,
+    string nine,
+    string ten,
+    string eleven,
+    string twelve,
+    string thirteen,
+    string fourteen,
+    string fifteen,
+    string sixteen,
+    string seventeen,
+    string eighteen,
+    string nineteen,
+    string twenty)
+{
+    println(one);
+    println(two);
+    println(three);
+    println(four);
+    println(five);
+    println(six);
+    println(seven);
+    println(eight);
+    println(nine);
+    println(ten);
+    println(eleven);
+    println(twelve);
+    println(thirteen);
+    println(fourteen);
+    println(fifteen);
+    println(sixteen);
+    println(seventeen);
+    println(eighteen);
+    println(nineteen);
+    println(twenty)
+}
+
 defer("1", () => {
     defer("2", () => {
         defer("3", () => {
@@ -21,3 +65,4 @@ defer("1", () => {
     });
 });
 
+twenty_args("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20");

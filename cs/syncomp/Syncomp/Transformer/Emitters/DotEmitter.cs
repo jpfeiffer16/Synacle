@@ -15,8 +15,9 @@ namespace syncomp
             var variable = ctx.Variables.Get((dotNode.Left as Identifier).Name);
             var fieldName = TransformerHelpers.GetUID(
                     variable.VariableDeclaration.File,
+                    variable.VariableDeclaration.Identifier,
                     variable.VariableDeclaration.Line,
-                    variable.VariableDeclaration.Identifier);
+                    variable.VariableDeclaration.Column);
             var memoryAddress = $"fld_{fieldName}_{(dotNode.Right as Identifier).Name}";
 
             lines.Add($"rmem reg{ctx.RegisterLevel} >{memoryAddress}");

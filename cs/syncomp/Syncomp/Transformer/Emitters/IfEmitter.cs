@@ -12,7 +12,7 @@ namespace syncomp
             var lines = new List<string>();
             var ifNode = node as If;
 
-            var uuid = TransformerHelpers.GetUID(ifNode.File, ifNode.Line, null);
+            var uuid = TransformerHelpers.GetUID(ifNode.File, null, ifNode.Line, ifNode.Column);
 
             lines.AddRange(new Transformer(ifNode.Condition, ctx).Transform());
             lines.Add($"jf reg0 >end_{uuid}");

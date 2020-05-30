@@ -11,7 +11,7 @@ namespace syncomp
         {
             var lines = new List<string>();
             var vdNode = node as VariableDeclaration;
-            var guid = TransformerHelpers.GetUID(vdNode.File, vdNode.Line, vdNode.Identifier);
+            var guid = TransformerHelpers.GetUID(vdNode.File, vdNode.Identifier, vdNode.Line, vdNode.Column);
             lines.Add($"jmp >var_{guid}_end");
             lines.Add($":var_{guid}");
             if (vdNode?.NodeType?.Body?.Count > 0)

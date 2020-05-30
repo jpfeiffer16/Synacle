@@ -11,7 +11,7 @@ namespace syncomp
         {
             var lines = new List<string>();
             var forNode = node as For;
-            var uuid = TransformerHelpers.GetUID(forNode.File, forNode.Line, null);
+            var uuid = TransformerHelpers.GetUID(forNode.File, null, forNode.Line, forNode.Column);
 
             lines.AddRange(new Transformer(forNode.Init, ctx).Transform());
             lines.Add($":for_{uuid}_begin");

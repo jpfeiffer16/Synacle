@@ -40,7 +40,7 @@ namespace syncomp
                 var stringToEmit = emitSb.ToString();
                 var firstLetter = stringToEmit.Substring(0, 1);
                 var value = stringToEmit.Substring(1);
-                var uuid = TransformerHelpers.GetUID(strNode.File, strNode.Line, null);
+                var uuid = TransformerHelpers.GetUID(strNode.File, null, strNode.Line, strNode.Column);
                 lines.Add($"jmp >var_{uuid}_end");
                 lines.Add($":var_{uuid}");
                 for (var charIndex = 0; charIndex < value.Length; charIndex++)

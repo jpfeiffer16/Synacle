@@ -33,8 +33,9 @@ namespace syncomp
                 // memoryAddress = $"fld_{(dot.Left as Identifier).Name}_{(dot.Right as Identifier).Name}";
                 var fieldName = TransformerHelpers.GetUID(
                         variable.VariableDeclaration.File,
+                        variable.VariableDeclaration.Identifier,
                         variable.VariableDeclaration.Line,
-                        variable.VariableDeclaration.Identifier);
+                        variable.VariableDeclaration.Column);
                 memoryAddress = $"fld_{fieldName}_{(dot.Right as Identifier).Name}";
             }
 

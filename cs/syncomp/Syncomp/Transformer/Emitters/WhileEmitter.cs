@@ -11,7 +11,7 @@ namespace syncomp
         {
             var lines = new List<string>();
             var whNode = node as While;
-            var uuid = TransformerHelpers.GetUID(whNode.File, whNode.Line, null);
+            var uuid = TransformerHelpers.GetUID(whNode.File, null, whNode.Line, whNode.Column);
 
             //Begin
             lines.Add($":while_{uuid}_begin");

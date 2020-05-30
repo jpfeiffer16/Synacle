@@ -19,8 +19,8 @@ namespace syncomp
 
             lines.AddRange(new VariableDeclarationEmitter().Transform(pdNode, ctx));
 
-            var backingGuid = TransformerHelpers.GetUID(backingVariableNode.File, backingVariableNode.Line, backingVariableNode.Identifier);
-            var variableGuid = TransformerHelpers.GetUID(pdNode.File, pdNode.Line, pdNode.Identifier);
+            var backingGuid = TransformerHelpers.GetUID(backingVariableNode.File, backingVariableNode.Identifier, backingVariableNode.Line, backingVariableNode.Column);
+            var variableGuid = TransformerHelpers.GetUID(pdNode.File, pdNode.Identifier, pdNode.Line, pdNode.Column);
             lines.Add($"wmem >var_{variableGuid} >var_{backingGuid}");
 
             ctx.Variables.Add(new Variable
