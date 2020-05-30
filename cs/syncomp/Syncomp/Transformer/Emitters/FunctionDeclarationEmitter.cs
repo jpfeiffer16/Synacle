@@ -20,10 +20,10 @@ namespace syncomp
             lines.Add("pop reg7");
             for (var index = 0; index < fcNode.Parameters.Count; index++)
             {
-                var parameter = fcNode.Parameters[index];
+                var parameter = fcNode.Parameters[fcNode.Parameters.Count - index - 1];
                 var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
-                lines.Add($"pop reg{index}");
-                lines.Add($"wmem >{variable.MemoryAddress} reg{index}");
+                lines.Add("pop reg0");
+                lines.Add($"wmem >{variable.MemoryAddress} reg0");
             }
             lines.Add("push reg7");
             var previousRegisterLevel = ctx.RegisterLevel;
