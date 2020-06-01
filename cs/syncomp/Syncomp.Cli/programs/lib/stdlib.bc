@@ -165,6 +165,10 @@ function print_number(int num) {
     print(string(num));
 }
 
+function print_numberln(int num) {
+    println(string(num));
+}
+
 
 function dump_mem() {
   var i = 0;
