@@ -1,9 +1,23 @@
-push(63);
+#include "./lib/stdlib.bc"
 
-wmem(123 as ptr, pop() + 2);
-// wmem(123 as ptr, 65);
+type test_type { int id }
 
-var test = 123 as string;
+function a()
+{
+    println("a");
+}
 
+function b()
+{
+    println("b");
+}
 
-out(~test as int);
+ptr<test_type> &var_one; 
+var_one->id = 0;
+ptr<test_type> &var_two; 
+var_two->id = 1;
+print_number(var_two->id);
+println(" ");
+
+var_one->id ? a() : b();
+var_two->id ? a() : b();

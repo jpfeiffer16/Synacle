@@ -517,6 +517,25 @@ namespace syncomp
                 diagnostics.AddRange(Check(equalNode.Right, ctx));
             }
             #endregion
+            #region "Ternary"
+            if (node is Ternary ternary)
+            {
+                diagnostics.AddRange(Check(ternary.Condition, ctx));
+                diagnostics.AddRange(Check(ternary.Left, ctx));
+                diagnostics.AddRange(Check(ternary.Right, ctx));
+                if (!ternary.Left.NodeType.Equals(ternary.Right.NodeType))
+                {
+                    diagnostics.Add(new Diagnostic(
+                        ternary.File,
+                        ternary.Line,
+                        ternary.Column,
+                        $"Result types '{ternary.Left.NodeType.GetName()}' and '{ternary.Right.NodeType.GetName()}' are not the same",
+                        DiagnosticCode.InvalidTypes));
+                    return diagnostics;
+                }
+                ternary.NodeType = ternary.Left.NodeType;
+            }
+            #endregion
             return diagnostics;
         }
         #endregion

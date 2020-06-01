@@ -285,6 +285,13 @@ namespace syncomp
                 return CreateSyntaxToken(SyntaxTokenType.Comma, ch);
             #endregion
 
+            #region "QuestionMark"
+            if (ch is "?")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.QuestionMark, ch);
+            }
+            #endregion
+
             #region "EOF and Unknown"
             if (ch is null)
                 return CreateSyntaxToken(SyntaxTokenType.EOF, "");

@@ -37,7 +37,8 @@ namespace syncomp
             new VariableDeclarationPath(),
             new WhilePath(),
             new AsPath(),
-            new DerefArrowPath()
+            new DerefArrowPath(),
+            new TernaryPath()
         };
     }
 }

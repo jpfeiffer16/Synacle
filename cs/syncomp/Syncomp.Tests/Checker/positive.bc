@@ -24,3 +24,7 @@ var lambda_test_two = () : int => 123;
 lambda_test_two = () : int => {
     return 123;
 };
+
+function yes() : int => 1;
+
+var ternary_result = yes() ? 1 : 0;

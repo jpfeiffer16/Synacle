@@ -39,7 +39,8 @@ namespace syncomp
             new WhileEmitter(),
             new DotEmitter(),
             new AsEmitter(),
-            new DerefArrowEmitter()
+            new DerefArrowEmitter(),
+            new TernaryEmitter()
         };
     }
 }

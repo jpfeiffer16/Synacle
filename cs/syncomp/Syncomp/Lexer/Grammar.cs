@@ -50,7 +50,8 @@ namespace syncomp
         Colon,
         As,
         DerefArrow,
-        LambdaArrow
+        LambdaArrow,
+        QuestionMark
     }
 
     public static class Grammar
