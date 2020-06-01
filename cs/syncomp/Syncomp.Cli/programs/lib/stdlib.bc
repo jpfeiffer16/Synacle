@@ -1,118 +1,118 @@
 function str_len(string str) : int {
-  var str_ptr = str as int;
-  var length = 0;
-  while(~str_ptr) {
-    ++str_ptr;
-    ++length;
-  }
-  return length;
+    var str_ptr = str as int;
+    var length = 0;
+    while(~str_ptr) {
+        ++str_ptr;
+        ++length;
+    }
+    return length;
 }
 
 function print(string str) {
-  var str_ptr = str as int;
-  while (~str_ptr) {
-    out(~str_ptr as int);
-    ++str_ptr;
-  }
+    var str_ptr = str as int;
+    while (~str_ptr) {
+        out(~str_ptr as int);
+        ++str_ptr;
+    }
 }
 
 function println(string str_ptr) {
-  print(str_ptr);
-  out(10);
+    print(str_ptr);
+    out(10);
 }
 
 function str_equal(string str_a, string str_b) : int {
-  var a_len = str_len(str_a);
-  var b_len = str_len(str_b);
-  if (!(a_len == b_len)) {
-    return 0;
-  }
-  for (var i = 0; i < a_len; ++i) {
-    var a_val = ~(str_a + i) as int;
-    var b_val = ~(str_b + i) as int;
-    if (!(a_val == b_val)) {
-      return 0;
+    var a_len = str_len(str_a);
+    var b_len = str_len(str_b);
+    if (!(a_len == b_len)) {
+        return 0;
     }
-  }
-  return 1;
+    for (var i = 0; i < a_len; ++i) {
+        var a_val = ~(str_a + i) as int;
+        var b_val = ~(str_b + i) as int;
+        if (!(a_val == b_val)) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 function alloc() : ptr {
-  int data_index = 16382;
-  while (!(~(data_index))) {
-    --data_index;
-  }
-  data_index = data_index + 2;
-  return data_index as ptr;
+    int data_index = 16382;
+    while (!(~(data_index))) {
+        --data_index;
+    }
+    data_index = data_index + 2;
+    return data_index as ptr;
 }
 
 function alloc_chunk(int length) : ptr {
-  ptr pointer = alloc();
-  int dest_ptr = pointer + length;
-  wmem(dest_ptr as ptr, 32767);
-  return pointer;
+    ptr pointer = alloc();
+    int dest_ptr = pointer + length;
+    wmem(dest_ptr as ptr, 32767);
+    return pointer;
 }
 
 function mem_cp(ptr s_ptr, ptr d_ptr, int len) {
-  var current_byte = 0;
-  while (current_byte <= len) {
-    var byte_to_write_ptr = s_ptr + current_byte;
-    var dest_ptr = d_ptr + current_byte;
-    wmem(dest_ptr as ptr, ~byte_to_write_ptr as int);
-    ++current_byte;
-  }
+    var current_byte = 0;
+    while (current_byte <= len) {
+        var byte_to_write_ptr = s_ptr + current_byte;
+        var dest_ptr = d_ptr + current_byte;
+        wmem(dest_ptr as ptr, ~byte_to_write_ptr as int);
+        ++current_byte;
+    }
 }
 
 function str_cat(string str_a, string str_b) : string {
-  var a_len = str_len(str_a);
-  var b_len = str_len(str_b);
-  ptr alloc_ptr = alloc();
-  mem_cp(str_a as ptr, alloc_ptr as ptr, a_len);
-  var end_address = alloc_ptr + a_len;
-  ++b_len;
-  mem_cp(str_b as ptr, end_address as ptr, b_len);
-  return alloc_ptr as string;
+    var a_len = str_len(str_a);
+    var b_len = str_len(str_b);
+    ptr alloc_ptr = alloc();
+    mem_cp(str_a as ptr, alloc_ptr as ptr, a_len);
+    var end_address = alloc_ptr + a_len;
+    ++b_len;
+    mem_cp(str_b as ptr, end_address as ptr, b_len);
+    return alloc_ptr as string;
 }
 
 function flip_str(string str_ptr) : string {
-  ptr alloc_ptr = alloc();
-  var len = str_len(str_ptr);
-  var index = 0;
-  while (index < len) {
-    var source_index = str_ptr + index;
-    push(~source_index as int);
-    ++index;
-  }
+    ptr alloc_ptr = alloc();
+    var len = str_len(str_ptr);
+    var index = 0;
+    while (index < len) {
+        var source_index = str_ptr + index;
+        push(~source_index as int);
+        ++index;
+    }
 
-  var current_byte = pop();
-  index = 0;
-  while (index < len) {
-    var dest_index = alloc_ptr + index;
-    wmem(dest_index as ptr, current_byte);
+    var current_byte = pop();
+    index = 0;
+    while (index < len) {
+        var dest_index = alloc_ptr + index;
+        wmem(dest_index as ptr, current_byte);
 
-    ++index;
-    current_byte = pop();
-  }
-  push(current_byte);
+        ++index;
+        current_byte = pop();
+    }
+    push(current_byte);
 
-  return alloc_ptr as string;
+    return alloc_ptr as string;
 }
 
 function input() : string {
-  var data_index = 16384;
-  var in_char = in();
-  var is_newline = in_char == 10;
-  while (!is_newline && in_char) {
-    wmem(data_index as ptr, in_char);
-    ++data_index;
-    in_char = in();
-    is_newline = in_char == 10;
-  }
-  wmem(data_index as ptr, 0);
-  ptr alloc_ptr = alloc();
-  var length = str_len(16384 as string);
-  mem_cp(16384 as ptr, alloc_ptr, length);
-  return alloc_ptr as string;
+    var data_index = 16384;
+    var in_char = in();
+    var is_newline = in_char == 10;
+    while (!is_newline && in_char) {
+        wmem(data_index as ptr, in_char);
+        ++data_index;
+        in_char = in();
+        is_newline = in_char == 10;
+    }
+    wmem(data_index as ptr, 0);
+    ptr alloc_ptr = alloc();
+    var length = str_len(16384 as string);
+    mem_cp(16384 as ptr, alloc_ptr, length);
+    return alloc_ptr as string;
 }
 
 function int(string str) : int {
@@ -136,29 +136,29 @@ function int(string str) : int {
 }
 
 function string(int num) : string {
-  int charNum;
-  var length = 0;
-  while (num > 9) {
+    int charNum;
+    var length = 0;
+    while (num > 9) {
+        charNum = num % 10;
+        push(charNum);
+        ++length;
+        num = num / 10;
+    }
     charNum = num % 10;
     push(charNum);
     ++length;
-    num = num / 10;
-  }
-  charNum = num % 10;
-  push(charNum);
-  ++length;
 
-  //Clean up the stack and output number
-  var stack_index = 0;
-  var dest_ptr = alloc();
+    //Clean up the stack and output number
+    var stack_index = 0;
+    var dest_ptr = alloc();
 
-  while(stack_index < length) {
-    wmem(dest_ptr + stack_index as ptr, pop() + 48);
-    stack_index = stack_index + 1;
-  }
-  wmem(dest_ptr + stack_index as ptr, 0);
+    while(stack_index < length) {
+        wmem(dest_ptr + stack_index as ptr, pop() + 48);
+        stack_index = stack_index + 1;
+    }
+    wmem(dest_ptr + stack_index as ptr, 0);
 
-  return dest_ptr as string;
+    return dest_ptr as string;
 }
 
 function print_number(int num) {
@@ -171,11 +171,11 @@ function print_numberln(int num) {
 
 
 function dump_mem() {
-  var i = 0;
+    var i = 0;
 
-  while (~i) {
-    ++i;
-    print_number(~i as int);
-    out(10);
-  }
+    while (~i) {
+        ++i;
+        print_number(~i as int);
+        out(10);
+    }
 }
