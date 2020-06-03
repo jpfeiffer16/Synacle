@@ -1,23 +1,27 @@
 #include "./lib/stdlib.bc"
 
-type test_type { int id }
-
-function a()
-{
-    println("a");
+type test_type {
+    int id,
+    string name
 }
 
-function b()
+function a(test_type test)
 {
-    println("b");
+    print_numberln(test.id);
+    test.name = "123";
+    println(test.name);
 }
 
-ptr<test_type> &var_one; 
-var_one->id = 0;
-ptr<test_type> &var_two; 
-var_two->id = 1;
-print_number(var_two->id);
-println(" ");
+function b(int id)
+{
+    print_numberln(id);
+}
 
-var_one->id ? a() : b();
-var_two->id ? a() : b();
+test_type t;
+t.id = 123;
+t.name = "Test";
+
+a(t);
+b(321);
+
+println(t.name);

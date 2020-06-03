@@ -89,14 +89,10 @@ namespace syncomp
             }
             else
             {
-                // var regLevel = ctx.RegisterLevel;
-                // ctx.RegisterLevel = 7;
                 lines.AddRange(new Transformer(new List<AstNode> { fcNode.Name }, ctx).Transform());
-                // lines.AddRange(TransformAst(new List<AstNode> { fcNode.Name }, ctx));
                 lines.Add($"set reg7 reg{ctx.RegisterLevel}");
                 EmitStackFunctionArgs(lines, fcNode, ctx);
                 lines.Add($"call reg7");
-                // ctx.RegisterLevel = regLevel;
             }
 
             return lines;
@@ -105,45 +101,41 @@ namespace syncomp
         private void EmitRegFunctionArgs(List<string> lines, FunctionCall functionCallNode, Context ctx)
         {
             var originalRegisterLevel = ctx.RegisterLevel;
-            // ctx.RegisterLevel = ctx.RegisterLevel + functionCallNode.Parameters.Count();
             foreach (var parameter in functionCallNode.Parameters)
-            // foreach (var parameter in functionCallNode.Parameters.AsQueryable().Reverse())
             {
                 lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
-                // lines.Add($"set reg{ctx.RegisterLevel} reg0");
                 ctx.RegisterLevel++;
-                // ctx.RegisterLevel--;
             }
             ctx.RegisterLevel = originalRegisterLevel;
-            // var originalRegisterLevel = ctx.RegisterLevel;
-            // ctx.RegisterLevel = ctx.RegisterLevel + functionCallNode.Parameters.Count();
         }
 
         private void EmitStackFunctionArgs(List<string> lines, FunctionCall functionCallNode, Context ctx)
         {
-            // var originalRegisterLevel = ctx.RegisterLevel;
-            // // ctx.RegisterLevel = ctx.RegisterLevel + functionCallNode.Parameters.Count();
-            // foreach (var parameter in functionCallNode.Parameters)
-            // // foreach (var parameter in functionCallNode.Parameters.AsQueryable().Reverse())
-            // {
-            //     lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
-            //     // lines.Add($"set reg{ctx.RegisterLevel} reg0");
-            //     ctx.RegisterLevel++;
-            //     // ctx.RegisterLevel--;
-            // }
-            // ctx.RegisterLevel = originalRegisterLevel;
-            // var originalRegisterLevel = ctx.RegisterLevel;
-            // ctx.RegisterLevel = ctx.RegisterLevel + functionCallNode.Parameters.Count();
             foreach (var parameter in functionCallNode.Parameters)
-            // foreach (var parameter in functionCallNode.Parameters.AsQueryable().Reverse())
             {
-                lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
-                lines.Add($"push reg{ctx.RegisterLevel}");
-                // lines.Add($"set reg{ctx.RegisterLevel} reg0");
-                // ctx.RegisterLevel++;
-                // ctx.RegisterLevel--;
+                if (parameter.NodeType.Body?.Count > 0)
+                {
+                    var variable = ctx.Variables.Get((parameter as Identifier).Name);
+                    // var declaration = parameter as VariableDeclaration;
+                    var varName = TransformerHelpers.GetUID(
+                        variable.VariableDeclaration.File,
+                        variable.VariableDeclaration.Identifier,
+                        variable.VariableDeclaration.Line,
+                        variable.VariableDeclaration.Column);
+                    foreach (var field in parameter.NodeType.Body)
+                    {
+                        var memoryAddress = $"fld_{varName}_{(field as VariableDeclaration).Identifier}";
+                        lines.Add($"rmem reg{ctx.RegisterLevel} >{memoryAddress}");
+                        lines.Add($"push reg{ctx.RegisterLevel}");
+
+                    }
+                }
+                else
+                {
+                    lines.AddRange(new Transformer(new List<AstNode> { parameter }, ctx).Transform());
+                    lines.Add($"push reg{ctx.RegisterLevel}");
+                }
             }
-            // ctx.RegisterLevel = originalRegisterLevel;
         }
     }
 }

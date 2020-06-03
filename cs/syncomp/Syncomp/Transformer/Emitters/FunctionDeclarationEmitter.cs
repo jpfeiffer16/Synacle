@@ -22,8 +22,28 @@ namespace syncomp
             {
                 var parameter = fcNode.Parameters[fcNode.Parameters.Count - index - 1];
                 var variable = ctx.Variables.Get((parameter as VariableDeclaration).Identifier);
-                lines.Add("pop reg0");
-                lines.Add($"wmem >{variable.MemoryAddress} reg0");
+                if (variable.VariableDeclaration.NodeType.Body?.Count > 0)
+                {
+                    var varName = TransformerHelpers.GetUID(
+                        variable.VariableDeclaration.File,
+                        variable.VariableDeclaration.Identifier,
+                        variable.VariableDeclaration.Line,
+                        variable.VariableDeclaration.Column);
+                    for(var i = variable.VariableDeclaration.NodeType.Body.Count -1;; i--)
+                    {
+                        var field = variable.VariableDeclaration.NodeType.Body[i];
+                        var fieldAddress = $"fld_{varName}_{(field as VariableDeclaration).Identifier}";
+                        lines.Add($"pop reg0");
+                        lines.Add($"wmem >{fieldAddress} reg0");
+
+                        if (i == 0) break;
+                    }
+                }
+                else
+                {
+                    lines.Add("pop reg0");
+                    lines.Add($"wmem >{variable.MemoryAddress} reg0");
+                }
             }
             lines.Add("push reg7");
             var previousRegisterLevel = ctx.RegisterLevel;
