@@ -17,17 +17,20 @@ namespace syncomp.Tests
               new FunctionDeclaration(
                 new List<AstNode>
                 {
-            new VariableDeclaration("a",null, null, 0, 0)
+                    new VariableDeclaration("a",null, null, 0, 0)
+                    {
+                        NodeType = ParserContext.NativeTypes.LangInt
+                    }
                 },
                 new List<AstNode>
                 {
-            new FunctionCall(
-              new List<AstNode>
-              {
-                new IntegerLiteral("65", null, 0, 0)
-              },
-              new Identifier("out", null, 0, 0)
-            , null, 0, 0)
+                    new FunctionCall(
+                      new List<AstNode>
+                      {
+                        new IntegerLiteral("65", null, 0, 0)
+                      },
+                      new Identifier("out", null, 0, 0)
+                    , null, 0, 0)
                 },
                 "test"
               , null, 0, 0),
