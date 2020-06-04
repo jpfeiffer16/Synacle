@@ -20,4 +20,4 @@ jobs:
       with:
         node-version: 12
     - name: Run bc tests
-      run: "!(syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc | grep FAILED)"
+      run: "!(./syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc | grep FAILED)"
