@@ -14,10 +14,10 @@ jobs:
       with:
         dotnet-version: 2.2.108
     - name: Build with dotnet
-      run: cd cs/syncomp/Syncomp.Tests/ && dotnet test && !(../../../syn-run ../Syncomp.Cli/programs/tests/stdlib.bc | grep FAILED)
+      run: cd cs/syncomp/Syncomp.Tests/ && dotnet test
     - name: Setup Node.js environment
       uses: actions/setup-node@v1.4.2
       with:
         node-version: 12
     - name: Run bc tests
-      run: "!(./syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc | grep FAILED)"
+      run: "./syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc"
