@@ -15,8 +15,9 @@ jobs:
     - uses: actions/setup-node@v1.4.2
       with:
         node-version: 12
-      
     - name: Build with dotnet
+      run: cd cs/syncomp/Syncomp.sln
+    - name: Run CSharp tests
       run: cd cs/syncomp/Syncomp.Tests/ && dotnet test
     - name: Run bc tests
       run: "./syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc"
