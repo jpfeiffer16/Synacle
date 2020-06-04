@@ -15,11 +15,21 @@ jobs:
     - uses: actions/setup-node@v1.4.2
       with:
         node-version: 12
-    - name: Build with dotnet
+
+    - name: build with dotnet (compiler)
       run: dotnet build cs/syncomp/Syncomp.sln
-    - name: Run CSharp tests
+
+    - name: run csharp tests (compiler)
       run: cd cs/syncomp/Syncomp.Tests/ && dotnet test
-    - name: Npm install
+
+    - name: build csharp vm
+      run: cd cs/synsharp && dotnet build
+
+    - name: build c vm
+      run: cd c && make
+
+    - name: npm install (js vm)
       run: npm install
-    - name: Run bc tests
-      run: "./syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc"
+
+    - name: Build bc tests
+      run: "./syn-run -o cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc"
