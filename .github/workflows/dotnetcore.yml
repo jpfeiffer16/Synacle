@@ -19,5 +19,7 @@ jobs:
       run: dotnet build cs/syncomp/Syncomp.sln
     - name: Run CSharp tests
       run: cd cs/syncomp/Syncomp.Tests/ && dotnet test
+    - name: Npm install
+      run: npm install
     - name: Run bc tests
       run: "./syn-run cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc"
