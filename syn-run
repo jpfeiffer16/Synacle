@@ -47,6 +47,6 @@ echo $BASE_PATH
 file $BASE_PATH/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll
 cat $BASE_PATH/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll
 
-dotnet $BASE_PATH/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
+dotnet run --no-build --project $BASE_PATH/cs/syncomp/Syncomp.Cli $NAME.bc &&
 $BASE_PATH/synasm/asm.js $NAME.asm && [ -z $COMPILE_ONLY ] &&
 $VM $DEBUG $TRACE -b $NAME.bin
