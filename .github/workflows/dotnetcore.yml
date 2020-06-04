@@ -16,7 +16,7 @@ jobs:
       with:
         node-version: 12
     - name: Build with dotnet
-      run: cd cs/syncomp/Syncomp.sln
+      run: dotnet build cs/syncomp/Syncomp.sln
     - name: Run CSharp tests
       run: cd cs/syncomp/Syncomp.Tests/ && dotnet test
     - name: Run bc tests
