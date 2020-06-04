@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BASE_PATH=$(dirname $(realpath $0))
 VM="syn-vm"
 DEBUG=""
 COMPILE_ONLY=""
@@ -14,13 +15,13 @@ while getopts ":otdcCjh" opt; do
         DEBUG="-d"
       ;;
     c )
-        VM="$HOME/Source/Synacle/c/bin/synvmc"
+        VM="$BASE_PATH/c/bin/synvmc"
       ;;
     C )
-        VM="dotnet $HOME/Source/Synacle/cs/synsharp/bin/Debug/netcoreapp2.0/synsharp.dll"
+        VM="dotnet $BASE_PATH/cs/synsharp/bin/Debug/netcoreapp2.0/synsharp.dll"
       ;;
     j )
-        VM="syn-vm"
+        VM="node $BASE_PATH/synvm/vm.js"
       ;;
     t )
         TRACE="-t"
@@ -41,7 +42,6 @@ shift $((OPTIND -1))
 
 NAME=$(echo $1 | cut -d'.' -f 1)
 
-
-dotnet ~/Source/Synacle/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
-syn-asm $NAME.asm && [ -z $COMPILE_ONLY ] &&
+dotnet $BASE_PATH/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
+$BASE_PATH/synasm/asm.js $NAME.asm && [ -z $COMPILE_ONLY ] &&
 $VM $DEBUG $TRACE -b $NAME.bin
