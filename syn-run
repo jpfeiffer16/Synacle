@@ -40,7 +40,7 @@ while getopts ":otdcCjh" opt; do
 done
 shift $((OPTIND -1))
 
-NAME=$(echo $1 | cut -d'.' -f 1)
+NAME=${1%.*}
 
 dotnet $BASE_PATH/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
 $BASE_PATH/synasm/asm.js $NAME.asm && [ -z $COMPILE_ONLY ] &&
