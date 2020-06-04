@@ -42,6 +42,7 @@ shift $((OPTIND -1))
 
 NAME=${1%.*}
 
+pwd
 echo $BASE_PATH
 
 dotnet $BASE_PATH/cs/syncomp/Syncomp.Cli/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll $NAME.bc &&
