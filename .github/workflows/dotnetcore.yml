@@ -38,7 +38,7 @@ jobs:
       run: "OUTPUT=$(c/bin/synvmc -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && echo $OUTPUT;! echo $OUTPUT | grep 'FAILED' > /dev/null"
 
     - name: Run bc tests (csharp vm)
-      run: "OUTPUT=$(dotnet run --no-build cs/synsharp/synsharp.csproj -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && echo $OUTPUT;! echo $OUTPUT | grep 'FAILED' > /dev/null"
+      run: "OUTPUT=$(dotnet run --no-build --project cs/synsharp/synsharp.csproj -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && echo $OUTPUT;! echo $OUTPUT | grep 'FAILED' > /dev/null"
 
     - name: Run bc tests (js vm)
       run: "OUTPUT=$(synvm/vm.js -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && echo $OUTPUT;! echo $OUTPUT | grep 'FAILED' > /dev/null"
