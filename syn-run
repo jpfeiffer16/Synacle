@@ -43,5 +43,9 @@ shift $((OPTIND -1))
 NAME=${1%.*}
 
 dotnet run --no-build --project $BASE_PATH/cs/syncomp/Syncomp.Cli $NAME.bc &&
-$BASE_PATH/synasm/asm.js $NAME.asm && [ -z $COMPILE_ONLY ] &&
-$VM $DEBUG $TRACE -b $NAME.bin
+$BASE_PATH/synasm/asm.js $NAME.asm || exit 1
+if [ -z $COMPILE_ONLY ]
+then
+    $VM $DEBUG $TRACE -b $NAME.bin
+fi
+exit $?
