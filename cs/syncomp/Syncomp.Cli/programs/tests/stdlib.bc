@@ -7,7 +7,7 @@ category("str_len tests", () => {
     before_each(() => { result = str_len("123"); });
 
     test("string length should be 3", () => {
-        assert(is(result)->equal_to(4));
+        assert(is(result)->equal_to(3));
     });
 });
 
