@@ -53,6 +53,7 @@ function Debugger(memory, interpreter, stdinMode = false) {
         break;
       case 'step':
         interpreter.step();
+        break;
       case 'snap':
         snapshot(memory);
         break;
