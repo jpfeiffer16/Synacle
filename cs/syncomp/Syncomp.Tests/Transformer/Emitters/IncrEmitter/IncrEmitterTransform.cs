@@ -15,7 +15,8 @@ namespace syncomp.Tests
             ctx.Variables.Add(new Variable
             {
                 MemoryAddress = "123",
-                Name = "a"
+                Name = "a",
+                VariableDeclaration = new VariableDeclaration("a", ParserContext.NativeTypes.LangInt, null, 0, 0)
             });
             this.result = new IncrEmitter().Transform(
               new Incr(new Identifier("a", null, 0, 0), null, 0, 0),

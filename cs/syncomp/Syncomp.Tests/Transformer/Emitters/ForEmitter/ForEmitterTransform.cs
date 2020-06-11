@@ -14,15 +14,15 @@ namespace syncomp.Tests
             var ctx = new Context();
             this.result = new ForEmitter().Transform(
               new For(
-                new List<AstNode> { new VariableDeclaration("i", null, null, 0, 0) },
+                new List<AstNode> { new VariableDeclaration("i", ParserContext.NativeTypes.LangInt, null, 0, 0) },
                 new List<AstNode> {
-            new LessThan(new Identifier("i", null ,0, 0), new IntegerLiteral("10", null ,0, 0), null ,0, 0)
+                  new LessThan(new Identifier("i", null ,0, 0), new IntegerLiteral("10", null ,0, 0), null ,0, 0)
                 },
                 new List<AstNode> {
-            new Incr(new Identifier("i", null ,0, 0), null ,0, 0),
+                  new Incr(new Identifier("i", null ,0, 0), null ,0, 0),
                 },
                 new List<AstNode>()
-              , null ,0, 0),
+              , null, 0, 0),
               ctx
             );
         }
