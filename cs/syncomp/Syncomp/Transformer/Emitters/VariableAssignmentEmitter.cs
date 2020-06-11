@@ -54,7 +54,28 @@ namespace syncomp
                 isMemoryAddressRuntimeComputed = true;
             }
             var memoryAddressString = isMemoryAddressRuntimeComputed ? "reg7" : $">{memoryAddress ?? throw new Exception("Unknown memory address")}";
-            lines.Add($"wmem {memoryAddressString} reg0");
+            // If the right-hand operand is a struct, we will do a struct copy.
+            // This makes the assumption that the left-hand operand is of the same type,
+            // but the type checker should enforce that
+            if (vaNode.Parameter.NodeType.Body?.Count > 0)
+            {
+                //Translate compiletime-computed to runtime-computed so we can get offsets
+                if (!isMemoryAddressRuntimeComputed)
+                {
+                    lines.Add($"set reg7 >{memoryAddress}");
+                }
+                lines.Add($"add reg7 reg7 {vaNode.Parameter.NodeType.Body.Count}");
+                foreach (var _ in vaNode.Parameter.NodeType.Body)
+                {
+                    lines.Add($"pop reg{ctx.RegisterLevel}");
+                    lines.Add($"wmem reg7 reg{ctx.RegisterLevel}");
+                    lines.Add("add reg7 reg7 32767");
+                }
+            }
+            else
+            {
+                lines.Add($"wmem {memoryAddressString} reg0");
+            }
 
             return lines;
         }

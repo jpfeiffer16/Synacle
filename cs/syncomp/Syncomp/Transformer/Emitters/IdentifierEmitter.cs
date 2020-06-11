@@ -14,7 +14,20 @@ namespace syncomp
 
             var variable = ctx.Variables.Get(idNode.Name);
 
-            lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
+            if (variable.VariableDeclaration.NodeType.Body?.Count > 0)
+            {
+                lines.Add($"set reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
+                foreach(var _ in variable.VariableDeclaration.NodeType.Body)
+                {
+                    lines.Add($"add reg{ctx.RegisterLevel} reg{ctx.RegisterLevel} 1");
+                    lines.Add($"rmem reg{ctx.RegisterLevel + 1} reg{ctx.RegisterLevel}");
+                    lines.Add($"push reg{ctx.RegisterLevel + 1}");
+                }
+            }
+            else
+            {
+                lines.Add($"rmem reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
+            }
 
             return lines;
         }

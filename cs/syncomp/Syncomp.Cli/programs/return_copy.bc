@@ -1,0 +1,30 @@
+#include "./lib/stdlib.bc"
+
+type person
+{
+    int id,
+    string name
+};
+
+function get_person()
+    : person
+{
+    person per;
+    per.id = 65;
+    per.name = "Joe";
+    return per;
+}
+
+ptr<person> &p;
+p->id = 65;
+p->name = "joe";
+
+var ptwo = p;
+ptwo->id = 66;
+ptwo->name = "JOE";
+
+out(ptwo->id);
+println(ptwo->name);
+
+out(p->id);
+println(p->name);
