@@ -19,9 +19,11 @@ namespace syncomp
                 lines.Add($"set reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
                 foreach(var _ in variable.VariableDeclaration.NodeType.Body)
                 {
+                    lines.Add("pop reg7");
                     lines.Add($"add reg{ctx.RegisterLevel} reg{ctx.RegisterLevel} 1");
                     lines.Add($"rmem reg{ctx.RegisterLevel + 1} reg{ctx.RegisterLevel}");
                     lines.Add($"push reg{ctx.RegisterLevel + 1}");
+                    lines.Add("push reg7");
                 }
             }
             else

@@ -1,0 +1,27 @@
+#include "./lib/stdlib.bc"
+
+type person
+{
+    string name,
+    int id
+};
+
+var get_person = (string name, int id) : person =>
+{
+    person p;
+    p.name = name;
+    p.id = id;
+    return p;
+};
+
+var joe = get_person("Joe", 123);
+var dan_name = "Daniel";
+var daniel = get_person(dan_name, 321);
+wmem(dan_name + 3 as ptr, 0);
+
+println(joe.name);
+print_numberln(joe.id);
+
+println(daniel.name);
+print_numberln(daniel.id);
+println(nameof(get_person));
