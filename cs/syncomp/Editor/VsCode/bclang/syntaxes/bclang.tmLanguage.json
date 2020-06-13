@@ -7,6 +7,21 @@
     },
     {
       "include": "#strings"
+    },
+    {
+      "include": "#functions"
+    },
+    {
+      "include": "#types"
+    },
+    {
+      "include": "#includes"
+    },
+    {
+      "include": "#primitive-types"
+    },
+    {
+      "include": "#integer-literals"
     }
   ],
   "repository": {
@@ -28,6 +43,26 @@
           "match": "\\\\."
         }
       ]
+    },
+    "functions": {
+      "name": "storage.type.function.bclang",
+      "match": "function"
+    },
+    "types": {
+      "name": "storage.type.class.bclang",
+      "match": "type"
+    },
+    "includes": {
+      "name": "keyword.control.import.bclang",
+      "match": "#include"
+    },
+    "primitive-types": {
+      "match": "(?<![_$[:alnum:]])(?:(?<=\\.\\.\\.)|(?<!\\.))(string|int|ptr|void|)(?![_$[:alnum:]])(?:(?=\\.\\.\\.)|(?!\\.))",
+      "name": "support.type.primitive.bclang"
+    },
+    "integer-literals": {
+      "name": "constant.numeric.decimal.bclang",
+      "match": "\\d"
     }
   },
   "scopeName": "source.bclang"
