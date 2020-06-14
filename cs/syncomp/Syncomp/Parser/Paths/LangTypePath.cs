@@ -34,10 +34,17 @@ namespace syncomp
             var currentList = new List<SyntaxToken>();
             foreach (var tkn in bodyExpression)
             {
-                if (tkn.Type == SyntaxTokenType.Comma)
+                // TODO: At some point, deprecate the use of Comma to separate members
+                if (tkn.Type == SyntaxTokenType.SemiColon || tkn.Type == SyntaxTokenType.Comma)
                 {
                     sectionList.Add(currentList);
                     currentList = new List<SyntaxToken>();
+                    if (tkn.Type == SyntaxTokenType.Comma)
+                    {
+                        ctx.Diagnostics.Add(
+                            new Diagnostic(tkn.File, tkn.Line, tkn.Column, "Separating members with commas is being deprecated", DiagnosticCode.Warning) {
+                                Level = DiagnosticCodeLevel.Warning, });
+                    }
                 }
                 else
                 {

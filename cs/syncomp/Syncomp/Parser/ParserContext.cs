@@ -4,6 +4,8 @@ namespace syncomp
 {
     public class ParserContext
     {
+        public List<Diagnostic> Diagnostics { get; } = new List<Diagnostic>();
+
         // TODO: Fix!
         public List<LangType> LangTypes { get; set; } = new List<LangType>
         {

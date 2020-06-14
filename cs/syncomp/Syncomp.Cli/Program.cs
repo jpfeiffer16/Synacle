@@ -42,20 +42,20 @@ namespace syncomp
                 preprocessor = new PreProcessor(filePath);
             }
             var ctx = preprocessor.BuildContext();
-            var ast = CompileCode(ctx);
+            var (parserContext, ast) = CompileCode(ctx);
             var checker = new Checker(ast);
-            var diagnostics = checker.Check();
-            if (diagnostics.Count > 0)
+            var diagnostics = checker.Check().Union(parserContext.Diagnostics);
+            if (diagnostics.Count() > 0)
             {
                 DisplayCheckerDiagnostics(diagnostics);
                 if (diagnostics.Where(d => d.Level == DiagnosticCodeLevel.Error).Count() > 0)
                 {
-                    Console.WriteLine($"There are {diagnostics.Count} errors. Please fix and re-compile.");
+                    Console.WriteLine($"There are {diagnostics.Count()} errors. Please fix and re-compile.");
                     Environment.Exit(1);
                 }
                 else
                 {
-                    Console.WriteLine($"There are {diagnostics.Count} warings.");
+                    Console.WriteLine($"There are {diagnostics.Count()} warings.");
                 }
             }
             var asmLines = EmitAst(ast);
@@ -80,7 +80,7 @@ namespace syncomp
             }
         }
 
-        private static List<AstNode> CompileCode(
+        private static (ParserContext, List<AstNode>) CompileCode(
             List<KeyValuePair<string, string>> preprocessorContext)
         {
             //Lex
@@ -118,7 +118,7 @@ namespace syncomp
                 Console.Error.WriteLine($"Near token '{token.Token}'");
                 Environment.Exit(1);
             }
-            return ast;
+            return (parserContext, ast);
         }
 
         private static List<string> EmitAst(List<AstNode> ast)
@@ -157,7 +157,7 @@ namespace syncomp
             Console.Error.WriteLine();
         }
 
-        private static void DisplayCheckerDiagnostics(List<Diagnostic> diagnostics)
+        private static void DisplayCheckerDiagnostics(IEnumerable<Diagnostic> diagnostics)
         {
             Dictionary<string, List<string>> fileCache = new Dictionary<string, List<string>>();
             foreach (var diagnostic in diagnostics)

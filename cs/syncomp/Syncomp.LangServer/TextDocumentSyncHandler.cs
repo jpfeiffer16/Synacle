@@ -62,9 +62,10 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
             tokens = tokens.Where(tkn => tkn.Type != SyntaxTokenType.Space).ToList();
             var parser = new Parser(tokens);
             var ast = new List<AstNode>();
+            ParserContext parserContext;
             try
             {
-                (_, ast) = parser.Parse();
+                (parserContext, ast) = parser.Parse();
             }
             catch (ParseException e)
             {
@@ -99,7 +100,7 @@ class TextDocumentSyncHandler : ITextDocumentSyncHandler
                 return;
             }
             var checker = new Checker(ast);
-            var diagnostics = checker.Check();
+            var diagnostics = checker.Check().Union(parserContext.Diagnostics);
             _server.Document.PublishDiagnostics(new PublishDiagnosticsParams
             {
                 Uri = uri,

@@ -2,8 +2,8 @@
 
 type person
 {
-    string name,
-    int id
+    string name;
+    int id;
 };
 
 var get_person = (string name, int id) : person =>
