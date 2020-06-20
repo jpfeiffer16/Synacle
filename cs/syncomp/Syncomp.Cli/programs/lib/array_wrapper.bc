@@ -9,11 +9,11 @@ type array { };
 function array_length(ptr<array> ptr) : int
 {
     int length = 0;
-    int value = (~(ptr + length));
+    int value = (*(ptr + length));
     while (!(value == 32767))
     {
         ++length;
-        value = (~(ptr + length));
+        value = (*(ptr + length));
     }
     return length;
 }
@@ -31,7 +31,7 @@ function array_get_nth(ptr<array> ptr, int index): int
     {
         throw(INDEX_OUT_OF_BOUNDS_MESSAGE);
     }
-    int return_value = ~(ptr + index);
+    int return_value = *(ptr + index);
     return return_value;
 }
 

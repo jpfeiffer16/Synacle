@@ -21,3 +21,8 @@ function random()
 {
 
 }
+
+// 1 sign bit - 8 exponent bits - 15 mantisa bits
+// mantisa is shift-127 encoded. You must subtract 127 to get the actual value
+// then add one for the 2^0 bit in the mantisa
+type float { };

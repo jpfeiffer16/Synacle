@@ -8,7 +8,7 @@ function main() {
     return;
   }
   ptr first_letter = alloc();
-  wmem(first_letter, ~name as int);
+  wmem(first_letter, *name as int);
   ++name;
   println(
     str_cat(

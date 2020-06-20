@@ -14,7 +14,7 @@ namespace syncomp.Tests
             {
                 new SyntaxToken
                 {
-                    Type = SyntaxTokenType.Multiplication,
+                    Type = SyntaxTokenType.Asterisk,
                     Token = "*"
                 },
                 new SyntaxToken
@@ -29,7 +29,7 @@ namespace syncomp.Tests
             };
             var index = 0;
 
-            this.result = new MultiplicationPath().Eval(index, tokens, nodes, new ParserContext());
+            this.result = new AsteriskPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
         [TestMethod]

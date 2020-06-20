@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-    public class MultiplicationEmitterTransform : Behavior
+    public class AsteriskEmitterTransform : Behavior
     {
         private List<string> result;
 

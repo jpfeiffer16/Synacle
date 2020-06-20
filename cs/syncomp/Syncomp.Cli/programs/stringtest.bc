@@ -8,11 +8,11 @@ function main() {
     //print_number(a);
     //println(" ");
     //println("the first letter of a is:");
-    //out(~a);
+    //out(*a);
     //println("Now we will loop through and print it out");
     //var len = str_len(a);
     //for (var i = 0; i < len; ++i) {
-    //    out(~(a + i));
+    //    out(*(a + i));
     //    out(10);
     //}
     //println(" ");

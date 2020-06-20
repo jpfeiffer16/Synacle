@@ -6,13 +6,13 @@ function tty_set_green()
     var write_ptr = str_ptr;
     wmem(write_ptr, 27);
     ++write_ptr;
-    wmem(write_ptr, ~"[" as int);
+    wmem(write_ptr, *"[" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"3" as int);
+    wmem(write_ptr, *"3" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"2" as int);
+    wmem(write_ptr, *"2" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"m" as int);
+    wmem(write_ptr, *"m" as int);
     print(str_ptr as string);
 }
 
@@ -22,13 +22,13 @@ function tty_set_red()
     var write_ptr = str_ptr;
     wmem(write_ptr, 27);
     ++write_ptr;
-    wmem(write_ptr, ~"[" as int);
+    wmem(write_ptr, *"[" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"3" as int);
+    wmem(write_ptr, *"3" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"1" as int);
+    wmem(write_ptr, *"1" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"m" as int);
+    wmem(write_ptr, *"m" as int);
     print(str_ptr as string);
 }
 
@@ -38,10 +38,10 @@ function tty_reset()
     var write_ptr = str_ptr;
     wmem(write_ptr, 27);
     ++write_ptr;
-    wmem(write_ptr, ~"[" as int);
+    wmem(write_ptr, *"[" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"0" as int);
+    wmem(write_ptr, *"0" as int);
     ++write_ptr;
-    wmem(write_ptr, ~"m" as int);
+    wmem(write_ptr, *"m" as int);
     print(str_ptr as string);
 }

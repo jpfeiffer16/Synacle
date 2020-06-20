@@ -160,7 +160,7 @@ namespace syncomp
             }
             if (ch == "*")
             {
-                return CreateSyntaxToken(SyntaxTokenType.Multiplication, ch);
+                return CreateSyntaxToken(SyntaxTokenType.Asterisk, ch);
             }
             if (ch == "/")
             {
@@ -209,6 +209,21 @@ namespace syncomp
             {
                 return CreateSyntaxToken(SyntaxTokenType.And, ch);
             }
+            #endregion
+
+            #region "Bitwise Operators"
+            if (ch is "|")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.BitwiseOr, ch);
+            }
+            if (ch is "&")
+            {
+                return CreateSyntaxToken(SyntaxTokenType.BitwiseAnd, ch);
+            }
+            // if (ch is "!")
+            // {
+            //     return CreateSyntaxToken(SyntaxTokenType.BitwiseNot, ch);
+            // }
             #endregion
 
             #region "Type Operators"

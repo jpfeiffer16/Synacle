@@ -27,7 +27,7 @@ namespace syncomp
             new LessThanOrEqualPath(),
             new LessThanPath(),
             new ModPath(),
-            new MultiplicationPath(),
+            new AsteriskPath(),
             new NotPath(),
             new OrPath(),
             new ReturnPath(),

@@ -66,9 +66,9 @@ function take(string op_name, int num, int p_counter) : ptr<takeresult>
     for (int i = 0; i < num; ++i)
     {
         ++p_counter;
-        print_number(~p_counter as int);
+        print_number(*p_counter as int);
         print(" ");
-        array_set_nth(take_array, i, ~p_counter as int);
+        array_set_nth(take_array, i, *p_counter as int);
     }
     println(" ");
     result->p_counter = p_counter;
@@ -84,7 +84,7 @@ func<void> entrypoint = function()
 
 int p_counter = entrypoint as int;
 for (; p_counter < 32767; ++p_counter) {
-    int op = ~p_counter as int;
+    int op = *p_counter as int;
     if (op == opcodes.HALT) {
         ptr<takeresult> result = take("HALT", 0, p_counter);
         p_counter = result->p_counter;

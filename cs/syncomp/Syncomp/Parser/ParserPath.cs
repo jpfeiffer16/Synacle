@@ -172,5 +172,10 @@ namespace syncomp
             if (langType is null) throw new TypeNotFoundException(typeToken.Token);
             return langType;
         }
+
+        protected bool IsExpressionNode(AstNode node)
+        {
+            return node is Identifier || node is IntegerLiteral || node is StringLiteral;
+        }
     }
 }

@@ -1,0 +1,13 @@
+
+
+template
+type list<T>
+{
+  T[] l,
+  int index
+};
+
+template
+function test_func(T in) : T
+{
+}

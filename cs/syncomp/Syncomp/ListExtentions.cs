@@ -4,6 +4,21 @@ namespace syncomp
 {
     public static class ListExtentions
     {
+        public static T Peek<T>(this List<T> list)
+        {
+            var count = list.Count;
+            if (count > 0)
+            {
+                var val = list[count - 1];
+                return val;
+            }
+            else
+            {
+                return default(T);
+            }
+            
+        }
+
         public static T Pop<T>(this List<T> list)
         {
             var count = list.Count;

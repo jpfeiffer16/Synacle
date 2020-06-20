@@ -18,7 +18,7 @@ var new_array = array_map(array, function(int value) : int {
 });
 
 var foreach_callback = function(ptr elem_ptr, int index) {
-    print_number(~elem_ptr as int);
+    print_number(*elem_ptr as int);
     println(" ");
 };
 

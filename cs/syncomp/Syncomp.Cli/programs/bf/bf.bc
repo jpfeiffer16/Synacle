@@ -8,7 +8,7 @@ function jump_back(string code, int index) : int
     while (nesting_level > 0)
     {
         --index;
-        var char = ~(code + index);
+        var char = *(code + index);
         if (char == symbol_right_bracket)
         {
             ++nesting_level
@@ -28,16 +28,16 @@ function interpret(string code)
     // var last_seen_left_bracket = 0;
     for (var i = 0; i < code_len; ++i)
     {
-        var char = ~(code + i);
+        var char = *(code + i);
         if (char == symbol_plus)
         {
-            int cur_val = ~stack_pointer;
+            int cur_val = *stack_pointer;
             ++cur_val;
             wmem(stack_pointer as ptr, cur_val);
         }
         if (char == symbol_minus)
         {
-            var cur_val = ~stack_pointer;
+            var cur_val = *stack_pointer;
             --cur_val;
             wmem(stack_pointer as ptr, cur_val);
         }
@@ -55,7 +55,7 @@ function interpret(string code)
         }
         if (char == symbol_output)
         {
-            out(~stack_pointer as int);
+            out(*stack_pointer as int);
         }
         if (char == symbol_left_bracket)
         {
@@ -63,13 +63,13 @@ function interpret(string code)
         }
         if (char == symbol_right_bracket)
         {
-            if (~stack_pointer)
+            if (*stack_pointer)
             {
                 i = jump_back(code, i);
             }
         }
     }
-    // print_number(~stack_pointer as int);
+    // print_number(*stack_pointer as int);
     // println(" ");
 }
 
@@ -77,7 +77,7 @@ function compile(string code)
 {
     var code_len = str_len(code);
     for (var i = 0; i < code_len; ++i) {
-      var char = ~(code + i);
+      var char = *(code + i);
 
       if (char == symbol_plus) {
         println("rmem reg0 16383");

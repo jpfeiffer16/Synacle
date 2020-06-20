@@ -1,7 +1,7 @@
 function str_len(string str) : int {
     var str_ptr = str as int;
     var length = 0;
-    while(~str_ptr) {
+    while(*str_ptr) {
         ++str_ptr;
         ++length;
     }
@@ -10,8 +10,8 @@ function str_len(string str) : int {
 
 function print(string str) {
     var str_ptr = str as int;
-    while (~str_ptr) {
-        out(~str_ptr as int);
+    while (*str_ptr) {
+        out(*str_ptr as int);
         ++str_ptr;
     }
 }
@@ -28,8 +28,8 @@ function str_equal(string str_a, string str_b) : int {
         return 0;
     }
     for (var i = 0; i < a_len; ++i) {
-        var a_val = ~(str_a + i) as int;
-        var b_val = ~(str_b + i) as int;
+        var a_val = *(str_a + i) as int;
+        var b_val = *(str_b + i) as int;
         if (!(a_val == b_val)) {
             return 0;
         }
@@ -39,7 +39,7 @@ function str_equal(string str_a, string str_b) : int {
 
 function alloc() : ptr {
     int data_index = 16382;
-    while (!(~(data_index))) {
+    while (!(*(data_index))) {
         --data_index;
     }
     data_index = data_index + 2;
@@ -58,7 +58,7 @@ function mem_cp(ptr s_ptr, ptr d_ptr, int len) {
     while (current_byte <= len) {
         var byte_to_write_ptr = s_ptr + current_byte;
         var dest_ptr = d_ptr + current_byte;
-        wmem(dest_ptr as ptr, ~byte_to_write_ptr as int);
+        wmem(dest_ptr as ptr, *byte_to_write_ptr as int);
         ++current_byte;
     }
 }
@@ -80,7 +80,7 @@ function flip_str(string str_ptr) : string {
     var index = 0;
     while (index < len) {
         var source_index = str_ptr + index;
-        push(~source_index as int);
+        push(*source_index as int);
         ++index;
     }
 
@@ -122,7 +122,7 @@ function int(string str) : int {
     for (; len > 0; --len)
     {
         var tens_place = 1 * (10 * (len - 1));
-        var diget = ~(str + index) as int;
+        var diget = *(str + index) as int;
         diget = diget - 48;
         for (; tens_place > 0; --tens_place)
         {
@@ -173,9 +173,9 @@ function print_numberln(int num) {
 function dump_mem() {
     var i = 0;
 
-    while (~i) {
+    while (*i) {
         ++i;
-        print_number(~i as int);
+        print_number(*i as int);
         out(10);
     }
 }
