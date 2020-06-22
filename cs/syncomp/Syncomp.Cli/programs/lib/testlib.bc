@@ -52,10 +52,10 @@ function assert(void fact) {
 
 type assert_type
 {
-    void left,
-    func<void, bool> equal_to,
-    func<void, bool> greater_than,
-    func<void, bool> less_than
+    void left;
+    func<void, bool> equal_to;
+    func<void, bool> greater_than;
+    func<void, bool> less_than;
 }
 
 

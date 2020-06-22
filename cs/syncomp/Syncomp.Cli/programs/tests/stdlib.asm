@@ -1335,25 +1335,6 @@ jmp >function__stdlib_9_38_end
 :function__stdlib_9_38
 pop reg7
 push reg7
-jmp >var__stdlib_10_16_end
-:var__stdlib_10_16
-&e
-&t
-&t
-&i
-&n
-&g
-32
-&h
-&e
-&r
-&e
-0
-:var__stdlib_10_16_end
-wmem >var__stdlib_10_16 &G
-set reg0 >var__stdlib_10_16
-push reg0
-call >println
 rmem reg0 >var_result_stdlib_6_4
 push reg0
 call >is
@@ -1375,8 +1356,8 @@ ret
 set reg0 >function__stdlib_5_26
 push reg0
 call >category
-jmp >var__stdlib_15_9_end
-:var__stdlib_15_9
+jmp >var__stdlib_14_9_end
+:var__stdlib_14_9
 &t
 &r
 &_
@@ -1392,16 +1373,16 @@ jmp >var__stdlib_15_9_end
 &t
 &s
 0
-:var__stdlib_15_9_end
-wmem >var__stdlib_15_9 &s
-set reg0 >var__stdlib_15_9
+:var__stdlib_14_9_end
+wmem >var__stdlib_14_9 &s
+set reg0 >var__stdlib_14_9
 push reg0
-jmp >function__stdlib_15_28_end
-:function__stdlib_15_28
+jmp >function__stdlib_14_28_end
+:function__stdlib_14_28
 pop reg7
 push reg7
-jmp >var__stdlib_16_9_end
-:var__stdlib_16_9
+jmp >var__stdlib_15_9_end
+:var__stdlib_15_9
 &t
 &r
 &i
@@ -1424,38 +1405,38 @@ jmp >var__stdlib_16_9_end
 &a
 &l
 0
-:var__stdlib_16_9_end
-wmem >var__stdlib_16_9 &s
-set reg0 >var__stdlib_16_9
+:var__stdlib_15_9_end
+wmem >var__stdlib_15_9 &s
+set reg0 >var__stdlib_15_9
 push reg0
-jmp >function__stdlib_16_34_end
-:function__stdlib_16_34
+jmp >function__stdlib_15_34_end
+:function__stdlib_15_34
 pop reg7
 push reg7
-jmp >var_result_stdlib_17_8_end
-:var_result_stdlib_17_8
-:var_result_stdlib_17_8_end
-jmp >var__stdlib_17_31_end
-:var__stdlib_17_31
+jmp >var_result_stdlib_16_8_end
+:var_result_stdlib_16_8
+:var_result_stdlib_16_8_end
+jmp >var__stdlib_16_31_end
+:var__stdlib_16_31
 &2
 &3
 0
-:var__stdlib_17_31_end
-wmem >var__stdlib_17_31 &1
-set reg0 >var__stdlib_17_31
+:var__stdlib_16_31_end
+wmem >var__stdlib_16_31 &1
+set reg0 >var__stdlib_16_31
 push reg0
-jmp >var__stdlib_17_38_end
-:var__stdlib_17_38
+jmp >var__stdlib_16_38_end
+:var__stdlib_16_38
 &2
 &3
 0
-:var__stdlib_17_38_end
-wmem >var__stdlib_17_38 &1
-set reg0 >var__stdlib_17_38
+:var__stdlib_16_38_end
+wmem >var__stdlib_16_38 &1
+set reg0 >var__stdlib_16_38
 push reg0
 call >str_equal
-wmem >var_result_stdlib_17_8 reg0
-rmem reg0 >var_result_stdlib_17_8
+wmem >var_result_stdlib_16_8 reg0
+rmem reg0 >var_result_stdlib_16_8
 push reg0
 call >is
 add reg0 reg0 2
@@ -1467,12 +1448,12 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_16_34_end
-set reg0 >function__stdlib_16_34
+:function__stdlib_15_34_end
+set reg0 >function__stdlib_15_34
 push reg0
 call >test
-jmp >var__stdlib_21_9_end
-:var__stdlib_21_9
+jmp >var__stdlib_20_9_end
+:var__stdlib_20_9
 &t
 &r
 &i
@@ -1499,37 +1480,37 @@ jmp >var__stdlib_21_9_end
 &a
 &l
 0
-:var__stdlib_21_9_end
-wmem >var__stdlib_21_9 &s
-set reg0 >var__stdlib_21_9
+:var__stdlib_20_9_end
+wmem >var__stdlib_20_9 &s
+set reg0 >var__stdlib_20_9
 push reg0
-jmp >function__stdlib_21_38_end
-:function__stdlib_21_38
+jmp >function__stdlib_20_38_end
+:function__stdlib_20_38
 pop reg7
 push reg7
-jmp >var_result_stdlib_22_8_end
-:var_result_stdlib_22_8
-:var_result_stdlib_22_8_end
-jmp >var__stdlib_22_31_end
-:var__stdlib_22_31
+jmp >var_result_stdlib_21_8_end
+:var_result_stdlib_21_8
+:var_result_stdlib_21_8_end
+jmp >var__stdlib_21_31_end
+:var__stdlib_21_31
 &3
 0
-:var__stdlib_22_31_end
-wmem >var__stdlib_22_31 &2
-set reg0 >var__stdlib_22_31
+:var__stdlib_21_31_end
+wmem >var__stdlib_21_31 &2
+set reg0 >var__stdlib_21_31
 push reg0
-jmp >var__stdlib_22_37_end
-:var__stdlib_22_37
+jmp >var__stdlib_21_37_end
+:var__stdlib_21_37
 &2
 &3
 0
-:var__stdlib_22_37_end
-wmem >var__stdlib_22_37 &1
-set reg0 >var__stdlib_22_37
+:var__stdlib_21_37_end
+wmem >var__stdlib_21_37 &1
+set reg0 >var__stdlib_21_37
 push reg0
 call >str_equal
-wmem >var_result_stdlib_22_8 reg0
-rmem reg0 >var_result_stdlib_22_8
+wmem >var_result_stdlib_21_8 reg0
+rmem reg0 >var_result_stdlib_21_8
 push reg0
 call >is
 add reg0 reg0 2
@@ -1541,17 +1522,17 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_21_38_end
-set reg0 >function__stdlib_21_38
+:function__stdlib_20_38_end
+set reg0 >function__stdlib_20_38
 push reg0
 call >test
 ret
-:function__stdlib_15_28_end
-set reg0 >function__stdlib_15_28
+:function__stdlib_14_28_end
+set reg0 >function__stdlib_14_28
 push reg0
 call >category
-jmp >var__stdlib_27_9_end
-:var__stdlib_27_9
+jmp >var__stdlib_26_9_end
+:var__stdlib_26_9
 &l
 &l
 &o
@@ -1563,16 +1544,16 @@ jmp >var__stdlib_27_9_end
 &t
 &s
 0
-:var__stdlib_27_9_end
-wmem >var__stdlib_27_9 &a
-set reg0 >var__stdlib_27_9
+:var__stdlib_26_9_end
+wmem >var__stdlib_26_9 &a
+set reg0 >var__stdlib_26_9
 push reg0
-jmp >function__stdlib_27_24_end
-:function__stdlib_27_24
+jmp >function__stdlib_26_24_end
+:function__stdlib_26_24
 pop reg7
 push reg7
-jmp >var__stdlib_28_9_end
-:var__stdlib_28_9
+jmp >var__stdlib_27_9_end
+:var__stdlib_27_9
 &e
 &t
 &u
@@ -1598,12 +1579,12 @@ jmp >var__stdlib_28_9_end
 32
 &0
 0
-:var__stdlib_28_9_end
-wmem >var__stdlib_28_9 &r
-set reg0 >var__stdlib_28_9
+:var__stdlib_27_9_end
+wmem >var__stdlib_27_9 &r
+set reg0 >var__stdlib_27_9
 push reg0
-jmp >function__stdlib_28_38_end
-:function__stdlib_28_38
+jmp >function__stdlib_27_38_end
+:function__stdlib_27_38
 pop reg7
 push reg7
 call >alloc
@@ -1618,17 +1599,17 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_28_38_end
-set reg0 >function__stdlib_28_38
+:function__stdlib_27_38_end
+set reg0 >function__stdlib_27_38
 push reg0
 call >test
 ret
-:function__stdlib_27_24_end
-set reg0 >function__stdlib_27_24
+:function__stdlib_26_24_end
+set reg0 >function__stdlib_26_24
 push reg0
 call >category
-jmp >var__stdlib_33_9_end
-:var__stdlib_33_9
+jmp >var__stdlib_32_9_end
+:var__stdlib_32_9
 &l
 &l
 &o
@@ -1646,16 +1627,16 @@ jmp >var__stdlib_33_9_end
 &t
 &s
 0
-:var__stdlib_33_9_end
-wmem >var__stdlib_33_9 &a
-set reg0 >var__stdlib_33_9
+:var__stdlib_32_9_end
+wmem >var__stdlib_32_9 &a
+set reg0 >var__stdlib_32_9
 push reg0
-jmp >function__stdlib_33_30_end
-:function__stdlib_33_30
+jmp >function__stdlib_32_30_end
+:function__stdlib_32_30
 pop reg7
 push reg7
-jmp >var__stdlib_34_9_end
-:var__stdlib_34_9
+jmp >var__stdlib_33_9_end
+:var__stdlib_33_9
 &e
 &t
 &u
@@ -1681,12 +1662,12 @@ jmp >var__stdlib_34_9_end
 32
 &0
 0
-:var__stdlib_34_9_end
-wmem >var__stdlib_34_9 &r
-set reg0 >var__stdlib_34_9
+:var__stdlib_33_9_end
+wmem >var__stdlib_33_9 &r
+set reg0 >var__stdlib_33_9
 push reg0
-jmp >function__stdlib_34_38_end
-:function__stdlib_34_38
+jmp >function__stdlib_33_38_end
+:function__stdlib_33_38
 pop reg7
 push reg7
 set reg0 5
@@ -1703,17 +1684,17 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_34_38_end
-set reg0 >function__stdlib_34_38
+:function__stdlib_33_38_end
+set reg0 >function__stdlib_33_38
 push reg0
 call >test
 ret
-:function__stdlib_33_30_end
-set reg0 >function__stdlib_33_30
+:function__stdlib_32_30_end
+set reg0 >function__stdlib_32_30
 push reg0
 call >category
-jmp >var__stdlib_39_9_end
-:var__stdlib_39_9
+jmp >var__stdlib_38_9_end
+:var__stdlib_38_9
 &e
 &m
 &_
@@ -1726,43 +1707,43 @@ jmp >var__stdlib_39_9_end
 &t
 &s
 0
-:var__stdlib_39_9_end
-wmem >var__stdlib_39_9 &m
-set reg0 >var__stdlib_39_9
+:var__stdlib_38_9_end
+wmem >var__stdlib_38_9 &m
+set reg0 >var__stdlib_38_9
 push reg0
-jmp >function__stdlib_39_25_end
-:function__stdlib_39_25
+jmp >function__stdlib_38_25_end
+:function__stdlib_38_25
 pop reg7
 push reg7
-jmp >var_string_to_copy_stdlib_40_4_end
-:var_string_to_copy_stdlib_40_4
-:var_string_to_copy_stdlib_40_4_end
-jmp >var__stdlib_40_25_end
-:var__stdlib_40_25
+jmp >var_string_to_copy_stdlib_39_4_end
+:var_string_to_copy_stdlib_39_4
+:var_string_to_copy_stdlib_39_4_end
+jmp >var__stdlib_39_25_end
+:var__stdlib_39_25
 &e
 &s
 &t
 0
-:var__stdlib_40_25_end
-wmem >var__stdlib_40_25 &T
-set reg0 >var__stdlib_40_25
-wmem >var_string_to_copy_stdlib_40_4 reg0
-jmp >var_string_ptr_stdlib_41_4_end
-:var_string_ptr_stdlib_41_4
-:var_string_ptr_stdlib_41_4_end
+:var__stdlib_39_25_end
+wmem >var__stdlib_39_25 &T
+set reg0 >var__stdlib_39_25
+wmem >var_string_to_copy_stdlib_39_4 reg0
+jmp >var_string_ptr_stdlib_40_4_end
+:var_string_ptr_stdlib_40_4
+:var_string_ptr_stdlib_40_4_end
 call >alloc
-wmem >var_string_ptr_stdlib_41_4 reg0
-rmem reg0 >var_string_to_copy_stdlib_40_4
+wmem >var_string_ptr_stdlib_40_4 reg0
+rmem reg0 >var_string_to_copy_stdlib_39_4
 push reg0
-rmem reg0 >var_string_ptr_stdlib_41_4
+rmem reg0 >var_string_ptr_stdlib_40_4
 push reg0
-rmem reg0 >var_string_to_copy_stdlib_40_4
+rmem reg0 >var_string_to_copy_stdlib_39_4
 push reg0
 call >str_len
 push reg0
 call >mem_cp
-jmp >var__stdlib_43_9_end
-:var__stdlib_43_9
+jmp >var__stdlib_42_9_end
+:var__stdlib_42_9
 &t
 &r
 &i
@@ -1786,33 +1767,33 @@ jmp >var__stdlib_43_9_end
 &a
 &l
 0
-:var__stdlib_43_9_end
-wmem >var__stdlib_43_9 &s
-set reg0 >var__stdlib_43_9
+:var__stdlib_42_9_end
+wmem >var__stdlib_42_9 &s
+set reg0 >var__stdlib_42_9
 push reg0
-jmp >function__stdlib_43_36_end
-:function__stdlib_43_36
+jmp >function__stdlib_42_36_end
+:function__stdlib_42_36
 pop reg7
 push reg7
-rmem reg0 >var_string_to_copy_stdlib_40_4
+rmem reg0 >var_string_to_copy_stdlib_39_4
 push reg0
-rmem reg0 >var_string_ptr_stdlib_41_4
+rmem reg0 >var_string_ptr_stdlib_40_4
 push reg0
 call >str_equal
 push reg0
 call >assert
 ret
-:function__stdlib_43_36_end
-set reg0 >function__stdlib_43_36
+:function__stdlib_42_36_end
+set reg0 >function__stdlib_42_36
 push reg0
 call >test
 ret
-:function__stdlib_39_25_end
-set reg0 >function__stdlib_39_25
+:function__stdlib_38_25_end
+set reg0 >function__stdlib_38_25
 push reg0
 call >category
-jmp >var__stdlib_48_9_end
-:var__stdlib_48_9
+jmp >var__stdlib_47_9_end
+:var__stdlib_47_9
 &t
 &r
 &_
@@ -1826,16 +1807,16 @@ jmp >var__stdlib_48_9_end
 &t
 &s
 0
-:var__stdlib_48_9_end
-wmem >var__stdlib_48_9 &s
-set reg0 >var__stdlib_48_9
+:var__stdlib_47_9_end
+wmem >var__stdlib_47_9 &s
+set reg0 >var__stdlib_47_9
 push reg0
-jmp >function__stdlib_48_26_end
-:function__stdlib_48_26
+jmp >function__stdlib_47_26_end
+:function__stdlib_47_26
 pop reg7
 push reg7
-jmp >var__stdlib_49_9_end
-:var__stdlib_49_9
+jmp >var__stdlib_48_9_end
+:var__stdlib_48_9
 &t
 &r
 &i
@@ -1866,61 +1847,61 @@ jmp >var__stdlib_49_9_end
 &e
 &d
 0
-:var__stdlib_49_9_end
-wmem >var__stdlib_49_9 &s
-set reg0 >var__stdlib_49_9
+:var__stdlib_48_9_end
+wmem >var__stdlib_48_9 &s
+set reg0 >var__stdlib_48_9
 push reg0
-jmp >function__stdlib_49_43_end
-:function__stdlib_49_43
+jmp >function__stdlib_48_43_end
+:function__stdlib_48_43
 pop reg7
 push reg7
-jmp >var__stdlib_50_33_end
-:var__stdlib_50_33
+jmp >var__stdlib_49_33_end
+:var__stdlib_49_33
 &2
 &3
 0
-:var__stdlib_50_33_end
-wmem >var__stdlib_50_33 &1
-set reg0 >var__stdlib_50_33
+:var__stdlib_49_33_end
+wmem >var__stdlib_49_33 &1
+set reg0 >var__stdlib_49_33
 push reg0
-jmp >var__stdlib_50_40_end
-:var__stdlib_50_40
+jmp >var__stdlib_49_40_end
+:var__stdlib_49_40
 &5
 &6
 0
-:var__stdlib_50_40_end
-wmem >var__stdlib_50_40 &4
-set reg0 >var__stdlib_50_40
+:var__stdlib_49_40_end
+wmem >var__stdlib_49_40 &4
+set reg0 >var__stdlib_49_40
 push reg0
 call >str_cat
 push reg0
-jmp >var__stdlib_50_48_end
-:var__stdlib_50_48
+jmp >var__stdlib_49_48_end
+:var__stdlib_49_48
 &2
 &3
 &4
 &5
 &6
 0
-:var__stdlib_50_48_end
-wmem >var__stdlib_50_48 &1
-set reg0 >var__stdlib_50_48
+:var__stdlib_49_48_end
+wmem >var__stdlib_49_48 &1
+set reg0 >var__stdlib_49_48
 push reg0
 call >str_equal
 push reg0
 call >assert
 ret
-:function__stdlib_49_43_end
-set reg0 >function__stdlib_49_43
+:function__stdlib_48_43_end
+set reg0 >function__stdlib_48_43
 push reg0
 call >test
 ret
-:function__stdlib_48_26_end
-set reg0 >function__stdlib_48_26
+:function__stdlib_47_26_end
+set reg0 >function__stdlib_47_26
 push reg0
 call >category
-jmp >var__stdlib_54_9_end
-:var__stdlib_54_9
+jmp >var__stdlib_53_9_end
+:var__stdlib_53_9
 &l
 &i
 &p
@@ -1935,16 +1916,16 @@ jmp >var__stdlib_54_9_end
 &t
 &s
 0
-:var__stdlib_54_9_end
-wmem >var__stdlib_54_9 &f
-set reg0 >var__stdlib_54_9
+:var__stdlib_53_9_end
+wmem >var__stdlib_53_9 &f
+set reg0 >var__stdlib_53_9
 push reg0
-jmp >function__stdlib_54_27_end
-:function__stdlib_54_27
+jmp >function__stdlib_53_27_end
+:function__stdlib_53_27
 pop reg7
 push reg7
-jmp >var__stdlib_55_9_end
-:var__stdlib_55_9
+jmp >var__stdlib_54_9_end
+:var__stdlib_54_9
 &t
 &r
 &i
@@ -1968,49 +1949,49 @@ jmp >var__stdlib_55_9_end
 &e
 &d
 0
-:var__stdlib_55_9_end
-wmem >var__stdlib_55_9 &s
-set reg0 >var__stdlib_55_9
+:var__stdlib_54_9_end
+wmem >var__stdlib_54_9 &s
+set reg0 >var__stdlib_54_9
 push reg0
-jmp >function__stdlib_55_36_end
-:function__stdlib_55_36
+jmp >function__stdlib_54_36_end
+:function__stdlib_54_36
 pop reg7
 push reg7
-jmp >var__stdlib_56_34_end
-:var__stdlib_56_34
+jmp >var__stdlib_55_34_end
+:var__stdlib_55_34
 &2
 &3
 0
-:var__stdlib_56_34_end
-wmem >var__stdlib_56_34 &1
-set reg0 >var__stdlib_56_34
+:var__stdlib_55_34_end
+wmem >var__stdlib_55_34 &1
+set reg0 >var__stdlib_55_34
 push reg0
 call >flip_str
 push reg0
-jmp >var__stdlib_56_42_end
-:var__stdlib_56_42
+jmp >var__stdlib_55_42_end
+:var__stdlib_55_42
 &2
 &1
 0
-:var__stdlib_56_42_end
-wmem >var__stdlib_56_42 &3
-set reg0 >var__stdlib_56_42
+:var__stdlib_55_42_end
+wmem >var__stdlib_55_42 &3
+set reg0 >var__stdlib_55_42
 push reg0
 call >str_equal
 push reg0
 call >assert
 ret
-:function__stdlib_55_36_end
-set reg0 >function__stdlib_55_36
+:function__stdlib_54_36_end
+set reg0 >function__stdlib_54_36
 push reg0
 call >test
 ret
-:function__stdlib_54_27_end
-set reg0 >function__stdlib_54_27
+:function__stdlib_53_27_end
+set reg0 >function__stdlib_53_27
 push reg0
 call >category
-jmp >var__stdlib_60_9_end
-:var__stdlib_60_9
+jmp >var__stdlib_59_9_end
+:var__stdlib_59_9
 &n
 &t
 32
@@ -2020,16 +2001,16 @@ jmp >var__stdlib_60_9_end
 &t
 &s
 0
-:var__stdlib_60_9_end
-wmem >var__stdlib_60_9 &i
-set reg0 >var__stdlib_60_9
+:var__stdlib_59_9_end
+wmem >var__stdlib_59_9 &i
+set reg0 >var__stdlib_59_9
 push reg0
-jmp >function__stdlib_60_22_end
-:function__stdlib_60_22
+jmp >function__stdlib_59_22_end
+:function__stdlib_59_22
 pop reg7
 push reg7
-jmp >var__stdlib_61_9_end
-:var__stdlib_61_9
+jmp >var__stdlib_60_9_end
+:var__stdlib_60_9
 &t
 &r
 &i
@@ -2066,22 +2047,22 @@ jmp >var__stdlib_61_9_end
 &n
 &t
 0
-:var__stdlib_61_9_end
-wmem >var__stdlib_61_9 &s
-set reg0 >var__stdlib_61_9
+:var__stdlib_60_9_end
+wmem >var__stdlib_60_9 &s
+set reg0 >var__stdlib_60_9
 push reg0
-jmp >function__stdlib_61_49_end
-:function__stdlib_61_49
+jmp >function__stdlib_60_49_end
+:function__stdlib_60_49
 pop reg7
 push reg7
-jmp >var__stdlib_62_22_end
-:var__stdlib_62_22
+jmp >var__stdlib_61_22_end
+:var__stdlib_61_22
 &2
 &3
 0
-:var__stdlib_62_22_end
-wmem >var__stdlib_62_22 &1
-set reg0 >var__stdlib_62_22
+:var__stdlib_61_22_end
+wmem >var__stdlib_61_22 &1
+set reg0 >var__stdlib_61_22
 push reg0
 call >int
 push reg0
@@ -2095,17 +2076,17 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_61_49_end
-set reg0 >function__stdlib_61_49
+:function__stdlib_60_49_end
+set reg0 >function__stdlib_60_49
 push reg0
 call >test
 ret
-:function__stdlib_60_22_end
-set reg0 >function__stdlib_60_22
+:function__stdlib_59_22_end
+set reg0 >function__stdlib_59_22
 push reg0
 call >category
-jmp >var__stdlib_66_9_end
-:var__stdlib_66_9
+jmp >var__stdlib_65_9_end
+:var__stdlib_65_9
 &t
 &r
 &i
@@ -2118,16 +2099,16 @@ jmp >var__stdlib_66_9_end
 &t
 &s
 0
-:var__stdlib_66_9_end
-wmem >var__stdlib_66_9 &s
-set reg0 >var__stdlib_66_9
+:var__stdlib_65_9_end
+wmem >var__stdlib_65_9 &s
+set reg0 >var__stdlib_65_9
 push reg0
-jmp >function__stdlib_66_25_end
-:function__stdlib_66_25
+jmp >function__stdlib_65_25_end
+:function__stdlib_65_25
 pop reg7
 push reg7
-jmp >var__stdlib_67_9_end
-:var__stdlib_67_9
+jmp >var__stdlib_66_9_end
+:var__stdlib_66_9
 &n
 &t
 32
@@ -2163,38 +2144,38 @@ jmp >var__stdlib_67_9_end
 &n
 &g
 0
-:var__stdlib_67_9_end
-wmem >var__stdlib_67_9 &i
-set reg0 >var__stdlib_67_9
+:var__stdlib_66_9_end
+wmem >var__stdlib_66_9 &i
+set reg0 >var__stdlib_66_9
 push reg0
-jmp >function__stdlib_67_48_end
-:function__stdlib_67_48
+jmp >function__stdlib_66_48_end
+:function__stdlib_66_48
 pop reg7
 push reg7
 set reg0 123
 push reg0
 call >string
 push reg0
-jmp >var__stdlib_68_38_end
-:var__stdlib_68_38
+jmp >var__stdlib_67_38_end
+:var__stdlib_67_38
 &2
 &3
 0
-:var__stdlib_68_38_end
-wmem >var__stdlib_68_38 &1
-set reg0 >var__stdlib_68_38
+:var__stdlib_67_38_end
+wmem >var__stdlib_67_38 &1
+set reg0 >var__stdlib_67_38
 push reg0
 call >str_equal
 push reg0
 call >assert
 ret
-:function__stdlib_67_48_end
-set reg0 >function__stdlib_67_48
+:function__stdlib_66_48_end
+set reg0 >function__stdlib_66_48
 push reg0
 call >test
 ret
-:function__stdlib_66_25_end
-set reg0 >function__stdlib_66_25
+:function__stdlib_65_25_end
+set reg0 >function__stdlib_65_25
 push reg0
 call >category
 halt

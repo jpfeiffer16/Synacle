@@ -6,7 +6,8 @@ namespace syncomp.Tests
     [TestClass]
     public class MultiplicationPathEval : Behavior
     {
-        private (int, AstNode) result;
+        private (int, AstNode) multiplicationResult;
+        private (int, AstNode) derefResult;
 
         protected override void Given()
         {
@@ -29,37 +30,63 @@ namespace syncomp.Tests
             };
             var index = 0;
 
-            this.result = new AsteriskPath().Eval(index, tokens, nodes, new ParserContext());
+            this.multiplicationResult = new AsteriskPath().Eval(index, tokens, nodes, new ParserContext());
+            index = 0;
+            this.derefResult = new AsteriskPath().Eval(index, tokens, new List<AstNode>(), new ParserContext());
         }
 
+#region "Multiplication"
         [TestMethod]
-        public void IndexIsCorrect()
+        public void MultiplicationIndexIsCorrect()
         {
-            Assert.AreEqual(1, this.result.Item1);
+            Assert.AreEqual(1, this.multiplicationResult.Item1);
         }
 
         [TestMethod]
-        public void AstNodeIsCorrect()
+        public void MultiplicationAstNodeIsCorrect()
         {
-            Assert.IsInstanceOfType(this.result.Item2, typeof(Multiplication));
+            Assert.IsInstanceOfType(this.multiplicationResult.Item2, typeof(Multiplication));
         }
 
         [TestMethod]
-        public void AstNodeLeftIsCorrect()
+        public void MultiplicationAstNodeLeftIsCorrect()
         {
             Assert.IsInstanceOfType(
-              ((Multiplication)this.result.Item2).Left,
+              ((Multiplication)this.multiplicationResult.Item2).Left,
               typeof(IntegerLiteral)
             );
         }
 
         [TestMethod]
-        public void AstNodeRightIsCorrect()
+        public void MultiplicationAstNodeRightIsCorrect()
         {
             Assert.IsInstanceOfType(
-              ((Multiplication)this.result.Item2).Right,
+              ((Multiplication)this.multiplicationResult.Item2).Right,
               typeof(Identifier)
             );
         }
+#endregion
+
+#region "Deref"
+        [TestMethod]
+        public void IndexIsCorrect()
+        {
+            Assert.AreEqual(1, this.derefResult.Item1);
+        }
+
+        [TestMethod]
+        public void AstNodeIsCorrect()
+        {
+            Assert.IsInstanceOfType(this.derefResult.Item2, typeof(Deref));
+        }
+
+        [TestMethod]
+        public void AstNodeParameterIsCorrect()
+        {
+            Assert.IsInstanceOfType(
+              ((Deref)this.derefResult.Item2).Parameter, typeof(Identifier)
+            );
+        }
+#endregion
     }
 }
