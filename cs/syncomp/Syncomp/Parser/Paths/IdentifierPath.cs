@@ -84,7 +84,7 @@ namespace syncomp
                         nodes,
                         $"Invalid variable declaration. Unknown type '{token.Token}'");
                 var nextToken = tokens[++i];
-                if (nextToken.Type != SyntaxTokenType.AddressOf)
+                if (nextToken.Type != SyntaxTokenType.Ampersand)
                 {
                     node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Column);
                 }

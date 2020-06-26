@@ -40,7 +40,10 @@ namespace syncomp
             new DotEmitter(),
             new AsEmitter(),
             new DerefArrowEmitter(),
-            new TernaryEmitter()
+            new TernaryEmitter(),
+            new BitwiseNotEmitter(),
+            new BitwiseOrEmitter(),
+            new BitwiseAndEmitter()
         };
     }
 }

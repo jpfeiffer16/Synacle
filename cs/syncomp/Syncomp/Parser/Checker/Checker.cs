@@ -536,6 +536,29 @@ namespace syncomp
                 ternary.NodeType = ternary.Left.NodeType;
             }
             #endregion
+            #region "BitwiseNot"
+            if (node is BitwiseNot bitwiseNot)
+            {
+                diagnostics.AddRange(Check(bitwiseNot.Parameter, ctx));
+                bitwiseNot.NodeType = bitwiseNot.Parameter.NodeType;
+            }
+            #endregion
+            #region "BitwiseAnd"
+            if (node is BitwiseAnd bitwiseAnd)
+            {
+                diagnostics.AddRange(Check(bitwiseAnd.Left, ctx));
+                diagnostics.AddRange(Check(bitwiseAnd.Right, ctx));
+                bitwiseAnd.NodeType = bitwiseAnd.Left.NodeType;
+            }
+            #endregion
+            #region "BitwiseOr"
+            if (node is BitwiseOr bitwiseOr)
+            {
+                diagnostics.AddRange(Check(bitwiseOr.Left, ctx));
+                diagnostics.AddRange(Check(bitwiseOr.Right, ctx));
+                bitwiseOr.NodeType = bitwiseOr.Left.NodeType;
+            }
+            #endregion
             return diagnostics;
         }
         #endregion

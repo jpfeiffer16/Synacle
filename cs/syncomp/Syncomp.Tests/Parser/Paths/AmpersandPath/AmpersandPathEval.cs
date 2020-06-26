@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace syncomp.Tests
 {
     [TestClass]
-    public class DerefPathEval : Behavior
+    public class AmpersandPathEval : Behavior
     {
         private (int, AstNode) result;
 
@@ -14,8 +14,8 @@ namespace syncomp.Tests
             {
                 new SyntaxToken
                 {
-                    Type = SyntaxTokenType.Deref,
-                    Token = "~"
+                    Type = SyntaxTokenType.Ampersand,
+                    Token = "&"
                 },
                 new SyntaxToken
                 {
@@ -25,29 +25,26 @@ namespace syncomp.Tests
             };
             var nodes = new List<AstNode>();
             var index = 0;
-            this.result = new DerefPath().Eval(index, tokens, nodes, new ParserContext());
+            this.result = new AmpersandPath().Eval(index, tokens, nodes, new ParserContext());
         }
 
-        // NOTE: This can be 1 now since before it would have overflowed before it
-        // returned the terminator. This is because we were using GetNextTerminator()
-        // Now we are using 
         [TestMethod]
         public void IndexIsCorrect()
         {
-            Assert.AreEqual(1, this.result.Item1);
+            Assert.AreEqual(1, result.Item1);
         }
 
         [TestMethod]
         public void AstNodeIsCorrect()
         {
-            Assert.IsInstanceOfType(this.result.Item2, typeof(Deref));
+            Assert.IsInstanceOfType(this.result.Item2, typeof(AddressOf));
         }
 
         [TestMethod]
         public void AstNodeParameterIsCorrect()
         {
             Assert.IsInstanceOfType(
-              ((Deref)this.result.Item2).Parameter, typeof(Identifier)
+              ((AddressOf)this.result.Item2).Parameter, typeof(Identifier)
             );
         }
     }

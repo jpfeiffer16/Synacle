@@ -126,11 +126,11 @@ namespace syncomp
             #region "Pointer Operators"
             if (ch == "~")
             {
-                return CreateSyntaxToken(SyntaxTokenType.Deref, ch);
+                return CreateSyntaxToken(SyntaxTokenType.Tilde, ch);
             }
             if (ch == "&" && Peek() != "&")
             {
-                return CreateSyntaxToken(SyntaxTokenType.AddressOf, ch);
+                return CreateSyntaxToken(SyntaxTokenType.Ampersand, ch);
             }
             if (ch == "-" && Peek() == ">")
             {
@@ -212,18 +212,12 @@ namespace syncomp
             #endregion
 
             #region "Bitwise Operators"
-            if (ch is "|")
+            if (ch == "|")
             {
-                return CreateSyntaxToken(SyntaxTokenType.BitwiseOr, ch);
+                return CreateSyntaxToken(SyntaxTokenType.Pipe, ch);
             }
-            if (ch is "&")
-            {
-                return CreateSyntaxToken(SyntaxTokenType.BitwiseAnd, ch);
-            }
-            // if (ch is "!")
-            // {
-            //     return CreateSyntaxToken(SyntaxTokenType.BitwiseNot, ch);
-            // }
+            // Ampersand for bitwise and is handled up above where
+            // we handling pointer ops
             #endregion
 
             #region "Type Operators"

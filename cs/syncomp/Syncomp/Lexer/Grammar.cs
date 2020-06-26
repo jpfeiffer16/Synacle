@@ -5,18 +5,16 @@ namespace syncomp
     public enum SyntaxTokenType
     {
         Addition,
-        AddressOf,
+        Ampersand,
         And,
         As,
-        BitwiseAnd,
+        Asterisk,
         BitwiseNot,
-        BitwiseOr,
         Breakpoint,
         Colon,
         Comma,
         Comment,
         Decr,
-        Deref,
         DerefArrow,
         Division,
         Dot,
@@ -37,10 +35,10 @@ namespace syncomp
         LessThan,
         LessThanOrEqual,
         Mod,
-        Asterisk,
         NewLine,
         Not,
         Or,
+        Pipe,
         PreprocessorDirective,
         QuestionMark,
         Return,
@@ -51,6 +49,7 @@ namespace syncomp
         StringLiteral,
         Subtraction,
         Tab,
+        Tilde,
         Unknown,
         VariableAssignment,
         VariableDeclaration,
@@ -215,12 +214,12 @@ namespace syncomp
               new SyntaxToken
               {
                 Token = "&",
-                Type = SyntaxTokenType.AddressOf
+                Type = SyntaxTokenType.Ampersand
               },
               new SyntaxToken
               {
                 Token = "~",
-                Type = SyntaxTokenType.Deref
+                Type = SyntaxTokenType.Tilde
               },
               new SyntaxToken
               {
