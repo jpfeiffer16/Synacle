@@ -1,5 +1,6 @@
 using System.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using syncomp;
 
 namespace StaticWeb
@@ -18,7 +19,12 @@ namespace StaticWeb
             result.Diagnostics = checker.Check();
             var emiiter = new Transformer(astNodes);
             result.Assembly = string.Join("\n", emiiter.TransformFullAst());
-            return JsonConvert.SerializeObject(result);
+            return JsonConvert.SerializeObject(result, new JsonSerializerSettings{
+                ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                }
+            });
         }
     }
 }

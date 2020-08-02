@@ -18,14 +18,18 @@
 
             <form>
                 <div class="form-group">
-                    <textarea class="form-control" id="input"></textarea>
+                    <textarea class="form-control" id="input">int test = "test";</textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary" type="button" id="button">Compile</button>
                 </div>
                 <div class="form-group">
-                    <label for="output">Output:</label>
-                    <p id="output"></p>
+                    <label for="assembly-output">Output:</label>
+                    <pre id="assembly-output"></pre>
+                </div>
+                <div class="form-group">
+                    <label for="diagnostic-output">Diagnostics:</label>
+                    <ul id="diagnostic-output"></ul>
                 </div>
             </form>
         </div>
