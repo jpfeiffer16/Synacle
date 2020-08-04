@@ -1283,17 +1283,18 @@ jmp >function__stdlib_7_16_end
 :function__stdlib_7_16
 pop reg7
 push reg7
-jmp >var__stdlib_7_41_end
-:var__stdlib_7_41
+jmp >var__stdlib_7_39_end
+:var__stdlib_7_39
 &2
 &3
 0
-:var__stdlib_7_41_end
-wmem >var__stdlib_7_41 &1
-set reg0 >var__stdlib_7_41
+:var__stdlib_7_39_end
+wmem >var__stdlib_7_39 &1
+set reg0 >var__stdlib_7_39
 push reg0
 call >str_len
 wmem >var_result_stdlib_6_4 reg0
+ret
 ret
 :function__stdlib_7_16_end
 set reg0 >function__stdlib_7_16
@@ -1346,6 +1347,7 @@ push reg0
 call reg7
 push reg0
 call >assert
+ret
 ret
 :function__stdlib_9_38_end
 set reg0 >function__stdlib_9_38
@@ -1599,6 +1601,7 @@ call reg7
 push reg0
 call >assert
 ret
+ret
 :function__stdlib_27_38_end
 set reg0 >function__stdlib_27_38
 push reg0
@@ -1683,6 +1686,7 @@ push reg0
 call reg7
 push reg0
 call >assert
+ret
 ret
 :function__stdlib_33_38_end
 set reg0 >function__stdlib_33_38
@@ -1782,6 +1786,7 @@ push reg0
 call >str_equal
 push reg0
 call >assert
+ret
 ret
 :function__stdlib_42_36_end
 set reg0 >function__stdlib_42_36
@@ -1891,6 +1896,7 @@ call >str_equal
 push reg0
 call >assert
 ret
+ret
 :function__stdlib_48_43_end
 set reg0 >function__stdlib_48_43
 push reg0
@@ -1980,6 +1986,7 @@ push reg0
 call >str_equal
 push reg0
 call >assert
+ret
 ret
 :function__stdlib_54_36_end
 set reg0 >function__stdlib_54_36
@@ -2076,6 +2083,7 @@ call reg7
 push reg0
 call >assert
 ret
+ret
 :function__stdlib_60_49_end
 set reg0 >function__stdlib_60_49
 push reg0
@@ -2168,6 +2176,7 @@ push reg0
 call >str_equal
 push reg0
 call >assert
+ret
 ret
 :function__stdlib_66_48_end
 set reg0 >function__stdlib_66_48

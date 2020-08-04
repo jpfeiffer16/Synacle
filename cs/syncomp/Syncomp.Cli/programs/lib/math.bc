@@ -1,3 +1,10 @@
+#include "./stdlib.bc"
+
+function max_two(int a, int b) : int
+{
+    return a > b ? a : b;
+}
+
 function power(int n, int p) : int
 {
     var agr = n;
@@ -26,3 +33,80 @@ function random()
 // mantisa is shift-127 encoded. You must subtract 127 to get the actual value
 // then add one for the 2^0 bit in the mantisa
 type float { };
+
+// Basic runtime fixed-point types and methods to operate on them
+type fixed
+{
+    int number;
+    int decimal_position;
+};
+
+function create_fixed(int number, int decimal_position) : fixed
+{
+    fixed fixed_num;
+    fixed_num.number = number;
+    fixed_num.decimal_position = decimal_position;
+
+    return fixed_num;
+}
+
+function fixed_add(fixed a, fixed b) : fixed
+{
+    var max = max_two(a.number, b.number);
+
+    fixed new_number;
+    new_number.number = a.number + b.number;
+    new_number.decimal_position = a.decimal_position;
+
+    return new_number;
+}
+
+function fixed_subtract(fixed a, fixed b) : fixed
+{
+    fixed new_number;
+    new_number.number = a.number - b.number;
+    new_number.decimal_position = a.decimal_position - 1;
+
+    return new_number;
+}
+
+function print_fixed(fixed num)
+{
+    var str = string(num.number);
+    var len = str_len(str);
+    for (int i = 0; i < len; ++i)
+    {
+        if (i == num.decimal_position)
+        {
+            out(*("." as int));
+        }
+        out(*(str + i));
+    }
+}
+
+function fixed(string str) : fixed
+{
+    var PERIOD_CHAR = *("." as int);
+    var num_str_ptr = alloc();
+    var num_str_offset = 0;
+    var len = str_len(str);
+    int decimal_position = 0;
+    for (int i = 0; i < len; ++i)
+    {
+        var char = *(str + i);
+        if (char == PERIOD_CHAR)
+        {
+            decimal_position = i;
+        }
+        if (!(char == PERIOD_CHAR))
+        {
+            wmem((num_str_ptr + num_str_offset) as ptr, char);
+            ++num_str_offset;
+        }
+    }
+    fixed num;
+    num.decimal_position = decimal_position;
+    num.number = int(num_str_ptr as string);
+    return num;
+}
+

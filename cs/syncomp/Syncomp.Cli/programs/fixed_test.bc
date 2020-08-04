@@ -1,0 +1,21 @@
+#include "./lib/stdlib.bc"
+#include "./lib/math.bc"
+
+// var a = create_fixed(1212, 2);
+// var b = create_fixed(1212, 2);
+// var a = fixed("12.12");
+// var b = fixed("12.12");
+var a =  fixed(input());
+var b =  fixed(input());
+var c = fixed_add(a, b);
+var d = fixed_subtract(a, b);
+
+// print_numberln(a.number);
+// print_numberln(b.number);
+// print_numberln(c.number);
+
+print("ADD: ");
+print_fixed(c);
+println(" ");
+print("SUBTRACT: ");
+print_fixed(d);

@@ -1,0 +1,64 @@
+#include "./stdlib.bc"
+
+type list_item {
+    ptr<list_item> next;
+    void value;
+    func<void, ptr<list_item>> new;
+    func<void, void> add;
+};
+
+type list
+{
+    int size;
+    ptr<list_item> items;
+    prt<list_item> last_item;
+};
+
+function compose_list_items(ptr<list_item> a, ptr<list_item> b)
+    : ptr<list_item>
+{
+    a->next = b;
+    return a;
+}
+
+
+function alloc_temp_block()
+{
+    var ptr = alloc();
+    for (var i = 0; i < 5; ++i)
+    {
+        wmem((ptr + i) as ptr, 255);
+    }
+}
+
+function list_add(ptr<list_item> list_item, void value)
+{
+}
+
+
+function new_list_item (void value) : ptr<list_item>
+{
+    var item_ptr = alloc() as ptr<list_item>();
+    item_ptr->value = value;
+    // TODO: Should be able to implicitly convert types to void when assigning
+    item_ptr->next = 0 as void;
+    item_ptr->new = (void value) => {
+        var prev_item = item_ptr;
+        var new_item = new_list_item(value);
+        compose_list_items(prev_item, new_item);
+        return new_item;
+    };
+    alloc_temp_block();
+    return item_ptr;
+}
+
+function enumerate_list(ptr<list_item> base_item, func<void, void> cb)
+{
+    ptr<list_item> item = base_item;
+    while (item->next)
+    {
+        cb(item->value);
+        item = item->next;
+    }
+    cb(item->value);
+}

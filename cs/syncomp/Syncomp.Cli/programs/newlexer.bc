@@ -1,13 +1,7 @@
-#include "./lib/stdlib.bc"
 
-var test = 2557;
 
-// var other_stuff = ~test;
-var other_stuff = ~test;
-// out(other_stuff);
-print_numberln(other_stuff);
-
-// var stuff = 65;
-// ptr<int> p = &stuff;
-// var a = *p;
-// out(a);
+function test(ptr pointer)
+{
+}
+var val = (123 + 123) as ptr;
+test((123 + 123) as ptr);

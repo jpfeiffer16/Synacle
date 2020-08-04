@@ -1,0 +1,31 @@
+#include "./lib/stdlib.bc"
+#include "./lib/list.bc"
+
+function main()
+{
+    // var first_item = compose_list_items(
+    //     new_list_item(1),
+    //     compose_list_items(
+    //         new_list_item(2),
+    //         compose_list_items(
+    //             new_list_item(3),
+    //             new_list_item(4)
+    //         )
+    //     )
+    // );
+
+    var items = new_list_item(100);
+    items
+        ->new(65)
+        ->new(66)
+        ->new(67)
+        ->new(68);
+    // first_item->new(1);
+
+    // print_numberln(first_item->next as int);
+    enumerate_list(items, (int value) => {
+        print_numberln(value);
+    });
+}
+
+main();

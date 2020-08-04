@@ -153,10 +153,10 @@ function string(int num) : string {
     var dest_ptr = alloc();
 
     while(stack_index < length) {
-        wmem(dest_ptr + stack_index as ptr, pop() + 48);
+        wmem((dest_ptr + stack_index) as ptr, pop() + 48);
         stack_index = stack_index + 1;
     }
-    wmem(dest_ptr + stack_index as ptr, 0);
+    wmem((dest_ptr + stack_index) as ptr, 0);
 
     return dest_ptr as string;
 }
