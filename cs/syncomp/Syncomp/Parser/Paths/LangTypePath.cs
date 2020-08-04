@@ -55,11 +55,13 @@ namespace syncomp
             // TODO: Fix!
             var langType = new LangType(
                 name,
-                ParseTokens(bodyExpression, ctx).Cast<VariableDeclaration>().ToList(),
+                new List<VariableDeclaration>(),
                 langTypeToken.File,
                 langTypeToken.Line,
                 langTypeToken.Column);
+
             ctx.LangTypes.Add(langType);
+            langType.Body.AddRange(ParseTokens(bodyExpression, ctx).Cast<VariableDeclaration>().ToList());
             return (i, langType);
         }
     }

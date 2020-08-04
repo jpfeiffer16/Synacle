@@ -236,6 +236,10 @@ namespace syncomp
             #region "While"
             if (node is While whileNode)
             {
+                foreach (var cNode in whileNode.Condition)
+                {
+                    diagnostics.AddRange(Check(cNode, ctx));
+                }
                 foreach (var exNode in whileNode.Expression)
                 {
                     diagnostics.AddRange(Check(exNode, ctx));
@@ -283,7 +287,7 @@ namespace syncomp
                 }
                 var fieldName = dot.Right as Identifier;
                 // if (right is null) throw new ParseException(i, tokens, nodes, "Right node is not an identifier");
-                var field = type.Body.Where(fld => fld.Identifier == fieldName.Name).FirstOrDefault();
+                var field = type.Body?.Where(fld => fld.Identifier == fieldName.Name).FirstOrDefault();
                 if (field is null)
                 {
                     diagnostics.Add(new Diagnostic(

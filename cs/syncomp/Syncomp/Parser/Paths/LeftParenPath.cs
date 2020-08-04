@@ -139,7 +139,8 @@ namespace syncomp
                   token.Column
                 ) { NodeType = nodeType };
 
-                i = nextClose + 1;
+                // i = nextClose + 1;
+                i = nextClose;
 
             }
             return (i, node);
