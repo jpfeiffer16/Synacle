@@ -40,14 +40,14 @@ namespace syncomp.Tests
         [TestMethod]
         public void AstNodeIsCorrect()
         {
-            Assert.IsInstanceOfType(this.result.Item2, typeof(Deref));
+            Assert.IsInstanceOfType(this.result.Item2, typeof(BitwiseNot));
         }
 
         [TestMethod]
         public void AstNodeParameterIsCorrect()
         {
             Assert.IsInstanceOfType(
-              ((Deref)this.result.Item2).Parameter, typeof(Identifier)
+              ((BitwiseNot)this.result.Item2).Parameter, typeof(Identifier)
             );
         }
     }

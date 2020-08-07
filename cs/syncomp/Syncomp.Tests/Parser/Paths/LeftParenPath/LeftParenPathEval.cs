@@ -37,9 +37,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void IndexIsCorrect()
         {
-            // NOTE: This may be incorrect. It seems like it should be 2. But this is
-            // where we are soo..
-            Assert.AreEqual(3, this.result.Item1);
+            Assert.AreEqual(2, this.result.Item1);
         }
 
         [TestMethod]

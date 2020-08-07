@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="2.6.3">
+    <PackageReference Include="coverlet.collector" Version="1.3.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.msbuild" Version="2.9.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -25,14 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None
-      Include="Checker/negative.bc"
-      CopyToOutputDirectory="PreserveNewest"
-      Link="negative.bc"/>
-    <None
-      Include="Checker/positive.bc"
-      CopyToOutputDirectory="PreserveNewest"
-      Link="positive.bc"/>
+    <None Include="Checker/negative.bc" CopyToOutputDirectory="PreserveNewest" Link="negative.bc" />
+    <None Include="Checker/positive.bc" CopyToOutputDirectory="PreserveNewest" Link="positive.bc" />
   </ItemGroup>
 
 </Project>

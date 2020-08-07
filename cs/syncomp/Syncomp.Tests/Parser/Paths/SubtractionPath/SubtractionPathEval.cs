@@ -35,7 +35,7 @@ namespace syncomp.Tests
         [TestMethod]
         public void IndexIsCorrect()
         {
-            Assert.AreEqual(1, this.result.Item1);
+            Assert.AreEqual(2, this.result.Item1);
         }
 
         [TestMethod]
