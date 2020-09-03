@@ -39,7 +39,8 @@ namespace syncomp
             new TildePath(),
             new VariableAssignmentPath(),
             new VariableDeclarationPath(),
-            new WhilePath()
+            new WhilePath(),
+            new TemplateKeywordPath()
         };
     }
 }

@@ -1,13 +1,27 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace syncomp
 {
-    public class ParserContext
+    public partial class ParserContext
     {
         public List<Diagnostic> Diagnostics { get; } = new List<Diagnostic>();
 
-        // TODO: Fix!
-        public List<LangType> LangTypes { get; set; } = new List<LangType>
+        public LangType GetLangType(string name)
+        {
+            // var type = 
+            return LangTypes.Where(l =>
+                l.GetName().Replace(" ", string.Empty) == name.Replace(" ", string.Empty))
+                .FirstOrDefault();
+        }
+
+        public void AddLangType(LangType langType)
+        {
+            LangTypes.Add(langType);
+        }
+
+
+        private List<LangType> LangTypes { get; set; } = new List<LangType>
         {
             // This should not actually be used in the type system. But instead
             // only as an indicator that a type needs to be bound to a variable
@@ -20,6 +34,8 @@ namespace syncomp
             NativeTypes.Pointer
         };
 
+        public List<Template> Templates = new List<Template>();
+
         public static class NativeTypes
         {
             public static LangType Implicit { get; } = new LangType(name: "implicit", body: null, file: null, line: 0, column: 0);
@@ -31,7 +47,7 @@ namespace syncomp
         }
 
         /// <summary>
-        /// Generisize a parameter by creating a new type that has the specified subtype
+        /// Generate a parameter by creating a new type that has the specified subtype
         /// and returning it
         /// </summary>
         /// <param name="parentType"></param>
@@ -39,9 +55,81 @@ namespace syncomp
         /// <returns>LangType</returns>
         public LangType GetGenericType(LangType parentType, LangType subType)
         {
-            var newType = new LangType(name: parentType.Name, body: null, file: null, line: 0, column: 0) { SubTypes = new List<LangType> { subType  } };
+            var newType = new LangType(name: parentType.Name, body: null, file: null, line: 0, column: 0) { SubTypes = new List<LangType> { subType } };
             this.LangTypes.Add(newType);
             return newType;
+        }
+
+        public LangType GetLangType(List<SyntaxToken> tokens, bool validateType = true)
+        {
+            var name = string.Join(string.Empty, tokens.Select(t => t.Token)).Trim();
+            var cachedType = this.GetLangType(name);
+            if (cachedType != null)
+            {
+                return cachedType;
+            }
+            var type = GetConcreteType(tokens, validateType);
+            var genericType = this.Templates.Where(tmpl => tmpl.LangType.Equals(type)).FirstOrDefault();
+            if (genericType != null)
+            {
+                genericType.Realize(type, this);
+                type = this.GetLangType(name);
+            }
+            return type;
+        }
+
+        public LangType GetConcreteType(List<SyntaxToken> tokens, bool validateType = true)
+        {
+            var left = tokens.FirstOrDefault(tkn => tkn.Type == SyntaxTokenType.LessThan);
+            // Type  is geneic
+            if (!(left is null))
+            {
+                int leftIndex = tokens.IndexOf(left);
+                var simpleTypeToken = tokens.Take(leftIndex).FirstOrDefault();
+                if (simpleTypeToken is null) throw new ParseException(left.Column, tokens, null, "No type before <");
+                var right = tokens.LastOrDefault(tkn => tkn.Type == SyntaxTokenType.GreaterThan);
+                if (right is null) throw new ParseException(left.Column, tokens, null, "No matching angle bracket");
+                var subTypeList = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
+                foreach (var tkn in tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1))
+                {
+                    if (tkn.Type == SyntaxTokenType.Comma)
+                    {
+                        subTypeList.Add(new List<SyntaxToken>());
+                    }
+                    else
+                    {
+                        subTypeList.LastOrDefault().Add(tkn);
+                    }
+                }
+                var simpleType = new LangType(
+                    simpleTypeToken.Token,
+                    new List<VariableDeclaration>(),
+                    simpleTypeToken.File,
+                    simpleTypeToken.Line,
+                    simpleTypeToken.Column);
+                simpleType.SubTypes = subTypeList.Select(t => GetConcreteType(t, validateType)).ToList();
+                return simpleType;
+            }
+            // Type is not geneic
+            var typeToken = tokens.FirstOrDefault();
+            if (typeToken is null) throw new ParseException(0, null, null, "Unable to find type");
+            // return new LangType(typeToken.Token, null, typeToken.File, typeToken.Line, typeToken.Index);
+            // var langType = ctx.LangTypes.Where(lt => lt.Name == typeToken.Token).FirstOrDefault();
+            var langType = this.GetLangType(typeToken.Token);
+
+            if (langType is null)
+            {
+                if (validateType)
+                    throw new TypeNotFoundException(typeToken.Token);
+                else
+                    langType = new LangType(
+                        typeToken.Token,
+                        new List<VariableDeclaration>(),
+                        typeToken.File,
+                        typeToken.Line,
+                        typeToken.Column);
+            }
+            return langType;
         }
     }
 }

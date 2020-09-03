@@ -77,7 +77,7 @@ namespace syncomp
                     typeTokens = tokens.GetRange(i, (nextMatching - i) + 1);
                     i = nextMatching;
                 }
-                var type = GetLangType(typeTokens, ctx);
+                var type = ctx.GetLangType(typeTokens);
                 if (type == null)
                     throw new ParseException(i,
                         tokens,

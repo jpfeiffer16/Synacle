@@ -32,7 +32,7 @@ namespace syncomp
                     var lambdaArrowIndex = GetNext(i, tokens, SyntaxTokenType.LambdaArrow);
                     var typeNameTokens = tokens.GetRange(i, lambdaArrowIndex - i);
                     i = GetNextNonWhitespace(lambdaArrowIndex + 1, tokens);
-                    returnType = GetLangType(typeNameTokens, ctx);
+                    returnType = ctx.GetLangType(typeNameTokens);
                 }
                 else
                 {

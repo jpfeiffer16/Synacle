@@ -48,7 +48,7 @@ namespace syncomp
                 var curlyStart = GetNext(i, tokens, SyntaxTokenType.LeftCurly);
                 var typeNameTokens = tokens.GetRange(i, curlyStart - i);
                 i = curlyStart;
-                returnType = GetLangType(typeNameTokens, ctx);
+                returnType = ctx.GetLangType(typeNameTokens);
             }
 
             var nextClosingCurly = GetExpression(

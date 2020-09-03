@@ -1,34 +1,31 @@
-// var test = "test";
-// var temp = "temp";
+#include "../lib/stdlib.bc"
 
-//type Y
-//{
-//    var id,
-//    var tp
-//}
-//
-//type Test
-//{
-//    var id,
-//    var tp
-//}
-//
-//Y test;
-//test.id = 123;
-//test.tp = function() { out(65) };
+type test_type
+{
+    string name;
+    int id;
+    int external_id;
+    string nick;
+};
 
-//Y test {
-//    id = 123,
-//    tp = function() { out(65) }
-//}
+func<test_type, void> test_func = (test_type param) : void =>
+{
+    print_numberln(sizeof(param));
+    println(param.name);
+    print_numberln(param.id);
+    print_numberln(param.external_id);
+    println(param.nick);
+};
 
-//if (test.id == 123)
-//{
-//    test.tp();
-//}
+test_type test;
+test.name = "Marcel";
+test.id = 123;
+test.external_id = 321;
+test.nick = "Little Dude";
 
-function main() {
-    out(10);
-}
+// print_numberln(sizeof(test));
 
-main();
+test_func(test);
+
+ptr<test_type> &t;
+var p = *t;

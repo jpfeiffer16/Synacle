@@ -31,6 +31,7 @@ namespace syncomp
         {
             if (other is null) return false;
             if (other.Name == "void") return true;
+            if (other.IsTypeParameter || this.IsTypeParameter) return true;
             if (this.Name != other.Name) return false;
             if (this.SubTypes == null && other.SubTypes == null) return true;
             if (this.SubTypes == null ^ other.SubTypes == null) return false;
@@ -42,8 +43,25 @@ namespace syncomp
             return true;
         }
 
+        public void ValidateTypeParameters(ParserContext ctx)
+        {
+            var type = ctx.GetLangType(this.Name);
+            if (type is null)
+            {
+                this.IsTypeParameter = true;
+            }
+            else
+            {
+                foreach (var tp in this.SubTypes)
+                {
+                    tp.ValidateTypeParameters(ctx);
+                }
+            }
+        }
+
         public string Name { get; }
         public List<VariableDeclaration> Body { get; }
         public List<LangType> SubTypes { get; set; } = new List<LangType>();
+        public bool IsTypeParameter { get; set; }
     }
 }

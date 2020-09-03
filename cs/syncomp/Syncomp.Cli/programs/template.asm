@@ -752,131 +752,52 @@ jmp >while__stdlib_176_4_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >var_test_func_typetest_11_0_end
-:var_test_func_typetest_11_0
-:var_test_func_typetest_11_0_end
-jmp >function__typetest_11_34_end
-:function__typetest_11_34
-jmp >var_param_typetest_11_35_end
-:var_param_typetest_11_35
-:fld_param_typetest_11_35_name
-:fld_param_typetest_11_35_id
-:fld_param_typetest_11_35_external_id
-:fld_param_typetest_11_35_nick
-:var_param_typetest_11_35_end
-pop reg7
-pop reg0
-wmem >fld_param_typetest_11_35_nick reg0
-pop reg0
-wmem >fld_param_typetest_11_35_external_id reg0
-pop reg0
-wmem >fld_param_typetest_11_35_id reg0
-pop reg0
-wmem >fld_param_typetest_11_35_name reg0
-push reg7
-set reg0 7
-push reg0
-call >print_numberln
-rmem reg0 >fld_param_typetest_11_35_name
-push reg0
-call >println
-rmem reg0 >fld_param_typetest_11_35_id
-push reg0
-call >print_numberln
-rmem reg0 >fld_param_typetest_11_35_external_id
-push reg0
-call >print_numberln
-rmem reg0 >fld_param_typetest_11_35_nick
-push reg0
-call >println
-ret
-:function__typetest_11_34_end
-set reg0 >function__typetest_11_34
-wmem >var_test_func_typetest_11_0 reg0
-jmp >var_test_typetest_20_0_end
-:var_test_typetest_20_0
-:fld_test_typetest_20_0_name
-:fld_test_typetest_20_0_id
-:fld_test_typetest_20_0_external_id
-:fld_test_typetest_20_0_nick
-:var_test_typetest_20_0_end
-jmp >var__typetest_21_12_end
-:var__typetest_21_12
-&a
-&r
-&c
-&e
-&l
-0
-:var__typetest_21_12_end
-wmem >var__typetest_21_12 &M
-set reg0 >var__typetest_21_12
-wmem >fld_test_typetest_20_0_name reg0
+jmp >var_keyval_template_11_0_end
+:var_keyval_template_11_0
+:fld_keyval_template_11_0_key
+:fld_keyval_template_11_0_value
+:var_keyval_template_11_0_end
 set reg0 123
-wmem >fld_test_typetest_20_0_id reg0
-set reg0 321
-wmem >fld_test_typetest_20_0_external_id reg0
-jmp >var__typetest_24_12_end
-:var__typetest_24_12
-&i
-&t
-&t
-&l
+wmem >fld_keyval_template_11_0_key reg0
+jmp >var__template_13_15_end
+:var__template_13_15
 &e
-32
-&D
-&u
-&d
-&e
+&s
+&t
 0
-:var__typetest_24_12_end
-wmem >var__typetest_24_12 &L
-set reg0 >var__typetest_24_12
-wmem >fld_test_typetest_20_0_nick reg0
-rmem reg0 >fld_test_typetest_20_0_name
+:var__template_13_15_end
+wmem >var__template_13_15 &T
+set reg0 >var__template_13_15
+wmem >fld_keyval_template_11_0_value reg0
+rmem reg0 >fld_keyval_template_11_0_key
 push reg0
-rmem reg0 >fld_test_typetest_20_0_id
+call >print_numberln
+rmem reg0 >fld_keyval_template_11_0_value
 push reg0
-rmem reg0 >fld_test_typetest_20_0_external_id
+call >println
+jmp >var_next_keyval_template_18_0_end
+:var_next_keyval_template_18_0
+:fld_next_keyval_template_18_0_key
+:fld_next_keyval_template_18_0_value
+:var_next_keyval_template_18_0_end
+jmp >var__template_19_18_end
+:var__template_19_18
+&e
+&s
+&t
+0
+:var__template_19_18_end
+wmem >var__template_19_18 &T
+set reg0 >var__template_19_18
+wmem >fld_next_keyval_template_18_0_key reg0
+set reg0 123
+wmem >fld_next_keyval_template_18_0_value reg0
+rmem reg0 >fld_next_keyval_template_18_0_key
 push reg0
-rmem reg0 >fld_test_typetest_20_0_nick
+call >println
+rmem reg0 >fld_next_keyval_template_18_0_value
 push reg0
-rmem reg7 >var_test_func_typetest_11_0
-call reg7
-jmp >var_t_backing_typetest_30_0_end
-:var_t_backing_typetest_30_0
-:fld_t_backing_typetest_30_0_name
-:fld_t_backing_typetest_30_0_id
-:fld_t_backing_typetest_30_0_external_id
-:fld_t_backing_typetest_30_0_nick
-:var_t_backing_typetest_30_0_end
-jmp >var_t_typetest_30_0_end
-:var_t_typetest_30_0
-:var_t_typetest_30_0_end
-wmem >var_t_typetest_30_0 >var_t_backing_typetest_30_0
-jmp >var_p_typetest_31_0_end
-:var_p_typetest_31_0
-:fld_p_typetest_31_0_name
-:fld_p_typetest_31_0_id
-:fld_p_typetest_31_0_external_id
-:fld_p_typetest_31_0_nick
-:var_p_typetest_31_0_end
-rmem reg0 >var_t_typetest_30_0
-rmem reg0 reg0
-set reg7 >var_p_typetest_31_0
-add reg7 reg7 4
-pop reg0
-wmem reg7 reg0
-add reg7 reg7 32767
-pop reg0
-wmem reg7 reg0
-add reg7 reg7 32767
-pop reg0
-wmem reg7 reg0
-add reg7 reg7 32767
-pop reg0
-wmem reg7 reg0
-add reg7 reg7 32767
+call >print_numberln
 halt
 
 :subtract

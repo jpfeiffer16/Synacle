@@ -14,13 +14,12 @@ namespace syncomp
           int i, List<SyntaxToken> tokens, List<AstNode> nodes, ParserContext ctx)
         {
             var langTypeToken = tokens[i];
-            var nameToken = tokens[i + 1];
-            if (nameToken.Type  != SyntaxTokenType.Identifier)
-            {
-                throw new ParseException(i, tokens, nodes, "No type name found");
-            }
-            var name = nameToken.Token;
-            i = this.GetNextNonWhitespace(i + 2, tokens);
+            ++i;
+            var nextOpenCurlyIndex = GetNext(i, tokens, SyntaxTokenType.LeftCurly);
+            var nameTokens = tokens.GetRange(i, nextOpenCurlyIndex - (i)).Where(t => !string.IsNullOrWhiteSpace(t.Token)).ToList();
+            var name = string.Join(string.Empty, nameTokens.Select(t => t.Token));
+            // i = this.GetNextNonWhitespace(i + 2, tokens);
+            i = nextOpenCurlyIndex;
             var typeBodyEnd = GetExpression(
               SyntaxTokenType.LeftCurly,
               SyntaxTokenType.RightCurly,
@@ -52,15 +51,10 @@ namespace syncomp
                 }
             }
             sectionList.Add(currentList);
-            // TODO: Fix!
-            var langType = new LangType(
-                name,
-                new List<VariableDeclaration>(),
-                langTypeToken.File,
-                langTypeToken.Line,
-                langTypeToken.Column);
 
-            ctx.LangTypes.Add(langType);
+            var langType = ctx.GetConcreteType(nameTokens.ToList(), validateType: false);
+
+            ctx.AddLangType(langType);
             langType.Body.AddRange(ParseTokens(bodyExpression, ctx).Cast<VariableDeclaration>().ToList());
             return (i, langType);
         }

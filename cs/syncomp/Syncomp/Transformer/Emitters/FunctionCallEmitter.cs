@@ -55,19 +55,16 @@ namespace syncomp
                 }
                 else if (fcName == "nameof")
                 {
-                    EmitRegFunctionArgs(lines, fcNode, ctx);
                     lines.AddRange(new Transformer(new List<AstNode> {
                         new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).Name, null, 0, 0) }, ctx)
                         .Transform());
                 }
                 else if (fcName == "sizeof")
                 {
-                    EmitRegFunctionArgs(lines, fcNode, ctx);
                     lines.Add($"set reg{ctx.RegisterLevel} {TypeHelper.GetTypeLength(fcNode.Parameters.FirstOrDefault().NodeType)}");
                 }
                 else if (fcName == "typeof")
                 {
-                    EmitRegFunctionArgs(lines, fcNode, ctx);
                     lines.AddRange(new Transformer(new List<AstNode> {
                         new StringLiteral((fcNode.Parameters.FirstOrDefault() as Identifier).NodeType.GetName(), null, 0, 0) }, ctx)
                         .Transform());

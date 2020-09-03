@@ -20,7 +20,8 @@
                 // "Syncomp.Cli/programs/lib/tty_colors.bc"
                 // "Syncomp.Cli/programs/newlexer.bc"
                 // "Syncomp.Cli/programs/fixed_test.bc",
-                "Syncomp.Cli/programs/list_test.bc",
+                "Syncomp.Cli/programs/template.bc",
+                // "Syncomp.Cli/programs/tests/stdlib.bc"
                 // "Syncomp.Cli/programs/interpreter/bcin.bc"
                 // "Syncomp.Tests/Checker/test_patterns.bc"
             ],
