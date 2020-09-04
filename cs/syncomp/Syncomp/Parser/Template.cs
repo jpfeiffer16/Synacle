@@ -28,7 +28,7 @@ namespace syncomp
         /// <param name="tokens">The tokens.</param>
         public Template(LangType langType , List<SyntaxToken> tokens)
         {
-            Tokens = tokens ?? throw new System.ArgumentNullException(nameof(tokens));
+            Tokens = tokens ?? throw new ArgumentNullException(nameof(tokens));
             LangType = langType ?? throw new ArgumentNullException(nameof(langType));
         }
 
@@ -36,7 +36,8 @@ namespace syncomp
         /// This method realizes the template and addes the concrete type to the
         /// type list in the ParserContext.
         /// </summary>
-        /// <param name="actualType">The Actual Type to realize.</param>
+        /// <param name="actualType">The actual type.</param>
+        /// <param name="ctx">The ctx.</param>
         public void Realize(LangType actualType, ParserContext ctx)
         {
             // Isolate type parameters and what to replace them with.

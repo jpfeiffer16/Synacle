@@ -752,50 +752,69 @@ jmp >while__stdlib_176_4_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >var_keyval_template_11_0_end
-:var_keyval_template_11_0
-:fld_keyval_template_11_0_key
-:fld_keyval_template_11_0_value
-:var_keyval_template_11_0_end
-set reg0 123
-wmem >fld_keyval_template_11_0_key reg0
-jmp >var__template_13_15_end
-:var__template_13_15
-&e
-&s
-&t
-0
-:var__template_13_15_end
-wmem >var__template_13_15 &T
-set reg0 >var__template_13_15
-wmem >fld_keyval_template_11_0_value reg0
-rmem reg0 >fld_keyval_template_11_0_key
+jmp >dictionary_get_end
+:dictionary_get
+jmp >var_key_template_17_24_end
+:var_key_template_17_24
+:var_key_template_17_24_end
+pop reg7
+pop reg0
+wmem >var_key_template_17_24 reg0
+push reg7
+ret
+:dictionary_get_end
+set reg0 >dictionary_get
+jmp >var_test_var_template_26_0_end
+:var_test_var_template_26_0
+:fld_test_var_template_26_0_int
+:var_test_var_template_26_0_end
+rmem reg0 >fld_test_var_template_26_0_int
 push reg0
 call >print_numberln
-rmem reg0 >fld_keyval_template_11_0_value
-push reg0
-call >println
-jmp >var_next_keyval_template_18_0_end
-:var_next_keyval_template_18_0
-:fld_next_keyval_template_18_0_key
-:fld_next_keyval_template_18_0_value
-:var_next_keyval_template_18_0_end
-jmp >var__template_19_18_end
-:var__template_19_18
+jmp >var_keyval_template_29_0_end
+:var_keyval_template_29_0
+:fld_keyval_template_29_0_key
+:fld_keyval_template_29_0_value
+:var_keyval_template_29_0_end
+set reg0 123
+wmem >fld_keyval_template_29_0_key reg0
+jmp >var__template_31_15_end
+:var__template_31_15
 &e
 &s
 &t
 0
-:var__template_19_18_end
-wmem >var__template_19_18 &T
-set reg0 >var__template_19_18
-wmem >fld_next_keyval_template_18_0_key reg0
-set reg0 123
-wmem >fld_next_keyval_template_18_0_value reg0
-rmem reg0 >fld_next_keyval_template_18_0_key
+:var__template_31_15_end
+wmem >var__template_31_15 &T
+set reg0 >var__template_31_15
+wmem >fld_keyval_template_29_0_value reg0
+rmem reg0 >fld_keyval_template_29_0_key
+push reg0
+call >print_numberln
+rmem reg0 >fld_keyval_template_29_0_value
 push reg0
 call >println
-rmem reg0 >fld_next_keyval_template_18_0_value
+jmp >var_next_keyval_template_36_0_end
+:var_next_keyval_template_36_0
+:fld_next_keyval_template_36_0_key
+:fld_next_keyval_template_36_0_value
+:var_next_keyval_template_36_0_end
+jmp >var__template_37_18_end
+:var__template_37_18
+&e
+&s
+&t
+0
+:var__template_37_18_end
+wmem >var__template_37_18 &T
+set reg0 >var__template_37_18
+wmem >fld_next_keyval_template_36_0_key reg0
+set reg0 123
+wmem >fld_next_keyval_template_36_0_value reg0
+rmem reg0 >fld_next_keyval_template_36_0_key
+push reg0
+call >println
+rmem reg0 >fld_next_keyval_template_36_0_value
 push reg0
 call >print_numberln
 halt

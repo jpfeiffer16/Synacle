@@ -7,6 +7,26 @@ type keyvalue_pair<TKey, TValue>
     TValue value;
 }
 
+template
+type dictionary<TKey, TValue>
+{
+    func<TKey, TValue> get;
+    func<TKey, TValue, void> set;
+    ptr buffer;
+    int buffer_size;
+}
+
+function dictionary_get(void key)
+{
+}
+
+function dictionary_set(void key, void value)
+{
+}
+
+function dictionary_new()
+{
+}
 
 keyvalue_pair<int, string> keyval;
 keyval.key = 123;
