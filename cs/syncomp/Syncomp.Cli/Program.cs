@@ -52,11 +52,11 @@ namespace syncomp
                 var warningCount = diagnostics.Where(d => d.Level == DiagnosticCodeLevel.Warning).Count();
                 if (errorCount > 0)
                 {
-                    Console.WriteLine($"There are {errorCount} errors");
+                    Console.Write($"There are {errorCount} errors");
                     if (warningCount > 0)
-                        Console.WriteLine($"and {warningCount} warings.");
+                        Console.WriteLine($" and {warningCount} warings.");
                     else
-                        Console.Write(".");
+                        Console.WriteLine(".");
                     Console.WriteLine("Please fix and re-compile.");
                     Environment.Exit(1);
                 }
