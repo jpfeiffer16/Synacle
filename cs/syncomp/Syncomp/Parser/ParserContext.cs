@@ -69,12 +69,7 @@ namespace syncomp
                 return cachedType;
             }
             var type = GetConcreteType(tokens, validateType);
-            var genericType = this.Templates.Where(tmpl => tmpl.LangType.Equals(type)).FirstOrDefault();
-            if (genericType != null)
-            {
-                genericType.Realize(type, this);
-                type = this.GetLangType(name);
-            }
+            type = CheckGenericTypes(type);
             return type;
         }
 
@@ -90,9 +85,13 @@ namespace syncomp
                 var right = tokens.LastOrDefault(tkn => tkn.Type == SyntaxTokenType.GreaterThan);
                 if (right is null) throw new ParseException(left.Column, tokens, null, "No matching angle bracket");
                 var subTypeList = new List<List<SyntaxToken>>() { new List<SyntaxToken>() };
-                foreach (var tkn in tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1))
+                var insideTokens = tokens.GetRange(leftIndex + 1, (tokens.IndexOf(right) - leftIndex) - 1);
+                var nestingLevel = 0;
+                foreach (var tkn in insideTokens)
                 {
-                    if (tkn.Type == SyntaxTokenType.Comma)
+                    if (tkn.Type == SyntaxTokenType.LessThan) nestingLevel++;
+                    if (tkn.Type == SyntaxTokenType.GreaterThan) nestingLevel--;
+                    if (tkn.Type == SyntaxTokenType.Comma && nestingLevel == 0)
                     {
                         subTypeList.Add(new List<SyntaxToken>());
                     }
@@ -113,8 +112,6 @@ namespace syncomp
             // Type is not geneic
             var typeToken = tokens.FirstOrDefault();
             if (typeToken is null) throw new ParseException(0, null, null, "Unable to find type");
-            // return new LangType(typeToken.Token, null, typeToken.File, typeToken.Line, typeToken.Index);
-            // var langType = ctx.LangTypes.Where(lt => lt.Name == typeToken.Token).FirstOrDefault();
             var langType = this.GetLangType(typeToken.Token);
 
             if (langType is null)
@@ -128,6 +125,25 @@ namespace syncomp
                         typeToken.File,
                         typeToken.Line,
                         typeToken.Column);
+            }
+            return langType;
+        }
+
+        public LangType CheckGenericTypes(LangType langType)
+        {
+            if (langType.Name != ParserContext.NativeTypes.LangVoid.Name)
+            {
+                var genericType = this.Templates.Where(tmpl => tmpl.LangType.Equals(langType)).FirstOrDefault();
+                if (genericType != null)
+                {
+                    genericType.Realize(langType, this);
+                    return GetLangType(langType.GetName());
+                }
+                for (var i = 0; i < langType.SubTypes.Count; i++)
+                {
+                    var subType = langType.SubTypes[i];
+                    langType.SubTypes[i] = CheckGenericTypes(subType);
+                }
             }
             return langType;
         }

@@ -752,71 +752,129 @@ jmp >while__stdlib_176_4_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >dictionary_get_end
-:dictionary_get
-jmp >var_key_template_17_24_end
-:var_key_template_17_24
-:var_key_template_17_24_end
+jmp >dictionary_new_end
+:dictionary_new
+pop reg7
+push reg7
+jmp >var_dict_template_20_4_end
+:var_dict_template_20_4
+:fld_dict_template_20_4_get
+:fld_dict_template_20_4_set
+:fld_dict_template_20_4_buffer
+:var_dict_template_20_4_end
+jmp >var_dictionary_get_template_21_4_end
+:var_dictionary_get_template_21_4
+:var_dictionary_get_template_21_4_end
+jmp >function__template_21_25_end
+:function__template_21_25
+jmp >var_key_template_21_26_end
+:var_key_template_21_26
+:var_key_template_21_26_end
 pop reg7
 pop reg0
-wmem >var_key_template_17_24 reg0
+wmem >var_key_template_21_26 reg0
 push reg7
 ret
-:dictionary_get_end
-set reg0 >dictionary_get
-jmp >var_test_var_template_26_0_end
-:var_test_var_template_26_0
-:fld_test_var_template_26_0_int
-:var_test_var_template_26_0_end
-rmem reg0 >fld_test_var_template_26_0_int
+:function__template_21_25_end
+set reg0 >function__template_21_25
+wmem >var_dictionary_get_template_21_4 reg0
+jmp >var_dictionary_set_template_25_4_end
+:var_dictionary_set_template_25_4
+:var_dictionary_set_template_25_4_end
+jmp >function__template_25_25_end
+:function__template_25_25
+jmp >var_key_template_25_26_end
+:var_key_template_25_26
+:var_key_template_25_26_end
+jmp >var_value_template_25_36_end
+:var_value_template_25_36
+:var_value_template_25_36_end
+pop reg7
+pop reg0
+wmem >var_value_template_25_36 reg0
+pop reg0
+wmem >var_key_template_25_26 reg0
+push reg7
+jmp >var_index_template_27_8_end
+:var_index_template_27_8
+:var_index_template_27_8_end
+rmem reg0 >var_key_template_25_26
+set reg1 255
+and reg0 reg0 reg1
+wmem >var_index_template_27_8 reg0
+rmem reg0 >var_index_template_27_8
 push reg0
 call >print_numberln
-jmp >var_keyval_template_29_0_end
-:var_keyval_template_29_0
-:fld_keyval_template_29_0_key
-:fld_keyval_template_29_0_value
-:var_keyval_template_29_0_end
-set reg0 123
-wmem >fld_keyval_template_29_0_key reg0
-jmp >var__template_31_15_end
-:var__template_31_15
+ret
+:function__template_25_25_end
+set reg0 >function__template_25_25
+wmem >var_dictionary_set_template_25_4 reg0
+rmem reg0 >var_dictionary_get_template_21_4
+wmem >fld_dict_template_20_4_get reg0
+rmem reg0 >var_dictionary_set_template_25_4
+wmem >fld_dict_template_20_4_set reg0
+set reg0 >var_dict_template_20_4
+ret
+ret
+:dictionary_new_end
+set reg0 >dictionary_new
+jmp >var_dict_template_37_0_end
+:var_dict_template_37_0
+:var_dict_template_37_0_end
+call >dictionary_new
+wmem >var_dict_template_37_0 reg0
+rmem reg0 >var_dict_template_37_0
+add reg0 reg0 2
+rmem reg0 reg0
+set reg7 reg0
+set reg0 3202
+push reg0
+jmp >var__template_38_16_end
+:var__template_38_16
 &e
 &s
 &t
 0
-:var__template_31_15_end
-wmem >var__template_31_15 &T
-set reg0 >var__template_31_15
-wmem >fld_keyval_template_29_0_value reg0
-rmem reg0 >fld_keyval_template_29_0_key
+:var__template_38_16_end
+wmem >var__template_38_16 &t
+set reg0 >var__template_38_16
 push reg0
-call >print_numberln
-rmem reg0 >fld_keyval_template_29_0_value
-push reg0
-call >println
-jmp >var_next_keyval_template_36_0_end
-:var_next_keyval_template_36_0
-:fld_next_keyval_template_36_0_key
-:fld_next_keyval_template_36_0_value
-:var_next_keyval_template_36_0_end
-jmp >var__template_37_18_end
-:var__template_37_18
-&e
+call reg7
+jmp >var___0_0_end
+:var___0_0
+&t
+&r
+&<
+&d
+&i
+&c
+&t
+&i
+&o
+&n
+&a
+&r
+&y
+&<
+&i
+&n
+&t
+&,
+32
 &s
 &t
+&r
+&i
+&n
+&g
+&>
+&>
 0
-:var__template_37_18_end
-wmem >var__template_37_18 &T
-set reg0 >var__template_37_18
-wmem >fld_next_keyval_template_36_0_key reg0
-set reg0 123
-wmem >fld_next_keyval_template_36_0_value reg0
-rmem reg0 >fld_next_keyval_template_36_0_key
+:var___0_0_end
+wmem >var___0_0 &p
+set reg0 >var___0_0
 push reg0
 call >println
-rmem reg0 >fld_next_keyval_template_36_0_value
-push reg0
-call >print_numberln
 halt
 
 :subtract
