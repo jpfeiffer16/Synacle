@@ -48,9 +48,16 @@ namespace syncomp
             if (diagnostics.Count() > 0)
             {
                 DisplayCheckerDiagnostics(diagnostics);
-                if (diagnostics.Where(d => d.Level == DiagnosticCodeLevel.Error).Count() > 0)
+                var errorCount = diagnostics.Where(d => d.Level == DiagnosticCodeLevel.Error).Count();
+                var warningCount = diagnostics.Where(d => d.Level == DiagnosticCodeLevel.Warning).Count();
+                if (errorCount > 0)
                 {
-                    Console.WriteLine($"There are {diagnostics.Count()} errors. Please fix and re-compile.");
+                    Console.WriteLine($"There are {errorCount} errors");
+                    if (warningCount > 0)
+                        Console.WriteLine($"and {warningCount} warings.");
+                    else
+                        Console.Write(".");
+                    Console.WriteLine("Please fix and re-compile.");
                     Environment.Exit(1);
                 }
                 else
