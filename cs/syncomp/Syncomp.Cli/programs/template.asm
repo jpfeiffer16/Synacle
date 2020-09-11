@@ -756,88 +756,88 @@ jmp >dictionary_new_end
 :dictionary_new
 pop reg7
 push reg7
-jmp >var_dict_template_20_4_end
-:var_dict_template_20_4
-:fld_dict_template_20_4_get
-:fld_dict_template_20_4_set
-:fld_dict_template_20_4_buffer
-:var_dict_template_20_4_end
-jmp >var_dictionary_get_template_21_4_end
-:var_dictionary_get_template_21_4
-:var_dictionary_get_template_21_4_end
-jmp >function__template_21_25_end
-:function__template_21_25
-jmp >var_key_template_21_26_end
-:var_key_template_21_26
-:var_key_template_21_26_end
+jmp >var_dict_template_21_4_end
+:var_dict_template_21_4
+:fld_dict_template_21_4_get
+:fld_dict_template_21_4_set
+:fld_dict_template_21_4_buffer
+:var_dict_template_21_4_end
+jmp >var_dictionary_get_template_22_4_end
+:var_dictionary_get_template_22_4
+:var_dictionary_get_template_22_4_end
+jmp >function__template_22_25_end
+:function__template_22_25
+jmp >var_key_template_22_26_end
+:var_key_template_22_26
+:var_key_template_22_26_end
 pop reg7
 pop reg0
-wmem >var_key_template_21_26 reg0
+wmem >var_key_template_22_26 reg0
 push reg7
 ret
-:function__template_21_25_end
-set reg0 >function__template_21_25
-wmem >var_dictionary_get_template_21_4 reg0
-jmp >var_dictionary_set_template_25_4_end
-:var_dictionary_set_template_25_4
-:var_dictionary_set_template_25_4_end
-jmp >function__template_25_25_end
-:function__template_25_25
-jmp >var_key_template_25_26_end
-:var_key_template_25_26
-:var_key_template_25_26_end
-jmp >var_value_template_25_36_end
-:var_value_template_25_36
-:var_value_template_25_36_end
+:function__template_22_25_end
+set reg0 >function__template_22_25
+wmem >var_dictionary_get_template_22_4 reg0
+jmp >var_dictionary_set_template_26_4_end
+:var_dictionary_set_template_26_4
+:var_dictionary_set_template_26_4_end
+jmp >function__template_26_25_end
+:function__template_26_25
+jmp >var_key_template_26_26_end
+:var_key_template_26_26
+:var_key_template_26_26_end
+jmp >var_value_template_26_36_end
+:var_value_template_26_36
+:var_value_template_26_36_end
 pop reg7
 pop reg0
-wmem >var_value_template_25_36 reg0
+wmem >var_value_template_26_36 reg0
 pop reg0
-wmem >var_key_template_25_26 reg0
+wmem >var_key_template_26_26 reg0
 push reg7
-jmp >var_index_template_27_8_end
-:var_index_template_27_8
-:var_index_template_27_8_end
-rmem reg0 >var_key_template_25_26
+jmp >var_index_template_28_8_end
+:var_index_template_28_8
+:var_index_template_28_8_end
+rmem reg0 >var_key_template_26_26
 set reg1 255
 and reg0 reg0 reg1
-wmem >var_index_template_27_8 reg0
-rmem reg0 >var_index_template_27_8
+wmem >var_index_template_28_8 reg0
+rmem reg0 >var_index_template_28_8
 push reg0
 call >print_numberln
 ret
-:function__template_25_25_end
-set reg0 >function__template_25_25
-wmem >var_dictionary_set_template_25_4 reg0
-rmem reg0 >var_dictionary_get_template_21_4
-wmem >fld_dict_template_20_4_get reg0
-rmem reg0 >var_dictionary_set_template_25_4
-wmem >fld_dict_template_20_4_set reg0
-set reg0 >var_dict_template_20_4
+:function__template_26_25_end
+set reg0 >function__template_26_25
+wmem >var_dictionary_set_template_26_4 reg0
+rmem reg0 >var_dictionary_get_template_22_4
+wmem >fld_dict_template_21_4_get reg0
+rmem reg0 >var_dictionary_set_template_26_4
+wmem >fld_dict_template_21_4_set reg0
+set reg0 >var_dict_template_21_4
 ret
 ret
 :dictionary_new_end
 set reg0 >dictionary_new
-jmp >var_dict_template_37_0_end
-:var_dict_template_37_0
-:var_dict_template_37_0_end
+jmp >var_dict_template_38_0_end
+:var_dict_template_38_0
+:var_dict_template_38_0_end
 call >dictionary_new
-wmem >var_dict_template_37_0 reg0
-rmem reg0 >var_dict_template_37_0
+wmem >var_dict_template_38_0 reg0
+rmem reg0 >var_dict_template_38_0
 add reg0 reg0 2
 rmem reg0 reg0
 set reg7 reg0
 set reg0 3202
 push reg0
-jmp >var__template_38_16_end
-:var__template_38_16
+jmp >var__template_39_16_end
+:var__template_39_16
 &e
 &s
 &t
 0
-:var__template_38_16_end
-wmem >var__template_38_16 &t
-set reg0 >var__template_38_16
+:var__template_39_16_end
+wmem >var__template_39_16 &t
+set reg0 >var__template_39_16
 push reg0
 call reg7
 jmp >var___0_0_end
