@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace syncomp
 {
@@ -34,7 +35,44 @@ namespace syncomp
             NativeTypes.Pointer
         };
 
-        public List<Template> Templates = new List<Template>();
+        private List<TemplateFunctionDeclaration> TemplateFunctions = new List<TemplateFunctionDeclaration>();
+
+        public void AddTempateFunction(TemplateFunctionDeclaration templateFunction)
+        {
+            TemplateFunctions.Add(templateFunction);
+        }
+
+        public TemplateFunctionDeclaration GetTempateFunction(string name)
+        {
+            return TemplateFunctions.Where(tf => tf.Name == name).FirstOrDefault();
+        }
+        //
+        // public TemplateFunctionDeclaration GetTemplateFunctionFromRealFunction(string name)
+        // {
+        //     var node = GetSymbolNodes(name);
+        //     // var langType = GetLangType(tokens, false);
+        //     // return TemplateFunctions.FirstOrDefault(tf => tf); ;
+        // }
+        //
+        // private SymbolNode GetSymbolNodes(string name)
+        // {
+        //     var node = new SymbolNode();
+        //     var nameBuilder = new StringBuilder();
+        //     foreach (var ch in name)
+        //     {
+        //         if (ch == '<')
+        //         {
+        //         }
+        //     }
+        // }
+        //
+        // private class SymbolNode
+        // {
+        //     List<SymbolNode> SubNodes { get; set; }
+        //     string Name { get; set; }
+        // }
+
+        public List<TypeTemplate> Templates = new List<TypeTemplate>();
 
         public static class NativeTypes
         {
@@ -129,7 +167,7 @@ namespace syncomp
             return langType;
         }
 
-        public LangType CheckGenericTypes(LangType langType)
+        private LangType CheckGenericTypes(LangType langType)
         {
             if (langType.Name != ParserContext.NativeTypes.LangVoid.Name)
             {

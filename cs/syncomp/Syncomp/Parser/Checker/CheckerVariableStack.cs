@@ -5,15 +5,21 @@ namespace syncomp
 {
     public class CheckerVariableStack
     {
+        public class CheckerVariableFrame
+        {
+            public List<CheckerFunction> Functions { get; set; } = new List<CheckerFunction>();
+            public List<CheckerVariable> Variables { get; set; } = new List<CheckerVariable>();
+            public List<TemplateFunctionDeclaration> TemplateFunctions { get; set; } = new List<TemplateFunctionDeclaration>();
+        }
 
-        private Stack<(List<CheckerFunction> functions, List<CheckerVariable> variables)> Stack
-            = new Stack<(List<CheckerFunction>, List<CheckerVariable>)>();
+        private Stack<CheckerVariableFrame> Stack
+            = new Stack<CheckerVariableFrame>();
 
         public CheckerVariableStack()
         {
             this.Push();
             // Typing for intrinsic functions
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
@@ -23,7 +29,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt, ParserContext.NativeTypes.LangVoid)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
@@ -37,7 +43,7 @@ namespace syncomp
                         ParserContext.NativeTypes.LangVoid)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
@@ -50,7 +56,7 @@ namespace syncomp
                         ParserContext.NativeTypes.LangInt)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
@@ -60,7 +66,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt, ParserContext.NativeTypes.LangVoid)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(
                     Enumerable.Empty<AstNode>().ToList(),
@@ -74,7 +80,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(
                     Enumerable.Empty<AstNode>().ToList(),
@@ -88,7 +94,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangInt)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(Enumerable.Empty<AstNode>().ToList(), null, "exit", null, 0, 0)
                 {
@@ -96,7 +102,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode> {
                     new VariableDeclaration("arg", ParserContext.NativeTypes.LangVoid, null, 0, 0)
@@ -106,7 +112,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid, ParserContext.NativeTypes.LangInt)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode> {
                     new VariableDeclaration("arg", ParserContext.NativeTypes.LangVoid, null, 0, 0)
@@ -116,7 +122,7 @@ namespace syncomp
                     NodeType = GenerateFunctionPointerSig(ParserContext.NativeTypes.LangVoid, ParserContext.NativeTypes.LangString)
                 }
             });
-            this.Stack.LastOrDefault().functions.Add(new CheckerFunction
+            this.Stack.LastOrDefault().Functions.Add(new CheckerFunction
             {
                 Node = new FunctionDeclaration(new List<AstNode>
                 {
@@ -131,21 +137,21 @@ namespace syncomp
 
         public void Push()
         {
-            this.Stack.Push((new List<CheckerFunction>(), new List<CheckerVariable>()));
+            this.Stack.Push(new CheckerVariableFrame());
         }
 
         public void Pop() => this.Stack.Pop();
 
         public void AddVariable(CheckerVariable variable)
         {
-            this.Stack.First().variables.Add(variable);
+            this.Stack.First().Variables.Add(variable);
         }
 
         public CheckerVariable GetVariable(string name)
         {
             foreach (var frame in Stack)
             {
-                var variable = frame.variables.Find(fm => fm.Node.Identifier == name);
+                var variable = frame.Variables.Find(fm => fm.Node.Identifier == name);
                 if (variable != null)
                 {
                     return variable;
@@ -156,18 +162,25 @@ namespace syncomp
 
         public void AddFunction(CheckerFunction function)
         {
-            this.Stack.First().functions.Add(function);
+            this.Stack.First().Functions.Add(function);
         }
 
         public CheckerFunction GetFunction(string name)
         {
+            // Check for functions in already resolved functions
             foreach (var frame in Stack)
             {
-                var function = frame.functions.Find(fm => fm.Node.Name == name);
+                var function = frame.Functions.Find(fm => fm.Node.Name == name);
                 if (function != null)
                     return function;
             }
+            // Try to resolve function from a template
             return null;
+        }
+
+        public void AddTemplateFunction(TemplateFunctionDeclaration templateFunction)
+        {
+            this.Stack.First().TemplateFunctions.Add(templateFunction);
         }
 
         private LangType GenerateFunctionPointerSig(params LangType[] subTypes)

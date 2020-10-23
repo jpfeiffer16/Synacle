@@ -28,14 +28,22 @@ namespace syncomp
                 foreach (var subtype in templateType?.SubTypes)
                         subtype.ValidateTypeParameters(ctx);
                 var templateTokens = tokens.GetRange(nextTokenIndex, (nextCloseCurly - nextTokenIndex) + 1);
-                ctx.Templates.Add(new Template(templateType, templateTokens));
+                ctx.Templates.Add(new TypeTemplate(templateType, templateTokens));
                 i = nextCloseCurly;
             }
-            else
+            else if (nextToken.Type == SyntaxTokenType.FunctionDeclaration)
             {
-                // TODO: Implement this
                 // Template function
-                throw new NotImplementedException();
+                var nextOpenParen = GetNext(i, tokens, SyntaxTokenType.LeftParen);
+                i++;
+                var functionName = string.Join(string.Empty, tokens.GetRange(i, nextOpenParen - i).Select(t => t.Token));
+                var nextOpenCurly = GetNext(i, tokens, SyntaxTokenType.LeftCurly);
+                var nextCloseCurly = GetExpression(SyntaxTokenType.LeftCurly, SyntaxTokenType.RightCurly, nextOpenCurly, tokens);
+                var functionTokens = tokens.GetRange(i, (nextCloseCurly - i) + 1);
+                i = nextCloseCurly;
+                var templateFunctionDeclaration = new TemplateFunctionDeclaration(functionName, functionTokens, templateToken.File, templateToken.Line, templateToken.Column);
+                ctx.AddTempateFunction(templateFunctionDeclaration);
+                return (i, templateFunctionDeclaration);
             }
             // TODO: Return an actual type if necessary
             return (i, new AstNode("EMPTY", templateToken.File, templateToken.Line, templateToken.Column));

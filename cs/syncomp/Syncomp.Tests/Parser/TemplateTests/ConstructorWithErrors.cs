@@ -13,9 +13,9 @@ namespace syncomp.Tests
         protected override void Given()
         {
             _nullLangTypeException = TrapException<Exception>(() =>
-                new Template(null, new List<SyntaxToken>()));
+                new TypeTemplate(null, new List<SyntaxToken>()));
             _nullTokensException = TrapException<Exception>(() =>
-                new Template(new LangType(null, null, null, 0, 0), null));
+                new TypeTemplate(new LangType(null, null, null, 0, 0), null));
         }
 
         [TestMethod]

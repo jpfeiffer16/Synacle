@@ -182,7 +182,9 @@ namespace syncomp
             #region "Identifier"
             if (node is Identifier idNode)
             {
-                var variable = ctx.Variables.GetVariable(idNode.Name);
+                var variable = ctx.Variables.GetVariable(idNode.Name)?.Node as AstNode;
+                if (variable is null)
+                    variable = ctx.Variables.GetFunction(idNode.Name)?.Node as AstNode;
                 if (variable is null)
                 {
                     diagnostics.Add(new Diagnostic(
@@ -194,7 +196,7 @@ namespace syncomp
                         DiagnosticCode.UnknownVariable));
                     return diagnostics;
                 }
-                idNode.NodeType = variable.Node.NodeType;
+                idNode.NodeType = variable.NodeType;
             }
             #endregion
             #region "For"
@@ -561,6 +563,12 @@ namespace syncomp
                 diagnostics.AddRange(Check(bitwiseOr.Left, ctx));
                 diagnostics.AddRange(Check(bitwiseOr.Right, ctx));
                 bitwiseOr.NodeType = bitwiseOr.Left.NodeType;
+            }
+            #endregion
+            #region "TemplateFunctionDeclaration"
+            if (node is TemplateFunctionDeclaration templateFunctionDeclarationNode)
+            {
+                ctx.Variables.AddTemplateFunction(templateFunctionDeclarationNode);
             }
             #endregion
             return diagnostics;

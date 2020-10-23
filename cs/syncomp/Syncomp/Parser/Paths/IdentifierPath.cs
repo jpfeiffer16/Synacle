@@ -62,7 +62,7 @@ namespace syncomp
                   functionCallToken.Column
                 );
             }
-            // Typed variable declaration
+            // Typed variable declaration or typed function call
             else if (
                 i + 1 < tokens.Count
                 && (tokens[i + 1].Type == SyntaxTokenType.Identifier
@@ -84,7 +84,33 @@ namespace syncomp
                         nodes,
                         $"Invalid variable declaration. Unknown type '{token.Token}'");
                 var nextToken = tokens[++i];
-                if (nextToken.Type != SyntaxTokenType.Ampersand)
+                // This is a function call with type params
+                if (nextToken.Type == SyntaxTokenType.LeftParen)
+                {
+                    var paramsEndCurly = GetExpression(SyntaxTokenType.LeftParen, SyntaxTokenType.RightParen, i, tokens);
+                    i++;
+                    var paramTokens = tokens.GetRange(i, paramsEndCurly - i);
+                    var parameters = ParseTokens(paramTokens, ctx);
+                    var firstTypeToken = typeTokens.FirstOrDefault();
+                    var name = string.Join(string.Empty, typeTokens.Select(t => t.Token));
+                    var existingTemplateFunction = ctx.GetTempateFunction(name);
+                    if (existingTemplateFunction != null)
+                    {
+                        // existingTemplateFunction.Realize();
+                    }
+                    var templateFunction = ctx.GetTempateFunction(name);
+                    if (!(templateFunction is null))
+                    {
+                        templateFunction.Realize();
+                    }
+                    node = new FunctionCall(
+                        parameters,
+                        new Identifier(name, firstTypeToken.File, firstTypeToken.Line, firstTypeToken.Column),
+                        firstTypeToken.File, firstTypeToken.Line, firstTypeToken.Column);
+                    // node = new Identifier("Test", null, 0, 0);
+                }
+                // This is variable declaration
+                else if (nextToken.Type != SyntaxTokenType.Ampersand)
                 {
                     node = new VariableDeclaration(nextToken.Token, type, typeDecToken.File, typeDecToken.Line, typeDecToken.Column);
                 }

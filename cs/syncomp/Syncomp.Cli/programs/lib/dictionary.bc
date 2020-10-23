@@ -1,0 +1,17 @@
+template
+type keyvalue_pair<TKey, TValue>
+{
+    TKey key;
+    TValue value;
+    ptr<keyvalue_pair<TKey, TValue>> next;
+}
+
+template
+function keyvalue_pair_new<TKey, TValue>() : ptr<keyvalue_pair_new<TKey, TValue>>
+{
+    keyvalue_pair<TKey, TValue> obj;
+    obj.key = 0;
+    obj.value = 0;
+    obj.next = 0;
+    return &obj;
+}

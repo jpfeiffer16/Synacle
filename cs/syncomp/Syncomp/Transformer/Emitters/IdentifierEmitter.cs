@@ -14,7 +14,11 @@ namespace syncomp
 
             var variable = ctx.Variables.Get(idNode.Name);
 
-            if (variable.VariableDeclaration.NodeType.Body?.Count > 0)
+            if (variable is null)
+            {
+                lines.Add($"set reg{ctx.RegisterLevel} >{idNode.Name}");
+            }
+            else if (variable.VariableDeclaration.NodeType.Body?.Count > 0)
             {
                 lines.Add($"set reg{ctx.RegisterLevel} >{variable.MemoryAddress}");
                 foreach(var _ in variable.VariableDeclaration.NodeType.Body)

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace syncomp
 {
-    public class Template
+    public class TypeTemplate
     {
         /// <summary>
         /// Gets the lang type.
@@ -22,11 +22,11 @@ namespace syncomp
         public List<SyntaxToken> Tokens { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Template"/> class.
+        /// Initializes a new instance of the <see cref="TypeTemplate"/> class.
         /// </summary>
         /// <param name="langType">The lang type.</param>
         /// <param name="tokens">The tokens.</param>
-        public Template(LangType langType , List<SyntaxToken> tokens)
+        public TypeTemplate(LangType langType , List<SyntaxToken> tokens)
         {
             Tokens = tokens ?? throw new ArgumentNullException(nameof(tokens));
             LangType = langType ?? throw new ArgumentNullException(nameof(langType));

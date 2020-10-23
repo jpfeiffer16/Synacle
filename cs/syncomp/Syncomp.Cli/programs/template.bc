@@ -1,43 +1,66 @@
-#include "./lib/stdlib.bc"
+
+// function one()
+// {
+//     out(65);
+// }
+// 
+// var two = () =>
+// {
+// };
+// 
+// function test(func<void> cb)
+// {
+//     cb();
+// }
+// 
+// test(one);
 
 template
-type keyvalue_pair<TKey, TValue>
+function stuff<TOne, TTwo>(TOne id, TTwo name)
 {
-    TKey key;
-    TValue value;
-    ptr<keyvalue_pair<TKey, TValue>> next;
+    out(id);
 }
 
-template
-type dictionary<TKey, TValue>
-{
-    func<TKey, TValue> get;
-    func<TKey, TValue, void> set;
-    ptr buffer;
-}
+stuff<int, string>(123, "Joe");
 
-function dictionary_new() : ptr<dictionary<void, void>>
-{
-    dictionary<void, void> dict;
-    var dictionary_get = (void key) : void =>
-    {
-    };
-
-    var dictionary_set = (void key, void value) =>
-    {
-        var index = key & 255;
-        print_numberln(index as int);
-    };
-
-    // dict.buffer = alloc_chunk(256);
-    dict.get = dictionary_get;
-    dict.set = dictionary_set;
-    return &dict;
-}
-
-var dict = dictionary_new() as ptr<dictionary<int, string>>;
-dict->set(3202, "test");
-println(typeof(dict));
+// template
+// type keyvalue_pair<TKey, TValue>
+// {
+//     TKey key;
+//     TValue value;
+//     ptr<keyvalue_pair<TKey, TValue>> next;
+// }
+// 
+// template
+// type dictionary<TKey, TValue>
+// {
+//     func<TKey, TValue> get;
+//     func<TKey, TValue, void> set;
+//     ptr buffer;
+// }
+// 
+// function dictionary_new() : ptr<dictionary<void, void>>
+// {
+//     dictionary<void, void> dict;
+//     var dictionary_get = (void key) : void =>
+//     {
+//     };
+// 
+//     var dictionary_set = (void key, void value) =>
+//     {
+//         var index = key & 255;
+//         print_numberln(index as int);
+//     };
+// 
+//     // dict.buffer = alloc_chunk(256);
+//     dict.get = dictionary_get;
+//     dict.set = dictionary_set;
+//     return &dict;
+// }
+// 
+// var dict = dictionary_new() as ptr<dictionary<int, string>>;
+// dict->set(3202, "test");
+// println(typeof(dict));
 
 // keyvalue_pair<int, string> keyval;
 // keyval.key = 123;
