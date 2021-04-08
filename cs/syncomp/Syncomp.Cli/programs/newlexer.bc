@@ -1,7 +1,30 @@
+#include "./lib/stdlib.bc"
 
+var true = 1;
 
-function test(ptr pointer)
-{
+function fib(int max) {
+    var current = 1;
+    if (max == 0) {
+        while (true) {
+            println(string(current));
+            current = current + current;
+        }
+        return;
+    }
+    while (current < max) {
+        println(string(current));
+        current = current + current;
+    }
 }
-var val = (123 + 123) as ptr;
-test((123 + 123) as ptr);
+
+function count() {
+    var current = 1;
+    while (true) {
+        println(string(current));
+        current = current + 1;
+    }
+}
+
+// print("Max: ");
+// fib(int(input()));
+count();

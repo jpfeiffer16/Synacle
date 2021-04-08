@@ -1411,8 +1411,8 @@ jmp >var__stdlib_15_9_end
 wmem >var__stdlib_15_9 &s
 set reg0 >var__stdlib_15_9
 push reg0
-jmp >function__stdlib_15_34_end
-:function__stdlib_15_34
+jmp >function__stdlib_15_35_end
+:function__stdlib_15_35
 pop reg7
 push reg7
 jmp >var_result_stdlib_16_8_end
@@ -1450,8 +1450,8 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_15_34_end
-set reg0 >function__stdlib_15_34
+:function__stdlib_15_35_end
+set reg0 >function__stdlib_15_35
 push reg0
 call >test
 jmp >var__stdlib_20_9_end
@@ -1486,8 +1486,8 @@ jmp >var__stdlib_20_9_end
 wmem >var__stdlib_20_9 &s
 set reg0 >var__stdlib_20_9
 push reg0
-jmp >function__stdlib_20_38_end
-:function__stdlib_20_38
+jmp >function__stdlib_20_39_end
+:function__stdlib_20_39
 pop reg7
 push reg7
 jmp >var_result_stdlib_21_8_end
@@ -1524,8 +1524,8 @@ call reg7
 push reg0
 call >assert
 ret
-:function__stdlib_20_38_end
-set reg0 >function__stdlib_20_38
+:function__stdlib_20_39_end
+set reg0 >function__stdlib_20_39
 push reg0
 call >test
 ret
