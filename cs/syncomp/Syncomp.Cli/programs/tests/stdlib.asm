@@ -1230,6 +1230,33 @@ set reg0 >function__testlib_71_27
 rmem reg7 >var_a_type_testlib_64_4
 add reg7 reg7 3
 wmem reg7 reg0
+jmp >function__testlib_76_24_end
+:function__testlib_76_24
+jmp >var_right_testlib_76_25_end
+:var_right_testlib_76_25
+:var_right_testlib_76_25_end
+pop reg7
+pop reg0
+wmem >var_right_testlib_76_25 reg0
+push reg7
+jmp >var_result_testlib_78_8_end
+:var_result_testlib_78_8
+:var_result_testlib_78_8_end
+rmem reg0 >var_left_testlib_62_29
+rmem reg1 >var_right_testlib_76_25
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+wmem >var_result_testlib_78_8 reg0
+rmem reg0 >var_result_testlib_78_8
+ret
+ret
+:function__testlib_76_24_end
+set reg0 >function__testlib_76_24
+rmem reg7 >var_a_type_testlib_64_4
+add reg7 reg7 4
+wmem reg7 reg0
 rmem reg0 >var_a_type_testlib_64_4
 ret
 ret
@@ -1237,14 +1264,14 @@ ret
 set reg0 >assert_type_factory
 jmp >is_end
 :is
-jmp >var_left_testlib_79_12_end
-:var_left_testlib_79_12
-:var_left_testlib_79_12_end
+jmp >var_left_testlib_84_12_end
+:var_left_testlib_84_12
+:var_left_testlib_84_12_end
 pop reg7
 pop reg0
-wmem >var_left_testlib_79_12 reg0
+wmem >var_left_testlib_84_12 reg0
 push reg7
-rmem reg0 >var_left_testlib_79_12
+rmem reg0 >var_left_testlib_84_12
 push reg0
 call >assert_type_factory
 ret

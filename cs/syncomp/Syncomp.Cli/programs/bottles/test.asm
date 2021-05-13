@@ -1,75 +1,163 @@
+jmp >str_len_end
+:str_len
+jmp >var_str_stdlib_1_17_end
+:var_str_stdlib_1_17
+:var_str_stdlib_1_17_end
+pop reg7
+pop reg0
+wmem >var_str_stdlib_1_17 reg0
+push reg7
+jmp >var_str_ptr_stdlib_2_4_end
+:var_str_ptr_stdlib_2_4
+:var_str_ptr_stdlib_2_4_end
+rmem reg0 >var_str_stdlib_1_17
+wmem >var_str_ptr_stdlib_2_4 reg0
+jmp >var_length_stdlib_3_4_end
+:var_length_stdlib_3_4
+:var_length_stdlib_3_4_end
+set reg0 0
+wmem >var_length_stdlib_3_4 reg0
+:while__stdlib_4_4_begin
+rmem reg0 >var_str_ptr_stdlib_2_4
+rmem reg0 reg0
+jf reg0 >while__stdlib_4_4_end
+rmem reg0 >var_str_ptr_stdlib_2_4
+add reg0 reg0 1
+wmem >var_str_ptr_stdlib_2_4 reg0
+rmem reg0 >var_length_stdlib_3_4
+add reg0 reg0 1
+wmem >var_length_stdlib_3_4 reg0
+jmp >while__stdlib_4_4_begin
+:while__stdlib_4_4_end
+rmem reg0 >var_length_stdlib_3_4
+ret
+ret
+:str_len_end
+set reg0 >str_len
+jmp >print_end
+:print
+jmp >var_str_stdlib_11_15_end
+:var_str_stdlib_11_15
+:var_str_stdlib_11_15_end
+pop reg7
+pop reg0
+wmem >var_str_stdlib_11_15 reg0
+push reg7
+jmp >var_str_ptr_stdlib_12_4_end
+:var_str_ptr_stdlib_12_4
+:var_str_ptr_stdlib_12_4_end
+rmem reg0 >var_str_stdlib_11_15
+wmem >var_str_ptr_stdlib_12_4 reg0
+:while__stdlib_13_4_begin
+rmem reg0 >var_str_ptr_stdlib_12_4
+rmem reg0 reg0
+jf reg0 >while__stdlib_13_4_end
+rmem reg0 >var_str_ptr_stdlib_12_4
+rmem reg0 reg0
+out reg0
+rmem reg0 >var_str_ptr_stdlib_12_4
+add reg0 reg0 1
+wmem >var_str_ptr_stdlib_12_4 reg0
+jmp >while__stdlib_13_4_begin
+:while__stdlib_13_4_end
+ret
+:print_end
+set reg0 >print
+jmp >println_end
+:println
+jmp >var_str_ptr_stdlib_19_17_end
+:var_str_ptr_stdlib_19_17
+:var_str_ptr_stdlib_19_17_end
+pop reg7
+pop reg0
+wmem >var_str_ptr_stdlib_19_17 reg0
+push reg7
+rmem reg0 >var_str_ptr_stdlib_19_17
+push reg0
+call >print
+set reg0 10
+out reg0
+ret
+:println_end
+set reg0 >println
 jmp >str_equal_end
 :str_equal
-jmp >var_a0d03bdc3068_end
-:var_a0d03bdc3068
-:var_a0d03bdc3068_end
-jmp >var_48c334332d03_end
-:var_48c334332d03
-:var_48c334332d03_end
-wmem >var_a0d03bdc3068 reg0
-wmem >var_48c334332d03 reg1
-jmp >var_215704c9a25e_end
-:var_215704c9a25e
-:var_215704c9a25e_end
-rmem reg0 >var_a0d03bdc3068
+jmp >var_str_a_stdlib_24_19_end
+:var_str_a_stdlib_24_19
+:var_str_a_stdlib_24_19_end
+jmp >var_str_b_stdlib_24_33_end
+:var_str_b_stdlib_24_33
+:var_str_b_stdlib_24_33_end
+pop reg7
+pop reg0
+wmem >var_str_b_stdlib_24_33 reg0
+pop reg0
+wmem >var_str_a_stdlib_24_19 reg0
+push reg7
+jmp >var_a_len_stdlib_25_4_end
+:var_a_len_stdlib_25_4
+:var_a_len_stdlib_25_4_end
+rmem reg0 >var_str_a_stdlib_24_19
+push reg0
 call >str_len
-wmem >var_215704c9a25e reg0
-jmp >var_730322c9181b_end
-:var_730322c9181b
-:var_730322c9181b_end
-rmem reg0 >var_48c334332d03
+wmem >var_a_len_stdlib_25_4 reg0
+jmp >var_b_len_stdlib_26_4_end
+:var_b_len_stdlib_26_4
+:var_b_len_stdlib_26_4_end
+rmem reg0 >var_str_b_stdlib_24_33
+push reg0
 call >str_len
-wmem >var_730322c9181b reg0
-rmem reg0 >var_215704c9a25e
-rmem reg1 >var_730322c9181b
+wmem >var_b_len_stdlib_26_4 reg0
+rmem reg0 >var_a_len_stdlib_25_4
+rmem reg1 >var_b_len_stdlib_26_4
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end_d912af0077e6
+jf reg0 >end__stdlib_27_4
 set reg0 0
 ret
-:end_d912af0077e6
-jmp >var_c342f856bd78_end
-:var_c342f856bd78
-:var_c342f856bd78_end
+:end__stdlib_27_4
+jmp >var_i_stdlib_30_9_end
+:var_i_stdlib_30_9
+:var_i_stdlib_30_9_end
 set reg0 0
-wmem >var_c342f856bd78 reg0
-:for_f8fcb1c42d9c_begin
-rmem reg0 >var_c342f856bd78
-rmem reg1 >var_215704c9a25e
+wmem >var_i_stdlib_30_9 reg0
+:for__stdlib_30_4_begin
+rmem reg0 >var_i_stdlib_30_9
+rmem reg1 >var_a_len_stdlib_25_4
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for_f8fcb1c42d9c_end
-jmp >var_714f36a3c2f3_end
-:var_714f36a3c2f3
-:var_714f36a3c2f3_end
-rmem reg0 >var_a0d03bdc3068
-rmem reg1 >var_c342f856bd78
+jf reg0 >for__stdlib_30_4_end
+jmp >var_a_val_stdlib_31_8_end
+:var_a_val_stdlib_31_8
+:var_a_val_stdlib_31_8_end
+rmem reg0 >var_str_a_stdlib_24_19
+rmem reg1 >var_i_stdlib_30_9
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_714f36a3c2f3 reg0
-jmp >var_9646c38f28e1_end
-:var_9646c38f28e1
-:var_9646c38f28e1_end
-rmem reg0 >var_48c334332d03
-rmem reg1 >var_c342f856bd78
+wmem >var_a_val_stdlib_31_8 reg0
+jmp >var_b_val_stdlib_32_8_end
+:var_b_val_stdlib_32_8
+:var_b_val_stdlib_32_8_end
+rmem reg0 >var_str_b_stdlib_24_33
+rmem reg1 >var_i_stdlib_30_9
 add reg0 reg0 reg1
 rmem reg0 reg0
-wmem >var_9646c38f28e1 reg0
-rmem reg0 >var_714f36a3c2f3
-rmem reg1 >var_9646c38f28e1
+wmem >var_b_val_stdlib_32_8 reg0
+rmem reg0 >var_a_val_stdlib_31_8
+rmem reg1 >var_b_val_stdlib_32_8
 eq reg0 reg0 reg1
 call >not
-jf reg0 >end_f38f11b7407d
+jf reg0 >end__stdlib_33_8
 set reg0 0
 ret
-:end_f38f11b7407d
-rmem reg0 >var_c342f856bd78
+:end__stdlib_33_8
+rmem reg0 >var_i_stdlib_30_9
 add reg0 reg0 1
-wmem >var_c342f856bd78 reg0
-jmp >for_f8fcb1c42d9c_begin
-:for_f8fcb1c42d9c_end
+wmem >var_i_stdlib_30_9 reg0
+jmp >for__stdlib_30_4_begin
+:for__stdlib_30_4_end
 set reg0 1
 ret
 ret
@@ -77,612 +165,607 @@ ret
 set reg0 >str_equal
 jmp >alloc_end
 :alloc
-jmp >var_811619e16991_end
-:var_811619e16991
-:var_811619e16991_end
+pop reg7
+push reg7
+jmp >var_data_index_stdlib_41_4_end
+:var_data_index_stdlib_41_4
+:var_data_index_stdlib_41_4_end
 set reg0 16382
-wmem >var_811619e16991 reg0
-:while_21d7926dcaa0_begin
-rmem reg0 >var_811619e16991
+wmem >var_data_index_stdlib_41_4 reg0
+:while__stdlib_42_4_begin
+rmem reg0 >var_data_index_stdlib_41_4
 rmem reg0 reg0
 call >not
-jf reg0 >while_21d7926dcaa0_end
-rmem reg0 >var_811619e16991
+jf reg0 >while__stdlib_42_4_end
+rmem reg0 >var_data_index_stdlib_41_4
 set reg1 1
 call >subtract
-wmem >var_811619e16991 reg0
-jmp >while_21d7926dcaa0_begin
-:while_21d7926dcaa0_end
-rmem reg0 >var_811619e16991
+wmem >var_data_index_stdlib_41_4 reg0
+jmp >while__stdlib_42_4_begin
+:while__stdlib_42_4_end
+rmem reg0 >var_data_index_stdlib_41_4
 set reg1 2
 add reg0 reg0 reg1
-wmem >var_811619e16991 reg0
-rmem reg0 >var_811619e16991
+wmem >var_data_index_stdlib_41_4 reg0
+rmem reg0 >var_data_index_stdlib_41_4
 ret
 ret
 :alloc_end
 set reg0 >alloc
 jmp >alloc_chunk_end
 :alloc_chunk
-jmp >var_d88e58f57cbc_end
-:var_d88e58f57cbc
-:var_d88e58f57cbc_end
-wmem >var_d88e58f57cbc reg0
-jmp >var_e6c93dd74cf6_end
-:var_e6c93dd74cf6
-:var_e6c93dd74cf6_end
+jmp >var_length_stdlib_49_21_end
+:var_length_stdlib_49_21
+:var_length_stdlib_49_21_end
+pop reg7
+pop reg0
+wmem >var_length_stdlib_49_21 reg0
+push reg7
+jmp >var_pointer_stdlib_50_4_end
+:var_pointer_stdlib_50_4
+:var_pointer_stdlib_50_4_end
 call >alloc
-wmem >var_e6c93dd74cf6 reg0
-jmp >var_ae6ffc88d047_end
-:var_ae6ffc88d047
-:var_ae6ffc88d047_end
-rmem reg0 >var_e6c93dd74cf6
-rmem reg1 >var_d88e58f57cbc
+wmem >var_pointer_stdlib_50_4 reg0
+jmp >var_dest_ptr_stdlib_51_4_end
+:var_dest_ptr_stdlib_51_4
+:var_dest_ptr_stdlib_51_4_end
+rmem reg0 >var_pointer_stdlib_50_4
+rmem reg1 >var_length_stdlib_49_21
 add reg0 reg0 reg1
-wmem >var_ae6ffc88d047 reg0
-rmem reg0 >var_ae6ffc88d047
+wmem >var_dest_ptr_stdlib_51_4 reg0
+rmem reg0 >var_dest_ptr_stdlib_51_4
 set reg1 32767
 wmem reg0 reg1
-rmem reg0 >var_e6c93dd74cf6
+rmem reg0 >var_pointer_stdlib_50_4
 ret
 ret
 :alloc_chunk_end
 set reg0 >alloc_chunk
 jmp >mem_cp_end
 :mem_cp
-jmp >var_acd2780a6276_end
-:var_acd2780a6276
-:var_acd2780a6276_end
-jmp >var_8a65bfdf0187_end
-:var_8a65bfdf0187
-:var_8a65bfdf0187_end
-jmp >var_e441aa18843c_end
-:var_e441aa18843c
-:var_e441aa18843c_end
-wmem >var_acd2780a6276 reg0
-wmem >var_8a65bfdf0187 reg1
-wmem >var_e441aa18843c reg2
-jmp >var_8c768169c0ad_end
-:var_8c768169c0ad
-:var_8c768169c0ad_end
+jmp >var_s_ptr_stdlib_56_16_end
+:var_s_ptr_stdlib_56_16
+:var_s_ptr_stdlib_56_16_end
+jmp >var_d_ptr_stdlib_56_27_end
+:var_d_ptr_stdlib_56_27
+:var_d_ptr_stdlib_56_27_end
+jmp >var_len_stdlib_56_38_end
+:var_len_stdlib_56_38
+:var_len_stdlib_56_38_end
+pop reg7
+pop reg0
+wmem >var_len_stdlib_56_38 reg0
+pop reg0
+wmem >var_d_ptr_stdlib_56_27 reg0
+pop reg0
+wmem >var_s_ptr_stdlib_56_16 reg0
+push reg7
+jmp >var_current_byte_stdlib_57_4_end
+:var_current_byte_stdlib_57_4
+:var_current_byte_stdlib_57_4_end
 set reg0 0
-wmem >var_8c768169c0ad reg0
-:while_5930780c22e4_begin
-rmem reg0 >var_8c768169c0ad
-rmem reg1 >var_e441aa18843c
+wmem >var_current_byte_stdlib_57_4 reg0
+:while__stdlib_58_4_begin
+rmem reg0 >var_current_byte_stdlib_57_4
+rmem reg1 >var_len_stdlib_56_38
 gt reg0 reg0 reg1
 call >not
-jf reg0 >while_5930780c22e4_end
-jmp >var_61d9ee66d2b2_end
-:var_61d9ee66d2b2
-:var_61d9ee66d2b2_end
-rmem reg0 >var_acd2780a6276
-rmem reg1 >var_8c768169c0ad
+jf reg0 >while__stdlib_58_4_end
+jmp >var_byte_to_write_ptr_stdlib_59_8_end
+:var_byte_to_write_ptr_stdlib_59_8
+:var_byte_to_write_ptr_stdlib_59_8_end
+rmem reg0 >var_s_ptr_stdlib_56_16
+rmem reg1 >var_current_byte_stdlib_57_4
 add reg0 reg0 reg1
-wmem >var_61d9ee66d2b2 reg0
-jmp >var_7b3c9c80f394_end
-:var_7b3c9c80f394
-:var_7b3c9c80f394_end
-rmem reg0 >var_8a65bfdf0187
-rmem reg1 >var_8c768169c0ad
+wmem >var_byte_to_write_ptr_stdlib_59_8 reg0
+jmp >var_dest_ptr_stdlib_60_8_end
+:var_dest_ptr_stdlib_60_8
+:var_dest_ptr_stdlib_60_8_end
+rmem reg0 >var_d_ptr_stdlib_56_27
+rmem reg1 >var_current_byte_stdlib_57_4
 add reg0 reg0 reg1
-wmem >var_7b3c9c80f394 reg0
-rmem reg0 >var_7b3c9c80f394
-rmem reg1 >var_61d9ee66d2b2
+wmem >var_dest_ptr_stdlib_60_8 reg0
+rmem reg0 >var_dest_ptr_stdlib_60_8
+rmem reg1 >var_byte_to_write_ptr_stdlib_59_8
 rmem reg1 reg1
 wmem reg0 reg1
-rmem reg0 >var_8c768169c0ad
+rmem reg0 >var_current_byte_stdlib_57_4
 add reg0 reg0 1
-wmem >var_8c768169c0ad reg0
-jmp >while_5930780c22e4_begin
-:while_5930780c22e4_end
+wmem >var_current_byte_stdlib_57_4 reg0
+jmp >while__stdlib_58_4_begin
+:while__stdlib_58_4_end
 ret
 :mem_cp_end
 set reg0 >mem_cp
-jmp >str_len_end
-:str_len
-jmp >var_af6678837420_end
-:var_af6678837420
-:var_af6678837420_end
-wmem >var_af6678837420 reg0
-jmp >var_1d8215a54410_end
-:var_1d8215a54410
-:var_1d8215a54410_end
-set reg0 0
-wmem >var_1d8215a54410 reg0
-:while_add77848d072_begin
-rmem reg0 >var_af6678837420
-rmem reg0 reg0
-jf reg0 >while_add77848d072_end
-rmem reg0 >var_af6678837420
-add reg0 reg0 1
-wmem >var_af6678837420 reg0
-rmem reg0 >var_1d8215a54410
-add reg0 reg0 1
-wmem >var_1d8215a54410 reg0
-jmp >while_add77848d072_begin
-:while_add77848d072_end
-rmem reg0 >var_1d8215a54410
-ret
-ret
-:str_len_end
-set reg0 >str_len
 jmp >str_cat_end
 :str_cat
-jmp >var_290cbb67db07_end
-:var_290cbb67db07
-:var_290cbb67db07_end
-jmp >var_5e2c56726e8b_end
-:var_5e2c56726e8b
-:var_5e2c56726e8b_end
-wmem >var_290cbb67db07 reg0
-wmem >var_5e2c56726e8b reg1
-jmp >var_b58a3c9f9c5a_end
-:var_b58a3c9f9c5a
-:var_b58a3c9f9c5a_end
-rmem reg0 >var_290cbb67db07
+jmp >var_str_a_stdlib_66_17_end
+:var_str_a_stdlib_66_17
+:var_str_a_stdlib_66_17_end
+jmp >var_str_b_stdlib_66_31_end
+:var_str_b_stdlib_66_31
+:var_str_b_stdlib_66_31_end
+pop reg7
+pop reg0
+wmem >var_str_b_stdlib_66_31 reg0
+pop reg0
+wmem >var_str_a_stdlib_66_17 reg0
+push reg7
+jmp >var_a_len_stdlib_67_4_end
+:var_a_len_stdlib_67_4
+:var_a_len_stdlib_67_4_end
+rmem reg0 >var_str_a_stdlib_66_17
+push reg0
 call >str_len
-wmem >var_b58a3c9f9c5a reg0
-jmp >var_c6947e39f1ab_end
-:var_c6947e39f1ab
-:var_c6947e39f1ab_end
-rmem reg0 >var_5e2c56726e8b
+wmem >var_a_len_stdlib_67_4 reg0
+jmp >var_b_len_stdlib_68_4_end
+:var_b_len_stdlib_68_4
+:var_b_len_stdlib_68_4_end
+rmem reg0 >var_str_b_stdlib_66_31
+push reg0
 call >str_len
-wmem >var_c6947e39f1ab reg0
-jmp >var_0af6c73f90a8_end
-:var_0af6c73f90a8
-:var_0af6c73f90a8_end
+wmem >var_b_len_stdlib_68_4 reg0
+jmp >var_alloc_ptr_stdlib_69_4_end
+:var_alloc_ptr_stdlib_69_4
+:var_alloc_ptr_stdlib_69_4_end
 call >alloc
-wmem >var_0af6c73f90a8 reg0
-rmem reg0 >var_290cbb67db07
-rmem reg1 >var_0af6c73f90a8
-rmem reg2 >var_b58a3c9f9c5a
+wmem >var_alloc_ptr_stdlib_69_4 reg0
+rmem reg0 >var_str_a_stdlib_66_17
+push reg0
+rmem reg0 >var_alloc_ptr_stdlib_69_4
+push reg0
+rmem reg0 >var_a_len_stdlib_67_4
+push reg0
 call >mem_cp
-jmp >var_cd5fccef75b4_end
-:var_cd5fccef75b4
-:var_cd5fccef75b4_end
-rmem reg0 >var_0af6c73f90a8
-rmem reg1 >var_b58a3c9f9c5a
+jmp >var_end_address_stdlib_71_4_end
+:var_end_address_stdlib_71_4
+:var_end_address_stdlib_71_4_end
+rmem reg0 >var_alloc_ptr_stdlib_69_4
+rmem reg1 >var_a_len_stdlib_67_4
 add reg0 reg0 reg1
-wmem >var_cd5fccef75b4 reg0
-rmem reg0 >var_c6947e39f1ab
+wmem >var_end_address_stdlib_71_4 reg0
+rmem reg0 >var_b_len_stdlib_68_4
 add reg0 reg0 1
-wmem >var_c6947e39f1ab reg0
-rmem reg0 >var_5e2c56726e8b
-rmem reg1 >var_cd5fccef75b4
-rmem reg2 >var_c6947e39f1ab
+wmem >var_b_len_stdlib_68_4 reg0
+rmem reg0 >var_str_b_stdlib_66_31
+push reg0
+rmem reg0 >var_end_address_stdlib_71_4
+push reg0
+rmem reg0 >var_b_len_stdlib_68_4
+push reg0
 call >mem_cp
-rmem reg0 >var_0af6c73f90a8
+rmem reg0 >var_alloc_ptr_stdlib_69_4
 ret
 ret
 :str_cat_end
 set reg0 >str_cat
 jmp >flip_str_end
 :flip_str
-jmp >var_d92e33a3f4ad_end
-:var_d92e33a3f4ad
-:var_d92e33a3f4ad_end
-wmem >var_d92e33a3f4ad reg0
-jmp >var_b106d80c8d64_end
-:var_b106d80c8d64
-:var_b106d80c8d64_end
+jmp >var_str_ptr_stdlib_77_18_end
+:var_str_ptr_stdlib_77_18
+:var_str_ptr_stdlib_77_18_end
+pop reg7
+pop reg0
+wmem >var_str_ptr_stdlib_77_18 reg0
+push reg7
+jmp >var_alloc_ptr_stdlib_78_4_end
+:var_alloc_ptr_stdlib_78_4
+:var_alloc_ptr_stdlib_78_4_end
 call >alloc
-wmem >var_b106d80c8d64 reg0
-jmp >var_9bea85df5b88_end
-:var_9bea85df5b88
-:var_9bea85df5b88_end
-rmem reg0 >var_d92e33a3f4ad
+wmem >var_alloc_ptr_stdlib_78_4 reg0
+jmp >var_len_stdlib_79_4_end
+:var_len_stdlib_79_4
+:var_len_stdlib_79_4_end
+rmem reg0 >var_str_ptr_stdlib_77_18
+push reg0
 call >str_len
-wmem >var_9bea85df5b88 reg0
-jmp >var_259cc93cf6a9_end
-:var_259cc93cf6a9
-:var_259cc93cf6a9_end
+wmem >var_len_stdlib_79_4 reg0
+jmp >var_index_stdlib_80_4_end
+:var_index_stdlib_80_4
+:var_index_stdlib_80_4_end
 set reg0 0
-wmem >var_259cc93cf6a9 reg0
-:while_9e3a88607211_begin
-rmem reg0 >var_259cc93cf6a9
-rmem reg1 >var_9bea85df5b88
+wmem >var_index_stdlib_80_4 reg0
+:while__stdlib_81_4_begin
+rmem reg0 >var_index_stdlib_80_4
+rmem reg1 >var_len_stdlib_79_4
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while_9e3a88607211_end
-jmp >var_fd557efa0b02_end
-:var_fd557efa0b02
-:var_fd557efa0b02_end
-rmem reg0 >var_d92e33a3f4ad
-rmem reg1 >var_259cc93cf6a9
+jf reg0 >while__stdlib_81_4_end
+jmp >var_source_index_stdlib_82_8_end
+:var_source_index_stdlib_82_8
+:var_source_index_stdlib_82_8_end
+rmem reg0 >var_str_ptr_stdlib_77_18
+rmem reg1 >var_index_stdlib_80_4
 add reg0 reg0 reg1
-wmem >var_fd557efa0b02 reg0
-rmem reg0 >var_fd557efa0b02
+wmem >var_source_index_stdlib_82_8 reg0
+rmem reg0 >var_source_index_stdlib_82_8
 rmem reg0 reg0
-rmem reg0 >var_fd557efa0b02
+rmem reg0 >var_source_index_stdlib_82_8
 rmem reg0 reg0
 push reg0
-rmem reg0 >var_259cc93cf6a9
+rmem reg0 >var_index_stdlib_80_4
 add reg0 reg0 1
-wmem >var_259cc93cf6a9 reg0
-jmp >while_9e3a88607211_begin
-:while_9e3a88607211_end
-jmp >var_76f4bb8f8499_end
-:var_76f4bb8f8499
-:var_76f4bb8f8499_end
+wmem >var_index_stdlib_80_4 reg0
+jmp >while__stdlib_81_4_begin
+:while__stdlib_81_4_end
+jmp >var_current_byte_stdlib_87_4_end
+:var_current_byte_stdlib_87_4
+:var_current_byte_stdlib_87_4_end
 pop reg0
-wmem >var_76f4bb8f8499 reg0
+wmem >var_current_byte_stdlib_87_4 reg0
 set reg0 0
-wmem >var_259cc93cf6a9 reg0
-:while_db7a62369771_begin
-rmem reg0 >var_259cc93cf6a9
-rmem reg1 >var_9bea85df5b88
+wmem >var_index_stdlib_80_4 reg0
+:while__stdlib_89_4_begin
+rmem reg0 >var_index_stdlib_80_4
+rmem reg1 >var_len_stdlib_79_4
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >while_db7a62369771_end
-jmp >var_b03a08f5293a_end
-:var_b03a08f5293a
-:var_b03a08f5293a_end
-rmem reg0 >var_b106d80c8d64
-rmem reg1 >var_259cc93cf6a9
+jf reg0 >while__stdlib_89_4_end
+jmp >var_dest_index_stdlib_90_8_end
+:var_dest_index_stdlib_90_8
+:var_dest_index_stdlib_90_8_end
+rmem reg0 >var_alloc_ptr_stdlib_78_4
+rmem reg1 >var_index_stdlib_80_4
 add reg0 reg0 reg1
-wmem >var_b03a08f5293a reg0
-rmem reg0 >var_b03a08f5293a
-rmem reg1 >var_76f4bb8f8499
+wmem >var_dest_index_stdlib_90_8 reg0
+rmem reg0 >var_dest_index_stdlib_90_8
+rmem reg1 >var_current_byte_stdlib_87_4
 wmem reg0 reg1
-rmem reg0 >var_259cc93cf6a9
+rmem reg0 >var_index_stdlib_80_4
 add reg0 reg0 1
-wmem >var_259cc93cf6a9 reg0
+wmem >var_index_stdlib_80_4 reg0
 pop reg0
-wmem >var_76f4bb8f8499 reg0
-jmp >while_db7a62369771_begin
-:while_db7a62369771_end
-rmem reg0 >var_76f4bb8f8499
-rmem reg0 >var_76f4bb8f8499
+wmem >var_current_byte_stdlib_87_4 reg0
+jmp >while__stdlib_89_4_begin
+:while__stdlib_89_4_end
+rmem reg0 >var_current_byte_stdlib_87_4
+rmem reg0 >var_current_byte_stdlib_87_4
 push reg0
-rmem reg0 >var_b106d80c8d64
+rmem reg0 >var_alloc_ptr_stdlib_78_4
 ret
 ret
 :flip_str_end
 set reg0 >flip_str
 jmp >input_end
 :input
-jmp >var_856daa0ffd31_end
-:var_856daa0ffd31
-:var_856daa0ffd31_end
+pop reg7
+push reg7
+jmp >var_data_index_stdlib_102_4_end
+:var_data_index_stdlib_102_4
+:var_data_index_stdlib_102_4_end
 set reg0 16384
-wmem >var_856daa0ffd31 reg0
-jmp >var_e197a96581de_end
-:var_e197a96581de
-:var_e197a96581de_end
+wmem >var_data_index_stdlib_102_4 reg0
+jmp >var_in_char_stdlib_103_4_end
+:var_in_char_stdlib_103_4
+:var_in_char_stdlib_103_4_end
 in reg0
-wmem >var_e197a96581de reg0
-jmp >var_f4535f6b6ab6_end
-:var_f4535f6b6ab6
-:var_f4535f6b6ab6_end
-rmem reg0 >var_e197a96581de
+wmem >var_in_char_stdlib_103_4 reg0
+jmp >var_is_newline_stdlib_104_4_end
+:var_is_newline_stdlib_104_4
+:var_is_newline_stdlib_104_4_end
+rmem reg0 >var_in_char_stdlib_103_4
 set reg1 10
 eq reg0 reg0 reg1
-wmem >var_f4535f6b6ab6 reg0
-:while_3eb500d12ab4_begin
-rmem reg0 >var_f4535f6b6ab6
-rmem reg1 >var_e197a96581de
+wmem >var_is_newline_stdlib_104_4 reg0
+:while__stdlib_105_4_begin
+rmem reg0 >var_is_newline_stdlib_104_4
+rmem reg1 >var_in_char_stdlib_103_4
 call >and
 call >not
-jf reg0 >while_3eb500d12ab4_end
-rmem reg0 >var_856daa0ffd31
-rmem reg1 >var_e197a96581de
+jf reg0 >while__stdlib_105_4_end
+rmem reg0 >var_data_index_stdlib_102_4
+rmem reg1 >var_in_char_stdlib_103_4
 wmem reg0 reg1
-rmem reg0 >var_856daa0ffd31
+rmem reg0 >var_data_index_stdlib_102_4
 add reg0 reg0 1
-wmem >var_856daa0ffd31 reg0
+wmem >var_data_index_stdlib_102_4 reg0
 in reg0
-wmem >var_e197a96581de reg0
-rmem reg0 >var_e197a96581de
+wmem >var_in_char_stdlib_103_4 reg0
+rmem reg0 >var_in_char_stdlib_103_4
 set reg1 10
 eq reg0 reg0 reg1
-wmem >var_f4535f6b6ab6 reg0
-jmp >while_3eb500d12ab4_begin
-:while_3eb500d12ab4_end
-rmem reg0 >var_856daa0ffd31
+wmem >var_is_newline_stdlib_104_4 reg0
+jmp >while__stdlib_105_4_begin
+:while__stdlib_105_4_end
+rmem reg0 >var_data_index_stdlib_102_4
 set reg1 0
 wmem reg0 reg1
-jmp >var_b561853d20e9_end
-:var_b561853d20e9
-:var_b561853d20e9_end
+jmp >var_alloc_ptr_stdlib_112_4_end
+:var_alloc_ptr_stdlib_112_4
+:var_alloc_ptr_stdlib_112_4_end
 call >alloc
-wmem >var_b561853d20e9 reg0
-jmp >var_54c6615f179a_end
-:var_54c6615f179a
-:var_54c6615f179a_end
+wmem >var_alloc_ptr_stdlib_112_4 reg0
+jmp >var_length_stdlib_113_4_end
+:var_length_stdlib_113_4
+:var_length_stdlib_113_4_end
 set reg0 16384
+push reg0
 call >str_len
-wmem >var_54c6615f179a reg0
+wmem >var_length_stdlib_113_4 reg0
 set reg0 16384
-rmem reg1 >var_b561853d20e9
-rmem reg2 >var_54c6615f179a
+push reg0
+rmem reg0 >var_alloc_ptr_stdlib_112_4
+push reg0
+rmem reg0 >var_length_stdlib_113_4
+push reg0
 call >mem_cp
-rmem reg0 >var_b561853d20e9
+rmem reg0 >var_alloc_ptr_stdlib_112_4
 ret
 ret
 :input_end
 set reg0 >input
-jmp >print_end
-:print
-jmp >var_15773dc05ad5_end
-:var_15773dc05ad5
-:var_15773dc05ad5_end
-wmem >var_15773dc05ad5 reg0
-:while_d3d1df8c96b2_begin
-rmem reg0 >var_15773dc05ad5
-rmem reg0 reg0
-jf reg0 >while_d3d1df8c96b2_end
-rmem reg0 >var_15773dc05ad5
-rmem reg0 reg0
-out reg0
-rmem reg0 >var_15773dc05ad5
-add reg0 reg0 1
-wmem >var_15773dc05ad5 reg0
-jmp >while_d3d1df8c96b2_begin
-:while_d3d1df8c96b2_end
-ret
-:print_end
-set reg0 >print
-jmp >println_end
-:println
-jmp >var_a1bcb9561e05_end
-:var_a1bcb9561e05
-:var_a1bcb9561e05_end
-wmem >var_a1bcb9561e05 reg0
-rmem reg0 >var_a1bcb9561e05
-call >print
-set reg0 10
-out reg0
-ret
-:println_end
-set reg0 >println
-jmp >print_number_end
-:print_number
-jmp >var_fc73dbe56c2e_end
-:var_fc73dbe56c2e
-:var_fc73dbe56c2e_end
-wmem >var_fc73dbe56c2e reg0
-rmem reg0 >var_fc73dbe56c2e
-set reg1 10
-eq reg0 reg0 reg1
-jf reg0 >end_c1dce0753a9f
-set reg0 49
-out reg0
-set reg0 48
-out reg0
-ret
-:end_c1dce0753a9f
-jmp >var_67d373ec5a15_end
-:var_67d373ec5a15
-:var_67d373ec5a15_end
-jmp >var_09e433a8a0e2_end
-:var_09e433a8a0e2
-:var_09e433a8a0e2_end
-set reg0 0
-wmem >var_09e433a8a0e2 reg0
-:while_2ea49886e023_begin
-rmem reg0 >var_fc73dbe56c2e
-set reg1 10
-gt reg0 reg0 reg1
-jf reg0 >while_2ea49886e023_end
-rmem reg0 >var_fc73dbe56c2e
-set reg1 10
-mod reg0 reg0 reg1
-wmem >var_67d373ec5a15 reg0
-rmem reg0 >var_67d373ec5a15
-rmem reg0 >var_67d373ec5a15
-push reg0
-rmem reg0 >var_09e433a8a0e2
-add reg0 reg0 1
-wmem >var_09e433a8a0e2 reg0
-rmem reg0 >var_fc73dbe56c2e
-set reg1 10
-call >divide
-wmem >var_fc73dbe56c2e reg0
-jmp >while_2ea49886e023_begin
-:while_2ea49886e023_end
-rmem reg0 >var_fc73dbe56c2e
-set reg1 10
-mod reg0 reg0 reg1
-wmem >var_67d373ec5a15 reg0
-rmem reg0 >var_67d373ec5a15
-rmem reg0 >var_67d373ec5a15
-push reg0
-rmem reg0 >var_09e433a8a0e2
-add reg0 reg0 1
-wmem >var_09e433a8a0e2 reg0
-jmp >var_2ef75db1cc71_end
-:var_2ef75db1cc71
-:var_2ef75db1cc71_end
-set reg0 0
-wmem >var_2ef75db1cc71 reg0
-:while_09da74f49780_begin
-rmem reg0 >var_2ef75db1cc71
-rmem reg1 >var_09e433a8a0e2
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >while_09da74f49780_end
-rmem reg0 >var_2ef75db1cc71
-set reg1 1
-add reg0 reg0 reg1
-wmem >var_2ef75db1cc71 reg0
-pop reg0
-set reg1 48
-add reg0 reg0 reg1
-out reg0
-jmp >while_09da74f49780_begin
-:while_09da74f49780_end
-ret
-:print_number_end
-set reg0 >print_number
-jmp >dump_mem_end
-:dump_mem
-jmp >var_abc48380eb3b_end
-:var_abc48380eb3b
-:var_abc48380eb3b_end
-set reg0 0
-wmem >var_abc48380eb3b reg0
-:while_162bcf00e309_begin
-rmem reg0 >var_abc48380eb3b
-rmem reg0 reg0
-jf reg0 >while_162bcf00e309_end
-rmem reg0 >var_abc48380eb3b
-add reg0 reg0 1
-wmem >var_abc48380eb3b reg0
-rmem reg0 >var_abc48380eb3b
-rmem reg0 reg0
-call >print_number
-set reg0 10
-out reg0
-jmp >while_162bcf00e309_begin
-:while_162bcf00e309_end
-ret
-:dump_mem_end
-set reg0 >dump_mem
 jmp >int_end
 :int
-jmp >var_fdc532ec9d48_end
-:var_fdc532ec9d48
-:var_fdc532ec9d48_end
-wmem >var_fdc532ec9d48 reg0
-jmp >var_a7b7c8a9f6f6_end
-:var_a7b7c8a9f6f6
-:var_a7b7c8a9f6f6_end
-rmem reg0 >var_fdc532ec9d48
-call >flip_str
-wmem >var_a7b7c8a9f6f6 reg0
-jmp >var_f6b41ebe9c0f_end
-:var_f6b41ebe9c0f
-:var_f6b41ebe9c0f_end
-rmem reg0 >var_a7b7c8a9f6f6
+jmp >var_str_stdlib_118_13_end
+:var_str_stdlib_118_13
+:var_str_stdlib_118_13_end
+pop reg7
+pop reg0
+wmem >var_str_stdlib_118_13 reg0
+push reg7
+jmp >var_len_stdlib_119_4_end
+:var_len_stdlib_119_4
+:var_len_stdlib_119_4_end
+rmem reg0 >var_str_stdlib_118_13
+push reg0
 call >str_len
-wmem >var_f6b41ebe9c0f reg0
-rmem reg0 >var_f6b41ebe9c0f
-set reg1 1
+wmem >var_len_stdlib_119_4 reg0
+jmp >var_index_stdlib_120_4_end
+:var_index_stdlib_120_4
+:var_index_stdlib_120_4_end
+set reg0 0
+wmem >var_index_stdlib_120_4 reg0
+jmp >var_accumulation_stdlib_121_4_end
+:var_accumulation_stdlib_121_4
+:var_accumulation_stdlib_121_4_end
+set reg0 0
+wmem >var_accumulation_stdlib_121_4 reg0
+:for__stdlib_122_4_begin
+rmem reg0 >var_len_stdlib_119_4
+set reg1 0
+gt reg0 reg0 reg1
+jf reg0 >for__stdlib_122_4_end
+jmp >var_tens_place_stdlib_124_8_end
+:var_tens_place_stdlib_124_8
+:var_tens_place_stdlib_124_8_end
+set reg0 1
+set reg1 10
+rmem reg2 >var_len_stdlib_119_4
+set reg3 1
+push reg0
+push reg1
+set reg0 reg2
+set reg1 reg3
 call >subtract
-wmem >var_f6b41ebe9c0f reg0
-jmp >var_953a15f6aa21_end
-:var_953a15f6aa21
-:var_953a15f6aa21_end
-set reg0 0
-wmem >var_953a15f6aa21 reg0
-jmp >var_147022f1066e_end
-:var_147022f1066e
-:var_147022f1066e_end
-set reg0 0
-wmem >var_147022f1066e reg0
-:while_846e9ddfd6b0_begin
-rmem reg0 >var_953a15f6aa21
-rmem reg1 >var_f6b41ebe9c0f
-gt reg0 reg0 reg1
-call >not
-jf reg0 >while_846e9ddfd6b0_end
-jmp >var_6da6a63028cf_end
-:var_6da6a63028cf
-:var_6da6a63028cf_end
-rmem reg0 >var_a7b7c8a9f6f6
-rmem reg1 >var_953a15f6aa21
+pop reg1
+set reg2 reg0
+pop reg0
+mult reg1 reg1 reg2
+rmem reg1 >var_len_stdlib_119_4
+set reg2 1
+push reg0
+push reg1
+set reg0 reg1
+set reg1 reg2
+call >subtract
+pop reg1
+set reg1 reg0
+pop reg0
+mult reg0 reg0 reg1
+wmem >var_tens_place_stdlib_124_8 reg0
+jmp >var_diget_stdlib_125_8_end
+:var_diget_stdlib_125_8
+:var_diget_stdlib_125_8_end
+rmem reg0 >var_str_stdlib_118_13
+rmem reg1 >var_index_stdlib_120_4
 add reg0 reg0 reg1
-wmem >var_6da6a63028cf reg0
-rmem reg0 >var_6da6a63028cf
 rmem reg0 reg0
-wmem >var_6da6a63028cf reg0
-jmp >var_e400adfe20a2_end
-:var_e400adfe20a2
-:var_e400adfe20a2_end
-rmem reg0 >var_6da6a63028cf
-set reg1 47
-gt reg0 reg0 reg1
-wmem >var_e400adfe20a2 reg0
-jmp >var_e11a43cd0ff9_end
-:var_e11a43cd0ff9
-:var_e11a43cd0ff9_end
-rmem reg0 >var_6da6a63028cf
-set reg1 58
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-wmem >var_e11a43cd0ff9 reg0
-rmem reg0 >var_e400adfe20a2
-rmem reg1 >var_e11a43cd0ff9
-call >and
-jf reg0 >end_20e7844750d8
-jmp >var_0e0b42539f1c_end
-:var_0e0b42539f1c
-:var_0e0b42539f1c_end
-rmem reg0 >var_6da6a63028cf
+wmem >var_diget_stdlib_125_8 reg0
+rmem reg0 >var_diget_stdlib_125_8
 set reg1 48
 call >subtract
-wmem >var_0e0b42539f1c reg0
-rmem reg0 >var_0e0b42539f1c
-call >print_number
-set reg0 10
-out reg0
-jmp >var_68bc87384c71_end
-:var_68bc87384c71
-:var_68bc87384c71_end
-set reg0 0
-wmem >var_68bc87384c71 reg0
-jmp >var_bc9e140674f7_end
-:var_bc9e140674f7
-:var_bc9e140674f7_end
-rmem reg0 >var_953a15f6aa21
-set reg1 1
-call >subtract
-wmem >var_bc9e140674f7 reg0
-:while_bd83fc4df4d0_begin
-rmem reg0 >var_68bc87384c71
-rmem reg1 >var_bc9e140674f7
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >while_bd83fc4df4d0_end
-rmem reg0 >var_0e0b42539f1c
+wmem >var_diget_stdlib_125_8 reg0
+:for__stdlib_127_8_begin
+rmem reg0 >var_tens_place_stdlib_124_8
+set reg1 0
+gt reg0 reg0 reg1
+jf reg0 >for__stdlib_127_8_end
+rmem reg0 >var_diget_stdlib_125_8
 set reg1 10
 mult reg0 reg0 reg1
-wmem >var_0e0b42539f1c reg0
-rmem reg0 >var_68bc87384c71
-add reg0 reg0 1
-wmem >var_68bc87384c71 reg0
-jmp >while_bd83fc4df4d0_begin
-:while_bd83fc4df4d0_end
-rmem reg0 >var_147022f1066e
-rmem reg1 >var_0e0b42539f1c
+wmem >var_diget_stdlib_125_8 reg0
+rmem reg0 >var_tens_place_stdlib_124_8
+set reg1 1
+call >subtract
+wmem >var_tens_place_stdlib_124_8 reg0
+jmp >for__stdlib_127_8_begin
+:for__stdlib_127_8_end
+rmem reg0 >var_accumulation_stdlib_121_4
+rmem reg1 >var_diget_stdlib_125_8
 add reg0 reg0 reg1
-wmem >var_147022f1066e reg0
-:end_20e7844750d8
-rmem reg0 >var_953a15f6aa21
+wmem >var_accumulation_stdlib_121_4 reg0
+rmem reg0 >var_index_stdlib_120_4
 add reg0 reg0 1
-wmem >var_953a15f6aa21 reg0
-jmp >while_846e9ddfd6b0_begin
-:while_846e9ddfd6b0_end
-rmem reg0 >var_147022f1066e
-call >print_number
-rmem reg0 >var_147022f1066e
+wmem >var_index_stdlib_120_4 reg0
+rmem reg0 >var_len_stdlib_119_4
+set reg1 1
+call >subtract
+wmem >var_len_stdlib_119_4 reg0
+jmp >for__stdlib_122_4_begin
+:for__stdlib_122_4_end
+rmem reg0 >var_accumulation_stdlib_121_4
 ret
 ret
 :int_end
 set reg0 >int
-jmp >var_647282b8f6c0_end
-:var_647282b8f6c0
-:var_647282b8f6c0_end
+jmp >string_end
+:string
+jmp >var_num_stdlib_138_16_end
+:var_num_stdlib_138_16
+:var_num_stdlib_138_16_end
+pop reg7
+pop reg0
+wmem >var_num_stdlib_138_16 reg0
+push reg7
+jmp >var_charNum_stdlib_139_4_end
+:var_charNum_stdlib_139_4
+:var_charNum_stdlib_139_4_end
+jmp >var_length_stdlib_140_4_end
+:var_length_stdlib_140_4
+:var_length_stdlib_140_4_end
+set reg0 0
+wmem >var_length_stdlib_140_4 reg0
+:while__stdlib_141_4_begin
+rmem reg0 >var_num_stdlib_138_16
+set reg1 9
+gt reg0 reg0 reg1
+jf reg0 >while__stdlib_141_4_end
+rmem reg0 >var_num_stdlib_138_16
+set reg1 10
+mod reg0 reg0 reg1
+wmem >var_charNum_stdlib_139_4 reg0
+rmem reg0 >var_charNum_stdlib_139_4
+rmem reg0 >var_charNum_stdlib_139_4
+push reg0
+rmem reg0 >var_length_stdlib_140_4
+add reg0 reg0 1
+wmem >var_length_stdlib_140_4 reg0
+rmem reg0 >var_num_stdlib_138_16
+set reg1 10
+call >divide
+wmem >var_num_stdlib_138_16 reg0
+jmp >while__stdlib_141_4_begin
+:while__stdlib_141_4_end
+rmem reg0 >var_num_stdlib_138_16
+set reg1 10
+mod reg0 reg0 reg1
+wmem >var_charNum_stdlib_139_4 reg0
+rmem reg0 >var_charNum_stdlib_139_4
+rmem reg0 >var_charNum_stdlib_139_4
+push reg0
+rmem reg0 >var_length_stdlib_140_4
+add reg0 reg0 1
+wmem >var_length_stdlib_140_4 reg0
+jmp >var_stack_index_stdlib_152_4_end
+:var_stack_index_stdlib_152_4
+:var_stack_index_stdlib_152_4_end
+set reg0 0
+wmem >var_stack_index_stdlib_152_4 reg0
+jmp >var_dest_ptr_stdlib_153_4_end
+:var_dest_ptr_stdlib_153_4
+:var_dest_ptr_stdlib_153_4_end
+call >alloc
+wmem >var_dest_ptr_stdlib_153_4 reg0
+:while__stdlib_155_4_begin
+rmem reg0 >var_stack_index_stdlib_152_4
+rmem reg1 >var_length_stdlib_140_4
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+jf reg0 >while__stdlib_155_4_end
+rmem reg0 >var_dest_ptr_stdlib_153_4
+rmem reg1 >var_stack_index_stdlib_152_4
+add reg0 reg0 reg1
+pop reg1
+set reg2 48
+add reg1 reg1 reg2
+wmem reg0 reg1
+rmem reg0 >var_stack_index_stdlib_152_4
+set reg1 1
+add reg0 reg0 reg1
+wmem >var_stack_index_stdlib_152_4 reg0
+jmp >while__stdlib_155_4_begin
+:while__stdlib_155_4_end
+rmem reg0 >var_dest_ptr_stdlib_153_4
+rmem reg1 >var_stack_index_stdlib_152_4
+add reg0 reg0 reg1
+set reg1 0
+wmem reg0 reg1
+rmem reg0 >var_dest_ptr_stdlib_153_4
+ret
+ret
+:string_end
+set reg0 >string
+jmp >print_number_end
+:print_number
+jmp >var_num_stdlib_164_22_end
+:var_num_stdlib_164_22
+:var_num_stdlib_164_22_end
+pop reg7
+pop reg0
+wmem >var_num_stdlib_164_22 reg0
+push reg7
+rmem reg0 >var_num_stdlib_164_22
+push reg0
+call >string
+push reg0
+call >print
+ret
+:print_number_end
+set reg0 >print_number
+jmp >print_numberln_end
+:print_numberln
+jmp >var_num_stdlib_168_24_end
+:var_num_stdlib_168_24
+:var_num_stdlib_168_24_end
+pop reg7
+pop reg0
+wmem >var_num_stdlib_168_24 reg0
+push reg7
+rmem reg0 >var_num_stdlib_168_24
+push reg0
+call >string
+push reg0
+call >println
+ret
+:print_numberln_end
+set reg0 >print_numberln
+jmp >dump_mem_end
+:dump_mem
+pop reg7
+push reg7
+jmp >var_i_stdlib_174_4_end
+:var_i_stdlib_174_4
+:var_i_stdlib_174_4_end
+set reg0 0
+wmem >var_i_stdlib_174_4 reg0
+:while__stdlib_176_4_begin
+rmem reg0 >var_i_stdlib_174_4
+rmem reg0 reg0
+jf reg0 >while__stdlib_176_4_end
+rmem reg0 >var_i_stdlib_174_4
+add reg0 reg0 1
+wmem >var_i_stdlib_174_4 reg0
+rmem reg0 >var_i_stdlib_174_4
+rmem reg0 reg0
+push reg0
+call >print_number
+set reg0 10
+out reg0
+jmp >while__stdlib_176_4_begin
+:while__stdlib_176_4_end
+ret
+:dump_mem_end
+set reg0 >dump_mem
+jmp >var_bottle_count_test_3_0_end
+:var_bottle_count_test_3_0
+:var_bottle_count_test_3_0_end
 set reg0 3
-wmem >var_647282b8f6c0 reg0
+wmem >var_bottle_count_test_3_0 reg0
 jmp >main_end
 :main
-:while_f3ee93a05972_begin
+pop reg7
+push reg7
+:while__test_6_4_begin
 set reg0 1
-jf reg0 >while_f3ee93a05972_end
-jmp >var_777423fa0051_end
-:var_777423fa0051
+jf reg0 >while__test_6_4_end
+jmp >var__test_7_14_end
+:var__test_7_14
 &o
 &u
 32
@@ -692,14 +775,16 @@ jmp >var_777423fa0051_end
 &e
 32
 0
-:var_777423fa0051_end
-wmem >var_777423fa0051 &Y
-set reg0 >var_777423fa0051
+:var__test_7_14_end
+wmem >var__test_7_14 &Y
+set reg0 >var__test_7_14
+push reg0
 call >print
-rmem reg0 >var_647282b8f6c0
+rmem reg0 >var_bottle_count_test_3_0
+push reg0
 call >print_number
-jmp >var_0c4e59cb0c6f_end
-:var_0c4e59cb0c6f
+jmp >var__test_9_16_end
+:var__test_9_16
 &b
 &o
 &t
@@ -730,26 +815,29 @@ jmp >var_0c4e59cb0c6f_end
 &o
 &?
 0
-:var_0c4e59cb0c6f_end
-wmem >var_0c4e59cb0c6f 32
-set reg0 >var_0c4e59cb0c6f
+:var__test_9_16_end
+wmem >var__test_9_16 32
+set reg0 >var__test_9_16
+push reg0
 call >println
-jmp >var_9f8a2f7c3c08_end
-:var_9f8a2f7c3c08
-:var_9f8a2f7c3c08_end
+jmp >var_inp_test_11_8_end
+:var_inp_test_11_8
+:var_inp_test_11_8_end
 call >input
-wmem >var_9f8a2f7c3c08 reg0
-rmem reg0 >var_9f8a2f7c3c08
-jmp >var_85ce09891bb4_end
-:var_85ce09891bb4
+wmem >var_inp_test_11_8 reg0
+rmem reg0 >var_inp_test_11_8
+push reg0
+jmp >var__test_13_26_end
+:var__test_13_26
 0
-:var_85ce09891bb4_end
-wmem >var_85ce09891bb4 &+
-set reg1 >var_85ce09891bb4
+:var__test_13_26_end
+wmem >var__test_13_26 &+
+set reg0 >var__test_13_26
+push reg0
 call >str_equal
-jf reg0 >end_3373b007869c
-jmp >var_677b75adce22_end
-:var_677b75adce22
+jf reg0 >end__test_13_8
+jmp >var__test_14_20_end
+:var__test_14_20
 &o
 &u
 32
@@ -761,25 +849,28 @@ jmp >var_677b75adce22_end
 &n
 &e
 0
-:var_677b75adce22_end
-wmem >var_677b75adce22 &Y
-set reg0 >var_677b75adce22
+:var__test_14_20_end
+wmem >var__test_14_20 &Y
+set reg0 >var__test_14_20
+push reg0
 call >println
-rmem reg0 >var_647282b8f6c0
+rmem reg0 >var_bottle_count_test_3_0
 add reg0 reg0 1
-wmem >var_647282b8f6c0 reg0
-:end_3373b007869c
-rmem reg0 >var_9f8a2f7c3c08
-jmp >var_ed0403089664_end
-:var_ed0403089664
+wmem >var_bottle_count_test_3_0 reg0
+:end__test_13_8
+rmem reg0 >var_inp_test_11_8
+push reg0
+jmp >var__test_18_26_end
+:var__test_18_26
 0
-:var_ed0403089664_end
-wmem >var_ed0403089664 &-
-set reg1 >var_ed0403089664
+:var__test_18_26_end
+wmem >var__test_18_26 &-
+set reg0 >var__test_18_26
+push reg0
 call >str_equal
-jf reg0 >end_1ec9fff7f0f6
-jmp >var_4f9071766e30_end
-:var_4f9071766e30
+jf reg0 >end__test_18_8
+jmp >var__test_19_20_end
+:var__test_19_20
 &o
 &u
 32
@@ -793,24 +884,25 @@ jmp >var_4f9071766e30_end
 &n
 &e
 0
-:var_4f9071766e30_end
-wmem >var_4f9071766e30 &Y
-set reg0 >var_4f9071766e30
+:var__test_19_20_end
+wmem >var__test_19_20 &Y
+set reg0 >var__test_19_20
+push reg0
 call >println
-rmem reg0 >var_647282b8f6c0
+rmem reg0 >var_bottle_count_test_3_0
 set reg1 1
 call >subtract
-wmem >var_647282b8f6c0 reg0
-:end_1ec9fff7f0f6
-rmem reg0 >var_647282b8f6c0
+wmem >var_bottle_count_test_3_0 reg0
+:end__test_18_8
+rmem reg0 >var_bottle_count_test_3_0
 set reg1 1
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >end_19af29a5aa24
-jmp >var_b78ecee84df3_end
-:var_b78ecee84df3
+jf reg0 >end__test_23_8
+jmp >var__test_24_20_end
+:var__test_24_20
 &o
 &u
 32
@@ -821,14 +913,15 @@ jmp >var_b78ecee84df3_end
 &.
 &.
 0
-:var_b78ecee84df3_end
-wmem >var_b78ecee84df3 &Y
-set reg0 >var_b78ecee84df3
+:var__test_24_20_end
+wmem >var__test_24_20 &Y
+set reg0 >var__test_24_20
+push reg0
 call >println
 ret
-:end_19af29a5aa24
-jmp >while_f3ee93a05972_begin
-:while_f3ee93a05972_end
+:end__test_23_8
+jmp >while__test_6_4_begin
+:while__test_6_4_end
 ret
 :main_end
 set reg0 >main
