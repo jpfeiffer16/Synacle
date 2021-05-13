@@ -1,0 +1,30 @@
+#include "../lib/testlib.bc"
+#include "../lib/stdlib.bc"
+
+category("intrinsics", () => {
+    test("equality works", () => assert(1 == 1));
+
+    test("greater than works", () => assert(2 > 1));
+
+    test("less than works", () => assert(1 < 2));
+
+    category("typeof", () =>
+    {
+        test("string works", () => {
+            var test = "test";
+            assert(str_equal(typeof(test), "string"));
+        });
+
+        test("int works", () => {
+            var test = 123;
+            assert(str_equal(typeof(test), "int"));
+        });
+    });
+
+    category("casting", () => {
+        test("casting works", () => {
+            var test = "test" as int;
+            assert(str_equal(typeof(test), "int"));
+        });
+    });
+});

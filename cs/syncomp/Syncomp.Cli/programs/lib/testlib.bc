@@ -2,15 +2,25 @@
 #include "./bool.bc"
 #include "./tty_colors.bc"
 
-string current_category;
+string current_category = " ";
 string current_test;
 func<void> current_before_each = () => {};
 func<void> current_after_each = () => {};
 
 function category(string name, func<void> cat_func)
 {
-    println(name);
+    // var shouldPad = str_len(current_category) > 1;
+    // if (shouldPad)
+    // {
+    //     current_category = str_cat(current_category, str_cat("->", name));
+    // }
+    // // Need else
+    // if (!shouldPad)
+    // {
+    //     current_category = name;
+    // }
     current_category = name;
+    println(name);
     cat_func();
 }
 

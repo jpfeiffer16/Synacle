@@ -32,13 +32,13 @@ jobs:
       run: npm install
 
     - name: Build bc tests
-      run: "./syn-run -o cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bc"
+      run: "./syn-run -o cs/syncomp/Syncomp.Cli/programs/tests/index.bc"
 
     - name: Run bc tests (c vm)
-      run: 'OUTPUT=$(c/bin/synvmc -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && printf "$OUTPUT";! printf "$OUTPUT" | grep "FAILED" > /dev/null'
+      run: 'OUTPUT=$(c/bin/synvmc -b cs/syncomp/Syncomp.Cli/programs/tests/index.bin) && printf "$OUTPUT";! printf "$OUTPUT" | grep "FAILED" > /dev/null'
 
     - name: Run bc tests (csharp vm)
-      run: 'OUTPUT=$(dotnet run --no-build --project cs/synsharp/synsharp.csproj -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && printf "$OUTPUT";! printf "$OUTPUT" | grep "FAILED" > /dev/null'
+      run: 'OUTPUT=$(dotnet run --no-build --project cs/synsharp/synsharp.csproj -b cs/syncomp/Syncomp.Cli/programs/tests/index.bin) && printf "$OUTPUT";! printf "$OUTPUT" | grep "FAILED" > /dev/null'
 
     - name: Run bc tests (js vm)
-      run: 'OUTPUT=$(synvm/vm.js -b cs/syncomp/Syncomp.Cli/programs/tests/stdlib.bin) && printf "$OUTPUT";! printf "$OUTPUT" | grep "FAILED" > /dev/null'
+      run: 'OUTPUT=$(synvm/vm.js -b cs/syncomp/Syncomp.Cli/programs/tests/index.bin) && printf "$OUTPUT";! printf "$OUTPUT" | grep "FAILED" > /dev/null'
