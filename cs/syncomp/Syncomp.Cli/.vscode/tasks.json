@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/syncomp.csproj"
+                "${workspaceFolder}/Syncomp.Cli.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

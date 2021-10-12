@@ -752,247 +752,275 @@ jmp >while__stdlib_176_4_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >compose_list_items_end
-:compose_list_items
-jmp >var_a_list_17_28_end
-:var_a_list_17_28
-:var_a_list_17_28_end
-jmp >var_b_list_17_46_end
-:var_b_list_17_46
-:var_b_list_17_46_end
+jmp >emit_escape_sequence_end
+:emit_escape_sequence
+jmp >var_sequence_tty_3_30_end
+:var_sequence_tty_3_30
+:var_sequence_tty_3_30_end
 pop reg7
 pop reg0
-wmem >var_b_list_17_46 reg0
-pop reg0
-wmem >var_a_list_17_28 reg0
+wmem >var_sequence_tty_3_30 reg0
 push reg7
-rmem reg0 >var_b_list_17_46
-rmem reg7 >var_a_list_17_28
-add reg7 reg7 1
-wmem reg7 reg0
-rmem reg0 >var_a_list_17_28
+set reg0 27
+out reg0
+rmem reg0 >var_sequence_tty_3_30
+push reg0
+call >print
 ret
-ret
-:compose_list_items_end
-set reg0 >compose_list_items
-jmp >alloc_temp_block_end
-:alloc_temp_block
+:emit_escape_sequence_end
+set reg0 >emit_escape_sequence
+jmp >clear_screen_end
+:clear_screen
 pop reg7
 push reg7
-jmp >var_ptr_list_27_4_end
-:var_ptr_list_27_4
-:var_ptr_list_27_4_end
-call >alloc
-wmem >var_ptr_list_27_4 reg0
-jmp >var_i_list_28_9_end
-:var_i_list_28_9
-:var_i_list_28_9_end
+jmp >var__tty_9_25_end
+:var__tty_9_25
+&H
+0
+:var__tty_9_25_end
+wmem >var__tty_9_25 &[
+set reg0 >var__tty_9_25
+push reg0
+call >emit_escape_sequence
+jmp >var__tty_10_25_end
+:var__tty_10_25
+&2
+&J
+0
+:var__tty_10_25_end
+wmem >var__tty_10_25 &[
+set reg0 >var__tty_10_25
+push reg0
+call >emit_escape_sequence
+ret
+:clear_screen_end
+set reg0 >clear_screen
+jmp >show_cursor_end
+:show_cursor
+pop reg7
+push reg7
+jmp >var__tty_14_25_end
+:var__tty_14_25
+&?
+&2
+&5
+&h
+0
+:var__tty_14_25_end
+wmem >var__tty_14_25 &[
+set reg0 >var__tty_14_25
+push reg0
+call >emit_escape_sequence
+ret
+:show_cursor_end
+set reg0 >show_cursor
+jmp >hide_cursor_end
+:hide_cursor
+pop reg7
+push reg7
+jmp >var__tty_18_25_end
+:var__tty_18_25
+&?
+&2
+&5
+&l
+0
+:var__tty_18_25_end
+wmem >var__tty_18_25 &[
+set reg0 >var__tty_18_25
+push reg0
+call >emit_escape_sequence
+ret
+:hide_cursor_end
+set reg0 >hide_cursor
+jmp >var_X_MAX_ball_4_0_end
+:var_X_MAX_ball_4_0
+:var_X_MAX_ball_4_0_end
+set reg0 60
+wmem >var_X_MAX_ball_4_0 reg0
+jmp >var_Y_MAX_ball_5_0_end
+:var_Y_MAX_ball_5_0
+:var_Y_MAX_ball_5_0_end
+set reg0 40
+wmem >var_Y_MAX_ball_5_0 reg0
+jmp >wait_end
+:wait
+jmp >var_cycles_ball_7_14_end
+:var_cycles_ball_7_14
+:var_cycles_ball_7_14_end
+pop reg7
+pop reg0
+wmem >var_cycles_ball_7_14 reg0
+push reg7
+jmp >var_i_ball_9_9_end
+:var_i_ball_9_9
+:var_i_ball_9_9_end
 set reg0 0
-wmem >var_i_list_28_9 reg0
-:for__list_28_4_begin
-rmem reg0 >var_i_list_28_9
-set reg1 5
+wmem >var_i_ball_9_9 reg0
+:for__ball_9_4_begin
+rmem reg0 >var_i_ball_9_9
+rmem reg1 >var_cycles_ball_7_14
 eq reg2 reg0 reg1
 gt reg3 reg0 reg1
 or reg0 reg2 reg3
 call >not
-jf reg0 >for__list_28_4_end
-rmem reg0 >var_ptr_list_27_4
-rmem reg1 >var_i_list_28_9
+jf reg0 >for__ball_9_4_end
+rmem reg0 >var_i_ball_9_9
+add reg0 reg0 1
+wmem >var_i_ball_9_9 reg0
+jmp >for__ball_9_4_begin
+:for__ball_9_4_end
+ret
+:wait_end
+set reg0 >wait
+call >hide_cursor
+jmp >var_dx_ball_15_0_end
+:var_dx_ball_15_0
+:var_dx_ball_15_0_end
+set reg0 1
+wmem >var_dx_ball_15_0 reg0
+jmp >var_dy_ball_16_0_end
+:var_dy_ball_16_0
+:var_dy_ball_16_0_end
+set reg0 1
+wmem >var_dy_ball_16_0 reg0
+jmp >var_x_ball_17_0_end
+:var_x_ball_17_0
+:var_x_ball_17_0_end
+set reg0 1
+wmem >var_x_ball_17_0 reg0
+jmp >var_y_ball_18_0_end
+:var_y_ball_18_0
+:var_y_ball_18_0_end
+set reg0 1
+wmem >var_y_ball_18_0 reg0
+:while__ball_19_0_begin
+set reg0 1
+jf reg0 >while__ball_19_0_end
+set reg0 25000
+push reg0
+call >wait
+rmem reg0 >var_dx_ball_15_0
+jf reg0 >end__ball_21_4
+rmem reg0 >var_x_ball_17_0
+set reg1 1
 add reg0 reg0 reg1
-set reg1 255
-wmem reg0 reg1
-rmem reg0 >var_i_list_28_9
-add reg0 reg0 1
-wmem >var_i_list_28_9 reg0
-jmp >for__list_28_4_begin
-:for__list_28_4_end
-ret
-:alloc_temp_block_end
-set reg0 >alloc_temp_block
-jmp >list_add_end
-:list_add
-jmp >var_list_item_list_34_18_end
-:var_list_item_list_34_18
-:var_list_item_list_34_18_end
-jmp >var_value_list_34_44_end
-:var_value_list_34_44
-:var_value_list_34_44_end
-pop reg7
-pop reg0
-wmem >var_value_list_34_44 reg0
-pop reg0
-wmem >var_list_item_list_34_18 reg0
-push reg7
-ret
-:list_add_end
-set reg0 >list_add
-jmp >new_list_item_end
-:new_list_item
-jmp >var_value_list_39_24_end
-:var_value_list_39_24
-:var_value_list_39_24_end
-pop reg7
-pop reg0
-wmem >var_value_list_39_24 reg0
-push reg7
-jmp >var_item_ptr_list_41_4_end
-:var_item_ptr_list_41_4
-:var_item_ptr_list_41_4_end
-call >alloc
-wmem >var_item_ptr_list_41_4 reg0
-rmem reg0 >var_value_list_39_24
-rmem reg7 >var_item_ptr_list_41_4
-add reg7 reg7 2
-wmem reg7 reg0
+wmem >var_x_ball_17_0 reg0
+:end__ball_21_4
+rmem reg0 >var_dx_ball_15_0
+call >not
+jf reg0 >end__ball_24_4
+rmem reg0 >var_x_ball_17_0
+set reg1 1
+call >subtract
+wmem >var_x_ball_17_0 reg0
+:end__ball_24_4
+rmem reg0 >var_dy_ball_16_0
+jf reg0 >end__ball_28_4
+rmem reg0 >var_y_ball_18_0
+set reg1 1
+add reg0 reg0 reg1
+wmem >var_y_ball_18_0 reg0
+:end__ball_28_4
+rmem reg0 >var_dy_ball_16_0
+call >not
+jf reg0 >end__ball_31_4
+rmem reg0 >var_y_ball_18_0
+set reg1 1
+call >subtract
+wmem >var_y_ball_18_0 reg0
+:end__ball_31_4
+rmem reg0 >var_x_ball_17_0
+set reg1 0
+rmem reg2 >var_x_ball_17_0
+call >and
+rmem reg2 >var_X_MAX_ball_4_0
+gt reg0 reg0 reg1
+eq reg0 reg0 reg1
+jf reg0 >end__ball_35_4
+rmem reg0 >var_dx_ball_15_0
+call >not
+wmem >var_dx_ball_15_0 reg0
+:end__ball_35_4
+rmem reg0 >var_x_ball_17_0
+set reg1 0
+rmem reg2 >var_x_ball_17_0
+call >or
+rmem reg2 >var_X_MAX_ball_4_0
+gt reg0 reg0 reg1
+eq reg0 reg0 reg1
+jf reg0 >end__ball_38_4
+rmem reg0 >var_dx_ball_15_0
+call >not
+wmem >var_dx_ball_15_0 reg0
+:end__ball_38_4
+rmem reg0 >var_y_ball_18_0
+set reg1 0
+eq reg0 reg0 reg1
+jf reg0 >end__ball_48_4
+rmem reg0 >var_dy_ball_16_0
+call >not
+wmem >var_dy_ball_16_0 reg0
+:end__ball_48_4
+rmem reg0 >var_y_ball_18_0
+rmem reg1 >var_Y_MAX_ball_5_0
+gt reg0 reg0 reg1
+jf reg0 >end__ball_51_4
+rmem reg0 >var_dy_ball_16_0
+call >not
+wmem >var_dy_ball_16_0 reg0
+:end__ball_51_4
+call >clear_screen
+jmp >var_i_ball_56_9_end
+:var_i_ball_56_9
+:var_i_ball_56_9_end
 set reg0 0
-rmem reg7 >var_item_ptr_list_41_4
-add reg7 reg7 1
-wmem reg7 reg0
-jmp >function__list_45_20_end
-:function__list_45_20
-jmp >var_value_list_45_21_end
-:var_value_list_45_21
-:var_value_list_45_21_end
-pop reg7
-pop reg0
-wmem >var_value_list_45_21 reg0
-push reg7
-jmp >var_prev_item_list_46_8_end
-:var_prev_item_list_46_8
-:var_prev_item_list_46_8_end
-rmem reg0 >var_item_ptr_list_41_4
-wmem >var_prev_item_list_46_8 reg0
-jmp >var_new_item_list_47_8_end
-:var_new_item_list_47_8
-:var_new_item_list_47_8_end
-rmem reg0 >var_value_list_45_21
-push reg0
-call >new_list_item
-wmem >var_new_item_list_47_8 reg0
-rmem reg0 >var_prev_item_list_46_8
-push reg0
-rmem reg0 >var_new_item_list_47_8
-push reg0
-call >compose_list_items
-rmem reg0 >var_new_item_list_47_8
-ret
-ret
-:function__list_45_20_end
-set reg0 >function__list_45_20
-rmem reg7 >var_item_ptr_list_41_4
-add reg7 reg7 3
-wmem reg7 reg0
-call >alloc_temp_block
-rmem reg0 >var_item_ptr_list_41_4
-ret
-ret
-:new_list_item_end
-set reg0 >new_list_item
-jmp >enumerate_list_end
-:enumerate_list
-jmp >var_base_item_list_55_24_end
-:var_base_item_list_55_24
-:var_base_item_list_55_24_end
-jmp >var_cb_list_55_50_end
-:var_cb_list_55_50
-:var_cb_list_55_50_end
-pop reg7
-pop reg0
-wmem >var_cb_list_55_50 reg0
-pop reg0
-wmem >var_base_item_list_55_24 reg0
-push reg7
-jmp >var_item_list_57_4_end
-:var_item_list_57_4
-:var_item_list_57_4_end
-rmem reg0 >var_base_item_list_55_24
-wmem >var_item_list_57_4 reg0
-:while__list_58_4_begin
-rmem reg0 >var_item_list_57_4
+wmem >var_i_ball_56_9 reg0
+:for__ball_56_4_begin
+rmem reg0 >var_i_ball_56_9
+rmem reg1 >var_y_ball_18_0
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+jf reg0 >for__ball_56_4_end
+set reg0 10
+out reg0
+rmem reg0 >var_i_ball_56_9
 add reg0 reg0 1
-rmem reg0 reg0
-jf reg0 >while__list_58_4_end
-rmem reg0 >var_item_list_57_4
-add reg0 reg0 2
-rmem reg0 reg0
-push reg0
-rmem reg7 >var_cb_list_55_50
-call reg7
-rmem reg0 >var_item_list_57_4
+wmem >var_i_ball_56_9 reg0
+jmp >for__ball_56_4_begin
+:for__ball_56_4_end
+jmp >var_i_ball_60_9_end
+:var_i_ball_60_9
+:var_i_ball_60_9_end
+set reg0 0
+wmem >var_i_ball_56_9 reg0
+:for__ball_60_4_begin
+rmem reg0 >var_i_ball_56_9
+rmem reg1 >var_x_ball_17_0
+eq reg2 reg0 reg1
+gt reg3 reg0 reg1
+or reg0 reg2 reg3
+call >not
+jf reg0 >for__ball_60_4_end
+set reg0 32
+out reg0
+rmem reg0 >var_i_ball_56_9
 add reg0 reg0 1
-rmem reg0 reg0
-wmem >var_item_list_57_4 reg0
-jmp >while__list_58_4_begin
-:while__list_58_4_end
-rmem reg0 >var_item_list_57_4
-add reg0 reg0 2
-rmem reg0 reg0
+wmem >var_i_ball_56_9 reg0
+jmp >for__ball_60_4_begin
+:for__ball_60_4_end
+jmp >var__ball_65_10_end
+:var__ball_65_10
+0
+:var__ball_65_10_end
+wmem >var__ball_65_10 &o
+set reg0 >var__ball_65_10
 push reg0
-rmem reg7 >var_cb_list_55_50
-call reg7
-ret
-:enumerate_list_end
-set reg0 >enumerate_list
-jmp >main_end
-:main
-pop reg7
-push reg7
-jmp >var_items_list_test_17_4_end
-:var_items_list_test_17_4
-:var_items_list_test_17_4_end
-set reg0 100
-push reg0
-call >new_list_item
-wmem >var_items_list_test_17_4 reg0
-rmem reg0 >var_items_list_test_17_4
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 65
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 66
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 67
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 68
-push reg0
-call reg7
-rmem reg0 >var_items_list_test_17_4
-push reg0
-jmp >function__list_test_26_26_end
-:function__list_test_26_26
-jmp >var_value_list_test_26_27_end
-:var_value_list_test_26_27
-:var_value_list_test_26_27_end
-pop reg7
-pop reg0
-wmem >var_value_list_test_26_27 reg0
-push reg7
-rmem reg0 >var_value_list_test_26_27
-push reg0
-call >print_numberln
-ret
-:function__list_test_26_26_end
-set reg0 >function__list_test_26_26
-push reg0
-call >enumerate_list
-ret
-:main_end
-set reg0 >main
-call >main
+call >print
+jmp >while__ball_19_0_begin
+:while__ball_19_0_end
 halt
 
 :subtract

@@ -934,65 +934,162 @@ call reg7
 ret
 :enumerate_list_end
 set reg0 >enumerate_list
-jmp >main_end
-:main
+jmp >var_once_callbacks_task_13_0_end
+:var_once_callbacks_task_13_0
+:var_once_callbacks_task_13_0_end
+set reg0 0
+wmem >var_once_callbacks_task_13_0 reg0
+jmp >var_tick_count_task_15_0_end
+:var_tick_count_task_15_0
+:var_tick_count_task_15_0_end
+set reg0 0
+wmem >var_tick_count_task_15_0 reg0
+jmp >start_event_loop_end
+:start_event_loop
 pop reg7
 push reg7
-jmp >var_items_list_test_17_4_end
-:var_items_list_test_17_4
-:var_items_list_test_17_4_end
-set reg0 100
+:while__task_17_4_begin
+set reg0 1
+jf reg0 >while__task_17_4_end
+rmem reg0 >var_tick_count_task_15_0
+add reg0 reg0 1
+wmem >var_tick_count_task_15_0 reg0
+rmem reg0 >var_once_callbacks_task_13_0
 push reg0
-call >new_list_item
-wmem >var_items_list_test_17_4 reg0
-rmem reg0 >var_items_list_test_17_4
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 65
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 66
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 67
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 68
-push reg0
-call reg7
-rmem reg0 >var_items_list_test_17_4
-push reg0
-jmp >function__list_test_26_26_end
-:function__list_test_26_26
-jmp >var_value_list_test_26_27_end
-:var_value_list_test_26_27
-:var_value_list_test_26_27_end
+jmp >function__task_19_39_end
+:function__task_19_39
+jmp >var_item_task_19_40_end
+:var_item_task_19_40
+:var_item_task_19_40_end
 pop reg7
 pop reg0
-wmem >var_value_list_test_26_27 reg0
+wmem >var_item_task_19_40 reg0
 push reg7
-rmem reg0 >var_value_list_test_26_27
-push reg0
-call >print_numberln
+jmp >var_one_time_task_20_12_end
+:var_one_time_task_20_12
+:fld_one_time_task_20_12_run
+:fld_one_time_task_20_12_ticks
+:fld_one_time_task_20_12_cb
+:var_one_time_task_20_12_end
+rmem reg0 >var_item_task_19_40
+set reg7 >var_one_time_task_20_12
+add reg7 reg7 3
+pop reg0
+wmem reg7 reg0
+add reg7 reg7 32767
+pop reg0
+wmem reg7 reg0
+add reg7 reg7 32767
+pop reg0
+wmem reg7 reg0
+add reg7 reg7 32767
+jmp >var_t_task_21_12_end
+:var_t_task_21_12
+:var_t_task_21_12_end
+rmem reg0 >fld_one_time_task_20_12_ticks
+wmem >var_t_task_21_12 reg0
+rmem reg0 >var_tick_count_task_15_0
+rmem reg1 >var_t_task_21_12
+gt reg0 reg0 reg1
+jf reg0 >end__task_22_12
+jmp >var_o_task_24_16_end
+:var_o_task_24_16
+:var_o_task_24_16_end
+rmem reg0 >fld_one_time_task_20_12_cb
+wmem >var_o_task_24_16 reg0
+rmem reg7 >var_o_task_24_16
+call reg7
+:end__task_22_12
 ret
-:function__list_test_26_26_end
-set reg0 >function__list_test_26_26
+:function__task_19_39_end
+set reg0 >function__task_19_39
 push reg0
 call >enumerate_list
+jmp >while__task_17_4_begin
+:while__task_17_4_end
 ret
-:main_end
-set reg0 >main
-call >main
+:start_event_loop_end
+set reg0 >start_event_loop
+jmp >add_once_end
+:add_once
+jmp >var_ticks_task_31_18_end
+:var_ticks_task_31_18
+:var_ticks_task_31_18_end
+jmp >var_cb_task_31_29_end
+:var_cb_task_31_29
+:var_cb_task_31_29_end
+pop reg7
+pop reg0
+wmem >var_cb_task_31_29 reg0
+pop reg0
+wmem >var_ticks_task_31_18 reg0
+push reg7
+jmp >var_item_task_32_4_end
+:var_item_task_32_4
+:fld_item_task_32_4_run
+:fld_item_task_32_4_ticks
+:fld_item_task_32_4_cb
+:var_item_task_32_4_end
+rmem reg0 >var_tick_count_task_15_0
+rmem reg1 >var_ticks_task_31_18
+add reg0 reg0 reg1
+wmem >fld_item_task_32_4_ticks reg0
+rmem reg0 >var_cb_task_31_29
+wmem >fld_item_task_32_4_cb reg0
+rmem reg0 >var_once_callbacks_task_13_0
+set reg1 0
+eq reg0 reg0 reg1
+jf reg0 >end__task_35_4
+rmem reg0 >fld_item_task_32_4_run
+push reg0
+rmem reg0 >fld_item_task_32_4_ticks
+push reg0
+rmem reg0 >fld_item_task_32_4_cb
+push reg0
+call >new_list_item
+wmem >var_once_callbacks_task_13_0 reg0
+:end__task_35_4
+rmem reg0 >var_once_callbacks_task_13_0
+set reg1 0
+eq reg0 reg0 reg1
+call >not
+jf reg0 >end__task_38_4
+rmem reg0 >var_once_callbacks_task_13_0
+add reg0 reg0 3
+rmem reg0 reg0
+set reg7 reg0
+rmem reg0 >fld_item_task_32_4_run
+push reg0
+rmem reg0 >fld_item_task_32_4_ticks
+push reg0
+rmem reg0 >fld_item_task_32_4_cb
+push reg0
+call reg7
+:end__task_38_4
+ret
+:add_once_end
+set reg0 >add_once
+set reg0 100
+push reg0
+jmp >function__task_test_5_14_end
+:function__task_test_5_14
+pop reg7
+push reg7
+jmp >var__task_test_6_12_end
+:var__task_test_6_12
+&i
+&!
+0
+:var__task_test_6_12_end
+wmem >var__task_test_6_12 &H
+set reg0 >var__task_test_6_12
+push reg0
+call >println
+ret
+:function__task_test_5_14_end
+set reg0 >function__task_test_5_14
+push reg0
+call >add_once
 halt
 
 :subtract

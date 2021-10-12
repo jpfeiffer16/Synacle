@@ -1,0 +1,7 @@
+#include "./lib/stdlib.bc"
+#include "./lib/task.bc"
+
+
+add_once(100, () => {
+    println("Hi!");
+});

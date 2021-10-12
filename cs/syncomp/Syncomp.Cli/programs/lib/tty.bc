@@ -1,0 +1,19 @@
+#include "./stdlib.bc"
+
+function emit_escape_sequence(string sequence) {
+    out(27);
+    print(sequence);
+}
+
+function clear_screen() {
+    emit_escape_sequence("[H");
+    emit_escape_sequence("[2J");
+}
+
+function show_cursor() {
+    emit_escape_sequence("[?25h");
+}
+
+function hide_cursor() {
+    emit_escape_sequence("[?25l");
+}

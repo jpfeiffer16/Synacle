@@ -27,5 +27,6 @@ test.nick = "Little Dude";
 
 test_func(test);
 
-ptr<test_type> &t;
-var p = *t;
+// TODO: Errors here
+// ptr<test_type> &t;
+// var p = *t;

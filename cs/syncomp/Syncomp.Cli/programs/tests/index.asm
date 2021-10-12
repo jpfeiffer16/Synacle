@@ -752,74 +752,53 @@ jmp >while__stdlib_176_4_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
+jmp >emit_escape_sequence_end
+:emit_escape_sequence
+jmp >var_code_tty_3_30_end
+:var_code_tty_3_30
+:var_code_tty_3_30_end
+pop reg7
+pop reg0
+wmem >var_code_tty_3_30 reg0
+push reg7
+jmp >var_str_ptr_tty_4_4_end
+:var_str_ptr_tty_4_4
+:var_str_ptr_tty_4_4_end
+call >alloc
+wmem >var_str_ptr_tty_4_4 reg0
+rmem reg0 >var_str_ptr_tty_4_4
+set reg1 27
+wmem reg0 reg1
+jmp >var_complete_str_tty_6_4_end
+:var_complete_str_tty_6_4
+:var_complete_str_tty_6_4_end
+rmem reg0 >var_str_ptr_tty_4_4
+push reg0
+rmem reg0 >var_code_tty_3_30
+push reg0
+call >str_cat
+wmem >var_complete_str_tty_6_4 reg0
+rmem reg0 >var_complete_str_tty_6_4
+push reg0
+call >print
+ret
+:emit_escape_sequence_end
+set reg0 >emit_escape_sequence
 jmp >tty_set_green_end
 :tty_set_green
 pop reg7
 push reg7
-jmp >var_str_ptr_tty_colors_5_4_end
-:var_str_ptr_tty_colors_5_4
-:var_str_ptr_tty_colors_5_4_end
-call >alloc
-wmem >var_str_ptr_tty_colors_5_4 reg0
-jmp >var_write_ptr_tty_colors_6_4_end
-:var_write_ptr_tty_colors_6_4
-:var_write_ptr_tty_colors_6_4_end
-rmem reg0 >var_str_ptr_tty_colors_5_4
-wmem >var_write_ptr_tty_colors_6_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_6_4
-set reg1 27
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_6_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_6_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_6_4
-jmp >var__tty_colors_9_21_end
-:var__tty_colors_9_21
+jmp >var__tty_colors_6_25_end
+:var__tty_colors_6_25
+&3
+&2
+&m
 0
-:var__tty_colors_9_21_end
-wmem >var__tty_colors_9_21 &[
-set reg1 >var__tty_colors_9_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_6_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_6_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_6_4
-jmp >var__tty_colors_11_21_end
-:var__tty_colors_11_21
-0
-:var__tty_colors_11_21_end
-wmem >var__tty_colors_11_21 &3
-set reg1 >var__tty_colors_11_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_6_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_6_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_6_4
-jmp >var__tty_colors_13_21_end
-:var__tty_colors_13_21
-0
-:var__tty_colors_13_21_end
-wmem >var__tty_colors_13_21 &2
-set reg1 >var__tty_colors_13_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_6_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_6_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_6_4
-jmp >var__tty_colors_15_21_end
-:var__tty_colors_15_21
-0
-:var__tty_colors_15_21_end
-wmem >var__tty_colors_15_21 &m
-set reg1 >var__tty_colors_15_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_str_ptr_tty_colors_5_4
+:var__tty_colors_6_25_end
+wmem >var__tty_colors_6_25 &[
+set reg0 >var__tty_colors_6_25
 push reg0
-call >print
+call >emit_escape_sequence
 ret
 :tty_set_green_end
 set reg0 >tty_set_green
@@ -827,70 +806,17 @@ jmp >tty_set_red_end
 :tty_set_red
 pop reg7
 push reg7
-jmp >var_str_ptr_tty_colors_21_4_end
-:var_str_ptr_tty_colors_21_4
-:var_str_ptr_tty_colors_21_4_end
-call >alloc
-wmem >var_str_ptr_tty_colors_21_4 reg0
-jmp >var_write_ptr_tty_colors_22_4_end
-:var_write_ptr_tty_colors_22_4
-:var_write_ptr_tty_colors_22_4_end
-rmem reg0 >var_str_ptr_tty_colors_21_4
-wmem >var_write_ptr_tty_colors_22_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_22_4
-set reg1 27
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_22_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_22_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_22_4
-jmp >var__tty_colors_25_21_end
-:var__tty_colors_25_21
+jmp >var__tty_colors_11_25_end
+:var__tty_colors_11_25
+&3
+&1
+&m
 0
-:var__tty_colors_25_21_end
-wmem >var__tty_colors_25_21 &[
-set reg1 >var__tty_colors_25_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_22_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_22_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_22_4
-jmp >var__tty_colors_27_21_end
-:var__tty_colors_27_21
-0
-:var__tty_colors_27_21_end
-wmem >var__tty_colors_27_21 &3
-set reg1 >var__tty_colors_27_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_22_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_22_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_22_4
-jmp >var__tty_colors_29_21_end
-:var__tty_colors_29_21
-0
-:var__tty_colors_29_21_end
-wmem >var__tty_colors_29_21 &1
-set reg1 >var__tty_colors_29_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_22_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_22_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_22_4
-jmp >var__tty_colors_31_21_end
-:var__tty_colors_31_21
-0
-:var__tty_colors_31_21_end
-wmem >var__tty_colors_31_21 &m
-set reg1 >var__tty_colors_31_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_str_ptr_tty_colors_21_4
+:var__tty_colors_11_25_end
+wmem >var__tty_colors_11_25 &[
+set reg0 >var__tty_colors_11_25
 push reg0
-call >print
+call >emit_escape_sequence
 ret
 :tty_set_red_end
 set reg0 >tty_set_red
@@ -898,58 +824,16 @@ jmp >tty_reset_end
 :tty_reset
 pop reg7
 push reg7
-jmp >var_str_ptr_tty_colors_37_4_end
-:var_str_ptr_tty_colors_37_4
-:var_str_ptr_tty_colors_37_4_end
-call >alloc
-wmem >var_str_ptr_tty_colors_37_4 reg0
-jmp >var_write_ptr_tty_colors_38_4_end
-:var_write_ptr_tty_colors_38_4
-:var_write_ptr_tty_colors_38_4_end
-rmem reg0 >var_str_ptr_tty_colors_37_4
-wmem >var_write_ptr_tty_colors_38_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_38_4
-set reg1 27
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_38_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_38_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_38_4
-jmp >var__tty_colors_41_21_end
-:var__tty_colors_41_21
+jmp >var__tty_colors_16_25_end
+:var__tty_colors_16_25
+&0
+&m
 0
-:var__tty_colors_41_21_end
-wmem >var__tty_colors_41_21 &[
-set reg1 >var__tty_colors_41_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_38_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_38_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_38_4
-jmp >var__tty_colors_43_21_end
-:var__tty_colors_43_21
-0
-:var__tty_colors_43_21_end
-wmem >var__tty_colors_43_21 &0
-set reg1 >var__tty_colors_43_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_write_ptr_tty_colors_38_4
-add reg0 reg0 1
-wmem >var_write_ptr_tty_colors_38_4 reg0
-rmem reg0 >var_write_ptr_tty_colors_38_4
-jmp >var__tty_colors_45_21_end
-:var__tty_colors_45_21
-0
-:var__tty_colors_45_21_end
-wmem >var__tty_colors_45_21 &m
-set reg1 >var__tty_colors_45_21
-rmem reg1 reg1
-wmem reg0 reg1
-rmem reg0 >var_str_ptr_tty_colors_37_4
+:var__tty_colors_16_25_end
+wmem >var__tty_colors_16_25 &[
+set reg0 >var__tty_colors_16_25
 push reg0
-call >print
+call >emit_escape_sequence
 ret
 :tty_reset_end
 set reg0 >tty_reset

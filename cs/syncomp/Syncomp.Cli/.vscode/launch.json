@@ -10,22 +10,24 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/Syncomp.Cli.dll",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/Syncomp.Cli.dll",
             "args": [
-                "${workspaceFolder}/programs/tests/stdlib/str_equal.bc"
+                // "${workspaceFolder}/programs/ball.bc"
+                // "${workspaceFolder}/programs/s_int_test.bc"
+                "${workspaceFolder}/programs/task_test.bc"
             ],
             "cwd": "${workspaceFolder}",
             // For more information about the 'console' field, see https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md#console-terminal-window
             "console": "internalConsole",
-            "stopAtEntry": true,
+            // "stopAtEntry": true,
             "internalConsoleOptions": "openOnSessionStart",
             // "debugServer": 4711,
             "logging": {
                 "engineLogging": true
-            },
-            "env": {
-              "INCLUDE": "/usr/include/bc"
             }
+            // "env": {
+            //   "INCLUDE": "/usr/include/bc"
+            // }
         },
         {
             "name": ".NET Core Attach",

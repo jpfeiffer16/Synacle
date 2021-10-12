@@ -1,0 +1,41 @@
+#include "./list.bc"
+
+type one {
+    int run;
+    int ticks;
+    func<void> cb;
+};
+
+type inteval {
+    int ticks;
+};
+
+ptr<list_item> once_callbacks = 0 as ptr<list_item>;
+
+var tick_count = 0;
+function start_event_loop() {
+    while(1) {
+        ++tick_count;
+        enumerate_list(once_callbacks, (void item) => {
+            var one_time = item as one;
+            var t = one_time.ticks;
+            if (tick_count > t) {
+                // one_time.cb();
+                var o = one_time.cb;
+                o();
+            }
+        });
+    }
+}
+
+function add_once(int ticks, func<void> cb) {
+    one item;
+    item.ticks = tick_count + ticks;
+    item.cb = cb;
+    if (once_callbacks == 0) {
+        once_callbacks = new_list_item(item);
+    }
+    if (!(once_callbacks == 0)) {
+        once_callbacks->new(item);
+    }
+}

@@ -1,0 +1,52 @@
+#include "./stdlib.bc"
+
+// This is pretty hedonistic in its wastefulness, but I'm not
+// particularly brilliant when it comes to bit-manipulation,
+// so here goes for now.
+type s_int {
+    // Sign. 0 for negative. 1 for positive.
+    int s;
+    // Number
+    int n;
+    // TODO: If this doesn't work, just remove it.
+    func<string> to_str;
+};
+
+function throw_not_ready() {
+    print("This is not ready yet. Don't use it.");
+}
+
+function s_add(s_int a, s_int b) : s_int {
+    throw_not_ready();
+    return 0 as s_int;
+}
+
+function s_subtract(s_int a, s_int b) : s_int {
+    throw_not_ready();
+    return 0 as s_int;
+}
+
+function s_multiply(s_int a, s_int b) : s_int {
+    throw_not_ready();
+    return 0 as s_int;
+}
+
+function s_divide(s_int a, s_int b) : s_int {
+    throw_not_ready();
+    return 0 as s_int;
+}
+
+var s_to_str = (s_int n) : string => {
+    return "TEMP";
+};
+
+function s_int_new(int number, int is_positive) : ptr<s_int> {
+    var chunk = alloc_chunk(sizeof(0 as s_int)) as ptr<s_int>;
+    chunk->n = number;
+    chunk->s = is_positive;
+    // TODO: The deref here is causing issues when taking the
+    // stack-args method path
+    chunk->to_str = () => s_to_str(*chunk);
+
+    return chunk;
+}

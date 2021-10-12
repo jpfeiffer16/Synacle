@@ -1,0 +1,8 @@
+#include "./lib/stdlib.bc"
+#include "./lib/signed_int.bc"
+
+var t = s_int_new(123, 1);
+
+// println(test->to_str());
+// println(string(t->n));
+println(typeof(t));

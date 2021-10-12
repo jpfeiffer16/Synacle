@@ -185,7 +185,7 @@ namespace syncomp
             if (ch == "<" && Peek() == "=")
             {
                 Pop();
-                return CreateSyntaxToken(SyntaxTokenType.LessThanOrEqual, "==");
+                return CreateSyntaxToken(SyntaxTokenType.LessThanOrEqual, "<=");
             }
             if (ch == ">" && Peek() != "=")
             {
@@ -194,7 +194,7 @@ namespace syncomp
             if (ch == ">" && Peek() == "=")
             {
                 Pop();
-                return CreateSyntaxToken(SyntaxTokenType.GreaterThanOrEqual, "==");
+                return CreateSyntaxToken(SyntaxTokenType.GreaterThanOrEqual, ">=");
             }
             if (ch == "!")
             {
@@ -207,7 +207,8 @@ namespace syncomp
             }
             if (ch == "|" && Peek() == "|")
             {
-                return CreateSyntaxToken(SyntaxTokenType.And, ch);
+                Pop();
+                return CreateSyntaxToken(SyntaxTokenType.Or, ch);
             }
             #endregion
 

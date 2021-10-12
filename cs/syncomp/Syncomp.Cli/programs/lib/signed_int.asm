@@ -752,247 +752,225 @@ jmp >while__stdlib_176_4_begin
 ret
 :dump_mem_end
 set reg0 >dump_mem
-jmp >compose_list_items_end
-:compose_list_items
-jmp >var_a_list_17_28_end
-:var_a_list_17_28
-:var_a_list_17_28_end
-jmp >var_b_list_17_46_end
-:var_b_list_17_46
-:var_b_list_17_46_end
-pop reg7
-pop reg0
-wmem >var_b_list_17_46 reg0
-pop reg0
-wmem >var_a_list_17_28 reg0
-push reg7
-rmem reg0 >var_b_list_17_46
-rmem reg7 >var_a_list_17_28
-add reg7 reg7 1
-wmem reg7 reg0
-rmem reg0 >var_a_list_17_28
-ret
-ret
-:compose_list_items_end
-set reg0 >compose_list_items
-jmp >alloc_temp_block_end
-:alloc_temp_block
+jmp >throw_not_ready_end
+:throw_not_ready
 pop reg7
 push reg7
-jmp >var_ptr_list_27_4_end
-:var_ptr_list_27_4
-:var_ptr_list_27_4_end
-call >alloc
-wmem >var_ptr_list_27_4 reg0
-jmp >var_i_list_28_9_end
-:var_i_list_28_9
-:var_i_list_28_9_end
+jmp >var__signed_int_15_10_end
+:var__signed_int_15_10
+&h
+&i
+&s
+32
+&i
+&s
+32
+&n
+&o
+&t
+32
+&r
+&e
+&a
+&d
+&y
+32
+&y
+&e
+&t
+&.
+32
+&D
+&o
+&n
+&'
+&t
+32
+&u
+&s
+&e
+32
+&i
+&t
+&.
+0
+:var__signed_int_15_10_end
+wmem >var__signed_int_15_10 &T
+set reg0 >var__signed_int_15_10
+push reg0
+call >print
+ret
+:throw_not_ready_end
+set reg0 >throw_not_ready
+jmp >s_add_end
+:s_add
+jmp >var_a_signed_int_18_15_end
+:var_a_signed_int_18_15
+:fld_a_signed_int_18_15_s
+:fld_a_signed_int_18_15_n
+:fld_a_signed_int_18_15_to_str
+:var_a_signed_int_18_15_end
+jmp >var_b_signed_int_18_24_end
+:var_b_signed_int_18_24
+:fld_b_signed_int_18_24_s
+:fld_b_signed_int_18_24_n
+:fld_b_signed_int_18_24_to_str
+:var_b_signed_int_18_24_end
+pop reg7
+pop reg0
+wmem >fld_b_signed_int_18_24_to_str reg0
+pop reg0
+wmem >fld_b_signed_int_18_24_n reg0
+pop reg0
+wmem >fld_b_signed_int_18_24_s reg0
+pop reg0
+wmem >fld_a_signed_int_18_15_to_str reg0
+pop reg0
+wmem >fld_a_signed_int_18_15_n reg0
+pop reg0
+wmem >fld_a_signed_int_18_15_s reg0
+push reg7
+call >throw_not_ready
 set reg0 0
-wmem >var_i_list_28_9 reg0
-:for__list_28_4_begin
-rmem reg0 >var_i_list_28_9
-set reg1 5
-eq reg2 reg0 reg1
-gt reg3 reg0 reg1
-or reg0 reg2 reg3
-call >not
-jf reg0 >for__list_28_4_end
-rmem reg0 >var_ptr_list_27_4
-rmem reg1 >var_i_list_28_9
-add reg0 reg0 reg1
-set reg1 255
-wmem reg0 reg1
-rmem reg0 >var_i_list_28_9
-add reg0 reg0 1
-wmem >var_i_list_28_9 reg0
-jmp >for__list_28_4_begin
-:for__list_28_4_end
 ret
-:alloc_temp_block_end
-set reg0 >alloc_temp_block
-jmp >list_add_end
-:list_add
-jmp >var_list_item_list_34_18_end
-:var_list_item_list_34_18
-:var_list_item_list_34_18_end
-jmp >var_value_list_34_44_end
-:var_value_list_34_44
-:var_value_list_34_44_end
+ret
+:s_add_end
+set reg0 >s_add
+jmp >s_subtract_end
+:s_subtract
+jmp >var_a_signed_int_23_20_end
+:var_a_signed_int_23_20
+:fld_a_signed_int_23_20_s
+:fld_a_signed_int_23_20_n
+:fld_a_signed_int_23_20_to_str
+:var_a_signed_int_23_20_end
+jmp >var_b_signed_int_23_29_end
+:var_b_signed_int_23_29
+:fld_b_signed_int_23_29_s
+:fld_b_signed_int_23_29_n
+:fld_b_signed_int_23_29_to_str
+:var_b_signed_int_23_29_end
 pop reg7
 pop reg0
-wmem >var_value_list_34_44 reg0
+wmem >fld_b_signed_int_23_29_to_str reg0
 pop reg0
-wmem >var_list_item_list_34_18 reg0
-push reg7
-ret
-:list_add_end
-set reg0 >list_add
-jmp >new_list_item_end
-:new_list_item
-jmp >var_value_list_39_24_end
-:var_value_list_39_24
-:var_value_list_39_24_end
-pop reg7
+wmem >fld_b_signed_int_23_29_n reg0
 pop reg0
-wmem >var_value_list_39_24 reg0
+wmem >fld_b_signed_int_23_29_s reg0
+pop reg0
+wmem >fld_a_signed_int_23_20_to_str reg0
+pop reg0
+wmem >fld_a_signed_int_23_20_n reg0
+pop reg0
+wmem >fld_a_signed_int_23_20_s reg0
 push reg7
-jmp >var_item_ptr_list_41_4_end
-:var_item_ptr_list_41_4
-:var_item_ptr_list_41_4_end
-call >alloc
-wmem >var_item_ptr_list_41_4 reg0
-rmem reg0 >var_value_list_39_24
-rmem reg7 >var_item_ptr_list_41_4
-add reg7 reg7 2
-wmem reg7 reg0
+call >throw_not_ready
 set reg0 0
-rmem reg7 >var_item_ptr_list_41_4
-add reg7 reg7 1
-wmem reg7 reg0
-jmp >function__list_45_20_end
-:function__list_45_20
-jmp >var_value_list_45_21_end
-:var_value_list_45_21
-:var_value_list_45_21_end
+ret
+ret
+:s_subtract_end
+set reg0 >s_subtract
+jmp >s_multiply_end
+:s_multiply
+jmp >var_a_signed_int_28_20_end
+:var_a_signed_int_28_20
+:fld_a_signed_int_28_20_s
+:fld_a_signed_int_28_20_n
+:fld_a_signed_int_28_20_to_str
+:var_a_signed_int_28_20_end
+jmp >var_b_signed_int_28_29_end
+:var_b_signed_int_28_29
+:fld_b_signed_int_28_29_s
+:fld_b_signed_int_28_29_n
+:fld_b_signed_int_28_29_to_str
+:var_b_signed_int_28_29_end
 pop reg7
 pop reg0
-wmem >var_value_list_45_21 reg0
+wmem >fld_b_signed_int_28_29_to_str reg0
+pop reg0
+wmem >fld_b_signed_int_28_29_n reg0
+pop reg0
+wmem >fld_b_signed_int_28_29_s reg0
+pop reg0
+wmem >fld_a_signed_int_28_20_to_str reg0
+pop reg0
+wmem >fld_a_signed_int_28_20_n reg0
+pop reg0
+wmem >fld_a_signed_int_28_20_s reg0
 push reg7
-jmp >var_prev_item_list_46_8_end
-:var_prev_item_list_46_8
-:var_prev_item_list_46_8_end
-rmem reg0 >var_item_ptr_list_41_4
-wmem >var_prev_item_list_46_8 reg0
-jmp >var_new_item_list_47_8_end
-:var_new_item_list_47_8
-:var_new_item_list_47_8_end
-rmem reg0 >var_value_list_45_21
-push reg0
-call >new_list_item
-wmem >var_new_item_list_47_8 reg0
-rmem reg0 >var_prev_item_list_46_8
-push reg0
-rmem reg0 >var_new_item_list_47_8
-push reg0
-call >compose_list_items
-rmem reg0 >var_new_item_list_47_8
+call >throw_not_ready
+set reg0 0
 ret
 ret
-:function__list_45_20_end
-set reg0 >function__list_45_20
-rmem reg7 >var_item_ptr_list_41_4
-add reg7 reg7 3
-wmem reg7 reg0
-call >alloc_temp_block
-rmem reg0 >var_item_ptr_list_41_4
-ret
-ret
-:new_list_item_end
-set reg0 >new_list_item
-jmp >enumerate_list_end
-:enumerate_list
-jmp >var_base_item_list_55_24_end
-:var_base_item_list_55_24
-:var_base_item_list_55_24_end
-jmp >var_cb_list_55_50_end
-:var_cb_list_55_50
-:var_cb_list_55_50_end
+:s_multiply_end
+set reg0 >s_multiply
+jmp >s_divide_end
+:s_divide
+jmp >var_a_signed_int_33_18_end
+:var_a_signed_int_33_18
+:fld_a_signed_int_33_18_s
+:fld_a_signed_int_33_18_n
+:fld_a_signed_int_33_18_to_str
+:var_a_signed_int_33_18_end
+jmp >var_b_signed_int_33_27_end
+:var_b_signed_int_33_27
+:fld_b_signed_int_33_27_s
+:fld_b_signed_int_33_27_n
+:fld_b_signed_int_33_27_to_str
+:var_b_signed_int_33_27_end
 pop reg7
 pop reg0
-wmem >var_cb_list_55_50 reg0
+wmem >fld_b_signed_int_33_27_to_str reg0
 pop reg0
-wmem >var_base_item_list_55_24 reg0
+wmem >fld_b_signed_int_33_27_n reg0
+pop reg0
+wmem >fld_b_signed_int_33_27_s reg0
+pop reg0
+wmem >fld_a_signed_int_33_18_to_str reg0
+pop reg0
+wmem >fld_a_signed_int_33_18_n reg0
+pop reg0
+wmem >fld_a_signed_int_33_18_s reg0
 push reg7
-jmp >var_item_list_57_4_end
-:var_item_list_57_4
-:var_item_list_57_4_end
-rmem reg0 >var_base_item_list_55_24
-wmem >var_item_list_57_4 reg0
-:while__list_58_4_begin
-rmem reg0 >var_item_list_57_4
-add reg0 reg0 1
-rmem reg0 reg0
-jf reg0 >while__list_58_4_end
-rmem reg0 >var_item_list_57_4
-add reg0 reg0 2
-rmem reg0 reg0
-push reg0
-rmem reg7 >var_cb_list_55_50
-call reg7
-rmem reg0 >var_item_list_57_4
-add reg0 reg0 1
-rmem reg0 reg0
-wmem >var_item_list_57_4 reg0
-jmp >while__list_58_4_begin
-:while__list_58_4_end
-rmem reg0 >var_item_list_57_4
-add reg0 reg0 2
-rmem reg0 reg0
-push reg0
-rmem reg7 >var_cb_list_55_50
-call reg7
+call >throw_not_ready
+set reg0 0
 ret
-:enumerate_list_end
-set reg0 >enumerate_list
-jmp >main_end
-:main
-pop reg7
-push reg7
-jmp >var_items_list_test_17_4_end
-:var_items_list_test_17_4
-:var_items_list_test_17_4_end
-set reg0 100
-push reg0
-call >new_list_item
-wmem >var_items_list_test_17_4 reg0
-rmem reg0 >var_items_list_test_17_4
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 65
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 66
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 67
-push reg0
-call reg7
-add reg0 reg0 3
-rmem reg0 reg0
-set reg7 reg0
-set reg0 68
-push reg0
-call reg7
-rmem reg0 >var_items_list_test_17_4
-push reg0
-jmp >function__list_test_26_26_end
-:function__list_test_26_26
-jmp >var_value_list_test_26_27_end
-:var_value_list_test_26_27
-:var_value_list_test_26_27_end
+ret
+:s_divide_end
+set reg0 >s_divide
+jmp >var_s_to_str_signed_int_38_0_end
+:var_s_to_str_signed_int_38_0
+:var_s_to_str_signed_int_38_0_end
+jmp >function__signed_int_38_15_end
+:function__signed_int_38_15
+jmp >var_n_signed_int_38_16_end
+:var_n_signed_int_38_16
+:fld_n_signed_int_38_16_s
+:fld_n_signed_int_38_16_n
+:fld_n_signed_int_38_16_to_str
+:var_n_signed_int_38_16_end
 pop reg7
 pop reg0
-wmem >var_value_list_test_26_27 reg0
+wmem >fld_n_signed_int_38_16_to_str reg0
+pop reg0
+wmem >fld_n_signed_int_38_16_n reg0
+pop reg0
+wmem >fld_n_signed_int_38_16_s reg0
 push reg7
-rmem reg0 >var_value_list_test_26_27
-push reg0
-call >print_numberln
+jmp >var__signed_int_39_11_end
+:var__signed_int_39_11
+&E
+&M
+&P
+0
+:var__signed_int_39_11_end
+wmem >var__signed_int_39_11 &T
+set reg0 >var__signed_int_39_11
 ret
-:function__list_test_26_26_end
-set reg0 >function__list_test_26_26
-push reg0
-call >enumerate_list
 ret
-:main_end
-set reg0 >main
-call >main
+:function__signed_int_38_15_end
+set reg0 >function__signed_int_38_15
+wmem >var_s_to_str_signed_int_38_0 reg0
 halt
 
 :subtract

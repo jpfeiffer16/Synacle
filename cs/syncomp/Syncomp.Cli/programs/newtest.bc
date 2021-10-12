@@ -1,0 +1,40 @@
+//  NOTE: Program in current state causes C vm to segfault
+#include "./lib/stdlib.bc"
+#include "./lib/tty.bc"
+
+function wait(int cycles) {
+    // Does what it looks like. Just wastes cpu cycles.
+    for (var i = 0; i < cycles; ++i) { }
+}
+
+function play(string name) {
+    hide_cursor();
+    var line = 0;
+    var column = 0;
+    while (1) {
+        if (line > 50)
+        {
+            line = 0;
+        }
+        ++line;
+        ++column;
+        if (column > 80) {
+            column = 0;
+        }
+        clear_screen();
+        for (var i = 0; i < line; ++i) {
+            out(10);
+        }
+        for (var j = 0; j < column; ++j) {
+            out(32);
+        }
+        println(name);
+        wait(25000);
+        // Uncomment to cause segemenation fault bug
+        // wait(50000);
+    }
+}
+
+println("What is your name");
+var name = input();
+play(name);
