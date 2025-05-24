@@ -1,0 +1,16 @@
+#TODO: .net error about directorys when putting ./lib in here
+#include "stdlib.bc"
+
+function translate_word(string word) : string {
+  ptr first_letter = alloc();
+  wmem(first_letter, *word as int);
+  ++word;
+  return str_cat(
+    str_cat(word, first_letter as string),
+    "ay"
+  );
+}
+
+function translate_sentence(string sentence) {
+
+}

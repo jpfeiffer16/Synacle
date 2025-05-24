@@ -1,8 +1,16 @@
 #include "./lib/stdlib.bc"
+#include "./lib/libpig.bc"
 
 function interpret_command(string cmd) : void {
     if (str_equal(cmd, "help")) {
       println("This is help");
+    }
+
+    if (str_equal(cmd, "pig")) {
+        print("pig > ");
+        var word = input();
+        var result = translate_word(word);
+        println(result);
     }
 }
 
@@ -13,3 +21,5 @@ function interpret_loop() : void {
     interpret_command(command);
     interpret_loop();
 }
+
+interpret_loop();

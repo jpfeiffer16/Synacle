@@ -8,6 +8,16 @@ function str_len(string str) : int {
     return length;
 }
 
+struct split_result {
+    int size;
+    string items;
+}
+
+function str_split(string sentence): string {
+    while (*sentence) {
+    }
+}
+
 function print(string str) {
     var str_ptr = str as int;
     while (*str_ptr) {

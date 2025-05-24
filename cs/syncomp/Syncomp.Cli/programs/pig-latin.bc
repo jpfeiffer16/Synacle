@@ -1,4 +1,5 @@
 #include "lib/stdlib.bc";
+#include "lib/libpig.bc"
 
 function main() {
   print("Enter your name or 'exit' to stop: ");
@@ -7,15 +8,8 @@ function main() {
   if (str_equal(name, "exit")) {
     return;
   }
-  ptr first_letter = alloc();
-  wmem(first_letter, *name as int);
-  ++name;
-  println(
-    str_cat(
-      str_cat(name, first_letter as string),
-      "ay"
-    )
-  );
+  var result = translate_word(name);
+  println(result);
   main();
 }
 
