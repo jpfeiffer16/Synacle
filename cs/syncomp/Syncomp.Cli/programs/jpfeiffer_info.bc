@@ -1,0 +1,57 @@
+#include "lib/stdlib.bc"
+#include "lib/tty_colors.bc"
+
+println("Hi! This binary was compiled with the Synacle Toolchain, created by Joe Pfeiffer");
+println("https://github.com/jpfeiffer16/Synacle");
+println("If you are seeing this, congratulations, you are persistent.");
+
+function print_info() {
+    println("               Joe Pfeiffer");
+    println("         Senior Software Engineer");
+    println("-------------------------------------------------");
+    println("  Github: https://github.com/jpfeiffer16");
+    println("LinkedIn: https://www.linkedin.com/in/jpfeiffer16");
+    println("   Email: joepfeiffer16@gmail.com");
+}
+
+function print_usage() {
+    println("info - print info about me");
+    println("project - print info about the project");
+    println("help - prints this usage info");
+}
+
+function loop() {
+    var cmd = input();
+    if (str_equal(cmd, "info")) {
+        print_info();
+        loop();
+    }
+    if (str_equal(cmd, "help")) {
+        print_usage();
+        loop();
+    }
+    if (str_equal(cmd, "project")) {
+        print_usage();
+        loop();
+    }
+    tty_set_red();
+    print("Please enter a valid command. Enter ");
+    tty_reset();
+    print("'help'");
+    tty_set_red();
+    println(" for help.");
+    tty_reset();
+    loop();
+}
+
+type testtype {
+    int id;
+}
+
+testtype t;
+
+println(typeof(t));
+
+loop();
+
+
