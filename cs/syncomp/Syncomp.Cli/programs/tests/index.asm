@@ -754,36 +754,85 @@ ret
 set reg0 >dump_mem
 jmp >emit_escape_sequence_end
 :emit_escape_sequence
-jmp >var_code_tty_3_30_end
-:var_code_tty_3_30
-:var_code_tty_3_30_end
+jmp >var_sequence_tty_3_30_end
+:var_sequence_tty_3_30
+:var_sequence_tty_3_30_end
 pop reg7
 pop reg0
-wmem >var_code_tty_3_30 reg0
+wmem >var_sequence_tty_3_30 reg0
 push reg7
-jmp >var_str_ptr_tty_4_4_end
-:var_str_ptr_tty_4_4
-:var_str_ptr_tty_4_4_end
-call >alloc
-wmem >var_str_ptr_tty_4_4 reg0
-rmem reg0 >var_str_ptr_tty_4_4
-set reg1 27
-wmem reg0 reg1
-jmp >var_complete_str_tty_6_4_end
-:var_complete_str_tty_6_4
-:var_complete_str_tty_6_4_end
-rmem reg0 >var_str_ptr_tty_4_4
-push reg0
-rmem reg0 >var_code_tty_3_30
-push reg0
-call >str_cat
-wmem >var_complete_str_tty_6_4 reg0
-rmem reg0 >var_complete_str_tty_6_4
+set reg0 27
+out reg0
+rmem reg0 >var_sequence_tty_3_30
 push reg0
 call >print
 ret
 :emit_escape_sequence_end
 set reg0 >emit_escape_sequence
+jmp >clear_screen_end
+:clear_screen
+pop reg7
+push reg7
+jmp >var__tty_9_25_end
+:var__tty_9_25
+&H
+0
+:var__tty_9_25_end
+wmem >var__tty_9_25 &[
+set reg0 >var__tty_9_25
+push reg0
+call >emit_escape_sequence
+jmp >var__tty_10_25_end
+:var__tty_10_25
+&2
+&J
+0
+:var__tty_10_25_end
+wmem >var__tty_10_25 &[
+set reg0 >var__tty_10_25
+push reg0
+call >emit_escape_sequence
+ret
+:clear_screen_end
+set reg0 >clear_screen
+jmp >show_cursor_end
+:show_cursor
+pop reg7
+push reg7
+jmp >var__tty_14_25_end
+:var__tty_14_25
+&?
+&2
+&5
+&h
+0
+:var__tty_14_25_end
+wmem >var__tty_14_25 &[
+set reg0 >var__tty_14_25
+push reg0
+call >emit_escape_sequence
+ret
+:show_cursor_end
+set reg0 >show_cursor
+jmp >hide_cursor_end
+:hide_cursor
+pop reg7
+push reg7
+jmp >var__tty_18_25_end
+:var__tty_18_25
+&?
+&2
+&5
+&l
+0
+:var__tty_18_25_end
+wmem >var__tty_18_25 &[
+set reg0 >var__tty_18_25
+push reg0
+call >emit_escape_sequence
+ret
+:hide_cursor_end
+set reg0 >hide_cursor
 jmp >tty_set_green_end
 :tty_set_green
 pop reg7
