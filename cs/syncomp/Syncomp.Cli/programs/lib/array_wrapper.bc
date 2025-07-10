@@ -42,7 +42,7 @@ function array_set_nth(ptr<array> ptr, int index, int value)
     {
         throw(INDEX_OUT_OF_BOUNDS_MESSAGE);
     }
-    wmem(ptr + index as ptr, value);
+    wmem((ptr + index) as ptr, value);
 }
 
 
@@ -51,7 +51,7 @@ function array_foreach(ptr<array> ptr, func<ptr, int, void> cb)
     int length = array_length(ptr);
     for (int i = 0; i < length; ++i)
     {
-        cb(ptr + i as ptr, i);
+        cb((ptr + i) as ptr, i);
     }
 }
 
